@@ -1,5 +1,3 @@
-{
-  "weapons": [],
-  "artifacts": [],
-  "constellation": []
-}
+[
+  {"id": 10000015, "artifacts":[{"id":"2140011","activation_number":4}],"weapons":[11406]}
+]
