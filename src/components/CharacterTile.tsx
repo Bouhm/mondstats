@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import characterDb from '../data/characters.json'
 import _ from 'lodash'
-import './Character.css'
 
-type CharacterProps = {
-  id: number,
-  artifacts: any[],
-  weapons: any[]
+import characterDb from '../data/characters.json'
+import './CharacterTile.css'
+
+type CharacterTileProps = {
+  id: number
 }
 
-function CharacterTile({ id }: CharacterProps) {
+function CharacterTile({ id }: CharacterTileProps) {
   const character = _.find(characterDb, { id })
   console.log(character);
 
@@ -17,7 +16,7 @@ function CharacterTile({ id }: CharacterProps) {
 
   return (
     <div className="character-tile">
-      <img src="" alt={`${character.name}-portrait`}></img>
+      <img src={character.icon} alt={`${character.name}-portrait`}></img>
     </div>
   )
 }

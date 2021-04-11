@@ -1,0 +1,13 @@
+.character-tile {
+  margin: 0.5rem;
+  background-color: white;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 0;
+
+  img {
+    width: 100px;
+    height: 100px;
+    vertical-align: middle;
+  }
+}
