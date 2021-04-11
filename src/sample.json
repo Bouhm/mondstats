@@ -1,3 +1,66 @@
-[
-  {"id": 10000015, "artifacts":[{"id":"2140011","activation_number":4}],"weapons":[11406]}
-]
+{
+  "10000003": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000005": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000006": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000014": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000015": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000020": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000021": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000022": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000023": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000025": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000027": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000031": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000032": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000034": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000036": {
+    "weapons": [],
+    "artifacts": []
+  },
+  "10000037": {
+    "weapons": [],
+    "artifacts": []
+  }
+}

@@ -11,17 +11,17 @@ type CharacterProps = {
   weapons: any[]
 }
 
-function Character({id, artifacts, weapons}: CharacterProps) {
+function Character({ id, artifacts, weapons }: CharacterProps) {
   const character = _.find(characterDb, { id })
 
   return (
     <div className="character-container">
-      <div className="character-portrait" style={{backgroundImage: `url("${character!.image.replace('@2x', '')}")`}}/>
+      <div className="character-portrait" style={{ backgroundImage: `url("${character!.image.replace('@2x', '')}")` }} />
       <div className="character-artifacts">
       </div>
       <div className="character-weapons">
-        {_.find(weaponDb, weapon => {
-          
+        {_.find(weaponDb, (weapon: any) => {
+
         })}
       </div>
       <div className="character-constellations">
