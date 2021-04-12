@@ -1,17 +1,34 @@
 import React, { useState } from 'react'
-import Character from './components/characters/Character'
 import _ from "lodash"
-import data from "./sample.json"
+import characterDb from './data/characters.json'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import Character from './components/characters/Character'
 import CharacterTile from './components/CharacterTile'
+
+import data from "./sample.json"
 import './App.css'
 
 function App() {
   return (
-    <div className="App">
-      <div className="character-tiles-container">
-        {_.map(_.keys(data), id => <CharacterTile id={parseInt(id)} />)}
+    <Router>
+      <div className="App">
+        <div className="character-tiles-container">
+          {_.map(_.keys(data), id => {
+            return (
+              <Link to={`/builds/characters/${_.find(characterDb, { id: parseInt(id) })!.name.toLowerCase().replace(" ", "")}`}>
+                <CharacterTile id={parseInt(id)} />
+              </Link>
+            )
+          })}
+        </div>
       </div>
-    </div>
+    </Router>
   )
 }
 
