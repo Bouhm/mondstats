@@ -1,9 +1,23 @@
 .character-tile {
+  position: relative;
   margin: 0.5rem;
   background-color: white;
   border-radius: 5px;
   box-sizing: border-box;
-  padding: 0;
+  padding-top: 10px;
+  
+  .element-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
 
   img {
     width: 100px;
