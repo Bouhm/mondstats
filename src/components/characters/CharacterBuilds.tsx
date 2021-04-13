@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import _ from 'lodash'
-import artifactDb from '../../data/artifacts.json'
-import weaponDb from '../../data/weapons.json'
 import characterDb from '../../data/characters.json'
+import { Store } from '../../Store'
 import { useParams } from 'react-router-dom'
 
 import './CharacterBuilds.css'
@@ -27,10 +26,15 @@ type Character = {
 
 function CharacterPage() {
   const { characterName } = useParams<{ characterName: string }>();
+  const [state, dispatch] = useContext(Store)
 
   let character: Character;
   _.forEach(characterDb, char => {
     if (char.name.toLowerCase().replace(" ", "") === characterName) character = char
+  })
+
+  useEffect(() => {
+    dispatch({ type: 'SELECT_CHARACTER', payload: characterName })
   })
 
   return (

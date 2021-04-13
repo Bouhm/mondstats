@@ -1,5 +1,7 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState, useContext } from 'react'
 import _ from 'lodash'
+import { Store } from '../../Store'
+
 import './Searchbar.css'
 
 type SearchbarProps = {
@@ -8,19 +10,20 @@ type SearchbarProps = {
 
 function Searchbar({ list }: SearchbarProps) {
   const [input, useInput] = useState("");
+  const [state, dispatch] = useContext(Store)
   console.log(list);
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
-    useInput(e.currentTarget.value);
+    const name = e.currentTarget.value;
+    useInput(name);
+
+    if (list.includes(name)) dispatch({ type: 'SELECT_CHARACTER', payload: name })
   }
 
   return (
     <div className="searchbar">
       <input list="search-input" name="search-input" onChange={handleInputChange} value={input} />
-      <datalist id="search-input">
-        {_.map(list, item => <option key={item} value={item} />)}
-      </datalist>
     </div>
   )
 }
