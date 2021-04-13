@@ -2,21 +2,3 @@
   width: 100vw;
   height: 100vh;
 }
-
-.character-tiles-container {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.rarity-3 {
-  background: linear-gradient(#5D6887, #608EAB, #5484A7);
-}
-
-.rarity-4 {
-  background: linear-gradient(#605A86, #9476AC, #A67AB9);
-}
-
-.rarity-5 {
-  background: linear-gradient(#8D5E2E, #B1792C, #B8742B);
-}

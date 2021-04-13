@@ -12,7 +12,6 @@ type CharacterTileProps = {
 
 function CharacterTile({ id }: CharacterTileProps) {
   const character = _.find(characterDb, { id })
-  console.log(character);
 
   if (!character) return null;
 
