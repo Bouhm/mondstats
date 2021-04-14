@@ -2,12 +2,12 @@ import React, { useReducer } from 'react'
 
 interface IState {
   selectedChar: string,
-  searchFilter: string[]
+  filteredChars: []
 }
 
 export const initialState: IState = {
   selectedChar: '',
-  searchFilter: []
+  filteredChars: []
 }
 
 export const Store = React.createContext<[IState, React.Dispatch<any>]>([initialState, () => { }])
@@ -29,9 +29,9 @@ export const reducer = (state: IState, action: IAction): IState => {
     case 'SELECT_CHARACTER':
       return { ...state, selectedChar: action.payload }
     case 'FILTER_CHARACTERS':
-      return { ...state, selectedChar: action.payload }
+      return { ...state, filteredChars: action.payload }
     case 'RESET_FILTER':
-      return { ...initialState, selectedChar: '' }
+      return { ...initialState, filteredChars: [] }
     case 'RESET_SELECTION':
       return { ...initialState, selectedChar: '' }
     default:

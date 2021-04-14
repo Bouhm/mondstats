@@ -4,14 +4,14 @@
   background-color: white;
   border-radius: 5px;
   box-sizing: border-box;
-  padding-top: 10px;
+  padding-top: 5px;
   
   .element-icon {
     position: absolute;
     top: 0;
     right: 0;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
   }
 
   &:hover {
@@ -20,8 +20,8 @@
   }
 
   img {
-    width: 100px;
-    height: 100px;
+    width: 125px;
+    height: 125px;
     vertical-align: middle;
   }
 }

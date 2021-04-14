@@ -1,0 +1,12 @@
+.searchbar {
+
+  input {
+    width: 20rem;
+    height: 2rem;
+    border-radius: 5px;
+    padding: 0.5rem;
+    color: white;
+    background-color: rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.5);
+  }
+}

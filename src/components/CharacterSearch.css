@@ -1,5 +1,20 @@
-.character-tiles-container {
+.character-tiles {
+  display: flex;
+}
+
+.searched-character {
+  margin-right: 1rem;
+}
+
+.unfiltered-characters {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+}
+
+.character-searchbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
 }
