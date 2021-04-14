@@ -5,8 +5,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Kaeya.png",
     "name": "Kaeya",
     "element": "Cryo",
-    "fetter": 10,
-    "level": 90,
     "rarity": 4,
     "constellations": [
       {
@@ -59,8 +57,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Ambor.png",
     "name": "Amber",
     "element": "Pyro",
-    "fetter": 10,
-    "level": 80,
     "rarity": 4,
     "constellations": [
       {
@@ -113,8 +109,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Xiangling.png",
     "name": "Xiangling",
     "element": "Pyro",
-    "fetter": 10,
-    "level": 70,
     "rarity": 4,
     "constellations": [
       {
@@ -167,8 +161,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Ganyu.png",
     "name": "Ganyu",
     "element": "Cryo",
-    "fetter": 10,
-    "level": 70,
     "rarity": 5,
     "constellations": [
       {
@@ -221,8 +213,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Xingqiu.png",
     "name": "Xingqiu",
     "element": "Hydro",
-    "fetter": 9,
-    "level": 70,
     "rarity": 4,
     "constellations": [
       {
@@ -275,8 +265,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Noel.png",
     "name": "Noelle",
     "element": "Geo",
-    "fetter": 7,
-    "level": 79,
     "rarity": 4,
     "constellations": [
       {
@@ -329,8 +317,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Lisa.png",
     "name": "Lisa",
     "element": "Electro",
-    "fetter": 6,
-    "level": 70,
     "rarity": 4,
     "constellations": [
       {
@@ -383,8 +369,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Qin.png",
     "name": "Jean",
     "element": "Anemo",
-    "fetter": 5,
-    "level": 40,
     "rarity": 5,
     "constellations": [
       {
@@ -437,8 +421,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Barbara.png",
     "name": "Barbara",
     "element": "Hydro",
-    "fetter": 2,
-    "level": 60,
     "rarity": 4,
     "constellations": [
       {
@@ -491,8 +473,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Bennett.png",
     "name": "Bennett",
     "element": "Pyro",
-    "fetter": 1,
-    "level": 60,
     "rarity": 4,
     "constellations": [
       {
@@ -545,8 +525,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Chongyun.png",
     "name": "Chongyun",
     "element": "Cryo",
-    "fetter": 1,
-    "level": 60,
     "rarity": 4,
     "constellations": [
       {
@@ -599,8 +577,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Razor.png",
     "name": "Razor",
     "element": "Electro",
-    "fetter": 1,
-    "level": 20,
     "rarity": 4,
     "constellations": [
       {
@@ -653,8 +629,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Venti.png",
     "name": "Venti",
     "element": "Anemo",
-    "fetter": 1,
-    "level": 20,
     "rarity": 5,
     "constellations": [
       {
@@ -707,8 +681,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Ningguang.png",
     "name": "Ningguang",
     "element": "Geo",
-    "fetter": 1,
-    "level": 20,
     "rarity": 4,
     "constellations": [
       {
@@ -761,8 +733,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Fischl.png",
     "name": "Fischl",
     "element": "Electro",
-    "fetter": 1,
-    "level": 20,
     "rarity": 4,
     "constellations": [
       {
@@ -815,8 +785,6 @@
     "icon": "https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_PlayerBoy.png",
     "name": "Traveler",
     "element": "None",
-    "fetter": 1,
-    "level": 70,
     "rarity": 5,
     "constellations": [
       {

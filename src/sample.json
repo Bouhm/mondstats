@@ -1,89 +1,8 @@
-{
-  "10000003": {
-    "weapons": [
-      {
-        "id": 11408,
-        "count": 1
-      }
-    ],
-    "artifacts": [
-      {
-        "sets": [
-          {
-            "id": "2140041",
-            "activation_number": 2
-          },
-          {
-            "id": "2150011",
-            "activation_number": 2
-          }
-        ],
-        "count": 1
-      }
-    ]
-  },
-  "10000005": {
-    "weapons": [
-      {
-        "id": 11407,
-        "count": 1
-      }
-    ],
-    "artifacts": [
-      {
-        "sets": [
-          {
-            "id": "2100071",
-            "activation_number": 2
-          },
-          {
-            "id": "2100081",
-            "activation_number": 2
-          }
-        ],
-        "count": 1
-      }
-    ]
-  },
-  "10000006": {
-    "weapons": [
-      {
-        "id": 14402,
-        "count": 1
-      }
-    ],
-    "artifacts": [
-      {
-        "sets": [
-          {
-            "id": "2150071",
-            "activation_number": 2
-          }
-        ],
-        "count": 1
-      }
-    ]
-  },
-  "10000014": {
-    "weapons": [
-      {
-        "id": 14302,
-        "count": 1
-      }
-    ],
-    "artifacts": [
-      {
-        "sets": [
-          {
-            "id": "2140041",
-            "activation_number": 4
-          }
-        ],
-        "count": 1
-      }
-    ]
-  },
-  "10000015": {
+[
+  {
+    "id": 10000015,
+    "name": "Kaeya",
+    "constellations": [],
     "weapons": [
       {
         "id": 11406,
@@ -102,21 +21,10 @@
       }
     ]
   },
-  "10000020": {
-    "weapons": [
-      {
-        "id": 12411,
-        "count": 1
-      }
-    ],
-    "artifacts": [
-      {
-        "sets": [],
-        "count": 1
-      }
-    ]
-  },
-  "10000021": {
+  {
+    "id": 10000021,
+    "name": "Amber",
+    "constellations": [],
     "weapons": [
       {
         "id": 15502,
@@ -135,26 +43,10 @@
       }
     ]
   },
-  "10000022": {
-    "weapons": [
-      {
-        "id": 15403,
-        "count": 1
-      }
-    ],
-    "artifacts": [
-      {
-        "sets": [
-          {
-            "id": "2100091",
-            "activation_number": 2
-          }
-        ],
-        "count": 1
-      }
-    ]
-  },
-  "10000023": {
+  {
+    "id": 10000023,
+    "name": "Xiangling",
+    "constellations": [],
     "weapons": [
       {
         "id": 13403,
@@ -177,7 +69,32 @@
       }
     ]
   },
-  "10000025": {
+  {
+    "id": 10000037,
+    "name": "Ganyu",
+    "constellations": [],
+    "weapons": [
+      {
+        "id": 15401,
+        "count": 1
+      }
+    ],
+    "artifacts": [
+      {
+        "sets": [
+          {
+            "id": "2140011",
+            "activation_number": 2
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 10000025,
+    "name": "Xingqiu",
+    "constellations": [],
     "weapons": [
       {
         "id": 11403,
@@ -200,54 +117,10 @@
       }
     ]
   },
-  "10000027": {
-    "weapons": [
-      {
-        "id": 14302,
-        "count": 1
-      }
-    ],
-    "artifacts": [
-      {
-        "sets": [],
-        "count": 1
-      }
-    ]
-  },
-  "10000031": {
-    "weapons": [
-      {
-        "id": 15413,
-        "count": 1
-      }
-    ],
-    "artifacts": [
-      {
-        "sets": [],
-        "count": 1
-      }
-    ]
-  },
-  "10000032": {
-    "weapons": [
-      {
-        "id": 11401,
-        "count": 1
-      }
-    ],
-    "artifacts": [
-      {
-        "sets": [
-          {
-            "id": "2150071",
-            "activation_number": 4
-          }
-        ],
-        "count": 1
-      }
-    ]
-  },
-  "10000034": {
+  {
+    "id": 10000034,
+    "name": "Noelle",
+    "constellations": [],
     "weapons": [
       {
         "id": 12407,
@@ -266,7 +139,102 @@
       }
     ]
   },
-  "10000036": {
+  {
+    "id": 10000006,
+    "name": "Lisa",
+    "constellations": [],
+    "weapons": [
+      {
+        "id": 14402,
+        "count": 1
+      }
+    ],
+    "artifacts": [
+      {
+        "sets": [
+          {
+            "id": "2150071",
+            "activation_number": 2
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 10000003,
+    "name": "Jean",
+    "constellations": [],
+    "weapons": [
+      {
+        "id": 11408,
+        "count": 1
+      }
+    ],
+    "artifacts": [
+      {
+        "sets": [
+          {
+            "id": "2140041",
+            "activation_number": 2
+          },
+          {
+            "id": "2150011",
+            "activation_number": 2
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 10000014,
+    "name": "Barbara",
+    "constellations": [],
+    "weapons": [
+      {
+        "id": 14302,
+        "count": 1
+      }
+    ],
+    "artifacts": [
+      {
+        "sets": [
+          {
+            "id": "2140041",
+            "activation_number": 4
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 10000032,
+    "name": "Bennett",
+    "constellations": [],
+    "weapons": [
+      {
+        "id": 11401,
+        "count": 1
+      }
+    ],
+    "artifacts": [
+      {
+        "sets": [
+          {
+            "id": "2150071",
+            "activation_number": 4
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 10000036,
+    "name": "Chongyun",
+    "constellations": [],
     "weapons": [
       {
         "id": 12402,
@@ -285,10 +253,30 @@
       }
     ]
   },
-  "10000037": {
+  {
+    "id": 10000020,
+    "name": "Razor",
+    "constellations": [],
     "weapons": [
       {
-        "id": 15401,
+        "id": 12411,
+        "count": 1
+      }
+    ],
+    "artifacts": [
+      {
+        "sets": [],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 10000022,
+    "name": "Venti",
+    "constellations": [],
+    "weapons": [
+      {
+        "id": 15403,
         "count": 1
       }
     ],
@@ -296,7 +284,67 @@
       {
         "sets": [
           {
-            "id": "2140011",
+            "id": "2100091",
+            "activation_number": 2
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 10000027,
+    "name": "Ningguang",
+    "constellations": [],
+    "weapons": [
+      {
+        "id": 14302,
+        "count": 1
+      }
+    ],
+    "artifacts": [
+      {
+        "sets": [],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 10000031,
+    "name": "Fischl",
+    "constellations": [],
+    "weapons": [
+      {
+        "id": 15413,
+        "count": 1
+      }
+    ],
+    "artifacts": [
+      {
+        "sets": [],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": 10000005,
+    "name": "Traveler",
+    "constellations": [],
+    "weapons": [
+      {
+        "id": 11407,
+        "count": 1
+      }
+    ],
+    "artifacts": [
+      {
+        "sets": [
+          {
+            "id": "2100071",
+            "activation_number": 2
+          },
+          {
+            "id": "2100081",
             "activation_number": 2
           }
         ],
@@ -304,4 +352,4 @@
       }
     ]
   }
-}
+]

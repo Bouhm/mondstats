@@ -16,7 +16,6 @@ function CharacterSearch() {
   // Set character search filter
   const handleSearchCharacter = (filteredChars: string[]) => {
     dispatch({ type: "SEARCH_CHARACTER", payload: filteredChars })
-    console.log(filteredChars);
   }
 
 
@@ -26,6 +25,9 @@ function CharacterSearch() {
       const char = _.find(characterDb, { name: charName });
       return { id: char!.id, name: char!.name }
     })
+
+    console.log(_.xorBy(_.keys(data), _.map(searchResults, res => res.id + ""), 'id'));
+
   }, state.filteredChars)
 
   return (
@@ -45,7 +47,7 @@ function CharacterSearch() {
           }
         </div>
         <div className="unfiltered-characters">
-          {_.map(_.xorBy(_.keys(data), 'id'), id => {
+          {_.map(_.xorBy(_.keys(data), state.filteredChars, 'id'), id => {
             return (
               <Link key={id} to={`/characters/${_.find(characterDb, { id: parseInt(id) })!.name.toLowerCase().replace(" ", "")}`}>
                 <CharacterTile id={parseInt(id)} />
