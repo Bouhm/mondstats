@@ -1,15 +1,21 @@
+.character-tile-container {
+  height: 190px;
+  width: 160px;
+}
+
 .character-tile {
   position: relative;
-  margin: 0.5rem;
+  width: 135px;
   background-color: white;
-  border-radius: 5px;
-  box-sizing: border-box;
+  border-radius: 8px;
   padding-top: 5px;
-  
+  overflow: hidden;
+  transition: transform 0.2s;
+
   .element-icon {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     width: 40px;
     height: 40px;
   }
@@ -17,12 +23,24 @@
   &:hover {
     cursor: pointer;
     transform: scale(1.05);
+    border: 3px solid rgb(233, 229, 220);
   }
 
   img {
-    width: 125px;
-    height: 125px;
+    width: 135px;
+    height: 135px;
     vertical-align: middle;
+    border-radius: 0 10% 0 0;
+
+  }
+
+  .character-tile-name {
+    padding: 0.2rem;
+    color: rgb(73, 83, 102);
+    background-color: rgb(233, 229, 220);
+    font-size: 1.3rem;
+    text-align: center;
+    text-decoration: none;
   }
 }
 

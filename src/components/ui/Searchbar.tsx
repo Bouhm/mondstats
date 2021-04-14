@@ -5,12 +5,13 @@ import Fuse from 'fuse.js'
 import './Searchbar.css'
 
 type SearchbarProps = {
-  list: string[];
-  onSearch: (filtered: string[]) => void;
+  list: string[]
+  onSearch: (filtered: string[]) => void
   maxResults: number
+  placeholder: string
 }
 
-function Searchbar({ list, maxResults, onSearch }: SearchbarProps) {
+function Searchbar({ list, maxResults, onSearch, placeholder = "" }: SearchbarProps) {
   const [input, useInput] = useState("");
   const fuse = new Fuse(list);
 
@@ -24,7 +25,7 @@ function Searchbar({ list, maxResults, onSearch }: SearchbarProps) {
     let searchResults = fuse.search(name);
 
     // If exact match, just that result
-    if (searchResults.length && _.map(list, char => char.toLowerCase()).includes(name.toLowerCase())) {
+    if (searchResults.length && _.map(list, char => char.toLowerCase()).includes(name.toLowerCase().trim())) {
       onSearch([searchResults[0].item]);
       return;
     }
@@ -45,7 +46,7 @@ function Searchbar({ list, maxResults, onSearch }: SearchbarProps) {
 
   return (
     <div className="searchbar">
-      <input list="search-input" name="search-input" onChange={handleInputChange} value={input} />
+      <input placeholder={placeholder} list="search-input" name="search-input" onChange={handleInputChange} value={input} />
     </div>
   )
 }

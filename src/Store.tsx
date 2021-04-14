@@ -2,7 +2,7 @@ import React, { useReducer } from 'react'
 
 interface IState {
   selectedChar: string,
-  filteredChars: []
+  filteredChars: string[]
 }
 
 export const initialState: IState = {
@@ -28,7 +28,8 @@ export const reducer = (state: IState, action: IAction): IState => {
   switch (action.type) {
     case 'SELECT_CHARACTER':
       return { ...state, selectedChar: action.payload }
-    case 'FILTER_CHARACTERS':
+    case 'SET_FILTER':
+      console.log("dispatch payload ", action.payload);
       return { ...state, filteredChars: action.payload }
     case 'RESET_FILTER':
       return { ...initialState, filteredChars: [] }

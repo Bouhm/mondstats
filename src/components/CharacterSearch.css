@@ -1,15 +1,31 @@
+.character-search {
+  position: relative;
+  top: 15%;
+  overflow-x: hidden;
+}
+
 .character-tiles {
   display: flex;
+  flex-flow: column;
+  padding: 0.5rem;
 }
 
 .searched-character {
-  margin-right: 1rem;
+  display: flex;
+  justify-content:center;
+  height: 10rem;
+  margin-bottom: 3rem;
+}
+
+.unfiltered {
+  display: flex;
+  justify-content: center;
 }
 
 .unfiltered-characters {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  max-width: 80%;
 }
 
 .character-searchbar {

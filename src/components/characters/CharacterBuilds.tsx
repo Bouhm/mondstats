@@ -4,16 +4,15 @@ import characterDb from '../../data/characters.json'
 import { Store } from '../../Store'
 import { useParams } from 'react-router-dom'
 
+import Traveler from '../../assets/Traveler.png'
 import './CharacterBuilds.css'
 
-type Character = {
+export type Character = {
   id: number,
   image: string,
   icon: string,
   name: string,
   element: string,
-  fetter: number,
-  level: number,
   rarity: number,
   constellations: {
     id: number,
@@ -32,13 +31,14 @@ function CharacterPage() {
   _.forEach(characterDb, char => {
     if (char.name.toLowerCase().replace(" ", "") === characterName) character = char
   })
+  const bgUrl = characterName === "traveler" ? Traveler : character!.image.replace("@2x", "");
 
   useEffect(() => {
     dispatch({ type: 'SELECT_CHARACTER', payload: characterName })
-  })
+  }, [])
 
   return (
-    <div className="character-container" style={{ backgroundImage: `url("${character!.image.replace("@2x", "")}")` }}>
+    <div className="character-container" style={{ backgroundImage: `url("${bgUrl}")` }}>
       <div className="character-artifacts">
       </div>
       <div className="character-weapons">

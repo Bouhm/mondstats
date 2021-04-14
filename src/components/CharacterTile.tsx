@@ -4,6 +4,7 @@ import _ from 'lodash'
 import characterDb from '../data/characters.json'
 import { ElementIcons } from '../data/constants'
 
+import TravelerIcon from '../assets/TravelerIcon.png'
 import './CharacterTile.css'
 
 type CharacterTileProps = {
@@ -19,11 +20,15 @@ function CharacterTile({ id }: CharacterTileProps) {
   classes += ` rarity-${character.rarity}`;
 
   const charElement = ElementIcons[character.element];
+  const iconUrl = character.name === "Traveler" ? TravelerIcon : character.icon;
 
   return (
-    <div className={classes}>
-      <img src={character.icon} alt={`${character.name}-portrait`}></img>
-      {charElement && <img className="element-icon" src={ElementIcons[character.element]} alt={character.element}></img>}
+    <div className="character-tile-container">
+      <div className={classes}>
+        <img src={iconUrl} alt={`${character.name}-portrait`}></img>
+        {charElement && <img className="element-icon" src={ElementIcons[character.element]} alt={character.element}></img>}
+        <div className="character-tile-name">{character.name}</div>
+      </div>
     </div>
   )
 }

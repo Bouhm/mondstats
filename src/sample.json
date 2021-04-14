@@ -2,7 +2,15 @@
   {
     "id": 10000015,
     "name": "Kaeya",
-    "constellations": [],
+    "constellations": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 11406,
@@ -24,7 +32,15 @@
   {
     "id": 10000021,
     "name": "Amber",
-    "constellations": [],
+    "constellations": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 15502,
@@ -46,7 +62,15 @@
   {
     "id": 10000023,
     "name": "Xiangling",
-    "constellations": [],
+    "constellations": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
     "weapons": [
       {
         "id": 13403,
@@ -72,7 +96,15 @@
   {
     "id": 10000037,
     "name": "Ganyu",
-    "constellations": [],
+    "constellations": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 15401,
@@ -94,7 +126,15 @@
   {
     "id": 10000025,
     "name": "Xingqiu",
-    "constellations": [],
+    "constellations": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
     "weapons": [
       {
         "id": 11403,
@@ -120,7 +160,15 @@
   {
     "id": 10000034,
     "name": "Noelle",
-    "constellations": [],
+    "constellations": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 12407,
@@ -142,7 +190,15 @@
   {
     "id": 10000006,
     "name": "Lisa",
-    "constellations": [],
+    "constellations": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 14402,
@@ -164,7 +220,15 @@
   {
     "id": 10000003,
     "name": "Jean",
-    "constellations": [],
+    "constellations": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 11408,
@@ -190,7 +254,15 @@
   {
     "id": 10000014,
     "name": "Barbara",
-    "constellations": [],
+    "constellations": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 14302,
@@ -212,7 +284,15 @@
   {
     "id": 10000032,
     "name": "Bennett",
-    "constellations": [],
+    "constellations": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 11401,
@@ -234,7 +314,15 @@
   {
     "id": 10000036,
     "name": "Chongyun",
-    "constellations": [],
+    "constellations": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 12402,
@@ -256,7 +344,15 @@
   {
     "id": 10000020,
     "name": "Razor",
-    "constellations": [],
+    "constellations": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 12411,
@@ -273,7 +369,15 @@
   {
     "id": 10000022,
     "name": "Venti",
-    "constellations": [],
+    "constellations": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 15403,
@@ -295,7 +399,15 @@
   {
     "id": 10000027,
     "name": "Ningguang",
-    "constellations": [],
+    "constellations": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 14302,
@@ -312,7 +424,15 @@
   {
     "id": 10000031,
     "name": "Fischl",
-    "constellations": [],
+    "constellations": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
     "weapons": [
       {
         "id": 15413,
@@ -329,7 +449,15 @@
   {
     "id": 10000005,
     "name": "Traveler",
-    "constellations": [],
+    "constellations": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
     "weapons": [
       {
         "id": 11407,
