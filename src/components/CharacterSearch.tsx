@@ -40,17 +40,15 @@ function CharacterSearch() {
           })
           }
         </div>
-        <section className="unfiltered">
-          <div className="unfiltered-characters">
-            {_.map(_.orderBy(_.xorBy(data, searchResults, 'id'), ['name'], ['asc']), (char: Character) => {
-              return (
-                <Link key={char.id} to={`/characters/${_.find(characterDb, { id: char.id })!.name.toLowerCase().replace(" ", "")}`}>
-                  <CharacterTile id={char.id} />
-                </Link>
-              )
-            })}
-          </div>
-        </section>
+        <div className="unfiltered-characters">
+          {_.map(_.orderBy(_.xorBy(data, searchResults, 'id'), ['name'], ['asc']), (char: Character) => {
+            return (
+              <Link key={char.id} to={`/characters/${_.find(characterDb, { id: char.id })!.name.toLowerCase().replace(" ", "")}`}>
+                <CharacterTile id={char.id} />
+              </Link>
+            )
+          })}
+        </div>
       </div>
     </div>
   )
