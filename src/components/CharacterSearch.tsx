@@ -24,14 +24,6 @@ function CharacterSearch() {
     return { id: char!.id, name: char!.name }
   })
 
-  console.log(_.orderBy(_.map(_.xorBy(data, searchResults, 'id'), (char: Character) => {
-    return (
-      <Link key={char.id} to={`/characters/${_.find(characterDb, { id: char.id })!.name.toLowerCase().replace(" ", "")}`}>
-        <CharacterTile id={char.id} />
-      </Link>
-    )
-  }), ['name'], ['desc']));
-
   return (
     <div className="character-search">
       <div className="character-searchbar">
