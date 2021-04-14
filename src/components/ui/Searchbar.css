@@ -1,7 +1,9 @@
 .searchbar {
+  width: 40em;
+  max-width: 90%;
 
   input {
-    width: 40rem;
+    width: 100%;
     height: 2rem;
     border-radius: 5px;
     padding: 0.5rem;
@@ -9,8 +11,8 @@
     background-color: rgba(0,0,0,0.3);
     border: 1.5px solid rgba(0,0,0,0.5);
     -moz-box-shadow:    inset 0 0 3px #000000;
-   -webkit-box-shadow: inset 0 0 3px #000000;
-   box-shadow:         inset 0 0 3px #000000;
+    -webkit-box-shadow: inset 0 0 3px #000000;
+    box-shadow:         inset 0 0 3px #000000;
     font-size: 1.1rem;
 
     &:focus {

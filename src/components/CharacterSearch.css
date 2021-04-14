@@ -1,6 +1,11 @@
+.logo-container {
+  padding: 2rem 0 0 0;
+  display: flex;
+  justify-content: center;
+}
+
 .character-search {
   position: relative;
-  top: 15%;
   overflow-x: hidden;
 }
 
@@ -25,7 +30,7 @@
 }
 
 .character-searchbar {
-  width: 100%;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   padding: 2rem;

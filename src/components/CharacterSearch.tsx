@@ -9,6 +9,7 @@ import Searchbar from './ui/Searchbar'
 import { Store } from '../Store'
 import './CharacterSearch.css'
 import { Character } from './characters/CharacterBuilds'
+import Logo from '../assets/logo_sm.png'
 
 function CharacterSearch() {
   const [state, dispatch] = useContext(Store)
@@ -26,6 +27,9 @@ function CharacterSearch() {
 
   return (
     <div className="character-search">
+      <div className="logo-container">
+        <img className="logo" src={Logo} alt="logo" />
+      </div>
       <div className="character-searchbar">
         <Searchbar maxResults={3} onSearch={handleSearchCharacter} list={_.map(characterDb, character => character.name)} placeholder="Search character" />
       </div>

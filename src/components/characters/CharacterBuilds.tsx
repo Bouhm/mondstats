@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import _ from 'lodash'
 import characterDb from '../../data/characters.json'
+import artifactDb from '../../data/artifacts.json'
+import weaponDb from '../../data/weapons.json'
 import { Store } from '../../Store'
 import { useParams } from 'react-router-dom'
 
