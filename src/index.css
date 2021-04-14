@@ -3,6 +3,13 @@
 	src: url(./assets/font.ttf);
 }
 
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   background-color: #333749;
   font-family: font;
@@ -10,7 +17,6 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  box-sizing: border-box;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
