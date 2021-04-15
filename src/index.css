@@ -1,7 +1,3 @@
-@font-face {
-	font-family: font;
-	src: url(./assets/font.ttf);
-}
 
 html {
   box-sizing: border-box;
@@ -12,7 +8,9 @@ html {
 
 body {
   background-color: #333749;
-  font-family: font;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;

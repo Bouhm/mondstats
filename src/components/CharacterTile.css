@@ -1,4 +1,10 @@
+@font-face {
+	font-family: font;
+	src: url(../assets/font.ttf);
+}
+
 .character-tile-container {
+  font-family: font;
   height: 190px;
   width: 160px;
 }

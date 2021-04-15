@@ -25,6 +25,10 @@ function CharacterSearch() {
     return { id: char!.id, name: char!.name }
   })
 
+  useEffect(() => {
+    dispatch({ type: 'RESET_FILTER' })
+  }, [])
+
   return (
     <div className="character-search">
       <div className="logo-container">

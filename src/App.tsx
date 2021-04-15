@@ -8,12 +8,14 @@ import {
 
 import CharacterBuilds from './components/characters/CharacterBuilds'
 import CharacterSearch from './components/CharacterSearch';
+import Navbar from './components/navbar/Navbar';
 
 import './App.css'
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <Router>
         <Switch>
           <Route exact path="/" component={CharacterSearch} />

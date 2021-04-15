@@ -29,12 +29,11 @@ export const reducer = (state: IState, action: IAction): IState => {
     case 'SELECT_CHARACTER':
       return { ...state, selectedChar: action.payload }
     case 'SET_FILTER':
-      console.log("dispatch payload ", action.payload);
       return { ...state, filteredChars: action.payload }
     case 'RESET_FILTER':
-      return { ...initialState, filteredChars: [] }
+      return { ...initialState, selectedChar: '', filteredChars: [] }
     case 'RESET_SELECTION':
-      return { ...initialState, selectedChar: '' }
+      return { ...initialState, selectedChar: '', filteredChars: [] }
     default:
       return state
   }
