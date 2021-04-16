@@ -5,8 +5,8 @@ import Logo from '../../assets/logo_sm.png'
 
 import "./Navbar.css"
 
-const Navtabs = [
-  { name: "Builds", linkto: "" }
+const Navtabs: { name: string, linkto: string }[] = [
+  // { name: "Builds", linkto: "/builds" }
 ]
 
 function Navbar() {
@@ -18,7 +18,7 @@ function Navbar() {
         </div>
         <div className="nav-menu">
           {_.map(Navtabs, tab => {
-            return <Link key={tab.name} to="/builds"><div className="nav-tab">{tab.name}</div></Link>
+            return <Link key={tab.name} to={tab.linkto}><div className="nav-tab">{tab.name}</div></Link>
           })}
         </div>
       </div>

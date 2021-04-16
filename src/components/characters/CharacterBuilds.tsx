@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'
 
 import Traveler from '../../assets/Traveler.png'
 import './CharacterBuilds.css'
+import { getShortName } from '../../scripts/util'
 
 export type Character = {
   id: number,
@@ -30,9 +31,13 @@ function CharacterPage() {
   const [state, dispatch] = useContext(Store)
 
   let character: Character;
-  _.forEach(characterDb, char => {
-    if (char.name.toLowerCase().replace(" ", "") === characterName) character = char
-  })
+
+  for (let i = 0; i < characterDb.length; i++) {
+    if (getShortName(characterDb[i].name) === characterName) {
+      character = characterDb[i];
+      break;
+    }
+  }
   const bgUrl = characterName === "traveler" ? Traveler : character!.image.replace("@2x", "");
 
   useEffect(() => {
@@ -42,6 +47,7 @@ function CharacterPage() {
   return (
     <div className="character-container" style={{ backgroundImage: `url("${bgUrl}")` }}>
       <div className="character-artifacts">
+
       </div>
       <div className="character-weapons">
       </div>

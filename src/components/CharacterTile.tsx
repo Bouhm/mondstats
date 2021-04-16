@@ -7,7 +7,7 @@ import { ElementIcons } from '../data/constants'
 import TravelerIcon from '../assets/TravelerIcon.png'
 import './CharacterTile.css'
 
-type CharacterTileProps = {
+export type CharacterTileProps = {
   id: number
 }
 

@@ -1,34 +1,55 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
 
-import CharacterTile from './CharacterTile'
+import CharacterTile, { CharacterTileProps } from './CharacterTile'
 import characterDb from '../data/characters.json'
 import data from "../sample.json"
 import Searchbar from './ui/Searchbar'
-import { Store } from '../Store'
-import './CharacterSearch.css'
+import { ICharData, Store } from '../Store'
 import { Character } from './characters/CharacterBuilds'
 import Logo from '../assets/logo_sm.png'
+import { getShortName } from '../scripts/util'
+import './CharacterSearch.css'
+
+type CharacterTileLink = CharacterTileProps & { shortname: string };
 
 function CharacterSearch() {
+  const [charData, setCharData] = useState<{ [id: string]: ICharData }>({});
   const [state, dispatch] = useContext(Store)
-  let searchResults: ({ id: number, name: string }[]) = []
+
+  useEffect(() => {
+    setCharData(data as { [id: string]: ICharData });
+    let charIdMap: { [shortname: string]: string } = {}
+    _.forEach(_.keys(charData), (id: string) => {
+      charIdMap[getShortName(charData[id].name)] = id;
+    });
+
+    dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
+  }, [charData, getShortName, dispatch, setCharData])
+
+  const [unfilteredChars, setUnfilteredChars] = useState<{ id: number, shortname: string }[]>([]);
+  const [filteredChars, setFilteredChars] = useState<{ id: number, shortname: string }[]>([]);
+
+  useEffect(() => {
+    let filtered: CharacterTileLink[] = [];
+    let unfiltered: CharacterTileLink[] = [];
+    _.forEach(characterDb, char => {
+      if (state.filteredChars.includes(char.name)) {
+        filtered.push({ id: char.id, shortname: getShortName(char.name) })
+      } else {
+        unfiltered.push({ id: char.id, shortname: getShortName(char.name) })
+      }
+    })
+
+    setFilteredChars(filtered);
+    setUnfilteredChars(unfiltered);
+  }, [characterDb, getShortName, setFilteredChars, setUnfilteredChars, state])
 
   // Set character search filter
   const handleSearchCharacter = (filteredChars: string[]) => {
     dispatch({ type: 'SET_FILTER', payload: filteredChars })
   }
-
-  searchResults = _.map(state.filteredChars, charName => {
-    const char = _.find(characterDb, { name: charName });
-    return { id: char!.id, name: char!.name }
-  })
-
-  useEffect(() => {
-    dispatch({ type: 'RESET_FILTER' })
-  }, [])
-
   return (
     <div className="character-search">
       <div className="logo-container">
@@ -39,19 +60,19 @@ function CharacterSearch() {
       </div>
       <div className="character-tiles">
         <div className="searched-character">
-          {searchResults && _.map(searchResults, ({ id, name }) => {
+          {_.map(filteredChars, (char: CharacterTileLink) => {
             return (
-              <Link key={id} to={`/characters/${name.toLowerCase().replace(" ", "")}`}>
-                <CharacterTile id={id} />
+              <Link key={char.id} to={`/characters/${char.shortname}`}>
+                <CharacterTile id={char.id} />
               </Link>
             )
           })
           }
         </div>
         <div className="unfiltered-characters">
-          {_.map(_.orderBy(_.xorBy(data, searchResults, 'id'), ['name'], ['asc']), (char: Character) => {
+          {_.map(_.orderBy(unfilteredChars, ['name'], ['asc']), (char: CharacterTileLink) => {
             return (
-              <Link key={char.id} to={`/characters/${_.find(characterDb, { id: char.id })!.name.toLowerCase().replace(" ", "")}`}>
+              <Link key={char.id} to={`/characters/${char.shortname}`}>
                 <CharacterTile id={char.id} />
               </Link>
             )
