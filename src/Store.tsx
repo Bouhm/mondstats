@@ -9,14 +9,14 @@ export interface ICharData {
 
 interface IState {
   characterIdMap: { [name: string]: number }
-  selectedChar: string,
   filteredChars: string[]
+  buildData: { [id: string]: ICharData }
 }
 
 export const initialState: IState = {
   characterIdMap: {},
-  selectedChar: '',
-  filteredChars: []
+  filteredChars: [],
+  buildData: {}
 }
 
 export const Store = React.createContext<[IState, React.Dispatch<any>]>([initialState, () => { }])
@@ -36,14 +36,12 @@ export const reducer = (state: IState, action: IAction): IState => {
   switch (action.type) {
     case 'SET_CHARACTER_ID_MAP':
       return { ...state, characterIdMap: action.payload }
-    case 'SELECT_CHARACTER':
-      return { ...state, selectedChar: action.payload }
+    case 'SET_BUILD_DATA':
+      return { ...state, buildData: action.payload }
     case 'SET_FILTER':
       return { ...state, filteredChars: action.payload }
     case 'RESET_FILTER':
-      return { ...initialState, selectedChar: '', filteredChars: [] }
-    case 'RESET_SELECTION':
-      return { ...initialState, selectedChar: '', filteredChars: [] }
+      return { ...initialState, filteredChars: [] }
     default:
       return state
   }

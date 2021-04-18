@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import CharacterBuilds from './components/characters/CharacterBuilds'
+import CharacterPage from './components/characters/CharacterPage'
 import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
 
@@ -19,7 +19,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={CharacterSearch} />
-          <Route path="/characters/:characterName" component={CharacterBuilds} />
+          <Route path="/characters/:characterName" component={CharacterPage} />
         </Switch>
       </Router>
     </div>

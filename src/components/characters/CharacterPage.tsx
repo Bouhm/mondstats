@@ -7,8 +7,9 @@ import { Store } from '../../Store'
 import { useParams } from 'react-router-dom'
 
 import Traveler from '../../assets/Traveler.png'
-import './CharacterBuilds.css'
 import { getShortName } from '../../scripts/util'
+import './CharacterPage.css'
+
 
 export type Character = {
   id: number,
@@ -26,8 +27,7 @@ export type Character = {
   }[]
 }
 
-function CharacterPage() {
-  const { characterName } = useParams<{ characterName: string }>();
+function CharacterBuild() {
   const [state, dispatch] = useContext(Store)
 
   let character: Character;
@@ -41,8 +41,7 @@ function CharacterPage() {
   const bgUrl = characterName === "traveler" ? Traveler : character!.image.replace("@2x", "");
 
   useEffect(() => {
-    dispatch({ type: 'SELECT_CHARACTER', payload: characterName })
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="character-container" style={{ backgroundImage: `url("${bgUrl}")` }}>
@@ -53,6 +52,16 @@ function CharacterPage() {
       </div>
       <div className="character-constellations">
       </div>
+    </div>
+  )
+}
+
+function CharacterPage() {
+  const { characterName } = useParams<{ characterName: string }>();
+
+  return (
+    <div className="character-page">
+      <CharacterBuild {} />
     </div>
   )
 }
