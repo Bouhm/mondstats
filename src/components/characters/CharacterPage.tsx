@@ -10,7 +10,6 @@ import Traveler from '../../assets/Traveler.png'
 import { getShortName } from '../../scripts/util'
 import './CharacterPage.css'
 
-
 export type Character = {
   id: number,
   image: string,
