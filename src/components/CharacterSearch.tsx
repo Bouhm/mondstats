@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom'
 import _ from 'lodash'
 
 import CharacterTile, { CharacterTileProps } from './CharacterTile'
-import characterDb from '../data/characters.json'
 import data from "../sample.json"
 import Searchbar from './ui/Searchbar'
 import { ICharData, Store } from '../Store'
-import { Character } from './characters/CharacterBuilds'
 import Logo from '../assets/logo_sm.png'
 import { getShortName } from '../scripts/util'
 import './CharacterSearch.css'
@@ -16,7 +14,7 @@ type CharacterTileLink = CharacterTileProps & { shortname: string };
 
 function CharacterSearch() {
   const [charData, setCharData] = useState<{ [id: string]: ICharData }>({});
-  const [state, dispatch] = useContext(Store)
+  const [{ characterDb, searchedChars }, dispatch] = useContext(Store)
 
   useEffect(() => {
     setCharData(data as { [id: string]: ICharData });
@@ -35,7 +33,7 @@ function CharacterSearch() {
     let filtered: CharacterTileLink[] = [];
     let unfiltered: CharacterTileLink[] = [];
     _.forEach(characterDb, char => {
-      if (state.filteredChars.includes(char.name)) {
+      if (searchedChars.includes(char.name)) {
         filtered.push({ id: char.id, shortname: getShortName(char.name) })
       } else {
         unfiltered.push({ id: char.id, shortname: getShortName(char.name) })
@@ -44,7 +42,7 @@ function CharacterSearch() {
 
     setFilteredChars(filtered);
     setUnfilteredChars(unfiltered);
-  }, [characterDb, getShortName, setFilteredChars, setUnfilteredChars, state])
+  }, [characterDb, searchedChars, getShortName, setFilteredChars, setUnfilteredChars])
 
   // Set character search filter
   const handleSearchCharacter = (filteredChars: string[]) => {

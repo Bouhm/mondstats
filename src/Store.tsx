@@ -1,22 +1,22 @@
 import React, { useReducer } from 'react'
-
-export interface ICharData {
-  name: string
-  constellations: number[]
-  weapons: { id: number, count: number }[]
-  artifacts: { sets: { id: number, activation_number: number }[] }[],
-}
+import { IArtifact, IWeapon, ICharacter, ICharData } from './data/types'
 
 interface IState {
   characterIdMap: { [name: string]: number }
-  filteredChars: string[]
-  buildData: { [id: string]: ICharData }
+  searchedChars: string[]
+  characterData: { [id: string]: ICharData }
+  artifactDb: { [id: string]: IArtifact }
+  weaponDb: { [id: string]: IWeapon }
+  characterDb: { [id: string]: ICharacter }
 }
 
 export const initialState: IState = {
   characterIdMap: {},
-  filteredChars: [],
-  buildData: {}
+  searchedChars: [],
+  characterData: {},
+  artifactDb: {},
+  weaponDb: {},
+  characterDb: {}
 }
 
 export const Store = React.createContext<[IState, React.Dispatch<any>]>([initialState, () => { }])
@@ -37,11 +37,17 @@ export const reducer = (state: IState, action: IAction): IState => {
     case 'SET_CHARACTER_ID_MAP':
       return { ...state, characterIdMap: action.payload }
     case 'SET_BUILD_DATA':
-      return { ...state, buildData: action.payload }
-    case 'SET_FILTER':
-      return { ...state, filteredChars: action.payload }
-    case 'RESET_FILTER':
-      return { ...initialState, filteredChars: [] }
+      return { ...state, characterData: action.payload }
+    case 'SET_ARTIFACT_DB':
+      return { ...state, artifactDb: action.payload }
+    case 'SET_WEAPON_DB':
+      return { ...state, weaponDb: action.payload }
+    case 'SET_CHARACTER_DB':
+      return { ...state, characterDb: action.payload }
+    case 'SET_SEARCHED':
+      return { ...state, searchedChars: action.payload }
+    case 'RESET_SEARCHED':
+      return { ...initialState, searchedChars: [] }
     default:
       return state
   }

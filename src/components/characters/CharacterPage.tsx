@@ -1,51 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react'
 import _ from 'lodash'
-import characterDb from '../../data/characters.json'
-import artifactDb from '../../data/artifacts.json'
-import weaponDb from '../../data/weapons.json'
 import { Store } from '../../Store'
+import { ICharData } from '../../data/types'
 import { useParams } from 'react-router-dom'
 
 import Traveler from '../../assets/Traveler.png'
 import { getShortName } from '../../scripts/util'
 import './CharacterPage.css'
 
-export type Character = {
-  id: number,
-  image: string,
-  icon: string,
-  name: string,
-  element: string,
-  rarity: number,
-  constellations: {
-    id: number,
-    name: string,
-    icon: string,
-    effect: string,
-    pos: number
-  }[]
-}
-
-function CharacterBuild() {
-  const [state, dispatch] = useContext(Store)
-
-  let character: Character;
-
-  for (let i = 0; i < characterDb.length; i++) {
-    if (getShortName(characterDb[i].name) === characterName) {
-      character = characterDb[i];
-      break;
-    }
-  }
-  const bgUrl = characterName === "traveler" ? Traveler : character!.image.replace("@2x", "");
+function CharacterBuild({ name, constellations, weapons, artifacts }: ICharData) {
+  const [{ characterDb, characterIdMap }, dispatch] = useContext(Store)
+  const character = characterDb[characterIdMap[getShortName(name)] + '']
 
   useEffect(() => {
   }, [dispatch])
 
   return (
-    <div className="character-container" style={{ backgroundImage: `url("${bgUrl}")` }}>
+    <div className="character-container" style={{ backgroundImage: `url("${character.image}")` }}>
       <div className="character-artifacts">
-
       </div>
       <div className="character-weapons">
       </div>
@@ -57,10 +29,12 @@ function CharacterBuild() {
 
 function CharacterPage() {
   const { characterName } = useParams<{ characterName: string }>();
+  const [{ characterIdMap, characterData }, dispatch] = useContext(Store)
+  const id = characterIdMap[characterName] + '';
 
   return (
     <div className="character-page">
-      <CharacterBuild {} />
+      <CharacterBuild {...characterData[id]} />
     </div>
   )
 }

@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import _ from 'lodash'
 
-import characterDb from '../data/characters.json'
 import { ElementIcons } from '../data/constants'
-
 import TravelerIcon from '../assets/TravelerIcon.png'
+import { Store } from '../Store'
 import './CharacterTile.css'
 
 export type CharacterTileProps = {
@@ -12,6 +11,7 @@ export type CharacterTileProps = {
 }
 
 function CharacterTile({ id }: CharacterTileProps) {
+  const [{ characterDb },] = useContext(Store)
   const character = _.find(characterDb, { id })
 
   if (!character) return null;
