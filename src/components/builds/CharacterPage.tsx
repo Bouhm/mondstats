@@ -8,12 +8,9 @@ import Traveler from '../../assets/Traveler.png'
 import { getShortName } from '../../scripts/util'
 import './CharacterPage.css'
 
-function CharacterBuild({ name, constellations, weapons, artifacts }: ICharData) {
+function CharacterBuild({ id, name, constellations, weapons, artifacts }: ICharData) {
   const [{ characterDb, characterIdMap }, dispatch] = useContext(Store)
   const character = characterDb[characterIdMap[getShortName(name)] + '']
-
-  useEffect(() => {
-  }, [dispatch])
 
   return (
     <div className="character-container" style={{ backgroundImage: `url("${character.image}")` }}>
