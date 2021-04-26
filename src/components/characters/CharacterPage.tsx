@@ -18,6 +18,7 @@ function CharacterBuild({ name, constellations, weapons, artifacts }: ICharData)
   return (
     <div className="character-container" style={{ backgroundImage: `url("${character.image}")` }}>
       <div className="character-artifacts">
+
       </div>
       <div className="character-weapons">
       </div>

@@ -1,9 +1,21 @@
+export interface IArtfifactBuild {
+  sets: {
+    id: number
+    activation_number: number
+  }[]
+}
+
+export interface IWeaponBuild {
+  id: number
+  count: number
+}
+
 export interface ICharData {
   id: number
   name: string
   constellations: number[]
-  weapons: { id: number, count: number }[]
-  artifacts: { sets: { id: number, activation_number: number }[] }[],
+  weapons: IWeaponBuild[]
+  artifacts: IArtfifactBuild[]
 }
 
 export interface IArtifact {

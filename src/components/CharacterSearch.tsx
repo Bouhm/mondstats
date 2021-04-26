@@ -5,7 +5,7 @@ import _ from 'lodash'
 import CharacterTile, { CharacterTileProps } from './CharacterTile'
 import data from "../sample.json"
 import Searchbar from './ui/Searchbar'
-import { ICharData, Store } from '../Store'
+import { Store } from '../Store'
 import Logo from '../assets/logo_sm.png'
 import { getShortName } from '../scripts/util'
 import './CharacterSearch.css'
