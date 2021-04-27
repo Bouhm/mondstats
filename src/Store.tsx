@@ -2,9 +2,9 @@ import React, { useReducer } from 'react'
 import { IArtifact, IWeapon, ICharacter, ICharData } from './data/types'
 
 interface IState {
-  characterIdMap: { [name: string]: number }
+  characterIdMap: { [name: string]: string }
   searchedChars: string[]
-  characterData: { [id: string]: ICharData }
+  characterBuilds: { [id: string]: ICharData }
   artifactDb: { [id: string]: IArtifact }
   weaponDb: { [id: string]: IWeapon }
   characterDb: { [id: string]: ICharacter }
@@ -13,7 +13,7 @@ interface IState {
 export const initialState: IState = {
   characterIdMap: {},
   searchedChars: [],
-  characterData: {},
+  characterBuilds: {},
   artifactDb: {},
   weaponDb: {},
   characterDb: {}
@@ -36,8 +36,8 @@ export const reducer = (state: IState, action: IAction): IState => {
   switch (action.type) {
     case 'SET_CHARACTER_ID_MAP':
       return { ...state, characterIdMap: action.payload }
-    case 'SET_BUILD_DATA':
-      return { ...state, characterData: action.payload }
+    case 'SET_CHARACTER_BUILDS':
+      return { ...state, characterBuilds: action.payload }
     case 'SET_ARTIFACT_DB':
       return { ...state, artifactDb: action.payload }
     case 'SET_WEAPON_DB':

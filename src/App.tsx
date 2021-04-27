@@ -6,6 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 
+import data from "./sample.json"
 import artifactDb from './data/artifacts.json'
 import characterDb from './data/characters.json'
 import weaponDb from './data/weapons.json'
@@ -15,15 +16,23 @@ import Navbar from './components/navbar/Navbar'
 import { Store } from "./Store"
 
 import './App.css'
+import { getShortName } from './scripts/util';
 
 function App() {
   const [, dispatch] = useContext(Store)
 
   useEffect(() => {
+    let charIdMap: { [shortname: string]: string } = {}
+    _.forEach(_.values(characterDb), char => {
+      charIdMap[getShortName(char.name)] = char.id + '';
+    });
+
+    dispatch({ type: "SET_CHARACTER_BUILDS", payload: data })
     dispatch({ type: "SET_ARTIFACT_DB", payload: artifactDb })
     dispatch({ type: "SET_WEAPON_DB", payload: weaponDb })
     dispatch({ type: "SET_CHARACTER_DB", payload: characterDb })
-  }, [dispatch])
+    dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
+  }, [characterDb, artifactDb, weaponDb, data, getShortName, dispatch])
 
   return (
     <div className="App">

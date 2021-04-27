@@ -4,21 +4,17 @@ import { Store } from '../../Store'
 import { ICharData } from '../../data/types'
 import { useParams } from 'react-router-dom'
 
-import Traveler from '../../assets/Traveler.png'
-import { getShortName } from '../../scripts/util'
 import './CharacterPage.css'
 
-function CharacterBuild({ name, constellations, weapons, artifacts }: ICharData) {
-  const [{ characterDb, characterIdMap }, dispatch] = useContext(Store)
-  const character = characterDb[characterIdMap[getShortName(name)] + '']
+function CharacterBuild({ id, name, constellations, weapons, artifacts }: ICharData) {
+  const [{ characterDb }] = useContext(Store)
+  const character = characterDb[id]
 
-  useEffect(() => {
-  }, [dispatch])
+  console.log(id)
 
   return (
     <div className="character-container" style={{ backgroundImage: `url("${character.image}")` }}>
       <div className="character-artifacts">
-
       </div>
       <div className="character-weapons">
       </div>
@@ -30,12 +26,18 @@ function CharacterBuild({ name, constellations, weapons, artifacts }: ICharData)
 
 function CharacterPage() {
   const { characterName } = useParams<{ characterName: string }>();
-  const [{ characterIdMap, characterData }, dispatch] = useContext(Store)
-  const id = characterIdMap[characterName] + '';
+  const [{ characterIdMap, characterBuilds }] = useContext(Store)
+  let build;
+
+  useEffect(() => {
+    build = characterBuilds[characterIdMap[characterName]];
+  }, [characterIdMap, characterName, characterBuilds])
+
+  if (!build) return null
 
   return (
     <div className="character-page">
-      <CharacterBuild {...characterData[id]} />
+      <CharacterBuild {...build} />
     </div>
   )
 }

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import _ from 'lodash'
 
 import CharacterTile, { CharacterTileProps } from './CharacterTile'
-import data from "../sample.json"
 import Searchbar from './ui/Searchbar'
 import { Store } from '../Store'
 import Logo from '../assets/logo_sm.png'
@@ -13,30 +12,18 @@ import './CharacterSearch.css'
 type CharacterTileLink = CharacterTileProps & { shortname: string };
 
 function CharacterSearch() {
-  const [charData, setCharData] = useState<{ [id: string]: ICharData }>({});
   const [{ characterDb, searchedChars }, dispatch] = useContext(Store)
-
-  useEffect(() => {
-    setCharData(data as { [id: string]: ICharData });
-    let charIdMap: { [shortname: string]: string } = {}
-    _.forEach(_.keys(charData), (id: string) => {
-      charIdMap[getShortName(charData[id].name)] = id;
-    });
-
-    dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
-  }, [charData, getShortName, dispatch, setCharData])
-
-  const [unfilteredChars, setUnfilteredChars] = useState<{ id: number, shortname: string }[]>([]);
-  const [filteredChars, setFilteredChars] = useState<{ id: number, shortname: string }[]>([]);
+  const [unfilteredChars, setUnfilteredChars] = useState<{ id: string, shortname: string }[]>([]);
+  const [filteredChars, setFilteredChars] = useState<{ id: string, shortname: string }[]>([]);
 
   useEffect(() => {
     let filtered: CharacterTileLink[] = [];
     let unfiltered: CharacterTileLink[] = [];
-    _.forEach(characterDb, char => {
+    _.forEach(_.values(characterDb), char => {
       if (searchedChars.includes(char.name)) {
-        filtered.push({ id: char.id, shortname: getShortName(char.name) })
+        filtered.push({ id: char.id + '', shortname: getShortName(char.name) })
       } else {
-        unfiltered.push({ id: char.id, shortname: getShortName(char.name) })
+        unfiltered.push({ id: char.id + '', shortname: getShortName(char.name) })
       }
     })
 
@@ -54,7 +41,7 @@ function CharacterSearch() {
         <img className="logo" src={Logo} alt="logo" />
       </div>
       <div className="character-searchbar">
-        <Searchbar maxResults={3} onSearch={handleSearchCharacter} list={_.map(characterDb, character => character.name)} placeholder="Search character" />
+        <Searchbar maxResults={3} onSearch={handleSearchCharacter} list={_.map(_.values(characterDb), character => character.name)} placeholder="Search character" />
       </div>
       <div className="character-tiles">
         <div className="searched-character">
