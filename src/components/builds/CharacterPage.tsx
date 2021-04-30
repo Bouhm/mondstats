@@ -5,16 +5,19 @@ import { ICharData } from '../../data/types'
 import { useParams } from 'react-router-dom'
 
 import './CharacterPage.css'
+import { ChevronUpSharp } from 'react-ionicons'
+import ArtifactBuild from './ArtifactBuild'
 
 function CharacterBuild({ id, name, constellations, weapons, artifacts }: ICharData) {
   const [{ characterDb }] = useContext(Store)
+  const [activeBuild, setActiveBuild] = useState(false)
   const character = characterDb[id]
-
-  console.log(id)
+  console.log(character);
 
   return (
     <div className="character-container" style={{ backgroundImage: `url("${character.image}")` }}>
       <div className="character-artifacts">
+        {_.map(artifacts, artifact => <ArtifactBuild {...artifact} />)}
       </div>
       <div className="character-weapons">
       </div>
@@ -27,17 +30,15 @@ function CharacterBuild({ id, name, constellations, weapons, artifacts }: ICharD
 function CharacterPage() {
   const { characterName } = useParams<{ characterName: string }>();
   const [{ characterIdMap, characterBuilds }] = useContext(Store)
-  let build;
+  const [build, setBuild] = useState<ICharData | undefined>(undefined)
 
   useEffect(() => {
-    build = characterBuilds[characterIdMap[characterName]];
+    setBuild(characterBuilds[characterIdMap[characterName]]);
   }, [characterIdMap, characterName, characterBuilds])
-
-  if (!build) return null
 
   return (
     <div className="character-page">
-      <CharacterBuild {...build} />
+      {build && <CharacterBuild {...build} />}
     </div>
   )
 }
