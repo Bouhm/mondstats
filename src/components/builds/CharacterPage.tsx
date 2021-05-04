@@ -6,9 +6,9 @@ import { useParams } from 'react-router-dom'
 
 import './CharacterPage.css'
 import { ChevronUpSharp } from 'react-ionicons'
-import ArtifactBuild from './ArtifactBuild'
+import ArtifactBuild from './Equipment'
 
-function CharacterBuildStats({ id, name, constellations, weapons, artifacts }: ICharData) {
+function BuildCarousel({ id, name, constellations, weapons, artifacts }: ICharData) {
   const [{ characterDb }] = useContext(Store)
   const [activeBuild, setActiveBuild] = useState(false)
   const character = characterDb[id]
@@ -16,7 +16,11 @@ function CharacterBuildStats({ id, name, constellations, weapons, artifacts }: I
 
   return (
     <div className="character-container" style={{ backgroundImage: `url("${character.image}")` }}>
-      <CharacterBuild weaponId={} artifactSets={} />
+      <div className="character-artifacts">
+        {_.map(artifacts, (artifact, i) => <ArtifactBuild key={artifact} {...artifact} />)}
+      </div>
+      <div className="character-weapons">
+      </div>
       <div className="character-constellations">
       </div>
     </div>
@@ -26,15 +30,15 @@ function CharacterBuildStats({ id, name, constellations, weapons, artifacts }: I
 function CharacterPage() {
   const { characterName } = useParams<{ characterName: string }>();
   const [{ characterIdMap, characterBuilds }] = useContext(Store)
-  const [builds, setBuilds] = useState<ICharData | undefined>(undefined)
+  const [build, setBuild] = useState<ICharData | undefined>(undefined)
 
   useEffect(() => {
-    setBuilds(characterBuilds[characterIdMap[characterName]]);
+    setBuild(characterBuilds[characterIdMap[characterName]]);
   }, [characterIdMap, characterName, characterBuilds])
 
   return (
     <div className="character-page">
-      {builds && <CharacterBuildStats {...builds} />}
+      {build && <BuildCarousel {...build} />}
     </div>
   )
 }

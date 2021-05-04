@@ -14,8 +14,17 @@ export interface ICharData {
   id: number
   name: string
   constellations: number[]
-  weapons: IWeaponBuild[]
-  artifacts: IArtfifactBuild[]
+  builds: {
+    weapons: IWeaponBuild[]
+    artifacts: IArtfifactBuild[]
+    count: number
+  }
+  abyss: {
+    floors: { [floorStr: string]: number }
+    party: { [charId: string]: number }
+    total: number
+  }
+  total: number
 }
 
 export interface IArtifact {
