@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 
 import './CharacterPage.css'
 import { ChevronUpSharp } from 'react-ionicons'
-import ArtifactBuild from './Equipment'
+import Build from './Build'
 
 function BuildCarousel({ id, name, constellations, weapons, artifacts }: ICharData) {
   const [{ characterDb }] = useContext(Store)
@@ -16,12 +16,10 @@ function BuildCarousel({ id, name, constellations, weapons, artifacts }: ICharDa
 
   return (
     <div className="character-container" style={{ backgroundImage: `url("${character.image}")` }}>
-      <div className="character-artifacts">
-        {_.map(artifacts, (artifact, i) => <ArtifactBuild key={artifact} {...artifact} />)}
+      <div className="character-build">
+        {_.map(artifacts, (artifact, i) => <Build key={artifact} {...artifact} />)}
       </div>
       <div className="character-weapons">
-      </div>
-      <div className="character-constellations">
       </div>
     </div>
   )

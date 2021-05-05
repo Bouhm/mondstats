@@ -6,7 +6,6 @@
 
 .character-search {
   position: relative;
-  overflow-x: hidden;
 }
 
 .character-tiles {
@@ -17,7 +16,7 @@
 
 .searched-character {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   height: 10rem;
   margin-bottom: 3rem;
 }

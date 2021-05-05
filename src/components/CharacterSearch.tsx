@@ -55,7 +55,7 @@ function CharacterSearch() {
           }
         </div>
         <div className="unfiltered-characters">
-          {_.map(_.orderBy(unfilteredChars, ['name'], ['asc']), (char: CharacterTileLink) => {
+          {_.map(_.orderBy(unfilteredChars, 'shortname', 'asc'), (char: CharacterTileLink) => {
             return (
               <Link key={char.id} to={`/builds/${char.shortname}`}>
                 <CharacterTile id={char.id} />
