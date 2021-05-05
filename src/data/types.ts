@@ -1,8 +1,6 @@
-export interface IArtfifactBuild {
-  sets: {
-    id: number
-    activation_number: number
-  }[]
+export interface IArtifactBuild {
+  id: number
+  activation_number: number
 }
 
 export interface IWeaponBuild {
@@ -10,15 +8,17 @@ export interface IWeaponBuild {
   count: number
 }
 
+export interface IBuild {
+  weapons: IWeaponBuild[]
+  artifacts: IArtifactBuild[]
+  count: number
+}
+
 export interface ICharData {
   id: number
   name: string
   constellations: number[]
-  builds: {
-    weapons: IWeaponBuild[]
-    artifacts: IArtfifactBuild[]
-    count: number
-  }
+  builds: IBuild[]
   abyss: {
     floors: { [floorStr: string]: number }
     party: { [charId: string]: number }

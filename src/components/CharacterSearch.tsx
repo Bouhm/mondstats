@@ -9,21 +9,21 @@ import Logo from '../assets/logo_sm.png'
 import { getShortName } from '../scripts/util'
 import './CharacterSearch.css'
 
-type CharacterTileLink = CharacterTileProps & { shortname: string };
+type CharacterTileLink = CharacterTileProps & { shortName: string };
 
 function CharacterSearch() {
   const [{ characterDb, searchedChars }, dispatch] = useContext(Store)
-  const [unfilteredChars, setUnfilteredChars] = useState<{ id: string, shortname: string }[]>([]);
-  const [filteredChars, setFilteredChars] = useState<{ id: string, shortname: string }[]>([]);
+  const [unfilteredChars, setUnfilteredChars] = useState<{ id: string, shortName: string }[]>([]);
+  const [filteredChars, setFilteredChars] = useState<{ id: string, shortName: string }[]>([]);
 
   useEffect(() => {
     let filtered: CharacterTileLink[] = [];
     let unfiltered: CharacterTileLink[] = [];
     _.forEach(_.values(characterDb), char => {
       if (searchedChars.includes(char.name)) {
-        filtered.push({ id: char.id + '', shortname: getShortName(char.name) })
+        filtered.push({ id: char.id + '', shortName: getShortName(char.name) })
       } else {
-        unfiltered.push({ id: char.id + '', shortname: getShortName(char.name) })
+        unfiltered.push({ id: char.id + '', shortName: getShortName(char.name) })
       }
     })
 
@@ -47,7 +47,7 @@ function CharacterSearch() {
         <div className="searched-character">
           {_.map(filteredChars, (char: CharacterTileLink) => {
             return (
-              <Link key={char.id} to={`/builds/${char.shortname}`}>
+              <Link key={char.id} to={`/builds/${char.shortName}`}>
                 <CharacterTile id={char.id} />
               </Link>
             )
@@ -57,7 +57,7 @@ function CharacterSearch() {
         <div className="unfiltered-characters">
           {_.map(_.orderBy(unfilteredChars, 'shortname', 'asc'), (char: CharacterTileLink) => {
             return (
-              <Link key={char.id} to={`/builds/${char.shortname}`}>
+              <Link key={char.id} to={`/builds/${char.shortName}`}>
                 <CharacterTile id={char.id} />
               </Link>
             )

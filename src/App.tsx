@@ -23,7 +23,7 @@ function App() {
   const [, dispatch] = useContext(Store)
 
   useEffect(() => {
-    console.log("App UseEffect")
+    console.log("App use effect")
     let charIdMap: { [shortname: string]: string } = {}
     _.forEach(_.values(characterDb), char => {
       charIdMap[getShortName(char.name)] = char.id + '';
@@ -41,7 +41,7 @@ function App() {
       <Navbar />
       <Router>
         <Switch>
-          <Route path="/builds/:characterName" component={CharacterPage} />
+          <Route path="/builds/:shortName" component={CharacterPage} />
           <Redirect exact path="/builds" to="/" />
           <Route exact path="/" component={CharacterSearch} />
         </Switch>
