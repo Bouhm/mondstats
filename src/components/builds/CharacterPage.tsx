@@ -28,7 +28,7 @@ function CharacterPage() {
 
   return (
     <div className="character-page" style={{ backgroundImage: `url("${character!.image}")` }}>
-      {builds && <BuildCarousel builds={builds} />}
+      {builds && <BuildCarousel builds={_.filter(builds, build => !(build.artifacts.length === 1 && build.artifacts[0].activation_number < 4 ))} />}
     </div>
   )
 }
