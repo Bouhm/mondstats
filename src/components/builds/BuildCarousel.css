@@ -1,3 +1,13 @@
+.builds-carousel {
+  display: flex;
+  flex-flow: row;
+  padding: 2rem;
+}
+
+.character-builds-container {
+  flex: 1;
+}
+
 .weapon-card {
   img {
     width: 125px;
@@ -5,36 +15,44 @@
   }
 }
 
+.character-builds-selector {
+  flex: 0 auto;
+}
+
 .artifact-sets-container {
   display: flex;
-  width: 200px;
+  width: 140px;
   transition: transform 0.2s;
 
   .artifact-card {
     position: relative;
-    width: 100px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     border-radius: 8px;
     overflow: hidden;
     margin: 0.1rem;
 
     .artifact-set-activation {
       color: white;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       position: absolute;
       bottom: 0;
       right: 0;
+      text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
       padding: 0.3rem;
     }
   }
 
   img {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
   }
 
   &:hover {
     transform: scale(1.03);
     border: 3px solid #e9e5dc;
+    border-radius: 8px;
   }
 }
