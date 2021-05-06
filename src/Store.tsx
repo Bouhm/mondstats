@@ -2,7 +2,7 @@ import React, { useReducer } from 'react'
 import { IArtifact, IWeapon, ICharacter, ICharData } from './data/types'
 
 interface IState {
-  characterIdMap: { [name: string]: string }
+  characterIdMap: { [shortName: string]: string }
   selectedCharacter: string,
   searchedChars: string[]
   characterBuilds: { [id: string]: ICharData }
