@@ -1,6 +1,6 @@
 @font-face {
-	font-family: font;
-	src: url(../assets/font.ttf);
+  font-family: font;
+  src: url(../assets/font.ttf);
 }
 
 .character-tile-container {
@@ -47,26 +47,14 @@
     text-decoration: none;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       right: 0;
       bottom: 30px;
-      height: 40px;
-      width: 40px;
+      height: 50px;
+      width: 70px;
       border-bottom-right-radius: 50%;
       box-shadow: 20px 0 0 0 #e9e5dc;
     }
   }
-}
-
-.rarity-3 {
-  background: linear-gradient(#5D6887, #608EAB, #5484A7);
-}
-
-.rarity-4 {
-  background: linear-gradient(#605A86, #9476AC, #A67AB9);
-}
-
-.rarity-5 {
-  background: linear-gradient(#8D5E2E, #B1792C, #B8742B);
 }

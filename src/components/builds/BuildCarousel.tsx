@@ -43,7 +43,7 @@ function BuildCarousel({ builds }: { builds: IBuild[] }) {
               <div className="artifact-set-details">
                 {_.map(artifact.set.affixes, affix => {
                   return (
-                    <div>
+                    <div> 
                       {affix.activation_number}-Piece: {affix.effect}
                     </div>
                   )
@@ -63,7 +63,13 @@ function BuildCarousel({ builds }: { builds: IBuild[] }) {
         {builds[activeBuildIdx].count}
       </div>
       <div className="character-builds-selector">
-        {_.map(builds, (build, i) => <ArtifactSets key={`artifacts-thumb=${i}`} artifacts={build.artifacts} />)}
+        {_.map(builds, (build, i) => {
+          return (
+            <div onClick={() => setActiveBuildIdx(i)}>
+              <ArtifactSets key={`artifacts-thumb=${i}`} artifacts={build.artifacts} />
+            </div>
+          )
+        })}
       </div>
     </div>
   )

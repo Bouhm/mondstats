@@ -5,9 +5,36 @@
   }
 }
 
-.artifact-card {
+.artifact-sets-container {
+  display: flex;
+  width: 200px;
+  transition: transform 0.2s;
+
+  .artifact-card {
+    position: relative;
+    width: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0.1rem;
+
+    .artifact-set-activation {
+      color: white;
+      font-size: 2rem;
+      font-weight: 700;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 0.3rem;
+    }
+  }
+
   img {
-    width: 125px;
-    height: 125px;
+    width: 100px;
+    height: 100px;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+    border: 3px solid #e9e5dc;
   }
 }

@@ -1,5 +1,6 @@
+import React, { useContext } from 'react'
 import _ from 'lodash'
-import React from 'react'
+import { Store } from '../../Store'
 import { IArtifactBuild } from '../../data/types'
 
 type ArtifactCardProps = {
@@ -7,10 +8,21 @@ type ArtifactCardProps = {
 }
 
 function ArtifactSets({ artifacts }: ArtifactCardProps) {
+  const [{ artifactDb }] = useContext(Store)
+  const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 5, set: { id } });
+
   return (
     <div className="artifact-sets-container">
-      {_.map(artifacts, artifact => {
+      {_.map(artifacts, ({ id, activation_number }) => {
+        const artifact = getArtifactSet(id);
+        if (!artifact) return null;
 
+        return (
+          <div className={`artifact-card rarity-${artifact.rarity}`}>
+            <img src={artifact.icon} alt={artifact.name} />
+            <div className="artifact-set-activation">{activation_number}x</div>
+          </div>
+        )
       })}
     </div>
   )
