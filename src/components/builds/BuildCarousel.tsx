@@ -25,14 +25,13 @@ function BuildCarousel({ builds }: { builds: IBuild[] }) {
 
             return (
               <div className="weapon-container">
-                <Weapon key={`${id}-${count}-${i}`} {...weapon} isLarge={activeBuildIdx === i} />
-                <div className="weapon-count">{Math.round((count / builds[activeBuildIdx].count) * 100)}%</div>
+                <Weapon key={`${id}-${count}-${i}`} {...weapon} popularity={Math.round((count / builds[activeBuildIdx].count) * 100)} />
               </div>
             )
           })}
         </div>
         <div className="artifact-build-container">
-          {_.map(builds[activeBuildIdx].artifacts, ({id}, i) => {
+          {_.map(builds[activeBuildIdx].artifacts, ({ id }, i) => {
             const artifact = getArtifactSet(id);
             if (!artifact) return null;
 
