@@ -16,6 +16,9 @@
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 
   .element-icon {
     position: absolute;
@@ -27,8 +30,12 @@
 
   &:hover {
     cursor: pointer;
-    transform: scale(1.03);
-    border: 3px solid #e9e5dc;
+    -webkit-transform: scale(1.08, 1.08);
+    transform: scale(1.08, 1.08);
+    -moz-box-shadow:    inset 0 0 5px #F2EEE6;
+    -webkit-box-shadow: inset 0 0 5px #F2EEE6;
+    box-shadow:         inset 0 0 5px #F2EEE6;
+    border: 3px solid #F2EEE6;
   }
 
   img {
@@ -38,23 +45,11 @@
   }
 
   .character-tile-name {
-    position: relative;
-    padding: 0.2rem;
+    padding: 0.2rem 0.2rem 0.1rem 0.2rem;
     color: rgb(73, 83, 102);
     background-color: #e9e5dc;
     font-size: 1.3rem;
     text-align: center;
     text-decoration: none;
-
-    &::before {
-      content: '';
-      position: absolute;
-      right: 0;
-      bottom: 30px;
-      height: 50px;
-      width: 70px;
-      border-bottom-right-radius: 50%;
-      box-shadow: 20px 0 0 0 #e9e5dc;
-    }
   }
 }
