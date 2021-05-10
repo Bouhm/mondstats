@@ -8,10 +8,46 @@
   flex: 1;
 }
 
+.weapon-container {
+  display: flex;
+  align-items: middle;
+
+  .weapon-count {
+    line-height: 200px;
+    color: white;
+    font-size: 4rem;
+    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+  }
+}
+
 .weapon-card {
+  width: 200px;
+  text-align: center;
+  border-radius: 8px;
+  margin: 1rem;
+  overflow: hidden;
+
   img {
-    width: 125px;
-    height: 125px;
+    width: 120px;
+    height: 130px;
+  }
+
+  &.large {
+    width: 230px;
+
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .weapon-name {
+    padding: 0.2rem 0.2rem 0.1rem 0.2rem;
+    color: rgb(73, 83, 102);
+    background-color: #e9e5dc;
+    font-size: 1.3rem;
+    text-align: center;
+    text-decoration: none;
   }
 }
 
@@ -21,7 +57,7 @@
 
 .artifact-sets-container {
   display: flex;
-  width: 140px;
+  width: 200px;
   transition: transform 0.2s;
 
   .artifact-card {
@@ -46,8 +82,8 @@
   }
 
   img {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
   }
 
   &:hover {

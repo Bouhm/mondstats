@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
 import _ from 'lodash'
+import { IWeapon } from '../../data/types'
 
-function Weapon() {
+function Weapon({ rarity, icon, name, isLarge }: IWeapon & { isLarge: boolean }) {
   return (
-    <div className={`weapon-card rarity-${weapon.rarity}`}>
-      <img src={weapon.icon} alt={weapon.name} />
-        <span>{count}</span>
+    <div className={`weapon-card rarity-${rarity} ${isLarge && 'large'}`}>
+      <img src={icon} alt={name} />
+      <div className="weapon-name">
+        {name}
       </div>
-      <div className="weapon-detail">
-      {weapon.desc}
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { Store } from '../../Store'
 import { IBuild } from '../../data/types'
 import ArtifactSets from './ArtifactSets'
 import './BuildCarousel.css'
+import Weapon from './Weapon'
 
 function BuildCarousel({ builds }: { builds: IBuild[] }) {
   const [{ selectedCharacter, artifactDb, weaponDb }] = useContext(Store)
@@ -17,19 +18,14 @@ function BuildCarousel({ builds }: { builds: IBuild[] }) {
     return (
       <div className="build-container">
         <div className="weapons-list">
-          {_.map(builds[activeBuildIdx].weapons, ({ id, count }, i) => {
+          {_.map(_.orderBy(builds[activeBuildIdx].weapons, 'count', 'desc'), ({ id, count }, i) => {
             const weapon = getWeapon(id);
             if (!weapon) return null;
 
             return (
-              <div key={`${id}-${count}-${i}`} className="weapon-container">
-                <div className={`weapon-card rarity-${weapon.rarity}`}>
-                  <img src={weapon.icon} alt={weapon.name} />
-                  <span>{count}</span>
-                </div>
-                <div className="weapon-detail">
-                  {weapon.desc}
-                </div>
+              <div className="weapon-container">
+                <Weapon key={`${id}-${count}-${i}`} {...weapon} isLarge={activeBuildIdx === i} />
+                <div className="weapon-count">{Math.round((count / builds[activeBuildIdx].count) * 100)}%</div>
               </div>
             )
           })}
