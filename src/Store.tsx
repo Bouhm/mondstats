@@ -4,7 +4,6 @@ import { IArtifact, IWeapon, ICharacter, ICharData } from './data/types'
 interface IState {
   characterIdMap: { [shortName: string]: string }
   selectedCharacter: string,
-  searchedChars: string[]
   characterBuilds: { [id: string]: ICharData }
   artifactDb: { [id: string]: IArtifact }
   weaponDb: { [id: string]: IWeapon }
@@ -14,7 +13,6 @@ interface IState {
 export const initialState: IState = {
   characterIdMap: {},
   selectedCharacter: '',
-  searchedChars: [],
   characterBuilds: {},
   artifactDb: {},
   weaponDb: {},
@@ -48,10 +46,6 @@ export const reducer = (state: IState, action: IAction): IState => {
       return { ...state, weaponDb: action.payload }
     case 'SET_CHARACTER_DB':
       return { ...state, characterDb: action.payload }
-    case 'SET_SEARCHED':
-      return { ...state, searchedChars: action.payload }
-    case 'RESET_SEARCHED':
-      return { ...initialState, searchedChars: [] }
     default:
       return state
   }

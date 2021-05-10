@@ -12,29 +12,32 @@ import './CharacterSearch.css'
 type CharacterTileLink = CharacterTileProps & { shortName: string };
 
 function CharacterSearch() {
-  const [{ characterDb, searchedChars }, dispatch] = useContext(Store)
+  const [{ characterDb }] = useContext(Store)
   const [unfilteredChars, setUnfilteredChars] = useState<{ id: string, shortName: string }[]>([]);
   const [filteredChars, setFilteredChars] = useState<{ id: string, shortName: string }[]>([]);
 
   useEffect(() => {
+    setUnfilteredChars(_.map(_.values(characterDb), char => ({ id: char.id + '', shortName: getShortName(char.name) })))
+  }, [characterDb, getShortName, setUnfilteredChars])
+
+  // Set character search filter
+  const handleSearchCharacter = (filteredChars: string[]) => {
     let filtered: CharacterTileLink[] = [];
     let unfiltered: CharacterTileLink[] = [];
     _.forEach(_.values(characterDb), char => {
-      if (searchedChars.includes(char.name)) {
+      if (filteredChars.includes(char.name)) {
         filtered.push({ id: char.id + '', shortName: getShortName(char.name) })
       } else {
         unfiltered.push({ id: char.id + '', shortName: getShortName(char.name) })
       }
     })
 
+    console.log
+
     setFilteredChars(filtered);
     setUnfilteredChars(unfiltered);
-  }, [characterDb, searchedChars, getShortName, setFilteredChars, setUnfilteredChars])
-
-  // Set character search filter
-  const handleSearchCharacter = (filteredChars: string[]) => {
-    dispatch({ type: 'SET_FILTER', payload: filteredChars })
   }
+
   return (
     <div className="character-search">
       <div className="logo-container">
