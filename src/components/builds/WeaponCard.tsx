@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import _ from 'lodash'
 import { IWeapon } from '../../data/types'
 
-function Weapon({ rarity, icon, name, isLarge }: IWeapon & { isLarge: boolean }) {
+function WeaponCard({ rarity, icon, name, isLarge }: IWeapon & { isLarge: boolean }) {
   return (
     <div className={`weapon-card rarity-${rarity} ${isLarge && 'large'}`}>
       <img src={icon} alt={name} />
@@ -13,4 +13,4 @@ function Weapon({ rarity, icon, name, isLarge }: IWeapon & { isLarge: boolean })
   )
 }
 
-export default Weapon
+export default WeaponCard
