@@ -18,7 +18,7 @@ function ArtifactSets({ artifacts }: ArtifactCardProps) {
         if (!artifact) return null;
 
         return (
-          <div className={`artifact-card rarity-${artifact.rarity}`}>
+          <div className={"artifact-card"}>
             <img src={artifact.icon} alt={artifact.name} />
             <div className="artifact-set-activation">{activation_number}x</div>
           </div>
