@@ -24,6 +24,7 @@ function CharacterSearch() {
   const handleSearchCharacter = (filteredChars: string[]) => {
     let filtered: CharacterTileLink[] = [];
     let unfiltered: CharacterTileLink[] = [];
+    
     _.forEach(_.values(characterDb), char => {
       if (filteredChars.includes(char.name)) {
         filtered.push({ id: char.id + '', shortName: getShortName(char.name) })
@@ -32,9 +33,7 @@ function CharacterSearch() {
       }
     })
 
-    console.log
-
-    setFilteredChars(filtered);
+    setFilteredChars(_.reverse(filtered));
     setUnfilteredChars(unfiltered);
   }
 
@@ -48,23 +47,20 @@ function CharacterSearch() {
       </div>
       <div className="character-tiles">
         <div className="searched-character">
-          {_.map(filteredChars, (char: CharacterTileLink) => {
-            return (
+          {_.map(filteredChars, char => (
               <Link key={char.id} to={`/builds/${char.shortName}`}>
                 <CharacterTile id={char.id} />
               </Link>
             )
-          })
-          }
+          )}
         </div>
         <div className="unfiltered-characters">
-          {_.map(_.orderBy(unfilteredChars, 'shortName', 'asc'), (char: CharacterTileLink) => {
-            return (
+          {_.map(_.orderBy(unfilteredChars, 'shortName', 'asc'), char => (
               <Link key={char.id} to={`/builds/${char.shortName}`}>
                 <CharacterTile id={char.id} />
               </Link>
             )
-          })}
+          )}
         </div>
       </div>
     </div>

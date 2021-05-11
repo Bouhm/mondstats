@@ -38,6 +38,8 @@ function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { tota
       data.push(build.count);
     })
 
+    let colors = _.map(labels, () => Colors[element])
+
     if (donutRef && donutRef.current) {
       new Chart(donutRef.current!.getContext("2d"), {
         type: "doughnut",
@@ -45,9 +47,10 @@ function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { tota
           labels,
           datasets: [
             {
-              data
+              data,
+              backgroundColor: colors
             }
-          ]
+          ],
         },
         options: {
           plugins: {
@@ -55,11 +58,10 @@ function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { tota
               display: false
             }
           }
-          //Customize chart options
         }
       });
     }
-  }, [donutRef, builds, activeBuildIdx, getArtifactSet, Chart])
+  }, [])
 
   const renderSelectedBuild = () => {
     return (
@@ -75,8 +77,8 @@ function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { tota
             return (
               <div key={`${id}-${count}-${i}`} className="weapon-container">
                 <Weapon {...weapon} popularity={popularity} />
-                <div className="weapon-bar-container">
-                  <div className={weapon.type_name.toLowerCase()} style={{ width: `${popularity}%` }} />
+                <div className="weapon-bar-chart">
+                  <div className={element} style={{ width: `${popularity}%` }} />
                 </div>
               </div>
             )
@@ -91,7 +93,8 @@ function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { tota
             return <ArtifactCard key={`${id}-${i}`} {...artifact} activation={activation_number} affixes={artifact.set.affixes} />
           })}
           <div className="artifacts-donut-chart">
-            <canvas id={"artifact-donut"} ref={donutRef} />
+            <canvas id={"artifacts-donut"} ref={donutRef} />
+            <div className="artifact-popularity">{Math.round((builds[activeBuildIdx].count / total) * 100)}%</div>
           </div>
         </div>
       </div>

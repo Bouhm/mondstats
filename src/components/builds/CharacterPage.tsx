@@ -31,7 +31,7 @@ function CharacterPage() {
       {charData && charData.builds && 
         <BuildSelector 
           element={character.element.toLowerCase()} 
-          builds={_.take(_.filter(charData.builds, build => !(build.artifacts.length === 1 && build.artifacts[0].activation_number < 4)), 8)}
+          builds={_.take(charData.builds, 8)}
           total={charData.total} 
         />
       }

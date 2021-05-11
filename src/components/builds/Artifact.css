@@ -44,7 +44,7 @@
   margin: 0.1rem 0 0.1rem 0;
   overflow: hidden;
   background-color: rgba(39, 42, 56, 0.6);
-  padding: 0.8rem;
+  padding: 0.5rem 0.5rem 0 0.5rem;
   display: flex;
   flex-flow: column;
 
@@ -74,7 +74,11 @@
 
   .artifact-effects {
     font-size: 1.1rem;
-    line-height: 1.5rem;
     border-spacing: 0.8rem;
+    display: inline-block;
+
+    td {
+      vertical-align: top;
+    }
   }
 }
