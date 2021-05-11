@@ -13,12 +13,12 @@ function ArtifactSets({ artifacts }: ArtifactCardProps) {
 
   return (
     <div className="artifact-sets-container">
-      {_.map(artifacts, ({ id, activation_number }) => {
+      {_.map(artifacts, ({ id, activation_number }, i) => {
         const artifact = getArtifactSet(id);
         if (!artifact) return null;
 
         return (
-          <div className={"artifact-card"}>
+          <div key={`thumb-${id}-i`} className={"artifact-thumb"}>
             <img src={artifact.icon} alt={artifact.name} />
             <div className="artifact-set-activation">{activation_number}x</div>
           </div>

@@ -1,0 +1,68 @@
+.builds-selector {
+  display: flex;
+  flex-flow: row;
+  padding: 2rem;
+}
+
+.character-builds-container {
+  width: 100%;
+}
+
+.build-container {
+  display: flex;
+
+  h1 {
+    color: white;
+    width: 300px;
+    border-bottom: solid 1px grey;
+  }
+
+  .weapons-list {
+    flex: 3;
+  } 
+  
+  .artifact-build-container {
+    flex: 2;
+  }
+}
+
+.weapons-list {
+  margin-right: 1rem;
+}
+
+.character-builds-selector {
+  flex: 0 auto;
+}
+
+.weapon-container {
+  display: flex;
+
+  .weapon-bar-container {
+    flex: 1;
+    margin: 0.1rem 0;
+
+    div {
+      height: 100%;
+    }
+  }
+}
+
+.sword {
+  background-color: #096982;
+}
+
+.claymore {
+  background-color: #58508d;
+}
+
+.polearm {
+  background-color: #bc5090;
+} 
+
+.catalyst {
+  background-color: #ff6361;
+}
+
+.bow { 
+  background-color: #FF8421;
+}

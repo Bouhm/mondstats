@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react'
 import _ from 'lodash'
 import { Store } from '../../Store'
-import { IBuild, ICharacter } from '../../data/types'
+import { IBuild, ICharacter, ICharData } from '../../data/types'
 import { useParams } from 'react-router-dom'
 
-import BuildCarousel from './BuildCarousel'
+import BuildSelector from './BuildSelector'
 import './CharacterPage.css'
 
 function CharacterPage() {
   const { shortName } = useParams<{ shortName: string }>();
   const [{ characterIdMap, characterBuilds, characterDb }, dispatch] = useContext(Store)
-  const [builds, setBuilds] = useState<IBuild[] | undefined>(undefined)
+  const [charData, setCharData] = useState<ICharData | undefined>(undefined)
   const [character, setCharacter] = useState<ICharacter | undefined>(undefined)
 
   useEffect(() => {
@@ -19,16 +19,16 @@ function CharacterPage() {
 
     if (charId) {
       setCharacter(characterDb[charId])
-      setBuilds(characterBuilds[charId].builds)
+      setCharData(characterBuilds[charId])
       dispatch({ type: 'SELECT_CHARACTER', payload: charId })
     }
-  }, [setCharacter, setBuilds, dispatch, characterIdMap, shortName, characterBuilds])
+  }, [setCharacter, setCharData, dispatch, characterIdMap, shortName, characterBuilds])
 
   if (!character) return null
 
   return (
     <div className="character-page" style={{ backgroundImage: `url("${character!.image}")` }}>
-      {builds && <BuildCarousel builds={_.filter(builds, build => !(build.artifacts.length === 1 && build.artifacts[0].activation_number < 4 ))} />}
+      {charData && charData.builds && <BuildSelector builds={_.take(_.filter(charData.builds, build => !(build.artifacts.length === 1 && build.artifacts[0].activation_number < 4)), 8)} total={charData.total} />}
     </div>
   )
 }

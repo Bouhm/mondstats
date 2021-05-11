@@ -1,0 +1,35 @@
+.weapon-card {
+  width: 300px;
+  margin: 0.1rem 0 0.1rem 0;
+  overflow: hidden;
+  background-color: #e9e5dc;
+  padding: 0.3rem;
+  display: flex;
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .weapon-detail {
+    display: flex;
+    width: 100%;
+    flex-flow: column;
+    text-align: center;
+
+    .weapon-name {
+      padding: 0 0.1rem;
+      color: rgb(73, 83, 102);
+      font-size: 1.2rem;
+      text-decoration: none;
+      height: 70%;
+    }
+
+    .weapon-popularity {
+      line-height: 30%;
+      color: white;
+      font-size: 2rem;
+      text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+    }
+  }
+}

@@ -13,14 +13,16 @@ function Navbar() {
   const navRef = useRef(null);
 
   useEffect(() => {
-    document.addEventListener('scroll', function(e) {
-      if (window.scrollY === 0) {
-        navRef.current!.classList.remove("invis")
-      } else {
-        navRef.current!.classList.add("invis")
+    document.addEventListener('scroll', function (e) {
+      if (navRef.current) {
+        if (window.scrollY === 0) {
+          navRef.current!.classList.remove("invis")
+        } else {
+          navRef.current!.classList.add("invis")
+        }
       }
     })
-  },[])
+  }, [navRef])
 
   return (
     <Router>

@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "chart.js": "^3.2.1",
     "fuse.js": "^6.4.6",
     "ionicons": "^5.5.1",
     "lodash": "^4.17.21",
