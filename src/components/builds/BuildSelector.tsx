@@ -79,7 +79,7 @@ function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { tota
               <div key={`${id}-${count}-${i}`} className="weapon-container">
                 <Weapon {...weapon} popularity={popularity} />
                 <div className="weapon-bar-chart">
-                  <div className={element} style={{ width: `${popularity}%` }} />
+                  <div className={`weapon-bar ${element}`} style={{ width: `${popularity}%` }} />
                 </div>
               </div>
             )

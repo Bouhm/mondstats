@@ -63,5 +63,20 @@
     div {
       height: 100%;
     }
+
+    .weapon-bar {
+      animation-name: bar;
+      animation-duration: 2s;
+      animation-direction: forwards;
+    }
+    
+    @keyframes bar {
+      0% {
+        max-width: 0;
+      }
+      100% {
+        max-width: 100%;
+      }
+    }
   }
 }
