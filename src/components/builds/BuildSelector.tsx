@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Chart, ChartDataset, registerables } from "chart.js";
+import { Chart, ChartDataset, registerables, Tooltip } from "chart.js";
 import _ from 'lodash'
 
 import { Store } from '../../Store'
@@ -22,6 +22,7 @@ function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { tota
 
   useEffect(() => {
     Chart.register(...registerables)
+    Chart.defaults.plugins.tooltip.displayColors = false;
 
     let labels: string[] = [];
     let data: number[] = [];

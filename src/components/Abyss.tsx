@@ -1,9 +1,8 @@
 import { Chart, registerables } from 'chart.js';
 import _ from 'lodash';
 import React, { useEffect, useRef } from 'react'
-import { IAbyss } from '../../data/types';
-import CharacterTile from '../CharacterTile';
-import Colors from './colors'
+import { IAbyss } from '../data/types';
+import CharacterTile from './CharacterTile';
 import './Abyss.css'
 
 function Abyss({ party, floors, total }: IAbyss) {
@@ -22,17 +21,14 @@ function Abyss({ party, floors, total }: IAbyss) {
       data.push(count);
     })
 
-    let colors = _.map(labels, () => Colors[element])
-
-    if (donutRef && donutRef.current) {
-      new Chart(donutRef.current!.getContext("2d"), {
-        type: "doughnut",
+    if (barChartRef && barChartRef.current) {
+      new Chart(barChartRef.current!.getContext("2d"), {
+        type: "bar",
         data: {
           labels,
           datasets: [
             {
-              data,
-              backgroundColor: colors
+              data
             }
           ],
         },
@@ -50,7 +46,7 @@ function Abyss({ party, floors, total }: IAbyss) {
   return (
     <div className="abyss-container">
       <div className="party-container">
-        {_.map(_.keys(party), charId => <CharacterTile id={charId} />)}
+        {_.map(_.keys(party), charId => <CharacterTile key={charId} id={charId} />)}
       </div>
       <div className="floor-chart">
         <canvas id={"abyss-bar-chart"} ref={barChartRef} />

@@ -11,7 +11,7 @@ import data from "./sample.json"
 import artifactDb from './data/artifacts.json'
 import characterDb from './data/characters.json'
 import weaponDb from './data/weapons.json'
-import CharacterPage from './components/builds/CharacterPage'
+import CharacterPage from './components/CharacterPage'
 import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar'
 import { Store } from "./Store"

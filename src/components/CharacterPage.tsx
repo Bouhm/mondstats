@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import _ from 'lodash'
-import { Store } from '../../Store'
-import { IBuild, ICharacter, ICharData } from '../../data/types'
+import { Store } from '../Store'
+import { IBuild, ICharacter, ICharData } from '../data/types'
 import { useParams } from 'react-router-dom'
 
-import BuildSelector from './BuildSelector'
+import BuildSelector from './builds/BuildSelector'
 import './CharacterPage.css'
 import Abyss from './Abyss'
 
@@ -16,7 +16,6 @@ function CharacterPage() {
 
   useEffect(() => {
     const charId = characterIdMap[shortName]
-    console.log(characterIdMap, shortName, charId)
 
     if (charId) {
       setCharacter(characterDb[charId])
@@ -25,16 +24,16 @@ function CharacterPage() {
     }
   }, [setCharacter, setCharData, dispatch, characterIdMap, shortName, characterBuilds])
 
-  if (!character || !charData ) return null
+  if (!character || !charData) return null
 
 
   return (
     <div className="character-page" style={{ backgroundImage: `url("${character!.image}")` }}>
-      {charData.builds && 
-        <BuildSelector 
-          element={character.element.toLowerCase()} 
+      {charData.builds &&
+        <BuildSelector
+          element={character.element.toLowerCase()}
           builds={_.take(charData.builds, 8)}
-          total={charData.total} 
+          total={charData.total}
         />
       }
       {charData.abyss &&

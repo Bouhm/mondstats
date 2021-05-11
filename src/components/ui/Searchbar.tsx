@@ -14,7 +14,7 @@ type SearchbarProps = {
 
 function Searchbar({ list, maxResults, onSearch, placeholder = "" }: SearchbarProps) {
   const [input, useInput] = useState("");
-  const fuse = new Fuse(list, { threshold: 0.2 });
+  const fuse = new Fuse(list, { threshold: 0.3 });
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     // Controlled input
