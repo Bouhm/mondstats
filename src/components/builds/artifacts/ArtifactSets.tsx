@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import _ from 'lodash'
-import { Store } from '../../Store'
-import { IArtifactBuild } from '../../data/types'
+import { Store } from '../../../Store'
+import { IArtifactBuild } from '../../../data/types'
 
 type ArtifactCardProps = {
   artifacts: IArtifactBuild[]

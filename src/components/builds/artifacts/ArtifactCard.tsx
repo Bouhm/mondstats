@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import { IArtifact } from '../../data/types'
+import { IArtifact } from '../../../data/types'
 
 function ArtifactCard({ rarity, icon, name, set, affixes, activation }: IArtifact & { activation: number, affixes: { activation_number: number, effect: string }[] }) {
   return (
@@ -21,7 +21,7 @@ function ArtifactCard({ rarity, icon, name, set, affixes, activation }: IArtifac
 
             return (
               <tr key={`affix-${set.id}-${i}`}>
-                <td><b>{affix.activation_number}-Piece: </b></td>
+                <td>{affix.activation_number}-Piece: </td>
                 <td>{affix.effect}</td>
               </tr>
             )

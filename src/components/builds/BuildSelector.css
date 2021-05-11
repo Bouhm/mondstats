@@ -58,7 +58,6 @@
   .weapon-bar-chart {
     flex: 1;
     margin: 0.1rem 0;
-    opacity: 0.8;
 
     div {
       height: 100%;

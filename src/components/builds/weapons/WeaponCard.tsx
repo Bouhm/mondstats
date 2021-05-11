@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React from 'react'
 import _ from 'lodash'
-import { IWeapon } from '../../data/types'
+import { IWeapon } from '../../../data/types'
 
 function WeaponCard({ icon, name, rarity, popularity }: IWeapon & { popularity: number }) {
   return (

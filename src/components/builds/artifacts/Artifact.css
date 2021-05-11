@@ -74,11 +74,12 @@
 
   .artifact-effects {
     font-size: 1.1rem;
-    border-spacing: 0.8rem;
+    border-spacing: 0.5rem;
     display: inline-block;
 
-    td {
+    td{
       vertical-align: top;
+      min-width: 5.2rem;
     }
   }
 }

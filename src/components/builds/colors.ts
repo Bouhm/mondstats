@@ -1,4 +1,4 @@
-const colors: { [key: string]: string } = {
+const elemColors: { [key: string]: string } = {
   pyro: "#EE7033",
   anemo: "#58DBAB",
   cryo: "#A1F9FF",
@@ -8,4 +8,4 @@ const colors: { [key: string]: string } = {
   geo: "#F0B738"
 }
 
-export default colors;
+export default elemColors;

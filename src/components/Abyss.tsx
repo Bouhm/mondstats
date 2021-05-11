@@ -41,13 +41,15 @@ function Abyss({ party, floors, total }: IAbyss) {
         }
       });
     }
-  }, [])
+  }, [barChartRef])
 
   return (
     <div className="abyss-container">
+      <h1>Party Members</h1>
       <div className="party-container">
-        {_.map(_.keys(party), charId => <CharacterTile key={charId} id={charId} />)}
+        {_.map(_.take(_.sortBy(_.toPairs(party), 1).reverse(), 8), charPair => <CharacterTile key={charPair[0]} id={charPair[0]} />)}
       </div>
+      <h1>Abyss Floors</h1>
       <div className="floor-chart">
         <canvas id={"abyss-bar-chart"} ref={barChartRef} />
       </div>
