@@ -37,16 +37,16 @@ function App() {
   }, [characterDb, artifactDb, weaponDb, data, getShortName, dispatch])
 
   return (
-    <div className="App">
-      <Navbar />
-      <Router>
+    <Router>
+      <div className="App">
+        <Navbar />
         <Switch>
+          <Route exact path="/" component={CharacterSearch} />
           <Route path="/builds/:shortName" component={CharacterPage} />
           <Redirect exact path="/builds" to="/" />
-          <Route exact path="/" component={CharacterSearch} />
         </Switch>
-      </Router>
-    </div>
+      </div>
+    </Router>
   )
 }
 

@@ -28,7 +28,13 @@ function CharacterPage() {
 
   return (
     <div className="character-page" style={{ backgroundImage: `url("${character!.image}")` }}>
-      {charData && charData.builds && <BuildSelector builds={_.take(_.filter(charData.builds, build => !(build.artifacts.length === 1 && build.artifacts[0].activation_number < 4)), 8)} total={charData.total} />}
+      {charData && charData.builds && 
+        <BuildSelector 
+          element={character.element.toLowerCase()} 
+          builds={_.take(_.filter(charData.builds, build => !(build.artifacts.length === 1 && build.artifacts[0].activation_number < 4)), 8)}
+          total={charData.total} 
+        />
+      }
     </div>
   )
 }

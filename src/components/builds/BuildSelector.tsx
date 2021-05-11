@@ -12,7 +12,7 @@ import './BuildSelector.css'
 import './Artifact.css'
 import './Weapon.css'
 
-function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number }) {
+function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { total: number, element: string }) {
   const [{ artifactDb, weaponDb }] = useContext(Store)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
   const donutRef = useRef(null)
@@ -26,11 +26,11 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
     let labels: string[] = [];
     let data: number[] = [];
 
-    _.forEach(builds, build => {
+    _.forEach(_.orderBy(builds, 'count', 'desc'), build => {
       let label = "";
 
       _.forEach(build.artifacts, (artifact, i) => {
-        label += artifact.activation_number + "-" + getArtifactSet(artifact.id)!.name;
+        label += artifact.activation_number + "-" + getArtifactSet(artifact.id)!.set.name
         if (i !== build.artifacts.length - 1) label += ", "
       })
 
@@ -50,6 +50,11 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
           ]
         },
         options: {
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
           //Customize chart options
         }
       });

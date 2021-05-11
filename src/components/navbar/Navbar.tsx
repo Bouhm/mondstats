@@ -25,7 +25,6 @@ function Navbar() {
   }, [navRef])
 
   return (
-    <Router>
       <div ref={navRef} id="navbar">
         <div className="nav-logo">
           <Link to="/"><img src={Logo} alt="logo" /></Link>
@@ -36,7 +35,6 @@ function Navbar() {
           })}
         </div>
       </div>
-    </Router>
   )
 }
 

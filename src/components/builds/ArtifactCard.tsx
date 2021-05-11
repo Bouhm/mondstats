@@ -13,19 +13,21 @@ function ArtifactCard({ rarity, icon, name, set, affixes, activation }: IArtifac
           </div>
         </div>
       </div>
-      <tbody className="artifact-effects">
-        {_.map(affixes, (affix, i) => {
-          console.log(activation, affix.activation_number)
-          if (activation < affix.activation_number) return null;
+      <table>
+        <tbody className="artifact-effects">
+          {_.map(affixes, (affix, i) => {
+            console.log(activation, affix.activation_number)
+            if (activation < affix.activation_number) return null;
 
-          return (
-            <tr key={`affix-${set.id}-${i}`}>
-              <td><b>{affix.activation_number}-Piece: </b></td>
-              <td>{affix.effect}</td>
-            </tr>
-          )
-        })}
-      </tbody>
+            return (
+              <tr key={`affix-${set.id}-${i}`}>
+                <td><b>{affix.activation_number}-Piece: </b></td>
+                <td>{affix.effect}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
     </div>
   )
 }
