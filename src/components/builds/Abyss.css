@@ -1,0 +1,7 @@
+.abyss-container {
+}
+
+.party-container {
+  display: flex;
+  justify-content: center;
+}

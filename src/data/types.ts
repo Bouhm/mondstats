@@ -14,16 +14,18 @@ export interface IBuild {
   count: number
 }
 
+export interface IAbyss {
+  floors: { [floorStr: string]: number }
+  party: { [charId: string]: number }
+  total: number
+}
+
 export interface ICharData {
   id: number
   name: string
   constellations: number[]
   builds: IBuild[]
-  abyss: {
-    floors: { [floorStr: string]: number }
-    party: { [charId: string]: number }
-    total: number
-  }
+  abyss: IAbyss
   total: number
 }
 

@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 
 import BuildSelector from './BuildSelector'
 import './CharacterPage.css'
+import Abyss from './Abyss'
 
 function CharacterPage() {
   const { shortName } = useParams<{ shortName: string }>();
@@ -24,16 +25,20 @@ function CharacterPage() {
     }
   }, [setCharacter, setCharData, dispatch, characterIdMap, shortName, characterBuilds])
 
-  if (!character) return null
+  if (!character || !charData ) return null
+
 
   return (
     <div className="character-page" style={{ backgroundImage: `url("${character!.image}")` }}>
-      {charData && charData.builds && 
+      {charData.builds && 
         <BuildSelector 
           element={character.element.toLowerCase()} 
           builds={_.take(charData.builds, 8)}
           total={charData.total} 
         />
+      }
+      {charData.abyss &&
+        <Abyss {...charData.abyss} />
       }
     </div>
   )
