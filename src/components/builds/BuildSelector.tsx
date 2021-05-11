@@ -23,16 +23,29 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
   useEffect(() => {
     Chart.register(...registerables)
 
+    let labels: string[] = [];
+    let data: number[] = [];
+
+    _.forEach(builds, build => {
+      let label = "";
+
+      _.forEach(build.artifacts, (artifact, i) => {
+        label += artifact.activation_number + "-" + getArtifactSet(artifact.id)!.name;
+        if (i !== build.artifacts.length - 1) label += ", "
+      })
+
+      labels.push(label);
+      data.push(build.count);
+    })
+
     if (donutRef && donutRef.current) {
       new Chart(donutRef.current!.getContext("2d"), {
-        type: "line",
+        type: "doughnut",
         data: {
-          //Bring in data
-          labels: ["Jan", "Feb", "March"],
+          labels,
           datasets: [
             {
-              label: "Sales",
-              data: [86, 67, 91],
+              data
             }
           ]
         },
@@ -41,7 +54,7 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
         }
       });
     }
-  }, [donutRef, Chart])
+  }, [donutRef, builds, activeBuildIdx, getArtifactSet, Chart])
 
   const renderSelectedBuild = () => {
     return (
@@ -67,8 +80,6 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
         <div className="artifact-build-container">
           <h1>Artifacts</h1>
           {_.map(builds[activeBuildIdx].artifacts, ({ id, activation_number }, i) => {
-
-            console.log(activation_number);
             const artifact = getArtifactSet(id);
             if (!artifact) return null;
 
