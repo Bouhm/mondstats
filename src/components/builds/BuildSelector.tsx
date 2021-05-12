@@ -34,6 +34,7 @@ function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { tota
 
     labels.push(label);
     data.push(build.count);
+    console.log(builds);
   })
 
   colors = Array(labels.length).fill("#a4a4a4")

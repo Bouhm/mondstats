@@ -17,9 +17,6 @@ function _Chart({ id, type, labels, data, colors }: ChartProps) {
   Chart.defaults.plugins.legend.display = false;
   const ref = useRef(null)
 
-  console.log(colors)
-
-
   useEffect(() => {
     let chart: Chart;
 

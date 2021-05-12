@@ -16,7 +16,6 @@ function ArtifactCard({ rarity, icon, name, set, affixes, activation }: IArtifac
       <table>
         <tbody className="artifact-effects">
           {_.map(affixes, (affix, i) => {
-            console.log(activation, affix.activation_number)
             if (activation < affix.activation_number) return null;
 
             return (
