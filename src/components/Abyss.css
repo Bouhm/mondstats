@@ -2,23 +2,35 @@
 }
 
 .party-container {
-  display: flex;
-  justify-content: center;
-  height: 70vh;
+  display: table;
+  margin: 0 auto;
+  height: 60vh;
 }
 
 .party-bar-container {
+  display: table-cell;
   height: 100%;
-  display: flex;
-  align-items: flex-end;
+  vertical-align: bottom;
+  padding: 0 0.5rem;
 
   .party-bar {
-    animation-name: bar;
-    animation-duration: 2s;
+    animation-name: vertibar;
+    animation-duration: 1s;
     animation-direction: forwards;
+    border: 2px solid rgba(255, 255, 255, 0.7);
   }
 
-  @keyframes bar {
+  .character-tile-container {
+    pointer-events: none;
+
+    .character-tile {
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      border-top: 0;
+      border-radius: 0;
+    }
+  }
+
+  @keyframes vertibar {
     0% {
       max-height: 0;
     }

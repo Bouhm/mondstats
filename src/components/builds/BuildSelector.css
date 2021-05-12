@@ -64,12 +64,13 @@
     }
 
     .weapon-bar {
-      animation-name: bar;
-      animation-duration: 2s;
+      animation-name: horibar;
+      animation-duration: 1s;
       animation-direction: forwards;
+      border: 2px solid rgba(255, 255, 255, 0.7);
     }
 
-    @keyframes bar {
+    @keyframes horibar {
       0% {
         max-width: 0;
       }
