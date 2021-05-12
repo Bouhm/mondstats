@@ -1,9 +1,8 @@
 import _ from 'lodash';
 import React, { MouseEventHandler, useContext, useState } from 'react';
 
-import { IBuild, IWeapon, IWeaponBuild } from '../../../data/types';
+import { IWeaponBuild } from '../../../data/types';
 import { Store } from '../../../Store';
-import useTooltip from '../../hooks/useTooltip';
 import Tooltip from '../../ui/Tooltip';
 import WeaponCard from './WeaponCard';
 
@@ -15,7 +14,6 @@ type WeaponBuild = {
 function WeaponBuild({ weapons, total }: WeaponBuild) {
   const [{ weaponDb, selectedCharacter, characterDb }] = useContext(Store)
   const getWeapon = (id: number) => _.find(weaponDb, { id });
-  const { handleMouseEnter, handleMouseLeave, isHovered } = useTooltip();
 
   return (
     <div className="weapons-list">
@@ -33,10 +31,11 @@ function WeaponBuild({ weapons, total }: WeaponBuild) {
               <div
                 className={`bar-chart-bar weapon-bar ${characterDb[selectedCharacter].element.toLocaleLowerCase()}`} 
                 style={{ width: `${popularity}%` }} 
-                onMouseEnter={(e) => handleMouseEnter(e, id)}
-                onMouseLeave={handleMouseLeave}
               >
-                  {isHovered(id) && <Tooltip alignment="horizontal">{`${weapon.name}: ${count}`}</Tooltip>}
+                <Tooltip 
+                  alignment="horizontal"
+                  content={`${weapon.name}: ${count}`}
+                />
               </div>
             </div>
           </div>

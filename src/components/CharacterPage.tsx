@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react'
-import _ from 'lodash'
-import { Store } from '../Store'
-import { IBuild, ICharacter, ICharData } from '../data/types'
-import { useParams } from 'react-router-dom'
+import './CharacterPage.css';
 
-import BuildSelector from './builds/BuildSelector'
-import './CharacterPage.css'
-import Abyss from './Abyss'
+import _ from 'lodash';
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { IBuild, ICharacter, ICharData } from '../data/types';
+import { Store } from '../Store';
+import Abyss from './Abyss';
+import BuildSelector from './builds/BuildSelector';
 
 function CharacterPage() {
   const { shortName } = useParams<{ shortName: string }>();
@@ -31,7 +32,6 @@ function CharacterPage() {
     <div className="character-page" style={{ backgroundImage: `url("${character!.image}")` }}>
       {charData.builds &&
         <BuildSelector
-          element={character.element.toLowerCase()}
           builds={_.take(charData.builds, 8)}
           total={charData.total}
         />

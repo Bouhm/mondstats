@@ -1,54 +1,45 @@
 import './Abyss.css';
 
-import { Chart, registerables } from 'chart.js';
 import _ from 'lodash';
 import React, { useContext, useEffect, useRef } from 'react';
 
 import { IAbyss } from '../data/types';
 import { Store } from '../Store';
+import elemColors from './builds/colors';
 import CharacterTile from './CharacterTile';
-import useTooltip from './hooks/useTooltip';
+import Chart, { IDataset } from './ui/Chart';
 import Tooltip from './ui/Tooltip';
 
 function Abyss({ party, floors, total }: IAbyss) {
   const [{ selectedCharacter, characterDb }] = useContext(Store)
-  const { handleMouseEnter, handleMouseLeave, isHovered } = useTooltip();
-  let barChartRef = useRef(null);
+  let datasets: IDataset[] = []
+  let labels: string[] = ["Floor 9", "Floor 10", "Floor 11", "Floor 12"]
 
-  useEffect(() => {
-    Chart.register(...registerables)
+  const _compareFloor = (f1: string, f2: string) => {
+    const f1Strs = f1.split("_")
+    const f2Strs = f2.split("_")
 
-    let labels: string[] = [];
-    let data: number[] = [];
-
-    _.forIn(floors, (count, floor) => {
-      let label = "";
-
-      labels.push(floor);
-      data.push(count);
-    })
-
-    if (barChartRef && barChartRef.current) {
-      new Chart(barChartRef.current!.getContext("2d"), {
-        type: "bar",
-        data: {
-          labels,
-          datasets: [
-            {
-              data
-            }
-          ],
-        },
-        options: {
-          plugins: {
-            legend: {
-              display: false
-            }
-          }
-        }
-      });
+    if (parseInt(f1Strs[0]) === parseInt(f2Strs[0])) {
+      if (parseInt(f1Strs[1]) === parseInt(f2Strs[1])) {
+        return parseInt(f1Strs[2]) - parseInt(f2Strs[2])
+      } else {
+        return parseInt(f1Strs[1]) - parseInt(f2Strs[1])
+      }
+    } else {
+      return parseInt(f1Strs[0]) - parseInt(f2Strs[0])
     }
-  }, [barChartRef])
+  }
+
+  const grouped = _.groupBy(_.keys(floors), floor => floor.split("_")[0]);
+
+  _.forEach(grouped, floorGroup => {
+    let sortedFloors = floorGroup.sort(_compareFloor);
+
+    datasets.push({
+      data: _.map(sortedFloors, floor => floors[floor]),
+      backgroundColor: elemColors[characterDb[selectedCharacter].element.toLocaleLowerCase()]
+    })
+  })
 
   return (
     <div className="abyss-container">
@@ -63,10 +54,11 @@ function Abyss({ party, floors, total }: IAbyss) {
               <div 
                 className={`bar-chart-bar party-bar ${characterDb[selectedCharacter].element.toLowerCase()}`} 
                 style={{ height: `${popularity}%` }}
-                onMouseEnter={(e) => handleMouseEnter(e, charPair[0])}
-                onMouseLeave={handleMouseLeave}
               >
-                {isHovered(charPair[0]) && <Tooltip alignment="vertical">{`${characterName}: ${charPair[1]}`}</Tooltip>}
+                <Tooltip 
+                  alignment="vertical"
+                  content={`${characterName}: ${charPair[1]}`}
+                />
               </div>
               <CharacterTile id={charPair[0]} />
             </div>
@@ -74,8 +66,13 @@ function Abyss({ party, floors, total }: IAbyss) {
         })}
       </div>
       <h1>Abyss Floors</h1>
-      <div className="floor-chart">
-        <canvas id={"abyss-bar-chart"} ref={barChartRef} />
+      <div className="floors-chart-container">
+        <Chart
+          id="floors-chart"
+          type="bar"
+          labels={labels}
+          datasets={datasets}
+        />
       </div>
     </div>
   )

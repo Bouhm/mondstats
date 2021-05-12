@@ -1,17 +1,23 @@
-import { Chart, registerables } from "chart.js";
-import _ from "lodash";
-import React, { useState } from "react";
-import { useEffect, useRef } from "react";
+import { Chart, registerables } from 'chart.js';
+import _ from 'lodash';
+import React, { useEffect, useRef, useState } from 'react';
+
+export interface IDataset {
+  label?: string
+  data: number[]
+  backgroundColor: string
+}
 
 type ChartProps = {
   id: string
   type: string
   labels: string[]
-  data: number[]
-  colors: string[]
+  data?: number[]
+  datasets?: IDataset[]
+  colors?: string[]
 }
 
-function _Chart({ id, type, labels, data, colors }: ChartProps) {
+function _Chart({ id, type, labels, colors = [], data = [], datasets = []}: ChartProps) {
   Chart.register(...registerables)
   Chart.defaults.plugins.tooltip.displayColors = false;
   Chart.defaults.plugins.legend.display = false;
@@ -22,18 +28,20 @@ function _Chart({ id, type, labels, data, colors }: ChartProps) {
 
   useEffect(() => {
     let chart: Chart;
+    let _datasets = datasets.length ? datasets :
+      [
+        {
+          data,
+          backgroundColor: colors
+        }
+      ]
 
     if (ref && ref.current) {
       chart = new Chart(ref.current!.getContext("2d"), {
         type,
         data: {
           labels,
-          datasets: [
-            {
-              data,
-              backgroundColor: colors
-            }
-          ],
+          datasets: _datasets
         },
         options: {
           borderColor: "rgba(255,255,255,0.7)",

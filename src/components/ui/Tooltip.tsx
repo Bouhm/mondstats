@@ -3,21 +3,22 @@ import './Tooltip.css';
 import React, { ReactNode } from 'react';
 
 type TooltipProps = {
-  children: ReactNode
+  content: string
   alignment?: "horizontal" | "vertical"
 }
 
-function Tooltip({ children, alignment = "horizontal" }: TooltipProps) {
-  let style = { left: "35%", top: "35%" }
+function Tooltip({ content, alignment = "horizontal" }: TooltipProps) {
+  let approxOffset = content.length*3
+  let style = { left: "35%", top: `35%` }
 
   if (alignment === "vertical") {
-    style = { left: "25%", top: "35%" }
+    style = { left: `${55 - approxOffset}%`, top: "35%" }
   }
 
   return (
     <div className="tooltip" style={style}>
       <div className="tooltip-content">
-        {children}
+        {content}
       </div>
     </div>
   )

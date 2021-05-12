@@ -1,20 +1,20 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import _ from 'lodash'
+import './BuildSelector.css';
+import './artifacts/Artifact.css';
+import './weapons/Weapon.css';
 
-import { Store } from '../../Store'
-import { IBuild } from '../../data/types'
-import ArtifactSets from './artifacts/ArtifactSets'
-import ArtifactBuild from './artifacts/ArtifactBuild'
-import WeaponBuild from './weapons/WeaponBuild'
-import Chart from '../ui/Chart'
-import elemColors from './colors'
+import _ from 'lodash';
+import React, { useContext, useState } from 'react';
 
-import './BuildSelector.css'
-import './artifacts/Artifact.css'
-import './weapons/Weapon.css'
+import { IBuild } from '../../data/types';
+import { Store } from '../../Store';
+import Chart from '../ui/Chart';
+import ArtifactBuild from './artifacts/ArtifactBuild';
+import ArtifactSets from './artifacts/ArtifactSets';
+import elemColors from './colors';
+import WeaponBuild from './weapons/WeaponBuild';
 
-function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { total: number, element: string }) {
-  const [{ artifactDb }] = useContext(Store)
+function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number }) {
+  const [{ characterDb, selectedCharacter, artifactDb }] = useContext(Store)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
   const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 1, set: { id } });
 
@@ -36,11 +36,10 @@ function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { tota
 
     labels.push(label);
     data.push(build.count);
-    console.log(builds);
   })
 
   colors = Array(labels.length).fill("#a4a4a4")
-  colors[activeBuildIdx] = elemColors[element];
+  colors[activeBuildIdx] = elemColors[characterDb[selectedCharacter].element.toLocaleLowerCase()];
 
   return (
     <div className="builds-selector">

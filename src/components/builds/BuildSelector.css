@@ -81,4 +81,10 @@
 
 .bar-chart-bar {
   position: relative;
+
+  &:hover {
+    .tooltip {
+      opacity: 1;
+    }
+  }
 }
