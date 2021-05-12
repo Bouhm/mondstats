@@ -14,11 +14,9 @@ import './artifacts/Artifact.css'
 import './weapons/Weapon.css'
 
 function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { total: number, element: string }) {
-  const [{ artifactDb, weaponDb }] = useContext(Store)
+  const [{ artifactDb }] = useContext(Store)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
-
   const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 1, set: { id } });
-  const getWeapon = (id: number) => _.find(weaponDb, { id });
 
   let labels: string[] = [];
   let data: number[] = [];
@@ -45,14 +43,12 @@ function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { tota
       <div className="character-builds-container">
         <div className="build-container">
           <WeaponBuild
-            build={builds[activeBuildIdx]}
-            element={element}
-            getWeapon={getWeapon}
+            weapons={builds[activeBuildIdx].weapons}
+            total={builds[activeBuildIdx].count}
           />
           <div className="artifact-build-container">
             <ArtifactBuild
-              build={builds[activeBuildIdx]}
-              getArtifactSet={getArtifactSet}
+              artifacts={builds[activeBuildIdx].artifacts}
             />
             <div className="artifacts-donut-chart">
               <Chart

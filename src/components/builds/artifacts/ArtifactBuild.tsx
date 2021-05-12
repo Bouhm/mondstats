@@ -1,18 +1,21 @@
 import _ from "lodash";
-import React from "react";
-import { IBuild, IArtifact } from "../../../data/types";
+import React, { useContext } from "react";
+import { IBuild, IArtifact, IArtifactBuild } from "../../../data/types";
+import { Store } from "../../../Store";
 import ArtifactCard from "./ArtifactCard";
 
 type ArtifactBuildProps = {
-  build: IBuild,
-  getArtifactSet(id: number): IArtifact | undefined
+  artifacts: IArtifactBuild[]
 }
 
-function ArtifactBuild({ build, getArtifactSet }: ArtifactBuildProps) {
+function ArtifactBuild({ artifacts }: ArtifactBuildProps) {
+  const [{ artifactDb }] = useContext(Store)
+  const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 1, set: { id } });
+
   return (
     <div className="artifact-build">
       <h1>Artifacts</h1>
-      {_.map(build.artifacts, ({ id, activation_number }, i) => {
+      {_.map(artifacts, ({ id, activation_number }, i) => {
         const artifact = getArtifactSet(id);
         if (!artifact) return null;
 
