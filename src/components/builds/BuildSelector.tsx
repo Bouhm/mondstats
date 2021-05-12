@@ -26,8 +26,12 @@ function BuildSelector({ builds, element, total }: { builds: IBuild[] } & { tota
     let label = "";
 
     _.forEach(build.artifacts, (artifact, i) => {
-      label += artifact.activation_number + "-" + getArtifactSet(artifact.id)!.set.name
-      if (i !== build.artifacts.length - 1) label += ", "
+      let name = getArtifactSet(artifact.id)!.set.name;
+      if (name.includes(" ")) {
+        name = name.split(" ")[0]
+      }
+      label += artifact.activation_number + "-" + name
+      if (i !== build.artifacts.length - 1) label += " "
     })
 
     labels.push(label);

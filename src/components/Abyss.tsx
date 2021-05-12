@@ -1,13 +1,18 @@
+import './Abyss.css';
+
 import { Chart, registerables } from 'chart.js';
 import _ from 'lodash';
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react';
+
 import { IAbyss } from '../data/types';
-import CharacterTile from './CharacterTile';
-import './Abyss.css'
 import { Store } from '../Store';
+import CharacterTile from './CharacterTile';
+import useTooltip from './hooks/useTooltip';
+import Tooltip from './ui/Tooltip';
 
 function Abyss({ party, floors, total }: IAbyss) {
   const [{ selectedCharacter, characterDb }] = useContext(Store)
+  const { handleMouseEnter, handleMouseLeave, isHovered } = useTooltip();
   let barChartRef = useRef(null);
 
   useEffect(() => {
@@ -51,13 +56,18 @@ function Abyss({ party, floors, total }: IAbyss) {
       <div className="party-container">
         {_.map(_.take(_.sortBy(_.toPairs(party), 1).reverse(), 8), charPair => {
           let popularity = Math.round(charPair[1] / total * 100)
+          let characterName = characterDb[charPair[0]].name;
 
           return (
-            <div key={charPair[0]} className="party-bar-container">
+            <div key={charPair[0]} className="bar-chart party-bar-container">
               <div 
-                className={`party-bar ${characterDb[selectedCharacter].element.toLowerCase()}`} 
+                className={`bar-chart-bar party-bar ${characterDb[selectedCharacter].element.toLowerCase()}`} 
                 style={{ height: `${popularity}%` }}
-              />
+                onMouseEnter={(e) => handleMouseEnter(e, charPair[0])}
+                onMouseLeave={handleMouseLeave}
+              >
+                {isHovered(charPair[0]) && <Tooltip alignment="vertical">{`${characterName}: ${charPair[1]}`}</Tooltip>}
+              </div>
               <CharacterTile id={charPair[0]} />
             </div>
           )

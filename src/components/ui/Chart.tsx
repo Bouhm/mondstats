@@ -15,6 +15,8 @@ function _Chart({ id, type, labels, data, colors }: ChartProps) {
   Chart.register(...registerables)
   Chart.defaults.plugins.tooltip.displayColors = false;
   Chart.defaults.plugins.legend.display = false;
+  Chart.defaults.plugins.tooltip.animation.duration = 0;
+  
   const [hasMounted, setHasMounted] = useState(false);
   const ref = useRef(null)
 

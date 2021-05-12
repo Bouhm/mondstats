@@ -37,7 +37,7 @@ export interface IArtifact {
   rarity: number,
   set: {
     id: number,
-    name: number,
+    name: string,
     affixes: {
       activation_number: number,
       effect: string
