@@ -9,8 +9,8 @@ import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
 import artifactDb from './data/artifacts.json';
 import characterDb from './data/characters.json';
-import weaponDb from './data/weapons.json';
 import data from './data/data.json';
+import weaponDb from './data/weapons.json';
 import { getShortName } from './scripts/util';
 import { Store } from './Store';
 
@@ -45,6 +45,7 @@ function App() {
         <section>
           <footer>WIP by Bouhm who has nothing to do with miHoYo, etc etc</footer>
         </section>
+        <span className="build-ver">dev build 05.13.21</span>
       </div>
     </Router>
   )

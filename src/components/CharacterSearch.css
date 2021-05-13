@@ -1,6 +1,12 @@
 .logo-container {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+
+  .players-total {
+    padding: 0;
+    color: rgba(255, 255, 255, 0.5);
+  }
 }
 
 .character-search {
@@ -33,5 +39,5 @@
   overflow: hidden;
   display: flex;
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem 0 2rem 0;
 }

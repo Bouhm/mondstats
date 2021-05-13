@@ -29,6 +29,7 @@ function CharacterSearch() {
     <div className="character-search">
       <div className="logo-container">
         <img className="logo" src={Logo} alt="logo" />
+        <div className="players-total">DATA TOTAL: 1994 PLAYERS</div>
       </div>
       <div className="character-searchbar">
         <Searchbar maxResults={4} onSearch={handleSearchCharacter} list={_.keys(characterIdMap)} placeholder="Search character" />
