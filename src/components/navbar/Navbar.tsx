@@ -11,10 +11,10 @@ const Navtabs: { name: string, linkto: string }[] = [
 ]
 
 function Navbar() {
-  const navRef = useRef(null);
+  const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.addEventListener('scroll', function (e) {
+    document.addEventListener('scroll', () => {
       if (navRef.current) {
         if (window.scrollY === 0) {
           navRef.current!.classList.remove("invis")
@@ -23,7 +23,7 @@ function Navbar() {
         }
       }
     })
-  }, [])
+  }, [navRef])
 
   return (
       <div ref={navRef} id="navbar">

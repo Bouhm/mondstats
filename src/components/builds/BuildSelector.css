@@ -58,6 +58,7 @@
 
 .character-builds-selector {
   flex: 0 auto;
+  margin-top: 4rem;
 }
 
 .weapon-container {
