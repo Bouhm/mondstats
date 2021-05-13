@@ -3,7 +3,8 @@ import './Searchbar.css';
 import Fuse from 'fuse.js';
 import _ from 'lodash';
 import React, { useState } from 'react';
-import { SearchSharp } from 'react-ionicons';
+
+import { Search } from '../Icons';
 
 type SearchbarProps = {
   list: string[]
@@ -42,6 +43,7 @@ function Searchbar({ list, maxResults, onSearch, placeholder = "" }: SearchbarPr
 
   return (
     <div className="searchbar">
+      <Search className="search-icon" size={22} />
       <input placeholder={placeholder} list="search-input" name="search-input" onChange={handleInputChange} value={input} />
     </div>
   )

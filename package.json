@@ -12,7 +12,6 @@
     "lodash": "^4.17.21",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "react-ionicons": "^4.2.0",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {

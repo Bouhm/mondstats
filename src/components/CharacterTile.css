@@ -1,5 +1,6 @@
 .character-tile-container {
   height: 190px;
+  margin: 0 0.5rem;
 }
 
 .character-tile {

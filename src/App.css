@@ -29,6 +29,10 @@ footer {
   padding: 0.5rem;
 }
 
+.icon {
+  position: absolute;
+}
+
 .rarity-3 {
   background: linear-gradient(#5d6887, #608eab, #5484a7);
 }
