@@ -80,6 +80,10 @@
 
     td {
       vertical-align: top;
+
+      &:nth-child(odd) {
+        min-width: 5.6rem;
+      }
     }
   }
 }

@@ -62,6 +62,24 @@
   }
 }
 
+@media (max-width: 1244px) {
+  .party-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: auto;
+
+    .party-bar-container {
+      margin-top: 2rem;
+
+      .party-bar {
+        height: 0 !important;
+      }
+    }
+  }
+}
+
 @media (max-width: 1000px) {
   .floors-chart-container {
     width: 100%;
