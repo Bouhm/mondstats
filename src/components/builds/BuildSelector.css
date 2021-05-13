@@ -114,11 +114,27 @@ h1 {
     flex-wrap: wrap-reverse;
     justify-content: center;
   }
+
+  .weapons-list {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    .weapon-bar-chart {
+      display: none;
+    }
+  }
 }
 
 @media (max-width: 836px) {
   .builds-selector {
     flex-flow: column-reverse;
+  }
+
+  h1 {
+    text-align: center;
+    width: 100%;
+    margin-top: 2rem;
   }
 }
 
