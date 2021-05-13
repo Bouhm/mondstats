@@ -1,4 +1,4 @@
-import { Chart, registerables } from 'chart.js';
+import { Chart, ChartItem, ChartTypeRegistry, registerables } from 'chart.js';
 import _ from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -24,7 +24,7 @@ function _Chart({ id, type, labels, colors = [], data = [], datasets = []}: Char
   Chart.defaults.plugins.tooltip.animation.duration = 0;
   
   const [hasMounted, setHasMounted] = useState(false);
-  const ref = useRef(null)
+  const ref = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     let chart: Chart;
@@ -37,8 +37,8 @@ function _Chart({ id, type, labels, colors = [], data = [], datasets = []}: Char
       ]
 
     if (ref && ref.current) {
-      chart = new Chart(ref.current!.getContext("2d"), {
-        type,
+      chart = new Chart(ref.current.getContext("2d") as ChartItem, {
+        type: type as keyof ChartTypeRegistry,
         data: {
           labels,
           datasets: _datasets
