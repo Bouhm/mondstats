@@ -55,3 +55,9 @@
   justify-content: center;
   line-height: 4rem;
 }
+
+@media (max-width: 516px) {
+  .nav-announcement {
+    display: none;
+  }
+}

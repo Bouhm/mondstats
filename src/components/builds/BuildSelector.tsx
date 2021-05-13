@@ -50,39 +50,37 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
 
   return (
     <div className="builds-selector">
-      <div className="character-builds-container">
-        <div className="build-container">
-          <WeaponBuild
-            weapons={orderedBuilds[activeBuildIdx].weapons}
-            total={orderedBuilds[activeBuildIdx].count}
+      <WeaponBuild
+        weapons={orderedBuilds[activeBuildIdx].weapons}
+        total={orderedBuilds[activeBuildIdx].count}
+      />
+      <div className="artifact-build-container">
+        <div className="artifact-build-stats">
+          <ArtifactBuild
+            artifacts={orderedBuilds[activeBuildIdx].artifacts}
           />
-          <div className="artifact-build-container">
-            <ArtifactBuild
-              artifacts={orderedBuilds[activeBuildIdx].artifacts}
+          <div className="artifacts-donut-chart">
+            <Chart
+              id="artifacts-donut"
+              type="doughnut"
+              labels={labels}
+              data={data}
+              colors={colors}
+              max={countSum}
+              showScale={false}
             />
-            <div className="artifacts-donut-chart">
-              <Chart
-                id="artifacts-donut"
-                type="doughnut"
-                labels={labels}
-                data={data}
-                colors={colors}
-                max={countSum}
-                showScale={false}
-              />
-              <div className="artifact-popularity">{Math.round((orderedBuilds[activeBuildIdx].count / countSum) * 100)}%</div>
-            </div>
+            <div className="artifact-popularity">{Math.round((orderedBuilds[activeBuildIdx].count / countSum) * 100)}%</div>
           </div>
         </div>
-      </div>
-      <div className="character-builds-selector">
-        {_.map(orderedBuilds, (build, i) => {
-          return (
-            <div key={`artifacts-thumb=${i}`} onClick={() => setActiveBuildIdx(i)}>
-              <ArtifactSets artifacts={build.artifacts} selected={activeBuildIdx === i} />
-            </div>
-          )
-        })}
+        <div className="character-builds-selector">
+          {_.map(orderedBuilds, (build, i) => {
+            return (
+              <div key={`artifacts-thumb=${i}`} onClick={() => setActiveBuildIdx(i)}>
+                <ArtifactSets artifacts={build.artifacts} selected={activeBuildIdx === i} />
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

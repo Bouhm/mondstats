@@ -15,7 +15,7 @@
 
     .artifact-set-activation {
       color: white;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 700;
       position: absolute;
       bottom: 0;
@@ -68,19 +68,18 @@
     .artifact-name {
       padding: 0 0.1rem;
       color: white;
-      font-size: 2rem;
+      font-size: 1.5rem;
       text-decoration: none;
     }
   }
 
   .artifact-effects {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     border-spacing: 0.5rem;
     display: inline-block;
 
     td {
       vertical-align: top;
-      min-width: 6.1rem;
     }
   }
 }

@@ -4,6 +4,7 @@ import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Logo from '../assets/logo_sm.png';
 import { Store } from '../Store';
 import CharacterTile, { CharacterTileProps } from './CharacterTile';
 import Searchbar from './ui/Searchbar';
@@ -27,7 +28,7 @@ function CharacterSearch() {
   return (
     <div className="character-search">
       <div className="logo-container">
-        {/* <img className="logo" src={Logo} alt="logo" /> */}
+        <img className="logo" src={Logo} alt="logo" />
       </div>
       <div className="character-searchbar">
         <Searchbar maxResults={4} onSearch={handleSearchCharacter} list={_.keys(characterIdMap)} placeholder="Search character" />
