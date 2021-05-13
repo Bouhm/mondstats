@@ -17,19 +17,20 @@ h1 {
 
 .build-container {
   display: flex;
-  height: 100%;
+  flex-wrap: wrap-reverse;
 
   .weapons-list {
     flex: 3;
   }
 
   .artifact-build-container {
-    max-height: calc(100vh - 9rem);
-    height: 100%;
     flex: 2;
     display: flex;
     flex-flow: column;
-    justify-content: space-between;
+
+    .artifact-build {
+      height: 40vh;
+    }
 
     .artifacts-donut-chart {
       position: relative;
@@ -95,5 +96,15 @@ h1 {
     .tooltip {
       opacity: 1;
     }
+  }
+}
+
+@media (max-width: 1280px) {
+  .artifact-build {
+    height: 100% !important;
+  }
+
+  .artifact-popularity {
+    font-size: 2rem !important;
   }
 }
