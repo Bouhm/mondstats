@@ -1,9 +1,9 @@
 .character-page {
   width: 100%;
-  background-size: 30%;
+  background-size: contain;
   background-repeat: no-repeat;
-  background-position: 50% -100%;
   background-attachment: fixed;
+  background-position: center;
 }
 
 .character-stats-count {
