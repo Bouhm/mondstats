@@ -11,7 +11,7 @@ import Chart, { IDataset } from './ui/Chart';
 import Tooltip from './ui/Tooltip';
 
 function Abyss({ party, floors, total }: IAbyss) {
-  const [{ selectedCharacter, characterDb }] = useContext(Store)
+  const [{ characterBuilds, selectedCharacter, characterDb }] = useContext(Store)
   let datasetsArr: IDataset[][] = []
   let labelArr: string[][] = [
     ["Floor 9-1", "Floor 9-2", "Floor 9-3"],
@@ -19,6 +19,7 @@ function Abyss({ party, floors, total }: IAbyss) {
     ["Floor 11-1", "Floor 11-2", "Floor 11-3"],
     ["Floor 12-1", "Floor 12-2", "Floor 12-3"]
   ]
+  const charTotal = characterBuilds[selectedCharacter].total;
 
   const _compareFloor = (f1: string, f2: string) => {
     const f1Strs = f1.split("_")
@@ -88,7 +89,7 @@ function Abyss({ party, floors, total }: IAbyss) {
           type="bar"
           labels={labelArr[0]}
           datasets={datasetsArr[0]}
-          max={total/4}
+          max={charTotal}
         />
         <Chart
           id="floor10-chart"
@@ -96,7 +97,7 @@ function Abyss({ party, floors, total }: IAbyss) {
           type="bar"
           labels={labelArr[1]}
           datasets={datasetsArr[1]}
-          max={total/4}
+          max={charTotal}
         />
         <Chart
           id="floor11-chart"
@@ -104,7 +105,7 @@ function Abyss({ party, floors, total }: IAbyss) {
           type="bar"
           labels={labelArr[2]}
           datasets={datasetsArr[2]}
-          max={total/4}
+          max={charTotal}
         />
         <Chart
           id="floor12-chart"
@@ -112,7 +113,7 @@ function Abyss({ party, floors, total }: IAbyss) {
           type="bar"
           labels={labelArr[3]}
           datasets={datasetsArr[3]}
-          max={total/4}
+          max={charTotal}
         />
       </div>
     </div>
