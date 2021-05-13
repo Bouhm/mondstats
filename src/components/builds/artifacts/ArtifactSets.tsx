@@ -1,18 +1,20 @@
-import React, { useContext } from 'react'
-import _ from 'lodash'
-import { Store } from '../../../Store'
-import { IArtifactBuild } from '../../../data/types'
+import _ from 'lodash';
+import React, { useContext } from 'react';
+
+import { IArtifactBuild } from '../../../data/types';
+import { Store } from '../../../Store';
 
 type ArtifactCardProps = {
   artifacts: IArtifactBuild[]
+  selected?: boolean
 }
 
-function ArtifactSets({ artifacts }: ArtifactCardProps) {
+function ArtifactSets({ artifacts, selected=false }: ArtifactCardProps) {
   const [{ artifactDb }] = useContext(Store)
   const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 5, set: { id } });
 
   return (
-    <div className="artifact-sets-container">
+    <div className={`artifact-sets-container ${selected ? "selected" : ""}`}>
       {_.map(artifacts, ({ id, activation_number }, i) => {
         const artifact = getArtifactSet(id);
         if (!artifact) return null;

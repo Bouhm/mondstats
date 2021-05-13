@@ -22,7 +22,7 @@ function WeaponBuild({ weapons, total }: WeaponBuild) {
         const weapon = getWeapon(id);
         if (!weapon) return null;
 
-        const popularity = Math.round((count / total) * 100);
+        const popularity = Math.round((count / total) * 100)
 
         return (
           <div key={`${id}-${count}-${i}`} className="weapon-container">

@@ -46,7 +46,7 @@ function Abyss({ party, floors, total }: IAbyss) {
       <h1>Party Members</h1>
       <div className="party-container">
         {_.map(_.take(_.sortBy(_.toPairs(party), 1).reverse(), 8), charPair => {
-          let popularity = Math.round(charPair[1] / total * 100)
+          let popularity = Math.round((charPair[1] / total * 1000)/10)
           let characterName = characterDb[charPair[0]].name;
 
           return (

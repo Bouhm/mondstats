@@ -2,6 +2,7 @@
   display: flex;
   width: 150px;
   transition: transform 0.2s;
+  height: 5rem;
 
   .artifact-thumb {
     position: relative;
@@ -73,11 +74,11 @@
   }
 
   .artifact-effects {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     border-spacing: 0.5rem;
     display: inline-block;
 
-    td{
+    td {
       vertical-align: top;
       min-width: 5.2rem;
     }

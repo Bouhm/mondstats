@@ -31,7 +31,7 @@ function Navbar() {
           <Link to="/"><img src={Logo} alt="logo" /></Link>
         </div>
         <div className="nav-announcement">
-          POORLY OPTIMIZED DEV DEMO
+          NOT OPTIMIZED AT ALL DEV DEMO SUPER WIP 
         </div>
         <div className="nav-menu">
           {_.map(Navtabs, tab => {

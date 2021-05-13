@@ -8,10 +8,11 @@ import { IBuild, ICharacter, ICharData } from '../data/types';
 import { Store } from '../Store';
 import Abyss from './Abyss';
 import BuildSelector from './builds/BuildSelector';
+import elemColors from './builds/colors';
 
 function CharacterPage() {
   const { shortName } = useParams<{ shortName: string }>();
-  const [{ characterIdMap, characterBuilds, characterDb }, dispatch] = useContext(Store)
+  const [{ characterIdMap, characterBuilds, characterDb, selectedCharacter }, dispatch] = useContext(Store)
   const [charData, setCharData] = useState<ICharData | undefined>(undefined)
   const [character, setCharacter] = useState<ICharacter | undefined>(undefined)
 
@@ -30,6 +31,9 @@ function CharacterPage() {
 
   return (
     <div className="character-page" style={{ backgroundImage: `url("${character!.image}")` }}>
+      <div className="character-stats-count" style={{ backgroundColor: elemColors[characterDb[selectedCharacter].element.toLocaleLowerCase()] }}>
+        Data from {characterBuilds[selectedCharacter].total} players
+      </div>
       {charData.builds &&
         <BuildSelector
           builds={_.take(charData.builds, 8)}

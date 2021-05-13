@@ -1,23 +1,18 @@
-import React, { useState, useContext, useEffect } from 'react'
-import _ from "lodash"
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import './App.css';
 
-import data from "./sample.json"
-import artifactDb from './data/artifacts.json'
-import characterDb from './data/characters.json'
-import weaponDb from './data/weapons.json'
-import CharacterPage from './components/CharacterPage'
+import _ from 'lodash';
+import React, { useContext, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+
+import CharacterPage from './components/CharacterPage';
 import CharacterSearch from './components/CharacterSearch';
-import Navbar from './components/navbar/Navbar'
-import { Store } from "./Store"
-
-import './App.css'
+import Navbar from './components/navbar/Navbar';
+import artifactDb from './data/artifacts.json';
+import characterDb from './data/characters.json';
+import weaponDb from './data/weapons.json';
+import data from './sample.json';
 import { getShortName } from './scripts/util';
+import { Store } from './Store';
 
 function App() {
   const [, dispatch] = useContext(Store)
@@ -40,11 +35,16 @@ function App() {
     <Router>
       <div className="App">
         <Navbar />
-        <Switch>
-          <Route exact path="/" component={CharacterSearch} />
-          <Route path="/builds/:shortName" component={CharacterPage} />
-          <Redirect exact path="/builds" to="/" />
-        </Switch>
+        <section>
+          <Switch>
+            <Route exact path="/" component={CharacterSearch} />
+            <Route path="/builds/:shortName" component={CharacterPage} />
+            <Redirect exact path="/builds" to="/" />
+          </Switch>
+        </section>
+        <section>
+          <footer>Made by Bouhm who has nothing to do with miHoYo, etc etc</footer>
+        </section>
       </div>
     </Router>
   )

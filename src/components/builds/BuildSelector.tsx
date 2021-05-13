@@ -14,21 +14,29 @@ import elemColors from './colors';
 import WeaponBuild from './weapons/WeaponBuild';
 
 function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number }) {
-  const [{ characterDb, selectedCharacter, artifactDb }] = useContext(Store)
+  const [{ characterDb, selectedCharacter, artifactDb, characterBuilds }] = useContext(Store)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
-  const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 1, set: { id } });
+  const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 5, set: { id } });
 
+  const orderedBuilds = _.orderBy(builds, 'count', 'desc');
+  console.log(orderedBuilds);
   let labels: string[] = [];
   let data: number[] = [];
   let colors: string[] = [];
+  let countSum = 0;
 
-  _.forEach(_.orderBy(builds, 'count', 'desc'), build => {
+  _.forEach(orderedBuilds, build => {
     let label = "";
 
     _.forEach(build.artifacts, (artifact, i) => {
+      console.log(artifact.id)
       let name = getArtifactSet(artifact.id)!.set.name;
       if (name.includes(" ")) {
-        name = name.split(" ")[0]
+        if (name.split(" ")[0] === "The") {
+          name = name.split(" ")[1]
+        } else {
+          name = name.split(" ")[0]
+        }
       }
       label += artifact.activation_number + "-" + name
       if (i !== build.artifacts.length - 1) label += " "
@@ -36,6 +44,7 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
 
     labels.push(label);
     data.push(build.count);
+    countSum += build.count;
   })
 
   colors = Array(labels.length).fill("#a4a4a4")
@@ -46,12 +55,12 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
       <div className="character-builds-container">
         <div className="build-container">
           <WeaponBuild
-            weapons={builds[activeBuildIdx].weapons}
-            total={builds[activeBuildIdx].count}
+            weapons={orderedBuilds[activeBuildIdx].weapons}
+            total={orderedBuilds[activeBuildIdx].count}
           />
           <div className="artifact-build-container">
             <ArtifactBuild
-              artifacts={builds[activeBuildIdx].artifacts}
+              artifacts={orderedBuilds[activeBuildIdx].artifacts}
             />
             <div className="artifacts-donut-chart">
               <Chart
@@ -61,17 +70,17 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
                 data={data}
                 colors={colors}
               />
-              <div className="artifact-popularity">{Math.round((builds[activeBuildIdx].count / total) * 100)}%</div>
+              <div className="artifact-popularity">{Math.round((orderedBuilds[activeBuildIdx].count / countSum) * 100)}%</div>
             </div>
           </div>
         </div>
-        {builds[activeBuildIdx].count}
+        {orderedBuilds[activeBuildIdx].count}
       </div>
       <div className="character-builds-selector">
-        {_.map(builds, (build, i) => {
+        {_.map(orderedBuilds, (build, i) => {
           return (
-            <div key={`artifacts-thumb=${i}`} className={`${activeBuildIdx === i ? "selected" : ""}`} onClick={() => setActiveBuildIdx(i)}>
-              <ArtifactSets artifacts={build.artifacts} />
+            <div key={`artifacts-thumb=${i}`} onClick={() => setActiveBuildIdx(i)}>
+              <ArtifactSets artifacts={build.artifacts} selected={activeBuildIdx === i} />
             </div>
           )
         })}
