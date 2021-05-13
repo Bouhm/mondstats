@@ -18,8 +18,8 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
   const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 5, set: { id } });
 
+  console.log(characterDb[selectedCharacter].element.toLocaleLowerCase())
   const orderedBuilds = _.orderBy(builds, 'count', 'desc');
-  console.log(orderedBuilds);
   let labels: string[] = [];
   let data: number[] = [];
   let colors: string[] = [];
@@ -74,7 +74,6 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
             </div>
           </div>
         </div>
-        {orderedBuilds[activeBuildIdx].count}
       </div>
       <div className="character-builds-selector">
         {_.map(orderedBuilds, (build, i) => {

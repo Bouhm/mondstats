@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import _ from 'lodash'
+import './CharacterSearch.css';
 
-import CharacterTile, { CharacterTileProps } from './CharacterTile'
-import Searchbar from './ui/Searchbar'
-import { Store } from '../Store'
-import Logo from '../assets/textlogo.png'
-import { getShortName } from '../scripts/util'
-import './CharacterSearch.css'
+import _ from 'lodash';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { Store } from '../Store';
+import CharacterTile, { CharacterTileProps } from './CharacterTile';
+import Searchbar from './ui/Searchbar';
 
 function CharacterSearch() {
   const [{ characterIdMap }] = useContext(Store)

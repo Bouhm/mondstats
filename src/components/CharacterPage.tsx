@@ -32,7 +32,7 @@ function CharacterPage() {
   return (
     <div className="character-page" style={{ backgroundImage: `url("${character!.image}")` }}>
       <div className="character-stats-count" style={{ backgroundColor: elemColors[characterDb[selectedCharacter].element.toLocaleLowerCase()] }}>
-        Data from {characterBuilds[selectedCharacter].total} players
+        <span>Data from {characterBuilds[selectedCharacter].total} players</span>
       </div>
       {charData.builds &&
         <BuildSelector

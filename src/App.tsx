@@ -43,7 +43,7 @@ function App() {
           </Switch>
         </section>
         <section>
-          <footer>Made by Bouhm who has nothing to do with miHoYo, etc etc</footer>
+          <footer>WIP by Bouhm who has nothing to do with miHoYo, etc etc</footer>
         </section>
       </div>
     </Router>
