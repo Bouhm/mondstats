@@ -5,7 +5,7 @@
 .party-container {
   display: table;
   margin: 0 auto;
-  height: 60vh;
+  height: 70vh;
 }
 
 .party-bar-container {
@@ -28,6 +28,12 @@
       border: 2px solid rgba(255, 255, 255, 0.7);
       border-top: 0;
       border-radius: 0;
+    }
+
+    .party-popularity {
+      color: white;
+      text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+      padding: 0.3rem;
     }
   }
 

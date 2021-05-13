@@ -60,7 +60,9 @@ function Abyss({ party, floors, total }: IAbyss) {
                   content={`${characterName}: ${charPair[1]}`}
                 />
               </div>
-              <CharacterTile id={charPair[0]} />
+              <CharacterTile id={charPair[0]}>
+                <div className="party-popularity">{Math.round(charPair[1]/total * 100)}%</div>
+              </CharacterTile>
             </div>
           )
         })}

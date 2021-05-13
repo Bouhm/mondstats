@@ -26,6 +26,7 @@ footer {
   width: 100%;
   text-align: center;
   color: rgba(255, 255, 255, 0.5);
+  padding: 0.5rem;
 }
 
 .rarity-3 {
