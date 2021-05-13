@@ -30,7 +30,7 @@ function Abyss({ party, floors, total }: IAbyss) {
     }
   }
 
-  const grouped = _.groupBy(_.keys(floors), floor => floor.split("_")[0]);
+  const grouped = _.groupBy(_.keys(floors), floor => floor.split("_")[1]);
 
   _.forEach(grouped, floorGroup => {
     let sortedFloors = floorGroup.sort(_compareFloor);

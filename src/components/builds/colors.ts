@@ -5,7 +5,9 @@ const elemColors: { [key: string]: string } = {
   hydro: "#35CBFC",
   electro: "#D795FF",
   dendro: "#A5D533",
-  geo: "#F0B738"
+  geo: "#F0B738",
+  adaptive: "#4B0082",
+  none: "#4B0082"
 }
 
 export default elemColors;

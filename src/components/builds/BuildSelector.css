@@ -9,15 +9,15 @@
   width: 100%;
 }
 
+h1 {
+  color: white;
+  width: 300px;
+  border-bottom: solid 1px grey;
+}
+
 .build-container {
   display: flex;
   height: 100%;
-
-  h1 {
-    color: white;
-    width: 300px;
-    border-bottom: solid 1px grey;
-  }
 
   .weapons-list {
     flex: 3;
