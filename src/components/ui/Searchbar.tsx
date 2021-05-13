@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import _ from 'lodash'
-import Fuse from 'fuse.js'
-import { SearchSharp } from 'react-ionicons'
+import './Searchbar.css';
 
-import './Searchbar.css'
+import Fuse from 'fuse.js';
+import _ from 'lodash';
+import React, { useState } from 'react';
+import { SearchSharp } from 'react-ionicons';
 
 type SearchbarProps = {
   list: string[]
