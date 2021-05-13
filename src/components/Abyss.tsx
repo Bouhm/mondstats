@@ -12,8 +12,13 @@ import Tooltip from './ui/Tooltip';
 
 function Abyss({ party, floors, total }: IAbyss) {
   const [{ selectedCharacter, characterDb }] = useContext(Store)
-  let datasets: IDataset[] = []
-  let labels: string[] = ["Floor 9", "Floor 10", "Floor 11", "Floor 12"]
+  let datasetsArr: IDataset[][] = []
+  let labelArr: string[][] = [
+    ["Floor 9-1", "Floor 9-2", "Floor 9-3"],
+    ["Floor 10-1", "Floor 10-2", "Floor 10-3"],
+    ["Floor 11-1", "Floor 11-2", "Floor 11-3"],
+    ["Floor 12-1", "Floor 12-2", "Floor 12-3"]
+  ]
 
   const _compareFloor = (f1: string, f2: string) => {
     const f1Strs = f1.split("_")
@@ -30,15 +35,23 @@ function Abyss({ party, floors, total }: IAbyss) {
     }
   }
 
-  const grouped = _.groupBy(_.keys(floors), floor => floor.split("_")[1]);
+  const grouped = _.groupBy(_.keys(floors), floor => floor.split("_")[0]);
 
   _.forEach(grouped, floorGroup => {
     let sortedFloors = floorGroup.sort(_compareFloor);
+    let grpedSrtedFloors = _.groupBy(sortedFloors, floor => floor.split("_")[2]);
 
-    datasets.push({
-      data: _.map(sortedFloors, floor => floors[floor]),
-      backgroundColor: elemColors[characterDb[selectedCharacter].element.toLocaleLowerCase()]
-    })
+    console.log(grpedSrtedFloors);
+    let i = 0;
+    datasetsArr.push(
+      _.map(grpedSrtedFloors, (stages) => {
+        return ({
+          label: ["1st Half", "2nd Half"][i++],
+          data: _.map(stages, floor => floors[floor]),
+          backgroundColor: elemColors[characterDb[selectedCharacter].element.toLocaleLowerCase()]
+        })
+      })
+    )
   })
 
   return (
@@ -70,10 +83,36 @@ function Abyss({ party, floors, total }: IAbyss) {
       <h1>Abyss Floors</h1>
       <div className="floors-chart-container">
         <Chart
-          id="floors-chart"
+          id="floor9-chart"
+          className="floors-chart"
           type="bar"
-          labels={labels}
-          datasets={datasets}
+          labels={labelArr[0]}
+          datasets={datasetsArr[0]}
+          max={total/4}
+        />
+        <Chart
+          id="floor10-chart"
+          className="floors-chart"
+          type="bar"
+          labels={labelArr[1]}
+          datasets={datasetsArr[1]}
+          max={total/4}
+        />
+        <Chart
+          id="floor11-chart"
+          className="floors-chart"
+          type="bar"
+          labels={labelArr[2]}
+          datasets={datasetsArr[2]}
+          max={total/4}
+        />
+        <Chart
+          id="floor12-chart"
+          className="floors-chart"
+          type="bar"
+          labels={labelArr[3]}
+          datasets={datasetsArr[3]}
+          max={total/4}
         />
       </div>
     </div>

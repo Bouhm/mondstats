@@ -9,19 +9,23 @@ export interface IDataset {
 }
 
 type ChartProps = {
-  id: string
+  id?: string
+  className?: string
   type: string
   labels: string[]
   data?: number[]
   datasets?: IDataset[]
   colors?: string[]
+  max: number
+  showScale?: boolean
 }
 
-function _Chart({ id, type, labels, colors = [], data = [], datasets = []}: ChartProps) {
+function _Chart({ id = "", className = "", type, max, labels, colors = [], data = [], datasets = [], showScale = true}: ChartProps) {
   Chart.register(...registerables)
   Chart.defaults.plugins.tooltip.displayColors = false;
   Chart.defaults.plugins.legend.display = false;
   Chart.defaults.plugins.tooltip.animation.duration = 0;
+  Chart.defaults.color = 'white';
   
   const [hasMounted, setHasMounted] = useState(false);
   const ref = useRef<HTMLCanvasElement>(null)
@@ -48,7 +52,13 @@ function _Chart({ id, type, labels, colors = [], data = [], datasets = []}: Char
           animation: {
             duration: hasMounted ? 0 : 600,
           },
-        }
+          scales: {
+            y: {
+                max,
+                display: showScale
+            }
+          } 
+        },
       });
     }
 
@@ -58,7 +68,7 @@ function _Chart({ id, type, labels, colors = [], data = [], datasets = []}: Char
     }
   }, [hasMounted, setHasMounted, labels, data, colors, ref])
 
-  return <canvas id={id} ref={ref} />
+  return <canvas className={className} id={id} ref={ref} />
 }
 
 export default _Chart

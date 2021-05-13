@@ -69,6 +69,8 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
                 labels={labels}
                 data={data}
                 colors={colors}
+                max={countSum}
+                showScale={false}
               />
               <div className="artifact-popularity">{Math.round((orderedBuilds[activeBuildIdx].count / countSum) * 100)}%</div>
             </div>
