@@ -41,7 +41,7 @@ h1 {
 
       .artifact-popularity {
         position: absolute;
-        z-index: -1;
+        z-index: 0;
         top: calc(50% - 1.5rem);
         width: 100%;
         text-align: center;

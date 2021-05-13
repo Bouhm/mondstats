@@ -51,7 +51,7 @@
 }
 
 .floors-chart-container {
-  width: 70%;
+  max-width: 65rem;
   margin: 0 auto;
 
   .floors-chart {
