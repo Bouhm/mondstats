@@ -42,7 +42,7 @@ function Searchbar({ list, maxResults, onSearch, placeholder = "" }: SearchbarPr
 
   return (
     <div className="searchbar">
-      <ion-icon name="search-outline" color="#e9e5dc" />
+      <SearchSharp color="#e9e5dc" />
       <input placeholder={placeholder} list="search-input" name="search-input" onChange={handleInputChange} value={input} />
     </div>
   )
