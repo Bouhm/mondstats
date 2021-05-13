@@ -42,7 +42,6 @@ function Abyss({ party, floors, total }: IAbyss) {
     let sortedFloors = floorGroup.sort(_compareFloor);
     let grpedSrtedFloors = _.groupBy(sortedFloors, floor => floor.split("_")[2]);
 
-    console.log(grpedSrtedFloors);
     let i = 0;
     datasetsArr.push(
       _.map(grpedSrtedFloors, (stages) => {

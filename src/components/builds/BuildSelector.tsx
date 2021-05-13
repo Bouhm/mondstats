@@ -18,7 +18,6 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
   const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 5, set: { id } });
 
-  console.log(characterDb[selectedCharacter].element.toLocaleLowerCase())
   const orderedBuilds = _.orderBy(builds, 'count', 'desc');
   let labels: string[] = [];
   let data: number[] = [];
@@ -29,7 +28,6 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
     let label = "";
 
     _.forEach(build.artifacts, (artifact, i) => {
-      console.log(artifact.id)
       let name = getArtifactSet(artifact.id)!.set.name;
       if (name.includes(" ")) {
         if (name.split(" ")[0] === "The") {
