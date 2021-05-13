@@ -21,6 +21,7 @@ function CharacterSearch() {
   const handleSearchCharacter = (filteredChars: string[]) => {
     setFilteredChars(filteredChars);
     setUnfilteredChars(_.filter(_.keys(characterIdMap), name => !filteredChars.includes(name)));
+    console.log(unfilteredChars);
   }
 
   return (
@@ -41,7 +42,7 @@ function CharacterSearch() {
           )}
         </div>
         <div className="unfiltered-characters">
-          {_.map(_.orderBy(unfilteredChars, 'asc'), char => (
+          {_.map(unfilteredChars.sort(), char => (
             <Link key={characterIdMap[char]} to={`/builds/${char}`}>
               <CharacterTile id={characterIdMap[char]} />
             </Link>
