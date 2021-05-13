@@ -10,7 +10,7 @@ import Navbar from './components/navbar/Navbar';
 import artifactDb from './data/artifacts.json';
 import characterDb from './data/characters.json';
 import weaponDb from './data/weapons.json';
-import data from './sample.json';
+import data from './data/data.json';
 import { getShortName } from './scripts/util';
 import { Store } from './Store';
 
