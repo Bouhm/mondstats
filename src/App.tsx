@@ -43,6 +43,9 @@ function App() {
           </Switch>
         </section>
         <section>
+          <div className="pls">Please contribute by setting your Battle Chronicle to public in Hoyolab. Thank you!
+            <img src="https://img-os-static.hoyolab.com/communityWeb/upload/d81f8ba1e6e991a18aeda0ccbffe2eb0.png" />
+          </div>
           <footer>WIP by Bouhm who has nothing to do with miHoYo, etc etc</footer>
         </section>
         <span className="build-ver">dev build 05.13.21</span>

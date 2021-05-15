@@ -76,3 +76,18 @@ footer {
   right: 0;
   color: rgba(255, 255, 255, 0.2);
 }
+
+.pls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3rem;
+  width: 80%;
+  margin: 0 auto;
+  z-index: 0;
+  opacity: 0.3;
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  flex-flow: column;
+}
