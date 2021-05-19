@@ -12,6 +12,10 @@ type WeaponBuildProps = {
   total: number
 }
 
+function _weaponComparer(w1: ICharWeapon, w2: ICharWeapon, buildId: string) {
+  return w1.weaponCount[buildId] - w2.weaponCount[buildId]
+}
+
 function WeaponBuild({ weapons, buildId, total }: WeaponBuildProps) {
   const [{ weaponDb, selectedCharacter, characterDb }] = useContext(Store)
   const getWeapon = (id: number) => _.find(weaponDb, { id });
@@ -20,7 +24,7 @@ function WeaponBuild({ weapons, buildId, total }: WeaponBuildProps) {
     <div className="weapons-list-container">
       <h1>Weapons</h1>
       <div className="weapons-list">
-        {_.map(_.orderBy(_.take(weapons, 8), 'count', 'desc'), ({ id, weaponCount }, i) => {
+        {_.map(_.orderBy(_.values(_.take(weapons, 8)), 'weaponCount', 'desc'), ({ id, weaponCount }, i) => {
           const weapon = getWeapon(id);
           if (!weapon) return null;
 

@@ -24,9 +24,12 @@ function BuildSelector({ artifacts, weapons }: BuildSelectProps) {
   const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 5, set: { id } });
 
   const orderedArtifacts = _.orderBy(artifacts, 'count', 'desc');
-  const orderedWeapons = _.orderBy(weapons, weapon => {
+  const orderedWeapons = _.orderBy(_.filter(weapons, weapon => {
+      return _.includes(_.keys(weapon.weaponCount), orderedArtifacts[activeBuildIdx].buildId)
+    }), (weapon) => {
     return weapon.weaponCount[orderedArtifacts[activeBuildIdx].buildId]
   })
+
 
   let labels: string[] = [];
   let chartData: number[] = [];
@@ -61,7 +64,6 @@ function BuildSelector({ artifacts, weapons }: BuildSelectProps) {
     <div className="builds-selector">
       <WeaponBuild
         weapons={orderedWeapons}
-        buildId={orderedArtifacts[activeBuildIdx].buildId}
         total={countSum}
       />
       <div className="artifact-build-container">
