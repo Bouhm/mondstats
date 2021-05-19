@@ -1,8 +1,9 @@
-import React from 'react'
-import _ from 'lodash'
-import { IWeapon } from '../../../data/types'
+import _ from 'lodash';
+import React from 'react';
 
-function WeaponCard({ icon, name, rarity, popularity }: IWeapon & { popularity: number }) {
+import { IWeaponDb } from '../../../data/types';
+
+function WeaponCard({ icon, name, rarity, popularity }: IWeaponDb & { popularity: number }) {
   return (
     <div className={`weapon-card`}>
       <img className={`rarity-${rarity}`} src={icon} alt={name} />

@@ -1,19 +1,20 @@
-import React, { useReducer } from 'react'
-import { IArtifact, IWeapon, ICharacter, ICharData } from './data/types'
+import React, { useReducer } from 'react';
+
+import { IArtifactDb, ICharacterDb, IData, IWeaponDb } from './data/types';
 
 interface IState {
-  characterIdMap: { [shortName: string]: string }
+  characterIdMap: { [shortName: string]: string },
+  data: IData,
   selectedCharacter: string,
-  characterBuilds: { [id: string]: ICharData }
-  artifactDb: { [id: string]: IArtifact }
-  weaponDb: { [id: string]: IWeapon }
-  characterDb: { [id: string]: ICharacter }
+  artifactDb:  { [id: string]: IArtifactDb },
+  weaponDb: { [id: string]: IWeaponDb },
+  characterDb:  { [id: string]: ICharacterDb }
 }
 
 export const initialState: IState = {
   characterIdMap: {},
   selectedCharacter: '',
-  characterBuilds: {},
+  data: { characters: {}, abyss: {} },
   artifactDb: {},
   weaponDb: {},
   characterDb: {}
@@ -38,8 +39,8 @@ export const reducer = (state: IState, action: IAction): IState => {
       return { ...state, characterIdMap: action.payload }
     case 'SELECT_CHARACTER':
       return { ...state, selectedCharacter: action.payload }
-    case 'SET_CHARACTER_BUILDS':
-      return { ...state, characterBuilds: action.payload }
+    case 'SET_DATA':
+      return { ...state, data: action.payload }
     case 'SET_ARTIFACT_DB':
       return { ...state, artifactDb: action.payload }
     case 'SET_WEAPON_DB':

@@ -1,7 +1,7 @@
 import './App.css';
 
 import _ from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
 import CharacterPage from './components/CharacterPage';
@@ -24,7 +24,7 @@ function App() {
       charIdMap[getShortName(char.name)] = char.id + '';
     });
 
-    dispatch({ type: "SET_CHARACTER_BUILDS", payload: data })
+    dispatch({ type: "SET_DATA", payload: data })
     dispatch({ type: "SET_ARTIFACT_DB", payload: artifactDb })
     dispatch({ type: "SET_WEAPON_DB", payload: weaponDb })
     dispatch({ type: "SET_CHARACTER_DB", payload: characterDb })

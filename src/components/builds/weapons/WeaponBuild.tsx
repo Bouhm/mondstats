@@ -1,17 +1,18 @@
 import _ from 'lodash';
 import React, { MouseEventHandler, useContext, useState } from 'react';
 
-import { IWeaponBuild } from '../../../data/types';
+import { ICharWeapon } from '../../../data/types';
 import { Store } from '../../../Store';
 import Tooltip from '../../ui/Tooltip';
 import WeaponCard from './WeaponCard';
 
-type WeaponBuild = {
-  weapons: IWeaponBuild[]
+type WeaponBuildProps = {
+  weapons: ICharWeapon[],
+  buildId: string,
   total: number
 }
 
-function WeaponBuild({ weapons, total }: WeaponBuild) {
+function WeaponBuild({ weapons, buildId, total }: WeaponBuildProps) {
   const [{ weaponDb, selectedCharacter, characterDb }] = useContext(Store)
   const getWeapon = (id: number) => _.find(weaponDb, { id });
 
@@ -19,23 +20,23 @@ function WeaponBuild({ weapons, total }: WeaponBuild) {
     <div className="weapons-list-container">
       <h1>Weapons</h1>
       <div className="weapons-list">
-        {_.map(_.orderBy(_.take(weapons, 8), 'count', 'desc'), ({ id, count }, i) => {
+        {_.map(_.orderBy(_.take(weapons, 8), 'count', 'desc'), ({ id, weaponCount }, i) => {
           const weapon = getWeapon(id);
           if (!weapon) return null;
 
-          const popularity = Math.round((count / total) * 100)
+          const popularity = Math.round((weaponCount[buildId] / total) * 100)
 
           return (
-            <div key={`${id}-${count}-${i}`} className="weapon-container">
+            <div key={`${id}-${weaponCount[buildId]}-${i}`} className="weapon-container">
               <WeaponCard {...weapon} popularity={popularity} />
               <div className="bar-chart weapon-bar-chart">
                 <div
-                  className={`bar-chart-bar weapon-bar ${characterDb[selectedCharacter].element.toLocaleLowerCase()}`} 
+                  className={`bar-chart-bar weapon-bar ${characterDb[selectedCharacter].element.toLowerCase()}`} 
                   style={{ width: `${popularity}%` }} 
                 >
                   <Tooltip 
                     alignment="horizontal"
-                    content={`${weapon.name}: ${count}`}
+                    content={`${weapon.name}: ${weaponCount[buildId]}`}
                   />
                 </div>
               </div>

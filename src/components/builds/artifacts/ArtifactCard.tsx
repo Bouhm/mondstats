@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React from 'react';
 
-import { IArtifact } from '../../../data/types';
+import { IArtifactDb } from '../../../data/types';
 
-function ArtifactCard({ rarity, icon, name, set, affixes, activation }: IArtifact & { activation: number, affixes: { activation_number: number, effect: string }[] }) {
+function ArtifactCard({ rarity, icon, name, set, affixes, activation }: IArtifactDb & { activation: number, affixes: { activation_number: number, effect: string }[] }) {
   return (
     <div className={`artifact-card`}>
       <div className="artifact-header">

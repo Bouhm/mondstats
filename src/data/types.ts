@@ -1,52 +1,109 @@
-export interface IArtifactBuild {
-  id: number
-  activation_number: number
-}
-
-export interface IWeaponBuild {
-  id: number
-  count: number
-}
-
-export interface IBuild {
-  weapons: IWeaponBuild[]
-  artifacts: IArtifactBuild[]
-  count: number
-}
-
-export interface IAbyss {
-  floors: { [floorStr: string]: number }
-  party: { [charId: string]: number }
-  total: number
-}
-
-export interface ICharData {
-  id: number
-  name: string
-  constellations: number[]
-  builds: IBuild[]
+export interface IData {
+  characters: {
+    [id: string]: IChar
+  },
   abyss: IAbyss
-  total: number
 }
 
-export interface IArtifact {
+export interface IChar {
   id: number,
   name: string,
+  levels: {
+    average: number,
+    maxCount: number
+  },
+  constellations: number[],
+  weapons: ICharWeapon[],
+  artifacts: ICharArtifact[],
+  total: number
+}
+
+export interface ICharWeapon {
+  id: number,
+  abyssClears: number,
+  mains: number,
+  weaponCount: {
+    [buildId: string]: number
+  }
+}
+
+export interface ICharArtifact {
+  sets: IArtifactSet[],
+  buildId: string,
+  abyssClears: number,
+  mains:number,
+  count: number
+}
+
+export interface IArtifactSet {
+  id: number,
+  activation_number: number,
+}
+
+export interface IPlayerAbyss {
+  floors: {
+    index: number,
+    levels: {
+      index: number,
+      star: number,
+      max_star: number,
+      battles: {
+        index: number,
+        timestamp: string,
+        avatars: {
+          id: number,
+          icon: string,
+          level: number,
+          rarity: number
+        }[]
+      }[]
+    }[]
+  }[]
+} 
+
+export interface IAbyss {
+  [floorNum: string]: IAbyssLevels
+}
+
+export interface IAbyssLevels {
+  [stageNum: string]: [IAbyssData, IAbyssData]
+}
+
+type IAbyssData = {
+  teams: { party: number[], count: number, abyssClears: number }[],
+  count: number
+}
+
+export interface IArtifactDb {
+  id: number, 
+  name: string, 
   icon: string,
   pos: number,
-  rarity: number,
+  rarity: number, 
   set: {
     id: number,
     name: string,
-    affixes: {
-      activation_number: number,
-      effect: string
-    }[]
+    affixes: IAffix[]
   },
   pos_name: string
 }
 
-export interface ICharacter {
+export interface IAffix { 
+  activation_number: number,
+  effect: string
+}
+
+export interface IWeaponDb {
+  id: number,
+  name: string,
+  icon: string,
+  type: number, 
+  rarity: number,
+  type_name: string,
+  desc: string
+}
+
+export interface ICharacterDb {
   id: number,
   image: string,
   icon: string,
@@ -58,16 +115,6 @@ export interface ICharacter {
     name: string,
     icon: string,
     effect: string,
-    pos: number
-  }[]
-}
-
-export interface IWeapon {
-  id: number,
-  name: string,
-  icon: string,
-  type: number,
-  rarity: number,
-  type_name: string,
-  desc: string
+    pos: number,
+  }[],
 }

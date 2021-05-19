@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import React, { useContext } from 'react';
 
-import { IArtifactBuild } from '../../../data/types';
+import { IArtifactSet } from '../../../data/types';
 import { Store } from '../../../Store';
 
 type ArtifactCardProps = {
-  artifacts: IArtifactBuild[]
+  artifacts: IArtifactSet[]
   selected?: boolean
 }
 
