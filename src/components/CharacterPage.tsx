@@ -12,7 +12,7 @@ import elemColors from './builds/colors';
 
 function CharacterPage() {
   const { shortName } = useParams<{ shortName: string }>();
-  const [{ characterIdMap, data, characterDb, selectedCharacter }, dispatch] = useContext(Store)
+  const [{ characterIdMap, allData, characterDb, selectedCharacter }, dispatch] = useContext(Store)
   const [charData, setCharData] = useState<ICharData | undefined>(undefined)
   const [character, setCharacter] = useState<ICharacterDb | undefined>(undefined)
 
@@ -21,10 +21,10 @@ function CharacterPage() {
 
     if (charId) {
       setCharacter(characterDb[charId])
-      setCharData(data.characters[charId])
+      setCharData(allData.characters[charId])
       dispatch({ type: 'SELECT_CHARACTER', payload: charId })
     }
-  }, [setCharacter, setCharData, dispatch, characterIdMap, shortName, data])
+  }, [setCharacter, setCharData, dispatch, characterIdMap, shortName, allData])
 
   if (!character || !charData) return null
 
@@ -32,7 +32,7 @@ function CharacterPage() {
   return (
     <div className="character-page" style={{ backgroundImage: `url("${character!.image}")` }}>
       <div className="character-stats-count" style={{ backgroundColor: elemColors[characterDb[selectedCharacter].element.toLocaleLowerCase()] }}>
-        <span>Data from {data.characters[selectedCharacter].total} players</span>
+        <span>Data from {allData.characters[selectedCharacter].total} players</span>
       </div>
       {charData.builds &&
         <BuildSelector
@@ -40,8 +40,8 @@ function CharacterPage() {
           total={charData.total}
         />
       }
-      {data.abyss &&
-        <Abyss {...data.abyss} />
+      {allData.abyss &&
+        <Abyss {...allData.abyss} />
       }
     </div>
   )

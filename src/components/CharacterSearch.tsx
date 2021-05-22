@@ -9,27 +9,31 @@ import { Store } from '../Store';
 import CharacterTile, { CharacterTileProps } from './CharacterTile';
 import Searchbar from './ui/Searchbar';
 
-function CharacterSearch() {
-  const [{ characterIdMap }] = useContext(Store)
+type CharacterSearchProps = {
+  dataTotal: number;
+}
+
+function CharacterSearch({ dataTotal }: CharacterSearchProps) {
+  const [{ characterIdMap, allData }] = useContext(Store)
   const [unfilteredChars, setUnfilteredChars] = useState<string[]>([]);
   const [filteredChars, setFilteredChars] = useState<string[]>([]);
 
+  console.log(dataTotal)
   useEffect(() => {
     setUnfilteredChars(_.keys(characterIdMap))
-  }, [characterIdMap, setUnfilteredChars])
+  }, [characterIdMap, setUnfilteredChars, allData])
 
   // Set character search filter
   const handleSearchCharacter = (filteredChars: string[]) => {
     setFilteredChars(filteredChars);
     setUnfilteredChars(_.filter(_.keys(characterIdMap), name => !filteredChars.includes(name)));
-    console.log(unfilteredChars);
   }
 
   return (
     <div className="character-search">
       <div className="logo-container">
         <img className="logo" src={Logo} alt="logo" />
-        <div className="players-total">DATA TOTAL: 1994 PLAYERS</div>
+        <div className="players-total">DATA TOTAL: {dataTotal} PLAYERS</div>
       </div>
       <div className="character-searchbar">
         <Searchbar maxResults={4} onSearch={handleSearchCharacter} list={_.keys(characterIdMap)} placeholder="Search character" />
