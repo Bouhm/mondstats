@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 
-import { IArtifactDb, ICharacterDb, IData, IWeaponDb } from './data/types';
+import { IArtifactDb, ICharacterDb, IData, IWeaponDb, newAbyss } from './data/types';
 
 interface IState {
   characterIdMap: { [shortName: string]: string },
@@ -14,7 +14,7 @@ interface IState {
 export const initialState: IState = {
   characterIdMap: {},
   selectedCharacter: '',
-  data: { characters: {}, abyss: {} },
+  data: { characters: {}, abyss: newAbyss },
   artifactDb: {},
   weaponDb: {},
   characterDb: {}

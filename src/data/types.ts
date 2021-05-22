@@ -1,77 +1,68 @@
 export interface IData {
-  characters: {
-    [id: string]: IChar
-  },
-  abyss: IAbyss
+  characters: { [id: string]: ICharData }
+  abyss: IAbyssData
 }
 
-export interface IChar {
+export interface ICharData {
   id: number,
   name: string,
-  levels: {
-    average: number,
-    maxCount: number
-  },
+  avgLevel: number,
   constellations: number[],
-  weapons: ICharWeapon[],
-  artifacts: ICharArtifact[],
+  builds: IBuild[]
   total: number
 }
 
-export interface ICharWeapon {
-  id: number,
-  abyssClears: number,
-  mains: number,
-  weaponCount: {
-    [buildId: string]: number
-  }
+export interface IArtifactBuild {
+  id: number
+  activation_number: number
 }
 
-export interface ICharArtifact {
-  sets: IArtifactSet[],
-  buildId: string,
-  abyssClears: number,
-  mains:number,
+export interface IWeaponBuild {
+  id: number
   count: number
 }
 
-export interface IArtifactSet {
-  id: number,
-  activation_number: number,
+export interface IBuild {
+  buildId: string,
+  weapons: IWeaponBuild[]
+  artifacts: IArtifactBuild[]
+  count: number
 }
 
-export interface IPlayerAbyss {
-  floors: {
-    index: number,
-    levels: {
-      index: number,
-      star: number,
-      max_star: number,
-      battles: {
-        index: number,
-        timestamp: string,
-        avatars: {
-          id: number,
-          icon: string,
-          level: number,
-          rarity: number
-        }[]
-      }[]
-    }[]
-  }[]
-} 
-
-export interface IAbyss {
+export interface IAbyssData {
   [floorNum: string]: IAbyssLevels
 }
 
 export interface IAbyssLevels {
-  [stageNum: string]: [IAbyssData, IAbyssData]
+  [stageNum: string]: [IBattle, IBattle]
 }
 
-type IAbyssData = {
-  teams: { party: number[], count: number, abyssClears: number }[],
-  count: number
+type IBattle = {
+  teams: { party: number[], count: number }[],
+  total: number
+}
+
+export const newAbyss: IAbyssData = {
+  "9": {
+    "1": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
+    "2": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
+    "3": [{ teams: [], total: 0 }, { teams: [], total: 0 }]
+  },
+  "10": {
+    "1": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
+    "2": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
+    "3": [{ teams: [], total: 0 }, { teams: [], total: 0 }]
+  },
+  "11": { 
+    "1": [{ teams: [], total: 0 }, { teams: [], total: 0 }], 
+    "2": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
+    "3": [{ teams: [], total: 0 }, { teams: [], total: 0 }]
+  },
+  "12": {
+    "1": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
+    "2": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
+    "3": [{ teams: [], total: 0 }, { teams: [], total: 0 }]
+  }
 }
 
 export interface IArtifactDb {
@@ -117,4 +108,11 @@ export interface ICharacterDb {
     effect: string,
     pos: number,
   }[],
+}
+
+export interface IArtifactSet {
+  [id: string]: {
+    count: number,
+    affixes: IAffix[]
+  }
 }
