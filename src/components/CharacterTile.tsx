@@ -1,16 +1,16 @@
-import React, { ReactNode, useContext } from 'react'
-import _ from 'lodash'
+import './CharacterTile.css';
 
-import { ElementIcons } from '../data/constants'
-import { Store } from '../Store'
-import './CharacterTile.css'
+import _ from 'lodash';
+import React, { ReactNode, useContext } from 'react';
+
+import { ElementIcons } from '../data/constants';
+import { Store } from '../Store';
 
 export type CharacterTileProps = {
   id: string
-  children?: ReactNode
 }
 
-function CharacterTile({ id, children = null }: CharacterTileProps) {
+function CharacterTile({ id }: CharacterTileProps) {
   const [{ characterDb },] = useContext(Store)
   const character = characterDb[id]
 
@@ -29,7 +29,6 @@ function CharacterTile({ id, children = null }: CharacterTileProps) {
         {charElement && <img className="element-icon" src={ElementIcons[character.element]} alt={character.element}></img>}
         <div className="character-tile-name">
           {character.name}
-          {children}
         </div>
       </div>
     </div>

@@ -35,7 +35,7 @@ function App() {
     dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
   }, [characterDb, artifactDb, weaponDb, data, getShortName, dispatch, setDataTotal])
 
-  const renderCharacterSearch = () => dataTotal && <CharacterSearch dataTotal={2006} />
+  const renderCharacterSearch = () => <CharacterSearch dataTotal={2006} />
 
   return (
     <Router>

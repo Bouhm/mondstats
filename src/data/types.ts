@@ -30,14 +30,14 @@ export interface IBuild {
 }
 
 export interface IAbyssData {
-  [floorNum: string]: IAbyssLevels
+  [floorNum: string]: IAbyssFloor
 }
 
-export interface IAbyssLevels {
+export interface IAbyssFloor {
   [stageNum: string]: [IBattle, IBattle]
 }
 
-type IBattle = {
+export type IBattle = {
   teams: { party: number[], count: number }[],
   total: number
 }
