@@ -4,16 +4,62 @@
 }
 
 .floor-container {
+  display: flex;
+  flex-flow: column;
+
   .party-container {
     display: flex;
     flex-flow: column;
-    align-items: center;
     margin: 1rem;
+  }
+
+  .stage-container {
+    display: grid;
+
+    .stage-label {
+      text-align: center;
+      color: white;
+      font-size: 3rem;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .stage-half {
+      display: flex;
+      justify-content: center;
+      color: white;
+    }
+
+    .stage-teams-show-more {
+      color: black;
+      text-align: center;
+      font-size: 1.5rem;
+      width: 15%;
+      margin: 1rem auto;
+      background-color: #e9e5dc;
+      padding: 1rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .battle-container {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
   }
 
   .party-popularity {
     width: 100%;
+    text-align: center;
+    padding: 2rem 0 1.5rem 0;
     background-color: #e9e5dc;
+    line-height: 30%;
+    color: white;
+    font-size: 2rem;
+    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
   }
 
   .party-characters {
@@ -27,6 +73,11 @@
       .character-tile {
         margin: 0;
         border-radius: 0;
+
+        &:hover {
+          transform: none;
+          border: none;
+        }
       }
     }
   }
