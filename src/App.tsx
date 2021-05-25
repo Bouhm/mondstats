@@ -20,7 +20,6 @@ function App() {
   const [dataTotal, setDataTotal] = useState<number>()
 
   useEffect(() => {
-    console.log("App use effect")
     let charIdMap: { [shortname: string]: string } = {}
     _.forEach(_.values(characterDb), char => {
       charIdMap[getShortName(char.name)] = char.id + '';

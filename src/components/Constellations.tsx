@@ -1,27 +1,68 @@
-function Constellations() {
+import './Constellations.css';
+
+import _ from 'lodash';
+import React, { ReactNode, useContext } from 'react';
+
+import { Store } from '../Store';
+import { Circle } from './Icons';
+import Tooltip from './ui/Tooltip';
+
+type ConstellationsProps = {
+  constellations: number[],
+  total: number
+}
+
+type ConstellationCardProps = {
+  name: string,
+  icon?: string,
+  effect?: string,
+  children: ReactNode
+}
+
+function ConstellationCard({ name, icon, effect, children }: ConstellationCardProps) {
+  return (
+    <div className="constellation-card">
+      <div className="constellation-card-icon">
+        {icon ? <img src={icon} alt={name} /> : "NONE"}
+      </div>
+      {children}
+    </div>
+  )
+}
+
+function Constellations({ constellations, total  }: ConstellationsProps ) {
+  const [{ selectedCharacter, characterDb },] = useContext(Store)
+
   return (
     <div className="constellations-container">
-    {_.map(_.take(_.sortBy(_.toPairs(party), 1).reverse(), 8), charPair => {
-      let popularity = Math.round((charPair[1] / total * 1000)/10)
-      let characterName = characterDb[charPair[0]].name;
+    {_.map(constellations, (count, i) => {
+      let popularity = Math.round((count / total * 1000)/10)
 
       return (
-        <div key={charPair[0]} className="bar-chart party-bar-container">
+        <div key={`constellation-${i}`} className="bar-chart constellation-bar-container">
           <div 
-            className={`bar-chart-bar party-bar ${characterDb[selectedCharacter].element.toLowerCase()}`} 
+            className={`bar-chart-bar constellation-bar ${characterDb[selectedCharacter].element.toLowerCase()}`} 
             style={{ height: `${popularity}%` }}
           >
             <Tooltip 
               alignment="vertical"
-              content={`${characterName}: ${charPair[1]}`}
+              content={`C${i}: ${count}`}
             />
           </div>
-          <CharacterTile id={charPair[0]}>
-            <div className="party-popularity">{Math.round(charPair[1]/total * 100)}%</div>
-          </CharacterTile>
+          {i === 0 ?
+            <ConstellationCard name={"None"}>
+              <div className="constellation-popularity">{Math.round(count/total * 100)}%</div>
+            </ConstellationCard>
+            :
+            <ConstellationCard {...characterDb[selectedCharacter].constellations[i-1]}>
+              <div className="constellation-popularity">{Math.round(count/total * 100)}%</div>
+            </ConstellationCard>
+          }
         </div>
       )
     })}
   </div>
   )
 }
+
+export default Constellations

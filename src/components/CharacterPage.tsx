@@ -9,6 +9,7 @@ import { Store } from '../Store';
 import Abyss from './Abyss';
 import BuildSelector from './builds/BuildSelector';
 import elemColors from './builds/colors';
+import Constellations from './Constellations';
 
 function CharacterPage() {
   const { shortName } = useParams<{ shortName: string }>();
@@ -35,10 +36,13 @@ function CharacterPage() {
         <span>Data from {allData.characters[selectedCharacter].total} players</span>
       </div>
       {charData.builds &&
-        <BuildSelector
-          builds={_.take(charData.builds, 8)}
-          total={charData.total}
-        />
+        <>
+          <BuildSelector
+            builds={_.take(charData.builds, 8)}
+            total={charData.total}
+          />
+          {/* <Constellations constellations={charData.constellations} total={charData.total} /> */}
+        </>
       }
       {allData.abyss &&
         <Abyss {...allData.abyss} />

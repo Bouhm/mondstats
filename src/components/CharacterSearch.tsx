@@ -41,19 +41,13 @@ function CharacterSearch({ dataTotal }: CharacterSearchProps) {
       <div className="character-tiles">
         <div className="searched-character">
           {_.map(filteredChars, char => (
-            <Link key={characterIdMap[char]} to={`/builds/${char}`}>
-              <CharacterTile id={characterIdMap[char]} />
-            </Link>
-          )
-          )}
+            <CharacterTile key={characterIdMap[char]} id={characterIdMap[char]} />
+          ))}
         </div>
         <div className="unfiltered-characters">
           {_.map(unfilteredChars.sort(), char => (
-            <Link key={characterIdMap[char]} to={`/builds/${char}`}>
-              <CharacterTile id={characterIdMap[char]} />
-            </Link>
-          )
-          )}
+            <CharacterTile key={characterIdMap[char]} id={characterIdMap[char]} />
+          ))}
         </div>
       </div>
     </div>

@@ -1,0 +1,66 @@
+.constellations-container {
+  display: table;
+  margin: 5rem auto;
+  height: 50vh;
+  margin-bottom: 8rem;
+}
+
+.constellation-card {
+  width: 150px;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  .constellation-card-icon {
+    height: 60px;
+    text-align: middle;
+    line-height: 60px;
+
+    img {
+      width: 60px;
+    }
+  }
+}
+
+.constellation-bar-container {
+  display: table-cell;
+  height: 100%;
+  vertical-align: bottom;
+  padding: 0 0.5rem;
+
+  .constellation-bar {
+    animation-name: vertibar;
+    animation-duration: 1s;
+    animation-direction: forwards;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+  }
+
+  .character-tile-container {
+    pointer-events: none;
+    margin: 0;
+
+    .character-tile {
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      border-top: 0;
+      border-radius: 0;
+    }
+
+    .constellation-popularity {
+      color: white;
+      text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+      padding: 0.3rem;
+    }
+  }
+
+  @keyframes vertibar {
+    0% {
+      max-height: 0;
+    }
+    100% {
+      max-height: 100%;
+    }
+  }
+}

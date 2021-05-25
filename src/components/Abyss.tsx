@@ -59,7 +59,7 @@ function Abyss(abyss: IAbyssData) {
                 )
               })}
             </div>
-            <div className="stage-teams-show-more">Show more</div>
+            {/* <div className="stage-teams-show-more">Show more</div> */}
         </div>
       })}
     </div>
