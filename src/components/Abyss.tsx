@@ -47,7 +47,7 @@ function Abyss(abyss: IAbyssData) {
                       }), 'count', 'desc'), 5), ({party, count}, j) => (
                         <div key={`party-${i}-${j}`} className="party-container">
                           <div className="party-characters">
-                            {_.map(party, (char, i) => ( 
+                            {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => ( 
                               <CharacterTile id={char+''} key={`party-${i}`} />
                             ))}
                           </div>
@@ -67,12 +67,11 @@ function Abyss(abyss: IAbyssData) {
 
   return (
     <div className="abyss-container">
-      <h1>Party Members</h1>
+      <h1>Abyss Teams</h1>
       <Dropdown options={options} onChange={handleSelect} isMulti />
       <div className="floor-container">
        {renderParties()}
       </div>
-      <h1>Abyss Floors</h1>
     </div>
   )
 }
