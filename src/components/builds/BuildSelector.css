@@ -16,30 +16,28 @@ h1 {
 
 .artifact-build-container {
   display: flex;
-  height: calc(100vh - 12rem);
   flex: 2;
-
-  .artifact-build {
-    width: 100%;
-  }
 
   .artifact-build-stats {
     display: flex;
-    flex: 1;
     flex-flow: column;
-    justify-content: space-between;
     margin-right: 1rem;
+    width: 100%;
 
     .artifact-build {
-      flex: 1;
+      min-height: 480px;
     }
 
     .artifacts-donut-chart {
       position: relative;
-      height: auto;
+      display: flex;
+      justify-content: center;
+      margin: 2rem auto;
+      max-width: 350px;
 
       .artifact-popularity {
         position: absolute;
+        text-align: center;
         z-index: 0;
         top: calc(50% - 1.5rem);
         width: 100%;
@@ -57,6 +55,7 @@ h1 {
 
 .character-builds-selector {
   margin-top: 4.5rem;
+  margin-right: 1rem;
   width: 10rem;
 }
 
@@ -135,6 +134,5 @@ h1 {
 
 @media (max-width: 1280px) {
   .artifact-build {
-    height: 100% !important;
   }
 }
