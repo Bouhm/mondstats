@@ -9,7 +9,6 @@ import { Store } from '../Store';
 import Abyss from './Abyss';
 import BuildSelector from './builds/BuildSelector';
 import elemColors from './builds/colors';
-import Constellations from './Constellations';
 
 function CharacterPage() {
   const { shortName } = useParams<{ shortName: string }>();

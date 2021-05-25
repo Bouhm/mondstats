@@ -19,7 +19,7 @@ function Dropdown({ options, onChange, isMulti=false, defaultValue=options.slice
         defaultValue={defaultValue} 
         isMulti={isMulti} 
         styles={{ 
-          valueContainer: base => ({ ...base, backgroundColor: "#2A2C3A",  border: "2px solid rgba(0,0,0,0.1)" }),
+          valueContainer: base => ({ ...base, backgroundColor: "#2A2C3A",  border: "2px solid rgba(0,0,0,0.1)", height: "3rem", fontSize: "1.2rem" }),
           control: base =>  ({ ...base, borderColor: "none" }),
           indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
           menu: base => ({ ...base, backgroundColor: "#21232D", color: "white",  }),

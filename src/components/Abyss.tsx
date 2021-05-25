@@ -1,6 +1,6 @@
 import './Abyss.css';
 
-import _, { floor } from 'lodash';
+import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 
 import AmberSad from '../assets/amberSad.png';
@@ -9,6 +9,7 @@ import { Store } from '../Store';
 import CharacterTile from './CharacterTile';
 import Dropdown, { Option } from './ui/Dropdown';
 import { ChevronDown, ChevronUp } from './ui/Icons';
+import Tooltip from './ui/Tooltip';
 
 function _filterAbyss(data: IAbyssData, charId: number) {
   let newAbyss = _.cloneDeep(data)
@@ -81,14 +82,22 @@ function Abyss(abyss: IAbyssData) {
                   {teams.length > 1 ? 
                     <>
                       {_.map(_.take(_.orderBy(teams, 'count', 'desc'), stageLimitToggle[selectedStage] ? 8 : 3), ({party, count}, j) => {
-                          return <div key={`party-${i}-${j}`} className="party-container">
-                            <div className="party-characters">
-                              {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => ( 
-                                <CharacterTile id={char+''} key={`party-${i}`} />
-                              ))}
+                          return (
+                            <div key={`party-${i}-${j}`} className="party-container">
+                              <div className="party-characters">
+                                {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => ( 
+                                  <CharacterTile id={char+''} key={`party-${i}`} />
+                                ))}
+                              </div>
+                              <div className="party-popularity bar-chart-bar">
+                                {Math.round((count/(_.reduce(teams, (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%
+                                <Tooltip 
+                                  content={`Party Count: ${count}`} 
+                                  alignment="top"
+                                />
+                              </div>
                             </div>
-                            <div className="party-popularity">{Math.round((count/(_.reduce(teams, (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%</div>
-                          </div>
+                          )
                         })
                       }
                     </>

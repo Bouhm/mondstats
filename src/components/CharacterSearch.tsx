@@ -18,7 +18,6 @@ function CharacterSearch({ dataTotal }: CharacterSearchProps) {
   const [unfilteredChars, setUnfilteredChars] = useState<string[]>([]);
   const [filteredChars, setFilteredChars] = useState<string[]>([]);
 
-  console.log(dataTotal)
   useEffect(() => {
     setUnfilteredChars(_.keys(characterIdMap))
   }, [characterIdMap, setUnfilteredChars, allData])

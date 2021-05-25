@@ -20,12 +20,13 @@
       text-align: center;
       color: white;
       font-size: 3rem;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(0, 0, 0, 0.6);
     }
 
     .stage-half {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       color: white;
     }
 
@@ -64,6 +65,7 @@
   }
 
   .party-popularity {
+    position: relative;
     width: 100%;
     text-align: center;
     padding: 2rem 0 1.5rem 0;
