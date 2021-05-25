@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, { ReactNode, useContext } from 'react';
 
 import { Store } from '../Store';
-import { Circle } from './Icons';
+import { Circle } from './ui/Icons';
 import Tooltip from './ui/Tooltip';
 
 type ConstellationsProps = {

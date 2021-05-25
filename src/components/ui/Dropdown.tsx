@@ -6,11 +6,11 @@ export type Option = { value: string, label: string }
 type DropdownProps = {
   options: Option[]
   onChange: (e: any) => void
-  defaultValue?: Option
+  defaultValue?: Option[]
   isMulti?: boolean
 }
 
-function Dropdown({ options, onChange, isMulti=false, defaultValue=options[0] }: DropdownProps) {
+function Dropdown({ options, onChange, isMulti=false, defaultValue=options.slice(0,1) }: DropdownProps) {
 
   return (
     <div className="dropdown">

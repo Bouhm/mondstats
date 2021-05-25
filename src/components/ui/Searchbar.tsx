@@ -4,7 +4,7 @@ import Fuse from 'fuse.js';
 import _ from 'lodash';
 import React, { useState } from 'react';
 
-import { Search } from '../Icons';
+import { Search } from './Icons';
 
 type SearchbarProps = {
   list: string[]
