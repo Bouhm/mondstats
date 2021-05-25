@@ -1,13 +1,43 @@
 import './Abyss.css';
 
-import _ from 'lodash';
-import React, { useContext, useState } from 'react';
+import _, { floor } from 'lodash';
+import React, { useContext, useEffect, useState } from 'react';
 
+import AmberSad from '../assets/amberSad.png';
 import { IAbyssData, IBattle } from '../data/types';
 import { Store } from '../Store';
 import CharacterTile from './CharacterTile';
 import Dropdown, { Option } from './ui/Dropdown';
 import { ChevronDown, ChevronUp } from './ui/Icons';
+
+function _filterAbyss(data: IAbyssData, charId: number) {
+  let newAbyss = _.cloneDeep(data)
+  
+  _.forEach(newAbyss, floor => {
+    _.forEach(floor, stage => {
+      _.forEach(stage, battle => {
+        battle.teams = _.filter(battle.teams, team => team.party.includes(charId))
+      })
+    })
+  })
+
+  return newAbyss;
+}
+
+const _compareFloor = (f1: string, f2: string) => {
+  const f1Strs = f1.split("_")
+  const f2Strs = f2.split("_")
+
+  if (parseInt(f1Strs[0]) === parseInt(f2Strs[0])) {
+    if (parseInt(f1Strs[1]) === parseInt(f2Strs[1])) {
+      return parseInt(f1Strs[2]) - parseInt(f2Strs[2])
+    } else {
+      return parseInt(f1Strs[1]) - parseInt(f2Strs[1])
+    }
+  } else {
+    return parseInt(f1Strs[0]) - parseInt(f2Strs[0])
+  }
+}
 
 function Abyss(abyss: IAbyssData) {
   const options = _.flatten(_.map(_.keys(abyss), floor => {
@@ -16,12 +46,15 @@ function Abyss(abyss: IAbyssData) {
     }))
   }))
 
-  const [{ selectedCharacter, characterDb }] = useContext(Store)
+  const [{ selectedCharacter, characterIdMap, characterDb }] = useContext(Store)
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
   const defaultStages = options.slice(options.length-3)
   const [ selectedStages, selectStages ] = useState<Option[]>(defaultStages)
+  const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssData>(abyss)
 
-  let teamCount = 0;
+  useEffect(() => {
+    setFilteredAbyss(_filterAbyss(abyss, parseInt(selectedCharacter)));
+  }, [abyss, setFilteredAbyss, selectedCharacter, selectedStages])
 
   const handleSelect = (selected: Option[]) => {
     selectStages(selected);
@@ -35,42 +68,41 @@ function Abyss(abyss: IAbyssData) {
 
   const renderParties = () => (
     <div className="abyss-container">
-      {_.map(selectedStages, selectedStage => {
-        const [floorNum, stageNum] = selectedStage.value.split("-");
+      {_.map(_.map(selectedStages, stage => stage.value).sort(_compareFloor), selectedStage => {
+        const [floorNum, stageNum] = selectedStage.split("-");
 
-        return <div key={selectedStage.value} className="stage-container">
-          <h2 className="stage-label">{selectedStage.value}</h2>
+        return <div key={selectedStage} className="stage-container">
+          <h2 className="stage-label">{selectedStage}</h2>
           <div className="stage-half">
-            {_.map(abyss[floorNum][stageNum], ({teams}, i) => {
-                return (
-                  <div key={`battle-${i}`} className="battle-container">
-                    <h2>{i+1}{i+1 === 1 ? 'st' : 'nd'} Half</h2>
-                    {_.map(_.take(_.orderBy(_.filter(teams, team => {
-                        if (team.party.includes(parseInt(selectedCharacter))) {
-                          teamCount++
-                          return true
-                        } else {
-                          return false
-                        }
-                      }), 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 8 : 3), ({party, count}, j) => (
-                        <div key={`party-${i}-${j}`} className="party-container">
-                          <div className="party-characters">
-                            {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => ( 
-                              <CharacterTile id={char+''} key={`party-${i}`} />
-                            ))}
+            {_.map(filteredAbyss[floorNum][stageNum], ({teams}, i) => {
+              return (
+                <div key={`battle-${i}`} className="battle-container">
+                  <h2>{i+1}{i+1 === 1 ? 'st' : 'nd'} Half</h2>
+                  {teams.length > 1 ? 
+                    <>
+                      {_.map(_.take(_.orderBy(teams, 'count', 'desc'), stageLimitToggle[selectedStage] ? 8 : 3), ({party, count}, j) => {
+                          return <div key={`party-${i}-${j}`} className="party-container">
+                            <div className="party-characters">
+                              {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => ( 
+                                <CharacterTile id={char+''} key={`party-${i}`} />
+                              ))}
+                            </div>
+                            <div className="party-popularity">{Math.round((count/(_.reduce(teams, (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%</div>
                           </div>
-                          <div className="party-popularity">{Math.round((count/teamCount * 10) / 10 * 100)}%</div>
-                        </div>
-                      ))
-                    }
-                  </div>
-                )
+                        })
+                      }
+                    </>
+                    :
+                    <img src={AmberSad} alt="empty" />
+                  }
+                </div>
+              )
               })}
             </div>
-            {!stageLimitToggle[selectedStage.value] ?
-              <div className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show more <ChevronDown size={20} color={"#202020"} /></div>
+            {!stageLimitToggle[selectedStage] ?
+              <div className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage)}>Show more <ChevronDown size={20} color={"#202020"} /></div>
               :
-              <div className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show less <ChevronUp size={20} color={"#202020"} /></div>
+              <div className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage)}>Show less <ChevronUp size={20} color={"#202020"} /></div>
             }
         </div>
       })}
