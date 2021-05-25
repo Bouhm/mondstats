@@ -28,7 +28,6 @@ h1 {
     flex: 1;
     flex-flow: column;
     justify-content: space-between;
-    align-items: center;
     margin-right: 1rem;
 
     .artifact-build {
@@ -44,7 +43,6 @@ h1 {
         z-index: 0;
         top: calc(50% - 1.5rem);
         width: 100%;
-        text-align: center;
         color: white;
         font-size: 3rem;
         text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
@@ -112,13 +110,11 @@ h1 {
     height: 100%;
     max-height: 100%;
     flex-wrap: wrap-reverse;
-    justify-content: center;
   }
 
   .weapons-list {
     display: flex;
     flex-flow: column;
-    align-items: center;
 
     .weapon-bar-chart {
       display: none;
@@ -132,7 +128,6 @@ h1 {
   }
 
   h1 {
-    text-align: center;
     width: 100%;
     margin-top: 2rem;
   }

@@ -7,9 +7,9 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 import Logo from '../../assets/logo_sm.png';
 
 const Navtabs: { name: string, linkto: string }[] = [
-  { name: "Characters", linkto: "/builds" },
-  { name: "Weapons", linkto: "/builds" },
-  { name: "Spiral Abyss", linkto: "/builds" }
+  // { name: "Characters", linkto: "/builds" },
+  // { name: "Weapons", linkto: "/builds" },
+  // { name: "Spiral Abyss", linkto: "/builds" }
 ]
 
 function Navbar() {
