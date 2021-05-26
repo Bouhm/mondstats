@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { MouseEventHandler, useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { IWeaponBuild } from '../../../data/types';
 import { Store } from '../../../Store';
@@ -12,7 +12,7 @@ type WeaponBuild = {
 }
 
 function WeaponBuild({ weapons, total }: WeaponBuild) {
-  const [{ weaponDb, selectedCharacter, characterDb }] = useContext(Store)
+  const [{ weaponDb, elementColor }] = useContext(Store)
   const getWeapon = (id: number) => _.find(weaponDb, { id });
 
   return (
@@ -30,8 +30,8 @@ function WeaponBuild({ weapons, total }: WeaponBuild) {
               <WeaponCard {...weapon} popularity={popularity} />
               <div className="bar-chart weapon-bar-chart">
                 <div
-                  className={`bar-chart-bar weapon-bar ${characterDb[selectedCharacter].element.toLowerCase()}`} 
-                  style={{ width: `${popularity}%` }} 
+                  className={`bar-chart-bar weapon-bar`} 
+                  style={{ width: `${popularity}%`, backgroundColor: elementColor }} 
                 >
                   <Tooltip 
                     alignment="horizontal"

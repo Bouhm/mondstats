@@ -10,11 +10,18 @@
   width: 100%;
   text-align: center;
   padding: 0.5rem;
+  height: 3.1rem;
 
   span {
     color: rgba(0, 0, 0, 0.7);
     font-size: 1.5rem;
   }
+}
+
+.character-filters {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 2rem;
 }
 
 .logo {
@@ -24,4 +31,10 @@
 
 h1 {
   text-align: center;
+}
+
+.its-empty {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

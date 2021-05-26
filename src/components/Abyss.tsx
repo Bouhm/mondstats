@@ -1,6 +1,7 @@
 import './Abyss.css';
 
 import _ from 'lodash';
+import { element } from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 
 import AmberSad from '../assets/amberSad.png';
@@ -47,9 +48,10 @@ function Abyss(abyss: IAbyssData) {
     }))
   }))
 
-  const [{ selectedCharacter, characterIdMap, characterDb }] = useContext(Store)
-  const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
+  const [{ selectedCharacter, characterDb }] = useContext(Store)
   const defaultStages = options.slice(options.length-3)
+
+  const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
   const [ selectedStages, selectStages ] = useState<Option[]>(defaultStages)
   const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssData>(abyss)
 
@@ -68,12 +70,12 @@ function Abyss(abyss: IAbyssData) {
   }
 
   const renderParties = () => (
-    <div className="abyss-container">
+    <div className="floor-container">
       {_.map(_.map(selectedStages, stage => stage.value).sort(_compareFloor), selectedStage => {
         const [floorNum, stageNum] = selectedStage.split("-");
 
         return <div key={selectedStage} className="stage-container">
-          <h2 className="stage-label">{selectedStage}</h2>
+          <h2 className="stage-label">Floor {selectedStage}</h2>
           <div className="stage-half">
             {_.map(filteredAbyss[floorNum][stageNum], ({teams}, i) => {
               return (
@@ -85,9 +87,9 @@ function Abyss(abyss: IAbyssData) {
                           return (
                             <div key={`party-${i}-${j}`} className="party-container">
                               <div className="party-characters">
-                                {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => ( 
-                                  <CharacterTile id={char+''} key={`party-${i}`} />
-                                ))}
+                                {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => {
+                                  return <CharacterTile id={char+''} key={`party-${i}`} />
+                                })}
                               </div>
                               <div className="party-popularity bar-chart-bar">
                                 {Math.round((count/(_.reduce(teams, (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%
@@ -122,9 +124,7 @@ function Abyss(abyss: IAbyssData) {
     <div className="abyss-container">
       <h1>Abyss Teams</h1>
       <Dropdown options={options} onChange={handleSelect} defaultValue={defaultStages} isMulti />
-      <div className="floor-container">
-       {renderParties()}
-      </div>
+      {renderParties()}
     </div>
   )
 }

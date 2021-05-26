@@ -1,23 +1,23 @@
 import './App.css';
 
-import _ from 'lodash';
+import _, { filter } from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
 import CharacterPage from './components/CharacterPage';
 import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
+import Dropdown, { Option } from './components/ui/Dropdown';
 import artifactDb from './data/artifacts.json';
 import characterDb from './data/characters.json';
-import data from './data/data.json';
-import { ICharacterDb, ICharData, IData } from './data/types';
+import allData from './data/data.json';
+import { IData } from './data/types';
 import weaponDb from './data/weapons.json';
 import { getShortName } from './scripts/util';
 import { Store } from './Store';
 
 function App() {
   const [, dispatch] = useContext(Store)
-  const [dataTotal, setDataTotal] = useState<number>()
 
   useEffect(() => {
     let charIdMap: { [shortname: string]: string } = {}
@@ -25,16 +25,49 @@ function App() {
       charIdMap[getShortName(char.name)] = char.id + '';
     });
 
-    dispatch({ type: "SET_ALL_DATA", payload: data.all })
-    dispatch({ type: "SET_ABYSS_CLEARS_DATA", payload: data.abyssClears })
-    dispatch({ type: "SET_MAINS_DATA", payload: data.mains })
     dispatch({ type: "SET_ARTIFACT_DB", payload: artifactDb })
     dispatch({ type: "SET_WEAPON_DB", payload: weaponDb })
     dispatch({ type: "SET_CHARACTER_DB", payload: characterDb })
     dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
-  }, [characterDb, artifactDb, weaponDb, data, getShortName, dispatch, setDataTotal])
+  }, [characterDb, artifactDb, weaponDb, getShortName, dispatch])
+
+  const options = [
+    { label: "All", value: "all" },
+    { label: "Cleared Spiral Abyss", value: "abyssClears" },
+    { label: "Mains", value: "mains" }
+  ]
+
+  const [data, setData] = useState<IData>(allData.all as unknown as IData)
+
+  const handleSelect = (selected: Option) => {
+    let data = allData.all;
+    switch (selected.value) {
+      case "all":
+        data = allData.all;
+        break;
+      case "mains":
+        data = allData.mains;
+        break;
+      case "abyssClears":
+        data = allData.abyssClears;
+        break;
+      default:
+        break;
+    }
+
+    setData(data as unknown as IData);
+  }
 
   const renderCharacterSearch = () => <CharacterSearch dataTotal={2006} />
+  const renderCharacterPage = () => {
+    return (
+      <>
+        <div className="character-filter"><Dropdown options={options} onChange={handleSelect} defaultValue={options[0]} /></div>
+        <CharacterPage data={data} />
+      </>
+    )
+  }
+  
 
   return (
     <Router>
@@ -43,7 +76,7 @@ function App() {
         <section>
           <Switch>
             <Route exact path="/" render={renderCharacterSearch}/>
-            <Route path="/builds/:shortName" component={CharacterPage} />
+            <Route path="/builds/:shortName" render={renderCharacterPage} />
             <Redirect exact path="/builds" to="/" />
           </Switch>
         </section>

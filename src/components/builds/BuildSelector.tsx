@@ -14,7 +14,7 @@ import elemColors from './colors';
 import WeaponBuild from './weapons/WeaponBuild';
 
 function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number }) {
-  const [{ characterDb, selectedCharacter, artifactDb }] = useContext(Store)
+  const [{ characterDb, selectedCharacter, artifactDb, elementColor }] = useContext(Store)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
   const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 5, set: { id } });
 
@@ -46,7 +46,7 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
   })
 
   colors = Array(labels.length).fill("#a4a4a4")
-  colors[activeBuildIdx] = elemColors[characterDb[selectedCharacter].element.toLowerCase()];
+  colors[activeBuildIdx] = elementColor;
 
   return (
     <div className="builds-selector">

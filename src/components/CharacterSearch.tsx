@@ -14,13 +14,13 @@ type CharacterSearchProps = {
 }
 
 function CharacterSearch({ dataTotal }: CharacterSearchProps) {
-  const [{ characterIdMap, allData }] = useContext(Store)
+  const [{ characterIdMap }] = useContext(Store)
   const [unfilteredChars, setUnfilteredChars] = useState<string[]>([]);
   const [filteredChars, setFilteredChars] = useState<string[]>([]);
 
   useEffect(() => {
     setUnfilteredChars(_.keys(characterIdMap))
-  }, [characterIdMap, setUnfilteredChars, allData])
+  }, [characterIdMap, setUnfilteredChars])
 
   // Set character search filter
   const handleSearchCharacter = (filteredChars: string[]) => {

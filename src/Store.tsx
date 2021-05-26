@@ -8,24 +8,20 @@ import { IArtifactDb, ICharacterDb, IData, IWeaponDb, newAbyss } from './data/ty
 
 interface IState {
   characterIdMap: { [shortName: string]: string },
-  allData: IData,
-  abyssClearData: IData,
-  mainsData: IData,
   selectedCharacter: string,
   artifactDb:  { [id: string]: IArtifactDb },
   weaponDb: { [id: string]: IWeaponDb },
-  characterDb:  { [id: string]: ICharacterDb }
+  characterDb:  { [id: string]: ICharacterDb },
+  elementColor: string
 }
 
 export const initialState: IState = {
   characterIdMap: {},
   selectedCharacter: '',
-  allData: { characters: {}, abyss: newAbyss },
-  abyssClearData: { characters: {}, abyss: newAbyss },
-  mainsData: { characters: {}, abyss: newAbyss },
   artifactDb: {},
   weaponDb: {},
-  characterDb: {}
+  characterDb: {},
+  elementColor: ""
 }
 
 export const Store = React.createContext<[IState, React.Dispatch<any>]>([initialState, () => { }])
@@ -47,18 +43,14 @@ export const reducer = (state: IState, action: IAction): IState => {
       return { ...state, characterIdMap: action.payload }
     case 'SELECT_CHARACTER':
       return { ...state, selectedCharacter: action.payload }
-    case 'SET_ALL_DATA':
-      return { ...state, allData: action.payload }
-    case 'SET_ABYSS_CLEAR_DATA':
-      return { ...state, abyssClearData: action.payload }
-    case 'SET_MAINS_DATA':
-      return { ...state, mainsData: action.payload }
     case 'SET_ARTIFACT_DB':
       return { ...state, artifactDb: action.payload }
     case 'SET_WEAPON_DB':
       return { ...state, weaponDb: action.payload }
     case 'SET_CHARACTER_DB':
       return { ...state, characterDb: action.payload }
+    case 'SET_ELEMENT_COLOR':
+      return { ...state, elementColor: action.payload }
     default:
       return state
   }

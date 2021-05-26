@@ -1,6 +1,6 @@
 .abyss-container {
   background: none;
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem;
 }
 
 .floor-container {
@@ -19,8 +19,10 @@
     .stage-label {
       text-align: center;
       color: white;
-      font-size: 3rem;
-      background-color: rgba(0, 0, 0, 0.6);
+      font-size: 2.5rem;
+      padding: 1rem;
+      background: url("https://webstatic-sea.hoyolab.com/app/community-game-records-sea/images/pc-abyss-bg.dc0c3ac6.png")
+        0% 0% / 100% no-repeat;
     }
 
     .stage-half {

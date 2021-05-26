@@ -91,3 +91,8 @@ footer {
   text-align: center;
   flex-flow: column;
 }
+
+.character-filter {
+  position: absolute;
+  right: 0;
+}
