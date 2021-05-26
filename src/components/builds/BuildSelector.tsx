@@ -3,7 +3,7 @@ import './artifacts/Artifact.css';
 import './weapons/Weapon.css';
 
 import _ from 'lodash';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { IBuild } from '../../data/types';
 import { Store } from '../../Store';
@@ -14,7 +14,7 @@ import elemColors from './colors';
 import WeaponBuild from './weapons/WeaponBuild';
 
 function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number }) {
-  const [{ characterDb, selectedCharacter, artifactDb, elementColor }] = useContext(Store)
+  const [{ artifactDb, elementColor }] = useContext(Store)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
   const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 5, set: { id } });
 
@@ -47,6 +47,10 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
 
   colors = Array(labels.length).fill("#a4a4a4")
   colors[activeBuildIdx] = elementColor;
+
+  useEffect(() => {
+    setActiveBuildIdx(0)
+  }, [builds, setActiveBuildIdx])
 
   return (
     <div className="builds-selector">
