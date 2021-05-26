@@ -27,15 +27,11 @@ function _filterAbyss(data: IAbyssData, charId: number) {
 }
 
 const _compareFloor = (f1: string, f2: string) => {
-  const f1Strs = f1.split("_")
-  const f2Strs = f2.split("_")
+  const f1Strs = f1.split("-")
+  const f2Strs = f2.split("-")
 
   if (parseInt(f1Strs[0]) === parseInt(f2Strs[0])) {
-    if (parseInt(f1Strs[1]) === parseInt(f2Strs[1])) {
-      return parseInt(f1Strs[2]) - parseInt(f2Strs[2])
-    } else {
-      return parseInt(f1Strs[1]) - parseInt(f2Strs[1])
-    }
+    return parseInt(f1Strs[1]) - parseInt(f2Strs[1])
   } else {
     return parseInt(f1Strs[0]) - parseInt(f2Strs[0])
   }
