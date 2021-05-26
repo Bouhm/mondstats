@@ -1,8 +1,8 @@
 import './App.css';
 
-import _, { filter } from 'lodash';
+import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
 
 import CharacterPage from './components/CharacterPage';
 import CharacterSearch from './components/CharacterSearch';
@@ -38,6 +38,12 @@ function App() {
   ]
 
   const [data, setData] = useState<IData>(allData.all as unknown as IData)
+  const location = useLocation();
+
+  useEffect(() => {
+    setData(allData.all as unknown as IData)
+  }, [location, setData, allData])
+
 
   const handleSelect = (selected: Option) => {
     let data = allData.all;
@@ -70,25 +76,23 @@ function App() {
   
 
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <section>
-          <Switch>
-            <Route exact path="/" render={renderCharacterSearch}/>
-            <Route path="/builds/:shortName" render={renderCharacterPage} />
-            <Redirect exact path="/builds" to="/" />
-          </Switch>
-        </section>
-        <section>
-          <div className="pls">Please contribute by setting your Battle Chronicle to public in Hoyolab. Thank you!
-            <img src="https://img-os-static.hoyolab.com/communityWeb/upload/d81f8ba1e6e991a18aeda0ccbffe2eb0.png" />
-          </div>
-          <footer>WIP by Bouhm who has nothing to do with miHoYo, etc etc</footer>
-        </section>
-        <span className="build-ver">dev build 05.25.21</span>
-      </div>
-    </Router>
+    <div className="App">
+      <Navbar />
+      <section>
+        <Switch>
+          <Route exact path="/" render={renderCharacterSearch}/>
+          <Route path="/builds/:shortName" render={renderCharacterPage} />
+          <Redirect exact path="/builds" to="/" />
+        </Switch>
+      </section>
+      <section>
+        <div className="pls">Please contribute by setting your Battle Chronicle to public in Hoyolab. Thank you!
+          <img src="https://img-os-static.hoyolab.com/communityWeb/upload/d81f8ba1e6e991a18aeda0ccbffe2eb0.png" />
+        </div>
+        <footer>WIP by Bouhm who has nothing to do with miHoYo, etc etc</footer>
+      </section>
+      <span className="build-ver">dev build 05.25.21</span>
+    </div>
   )
 }
 
