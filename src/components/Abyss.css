@@ -138,3 +138,18 @@
     }
   }
 }
+
+@media (max-width: 634px) {
+  .party-container {
+    .party-characters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+@media (max-width: 516px) {
+  .abyss-container {
+    padding: 0 0.5rem 0 0;
+  }
+}

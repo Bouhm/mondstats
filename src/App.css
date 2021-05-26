@@ -94,5 +94,13 @@ footer {
 
 .character-filter {
   position: absolute;
+  top: 7.1rem;
   right: 0;
+}
+
+@media (max-width: 516px) {
+  .character-filter {
+    width: 100%;
+    margin: 0 auto;
+  }
 }

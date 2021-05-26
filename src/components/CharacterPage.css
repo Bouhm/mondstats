@@ -1,5 +1,7 @@
 .character-page {
   width: 100%;
+  max-width: 100%;
+  overflow: hidden;
   background-size: contain;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -37,4 +39,13 @@ h1 {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 516px) {
+  .character-stats-count {
+    span {
+      font-size: 1.2rem;
+      line-height: 2rem;
+    }
+  }
 }
