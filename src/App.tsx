@@ -86,7 +86,7 @@ function App() {
           </div>
           <footer>WIP by Bouhm who has nothing to do with miHoYo, etc etc</footer>
         </section>
-        <span className="build-ver">dev build 05.22.21</span>
+        <span className="build-ver">dev build 05.25.21</span>
       </div>
     </Router>
   )
