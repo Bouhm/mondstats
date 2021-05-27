@@ -22,10 +22,11 @@ function CharacterTile({ id }: CharacterTileProps) {
   classes += ` rarity-${character.rarity}`;
 
   const charElement = ElementIcons[character.element];
+  const charName = character.name === "Traveler" ? getShortName(`${character.name}-${character.element}`) : getShortName(character.name);
   // const iconUrl = character.name === "Traveler" ? TravelerIcon : character.icon;
 
   return (
-    <Link to={`/builds/${getShortName(character.name)}`}>
+    <Link to={`/builds/${charName}`}>
       <div className="character-tile-container">
         <div className={classes}>
           <img src={character.icon} alt={`${character.name}-portrait`}></img>

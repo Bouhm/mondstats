@@ -22,7 +22,8 @@ function App() {
   useEffect(() => {
     let charIdMap: { [shortname: string]: string } = {}
     _.forEach(_.values(characterDb), char => {
-      charIdMap[getShortName(char.name)] = char.id + '';
+      const charName = char.name === "Traveler" ? getShortName(`${char.name}-${char.element}`) : getShortName(char.name);
+      charIdMap[charName] = char.id + '';
     });
 
     dispatch({ type: "SET_ARTIFACT_DB", payload: artifactDb })
