@@ -1,10 +1,10 @@
 import './Abyss.css';
 
+import AmberSad from '/assets/amberSad.png';
 import _ from 'lodash';
 import { element } from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 
-import AmberSad from '../assets/amberSad.png';
 import { IAbyssData, IBattle } from '../data/types';
 import { Store } from '../Store';
 import CharacterTile from './CharacterTile';

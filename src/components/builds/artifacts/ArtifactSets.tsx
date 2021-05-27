@@ -21,7 +21,7 @@ function ArtifactSets({ artifacts, selected=false }: ArtifactCardProps) {
 
         return (
           <div key={`thumb-${id}-i`} className={"artifact-thumb"}>
-            <img src={artifact.icon} alt={artifact.name} />
+            <img src={`/assets/artifacts/${artifact.id}.png`} alt={artifact.name} />
             <div className="artifact-set-activation">{activation_number}x</div>
           </div>
         )

@@ -1,6 +1,6 @@
 @font-face {
   font-family: font;
-  src: url(./assets/font.ttf);
+  src: url(/font.ttf);
 }
 
 .App {

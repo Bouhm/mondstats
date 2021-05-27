@@ -3,10 +3,10 @@ import React from 'react';
 
 import { IWeaponDb } from '../../../data/types';
 
-function WeaponCard({ icon, name, rarity, popularity }: IWeaponDb & { popularity: number }) {
+function WeaponCard({ id, name, rarity, popularity }: IWeaponDb & { popularity: number }) {
   return (
     <div className={`weapon-card`}>
-      <img className={`rarity-${rarity}`} src={icon} alt={name} />
+      <img className={`rarity-${rarity}`} src={`/assets/weapons/${id}.png`} alt={name} />
       <div className="weapon-detail">
         <div className="weapon-name">
           {name}

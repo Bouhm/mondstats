@@ -1,10 +1,9 @@
 import './Navbar.css';
 
+import Logo from '/assets/logo_sm.png';
 import _ from 'lodash';
 import React, { useContext, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-
-import Logo from '../../assets/logo_sm.png';
 
 const Navtabs: { name: string, linkto: string }[] = [
   // { name: "Characters", linkto: "/builds" },

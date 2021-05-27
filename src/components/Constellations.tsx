@@ -14,16 +14,16 @@ type ConstellationsProps = {
 
 type ConstellationCardProps = {
   name: string,
-  icon?: string,
+  id?: number,
   effect?: string,
   children: ReactNode
 }
 
-function ConstellationCard({ name, icon, effect, children }: ConstellationCardProps) {
+function ConstellationCard({ id, name, effect, children }: ConstellationCardProps) {
   return (
     <div className="constellation-card">
       <div className="constellation-card-icon">
-        {icon ? <img src={icon} alt={name} /> : "NONE"}
+        {id ? <img src={`/assets/characters/constellations/${id}.png`} alt={name} /> : "NONE"}
       </div>
       {children}
     </div>

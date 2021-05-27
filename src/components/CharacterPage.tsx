@@ -1,10 +1,10 @@
 import './CharacterPage.css';
 
+import AmberSad from '/assets/amberSad.png';
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import AmberSad from '../assets/amberSad.png';
 import { IAbyssData, ICharacterDb, ICharData, IData } from '../data/types';
 import { Store } from '../Store';
 import Abyss from './Abyss';
@@ -43,7 +43,7 @@ function CharacterPage({ data }: CharacterPageProps) {
   }
 
   return (
-    <div className="character-page" style={{ backgroundImage: `url("${character!.image}")` }}>
+    <div className="character-page" style={{ backgroundImage: `url("/assets/characters/${character.id}_bg.png")` }}>
       <div className="character-stats-count" style={{ backgroundColor: elementColor }}>
         <span>Data from {charData.total} players</span>
       </div>
