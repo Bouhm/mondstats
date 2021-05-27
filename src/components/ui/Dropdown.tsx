@@ -19,6 +19,7 @@ function Dropdown({ options, onChange, isMulti=false, defaultValue=options.slice
         defaultValue={defaultValue} 
         isMulti={isMulti} 
         isSearchable={false}
+        isClearable={false}
         styles={{ 
           container: base => ({ ...base, minWidth: "15rem" }),
           singleValue: base => ({ ...base, color: "white" }),
