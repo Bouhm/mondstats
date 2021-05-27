@@ -4,6 +4,7 @@ import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
 
+import Changelog from './components/Changelog';
 import CharacterPage from './components/CharacterPage';
 import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
@@ -80,6 +81,7 @@ function App() {
       <Navbar />
       <section>
         <Switch>
+          <Route path="/changelog" component={Changelog} />
           <Route exact path="/" render={renderCharacterSearch}/>
           <Route path="/builds/:shortName" render={renderCharacterPage} />
           <Redirect exact path="/builds" to="/" />

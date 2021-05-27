@@ -12,13 +12,18 @@
     "imagemin": "^8.0.0",
     "imagemin-pngquant": "^9.0.2",
     "lodash": "^4.17.21",
+    "markdown-it": "^12.0.6",
+    "marked": "^2.0.6",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^5.2.0",
     "react-select": "^4.3.1"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.13.13",
     "@types/lodash": "^4.14.168",
+    "@types/markdown-it": "^12.0.1",
+    "@types/marked": "^2.0.3",
     "@types/node": "^15.6.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -33,6 +38,7 @@
     "postcss-plugin": "^1.0.0",
     "prop-types": "^15.7.2",
     "typescript": "^4.1.2",
-    "vite": "^2.1.3"
+    "vite": "^2.1.3",
+    "vite-plugin-markdown": "^2.0.2"
   }
 }

@@ -35,7 +35,7 @@
     right: 0;
     line-height: 3.5rem;
     display: flex;
-    color: white;
+    color: rgba(255, 255, 255, 0.6);
 
     .nav-tab {
       text-align: center;

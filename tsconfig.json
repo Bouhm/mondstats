@@ -5,7 +5,7 @@
     "types": ["vite/client"],
     "allowJs": false,
     "skipLibCheck": false,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -14,7 +14,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "typeRoots": ["node_modules/@types", "./index.d.ts"]
   },
-  "include": ["./src", "declarations.d.ts", "downloadImages.js"]
+  "include": ["./src", "index.d.ts"]
 }
