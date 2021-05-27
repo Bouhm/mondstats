@@ -1,6 +1,7 @@
 .abyss-container {
   background: none;
   padding: 0 2rem 2rem 2rem;
+  min-height: 28rem;
 }
 
 .floor-container {
