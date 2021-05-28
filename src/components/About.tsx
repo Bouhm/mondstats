@@ -32,8 +32,12 @@ function About() {
         <h2>How can I contact you?</h2>
         <p>You can find me in Discord as <b>Bouhm#2205</b>. I'd love to hear your feedback, suggestions, and/or criticisms!</p>
       </div>
-      <div className="pls">Please contribute by setting your Battle Chronicle to public in HoYoLAB. Thank you!
+      <div className="pls">
+        Please contribute by setting your Battle Chronicle to public in HoYoLAB. Thank you!
         <img src="/assets/pls.png" alt="pls"/>
+      </div>
+      <div className="hoyolab-image">
+        <img src="/assets/hoyolab.jpg" alt="hoyolab" />
       </div>
     </div>
   )
