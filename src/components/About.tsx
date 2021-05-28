@@ -26,11 +26,11 @@ function About() {
       </div>
       <div className="about-section">
         <h2>Where is my 4-Bloodstained Chivalry Klee build?</h2>
-        <p>There are several reasons why a build might not be included. If the build is used by a very small percentage of players, it is omitted. With a large enough sample size, the displayed builds will skew toward establish meta builds. You can filter builds to expose less conventional builds such as those used by Barbara mains.</p>
+        <p>There are several reasons why a build might not be included. If the build is used by a very small percentage of players, it is omitted. With a large enough sample size, the displayed builds will skew toward established meta builds. You can apply filters to search for less conventional builds such as those used by Barbara mains.</p>
       </div>
       <div className="about-section">
         <h2>How can I contact you?</h2>
-        <p>You can reach me in Discord by pinging <b>Bouhm#2205</b> or emailing me at <b>bbouhm@gmail.com</b>. I'd love to hear your feedback, suggestions, and/or criticisms!</p>
+        <p>You can find me in Discord as <b>Bouhm#2205</b>. I'd love to hear your feedback, suggestions, and/or criticisms!</p>
       </div>
       <div className="pls">Please contribute by setting your Battle Chronicle to public in HoYoLAB. Thank you!
         <img src="/assets/pls.png" alt="pls"/>
