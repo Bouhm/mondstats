@@ -97,7 +97,7 @@ function App() {
           <Link to="/about">About</Link>
           <Link to="/changelog">Changelog</Link>
         </div>
-        <footer>Favonius.gg is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoyo.</footer>
+        <footer>Favonius.gg is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoYo.</footer>
       </section>
       <span className="build-ver">dev build 05.25.21</span>
     </div>
