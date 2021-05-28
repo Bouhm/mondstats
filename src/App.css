@@ -29,6 +29,17 @@ footer {
   padding: 0.5rem;
 }
 
+.withTooltip {
+  position: relative;
+
+  &:hover,
+  &:active {
+    .tooltip {
+      opacity: 1;
+    }
+  }
+}
+
 .icon {
   position: absolute;
 }

@@ -26,19 +26,18 @@ function WeaponBuild({ weapons, total }: WeaponBuild) {
           const popularity = Math.round((count / total) * 100)
 
           return (
-            <div key={`${id}-${count}-${i}`} className="weapon-container">
+            <div key={`${id}-${count}-${i}`} className="weapon-container withTooltip">
               <WeaponCard {...weapon} popularity={popularity} />
               <div className="bar-chart weapon-bar-chart">
                 <div
                   className={`bar-chart-bar weapon-bar`} 
                   style={{ width: `${popularity}%`, backgroundColor: elementColor }} 
-                >
-                  <Tooltip 
-                    alignment="horizontal"
-                    content={`${weapon.name}: ${count}`}
-                  />
-                </div>
+                />
               </div>
+              <Tooltip 
+                alignment="horizontal"
+                content={`${weapon.name}: ${count}`}
+              />
             </div>
           )
         })}

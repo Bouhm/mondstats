@@ -10,11 +10,11 @@ type ArtifactCardProps = {
 }
 
 function ArtifactSets({ artifacts, selected=false }: ArtifactCardProps) {
-  const [{ artifactDb }] = useContext(Store)
+  const [{ artifactDb, elementColor }] = useContext(Store)
   const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 5, set: { id } });
 
   return (
-    <div className={`artifact-sets-container ${selected ? "selected" : ""}`}>
+    <div className={`artifact-sets-container ${selected ? "selected" : ""}`} style={selected ? {backgroundColor: elementColor }:{}}>
       {_.map(artifacts, ({ id, activation_number }, i) => {
         const artifact = getArtifactSet(id);
         if (!artifact) return null;

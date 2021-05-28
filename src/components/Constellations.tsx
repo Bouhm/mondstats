@@ -41,7 +41,7 @@ function Constellations({ constellations, total  }: ConstellationsProps ) {
       return (
         <div key={`constellation-${i}`} className="bar-chart constellation-bar-container">
           <div 
-            className={`bar-chart-bar constellation-bar ${characterDb[selectedCharacter].element.toLowerCase()}`} 
+            className={`bar-chart-bar constellation-bar ${characterDb[selectedCharacter].element.toLowerCase()} withTooltip`} 
             style={{ height: `${popularity}%` }}
           >
             <Tooltip 

@@ -87,7 +87,7 @@ function Abyss(abyss: IAbyssData) {
                                   return <CharacterTile id={char+''} key={`party-${i}`} />
                                 })}
                               </div>
-                              <div className="party-popularity bar-chart-bar">
+                              <div className="party-popularity withTooltip">
                                 {Math.round((count/(_.reduce(teams, (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%
                                 <Tooltip 
                                   content={`Party Count: ${count}`} 

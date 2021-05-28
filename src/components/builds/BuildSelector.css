@@ -36,10 +36,14 @@
       margin: 2rem auto;
       max-width: 350px;
 
+      canvas {
+        z-index: 1;
+      }
+
       .artifact-popularity {
         position: absolute;
         text-align: center;
-        z-index: -1;
+        z-index: 0;
         top: calc(50% - 1.5rem);
         width: 100%;
         color: white;
@@ -55,12 +59,17 @@
 }
 
 .character-builds-selector {
-  margin-top: 4.5rem;
+  margin-top: 5.9rem;
   margin-right: 1rem;
   width: 10rem;
+
+  .artifact-thumb {
+    overflow: hidden;
+  }
 }
 
 .weapon-container {
+  position: relative;
   display: flex;
 
   .weapon-bar-chart {
@@ -87,22 +96,14 @@
   }
 }
 
-.bar-chart-bar {
-  position: relative;
-
-  &:hover {
-    .tooltip {
-      opacity: 1;
-    }
-  }
-}
-
 @media (max-width: 516px) {
   .character-builds-selector {
     width: 100%;
     display: flex;
     flex-flow: column;
     align-items: center;
+
+    margin-top: 3rem;
   }
 
   .builds-selector {

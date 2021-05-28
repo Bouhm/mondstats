@@ -6,7 +6,10 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  z-index: -1;
+
+  h1 {
+    font-size: 2rem;
+  }
 }
 
 .character-stats-count {
@@ -43,6 +46,12 @@ h1 {
 }
 
 @media (max-width: 516px) {
+  .character-page {
+    h1 {
+      margin: 2rem auto 2rem auto;
+    }
+  }
+
   .character-stats-count {
     span {
       font-size: 1.2rem;

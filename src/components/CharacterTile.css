@@ -22,7 +22,8 @@
     height: 40px;
   }
 
-  &:hover {
+  &:hover,
+  &:active {
     cursor: pointer;
     -webkit-transform: scale(1.08, 1.08);
     transform: scale(1.08, 1.08);

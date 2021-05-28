@@ -9,14 +9,14 @@ type TooltipProps = {
 
 function Tooltip({ content, alignment = "horizontal" }: TooltipProps) {
   let approxOffset = content.length*3
-  let style = { left: "35%", top: `35%` }
+  let style = { left: "12rem", top: `30%` }
 
   switch (alignment) {
     case "vertical":
       style = { left: `${55 - approxOffset}%`, top: "35%" }
       break;
     case "top":
-      style = { left: `${85 - approxOffset}%`, top: "-25%" }
+      style = { left: `${110 - approxOffset}%`, top: "35%" }
       break;
     default:
       break;
