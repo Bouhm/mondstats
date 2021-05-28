@@ -12,7 +12,7 @@ function About() {
     <div className="about-container">
       <div className="about-header">
         <h1>About Favonius.gg</h1>
-        <p>Favonius.gg is a website that aims to help build characters and form teams to compete in the most challenging content in the game. You can view the statistics on how other players like to build certain characters and how they like to use them.</p>
+        <p>Favonius.gg is a website that aims to help players build their characters and form teams to compete in the most challenging content in the game. You can view the statistics on how players of different skills and preferences like to build and use certain characters.</p>
         <p>This is a hobby project by Bouhm who is obsessed with sharing the many ways players find success and enjoyment in the game with the community.</p>
       </div>
       <hr />
