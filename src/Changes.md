@@ -1,5 +1,11 @@
 ## dev build 5.25.21
 
+- Updated About page & Changelog
+- Moved "Pls" to About page
+- Correct typos and casing
+
+## dev build 5.25.21
+
 - Added filtering by mains (lvl 90 characters) and characters who cleared the Spiral Abyss (clear 12-3 with at least 34 stars total)
 - Spiral Abyss teams now show most commonly used teams. Data only includes teams that cleared the stage with 3 stars.
 - Fixed separation of Anemo & Geo MC pages

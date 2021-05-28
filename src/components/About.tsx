@@ -18,11 +18,11 @@ function About() {
       <hr />
       <div className="about-section">
         <h2>How are you collecting data?</h2>
-        <p>Favonius.gg collects its data using the APIs from Hoyolab. Only data from users who opt-in to display their Battle Chronicles publicly can be collected. Due to the API rate limit, it takes a long time to accumulate a large sample size. Favonius.gg will perform rolling updates and perform updates in batches.</p>
+        <p>Favonius.gg collects its data using the APIs from HoYoLAB. Only data from users who opt-in to display their Battle Chronicles publicly can be collected. Due to the API rate limit, it takes a long time to accumulate a large sample size. Favonius.gg will perform rolling updates and perform updates in batches.</p>
       </div>
       <div className="about-section">
         <h2>How can I contribute?</h2>
-        <p>Creating an account in Hoyolab (which is miHoYo's official forum) if you haven't done so already and toggling your Battle Chronicle to 'Public' in your profile will allow your data to be visible. Favonius.gg collects data indiscriminately so it won't have your data for certain.</p>
+        <p>Creating an account in HoYoLAB (which is miHoYo's official forum) if you haven't done so already and toggling your Battle Chronicle to 'Public' in your profile will allow your data to be visible. Favonius.gg collects data indiscriminately so it won't have your data for certain.</p>
       </div>
       <div className="about-section">
         <h2>Where is my 4-Bloodstained Chivalry Klee build?</h2>
@@ -31,6 +31,9 @@ function About() {
       <div className="about-section">
         <h2>How can I contact you?</h2>
         <p>You can reach me in Discord by pinging <b>Bouhm#2205</b> or emailing me at <b>bbouhm@gmail.com</b>. I'd love to hear your feedback, suggestions, and/or criticisms!</p>
+      </div>
+      <div className="pls">Please contribute by setting your Battle Chronicle to public in HoYoLAB. Thank you!
+        <img src="/assets/pls.png" alt="pls"/>
       </div>
     </div>
   )

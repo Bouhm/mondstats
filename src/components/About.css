@@ -24,4 +24,19 @@
       font-size: 1.4rem;
     }
   }
+
+  .pls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+    width: 80%;
+    margin: 0 auto;
+    z-index: 0;
+    opacity: 0.3;
+    font-size: 1.8rem;
+    color: white;
+    text-align: center;
+    flex-flow: column;
+  }
 }
