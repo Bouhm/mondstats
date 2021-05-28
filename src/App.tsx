@@ -90,9 +90,9 @@ function App() {
         </Switch>
       </section>
       <section>
-        <div className="pls">Please contribute by setting your Battle Chronicle to public in Hoyolab. Thank you!
+        {/* <div className="pls">Please contribute by setting your Battle Chronicle to public in Hoyolab. Thank you!
           <img src="/assets/pls.png" alt="pls"/>
-        </div>
+        </div> */}
         <div className="links">
           <Link to="/about">About</Link>
           <Link to="/changelog">Changelog</Link>
