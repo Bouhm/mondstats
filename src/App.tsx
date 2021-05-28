@@ -91,7 +91,7 @@ function App() {
         <div className="pls">Please contribute by setting your Battle Chronicle to public in Hoyolab. Thank you!
           <img src="/assets/pls.png" alt="pls"/>
         </div>
-        <footer>WIP by Bouhm who has nothing to do with miHoYo, etc etc</footer>
+        <footer>Favonius.gg is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoyo.</footer>
       </section>
       <span className="build-ver">dev build 05.25.21</span>
     </div>
