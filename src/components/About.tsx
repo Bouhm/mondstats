@@ -29,6 +29,10 @@ function About() {
         <p>There are several reasons why a build might not be included. If the build is used by a very small percentage of players, it is omitted. With a large enough sample size, the displayed builds will skew toward established meta builds. You can apply filters to search for less conventional builds such as those used by Barbara mains.</p>
       </div>
       <div className="about-section">
+        <h2>I need more charts and numbers!</h2>
+        <p>This is still a work in progress, there are much more nifty charts and statistics to come!</p>
+      </div>
+      <div className="about-section">
         <h2>How can I contact you?</h2>
         <p>You can find me in Discord under <b>Bouhm#2205</b>. I'd love to hear your feedback, suggestions, and/or criticisms!</p>
       </div>
