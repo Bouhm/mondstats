@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  padding: 1rem 5rem;
+  margin: 1rem 5rem;
 
   h1 {
     font-size: 2rem;
@@ -76,7 +76,7 @@
   }
 
   .markdown-body .pl-c2::before {
-    content: "^M";
+    content: '^M';
   }
 
   .markdown-body .pl-sr .pl-cce {
@@ -197,7 +197,7 @@
     overflow: visible;
   }
 
-  .markdown-body [type="checkbox"] {
+  .markdown-body [type='checkbox'] {
     box-sizing: border-box;
     padding: 0;
   }
@@ -236,13 +236,13 @@
 
   .markdown-body hr::before {
     display: table;
-    content: "";
+    content: '';
   }
 
   .markdown-body hr::after {
     display: table;
     clear: both;
-    content: "";
+    content: '';
   }
 
   .markdown-body table {
@@ -329,7 +329,7 @@
   }
 
   .markdown-body code {
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
       monospace;
     font-size: 12px;
   }
@@ -337,7 +337,7 @@
   .markdown-body pre {
     margin-top: 0;
     margin-bottom: 0;
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
       monospace;
     font-size: 12px;
   }
@@ -376,13 +376,13 @@
 
   .markdown-body::before {
     display: table;
-    content: "";
+    content: '';
   }
 
   .markdown-body::after {
     display: table;
     clear: both;
-    content: "";
+    content: '';
   }
 
   .markdown-body > *:first-child {
@@ -600,11 +600,11 @@
     box-sizing: content-box;
   }
 
-  .markdown-body img[align="right"] {
+  .markdown-body img[align='right'] {
     padding-left: 20px;
   }
 
-  .markdown-body img[align="left"] {
+  .markdown-body img[align='left'] {
     padding-right: 20px;
   }
 
@@ -670,7 +670,7 @@
   .markdown-body kbd {
     display: inline-block;
     padding: 3px 5px;
-    font: 11px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    font: 11px 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
       monospace;
     line-height: 10px;
     color: #444d56;
@@ -732,5 +732,11 @@
   small {
     color: grey;
     font-style: italic;
+  }
+}
+
+@media (max-width: 516px) {
+  .changelog-container {
+    margin: 1rem 2rem;
   }
 }

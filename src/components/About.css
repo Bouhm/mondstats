@@ -1,5 +1,5 @@
 .about-container {
-  padding: 1rem 5rem;
+  margin: 1rem 5rem;
   color: rgba(255, 255, 255, 0.6);
   font-size: 1.3rem;
   line-height: 1.7rem;
@@ -30,11 +30,11 @@
     justify-content: center;
     align-items: center;
     padding-top: 3rem;
-    width: 80%;
     margin: 0 auto;
     z-index: 0;
     opacity: 0.3;
     font-size: 1.8rem;
+    line-height: 2rem;
     color: white;
     text-align: center;
     flex-flow: column;
@@ -44,5 +44,15 @@
     margin: 1rem;
     display: flex;
     justify-content: center;
+  }
+}
+
+@media (max-width: 516px) {
+  .about-container {
+    margin: 1rem 2rem;
+
+    .hoyolab-image {
+      width: 75%;
+    }
   }
 }

@@ -2,7 +2,7 @@
 
 - Updated About page & Changelog
 - Moved "Pls" to About page
-- Correct typos and casing
+- Update domain name
 
 ## dev build 5.25.21
 
