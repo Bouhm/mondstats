@@ -9,12 +9,12 @@ function About() {
       <div className="about-header">
         <h1>About Favonius.gg</h1>
         <p>Favonius.gg is a website that aims to help build characters and form teams to compete in the most challenging content in the game. You can view the statistics on how other players like to build certain characters and how they like to use them.</p>
-        <p>This is a hobby project by Bouhm who is obsessed with sharing the different ways players find success and enjoyment in the game with the community.</p>
+        <p>This is a hobby project by Bouhm who is obsessed with sharing the many ways players find success and enjoyment in the game with the community.</p>
       </div>
       <hr />
       <div className="about-section">
         <h2>How are you collecting data?</h2>
-        <p>Favonius.gg collects its data using the public APIs from Hoyolab. Only data from users who opt-in to display their Battle Chronicles publicly can be collected. Due to the API rate limit, it takes a long time to accumulate a large sample size. Favonius.gg will perform rolling updates and perform updates in batches.</p>
+        <p>Favonius.gg collects its data using the APIs from Hoyolab. Only data from users who opt-in to display their Battle Chronicles publicly can be collected. Due to the API rate limit, it takes a long time to accumulate a large sample size. Favonius.gg will perform rolling updates and perform updates in batches.</p>
       </div>
       <div className="about-section">
         <h2>How can I contribute?</h2>
