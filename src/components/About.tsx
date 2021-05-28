@@ -1,9 +1,13 @@
 import './About.css';
 
 import _ from 'lodash';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function About() { 
+  useEffect(() => {
+    window.scrollTo(0,0);
+  },[])
+
   return (
     <div className="about-container">
       <div className="about-header">
