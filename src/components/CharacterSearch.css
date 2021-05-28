@@ -3,6 +3,10 @@
   align-items: center;
   flex-flow: column;
 
+  img {
+    width: 140px;
+  }
+
   .players-total {
     padding: 0;
     color: rgba(255, 255, 255, 0.5);
@@ -23,8 +27,8 @@
 .searched-character {
   display: flex;
   justify-content: center;
-  min-height: 10rem;
-  margin-bottom: 3rem;
+  min-height: 12rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
 }
 
