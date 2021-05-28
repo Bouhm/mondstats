@@ -2,8 +2,9 @@ import './App.css';
 
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
-import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
+import { Link, Redirect, Route, Switch, useLocation } from 'react-router-dom';
 
+import About from './components/About';
 import Changelog from './components/Changelog';
 import CharacterPage from './components/CharacterPage';
 import CharacterSearch from './components/CharacterSearch';
@@ -81,6 +82,7 @@ function App() {
       <Navbar />
       <section>
         <Switch>
+          <Route path="/about" component={About} />
           <Route path="/changelog" component={Changelog} />
           <Route exact path="/" render={renderCharacterSearch}/>
           <Route path="/builds/:shortName" render={renderCharacterPage} />
@@ -90,6 +92,10 @@ function App() {
       <section>
         <div className="pls">Please contribute by setting your Battle Chronicle to public in Hoyolab. Thank you!
           <img src="/assets/pls.png" alt="pls"/>
+        </div>
+        <div className="links">
+          <Link to="/about">About</Link>
+          <Link to="/changelog">Changelog</Link>
         </div>
         <footer>Favonius.gg is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoyo.</footer>
       </section>

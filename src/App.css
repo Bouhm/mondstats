@@ -92,6 +92,17 @@ footer {
   flex-flow: column;
 }
 
+.links {
+  display: flex;
+  justify-content: center;
+  color: #e9e5dc;
+  margin: 1rem;
+
+  a {
+    margin: 1rem;
+  }
+}
+
 .character-filter {
   position: absolute;
   top: 7.1rem;

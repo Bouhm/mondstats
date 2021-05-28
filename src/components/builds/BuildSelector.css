@@ -3,12 +3,12 @@
   flex-flow: row;
   padding: 1rem 0.5rem 2rem 2rem;
   margin-top: 2rem;
-}
 
-h1 {
-  color: white;
-  width: 300px;
-  border-bottom: solid 1px grey;
+  h1 {
+    color: white;
+    width: 300px;
+    border-bottom: solid 1px grey;
+  }
 }
 
 .weapons-list-container {

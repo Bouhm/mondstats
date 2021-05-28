@@ -6,7 +6,6 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 const Navtabs: { name: string, linkto: string }[] = [
-  { name: "Changelog", linkto: "/changelog" },
   // { name: "Weapons", linkto: "/builds" },
   // { name: "Spiral Abyss", linkto: "/builds" }
 ]
