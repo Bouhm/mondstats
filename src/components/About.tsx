@@ -18,11 +18,11 @@ function About() {
       <hr />
       <div className="about-section">
         <h2>How are you collecting data?</h2>
-        <p>Favonius.io collects its data using the APIs from HoYoLAB. Only data from users who opt-in to display their Battle Chronicles publicly can be collected. Due to the API rate limit, it takes a long time to accumulate a large sample size. Favonius.io will perform rolling updates and perform updates in batches.</p>
+        <p>Favonius.io collects its data using the APIs from HoYoLAB. Only data from users who opt-in to display their Battle Chronicles publicly can be collected. Due to the API rate limit, it takes a long time to accumulate a large sample size. Favonius.io will perform rolling updates and perform updates in batches over a looong period of time.</p>
       </div>
       <div className="about-section">
         <h2>How can I contribute?</h2>
-        <p>Creating an account in HoYoLAB (which is miHoYo's official forum) if you haven't done so already and toggling your Battle Chronicle to 'Public' in your profile will allow your data to be visible. Favonius.io collects data indiscriminately so it won't have your data for certain.</p>
+        <p>Wow thank you for asking! Creating an account in HoYoLAB (miHoYo's official forum) if you haven't done so already and toggling your Battle Chronicle to 'Public' in your profile will allow your data to be visible. Favonius.io collects data indiscriminately so it won't have your data for certain.</p>
       </div>
       <div className="about-section">
         <h2>Where is my 4-Bloodstained Chivalry Klee build?</h2>
