@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 
-import { IArtifactDb, ICharacterDb, IData, IWeaponDb, newAbyss } from './data/types';
+import { IArtifactSetDb, ICharacterDb, IWeaponDb, newAbyss } from './data/types';
 
 // Didn't want to build out an API for handling more granular filtering of data
 // Because then I'd have to deal with a real database with potentially a ton of entries
@@ -9,16 +9,16 @@ import { IArtifactDb, ICharacterDb, IData, IWeaponDb, newAbyss } from './data/ty
 interface IState {
   characterIdMap: { [shortName: string]: string },
   selectedCharacter: string,
-  artifactDb:  { [id: string]: IArtifactDb },
-  weaponDb: { [id: string]: IWeaponDb },
-  characterDb:  { [id: string]: ICharacterDb },
+  artifactSetDb: IArtifactSetDb,
+  weaponDb: IWeaponDb,
+  characterDb: ICharacterDb,
   elementColor: string
 }
 
 export const initialState: IState = {
   characterIdMap: {},
   selectedCharacter: '',
-  artifactDb: {},
+  artifactSetDb: {},
   weaponDb: {},
   characterDb: {},
   elementColor: ""
@@ -43,8 +43,8 @@ export const reducer = (state: IState, action: IAction): IState => {
       return { ...state, characterIdMap: action.payload }
     case 'SELECT_CHARACTER':
       return { ...state, selectedCharacter: action.payload }
-    case 'SET_ARTIFACT_DB':
-      return { ...state, artifactDb: action.payload }
+    case 'SET_ARTIFACT_SET_DB':
+      return { ...state, artifactSetDb: action.payload }
     case 'SET_WEAPON_DB':
       return { ...state, weaponDb: action.payload }
     case 'SET_CHARACTER_DB':

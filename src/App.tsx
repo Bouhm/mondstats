@@ -1,6 +1,7 @@
 import './App.css';
 
 import React, { useContext, useEffect, useState } from 'react';
+import _ from 'lodash';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
 
 import { gql, useQuery } from '@apollo/client';
@@ -11,48 +12,80 @@ import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
 import { getShortName } from './scripts/util';
 import { Store } from './Store';
+import { IArtifactSetDb, IArtifactSetData, ICharacterDb, ICharacterData, IWeaponDb, IWeaponData } from './data/types';
 
 const Query = gql`
   query GetAllData { 
     characters {
+      _id
       name
+      element
+      rarity
+      constellations {
+        name
+        effect
+      }
+    }
+
+    weapons {
+      _id
+      name
+      rarity
+    }
+
+    artifactSets {
+      name
+      rarity
+      affixes {
+        effect
+        activation_number
+      }
     }
   } 
 `;
 
 function App() {
   const [, dispatch] = useContext(Store)
-  const [data, setData] = useState([])
+  const { loading, error, data } = useQuery(Query);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    // let charIdMap: { [shortname: string]: string } = {}
-    // _.forEach(_.values(characterDb), char => {
-    //   const charName = char.name === "Traveler" ? getShortName(`${char.name}-${char.element}`) : getShortName(char.name);
-    //   charIdMap[charName] = char.id + '';
-    // });
+    if (loading) {
+      setIsLoading(true);
+    } else if (error) {
+      setHasError(true);
+    } else if (data) {
+      setIsLoading(false)
+      setHasError(false)
+      let characterDb: ICharacterDb = {}
+      let weaponDb: IWeaponDb = {}
+      let artifactSetDb: IArtifactSetDb = {}
+      let charIdMap: { [shortname: string]: string } = {}
 
-    // dispatch({ type: "SET_ARTIFACT_DB", payload: artifactDb })
-    // dispatch({ type: "SET_WEAPON_DB", payload: weaponDb })
-    // dispatch({ type: "SET_CHARACTER_DB", payload: characterDb })
-    // dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
-  }, [getShortName, dispatch])
+      _.forEach(data.data.characters, (character: ICharacterData) => {
+        characterDb[character._id] = character
 
-  function Test() {
-    const { loading, error, data } = useQuery(Query);
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
+        const charName = character.name === "Traveler" ? getShortName(`${character.name}-${character.element}`) : getShortName(character.name);
+        charIdMap[charName] = character._id;
+      })
 
-    return (
-      <div>
-        <p>
-          {data}
-        </p>
-      </div>
-    );
-  }
+      _.forEach(data.data.weapons, (weapon: IWeaponData) => {
+        weaponDb[weapon._id] = weapon
+      })
 
+      _.forEach(data.data.artifactSets, (set: IArtifactSetData) => {
+        artifactSetDb[set._id] = set
+      })
 
-  const renderCharacterSearch = () => <CharacterSearch dataTotal={2006} />
+      dispatch({ type: "SET_ARTIFACT_DB", payload: artifactSetDb })
+      dispatch({ type: "SET_WEAPON_DB", payload: weaponDb })
+      dispatch({ type: "SET_CHARACTER_DB", payload: characterDb })
+      dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
+    }
+  }, [loading, error, data, getShortName, dispatch])
+
+  const renderCharacterSearch = () => <CharacterSearch dataTotal={10127} />
   const renderCharacterPage = () => {
     return (
       <>
@@ -73,7 +106,6 @@ function App() {
           <Route path="/builds/:shortName" render={renderCharacterPage} />
           <Redirect exact path="/builds" to="/" />
         </Switch>
-        <Test />
       </section>
       <section>
         <div className="links">
