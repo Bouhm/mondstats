@@ -18,6 +18,7 @@ const Query = gql`
   query GetAllData { 
     characters {
       _id
+      id: oid
       name
       element
       rarity
@@ -29,13 +30,15 @@ const Query = gql`
 
     weapons {
       _id
+      id: oid
       name
       rarity
     }
 
     artifactSets {
+      _id
+      id: oid
       name
-      rarity
       affixes {
         effect
         activation_number
@@ -63,19 +66,19 @@ function App() {
       let artifactSetDb: IArtifactSetDb = {}
       let charIdMap: { [shortname: string]: string } = {}
 
-      _.forEach(data.data.characters, (character: ICharacterData) => {
-        characterDb[character._id] = character
+      _.forEach(data.characters, (character: ICharacterData) => {
+        characterDb[character._id!] = character;
 
         const charName = character.name === "Traveler" ? getShortName(`${character.name}-${character.element}`) : getShortName(character.name);
         charIdMap[charName] = character._id;
       })
 
-      _.forEach(data.data.weapons, (weapon: IWeaponData) => {
-        weaponDb[weapon._id] = weapon
+      _.forEach(data.weapons, (weapon: IWeaponData) => {
+        weaponDb[weapon._id!] = weapon
       })
 
-      _.forEach(data.data.artifactSets, (set: IArtifactSetData) => {
-        artifactSetDb[set._id] = set
+      _.forEach(data.artifactSets, (set: IArtifactSetData) => {
+        artifactSetDb[set._id!] = set
       })
 
       dispatch({ type: "SET_ARTIFACT_DB", payload: artifactSetDb })
@@ -89,7 +92,6 @@ function App() {
   const renderCharacterPage = () => {
     return (
       <>
-        {/* <div className="character-filter"><Dropdown options={options} defaultValue={options[0]} /></div> */}
         {/* <CharacterPage data={data} /> */}
       </>
     )

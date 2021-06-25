@@ -1,5 +1,6 @@
 export interface ICharacterData {
   _id: string,
+  id: number,
   name: string,
   rarity: number,
   element: string
@@ -11,12 +12,14 @@ export interface ICharacterData {
 
 export interface IWeaponData {
   _id: string,
+  id: number,
   name: string,
   rarity: number
 }
 
 export interface IArtifactSetData {
-  _id: number
+  _id: string,
+  id: number
   affixes: IAffix
 }
 
@@ -30,6 +33,11 @@ export interface IWeaponDb {
 
 export interface IArtifactSetDb {
   [id: string]: IArtifactSetData
+}
+
+export interface IArtifactBuild {
+  id: number
+  activation_number: number
 }
 
 export interface IWeaponBuild {

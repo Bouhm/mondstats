@@ -3,7 +3,6 @@ import './CharacterSearch.css';
 import Logo from '/assets/logo_sm.png';
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import { Store } from '../Store';
 import CharacterTile, { CharacterTileProps } from './CharacterTile';
