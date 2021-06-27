@@ -1,8 +1,6 @@
 #sidebar {
   display: flex;
   flex-flow: column;
-  top: 0;
-  bottom: 0;
   background: #2e3142;
   -webkit-box-shadow: 0 4px 6px -6px black;
   -moz-box-shadow: 0 4px 6px -6px black;
@@ -21,7 +19,7 @@
       align-items: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       width: auto;
-      padding: 0 1rem;
+      padding: 0.2rem 1rem;
       
       img {
         width: 40px;

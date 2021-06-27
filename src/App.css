@@ -7,13 +7,14 @@
   font-family: font;
   width: 100vw;
   height: 100vh;
-  padding-top: 4rem;
+  padding-top: 3.5rem;
 
   .App-content {
+    height: 100%;
     display: flex;
 
     #sidebar {
-      flex: 0 0 16rem;
+      flex: 0 0 13rem;
     }
 
     div {
