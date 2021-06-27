@@ -1,4 +1,7 @@
 #sidebar {
+  position: fixed;
+  top: 4rem;
+  bottom: 0;
   display: flex;
   flex-flow: column;
   background: #2e3142;
@@ -17,10 +20,10 @@
     .sidebar-tab {
       display: flex;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       width: auto;
       padding: 0.2rem 1rem;
-      
+
       img {
         width: 40px;
         margin-right: 1rem;
