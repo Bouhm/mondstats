@@ -8,6 +8,18 @@
   width: 100vw;
   height: 100vh;
   padding-top: 4rem;
+
+  .App-content {
+    display: flex;
+
+    #sidebar {
+      flex: 0 0 16rem;
+    }
+
+    div {
+      flex: 1;
+    }
+  }
 }
 
 a {

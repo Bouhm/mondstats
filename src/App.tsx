@@ -1,7 +1,7 @@
 import './App.css';
 
-import React, { useContext, useEffect, useState } from 'react';
 import _ from 'lodash';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
 
 import { gql, useQuery } from '@apollo/client';
@@ -10,9 +10,17 @@ import About from './components/About';
 import Changelog from './components/Changelog';
 import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
+import Sidebar from './components/sidebar/Sidebar';
+import {
+  IArtifactSetData,
+  IArtifactSetDb,
+  ICharacterData,
+  ICharacterDb,
+  IWeaponData,
+  IWeaponDb,
+} from './data/types';
 import { getShortName } from './scripts/util';
 import { Store } from './Store';
-import { IArtifactSetDb, IArtifactSetData, ICharacterDb, ICharacterData, IWeaponDb, IWeaponData } from './data/types';
 
 const Query = gql`
   query GetAllData { 
@@ -100,22 +108,27 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <section>
-        <Switch>
-          <Route path="/about" component={About} />
-          <Route path="/changelog" component={Changelog} />
-          <Route exact path="/" render={renderCharacterSearch} />
-          <Route path="/builds/:shortName" render={renderCharacterPage} />
-          <Redirect exact path="/builds" to="/" />
-        </Switch>
-      </section>
-      <section>
-        <div className="links">
-          <Link to="/about">About</Link>
-          <Link to="/changelog">Changelog</Link>
+      <main className="App-content">
+        <Sidebar />
+        <div>
+          <section className="section-view">
+            <Switch>
+              <Route path="/about" component={About} />
+              <Route path="/changelog" component={Changelog} />
+              <Route exact path="/" render={renderCharacterSearch} />
+              <Route path="/builds/:shortName" render={renderCharacterPage} />
+              <Redirect exact path="/builds" to="/" />
+            </Switch>
+          </section>
+          <section>
+            <div className="links">
+              <Link to="/about">About</Link>
+              <Link to="/changelog">Changelog</Link>
+            </div>
+            <footer>Favonius.io is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoYo.</footer>
+          </section>
         </div>
-        <footer>Favonius.io is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoYo.</footer>
-      </section>
+      </main>
       <span className="build-ver">dev build 05.27.21</span>
     </div>
   )

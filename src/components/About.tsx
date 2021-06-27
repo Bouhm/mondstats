@@ -1,6 +1,5 @@
 import './About.css';
 
-import _ from 'lodash';
 import React, { useEffect } from 'react';
 
 function About() { 

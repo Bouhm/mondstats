@@ -1,9 +1,8 @@
 #sidebar {
-  position: fixed;
   display: flex;
   flex-flow: column;
-  width: 6rem;
-  height: 3.5rem;
+  top: 0;
+  bottom: 0;
   background: #2e3142;
   -webkit-box-shadow: 0 4px 6px -6px black;
   -moz-box-shadow: 0 4px 6px -6px black;
@@ -11,17 +10,23 @@
   z-index: 99;
 
   .sidebar-menu {
-    position: absolute;
     right: 0;
     line-height: 3.5rem;
     display: flex;
+    flex-flow: column;
     color: rgba(255, 255, 255, 0.6);
 
     .sidebar-tab {
-      text-align: center;
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       width: auto;
       padding: 0 1rem;
+      
+      img {
+        width: 40px;
+        margin-right: 1rem;
+      }
     }
   }
 }

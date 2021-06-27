@@ -1,25 +1,37 @@
-import './Navbar.css';
+import './Sidebar.css';
 
-import Logo from '/assets/logo_sm.png';
 import _ from 'lodash';
-import React, { useContext, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const tabs: { name: string, linkto: string }[] = [
-  // { name: "Weapons", linkto: "/builds" },
-  // { name: "Spiral Abyss", linkto: "/builds" }
+interface ITab {
+  name: string
+  linkto: string
+  icon: string
+}
+
+const tabs: ITab[] = [
+  { name: "Spiral Abyss", linkto: "/abyss", icon: "spiralAbyss.png" },
+  { name: "Characters", linkto: "/characters", icon: "characters.png" },
+  { name: "Artifacts", linkto: "/artifacts", icon: "artifacts.png" },
+  { name: "Weapons", linkto: "/weapons", icon: "weapons.png" }
 ]
 
-function Navbar() {
+function Sidebar() {
   return (
     <div id="sidebar">
       <div className="sidebar-menu">
         {_.map(tabs, tab => {
-          return <Link key={tab.name} to={tab.linkto}><div className="sidebar-tab">{tab.name}</div></Link>
+          return <Link key={tab.name} to={tab.linkto}>
+            <div className="sidebar-tab">
+              <img src={`/assets/icons/${tab.icon}`} />
+              {tab.name}
+            </div>
+          </Link>
         })}
       </div>
     </div>
   )
 }
 
-export default Navbar;
+export default Sidebar;

@@ -30,7 +30,6 @@ function CharacterSearch({ dataTotal }: CharacterSearchProps) {
   return (
     <div className="character-search">
       <div className="logo-container">
-        <img className="logo" src={Logo} alt="logo" />
         <div className="players-total">DATA TOTAL: {dataTotal} PLAYERS</div>
       </div>
       <div className="character-searchbar">
