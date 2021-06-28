@@ -5,6 +5,7 @@ export interface ICharacterData {
   rarity: number,
   element: string
   constellations: {
+    id: number,
     name: string,
     effect: string
   }[]
@@ -19,8 +20,14 @@ export interface IWeaponData {
 
 export interface IArtifactSetData {
   _id: string,
-  id: number
-  affixes: IAffix
+  id: number,
+  name: string,
+  affixes: IAffix[]
+}
+
+export interface IAffix { 
+  activation_number: number,
+  effect: string
 }
 
 export interface ICharacterDb{
@@ -35,60 +42,35 @@ export interface IArtifactSetDb {
   [id: string]: IArtifactSetData
 }
 
-export interface IArtifactBuild {
-  id: number
-  activation_number: number
-}
-
-export interface IWeaponBuild {
-  id: number
-  count: number
-}
-
-export interface IBuild {
-  buildId: string,
-  weapons: IWeaponBuild[]
-  artifacts: IArtifactBuild[]
-  count: number
-}
-
-export interface IAbyssData {
-  [floorNum: string]: IAbyssFloor
-}
-
-export interface IAbyssFloor {
-  [stageNum: string]: [IBattle, IBattle]
-}
-
-export type IBattle = {
-  teams: { party: number[], count: number }[],
+export interface ICharacterBuild {
+  avg_level: number,
+  constellations: number[],
+  char_id: string,
+  builds: IBuild[],
   total: number
 }
 
-export const newAbyss: IAbyssData = {
-  "9": {
-    "1": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
-    "2": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
-    "3": [{ teams: [], total: 0 }, { teams: [], total: 0 }]
-  },
-  "10": {
-    "1": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
-    "2": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
-    "3": [{ teams: [], total: 0 }, { teams: [], total: 0 }]
-  },
-  "11": { 
-    "1": [{ teams: [], total: 0 }, { teams: [], total: 0 }], 
-    "2": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
-    "3": [{ teams: [], total: 0 }, { teams: [], total: 0 }]
-  },
-  "12": {
-    "1": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
-    "2": [{ teams: [], total: 0 }, { teams: [], total: 0 }],
-    "3": [{ teams: [], total: 0 }, { teams: [], total: 0 }]
-  }
+export interface IWeaponBuild {
+  _id: string,
+  count: number
 }
 
-export interface IAffix { 
-  activation_number: number,
-  effect: string
+export interface IArtifactBuild {
+  id: number,
+  activation_number: number
 }
+
+export interface IBuild {
+  weapons: IWeaponBuild[],
+  artifacts: IArtifactBuild[]
+}
+
+export interface IAbyssBattle {
+  floor_level: string,
+  party_stats: {
+    party: string[]
+    count: number
+  }[],
+  total: number
+}
+

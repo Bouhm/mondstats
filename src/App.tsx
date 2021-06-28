@@ -11,6 +11,10 @@ import Changelog from './components/Changelog';
 import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
+import AbyssBattles from './data/abyssBattles.json';
+import ArtifactSetDb from './data/artifactSets.json';
+import CharacterBuilds from './data/characterBuilds.json';
+import CharacterDb from './data/characters.json';
 import {
   IArtifactSetData,
   IArtifactSetDb,
@@ -19,85 +23,44 @@ import {
   IWeaponData,
   IWeaponDb,
 } from './data/types';
+import WeaponDb from './data/weapons.json';
 import { getShortName } from './scripts/util';
 import { Store } from './Store';
 
-const Query = gql`
-  query GetAllData { 
-    characters {
-      _id
-      id: oid
-      name
-      element
-      rarity
-      constellations {
-        id: oid
-        name
-        effect
-      }
-    }
-
-    weapons {
-      _id
-      id: oid
-      name
-      rarity
-    }
-
-    artifactSets {
-      _id
-      id: oid
-      name
-      affixes {
-        effect
-        activation_number
-      }
-    }
-  } 
-`;
-
 function App() {
   const [, dispatch] = useContext(Store)
-  const { loading, error, data } = useQuery(Query);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  // const { loading, error, data } = useQuery(Query);
 
   useEffect(() => {
-    if (loading) {
-      setIsLoading(true);
-    } else if (error) {
-      setHasError(true);
-    } else if (data) {
-      setIsLoading(false)
-      setHasError(false)
-      let characterDb: ICharacterDb = {}
-      let weaponDb: IWeaponDb = {}
-      let artifactSetDb: IArtifactSetDb = {}
-      let charIdMap: { [shortname: string]: string } = {}
+    let charIdMap: { [shortname: string]: string } = {}
+    let characterDb: ICharacterDb = {}
+    let weaponDb: IWeaponDb = {}
+    let artifactSetDb: IArtifactSetDb = {}
 
-      _.forEach(data.characters, (character: ICharacterData) => {
-        characterDb[character._id!] = character;
+    _.forEach(CharacterDb, (character: ICharacterData) => {
+      characterDb[character._id] = character;
 
-        const charName = character.name === "Traveler" ? getShortName(`${character.name}-${character.element}`) : getShortName(character.name);
-        charIdMap[charName] = character._id;
-      })
+      const charName = character.name === "Traveler" ? getShortName(`${character.name}-${character.element}`) : getShortName(character.name);
+      charIdMap[charName] = character._id;
+    })
 
-      _.forEach(data.weapons, (weapon: IWeaponData) => {
-        weaponDb[weapon._id!] = weapon
-      })
+    _.forEach(WeaponDb, (weapon: IWeaponData) => {
+      weaponDb[weapon._id] = weapon
+    })
 
-      _.forEach(data.artifactSets, (set: IArtifactSetData) => {
-        artifactSetDb[set._id!] = set
-      })
+    _.forEach(ArtifactSetDb, (set: IArtifactSetData) => {
+      artifactSetDb[set._id] = set
+    })
 
-      dispatch({ type: "SET_ARTIFACT_DB", payload: artifactSetDb })
-      dispatch({ type: "SET_WEAPON_DB", payload: weaponDb })
-      dispatch({ type: "SET_CHARACTER_DB", payload: characterDb })
-      dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
-    }
-  }, [loading, error, data, getShortName, dispatch])
+    dispatch({ type: "SET_ARTIFACT_DB", payload: artifactSetDb })
+    dispatch({ type: "SET_WEAPON_DB", payload: weaponDb })
+    dispatch({ type: "SET_CHARACTER_DB", payload: characterDb })
+    dispatch({ type: "SET_CHARACTER_BUILDS", payload: CharacterBuilds })
+    dispatch({ type: "SET_ABYSS_BATTLES", payload: AbyssBattles })
+    dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
+  }, [CharacterDb, ArtifactSetDb, WeaponDb, getShortName, dispatch])
 
-  const renderCharacterSearch = () => <CharacterSearch dataTotal={10127} />
+  const renderCharacterSearch = () => <CharacterSearch dataTotal={11119} />
   const renderCharacterPage = () => {
     return (
       <>

@@ -1,6 +1,13 @@
 import React, { useReducer } from 'react';
 
-import { IArtifactSetDb, ICharacterDb, IWeaponDb, newAbyss } from './data/types';
+import {
+  IAbyssBattle,
+  IArtifactSetDb,
+  ICharacterBuild,
+  ICharacterData,
+  ICharacterDb,
+  IWeaponDb,
+} from './data/types';
 
 // Didn't want to build out an API for handling more granular filtering of data
 // Because then I'd have to deal with a real database with potentially a ton of entries
@@ -12,7 +19,10 @@ interface IState {
   artifactSetDb: IArtifactSetDb,
   weaponDb: IWeaponDb,
   characterDb: ICharacterDb,
-  elementColor: string
+  elementColor: string,
+  characterBuilds: ICharacterBuild[],
+  abyssBattles: IAbyssBattle[],
+  f2p: boolean
 }
 
 export const initialState: IState = {
@@ -21,7 +31,10 @@ export const initialState: IState = {
   artifactSetDb: {},
   weaponDb: {},
   characterDb: {},
-  elementColor: ""
+  elementColor: "",
+  characterBuilds: [],
+  abyssBattles: [],
+  f2p: false
 }
 
 export const Store = React.createContext<[IState, React.Dispatch<any>]>([initialState, () => { }])
@@ -51,6 +64,12 @@ export const reducer = (state: IState, action: IAction): IState => {
       return { ...state, characterDb: action.payload }
     case 'SET_ELEMENT_COLOR':
       return { ...state, elementColor: action.payload }
+    case 'SET_CHARACTER_BUILDS':
+      return { ...state, characterBuilds: action.payload }
+    case 'SET_ABYSS_BATTLES':
+      return { ...state, abyssBattles: action.payload }
+    case 'SET_F2P':
+      return { ...state, f2p: action.payload }
     default:
       return state
   }
