@@ -11,7 +11,9 @@ import { StoreProvider } from './Store';
 
 const client = new ApolloClient({
   uri: 'https://favonius-server.herokuapp.com/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(({
+    addTypename: false
+  })),
 });
 
 ReactDOM.render(

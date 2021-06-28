@@ -31,6 +31,7 @@ const Query = gql`
       element
       rarity
       constellations {
+        id: oid
         name
         effect
       }
@@ -110,8 +111,8 @@ function App() {
       <Navbar />
       <main className="App-content">
         <Sidebar />
-        <div>
-          <section className="section-view">
+        <div className="section-view">
+          <section>
             <Switch>
               <Route path="/about" component={About} />
               <Route path="/changelog" component={Changelog} />

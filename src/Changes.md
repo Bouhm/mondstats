@@ -1,3 +1,15 @@
+
+## dev build 6.10.21
+
+- Build out an actual backend server
+- Add more granular filters   
+
+## dev build 6.02.21
+
+- Migrate to an actual database
+- Update current data to have more up-to-date builds and stats
+
+
 ## dev build 5.27.21
 
 - Updated About page & Changelog

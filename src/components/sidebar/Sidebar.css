@@ -5,9 +5,9 @@
   display: flex;
   flex-flow: column;
   background: #2e3142;
-  -webkit-box-shadow: 0 4px 6px -6px black;
-  -moz-box-shadow: 0 4px 6px -6px black;
-  box-shadow: 0 4px 6px -6px black;
+  -webkit-box-shadow: 0 4px 6px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0 4px 6px 0px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 6px 0px rgba(0,0,0,0.5);
   z-index: 99;
 
   .sidebar-menu {

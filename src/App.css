@@ -11,14 +11,9 @@
 
   .App-content {
     height: 100%;
-    display: flex;
 
-    #sidebar {
-      flex: 0 0 13rem;
-    }
-
-    div {
-      flex: 1;
+    .section-view {
+      margin-left: 13rem;
     }
   }
 }
