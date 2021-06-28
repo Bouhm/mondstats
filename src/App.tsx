@@ -93,7 +93,7 @@ function App() {
           </section>
         </div>
       </main>
-      <span className="build-ver">dev build 05.27.21</span>
+      <span className="build-ver">dev build 06.28.21</span>
     </div>
   )
 }

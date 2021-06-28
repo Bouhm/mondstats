@@ -1,14 +1,26 @@
+## dev build 6.28.21
+
+- Fix aggregation on abyss battles
+- Update data pool to 11119 players total
+
+## dev build 6.26.21
+
+- Add more filters including filter by F2P
+
+## dev build 6.15.21 
+
+- Add character constellations and average levels
+- Update API aggregation functions 
 
 ## dev build 6.10.21
 
-- Build out an actual backend server
+- Built out an actual backend API server
 - Add more granular filters   
 
 ## dev build 6.02.21
 
 - Migrate to an actual database
 - Update current data to have more up-to-date builds and stats
-
 
 ## dev build 5.27.21
 
