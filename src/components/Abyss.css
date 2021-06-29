@@ -107,7 +107,7 @@
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
     min-height: 135px;
     min-width: 135px;
-    diplay: flex;
+    display: flex;
     flex-flow: column;
     justify-content: center;
   }

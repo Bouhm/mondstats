@@ -1,0 +1,18 @@
+.construction-video {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-item: center;
+
+  h1 {
+    margin: 3rem 0;
+  }
+
+  video {
+    margin: 0 auto;
+    width: 500px;
+    height: 280px;
+    border-radius: 8px;
+  }
+}

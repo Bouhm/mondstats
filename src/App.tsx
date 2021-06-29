@@ -13,6 +13,7 @@ import CharacterPage from './components/CharacterPage';
 import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
+import UnderConstruction from './components/WIP';
 import AbyssBattles from './data/abyssBattles.json';
 import ArtifactDb from './data/artifacts.json';
 import ArtifactSetDb from './data/artifactSets.json';
@@ -104,6 +105,7 @@ function App() {
               <Route path="/changelog" component={Changelog} />
               <Route exact path="/" render={renderCharacterSearch} />
               <Route path="/builds/:shortName" render={renderCharacterPage} />
+              <Route path="/" component={UnderConstruction} />
               <Redirect exact path="/builds" to="/" />
             </Switch>
           </section>
