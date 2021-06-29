@@ -14,11 +14,18 @@
 .floor-container {
   display: flex;
   flex-flow: column;
+  align-items: center;
 
   .party-container {
     display: flex;
     flex-flow: column;
     margin: 1rem;
+    max-width: calc(135px * 4);
+  }
+
+  .TEMP-SINGLE-COL {
+    display: flex !important;
+    flex-flow: column;
   }
 
   .stage-container {

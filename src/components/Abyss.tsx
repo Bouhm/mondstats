@@ -65,42 +65,62 @@ function Abyss(abyssBattles: IAbyssBattle[]) {
   const renderParties = () => (
     <div className="floor-container">
       {_.map(_.map(selectedStages, stage => stage.value).sort(_compareFloor), selectedStage => {
-        return <div key={selectedStage} className="stage-container">
+        return <div key={selectedStage} className="stage-container TEMP-SINGLE-COL">
           <h2 className="stage-label">Floor {selectedStage}</h2>
-          <div className="stage-half">
+          <div className="stage-half TEMP-SINGLE-COL">
             {_.map(_.filter(filteredAbyss, { floor_level: selectedStage }), ({party_stats}) => {
-              return _.map(party_stats, (parties, i) => {
+              let combinedArr = _.uniqBy([...party_stats[0], ...party_stats[1]], 'party');
+
+              return _.map(_.take(_.orderBy(combinedArr, 'count', 'desc'), stageLimitToggle[selectedStage] ? 10 : 5), ({party, count}, j) => {
                 return (
-                  <div key={`battle-${i}`} className="battle-container">
-                    <h2>{i+1}{i+1 === 1 ? 'st' : 'nd'} Half</h2>
-                    {parties.length > 1 ? 
-                      <>
-                        {_.map(_.take(_.orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage] ? 8 : 3), ({party, count}, j) => {
-                            return (
-                              <div key={`party-${i}-${j}`} className="party-container">
-                                <div className="party-characters">
-                                  {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => {
-                                    return <CharacterTile id={char+''} key={`party-${i}`} />
-                                  })}
-                                </div>
-                                <div className="party-popularity withTooltip">
-                                  {Math.round((count/(_.reduce(parties, (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%
-                                  <Tooltip 
-                                    content={`Party Count: ${count}`} 
-                                    alignment="top"
-                                  />
-                                </div>
-                              </div>
-                            )
-                          })
-                        }
-                      </>
-                      :
-                      <img src={AmberSad} alt="empty" />
-                    }
+                  <div key={`party-${selectedStage}-${j}`} className="party-container">
+                    <div className="party-characters">
+                      {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => {
+                        return <CharacterTile id={char+''} key={`party-${i}`} />
+                      })}
+                    </div>
+                    <div className="party-popularity withTooltip">
+                      {Math.round((count/(_.reduce(combinedArr, (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%
+                      <Tooltip 
+                        content={`Party Count: ${count}`} 
+                        alignment="top"
+                      />
+                    </div>
                   </div>
                 )
               })
+              // return _.map(party_stats, (parties, i) => {
+              //   return (
+              //     <div key={`battle-${i}`} className="battle-container">
+              //       <h2>{i+1}{i+1 === 1 ? 'st' : 'nd'} Half</h2>
+              //       {parties.length > 1 ? 
+              //         <>
+              //           {_.map(_.take(_.orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage] ? 8 : 3), ({party, count}, j) => {
+              //               return (
+              //                 <div key={`party-${i}-${j}`} className="party-container">
+              //                   <div className="party-characters">
+              //                     {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => {
+              //                       return <CharacterTile id={char+''} key={`party-${i}`} />
+              //                     })}
+              //                   </div>
+              //                   <div className="party-popularity withTooltip">
+              //                     {Math.round((count/(_.reduce(parties, (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%
+              //                     <Tooltip 
+              //                       content={`Party Count: ${count}`} 
+              //                       alignment="top"
+              //                     />
+              //                   </div>
+              //                 </div>
+              //               )
+              //             })
+              //           }
+              //         </>
+              //         :
+              //         <img src={AmberSad} alt="empty" />
+              //       }
+              //     </div>
+              //   )
+              // })
             })}
             </div>
             {!stageLimitToggle[selectedStage] ?
