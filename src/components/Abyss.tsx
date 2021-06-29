@@ -5,12 +5,14 @@ import _ from 'lodash';
 import { element } from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 
+import { IAbyssBattle } from '../data/types';
+import { useAppSelector } from '../hooks';
 import CharacterTile from './CharacterTile';
 import Dropdown, { Option } from './ui/Dropdown';
 import { ChevronDown, ChevronUp } from './ui/Icons';
 import Tooltip from './ui/Tooltip';
 
-function _filterAbyss(data: IAbyssData, charId: number) {
+function _filterAbyss(data: IAbyssBattle[], charId: number) {
   let newAbyss = _.cloneDeep(data)
   
   _.forEach(newAbyss, floor => {
@@ -35,14 +37,15 @@ const _compareFloor = (f1: string, f2: string) => {
   }
 }
 
-function Abyss(abyss: IAbyssData) {
-  const options = _.flatten(_.map(_.keys(abyss), floor => {
-    return _.flatten(_.map(_.keys(abyss[floor]), stage => {
-      return { label: `${floor}-${stage}`, value:`${floor}-${stage}`}
+function Abyss(abyss: IAbyssBattle[]) {
+  const options = _.map(abyss, stage => {
+    return _.flatten(_.map(stage, (battle, i) => {
+      return { label: `${stage.floor_level}-${i}`, value:`${stage.floor_level}-${i}`}
     }))
-  }))
+  })
 
-  const [{ selectedCharacter, characterDb }] = useContext(Store)
+  const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
+  const characterDb = useAppSelector((state) => state.data.characterDb)
   const defaultStages = options.slice(options.length-3)
 
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
