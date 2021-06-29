@@ -7,7 +7,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { IBuild } from '../../data/types';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import Chart, { IChartConfig } from '../ui/Chart';
+import Chart from '../ui/Chart';
 import ArtifactBuild from './artifacts/ArtifactBuild';
 import ArtifactSets from './artifacts/ArtifactSets';
 import elemColors from './colors';
@@ -16,54 +16,37 @@ import WeaponBuild from './weapons/WeaponBuild';
 function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number }) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
-  
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
-  const [chartConfig, setChartConfig] = useState<IChartConfig>({
-    labels: [],
-    data: [],
-    colors: []
-  })
-  let countSum = 0;
 
   const orderedBuilds = _.orderBy(builds, 'count', 'desc');
+  let labels: string[] = [];
+  let data: number[] = [];
+  let colors: string[] = [];
+  let countSum = 0; 
 
-  useEffect(() => {
-    if (_.isEmpty(artifactSetDb)) {
-      let labels: string[] = []
-      let data: number[] = []
-      let colors: string[] = []
-      
-      _.forEach(orderedBuilds, build => {
-        let label = "";
-  
-        _.forEach(build.artifacts, (set, i) => {
-          let name = artifactSetDb[set._id].name;
-          if (name.includes(" ")) {
-            if (name.split(" ")[0] === "The") {
-              name = name.split(" ")[1]
-            } else {
-              name = name.split(" ")[0]
-            }
-          }
-          label += set.activation_number + "-" + name
-          if (i !== build.artifacts.length - 1) label += " "
-        })
-  
-        labels.push(label);
-        data.push(build.count);
-        countSum += build.count;
-      })
-  
-      colors = Array(labels.length).fill("#a4a4a4")
-      colors[activeBuildIdx] = elementColor;
-  
-      setChartConfig({
-        labels, data, colors
-      })
-    }
-  }, [artifactSetDb])
+  _.forEach(orderedBuilds, build => {
+    let label = "";
 
-  console.log(orderedBuilds)
+    _.forEach(build.artifacts, (set, i) => {
+      let name = artifactSetDb[set._id].name;
+      if (name.includes(" ")) {
+        if (name.split(" ")[0] === "The") {
+          name = name.split(" ")[1]
+        } else {
+          name = name.split(" ")[0]
+        }
+      }
+      label += set.activation_number + "-" + name
+      if (i !== build.artifacts.length - 1) label += " "
+    })
+
+    labels.push(label);
+    data.push(build.count);
+    countSum += build.count;
+  })
+
+  colors = Array(labels.length).fill("#a4a4a4")
+  colors[activeBuildIdx] = elementColor;
 
   return (
     <div className="builds-selector">
@@ -80,9 +63,9 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
             <Chart
               id="artifacts-donut"
               type="doughnut"
-              labels={chartConfig.labels}
-              data={chartConfig.data}
-              colors={chartConfig.colors}
+              labels={labels}
+              data={data}
+              colors={colors}
               max={countSum}
               showScale={false}
             />
