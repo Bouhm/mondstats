@@ -83,7 +83,7 @@ function App() {
     dispatch(setWeaponDb(weaponDb))
   }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
 
-  const renderCharacterSearch = () => <CharacterSearch dataTotal={11186} />
+  const renderCharacterSearch = () => <CharacterSearch dataTotal={11449} />
   const renderCharacterPage = () => {
     return (
       <>

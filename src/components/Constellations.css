@@ -1,8 +1,16 @@
-.constellations-container {
-  display: table;
+.constellations-chart {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
   margin: 5rem auto;
   height: 50vh;
   margin-bottom: 8rem;
+}
+
+.divider {
+  height: 100%;
+  border-right: solid 2px rgba(255,255,255,0.3);
+  margin: 0 1rem;
 }
 
 .constellation-card {

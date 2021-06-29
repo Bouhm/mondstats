@@ -36,32 +36,38 @@ function Constellations({ constellations, total  }: ConstellationsProps ) {
 
   return (
     <div className="constellations-container">
-    {_.map(constellations, (count, i) => {
-      let popularity = Math.round((count / total * 1000)/10)
+    <h1>Constellations</h1>
+    <div className="constellations-chart">
+      {_.map(constellations, (count, i) => {
+        let popularity = Math.round((count / total * 1000)/10).toFixed(1)
 
-      return (
-        <div key={`constellation-${i}`} className="bar-chart constellation-bar-container">
-          <div 
-            className={`bar-chart-bar constellation-bar ${characterDb[selectedCharacter].element.toLowerCase()} withTooltip`} 
-            style={{ height: `${popularity}%` }}
-          >
-            <Tooltip 
-              alignment="vertical"
-              content={`C${i}: ${count}`}
-            />
-          </div>
-          {i === 0 ?
-            <ConstellationCard name={"None"}>
-              <div className="constellation-popularity">{Math.round(count/total * 100)}%</div>
-            </ConstellationCard>
-            :
-            <ConstellationCard {...characterDb[selectedCharacter].constellations[i-1]}>
-              <div className="constellation-popularity">{Math.round(count/total * 100)}%</div>
-            </ConstellationCard>
-          }
-        </div>
-      )
-    })}
+        return (
+          <>
+            {i === 1 && <div className="divider" />}
+            <div key={`constellation-${i}`} className="bar-chart constellation-bar-container">
+              <div 
+                className={`bar-chart-bar constellation-bar ${characterDb[selectedCharacter].element.toLowerCase()} withTooltip`} 
+                style={{ height: `${popularity}%` }}
+              >
+                <Tooltip 
+                  alignment="vertical"
+                  content={`C${i}: ${count}`}
+                />
+              </div>
+              {i === 0 ?
+                <ConstellationCard name={"None"}>
+                  <div className="constellation-popularity">{((count / total * 1000)/10).toFixed(1)}%</div>
+                </ConstellationCard>
+                :
+                <ConstellationCard {...characterDb[selectedCharacter].constellations[i-1]}>
+                  <div className="constellation-popularity">{((count / total * 1000)/10).toFixed(1)}%</div>
+                </ConstellationCard>
+              }
+            </div>
+          </>
+        )
+      })}
+      </div>
   </div>
   )
 }

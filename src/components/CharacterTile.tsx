@@ -9,10 +9,11 @@ import { useAppSelector } from '../hooks';
 import { getShortName } from '../scripts/util';
 
 export type CharacterTileProps = {
-  id: string
+  id: string,
+  labeled?: boolean
 }
 
-function CharacterTile({ id }: CharacterTileProps) {
+function CharacterTile({ id, labeled = true }: CharacterTileProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const character = characterDb[id]
 
@@ -30,9 +31,9 @@ function CharacterTile({ id }: CharacterTileProps) {
         <div className={classes}>
           <img src={`/assets/characters/${character.oid}.png`} alt={`${character.name}-portrait`}></img>
           {charElement && <img className="element-icon" src={ElementIcons[character.element]} alt={character.element}></img>}
-          <div className="character-tile-name">
+          {labeled && <div className="character-tile-name">
             {character.name}
-          </div>
+          </div>}
         </div>
       </div>
     </Link>

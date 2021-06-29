@@ -3,6 +3,13 @@
   padding: 0 2rem 2rem 2rem;
   min-height: 28rem;
 
+  .abyss-disclaimer {
+    color: #e9e5dc;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
   h1 {
     color: white;
     width: 300px;
@@ -18,9 +25,9 @@
 
   .party-container {
     display: flex;
-    flex-flow: column;
     margin: 1rem;
-    max-width: calc(135px * 4);
+    border-radius: 6px;
+    overflow: hidden;
   }
 
   .TEMP-SINGLE-COL {
@@ -91,14 +98,18 @@
 
   .party-popularity {
     position: relative;
-    width: 100%;
     text-align: center;
-    padding: 2rem 0 1.5rem 0;
+    padding: 1rem;
     background-color: #e9e5dc;
     line-height: 30%;
     color: white;
     font-size: 2rem;
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+    min-height: 135px;
+    min-width: 135px;
+    diplay: flex;
+    flex-flow: column;
+    justify-content: center;
   }
 
   .party-characters {
@@ -163,11 +174,19 @@
   }
 }
 
-@media (max-width: 634px) {
+@media (max-width: 978px) {
   .party-container {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem;
+
     .party-characters {
       display: grid;
       grid-template-columns: 1fr 1fr;
+    }
+
+    .party-popularity {
+      width: 100%;
     }
   }
 }
