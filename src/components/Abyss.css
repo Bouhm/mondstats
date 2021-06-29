@@ -1,7 +1,8 @@
 .abyss-container {
-  background: none;
   padding: 0 2rem 2rem 2rem;
   min-height: 28rem;
+  background-color: rgba(0,0,0,0.15);
+  border-radius: 10px;
 
   .abyss-disclaimer {
     color: #e9e5dc;

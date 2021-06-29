@@ -1,3 +1,8 @@
+.constellations-container {
+  background-color: rgba(0,0,0,0.15);
+  border-radius: 10px;
+}
+
 .constellations-chart {
   display: flex;
   justify-content: center;
@@ -5,6 +10,7 @@
   margin: 5rem auto;
   height: 50vh;
   margin-bottom: 8rem;
+  
 }
 
 .divider {
