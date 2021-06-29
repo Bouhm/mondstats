@@ -1,11 +1,11 @@
 export interface ICharacterData {
   _id: string,
-  id: number,
+  oid: number,
   name: string,
   rarity: number,
   element: string
   constellations: {
-    id: number,
+    oid: number,
     name: string,
     effect: string
   }[]
@@ -13,14 +13,21 @@ export interface ICharacterData {
 
 export interface IWeaponData {
   _id: string,
-  id: number,
+  oid: number,
   name: string,
   rarity: number
 }
 
+export interface IArtifactData {
+  _id: string,
+  oid: number,
+  name: string,
+  set: string
+}
+
 export interface IArtifactSetData {
   _id: string,
-  id: number,
+  oid: number,
   name: string,
   affixes: IAffix[]
 }
@@ -36,6 +43,10 @@ export interface ICharacterDb{
 
 export interface IWeaponDb {
   [id: string]: IWeaponData
+}
+
+export interface IArtifactDb {
+  [id: string]: IArtifactData
 }
 
 export interface IArtifactSetDb {
@@ -56,13 +67,14 @@ export interface IWeaponBuild {
 }
 
 export interface IArtifactBuild {
-  id: number,
+  _id: number,
   activation_number: number
 }
 
 export interface IBuild {
   weapons: IWeaponBuild[],
   artifacts: IArtifactBuild[]
+  count: number
 }
 
 export interface IAbyssBattle {

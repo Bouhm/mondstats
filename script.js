@@ -38,7 +38,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
     })
   }
 
-
   for (const [id, artifact] of Object.entries(Artifacts)) {
     download(artifact.icon, path.resolve(__dirname, "./src/assets/artifacts"), path.resolve(__dirname, "./src/assets/artifacts/raw", `${artifact.id}.png`))
   }

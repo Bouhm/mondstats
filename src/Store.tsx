@@ -2,9 +2,9 @@ import React, { useReducer } from 'react';
 
 import {
   IAbyssBattle,
+  IArtifactDb,
   IArtifactSetDb,
   ICharacterBuild,
-  ICharacterData,
   ICharacterDb,
   IWeaponDb,
 } from './data/types';
@@ -17,6 +17,7 @@ interface IState {
   characterIdMap: { [shortName: string]: string },
   selectedCharacter: string,
   artifactSetDb: IArtifactSetDb,
+  artifactDb: IArtifactDb,
   weaponDb: IWeaponDb,
   characterDb: ICharacterDb,
   elementColor: string,
@@ -29,6 +30,7 @@ export const initialState: IState = {
   characterIdMap: {},
   selectedCharacter: '',
   artifactSetDb: {},
+  artifactDb: {},
   weaponDb: {},
   characterDb: {},
   elementColor: "",
@@ -56,6 +58,8 @@ export const reducer = (state: IState, action: IAction): IState => {
       return { ...state, characterIdMap: action.payload }
     case 'SELECT_CHARACTER':
       return { ...state, selectedCharacter: action.payload }
+    case 'SET_ARTIFACT_DB':
+      return { ...state, artifactDb: action.payload }
     case 'SET_ARTIFACT_SET_DB':
       return { ...state, artifactSetDb: action.payload }
     case 'SET_WEAPON_DB':

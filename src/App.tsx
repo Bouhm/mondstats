@@ -8,14 +8,18 @@ import { gql, useQuery } from '@apollo/client';
 
 import About from './components/About';
 import Changelog from './components/Changelog';
+import CharacterPage from './components/CharacterPage';
 import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
 import AbyssBattles from './data/abyssBattles.json';
+import ArtifactDb from './data/artifacts.json';
 import ArtifactSetDb from './data/artifactSets.json';
 import CharacterBuilds from './data/characterBuilds.json';
 import CharacterDb from './data/characters.json';
 import {
+  IArtifactData,
+  IArtifactDb,
   IArtifactSetData,
   IArtifactSetDb,
   ICharacterData,
@@ -28,13 +32,14 @@ import { getShortName } from './scripts/util';
 import { Store } from './Store';
 
 function App() {
-  const [, dispatch] = useContext(Store)
+  const [state, dispatch] = useContext(Store)
   // const { loading, error, data } = useQuery(Query);
 
   useEffect(() => {
     let charIdMap: { [shortname: string]: string } = {}
     let characterDb: ICharacterDb = {}
     let weaponDb: IWeaponDb = {}
+    let artifactDb: IArtifactDb = {}
     let artifactSetDb: IArtifactSetDb = {}
 
     _.forEach(CharacterDb, (character: ICharacterData) => {
@@ -48,23 +53,29 @@ function App() {
       weaponDb[weapon._id] = weapon
     })
 
+    _.forEach(ArtifactDb, (artifact: IArtifactData) => {
+      artifactDb[artifact._id] = artifact
+    })
+
     _.forEach(ArtifactSetDb, (set: IArtifactSetData) => {
       artifactSetDb[set._id] = set
     })
 
+    dispatch({ type: "SET_ARTIFACT", payload: artifactDb })
     dispatch({ type: "SET_ARTIFACT_DB", payload: artifactSetDb })
     dispatch({ type: "SET_WEAPON_DB", payload: weaponDb })
     dispatch({ type: "SET_CHARACTER_DB", payload: characterDb })
     dispatch({ type: "SET_CHARACTER_BUILDS", payload: CharacterBuilds })
     dispatch({ type: "SET_ABYSS_BATTLES", payload: AbyssBattles })
     dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
-  }, [CharacterDb, ArtifactSetDb, WeaponDb, getShortName, dispatch])
+    console.log("data set")
+  }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb, getShortName, dispatch])
 
-  const renderCharacterSearch = () => <CharacterSearch dataTotal={11119} />
+  const renderCharacterSearch = () => <CharacterSearch dataTotal={11186} />
   const renderCharacterPage = () => {
     return (
       <>
-        {/* <CharacterPage data={data} /> */}
+        <CharacterPage data={{ characters: state.characterBuilds, abyss: state.abyssBattles }} />
       </>
     )
   }

@@ -5,7 +5,7 @@ import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { IAbyssData, ICharacterDb, ICharData, IData } from '../data/types';
+import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../data/types';
 import { Store } from '../Store';
 import Abyss from './Abyss';
 import BuildSelector from './builds/BuildSelector';
@@ -13,29 +13,36 @@ import elemColors from './builds/colors';
 import Constellations from './Constellations';
 
 type CharacterPageProps = {
-  data: IData
+  data: { 
+    characters: ICharacterBuild[],
+    abyss: IAbyssBattle[]
+  }
 }
 
 function CharacterPage({ data }: CharacterPageProps) {  
   const { shortName } = useParams<{ shortName: string }>();
   const [{ characterIdMap, characterDb, elementColor }, dispatch] = useContext(Store)
-  const [charData, setCharData] = useState<ICharData | undefined>(undefined)
-  const [abyssData, setAbyssData] = useState<IAbyssData | undefined>(undefined)
-  const [character, setCharacter] = useState<ICharacterDb | undefined>(undefined)
+  const [charData, setCharData] = useState<ICharacterBuild | undefined>(undefined)
+  const [abyssData, setAbyssData] = useState<IAbyssBattle[] | undefined>(undefined)
+  const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
+  const charId = characterIdMap[shortName]
+
+  _.forEach(data.abyss, floor => _.forEach(floor.party_stats, (battle, i) => {
+    if (battle && !_.includes(battle.party, charId)) {
+      delete floor.party_stats[i]
+    }
+  }));
 
   useEffect(() => {
-    const charId = characterIdMap[shortName]
-
-    if (charId) {
-      let character = characterDb[charId];
-      setCharacter(character)
-      setCharData(data.characters[charId]);
-      setAbyssData(data.abyss);
-    
+    if (!_.isEmpty(characterDb)) {
+      const char = characterDb[charId];
+      setCharacter(char)
+      setCharData(_.find(data.characters, charData => charData.char_id === charId ));
+      setAbyssData(data.abyss)
       dispatch({ type: 'SELECT_CHARACTER', payload: charId })
-      dispatch({ type: 'SET_ELEMENT_COLOR', payload: elemColors[character.element.toLowerCase()] })
+      dispatch({ type: 'SET_ELEMENT_COLOR', payload: elemColors[char.element.toLowerCase()] })
     }
-  }, [setCharacter, setCharData, dispatch, elemColors, elementColor, characterIdMap, shortName, data])
+  }, [setCharacter, setCharData, setAbyssData, dispatch, charId, characterDb, elemColors, elementColor])
 
   if (!character || !charData) {
     return <div>
@@ -44,7 +51,7 @@ function CharacterPage({ data }: CharacterPageProps) {
   }
 
   return (
-    <div className="character-page" style={{ backgroundImage: `url("/assets/characters/${character.id}_bg.png")` }}>
+    <div className="character-page" style={{ backgroundImage: `url("/assets/characters/${character.oid}_bg.png")` }}>
       <div className="character-stats-count" style={{ backgroundColor: elementColor }}>
         <span>Data from {charData.total} players</span>
       </div>
@@ -54,12 +61,12 @@ function CharacterPage({ data }: CharacterPageProps) {
             builds={_.take(charData.builds, 8)}
             total={charData.total}
           />
-          {/* <Constellations constellations={charData.constellations} total={charData.total} /> */}
+          <Constellations constellations={charData.constellations} total={charData.total} />
         </>
       }
-      {abyssData &&
+      {/* {abyssData &&
         <Abyss {...abyssData} />
-      }
+      } */}
     </div>
   )
 }

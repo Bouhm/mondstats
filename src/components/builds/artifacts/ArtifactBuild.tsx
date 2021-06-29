@@ -10,17 +10,18 @@ type ArtifactBuildProps = {
 }
 
 function ArtifactBuild({ artifacts }: ArtifactBuildProps) {
-  const [{ artifactDb }] = useContext(Store)
-  const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 1, set: { id } });
+  const [{ artifactDb, artifactSetDb }] = useContext(Store)
+
+  if (_.isEmpty(artifactSetDb)) return null;
 
   return (
     <div className="artifact-build">
       <h1>Artifacts</h1>
-      {_.map(artifacts, ({ id, activation_number }, i) => {
-        const artifact = getArtifactSet(id);
+      {_.map(artifacts, ({ _id, activation_number }, i) => {
+        const artifact = artifactDb[_id]
         if (!artifact) return null;
 
-        return <ArtifactCard key={`${id}-${i}`} {...artifact} activation={activation_number} affixes={artifact.set.affixes} />
+        return <ArtifactCard key={`${_id}-${i}`} {...artifact} activation={activation_number} affixes={artifactSetDb[_id].affixes} />
       })}
     </div>
   )

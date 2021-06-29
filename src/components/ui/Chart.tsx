@@ -66,7 +66,7 @@ function _Chart({ id = "", className = "", type, max, labels, colors = [], data 
       chart.destroy();
       setHasMounted(true)
     }
-  }, [hasMounted, setHasMounted, labels, data, colors, ref])
+  }, [hasMounted, setHasMounted, max, showScale, Chart, labels, data, datasets, colors, type, ref])
 
   return <canvas className={className} id={id} ref={ref} />
 }

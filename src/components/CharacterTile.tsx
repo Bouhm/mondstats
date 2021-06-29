@@ -28,7 +28,7 @@ function CharacterTile({ id }: CharacterTileProps) {
     <Link to={`/builds/${charName}`}>
       <div className="character-tile-container">
         <div className={classes}>
-          <img src={`/assets/characters/${character.id}.png`} alt={`${character.name}-portrait`}></img>
+          <img src={`/assets/characters/${character.oid}.png`} alt={`${character.name}-portrait`}></img>
           {charElement && <img className="element-icon" src={ElementIcons[character.element]} alt={character.element}></img>}
           <div className="character-tile-name">
             {character.name}
