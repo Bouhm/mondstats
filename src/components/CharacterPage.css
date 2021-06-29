@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  background-size: 23%;
+  background-size: contain;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;

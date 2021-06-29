@@ -74,9 +74,9 @@ function CharacterPage({ data }: CharacterPageProps) {
           <Constellations constellations={charData.constellations} total={charData.total} />
         </>
       }
-      {/* {abyssData &&
+      {abyssData &&
         <Abyss {...abyssData} />
-      } */}
+      }
     </div>
   )
 }
