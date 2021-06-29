@@ -2,6 +2,12 @@ import { Chart, ChartItem, ChartTypeRegistry, registerables } from 'chart.js';
 import _ from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
+export interface IChartConfig {
+  labels: string[],
+  data: number[],
+  colors: string[]
+}
+
 export interface IDataset {
   label?: string
   data: number[]

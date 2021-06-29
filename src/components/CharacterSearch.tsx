@@ -4,7 +4,7 @@ import Logo from '/assets/logo_sm.png';
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 
-import { Store } from '../Store';
+import { useAppSelector } from '../hooks';
 import CharacterTile, { CharacterTileProps } from './CharacterTile';
 import Searchbar from './ui/Searchbar';
 
@@ -13,7 +13,7 @@ type CharacterSearchProps = {
 }
 
 function CharacterSearch({ dataTotal }: CharacterSearchProps) {
-  const [{ characterIdMap }] = useContext(Store)
+  const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const [unfilteredChars, setUnfilteredChars] = useState<string[]>([]);
   const [filteredChars, setFilteredChars] = useState<string[]>([]);
 

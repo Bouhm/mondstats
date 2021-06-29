@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { IWeaponBuild } from '../../../data/types';
-import { Store } from '../../../Store';
+import { useAppSelector } from '../../../hooks';
 import Tooltip from '../../ui/Tooltip';
 import WeaponCard from './WeaponCard';
 
@@ -12,7 +12,8 @@ type WeaponBuild = {
 }
 
 function WeaponBuild({ weapons, total }: WeaponBuild) {
-  const [{ weaponDb, elementColor }] = useContext(Store)
+  const weaponDb = useAppSelector((state) => state.data.weaponDb)
+  const elementColor = useAppSelector((state) => state.data.elementColor)
 
   return (
     <div className="weapons-list-container">

@@ -5,7 +5,6 @@ import _ from 'lodash';
 import { element } from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 
-import { Store } from '../Store';
 import CharacterTile from './CharacterTile';
 import Dropdown, { Option } from './ui/Dropdown';
 import { ChevronDown, ChevronUp } from './ui/Icons';

@@ -5,15 +5,15 @@ import React, { ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ElementIcons } from '../data/constants';
+import { useAppSelector } from '../hooks';
 import { getShortName } from '../scripts/util';
-import { Store } from '../Store';
 
 export type CharacterTileProps = {
   id: string
 }
 
 function CharacterTile({ id }: CharacterTileProps) {
-  const [{ characterDb },] = useContext(Store)
+  const characterDb = useAppSelector((state) => state.data.characterDb)
   const character = characterDb[id]
 
   if (!character) return null;

@@ -67,7 +67,7 @@ export interface IWeaponBuild {
 }
 
 export interface IArtifactBuild {
-  _id: number,
+  _id: string,
   activation_number: number
 }
 
@@ -82,7 +82,6 @@ export interface IAbyssBattle {
   party_stats: {
     party: string[]
     count: number
-  }[],
-  total: number
+  }[][]
 }
 

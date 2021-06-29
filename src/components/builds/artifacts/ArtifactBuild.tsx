@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { useContext } from 'react';
 
 import { IArtifactBuild } from '../../../data/types';
-import { Store } from '../../../Store';
+import { useAppSelector } from '../../../hooks';
 import ArtifactCard from './ArtifactCard';
 
 type ArtifactBuildProps = {
@@ -10,7 +10,8 @@ type ArtifactBuildProps = {
 }
 
 function ArtifactBuild({ artifacts }: ArtifactBuildProps) {
-  const [{ artifactDb, artifactSetDb }] = useContext(Store)
+  const artifactDb = useAppSelector((state) => state.data.artifactDb)
+  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
 
   if (_.isEmpty(artifactSetDb)) return null;
 

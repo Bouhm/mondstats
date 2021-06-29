@@ -1,4 +1,6 @@
-import React, { useReducer } from 'react';
+import React from 'react';
+
+import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
   IAbyssBattle,
@@ -9,24 +11,20 @@ import {
   IWeaponDb,
 } from './data/types';
 
-// Didn't want to build out an API for handling more granular filtering of data
-// Because then I'd have to deal with a real database with potentially a ton of entries
-// Sticking to using static API with pre-filtered data in separate JSON files
-
 interface IState {
-  characterIdMap: { [shortName: string]: string },
+  characterIdMap: {[shortname: string]: string},
   selectedCharacter: string,
-  artifactSetDb: IArtifactSetDb,
   artifactDb: IArtifactDb,
-  weaponDb: IWeaponDb,
+  artifactSetDb: IArtifactSetDb,
   characterDb: ICharacterDb,
+  weaponDb: IWeaponDb,
   elementColor: string,
   characterBuilds: ICharacterBuild[],
   abyssBattles: IAbyssBattle[],
   f2p: boolean
 }
 
-export const initialState: IState = {
+const initialState: IState = {
   characterIdMap: {},
   selectedCharacter: '',
   artifactSetDb: {},
@@ -39,42 +37,58 @@ export const initialState: IState = {
   f2p: false
 }
 
-export const Store = React.createContext<[IState, React.Dispatch<any>]>([initialState, () => { }])
-
-export const StoreProvider = (props: any): JSX.Element => {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  return <Store.Provider value={[state, dispatch]}>{props.children}</Store.Provider>
-}
-
-// REDUCERS
-interface IAction {
-  type: string
-  payload?: any
-}
-
-export const reducer = (state: IState, action: IAction): IState => {
-  switch (action.type) {
-    case 'SET_CHARACTER_ID_MAP':
-      return { ...state, characterIdMap: action.payload }
-    case 'SELECT_CHARACTER':
-      return { ...state, selectedCharacter: action.payload }
-    case 'SET_ARTIFACT_DB':
-      return { ...state, artifactDb: action.payload }
-    case 'SET_ARTIFACT_SET_DB':
-      return { ...state, artifactSetDb: action.payload }
-    case 'SET_WEAPON_DB':
-      return { ...state, weaponDb: action.payload }
-    case 'SET_CHARACTER_DB':
-      return { ...state, characterDb: action.payload }
-    case 'SET_ELEMENT_COLOR':
-      return { ...state, elementColor: action.payload }
-    case 'SET_CHARACTER_BUILDS':
-      return { ...state, characterBuilds: action.payload }
-    case 'SET_ABYSS_BATTLES':
-      return { ...state, abyssBattles: action.payload }
-    case 'SET_F2P':
-      return { ...state, f2p: action.payload }
-    default:
-      return state
+const dataSlice = createSlice({
+  name: 'data',
+  initialState,
+  reducers: {
+    setCharacterIdMap: (state, action: PayloadAction<{[shortname: string]: string}>) => {
+      state.characterIdMap = action.payload
+    },
+    selectCharacter: (state, action: PayloadAction<string>) => {
+      state.selectedCharacter = action.payload
+    },
+    setArtifactDb: (state, action: PayloadAction<IArtifactDb>) => {
+      state.artifactDb = action.payload
+    },
+    setArtifactSetDb: (state, action: PayloadAction<IArtifactSetDb>) => {
+      state.artifactSetDb = action.payload
+    },
+    setWeaponDb: (state, action: PayloadAction<IWeaponDb>) => {
+      state.weaponDb = action.payload
+    },
+    setCharacterDb: (state, action: PayloadAction<ICharacterDb>) => {
+      state.characterDb = action.payload
+    },
+    setElementColor: (state, action: PayloadAction<string>) => {
+      state.elementColor = action.payload
+    },
+    setCharacterBuilds: (state, action: PayloadAction<ICharacterBuild[]>) => {
+      state.characterBuilds = action.payload
+    },
+    setAbyssbattles: (state, action: PayloadAction<IAbyssBattle[]>) => {
+      state.abyssBattles = action.payload
+    },
+    setF2p: (state, action: PayloadAction<boolean>) => {
+      state.f2p = action.payload
+    },
   }
-}
+})
+
+export const { 
+  setCharacterIdMap,
+  selectCharacter,
+  setArtifactDb,
+  setArtifactSetDb,
+  setWeaponDb,
+  setCharacterDb,
+  setElementColor,
+  setCharacterBuilds,
+  setAbyssbattles,
+  setF2p
+} = dataSlice.actions;
+
+const store = configureStore({ reducer: { data: dataSlice.reducer } })
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
+export default store;

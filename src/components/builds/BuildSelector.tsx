@@ -6,25 +6,33 @@ import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 
 import { IBuild } from '../../data/types';
-import { Store } from '../../Store';
-import Chart from '../ui/Chart';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import Chart, { IChartConfig } from '../ui/Chart';
 import ArtifactBuild from './artifacts/ArtifactBuild';
 import ArtifactSets from './artifacts/ArtifactSets';
 import elemColors from './colors';
 import WeaponBuild from './weapons/WeaponBuild';
 
 function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number }) {
-  const [{ artifactSetDb, elementColor }] = useContext(Store)
+  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
+  const elementColor = useAppSelector((state) => state.data.elementColor)
+  
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
+  const [chartConfig, setChartConfig] = useState<IChartConfig>({
+    labels: [],
+    data: [],
+    colors: []
+  })
+  let countSum = 0;
 
   const orderedBuilds = _.orderBy(builds, 'count', 'desc');
-  let labels: string[] = [];
-  let data: number[] = [];
-  let colors: string[] = [];
-  let countSum = 0; 
 
   useEffect(() => {
     if (_.isEmpty(artifactSetDb)) {
+      let labels: string[] = []
+      let data: number[] = []
+      let colors: string[] = []
+      
       _.forEach(orderedBuilds, build => {
         let label = "";
   
@@ -49,8 +57,13 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
       colors = Array(labels.length).fill("#a4a4a4")
       colors[activeBuildIdx] = elementColor;
   
+      setChartConfig({
+        labels, data, colors
+      })
     }
   }, [artifactSetDb])
+
+  console.log(orderedBuilds)
 
   return (
     <div className="builds-selector">
@@ -67,9 +80,9 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
             <Chart
               id="artifacts-donut"
               type="doughnut"
-              labels={labels}
-              data={data}
-              colors={colors}
+              labels={chartConfig.labels}
+              data={chartConfig.data}
+              colors={chartConfig.colors}
               max={countSum}
               showScale={false}
             />

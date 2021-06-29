@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { useContext } from 'react';
 
 import { IArtifactBuild } from '../../../data/types';
-import { Store } from '../../../Store';
+import { useAppSelector } from '../../../hooks';
 
 type ArtifactCardProps = {
   artifacts: IArtifactBuild[]
@@ -10,7 +10,8 @@ type ArtifactCardProps = {
 }
 
 function ArtifactSets({ artifacts, selected=false }: ArtifactCardProps) {
-  const [{ artifactDb, elementColor }] = useContext(Store)
+  const artifactDb = useAppSelector((state) => state.data.artifactDb)
+  const elementColor = useAppSelector((state) => state.data.elementColor)
 
   return (
     <div className={`artifact-sets-container ${selected ? "selected" : ""}`} style={selected ? {backgroundColor: elementColor }:{}}>

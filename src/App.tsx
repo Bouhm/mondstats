@@ -2,6 +2,7 @@ import './App.css';
 
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
 
 import { gql, useQuery } from '@apollo/client';
@@ -28,11 +29,23 @@ import {
   IWeaponDb,
 } from './data/types';
 import WeaponDb from './data/weapons.json';
+import { useAppDispatch, useAppSelector } from './hooks';
 import { getShortName } from './scripts/util';
-import { Store } from './Store';
+import {
+  setAbyssbattles,
+  setArtifactDb,
+  setArtifactSetDb,
+  setCharacterBuilds,
+  setCharacterDb,
+  setCharacterIdMap,
+  setWeaponDb,
+} from './Store';
 
 function App() {
-  const [state, dispatch] = useContext(Store)
+  const characterBuilds = useAppSelector((state) => state.data.characterBuilds)
+  const abyssBattles = useAppSelector((state) => state.data.abyssBattles)
+  const dispatch = useAppDispatch()
+  
   // const { loading, error, data } = useQuery(Query);
 
   useEffect(() => {
@@ -61,21 +74,20 @@ function App() {
       artifactSetDb[set._id] = set
     })
 
-    dispatch({ type: "SET_ARTIFACT", payload: artifactDb })
-    dispatch({ type: "SET_ARTIFACT_DB", payload: artifactSetDb })
-    dispatch({ type: "SET_WEAPON_DB", payload: weaponDb })
-    dispatch({ type: "SET_CHARACTER_DB", payload: characterDb })
-    dispatch({ type: "SET_CHARACTER_BUILDS", payload: CharacterBuilds })
-    dispatch({ type: "SET_ABYSS_BATTLES", payload: AbyssBattles })
-    dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
-    console.log("data set")
-  }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb, getShortName, dispatch])
+    dispatch(setArtifactDb(artifactDb))
+    dispatch(setArtifactSetDb(artifactSetDb))
+    dispatch(setCharacterDb(characterDb))
+    dispatch(setCharacterBuilds(CharacterBuilds))
+    dispatch(setAbyssbattles(AbyssBattles))
+    dispatch(setCharacterIdMap(charIdMap))
+    dispatch(setWeaponDb(weaponDb))
+  }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
 
   const renderCharacterSearch = () => <CharacterSearch dataTotal={11186} />
   const renderCharacterPage = () => {
     return (
       <>
-        <CharacterPage data={{ characters: state.characterBuilds, abyss: state.abyssBattles }} />
+        <CharacterPage data={{ characters: characterBuilds, abyss: abyssBattles }} />
       </>
     )
   }

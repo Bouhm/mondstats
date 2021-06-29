@@ -2,10 +2,10 @@ import _ from 'lodash';
 import React, { useContext } from 'react';
 
 import { IArtifactData, IArtifactDb } from '../../../data/types';
-import { Store } from '../../../Store';
+import { useAppSelector } from '../../../hooks';
 
 function ArtifactCard({ oid, name, set, affixes, activation }: IArtifactData & { activation: number, affixes: { activation_number: number, effect: string }[] }) {
-  const [{ artifactSetDb }] = useContext(Store)
+  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
 
   return (
     <div className={`artifact-card`}>

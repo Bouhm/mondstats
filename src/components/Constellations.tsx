@@ -3,7 +3,7 @@ import './Constellations.css';
 import _ from 'lodash';
 import React, { ReactNode, useContext } from 'react';
 
-import { Store } from '../Store';
+import { useAppSelector } from '../hooks';
 import { Circle } from './ui/Icons';
 import Tooltip from './ui/Tooltip';
 
@@ -31,7 +31,8 @@ function ConstellationCard({ id, name, effect, children }: ConstellationCardProp
 }
 
 function Constellations({ constellations, total  }: ConstellationsProps ) {
-  const [{ selectedCharacter, characterDb },] = useContext(Store)
+  const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
+  const characterDb = useAppSelector((state) => state.data.characterDb)
 
   return (
     <div className="constellations-container">
