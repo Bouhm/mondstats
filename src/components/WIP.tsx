@@ -10,6 +10,9 @@ function UnderConstruction() {
         <source src="/assets/vids/wip.webm"
               type="video/webm" />
       </video>
+      <p>
+        New content coming very soon. Stay tuned!
+      </p>
     </div>
   )
 }

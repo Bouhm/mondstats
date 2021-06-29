@@ -103,9 +103,12 @@ function App() {
             <Switch>
               <Route path="/about" component={About} />
               <Route path="/changelog" component={Changelog} />
+              <Route path="/abyss" component={UnderConstruction} />
+              <Route path="/characters" component={UnderConstruction} />
+              <Route path="/artifacts" component={UnderConstruction} />
+              <Route path="/weapons" component={UnderConstruction} />
               <Route exact path="/" render={renderCharacterSearch} />
               <Route path="/builds/:shortName" render={renderCharacterPage} />
-              <Route path="/" component={UnderConstruction} />
               <Redirect exact path="/builds" to="/" />
             </Switch>
           </section>

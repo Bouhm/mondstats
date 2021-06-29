@@ -9,6 +9,12 @@
     margin: 3rem 0;
   }
 
+  p {
+    width: 100%;
+    text-align: center;
+    color: white;
+  }
+
   video {
     margin: 0 auto;
     width: 500px;
