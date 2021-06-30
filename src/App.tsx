@@ -2,101 +2,156 @@ import './App.css';
 
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, Redirect, Route, Switch, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Redirect, Route, Switch } from 'react-router-dom';
+
+import { gql, useQuery } from '@apollo/client';
 
 import About from './components/About';
 import Changelog from './components/Changelog';
 import CharacterPage from './components/CharacterPage';
 import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
-import Dropdown, { Option } from './components/ui/Dropdown';
-import artifactDb from './data/artifacts.json';
-import characterDb from './data/characters.json';
-import allData from './data/data.json';
-import { IData } from './data/types';
-import weaponDb from './data/weapons.json';
+import Sidebar from './components/sidebar/Sidebar';
+import Dialogue from './components/ui/Dialogue';
+import UnderConstruction from './components/WIP';
+import AbyssBattles from './data/abyssBattles.json';
+import ArtifactDb from './data/artifacts.json';
+import ArtifactSetDb from './data/artifactSets.json';
+import CharacterBuilds from './data/characterBuilds.json';
+import CharacterDb from './data/characters.json';
+import {
+  IArtifactData,
+  IArtifactDb,
+  IArtifactSetData,
+  IArtifactSetDb,
+  ICharacterData,
+  ICharacterDb,
+  IWeaponData,
+  IWeaponDb,
+} from './data/types';
+import WeaponDb from './data/weapons.json';
+import { useAppDispatch, useAppSelector } from './hooks';
 import { getShortName } from './scripts/util';
-import { Store } from './Store';
+import {
+  setAbyssbattles,
+  setArtifactDb,
+  setArtifactSetDb,
+  setCharacterBuilds,
+  setCharacterDb,
+  setCharacterIdMap,
+  setWeaponDb,
+} from './Store';
 
 function App() {
-  const [, dispatch] = useContext(Store)
+  const characterBuilds = useAppSelector((state) => state.data.characterBuilds)
+  const abyssBattles = useAppSelector((state) => state.data.abyssBattles)
+  const dispatch = useAppDispatch()
+
+  const dialogueWidthLimit = 1078;
+  const [seenDialogue, setSeenDialogue] = useState(window.innerWidth > dialogueWidthLimit && JSON.parse(sessionStorage.getItem('seenDialogue')!))
+
+  const handleCloseDialogue = () => {
+    setSeenDialogue(true);
+  }
+
+  const handleWindowResize = () => {
+    if (window.innerWidth <= dialogueWidthLimit) {
+      setSeenDialogue(true);
+    } else if (!JSON.parse(sessionStorage.getItem('seenDialogue')!)) {
+      setSeenDialogue(false);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowResize)
+  },[])
+
+  
+  // const { loading, error, data } = useQuery(Query);
 
   useEffect(() => {
     let charIdMap: { [shortname: string]: string } = {}
-    _.forEach(_.values(characterDb), char => {
-      const charName = char.name === "Traveler" ? getShortName(`${char.name}-${char.element}`) : getShortName(char.name);
-      charIdMap[charName] = char.id + '';
-    });
+    let characterDb: ICharacterDb = {}
+    let weaponDb: IWeaponDb = {}
+    let artifactDb: IArtifactDb = {}
+    let artifactSetDb: IArtifactSetDb = {}
 
-    dispatch({ type: "SET_ARTIFACT_DB", payload: artifactDb })
-    dispatch({ type: "SET_WEAPON_DB", payload: weaponDb })
-    dispatch({ type: "SET_CHARACTER_DB", payload: characterDb })
-    dispatch({ type: 'SET_CHARACTER_ID_MAP', payload: charIdMap })
-  }, [characterDb, artifactDb, weaponDb, getShortName, dispatch])
+    _.forEach(CharacterDb, (character: ICharacterData) => {
+      characterDb[character._id] = character;
 
-  const options = [
-    { label: "All", value: "all" },
-    { label: "Cleared Spiral Abyss", value: "abyssClears" },
-    { label: "Mains", value: "mains" }
-  ]
+      const charName = character.name === "Traveler" ? getShortName(`${character.name}-${character.element}`) : getShortName(character.name);
+      charIdMap[charName] = character._id;
+    })
 
-  const [data, setData] = useState<IData>(allData.all as unknown as IData)
-  const location = useLocation();
+    _.forEach(WeaponDb, (weapon: IWeaponData) => {
+      weaponDb[weapon._id] = weapon
+    })
 
-  useEffect(() => {
-    setData(allData.all as unknown as IData)
-  }, [location, setData, allData])
+    _.forEach(ArtifactDb, (artifact: IArtifactData) => {
+      artifactDb[artifact._id] = artifact
+    })
 
+    _.forEach(ArtifactSetDb, (set: IArtifactSetData) => {
+      artifactSetDb[set._id] = set
+    })
 
-  const handleSelect = (selected: Option) => {
-    let data = allData.all;
-    switch (selected.value) {
-      case "all":
-        data = allData.all;
-        break;
-      case "mains":
-        data = allData.mains;
-        break;
-      case "abyssClears":
-        data = allData.abyssClears;
-        break;
-      default:
-        break;
-    }
+    dispatch(setArtifactDb(artifactDb))
+    dispatch(setArtifactSetDb(artifactSetDb))
+    dispatch(setCharacterDb(characterDb))
+    dispatch(setCharacterBuilds(CharacterBuilds))
+    dispatch(setAbyssbattles(AbyssBattles))
+    dispatch(setCharacterIdMap(charIdMap))
+    dispatch(setWeaponDb(weaponDb))
+  }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
 
-    setData(data as unknown as IData);
-  }
-
-  const renderCharacterSearch = () => <CharacterSearch dataTotal={2006} />
+  const renderCharacterSearch = () => <CharacterSearch dataTotal={11449} />
   const renderCharacterPage = () => {
     return (
       <>
-        <div className="character-filter"><Dropdown options={options} onChange={handleSelect} defaultValue={options[0]} /></div>
-        <CharacterPage data={data} />
+        <CharacterPage data={{ characters: characterBuilds, abyss: abyssBattles }} />
       </>
     )
   }
-  
+
   return (
     <div className="App">
+      {!seenDialogue && (
+        <Dialogue 
+        onClose={handleCloseDialogue}>
+          The past month was spent on database migration and building out a back-end server. Now that that's done, I'll finally implement more interesting content with the data in the following weeks. Please feel free to throw any suggestions at <b>Bouhm#2205</b> on Discord.
+        </Dialogue>
+      )}
       <Navbar />
-      <section>
-        <Switch>
-          <Route path="/about" component={About} />
-          <Route path="/changelog" component={Changelog} />
-          <Route exact path="/" render={renderCharacterSearch}/>
-          <Route path="/builds/:shortName" render={renderCharacterPage} />
-          <Redirect exact path="/builds" to="/" />
-        </Switch>
-      </section>
-      <section>
-        <div className="links">
-          <Link to="/about">About</Link>
-          <Link to="/changelog">Changelog</Link>
+      <main className="App-content">
+        <Sidebar />
+        <div className="section-view" style={!seenDialogue ? {
+        filter: "blur(2px)", 
+        opacity: 0.1
+      } : {}}>
+          <section>
+            <Switch>
+              <Route path="/about" component={About} />
+              <Route path="/changelog" component={Changelog} />
+              <Route path="/abyss" component={UnderConstruction} />
+              <Route path="/characters" component={UnderConstruction} />
+              <Route path="/artifacts" component={UnderConstruction} />
+              <Route path="/weapons" component={UnderConstruction} />
+              <Route exact path="/" render={renderCharacterSearch} />
+              <Route path="/builds/:shortName" render={renderCharacterPage} />
+              <Redirect exact path="/builds" to="/" />
+            </Switch>
+          </section>
+          <section>
+            <div className="links">
+              <Link to="/about">About</Link>
+              <Link to="/changelog">Changelog</Link>
+            </div>
+            <footer>Favonius.io is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoYo.</footer>
+          </section>
         </div>
-        <footer>Favonius.io is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoYo.</footer>
-      </section>
-      <span className="build-ver">dev build 05.27.21</span>
+      </main>
+      <span className="build-ver">dev build 06.28.21</span>
     </div>
   )
 }

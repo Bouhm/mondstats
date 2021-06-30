@@ -1,35 +1,50 @@
 .abyss-container {
-  background: none;
-  padding: 0 2rem 2rem 2rem;
+  padding: 0.5rem 2rem 2rem 2rem;
   min-height: 28rem;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+
+  .abyss-disclaimer {
+    color: #e9e5dc;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+  }
 
   h1 {
-    color: white;
-    width: 300px;
-    margin: 3rem auto 1.5rem auto;
-    border-bottom: solid 1px grey;
+    margin: 2rem auto;
   }
 }
 
 .floor-container {
   display: flex;
   flex-flow: column;
+  align-items: center;
 
   .party-container {
     display: flex;
+    margin: 2rem;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .TEMP-SINGLE-COL {
+    display: flex !important;
     flex-flow: column;
-    margin: 1rem;
+    align-items: center;
   }
 
   .stage-container {
     display: grid;
+    width: 100%;
 
     .stage-label {
+      width: 100%;
       text-align: center;
       color: white;
       font-size: 2.5rem;
       padding: 1rem;
-      background: url("https://webstatic-sea.hoyolab.com/app/community-game-records-sea/images/pc-abyss-bg.dc0c3ac6.png")
+      background: url('https://webstatic-sea.hoyolab.com/app/community-game-records-sea/images/pc-abyss-bg.dc0c3ac6.png')
         0% 0% / 100% no-repeat;
     }
 
@@ -45,6 +60,10 @@
         width: 300px;
         border-bottom: solid 1px grey;
       }
+
+      .emote-empty {
+        width: 160px;
+      }
     }
 
     .stage-teams-show-more {
@@ -55,6 +74,7 @@
       background-color: #e9e5dc;
       padding: 1rem 2rem;
       border-radius: 5px;
+      width: 15rem;
 
       font-weight: 500;
       color: #202020;
@@ -84,14 +104,18 @@
 
   .party-popularity {
     position: relative;
-    width: 100%;
     text-align: center;
-    padding: 2rem 0 1.5rem 0;
+    padding: 1rem;
     background-color: #e9e5dc;
     line-height: 30%;
     color: white;
     font-size: 2rem;
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+    height: 135px;
+    min-width: 135px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
   }
 
   .party-characters {
@@ -156,11 +180,20 @@
   }
 }
 
-@media (max-width: 634px) {
+@media (max-width: 1018px) {
   .party-container {
+    display: flex;
+    flex-flow: column;
+    margin: 1rem;
+
     .party-characters {
       display: grid;
       grid-template-columns: 1fr 1fr;
+    }
+
+    .party-popularity {
+      width: 100%;
+      height: 100%;
     }
   }
 }

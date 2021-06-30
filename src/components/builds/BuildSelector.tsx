@@ -6,7 +6,7 @@ import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 
 import { IBuild } from '../../data/types';
-import { Store } from '../../Store';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import Chart from '../ui/Chart';
 import ArtifactBuild from './artifacts/ArtifactBuild';
 import ArtifactSets from './artifacts/ArtifactSets';
@@ -14,21 +14,21 @@ import elemColors from './colors';
 import WeaponBuild from './weapons/WeaponBuild';
 
 function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number }) {
-  const [{ artifactDb, elementColor }] = useContext(Store)
+  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
+  const elementColor = useAppSelector((state) => state.data.elementColor)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
-  const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 5, set: { id } });
 
   const orderedBuilds = _.orderBy(builds, 'count', 'desc');
   let labels: string[] = [];
   let data: number[] = [];
   let colors: string[] = [];
-  let countSum = 0;
+  let countSum = 0; 
 
   _.forEach(orderedBuilds, build => {
     let label = "";
 
-    _.forEach(build.artifacts, (artifact, i) => {
-      let name = getArtifactSet(artifact.id)!.set.name;
+    _.forEach(build.artifacts, (set, i) => {
+      let name = artifactSetDb[set._id].name;
       if (name.includes(" ")) {
         if (name.split(" ")[0] === "The") {
           name = name.split(" ")[1]
@@ -36,7 +36,7 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
           name = name.split(" ")[0]
         }
       }
-      label += artifact.activation_number + "-" + name
+      label += set.activation_number + "-" + name
       if (i !== build.artifacts.length - 1) label += " "
     })
 
@@ -47,10 +47,6 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
 
   colors = Array(labels.length).fill("#a4a4a4")
   colors[activeBuildIdx] = elementColor;
-
-  useEffect(() => {
-    setActiveBuildIdx(0)
-  }, [builds, setActiveBuildIdx])
 
   return (
     <div className="builds-selector">

@@ -1,8 +1,38 @@
 .constellations-container {
-  display: table;
-  margin: 5rem auto;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+.constellations-chart {
+  display: grid;
   height: 50vh;
-  margin-bottom: 8rem;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(100, 1fr);
+  grid-column-gap: 5px;
+
+  [class*='bar'] {
+    border-radius: 5px 5px 0 0;
+    transition: all 0.6s ease;
+    grid-row-start: 1;
+    grid-row-end: 101;
+  }
+
+  @mixin chartValue($data) {
+    $result: 101 - $data;
+    grid-row-start: $result;
+  }
+
+  @for $i from 1 through 101 {
+    .bar-#{$i} {
+      @include chartValue($i);
+    }
+  }
+}
+
+.divider {
+  height: 100%;
+  border-right: solid 2px rgba(255, 255, 255, 0.3);
+  margin: 0 1rem;
 }
 
 .constellation-card {
@@ -26,11 +56,6 @@
 }
 
 .constellation-bar-container {
-  display: table-cell;
-  height: 100%;
-  vertical-align: bottom;
-  padding: 0 0.5rem;
-
   .constellation-bar {
     animation-name: vertibar;
     animation-duration: 1s;
@@ -62,5 +87,11 @@
     100% {
       max-height: 100%;
     }
+  }
+}
+
+@media (max-width: 1400px) {
+  .constellation-bar-container {
+    width: auto;
   }
 }

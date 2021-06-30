@@ -2,6 +2,12 @@ import { Chart, ChartItem, ChartTypeRegistry, registerables } from 'chart.js';
 import _ from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
+export interface IChartConfig {
+  labels: string[],
+  data: number[],
+  colors: string[]
+}
+
 export interface IDataset {
   label?: string
   data: number[]
@@ -66,7 +72,7 @@ function _Chart({ id = "", className = "", type, max, labels, colors = [], data 
       chart.destroy();
       setHasMounted(true)
     }
-  }, [hasMounted, setHasMounted, labels, data, colors, ref])
+  }, [hasMounted, setHasMounted, max, showScale, Chart, labels, data, datasets, colors, type, ref])
 
   return <canvas className={className} id={id} ref={ref} />
 }

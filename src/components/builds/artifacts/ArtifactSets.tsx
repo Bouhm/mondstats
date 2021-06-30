@@ -2,26 +2,23 @@ import _ from 'lodash';
 import React, { useContext } from 'react';
 
 import { IArtifactBuild } from '../../../data/types';
-import { Store } from '../../../Store';
+import { useAppSelector } from '../../../hooks';
 
-type ArtifactCardProps = {
+type ArtifactSetsProps = {
   artifacts: IArtifactBuild[]
   selected?: boolean
 }
 
-function ArtifactSets({ artifacts, selected=false }: ArtifactCardProps) {
-  const [{ artifactDb, elementColor }] = useContext(Store)
-  const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 5, set: { id } });
+function ArtifactSets({ artifacts, selected=false }: ArtifactSetsProps) {
+  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
+  const elementColor = useAppSelector((state) => state.data.elementColor)
 
   return (
     <div className={`artifact-sets-container ${selected ? "selected" : ""}`} style={selected ? {backgroundColor: elementColor }:{}}>
-      {_.map(artifacts, ({ id, activation_number }, i) => {
-        const artifact = getArtifactSet(id);
-        if (!artifact) return null;
-
+      {_.map(artifacts, ({ _id, activation_number }, i) => {
         return (
-          <div key={`thumb-${id}-i`} className={"artifact-thumb"}>
-            <img src={`/assets/artifacts/${artifact.id}.png`} alt={artifact.name} />
+          <div key={`thumb-${_id}-i`} className={"artifact-thumb"}>
+            <img src={`/assets/artifacts/${artifactSetDb[_id].oid}.png`} alt={artifactSetDb[_id].name} />
             <div className="artifact-set-activation">{activation_number}x</div>
           </div>
         )

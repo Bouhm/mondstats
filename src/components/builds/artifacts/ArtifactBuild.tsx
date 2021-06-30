@@ -2,25 +2,25 @@ import _ from 'lodash';
 import React, { useContext } from 'react';
 
 import { IArtifactBuild } from '../../../data/types';
-import { Store } from '../../../Store';
-import ArtifactCard from './ArtifactCard';
+import { useAppSelector } from '../../../hooks';
+import ArtifactSetCard from './ArtifactSetCard';
 
 type ArtifactBuildProps = {
   artifacts: IArtifactBuild[]
 }
 
 function ArtifactBuild({ artifacts }: ArtifactBuildProps) {
-  const [{ artifactDb }] = useContext(Store)
-  const getArtifactSet = (id: number) => _.find(artifactDb, { pos: 1, set: { id } });
+  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
+
+  if (_.isEmpty(artifactSetDb)) return null;
 
   return (
     <div className="artifact-build">
       <h1>Artifacts</h1>
-      {_.map(artifacts, ({ id, activation_number }, i) => {
-        const artifact = getArtifactSet(id);
-        if (!artifact) return null;
+      {_.map(artifacts, ({ _id, activation_number }, i) => {
+        const set = artifactSetDb[_id]
 
-        return <ArtifactCard key={`${id}-${i}`} {...artifact} activation={activation_number} affixes={artifact.set.affixes} />
+        return <ArtifactSetCard key={`${_id}-${i}`} {...set} activation={activation_number} />
       })}
     </div>
   )

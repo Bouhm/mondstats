@@ -1,6 +1,5 @@
 import './About.css';
 
-import _ from 'lodash';
 import React, { useEffect } from 'react';
 
 function About() { 
@@ -12,7 +11,7 @@ function About() {
     <div className="about-container">
       <div className="about-header">
         <h1>About Favonius.io</h1>
-        <p>Favonius.io is a website that aims to help players build characters and form teams to compete in the most challenging content in the game. You can view the statistics on how players of different skills and preferences like to build and use certain characters.</p>
+        <p>Favonius.io is a website that aims to help players build characters and formulate teams to optimize their gameplay. You can browse the statistics on how players of different skills and preferences like to build and use certain characters.</p>
         <p>This is a hobby project by Bouhm who is obsessed with sharing the many ways players find success and enjoyment in the game.</p>
       </div>
       <hr />
