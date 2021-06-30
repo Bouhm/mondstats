@@ -1,0 +1,77 @@
+.constellation-card {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  .constellation-card-icon {
+    height: 60px;
+    text-align: middle;
+    line-height: 60px;
+
+    img {
+      width: 60px;
+    }
+  }
+
+  .constellation-popularity {
+    font-size: 1.8rem;
+  }
+
+  p {
+    margin: 0.5rem;
+  }
+}
+
+@media (max-width: 887px) {
+  .constellation-popularity {
+    font-size: 1.2rem !important;
+  }
+
+  p {
+    font-size: 0.8rem !important;
+    text-align: center;
+  }
+
+  .constellation-card-icon {
+    height: 30px !important;
+    line-height: 30px !important;
+
+    img {
+      width: 30px !important;
+    }
+  }
+}
+
+
+@media (max-width: 887px) {
+  .constellation-popularity {
+    font-size: 1.2rem !important;
+  }
+
+  p {
+    font-size: 0.8rem !important;
+    text-align: center;
+  }
+
+  .constellation-card-icon {
+    height: 30px !important;
+    line-height: 30px !important;
+
+    img {
+      width: 30px !important;
+    }
+  }
+}
+
+@media (max-width: 646px) {
+  .constellation-popularity {
+    display: none !important;
+  }
+
+  p {
+    display: none !important;
+  }
+}
+

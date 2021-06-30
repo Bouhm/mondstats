@@ -6,17 +6,22 @@ import React, { ReactNode } from 'react';
 type BarChartProps = {
   data: {
     content?: ReactNode,
-    value: number
+    value: number,
+    color?: string
   }[]
 }
 
 function BarChart({data}: BarChartProps) {
+
   return (
-    <dl className="chart">
-      {_.map(data, ({ content, value }) => {
+    <dl 
+      className="barchart-container"
+      style={{gridTemplateColumns: `repeat(${data.length}, 1fr)`}}
+    >
+      {_.map(data, ({ content, color, value }, i) => {
         return (
-          <div className={`_bar-${value}`}>
-            {content && content}
+          <div key ={`_bar-${value}-${i}`} className={`_bar-${value}`} style={{backgroundColor: color}}>
+            <div className={"bar-content"}>{content}</div>
           </div>
         )
       })}
