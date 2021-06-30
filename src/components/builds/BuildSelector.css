@@ -29,7 +29,7 @@
       position: relative;
       display: flex;
       justify-content: center;
-      margin: 2rem auto;
+      padding-left: 2rem;
       max-width: 350px;
 
       canvas {
@@ -129,6 +129,12 @@
 
     .weapon-bar-chart {
       display: none;
+    }
+  }
+
+  .artifacts-donut-chart {
+    .artifact-popularity {
+      font-size: 2.5rem !important;
     }
   }
 }
