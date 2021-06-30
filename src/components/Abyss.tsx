@@ -68,16 +68,16 @@ function Abyss(abyssBattles: IAbyssBattle[]) {
         return <div key={selectedStage.value} className="stage-container TEMP-SINGLE-COL">
           <h2 className="stage-label">Floor {selectedStage.label}</h2>
           <div className="stage-half TEMP-SINGLE-COL">
-            {_.map(_.filter(filteredAbyss, { floor_level: selectedStage.value }), ({party_stats}) => {
-              return <> 
+            {_.map(_.filter(filteredAbyss, { floor_level: selectedStage.value }), ({party_stats}, i) => {
+              return <div key={`${selectedStage.value}-${i}`}> 
               <>
                 {party_stats[0].length > 1 ? 
                   _.map(_.take(_.orderBy(party_stats[0], 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 8 : 3), ({party, count}, j) => {
                     return (
-                      <div key={`party-${selectedStage.value}-${j}`} className="party-container">
+                      <div key={`party-${selectedStage.value}-${i}-${j}`} className="party-container">
                         <div className="party-characters">
-                          {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => {
-                            return <CharacterTile id={char+''} key={`party-${i}`} labeled={false} />
+                          {_.map(_.sortBy(party, char => characterDb[char].name), (char, k) => {
+                            return <CharacterTile id={char+''} key={`party-${char}-${k}`} labeled={false} />
                           })}
                         </div>
                         <div className="party-popularity">
@@ -95,7 +95,7 @@ function Abyss(abyssBattles: IAbyssBattle[]) {
                     :
                     <div className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show less <ChevronUp size={20} color={"#202020"} /></div>
                   )}
-                </>
+                </div>
               // return _.map(party_stats, (parties, i) => {
               //   return (
               //     <div key={`battle-${i}`} className="battle-container">

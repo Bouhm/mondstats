@@ -13,6 +13,7 @@ import CharacterPage from './components/CharacterPage';
 import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
+import Dialogue from './components/ui/Dialogue';
 import UnderConstruction from './components/WIP';
 import AbyssBattles from './data/abyssBattles.json';
 import ArtifactDb from './data/artifacts.json';
@@ -41,7 +42,6 @@ import {
   setCharacterIdMap,
   setWeaponDb,
 } from './Store';
-import Dialogue from './components/ui/Dialogue';
 
 function App() {
   const characterBuilds = useAppSelector((state) => state.data.characterBuilds)
@@ -56,7 +56,6 @@ function App() {
   }
 
   const handleWindowResize = () => {
-    console.log(window.innerWidth)
     if (window.innerWidth <= dialogueWidthLimit) {
       setSeenDialogue(true);
     } else if (!JSON.parse(sessionStorage.getItem('seenDialogue')!)) {
