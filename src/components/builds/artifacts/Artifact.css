@@ -93,3 +93,30 @@
     }
   }
 }
+
+@media (max-width: 640px) {
+  table,
+  table td,
+  table tr,
+  table th {
+    display: block;
+    text-align: left;
+  }
+  table th,
+  table td {
+    margin: 0;
+    padding-left: 25px;
+  }
+  table td {
+    padding-left: 0;
+
+    &:nth-child(odd) {
+      border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+      font-size: 1.3rem;
+    }
+
+    &:nth-child(even) {
+      margin-bottom: 1.2rem;
+    }
+  }
+}
