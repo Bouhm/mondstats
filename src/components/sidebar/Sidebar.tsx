@@ -25,7 +25,7 @@ function Sidebar() {
           return <Link key={tab.name} to={tab.linkto}>
             <div className="sidebar-tab">
               <img src={`/assets/icons/${tab.icon}`} />
-              {tab.name}
+              <span className="tab-name">{tab.name}</span>
             </div>
           </Link>
         })}
