@@ -8,10 +8,14 @@
   .constellation-card-icon {
     height: 60px;
     text-align: middle;
-    line-height: 60px;
+    line-height: 2.5rem;
 
     img {
       width: 60px;
+
+      &[alt] {
+        font-size: 1rem !important;
+      }
     }
   }
 
@@ -38,7 +42,6 @@
 
   .constellation-card-icon {
     height: 30px !important;
-    line-height: 30px !important;
 
     img {
       width: 30px !important;
@@ -58,7 +61,6 @@
 
   .constellation-card-icon {
     height: 30px !important;
-    line-height: 30px !important;
 
     img {
       width: 30px !important;
@@ -79,7 +81,6 @@
 
   .constellation-card-icon {
     height: 30px !important;
-    line-height: 30px !important;
 
     img {
       width: 30px !important;

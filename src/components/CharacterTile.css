@@ -40,11 +40,15 @@
   }
 
   .character-tile-name {
-    padding: 0.2rem 0.2rem 0.1rem 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
     color: rgb(73, 83, 102);
     background-color: #e9e5dc;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     text-align: center;
+    line-height: 1.1rem;
     text-decoration: none;
   }
 }

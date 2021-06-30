@@ -1,3 +1,8 @@
+## dev build 6.30.21
+
+- Add Constellation stats
+- Add preliminary Kaedahara Kazuha data
+
 ## dev build 6.28.21
 
 - Fix aggregation on abyss battles

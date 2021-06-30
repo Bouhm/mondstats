@@ -24,7 +24,7 @@ function ConstellationCard({ oid, name, effect, children }: ConstellationCardPro
   return (
     <div className="constellation-card">
       <div className="constellation-card-icon">
-        {oid ? <img src={`/assets/characters/constellations/${oid}.png`} alt={name} /> : "C0"}
+        {oid ? <img src={`/assets/characters/constellations/${oid}.png`} /> : "C0"}
       </div>
       {children}
     </div>
