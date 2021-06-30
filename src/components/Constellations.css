@@ -4,13 +4,11 @@
 }
 
 .constellations-chart {
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: 1fr 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin: 5rem auto;
   height: 50vh;
   margin-bottom: 8rem;
-  
 }
 
 .divider {
@@ -41,6 +39,7 @@
 
 .constellation-bar-container {
   display: table-cell;
+  max-width: 11rem;
   height: 100%;
   vertical-align: bottom;
   padding: 0 0.5rem;
@@ -76,5 +75,11 @@
     100% {
       max-height: 100%;
     }
+  }
+}
+
+@media (max-width: 1400px) {
+  .constellation-bar-container {
+    width: auto;
   }
 }

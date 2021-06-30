@@ -1,16 +1,10 @@
 .builds-selector {
   display: flex;
   flex-flow: row;
-  padding: 1rem 0.5rem 2rem 2rem;
-  margin-top: 2rem;
+  padding: 2rem;
+  margin: 2rem 0;
   background-color: rgba(0,0,0,0.15);
   border-radius: 10px;
-
-  h1 {
-    color: white;
-    width: 300px;
-    border-bottom: solid 1px grey;
-  }
 }
 
 .weapons-list-container {
@@ -121,7 +115,9 @@
     max-height: 100%;
     flex-wrap: wrap-reverse;
   }
+}
 
+@media (max-width: 676px) {
   .weapons-list {
     display: flex;
     flex-flow: column;
@@ -137,14 +133,8 @@
   .builds-selector {
     flex-flow: column-reverse;
   }
-
-  h1 {
-    width: 100%;
-    margin-top: 2rem;
-  }
 }
 
 @media (max-width: 1280px) {
-  .artifact-build {
-  }
+
 }

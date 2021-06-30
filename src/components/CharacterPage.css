@@ -8,7 +8,11 @@
   background-position: center;
 
   h1 {
+    text-align: center;
     font-size: 2rem;
+    width: 300px;
+    color: white;
+    border-bottom: solid 1px grey;
   }
 }
 
@@ -35,10 +39,6 @@
   opacity: 0.5;
 }
 
-h1 {
-  text-align: center;
-}
-
 .its-empty {
   width: 100%;
   display: flex;
@@ -48,6 +48,7 @@ h1 {
 @media (max-width: 516px) {
   .character-page {
     h1 {
+      width: 100%;
       margin: 2rem auto 2rem auto;
     }
   }
