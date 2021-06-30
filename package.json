@@ -4,10 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview",
-    "download-assets": "node --experimental-json-modules ./assetDownloader.js"
+    "serve": "vite preview"
   },
-  "type": "module",
   "dependencies": {
     "@apollo/client": "^3.3.20",
     "@reduxjs/toolkit": "^1.6.0",
@@ -15,20 +13,20 @@
     "chart.js": "^3.2.1",
     "fuse.js": "^6.4.6",
     "graphql": "^15.5.1",
-    "imagemin": "^8.0.0",
-    "imagemin-pngquant": "^8.0.0",
     "lodash": "^4.17.21",
     "postcss-scss": "^4.0.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-select": "^4.3.1"
+    "react-select": "^4.3.1",
+    "ts-node": "^10.0.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.13.13",
+    "@types/imagemin": "^7.0.0",
     "@types/lodash": "^4.14.168",
-    "@types/node": "^15.6.1",
+    "@types/node": "^15.12.5",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
