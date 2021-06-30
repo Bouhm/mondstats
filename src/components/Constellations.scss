@@ -122,3 +122,15 @@
   }
 }
 
+@media (max-width: 400px) {
+  .constellation-card {
+    .constellation-card-icon {
+      height: 20px ;
+      line-height: 20px ;
+  
+      img {
+        width: 20px ;
+      }
+    }
+  }
+}
