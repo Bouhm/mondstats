@@ -71,7 +71,7 @@ function CharacterPage({ data }: CharacterPageProps) {
             builds={_.take(charData.builds, 8)}
             total={charData.total}
           />
-          <Constellations constellations={charData.constellations} total={charData.total} />
+          {/* <Constellations constellations={charData.constellations} total={charData.total} /> */}
         </>
       }
       {abyssData &&
