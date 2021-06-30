@@ -1,7 +1,7 @@
 .abyss-container {
   padding: 0.5rem 2rem 2rem 2rem;
   min-height: 28rem;
-  background-color: rgba(0,0,0,0.15);
+  background-color: rgba(0, 0, 0, 0.15);
   border-radius: 10px;
 
   .abyss-disclaimer {
@@ -27,17 +27,20 @@
   .TEMP-SINGLE-COL {
     display: flex !important;
     flex-flow: column;
+    align-items: center;
   }
 
   .stage-container {
     display: grid;
+    width: 100%;
 
     .stage-label {
+      width: 100%;
       text-align: center;
       color: white;
       font-size: 2.5rem;
       padding: 1rem;
-      background: url("https://webstatic-sea.hoyolab.com/app/community-game-records-sea/images/pc-abyss-bg.dc0c3ac6.png")
+      background: url('https://webstatic-sea.hoyolab.com/app/community-game-records-sea/images/pc-abyss-bg.dc0c3ac6.png')
         0% 0% / 100% no-repeat;
     }
 
@@ -52,6 +55,10 @@
         color: white;
         width: 300px;
         border-bottom: solid 1px grey;
+      }
+
+      .emote-empty {
+        width: 160px;
       }
     }
 

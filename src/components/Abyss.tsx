@@ -87,7 +87,7 @@ function Abyss(abyssBattles: IAbyssBattle[]) {
                     )
                   })
                   :
-                  <img src={AmberSad} alt="empty" />}
+                  <img className="emote-empty" src={AmberSad} alt="empty" />}
                   </>
                   {party_stats[0].length > 3 && (
                     !stageLimitToggle[selectedStage.value] ?
