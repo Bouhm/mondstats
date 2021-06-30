@@ -1,28 +1,17 @@
 $totalRows: 101;
 
 .barchart-container {
+  position: relative;
   display: grid;
   grid-template-rows: repeat($totalRows, 1fr);
   grid-column-gap: 5px;
+  bottom: -0.2rem;
   height: 40vh;
   padding: 0 2rem;
-  margin: 0 auto 8.2rem auto;
+  margin: 0 auto;
   max-width: 80rem;
 
-  .bar-content {
-    position: absolute;
-    color: white;
-    background-color: rgba(0,0,0,0.5);
-    bottom: -8.2rem;
-    left: -2px;
-    right: -2px;
-    border: 2px solid white;
-    border-top: none;
-  }
-
   [class*="_bar"] {
-    position: relative;
-    z-index: 2;
     transition: all .6s ease;
     grid-row-start: 1;
     grid-row-end: $totalRows;
@@ -39,6 +28,21 @@ $totalRows: 101;
     ._bar-#{$i} {
       @include chartValue($i);
     }
+  }
+}
+
+.content-container {
+  display: grid;
+  position: relative;
+  top: 0rem;
+  grid-column-gap: 5px;
+  padding: 0 2rem;
+  margin: 0 auto 2rem auto;
+  max-width: 80rem;
+
+  .bar-content {
+    border: 2px solid white;
+    border-top: none;
   }
 }
 

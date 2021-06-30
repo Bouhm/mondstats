@@ -21,6 +21,8 @@
 
   p {
     margin: 0.5rem;
+  white-space: nowrap;
+
   }
 }
 
@@ -44,8 +46,7 @@
   }
 }
 
-
-@media (max-width: 887px) {
+@media (max-width: 1097px) {
   .constellation-popularity {
     font-size: 1.2rem !important;
   }
@@ -65,7 +66,28 @@
   }
 }
 
-@media (max-width: 646px) {
+@media (max-width: 970px) {
+  .constellation-popularity {
+    font-size: 1rem !important;
+  }
+
+  p {
+    font-size: 0.7rem !important;
+    text-align: center;
+    white-space: pre-wrap !important;
+  }
+
+  .constellation-card-icon {
+    height: 30px !important;
+    line-height: 30px !important;
+
+    img {
+      width: 30px !important;
+    }
+  }
+}
+
+@media (max-width: 747px) {
   .constellation-popularity {
     display: none !important;
   }
