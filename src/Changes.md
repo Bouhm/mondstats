@@ -1,9 +1,3 @@
-## dev build 6.29.21
-
-- Add preliminary Kaedahara Kazuha data
-- Add assets for new weapons and Kaedahara Kazuha
-- Update data pool to ~11000 players total
-
 ## dev build 6.28.21
 
 - Fix aggregation on abyss battles
