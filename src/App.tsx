@@ -49,13 +49,18 @@ function App() {
   const dispatch = useAppDispatch()
 
   const dialogueWidthLimit = 1078;
-  const [seenDialogue, setSeenDialogue] = useState(window.innerWidth > dialogueWidthLimit && JSON.parse(sessionStorage.getItem('seenDialogue')!))
+  const [seenDialogue, setSeenDialogue] = useState(true)
+
+  useEffect(() => {
+    setSeenDialogue(window.innerWidth <= dialogueWidthLimit || JSON.parse(sessionStorage.getItem('seenDialogue')!))
+  },[])
 
   const handleCloseDialogue = () => {
     setSeenDialogue(true);
   }
 
   const handleWindowResize = () => {
+    console.log(window.innerWidth)
     if (window.innerWidth <= dialogueWidthLimit) {
       setSeenDialogue(true);
     } else if (!JSON.parse(sessionStorage.getItem('seenDialogue')!)) {
