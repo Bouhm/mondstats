@@ -1,23 +1,23 @@
+import './BarChart.scss';
+
 import _ from 'lodash';
-import React from 'react';
-import './BarChart.css'
+import React, { ReactNode } from 'react';
 
 type BarChartProps = {
   data: {
-    label: string,
+    content?: ReactNode,
     value: number
   }[]
 }
 
 function BarChart({data}: BarChartProps) {
   return (
-    <dl className="bar-chart">
-      {_.map(data, ({ label, value }) => {
+    <dl className="chart">
+      {_.map(data, ({ content, value }) => {
         return (
-          <>
-            <dt className="bar-chart-label">{label}</dt>
-            <dd className="bar">{value}%</dd>
-          </>
+          <div className={`_bar-${value}`}>
+            {content && content}
+          </div>
         )
       })}
     </dl>

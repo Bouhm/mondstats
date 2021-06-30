@@ -1,0 +1,31 @@
+
+.chart {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(100, 1fr);
+  grid-column-gap: 5px;
+  height: 100vh;
+  width: 70vw;
+  padding: 5px 10px;
+}
+
+[class*="_bar"] {
+  border-radius: 5px 5px 0 0;
+  transition: all .6s ease;
+  background-color: #ff4136;
+  grid-row-start: 1;
+  grid-row-end: 101;
+}
+
+$totalRows: 101;
+
+@mixin chartValue($data) {
+  $result: $totalRows - $data;
+  grid-row-start: $result;
+}
+
+@for $i from 1 through $totalRows {
+  ._bar-#{$i} {
+    @include chartValue($i);
+  }
+}

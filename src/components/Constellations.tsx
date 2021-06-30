@@ -1,9 +1,10 @@
-import './Constellations.css';
+import './Constellations.scss';
 
 import _ from 'lodash';
 import React, { ReactNode, useContext } from 'react';
 
 import { useAppSelector } from '../hooks';
+import BarChart from './ui/BarChart';
 import { Circle } from './ui/Icons';
 import Tooltip from './ui/Tooltip';
 
@@ -38,7 +39,9 @@ function Constellations({ constellations, total  }: ConstellationsProps ) {
     <div className="constellations-container">
     <h1>Constellations</h1>
     <div className="constellations-chart">
-      {_.map(constellations, (count, i) => {
+      <BarChart data={_.map(constellations, (c, i) => ({ label: `C${i}`, value: Math.round((c / total * 1000)/10) }))} />
+
+      {/* {_.map(constellations, (count, i) => {
         let popularity = Math.round((count / total * 1000)/10)
 
         return (
@@ -65,7 +68,7 @@ function Constellations({ constellations, total  }: ConstellationsProps ) {
             </div>
           </>
         )
-      })}
+      })} */}
       </div>
   </div>
   )

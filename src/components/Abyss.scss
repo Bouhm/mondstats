@@ -26,6 +26,13 @@
     margin: 2rem;
     border-radius: 6px;
     overflow: hidden;
+
+    .popularity-line {
+      margin: 0.2rem;
+      color: dimgray;
+      text-shadow: none;
+      font-size: 1rem;
+    }
   }
 
   .TEMP-SINGLE-COL {
@@ -53,12 +60,11 @@
       justify-content: center;
       flex-wrap: wrap;
       color: white;
+      text-align: center;
 
       h2 {
-        text-align: center;
         color: white;
-        width: 300px;
-        border-bottom: solid 1px grey;
+        width: 100%;
       }
 
       .emote-empty {
@@ -159,14 +165,6 @@
     justify-content: center;
     flex-wrap: wrap;
     height: auto;
-
-    .party-bar-container {
-      margin-top: 2rem;
-
-      .party-bar {
-        height: 0 !important;
-      }
-    }
   }
 }
 

@@ -1,4 +1,4 @@
-import './Abyss.css';
+import './Abyss.scss';
 
 import AmberSad from '/assets/amberSad.png';
 import _ from 'lodash';
@@ -69,8 +69,9 @@ function Abyss(abyssBattles: IAbyssBattle[]) {
           <h2 className="stage-label">Floor {selectedStage.label}</h2>
           <div className="stage-half TEMP-SINGLE-COL">
             {_.map(_.filter(filteredAbyss, { floor_level: selectedStage.value }), ({party_stats}, i) => {
-              return <div key={`${selectedStage.value}-${i}`}> 
+              return <div className="stage-party" key={`${selectedStage.value}-${i}`}> 
               <>
+                <h2>Total: {(_.reduce(party_stats[0], (sum,curr) => sum + curr.count, 0))} {characterDb[selectedCharacter].name} Teams</h2>
                 {party_stats[0].length > 1 ? 
                   _.map(_.take(_.orderBy(party_stats[0], 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 8 : 3), ({party, count}, j) => {
                     return (
@@ -81,7 +82,8 @@ function Abyss(abyssBattles: IAbyssBattle[]) {
                           })}
                         </div>
                         <div className="party-popularity">
-                          <p>{Math.round((count/(_.reduce(party_stats[0], (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%</p>
+                          <p className="popularity-pct">{Math.round((count/(_.reduce(party_stats[0], (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%</p>
+                          <p className="popularity-line">Count: {count}</p>
                         </div>
                       </div>
                     )
