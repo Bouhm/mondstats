@@ -5,9 +5,11 @@ import https from "https"
 import imagemin from "imagemin"
 import imageminPngquant from 'imagemin-pngquant';
 
-import Artifacts from './src/data/artifactSets.json'
+import ArtifactSets from './src/data/artifactSets.json'
+import Artifacts from './src/data/artifacts.json'
 import Characters from './src/data/characters.json'
 import Weapons from './src/data/weapons.json'
+import _ from "lodash";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -19,6 +21,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
     });
 
     file.on('finish', async function() {
+      console.log("???")
       await imagemin([raw], {
         destination: localPath,
         plugins: [
@@ -30,19 +33,20 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
     })
   }
 
-  for (const [id, character] of Object.entries(Characters)) {
-    download(character.icon, path.resolve(__dirname, "./src/assets/characters"), path.resolve(__dirname, "./src/assets/characters/raw", `${character.id}.png`))
-    download(character.image, path.resolve(__dirname, "./src/assets/characters"), path.resolve(__dirname, "./src/assets/characters/raw", `${character.id}_bg.png`))
+  _.forEach(Characters, character => {
+    download(character.icon, path.resolve(__dirname, "./src/assets/characters"), path.resolve(__dirname, "./src/assets/characters/raw", `${character.oid}.png`))
+    download(character.image, path.resolve(__dirname, "./src/assets/characters"), path.resolve(__dirname, "./src/assets/characters/raw", `${character.oid}_bg.png`))
     character.constellations.forEach(c => {
-      download(c.icon, path.resolve(__dirname, "./src/assets/characters/constellations"), path.resolve(__dirname, "./src/assets/characters/constellations/raw", `${c.id}.png`))
+      download(c.icon, path.resolve(__dirname, "./src/assets/characters/constellations"), path.resolve(__dirname, "./src/assets/characters/constellations/raw", `${c.oid}.png`))
     })
-  }
+  }) 
 
-  for (const [id, artifact] of Object.entries(Artifacts)) {
-    download(artifact.icon, path.resolve(__dirname, "./src/assets/artifacts"), path.resolve(__dirname, "./src/assets/artifacts/raw", `${artifact.id}.png`))
-  }
+  _.forEach(ArtifactSets, artifactSet => {
+    const artifact = _.find(Artifacts, artifact => artifact.set === artifactSet._id && artifact.pos === 5)
+    download(artifact.icon, path.resolve(__dirname, "./src/assets/artifacts"), path.resolve(__dirname, "./src/assets/artifacts/raw", `${artifactSet.oid}.png`))
+  })
 
-  for (const [id, weapon] of Object.entries(Weapons)) {
-    download(weapon.icon, path.resolve(__dirname, "./src/assets/weapons"), path.resolve(__dirname, "./src/assets/weapons/raw", `${weapon.id}.png`))
-  }
+  _.forEach(Weapons, weapon => {
+    download(weapon.icon, path.resolve(__dirname, "./src/assets/weapons"), path.resolve(__dirname, "./src/assets/weapons/raw", `${weapon.oid}.png`))
+  })
 })()
