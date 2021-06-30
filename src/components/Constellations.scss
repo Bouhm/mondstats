@@ -1,3 +1,10 @@
+.constellations-container {
+  
+  h1 {
+    margin: 0 auto;
+  }
+}
+
 .constellation-card {
   display: flex;
   flex-flow: column;
@@ -8,7 +15,8 @@
   .constellation-card-icon {
     height: 60px;
     text-align: middle;
-    line-height: 2.5rem;
+    line-height: 60px;
+    font-size: 1.3rem;
 
     img {
       width: 60px;
@@ -25,8 +33,7 @@
 
   p {
     margin: 0.5rem;
-  white-space: nowrap;
-
+    white-space: nowrap;
   }
 }
 
@@ -61,6 +68,8 @@
 
   .constellation-card-icon {
     height: 30px !important;
+    line-height: 30px !important;
+    font-size: 0.9rem !important;
 
     img {
       width: 30px !important;
@@ -80,15 +89,20 @@
   }
 
   .constellation-card-icon {
-    height: 30px !important;
+    height: 25px !important;
+    line-height: 25px !important;
 
     img {
-      width: 30px !important;
+      width: 25px !important;
     }
   }
 }
 
 @media (max-width: 747px) {
+  .constellation-card-icon {
+    line-height: 1.8rem !important;
+  }
+  
   .constellation-popularity {
     display: none !important;
   }
