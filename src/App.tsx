@@ -60,7 +60,6 @@ function App() {
   }
 
   const handleWindowResize = () => {
-    console.log(window.innerWidth)
     if (window.innerWidth <= dialogueWidthLimit) {
       setSeenDialogue(true);
     } else if (!JSON.parse(sessionStorage.getItem('seenDialogue')!)) {
