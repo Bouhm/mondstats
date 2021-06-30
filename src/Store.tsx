@@ -21,7 +21,8 @@ interface IState {
   elementColor: string,
   characterBuilds: ICharacterBuild[],
   abyssBattles: IAbyssBattle[],
-  f2p: boolean
+  f2p: boolean,
+  seenDialogues: { [id: string]: boolean }
 }
 
 const initialState: IState = {
@@ -34,7 +35,8 @@ const initialState: IState = {
   elementColor: "",
   characterBuilds: [],
   abyssBattles: [],
-  f2p: false
+  f2p: false,
+  seenDialogues: {}
 }
 
 const dataSlice = createSlice({
@@ -71,6 +73,9 @@ const dataSlice = createSlice({
     setF2p: (state, action: PayloadAction<boolean>) => {
       state.f2p = action.payload
     },
+    setSeenDialogues: (state, action: PayloadAction<{[id: string]: boolean}>) => {
+      state.seenDialogues = {...state.seenDialogues, ...action.payload }
+    }
   }
 })
 
@@ -84,7 +89,8 @@ export const {
   setElementColor,
   setCharacterBuilds,
   setAbyssbattles,
-  setF2p
+  setF2p,
+  setSeenDialogues
 } = dataSlice.actions;
 
 const store = configureStore({ reducer: { data: dataSlice.reducer } })

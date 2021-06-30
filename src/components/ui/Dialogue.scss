@@ -1,0 +1,128 @@
+$r: 19;
+$g: 26;
+$b: 35;
+
+.dialogue-backdrop {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.dialogue {
+  z-index: 101;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 1.8rem;
+  text-shadow: none;
+
+  display: flex;
+  flex-flow: column;
+  z-index: 20;
+  -webkit-text-stroke: 1px rgba($r, $g, $b, 0.3);
+  -webkit-text-fill-color: #f6f2ee;
+}
+
+.response {
+  display: flex;
+  justify-content: flex-end;
+
+  p {
+    position: relative;
+    right: -10px;
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    width: 30%;
+    padding: 1rem 1.5rem;
+    margin: 0.6rem;
+    background: linear-gradient(
+      to right,
+      rgba($r, $g, $b, 0.6),
+      rgba($r, $g, $b, 0.4),
+      transparent
+    );
+
+    border-radius: 30rem 0 0 30rem;
+    border-left: 3px solid rgba(255, 195, 0, 0.4);
+    border-top: 3px solid rgba(255, 195, 0, 0.3);
+    border-bottom: 3px solid rgba(255, 195, 0, 0.3);
+    animation: pulse 2s infinite ease-out;
+    border-right: none;
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.6);
+    }
+
+    span {
+      margin-left: 1.5rem;
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 0px gba(255, 255, 255, 0.6);
+  }
+}
+
+.name {
+  padding: 0.8rem;
+  margin: 0 30rem;
+  -webkit-text-fill-color: #ffc300;
+  border-bottom: 3px solid rgba(255, 195, 0, 0.4);
+}
+
+.content {
+  background: linear-gradient(
+    to right,
+    rgba($r, $g, $b, 0),
+    rgba($r, $g, $b, 0.5),
+    rgba($r, $g, $b, 0.7),
+    rgba($r, $g, $b, 0.5),
+    rgba($r, $g, $b, 0)
+  );
+  height: 100%;
+  text-align: center;
+  height: 30vh;
+}
+
+.text {
+  padding-top: 2rem;
+  margin: 0 auto;
+  max-width: 70%;
+}
+
+@media (max-width: 1640px) {
+  .dialogue {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 887px) {
+  .text {
+    height: 100%;
+  }
+
+  .name {
+    display: flex;
+    justify-content: center;
+  }
+
+  .response {
+    p {
+      font-size: 1.4rem;
+    }
+  }
+}

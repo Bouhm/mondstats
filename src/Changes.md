@@ -1,3 +1,9 @@
+## dev build 6.29.21
+
+- Add preliminary Kaedahara Kazuha data
+- Add assets for new weapons and Kaedahara Kazuha
+- Update data pool to ~11000 players total
+
 ## dev build 6.28.21
 
 - Fix aggregation on abyss battles
@@ -5,7 +11,7 @@
 
 ## dev build 6.26.21
 
-- Add more filters including filter by F2P
+- Implement more filtering including filter by F2P in the backend
 
 ## dev build 6.15.21
 

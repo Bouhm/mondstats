@@ -5,7 +5,7 @@ import https from "https"
 import imagemin from "imagemin"
 import imageminPngquant from 'imagemin-pngquant';
 
-import Artifacts from './src/data/artifacts.json'
+import Artifacts from './src/data/artifactSets.json'
 import Characters from './src/data/characters.json'
 import Weapons from './src/data/weapons.json'
 

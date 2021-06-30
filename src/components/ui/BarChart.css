@@ -1,11 +1,11 @@
-.chart {
+.bar {
   display: grid;
   grid-auto-columns: 1fr;
   grid-template-rows: repeat(100, 1fr) 1.4rem;
   grid-column-gap: 5px;
 }
 
-.date {
+.bar-c {
   /* fill the bottom row */
   grid-row-start: -2;
 }

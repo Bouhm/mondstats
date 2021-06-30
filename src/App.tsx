@@ -41,11 +41,33 @@ import {
   setCharacterIdMap,
   setWeaponDb,
 } from './Store';
+import Dialogue from './components/ui/Dialogue';
 
 function App() {
   const characterBuilds = useAppSelector((state) => state.data.characterBuilds)
   const abyssBattles = useAppSelector((state) => state.data.abyssBattles)
   const dispatch = useAppDispatch()
+
+  const dialogueWidthLimit = 1078;
+  const [seenDialogue, setSeenDialogue] = useState(window.innerWidth > dialogueWidthLimit && JSON.parse(sessionStorage.getItem('seenDialogue')!))
+
+  const handleCloseDialogue = () => {
+    setSeenDialogue(true);
+  }
+
+  const handleWindowResize = () => {
+    console.log(window.innerWidth)
+    if (window.innerWidth <= dialogueWidthLimit) {
+      setSeenDialogue(true);
+    } else if (!JSON.parse(sessionStorage.getItem('seenDialogue')!)) {
+      setSeenDialogue(false);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowResize)
+  },[])
+
   
   // const { loading, error, data } = useQuery(Query);
 
@@ -95,10 +117,19 @@ function App() {
 
   return (
     <div className="App">
+      {!seenDialogue && (
+        <Dialogue 
+        onClose={handleCloseDialogue}>
+          The past month was spent on database migration and building out a back-end server. Now that that's done, I'll finally implement more interesting content with the data in the following weeks. Please feel free to throw any suggestions at <b>Bouhm#2205</b> on Discord.
+        </Dialogue>
+      )}
       <Navbar />
       <main className="App-content">
         <Sidebar />
-        <div className="section-view">
+        <div className="section-view" style={!seenDialogue ? {
+        filter: "blur(2px)", 
+        opacity: 0.1
+      } : {}}>
           <section>
             <Switch>
               <Route path="/about" component={About} />
