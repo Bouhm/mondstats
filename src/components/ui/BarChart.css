@@ -1,0 +1,16 @@
+.chart {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-rows: repeat(100, 1fr) 1.4rem;
+  grid-column-gap: 5px;
+}
+
+.date {
+  /* fill the bottom row */
+  grid-row-start: -2;
+}
+
+.bar {
+  /* end before the bottom row */
+  grid-row-end: -2;
+}

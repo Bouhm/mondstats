@@ -39,15 +39,14 @@ function Constellations({ constellations, total  }: ConstellationsProps ) {
     <h1>Constellations</h1>
     <div className="constellations-chart">
       {_.map(constellations, (count, i) => {
-        let popularity = Math.round((count / total * 1000)/10).toFixed(1)
+        let popularity = Math.round((count / total * 1000)/10)
 
         return (
           <>
             {i === 1 && <div className="divider" />}
             <div key={`constellation-${i}`} className="bar-chart constellation-bar-container">
               <div 
-                className={`bar-chart-bar constellation-bar ${characterDb[selectedCharacter].element.toLowerCase()} withTooltip`} 
-                style={{ height: `${popularity}%` }}
+                className={`bar-chart-bar constellation-bar bar-${popularity} ${characterDb[selectedCharacter].element.toLowerCase()} withTooltip`} 
               >
                 <Tooltip 
                   alignment="vertical"
