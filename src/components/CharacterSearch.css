@@ -44,7 +44,7 @@
   overflow: hidden;
   display: flex;
   justify-content: center;
-  padding: 1rem 2rem 2rem 1rem;
+  padding: 1rem 1rem 2rem 1rem;
 
   input {
     max-width: 35rem;

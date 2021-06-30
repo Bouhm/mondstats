@@ -50,10 +50,6 @@
   }
 }
 
-.weapons-list {
-  margin-right: 1rem;
-}
-
 .character-builds-selector {
   margin-top: 5.9rem;
   margin-right: 1rem;
@@ -115,6 +111,10 @@
     max-height: 100%;
     flex-wrap: wrap-reverse;
   }
+
+  .artifacts-donut-chart {
+    margin-left: -1.5rem;
+  }
 }
 
 @media (max-width: 676px) {
@@ -124,7 +124,7 @@
     align-items: center;
 
     .weapon-container .weapon-card {
-      width: 400px;
+      width: 300px;
     }
 
     .weapon-bar-chart {
