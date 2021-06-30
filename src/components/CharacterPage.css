@@ -60,3 +60,9 @@
     }
   }
 }
+
+@media (max-width: 1036px) {
+  h1 {
+    width: 100% !important;
+  }
+}

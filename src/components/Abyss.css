@@ -106,7 +106,7 @@
     color: white;
     font-size: 2rem;
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-    min-height: 135px;
+    height: 100%;
     min-width: 135px;
     display: flex;
     flex-flow: column;

@@ -123,6 +123,10 @@
     flex-flow: column;
     align-items: center;
 
+    .weapon-container .weapon-card {
+      width: 400px;
+    }
+
     .weapon-bar-chart {
       display: none;
     }
