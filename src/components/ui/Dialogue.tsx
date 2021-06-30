@@ -1,6 +1,7 @@
+import './Dialogue.scss';
+
 import _ from 'lodash';
 import React, { ReactNode } from 'react';
-import './Dialogue.scss'
 
 type DialogueProps = {
   children: ReactNode
@@ -9,7 +10,7 @@ type DialogueProps = {
 
 function Dialogue({ children, onClose }: DialogueProps) {
   const handleClose = () => {
-    sessionStorage.setItem(`seenDialogue`, "true");
+    localStorage.setItem(`seenDialogue`, "true");
     onClose();
   }
 
