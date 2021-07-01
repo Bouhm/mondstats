@@ -1,12 +1,11 @@
 import './CharacterSearch.css';
 
-import Logo from '/assets/logo_sm.png';
 import _ from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useAppSelector } from '../hooks';
-import CharacterTile, { CharacterTileProps } from './CharacterTile';
-import Searchbar from './ui/Searchbar';
+import { useAppSelector } from '../../hooks';
+import Searchbar from '../ui/Searchbar';
+import CharacterTile from './CharacterTile';
 
 type CharacterSearchProps = {
   dataTotal: number;

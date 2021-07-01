@@ -45,12 +45,12 @@ function Constellations({ constellations, total }: ConstellationsProps ) {
           <>
           {i === 0 ?
             <ConstellationCard name={"None"}>
-              <div className="constellation-popularity">{((count / total * 1000)/10).toFixed(1)}%</div>
+              <div className="constellation-popularity">{Math.round((count / total * 1000)/10)}%</div>
               <p>Count: {count}</p>
             </ConstellationCard>
             :
             <ConstellationCard {...characterDb[selectedCharacter].constellations[i-1]}>
-              <div className="constellation-popularity">{((count / total * 1000)/10).toFixed(1)}%</div>
+              <div className="constellation-popularity">{Math.round((count / total * 1000)/10)}%</div>
               <p>Count: {count}</p>
             </ConstellationCard>
           }

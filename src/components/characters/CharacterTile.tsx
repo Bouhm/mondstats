@@ -4,9 +4,9 @@ import _ from 'lodash';
 import React, { ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ElementIcons } from '../data/constants';
-import { useAppSelector } from '../hooks';
-import { getShortName } from '../scripts/util';
+import { ElementIcons } from '../../data/constants';
+import { useAppSelector } from '../../hooks';
+import { getShortName } from '../../scripts/util';
 
 export type CharacterTileProps = {
   id: string,

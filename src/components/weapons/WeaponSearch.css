@@ -1,0 +1,37 @@
+.weapon-search {
+  position: relative;
+  height: 100%;
+  margin-top: 3rem;
+}
+
+.weapon-tiles {
+  display: flex;
+  flex-flow: column;
+  padding: 0.5rem;
+}
+
+.searched-weapon {
+  display: flex;
+  justify-content: center;
+  min-height: 12rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.unfiltered-characters {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 160px);
+  grid-auto-rows: 190px;
+  justify-content: center;
+}
+
+.weapon-searchbar {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem 2rem 1rem;
+
+  input {
+    max-width: 35rem;
+  }
+}

@@ -7,7 +7,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { IAbyssBattle } from '../../data/types';
 import { useAppSelector } from '../../hooks';
-import CharacterTile from '../CharacterTile';
+import CharacterTile from '../characters/CharacterTile';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 

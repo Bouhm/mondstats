@@ -1,0 +1,54 @@
+.weapon-tile-container {
+  height: 190px;
+  margin: 0 0.5rem;
+}
+
+.weapon-tile {
+  position: relative;
+  width: 135px;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  .element-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  &:hover,
+  &:active {
+    cursor: pointer;
+    -webkit-transform: scale(1.08, 1.08);
+    transform: scale(1.08, 1.08);
+    -moz-box-shadow: inset 0 0 5px #f2eee6;
+    -webkit-box-shadow: inset 0 0 5px #f2eee6;
+    box-shadow: inset 0 0 5px #f2eee6;
+    border: 3px solid #f2eee6;
+  }
+
+  img {
+    width: 135px;
+    height: 135px;
+    vertical-align: middle;
+  }
+
+  .weapon-tile-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    color: rgb(73, 83, 102);
+    background-color: #e9e5dc;
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 1.1rem;
+    text-decoration: none;
+  }
+}

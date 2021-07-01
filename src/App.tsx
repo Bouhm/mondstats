@@ -7,14 +7,15 @@ import { Link, Redirect, Route, Switch } from 'react-router-dom';
 
 import { gql, useQuery } from '@apollo/client';
 
-import About from './components/About';
 import CharacterPage from './components/builds/CharacterPage';
-import CharacterSearch from './components/CharacterSearch';
+import CharacterSearch from './components/characters/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
+import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 import Dialogue from './components/ui/Dialogue';
+import WeaponSearch from './components/weapons/WeaponSearch';
 import AbyssBattles from './data/abyssBattles.json';
 import ArtifactDb from './data/artifacts.json';
 import ArtifactSetDb from './data/artifactSets.json';
@@ -105,7 +106,7 @@ function App() {
     dispatch(setWeaponDb(weaponDb))
   }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
 
-  const renderCharacterSearch = () => <CharacterSearch dataTotal={11449} />
+
   const renderCharacterPage = () => <CharacterPage data={{ characters: characterBuilds, abyss: abyssBattles }} />
 
   return (
@@ -130,8 +131,8 @@ function App() {
               <Route path="/abyss" component={UnderConstruction} />
               <Route path="/characters" component={UnderConstruction} />
               <Route path="/artifacts" component={UnderConstruction} />
-              <Route path="/weapons" component={UnderConstruction} />
-              <Route exact path="/" render={renderCharacterSearch} />
+              <Route path="/weapons" component={WeaponSearch} />
+              <Route exact path="/" component={CharacterSearch} />
               <Route path="/builds/:shortName" render={renderCharacterPage} />
               <Redirect exact path="/builds" to="/" />
             </Switch>
