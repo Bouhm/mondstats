@@ -9,9 +9,11 @@ import WeaponCard from './WeaponCard';
 type WeaponBuild = {
   weapons: IWeaponBuild[]
   total: number
-}
+} & { f2p: boolean }
 
-function WeaponBuild({ weapons, total }: WeaponBuild) {
+const BP_WEAPONS = [11409, 12409, 14405, 15409, 13405]
+
+function WeaponBuild({ weapons, total, f2p }: WeaponBuild) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
 
@@ -19,7 +21,14 @@ function WeaponBuild({ weapons, total }: WeaponBuild) {
     <div className="weapons-list-container">
       <h1>Weapons</h1>
       <div className="weapons-list">
-        {_.map(_.orderBy(_.take(weapons, 8), 'count', 'desc'), ({ _id, count }, i) => {
+        {_.map(_.take(_.orderBy(_.filter(weapons, ({_id}) => {
+          if (f2p) {
+            const weapon = weaponDb[_id]
+            return weapon.rarity < 5 && !_.includes(BP_WEAPONS, weapon.oid)
+          }
+
+          return true
+        }), 'count', 'desc'), 8), ({ _id, count }, i) => {
           const weapon = weaponDb[_id];
           if (!weapon) return null;
 

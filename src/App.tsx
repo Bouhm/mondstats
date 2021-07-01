@@ -8,13 +8,13 @@ import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 
 import About from './components/About';
-import Changelog from './components/Changelog';
-import CharacterPage from './components/CharacterPage';
+import CharacterPage from './components/builds/CharacterPage';
 import CharacterSearch from './components/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
+import Changelog from './components/pages/Changelog';
+import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 import Dialogue from './components/ui/Dialogue';
-import UnderConstruction from './components/WIP';
 import AbyssBattles from './data/abyssBattles.json';
 import ArtifactDb from './data/artifacts.json';
 import ArtifactSetDb from './data/artifactSets.json';
@@ -106,13 +106,7 @@ function App() {
   }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
 
   const renderCharacterSearch = () => <CharacterSearch dataTotal={11449} />
-  const renderCharacterPage = () => {
-    return (
-      <>
-        <CharacterPage data={{ characters: characterBuilds, abyss: abyssBattles }} />
-      </>
-    )
-  }
+  const renderCharacterPage = () => <CharacterPage data={{ characters: characterBuilds, abyss: abyssBattles }} />
 
   return (
     <div className="App">

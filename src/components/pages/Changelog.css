@@ -14,6 +14,13 @@
 
 @media (max-width: 516px) {
   .changelog-container {
-    margin: 1rem 2rem;
+    .markdown-body {
+      font-size: 1.1rem !important;
+      margin: 1rem 2rem;
+  
+      h2 {
+        font-size: 1.3rem !important;
+      }
+    }
   }
 }

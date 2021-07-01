@@ -7,7 +7,7 @@ const elemColors: { [key: string]: string } = {
   dendro: "#A5D533",
   geo: "#F0B738",
   adaptive: "#4B0082",
-  none: "#4B0082"
+  none: "#a4a4a4"
 }
 
 export default elemColors;

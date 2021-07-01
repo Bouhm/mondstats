@@ -29,7 +29,7 @@
       position: relative;
       display: flex;
       justify-content: center;
-      padding-left: 2rem;
+      padding: 2rem 0 0 2rem;
       max-width: 350px;
 
       canvas {
@@ -40,7 +40,7 @@
         position: absolute;
         text-align: center;
         z-index: 0;
-        top: calc(50% - 1.5rem);
+        top: calc(50% - 0.5rem);
         width: 100%;
         color: white;
         font-size: 3rem;

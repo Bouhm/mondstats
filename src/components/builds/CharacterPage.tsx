@@ -2,15 +2,16 @@ import './CharacterPage.css';
 
 import AmberSad from '/assets/amberSad.png';
 import _ from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../data/types';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { selectCharacter, setElementColor } from '../Store';
+import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../data/types';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { selectCharacter, setElementColor } from '../../Store';
+import Toggle from '../ui/Toggle';
 import Abyss from './Abyss';
-import BuildSelector from './builds/BuildSelector';
-import elemColors from './builds/colors';
+import BuildSelector from './BuildSelector';
+import elemColors from './colors';
 import Constellations from './Constellations';
 
 type CharacterPageProps = {
@@ -31,6 +32,7 @@ function CharacterPage({ data }: CharacterPageProps) {
   const [charData, setCharData] = useState<ICharacterBuild | undefined>(undefined)
   const [abyssData, setAbyssData] = useState<IAbyssBattle[] | undefined>(undefined)
   const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
+  const [f2p, setF2p] = useState(false);
   const charId = characterIdMap[shortName]
 
   let filteredAbyss = _.cloneDeep(data.abyss)
@@ -42,6 +44,10 @@ function CharacterPage({ data }: CharacterPageProps) {
     })
   }));
 
+  const handleToggleF2p = () => {
+    setF2p(!f2p)
+  }
+  
   useEffect(() => {
     if (!_.isEmpty(characterDb)) {
       const char = characterDb[charId];
@@ -62,20 +68,25 @@ function CharacterPage({ data }: CharacterPageProps) {
 
   return (
     <div className="character-page" style={{ backgroundImage: `url("/assets/characters/${character.oid}_bg.png")` }}>
-      <div className="character-stats-count" style={{ backgroundColor: elementColor }}>
-        <span>Data from {charData.total} players</span>
+      <div className="character-page-stats-count" style={{ backgroundColor: elementColor }}>
+        <span>{charData.total} {character.name} Builds</span>
       </div>
+      <div className="character-page-controls">
+        <Toggle color={elementColor} label={"F2P"} defaultValue={f2p} onChange={handleToggleF2p} />
+      </div>
+
       {charData.builds &&
         <>
           <BuildSelector
             builds={_.take(charData.builds, 8)}
             total={charData.total}
+            f2p={f2p}
           />
           <Constellations constellations={charData.constellations} total={charData.total} />
         </>
       }
       {abyssData &&
-        <Abyss {...abyssData} />
+        <Abyss abyssData={abyssData} f2p={f2p} />
       }
     </div>
   )

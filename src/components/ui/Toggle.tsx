@@ -1,15 +1,16 @@
-import './Toggle.css';
+import './Toggle.scss';
 
 import _ from 'lodash';
 import React, { useState } from 'react';
 
 type ToggleProps = {
-  label: string;
-  defaultValue: boolean
+  label?: string;
+  defaultValue?: boolean
+  color: string
   onChange: () => void;
 }
 
-function Toggle({ label, defaultValue, onChange }: ToggleProps) {
+function Toggle({ label, color, defaultValue = false, onChange }: ToggleProps) {
   const [checked, setChecked] = useState(defaultValue)
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -19,10 +20,10 @@ function Toggle({ label, defaultValue, onChange }: ToggleProps) {
 
   return (
     <div className="toggle-container">
-      <label>{label}</label>
+      <span>{label}</span>
       <div className="toggle">
-        <input type="checkbox" checked={checked} onChange={handleChange} />
-        <span className="toggle-slider"></span>
+        <input id="switch" type="checkbox" checked={checked} onChange={handleChange} />
+        <label htmlFor="switch" style={checked ? {backgroundColor: color} : {}} />
       </div>
     </div>
   )

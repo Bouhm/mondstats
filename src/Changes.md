@@ -1,5 +1,6 @@
 ## dev build 6.30.21
 
+- Add F2P filtering for character builds
 - Add Constellation stats
 - Add preliminary Kaedahara Kazuha data
 

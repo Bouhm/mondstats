@@ -3,28 +3,34 @@ import './artifacts/Artifact.css';
 import './weapons/Weapon.css';
 
 import _ from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { IBuild } from '../../data/types';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import Chart from '../ui/Chart';
 import ArtifactBuild from './artifacts/ArtifactBuild';
 import ArtifactSets from './artifacts/ArtifactSets';
 import elemColors from './colors';
 import WeaponBuild from './weapons/WeaponBuild';
 
-function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number }) {
+type BuildSelectorProps = {
+  builds: IBuild[],
+  total: number,
+  f2p: boolean
+}
+
+function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
 
-  const orderedBuilds = _.orderBy(builds, 'count', 'desc');
+  const filteredBuilds = _.orderBy(builds, 'count', 'desc');
   let labels: string[] = [];
   let data: number[] = [];
   let colors: string[] = [];
   let countSum = 0; 
 
-  _.forEach(orderedBuilds, build => {
+  _.forEach(filteredBuilds, build => {
     let label = "";
 
     _.forEach(build.artifacts, (set, i) => {
@@ -45,19 +51,20 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
     countSum += build.count;
   })
 
-  colors = Array(labels.length).fill("#a4a4a4")
+  colors = Array(labels.length).fill(elemColors.none)
   colors[activeBuildIdx] = elementColor;
 
   return (
     <div className="builds-selector">
       <WeaponBuild
-        weapons={orderedBuilds[activeBuildIdx].weapons}
-        total={orderedBuilds[activeBuildIdx].count}
+        weapons={filteredBuilds[activeBuildIdx].weapons}
+        total={filteredBuilds[activeBuildIdx].count}
+        f2p={f2p}
       />
       <div className="artifact-build-container">
         <div className="artifact-build-stats">
           <ArtifactBuild
-            artifacts={orderedBuilds[activeBuildIdx].artifacts}
+            artifacts={filteredBuilds[activeBuildIdx].artifacts}
           />
           <div className="artifacts-donut-chart">
             <Chart
@@ -69,11 +76,11 @@ function BuildSelector({ builds, total }: { builds: IBuild[] } & { total: number
               max={countSum}
               showScale={false}
             />
-            <div className="artifact-popularity">{Math.round((orderedBuilds[activeBuildIdx].count / countSum) * 100)}%</div>
+            <div className="artifact-popularity">{Math.round((filteredBuilds[activeBuildIdx].count / countSum) * 100)}%</div>
           </div>
         </div>
         <div className="character-builds-selector">
-          {_.map(orderedBuilds, (build, i) => {
+          {_.map(filteredBuilds, (build, i) => {
             return (
               <div key={`artifacts-thumb=${i}`} onClick={() => setActiveBuildIdx(i)}>
                 <ArtifactSets artifacts={build.artifacts} selected={activeBuildIdx === i} />

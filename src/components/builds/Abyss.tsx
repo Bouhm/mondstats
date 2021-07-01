@@ -5,12 +5,11 @@ import _ from 'lodash';
 import { element } from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 
-import { IAbyssBattle } from '../data/types';
-import { useAppSelector } from '../hooks';
-import CharacterTile from './CharacterTile';
-import Dropdown, { Option } from './ui/Dropdown';
-import { ChevronDown, ChevronUp } from './ui/Icons';
-import Tooltip from './ui/Tooltip';
+import { IAbyssBattle } from '../../data/types';
+import { useAppSelector } from '../../hooks';
+import CharacterTile from '../CharacterTile';
+import Dropdown, { Option } from '../ui/Dropdown';
+import { ChevronDown, ChevronUp } from '../ui/Icons';
 
 const _compareFloor = (f1: Option, f2: Option) => {
   const f1Strs = f1.value.split("-")
@@ -23,8 +22,8 @@ const _compareFloor = (f1: Option, f2: Option) => {
   }
 }
 
-function Abyss(abyssBattles: IAbyssBattle[]) {
-  const options = _.map(abyssBattles, stage => {
+function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) {
+  const options = _.map(abyssData, stage => {
     return { label: stage.floor_level, value: stage.floor_level}
   }).sort(_compareFloor)
 
@@ -34,14 +33,21 @@ function Abyss(abyssBattles: IAbyssBattle[]) {
 
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
   const [ selectedStages, selectStages ] = useState<Option[]>(defaultStages)
-  const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssBattle[]>(abyssBattles)
+  const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssBattle[]>(abyssData)
 
   const _filterAbyss = (data: IAbyssBattle[], charId: string) => {
     let filteredAbyss = _.cloneDeep(data)
     
     _.forEach(filteredAbyss, floor => {
       _.forEach(floor.party_stats, (battle, i) => {
-        floor.party_stats[i] = _.filter(battle, team => team.party.includes(charId))
+        floor.party_stats[i] = _.filter(battle, ({party}) => {
+          if (f2p) {
+            let fivesCount =  characterDb[charId].rarity > 4 ? 1 : 0;
+            return party.includes(charId) && _.filter(party, char => characterDb[char].rarity > 4).length === fivesCount;
+          }
+
+          return party.includes(charId)
+        })
       })
     })
 
@@ -49,8 +55,9 @@ function Abyss(abyssBattles: IAbyssBattle[]) {
   }
 
   useEffect(() => {
-    setFilteredAbyss(_filterAbyss(abyssBattles, selectedCharacter));
-  }, [setFilteredAbyss, selectedCharacter, selectedStages])
+    console.log("useEffect")
+    setFilteredAbyss(_filterAbyss(abyssData, selectedCharacter));
+  }, [setFilteredAbyss, selectedCharacter, selectedStages, f2p])
 
   const handleSelect = (selected: Option[]) => {
     selectStages(selected);
