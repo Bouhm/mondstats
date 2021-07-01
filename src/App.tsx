@@ -131,7 +131,7 @@ function App() {
               <Route path="/abyss" component={UnderConstruction} />
               <Route path="/characters" component={UnderConstruction} />
               <Route path="/artifacts" component={UnderConstruction} />
-              <Route path="/weapons" component={WeaponSearch} />
+              <Route path="/weapons" component={UnderConstruction} />
               <Route exact path="/" component={CharacterSearch} />
               <Route path="/builds/:shortName" render={renderCharacterPage} />
               <Redirect exact path="/builds" to="/" />
