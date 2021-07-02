@@ -1,6 +1,6 @@
 ## dev build 7.02.21
 
-- Convert images to slightly more optimized WebP format
+- Update assets and convert images to slightly more optimized WebP 
 - Style fixes with some controls UI components
 - Update for newer content, increase data pool to ~13000 players total
 
