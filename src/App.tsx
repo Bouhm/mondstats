@@ -119,10 +119,7 @@ function App() {
       <Navbar />
       <main className="App-content">
         <Sidebar />
-        <div className="section-view" style={!seenDialogue ? {
-        filter: "blur(2px)", 
-        opacity: 0.1
-      } : {}}>
+        <div className="section-view">
           <section>
             <Switch>
               <Route path="/about" component={About} />
