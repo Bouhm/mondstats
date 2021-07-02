@@ -110,10 +110,10 @@
     height: 100%;
     max-height: 100%;
     flex-wrap: wrap-reverse;
-  }
 
-  .artifacts-donut-chart {
-    margin-left: -1.5rem !important;
+    .artifact-build-stats {
+      margin-right: 0;
+    }
   }
 }
 

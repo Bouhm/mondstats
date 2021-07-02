@@ -29,7 +29,7 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
 
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const defaultStages = options.slice(options.length-3)
+  const defaultStages = options.slice(options.length-6)
 
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
   const [ selectedStages, selectStages ] = useState<Option[]>(defaultStages)
@@ -83,14 +83,14 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
                   _.map(_.take(_.orderBy(party_stats[0], 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 8 : 3), ({party, count}, j) => {
                     return (
                       <div key={`party-${selectedStage.value}-${i}-${j}`} className="party-container">
-                        <div className="party-characters">
+                        <div className="party-grid">
                           {_.map(_.sortBy(party, char => characterDb[char].name), (char, k) => {
                             return <CharacterTile id={char+''} key={`party-${char}-${k}`} labeled={false} />
                           })}
-                        </div>
-                        <div className="party-popularity">
-                          <p className="popularity-pct">{Math.round((count/(_.reduce(party_stats[0], (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%</p>
-                          <p className="popularity-line">Count: {count}</p>
+                          <div className="party-popularity">
+                            <p className="popularity-pct">{Math.round((count/(_.reduce(party_stats[0], (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%</p>
+                            <p className="popularity-line">Count: {count}</p>
+                          </div>
                         </div>
                       </div>
                     )
@@ -114,7 +114,7 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
               //           {_.map(_.take(_.orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage] ? 8 : 3), ({party, count}, j) => {
               //               return (
               //                 <div key={`party-${i}-${j}`} className="party-container">
-              //                   <div className="party-characters">
+              //                   <div className="party-grid">
               //                     {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => {
               //                       return <CharacterTile id={char+''} key={`party-${i}`} />
               //                     })}

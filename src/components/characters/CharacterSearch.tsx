@@ -29,7 +29,7 @@ function CharacterSearch({ dataTotal }: CharacterSearchProps) {
   return (
     <div className="character-search">
       <div className="character-searchbar">
-        <Searchbar maxResults={6} onSearch={handleSearchCharacter} list={_.keys(characterIdMap)} placeholder="Search character builds" />
+        <Searchbar maxResults={4} onSearch={handleSearchCharacter} list={_.keys(characterIdMap)} placeholder="Search character builds" />
       </div>
       <div className="character-tiles">
         <div className="searched-character">

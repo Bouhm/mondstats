@@ -15,7 +15,6 @@ import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 import Dialogue from './components/ui/Dialogue';
-import WeaponSearch from './components/weapons/WeaponSearch';
 import AbyssBattles from './data/abyssBattles.json';
 import ArtifactDb from './data/artifacts.json';
 import ArtifactSetDb from './data/artifactSets.json';
