@@ -43,7 +43,7 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
         floor.party_stats[i] = _.filter(battle, ({party}) => {
           if (f2p) {
             let fivesCount =  characterDb[charId].rarity > 4 ? 1 : 0;
-            return party.includes(charId) && _.filter(party, char => characterDb[char].rarity > 4).length === fivesCount;
+            return party.includes(charId) && _.filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length === fivesCount;
           }
 
           return party.includes(charId)

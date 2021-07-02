@@ -5,7 +5,7 @@
 
 .weapon-tile {
   position: relative;
-  width: 135px;
+  width: 145px;
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
@@ -34,8 +34,8 @@
   }
 
   img {
-    width: 135px;
-    height: 135px;
+    width: 145px;
+    height: 145px;
     vertical-align: middle;
   }
 
@@ -43,7 +43,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 2.5rem;
+    height: 3.5rem;
     color: rgb(73, 83, 102);
     background-color: #e9e5dc;
     font-size: 1.1rem;

@@ -1,6 +1,5 @@
 import './WeaponSearch.css';
 
-import Logo from '/assets/logo_sm.png';
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 
@@ -30,14 +29,16 @@ function WeaponSearch() {
         <Searchbar maxResults={6} onSearch={handleSearchCharacter} list={weaponNames} placeholder="Search weapons" />
       </div>
       <div className="weapon-tiles">
-        <div className="searched-weapon">
-          {_.map(filteredWeapons, weaponId => (
-            <WeaponTile key={weaponId} id={weaponId} />
-          ))}
+        <div className="searched-weapon-grid">
+          <div className="searched-weapon">
+            {_.map(filteredWeapons, weaponName => (
+              <WeaponTile key={weaponName} id={_.find(weaponDb, { name: weaponName })!._id} />
+            ))}
+          </div>
         </div>
         <div className="unfiltered-characters">
-          {_.map(unfilteredWeapons.sort(), weaponId => (
-            <WeaponTile key={weaponId} id={weaponId} />
+          {_.map(unfilteredWeapons.sort(), weaponName => (
+            <WeaponTile key={weaponName} id={_.find(weaponDb, { name: weaponName })!._id} />
           ))}
         </div>
       </div>

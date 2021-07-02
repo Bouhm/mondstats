@@ -27,7 +27,7 @@ function WeaponTile({ id, labeled = true }: CharacterTileProps) {
     <Link to={`/weapons/${weaponName}`}>
       <div className="weapon-tile-container">
         <div className={classes}>
-          <img src={`/assets/weapons/${weapon.oid}.png`} alt={`${weapon.name}-portrait`}></img>
+          <img src={`/assets/weapons/${weapon.oid}.webp`} alt={`${weapon.name}-portrait`}></img>
           {labeled && <div className="weapon-tile-name">
             {weapon.name}
           </div>}

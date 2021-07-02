@@ -29,7 +29,7 @@ function CharacterTile({ id, labeled = true }: CharacterTileProps) {
     <Link to={`/builds/${charName}`}>
       <div className="character-tile-container">
         <div className={classes}>
-          <img src={`/assets/characters/${character.oid}.png`} alt={`${character.name}-portrait`}></img>
+          <img src={`/assets/characters/${character.oid}.webp`} alt={`${character.name}-portrait`}></img>
           {charElement && <img className="element-icon" src={ElementIcons[character.element]} alt={character.element}></img>}
           {labeled && <div className="character-tile-name">
             {character.name}

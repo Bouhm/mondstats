@@ -34,19 +34,19 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
   }
 
   _.forEach(Characters, character => {
-    download(character.icon, path.resolve(__dirname, "./src/assets/characters"), path.resolve(__dirname, "./src/assets/characters/raw", `${character.oid}.png`))
-    download(character.image, path.resolve(__dirname, "./src/assets/characters"), path.resolve(__dirname, "./src/assets/characters/raw", `${character.oid}_bg.png`))
+    download(character.icon, path.resolve(__dirname, "./src/assets/characters"), path.resolve(__dirname, "./src/assets/characters/raw", `${character.oid}.webp`))
+    download(character.image, path.resolve(__dirname, "./src/assets/characters"), path.resolve(__dirname, "./src/assets/characters/raw", `${character.oid}_bg.webp`))
     character.constellations.forEach(c => {
-      download(c.icon, path.resolve(__dirname, "./src/assets/characters/constellations"), path.resolve(__dirname, "./src/assets/characters/constellations/raw", `${c.oid}.png`))
+      download(c.icon, path.resolve(__dirname, "./src/assets/characters/constellations"), path.resolve(__dirname, "./src/assets/characters/constellations/raw", `${c.oid}.webp`))
     })
   }) 
 
   _.forEach(ArtifactSets, artifactSet => {
     const artifact = _.find(Artifacts, artifact => artifact.set === artifactSet._id && artifact.pos === 5)
-    download(artifact.icon, path.resolve(__dirname, "./src/assets/artifacts"), path.resolve(__dirname, "./src/assets/artifacts/raw", `${artifactSet.oid}.png`))
+    download(artifact.icon, path.resolve(__dirname, "./src/assets/artifacts"), path.resolve(__dirname, "./src/assets/artifacts/raw", `${artifactSet.oid}.webp`))
   })
 
   _.forEach(Weapons, weapon => {
-    download(weapon.icon, path.resolve(__dirname, "./src/assets/weapons"), path.resolve(__dirname, "./src/assets/weapons/raw", `${weapon.oid}.png`))
+    download(weapon.icon, path.resolve(__dirname, "./src/assets/weapons"), path.resolve(__dirname, "./src/assets/weapons/raw", `${weapon.oid}.webp`))
   })
 })()

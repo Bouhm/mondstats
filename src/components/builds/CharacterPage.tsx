@@ -67,7 +67,7 @@ function CharacterPage({ data }: CharacterPageProps) {
   }
 
   return (
-    <div className="character-page" style={{ backgroundImage: `url("/assets/characters/${character.oid}_bg.png")` }}>
+    <div className="character-page" style={{ backgroundImage: `url("/assets/characters/${character.oid}_bg.webp")` }}>
       <div className="character-page-stats-count" style={{ backgroundColor: elementColor }}>
         <span>{charData.total} {character.name} Builds</span>
       </div>
