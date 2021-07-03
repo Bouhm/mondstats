@@ -68,7 +68,8 @@ export interface IWeaponBuild {
 
 export interface IArtifactBuild {
   _id: string,
-  activation_number: number
+  activation_number: number,
+  rarity: number
 }
 
 export interface IBuild {
@@ -85,3 +86,25 @@ export interface IAbyssBattle {
   }[][]
 }
 
+export interface IArtifactSetStats {
+  [_id: string]: {
+    weapons: {
+      artifacts: IArtifactBuild[]
+    },
+    characters: {
+      [charId: string]: number
+    },
+    count: number
+  }
+}
+
+export interface IWeaponStats {
+  [_id: string]: {
+    characters: {
+      [charId: string]: number
+    },
+    type_name: string,
+    rarity: number,
+    count: number
+  }
+}

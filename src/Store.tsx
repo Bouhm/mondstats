@@ -6,9 +6,11 @@ import {
   IAbyssBattle,
   IArtifactDb,
   IArtifactSetDb,
+  IArtifactSetStats,
   ICharacterBuild,
   ICharacterDb,
   IWeaponDb,
+  IWeaponStats,
 } from './data/types';
 
 interface IState {
@@ -22,7 +24,8 @@ interface IState {
   characterBuilds: ICharacterBuild[],
   abyssBattles: IAbyssBattle[],
   f2p: boolean,
-  seenDialogues: { [id: string]: boolean }
+  artifactSetStats: IArtifactSetStats,
+  weaponStats: IWeaponStats
 }
 
 const initialState: IState = {
@@ -36,7 +39,8 @@ const initialState: IState = {
   characterBuilds: [],
   abyssBattles: [],
   f2p: false,
-  seenDialogues: {}
+  artifactSetStats: {},
+  weaponStats: {}
 }
 
 const dataSlice = createSlice({
@@ -73,9 +77,13 @@ const dataSlice = createSlice({
     setF2p: (state, action: PayloadAction<boolean>) => {
       state.f2p = action.payload
     },
-    setSeenDialogues: (state, action: PayloadAction<{[id: string]: boolean}>) => {
-      state.seenDialogues = {...state.seenDialogues, ...action.payload }
-    }
+    setArtifactSetStats:(state, action: PayloadAction<IArtifactSetStats>) => {
+      state.artifactSetStats = action.payload
+    },
+    setWeaponStats:(state, action: PayloadAction<IWeaponStats>) => {
+      state.weaponStats = action.payload
+    },
+    
   }
 })
 

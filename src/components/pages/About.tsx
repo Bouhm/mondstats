@@ -21,7 +21,7 @@ function About() {
       </div>
       <div className="about-section">
         <h2>How can I contribute?</h2>
-        <p>Wow thank you for asking! Creating an account in HoYoLAB (miHoYo's official forum) if you haven't done so already and toggling your Battle Chronicle to 'Public' in your profile will allow your data to be visible. Favonius.io collects data indiscriminately so it won't have your data for certain.</p>
+        <p>Thank you for asking! Creating an account in HoYoLAB (miHoYo's official forum) if you haven't done so already and toggling your Battle Chronicle to 'Public' in your profile will allow your data to be visible. Favonius.io collects data indiscriminately so it won't have your data for certain.</p>
       </div>
       <div className="about-section">
         <h2>Where is my 4-Bloodstained Chivalry Klee build?</h2>
