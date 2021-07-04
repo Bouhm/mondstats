@@ -1,3 +1,9 @@
+## dev build 7.02.21
+
+- Update assets and convert images to slightly more optimized WebP 
+- Style fixes with some controls UI components
+- Update for newer content, increase data pool to ~13000 players total
+
 ## dev build 6.30.21
 
 - Add F2P filtering for character builds

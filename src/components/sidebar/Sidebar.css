@@ -44,3 +44,10 @@
   }
 }
 
+@media (max-width: 516px) {
+  #sidebar {
+    display: none;
+  }
+}
+
+

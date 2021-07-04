@@ -15,7 +15,6 @@ import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 import Dialogue from './components/ui/Dialogue';
-import WeaponSearch from './components/weapons/WeaponSearch';
 import AbyssBattles from './data/abyssBattles.json';
 import ArtifactDb from './data/artifacts.json';
 import ArtifactSetDb from './data/artifactSets.json';
@@ -100,7 +99,7 @@ function App() {
     dispatch(setArtifactDb(artifactDb))
     dispatch(setArtifactSetDb(artifactSetDb))
     dispatch(setCharacterDb(characterDb))
-    dispatch(setCharacterBuilds(CharacterBuilds))
+    dispatch(setCharacterBuilds(characterBuilds))
     dispatch(setAbyssbattles(AbyssBattles))
     dispatch(setCharacterIdMap(charIdMap))
     dispatch(setWeaponDb(weaponDb))
@@ -111,19 +110,16 @@ function App() {
 
   return (
     <div className="App">
-      {!seenDialogue && (
+      {/* {!seenDialogue && (
         <Dialogue 
         onClose={handleCloseDialogue}>
           The past month was spent on database migration and building out a back-end server. Now that that's done, I'll finally implement more interesting content with the data in the following weeks. Please feel free to throw any suggestions at <b>Bouhm#2205</b> on Discord.
         </Dialogue>
-      )}
+      )} */}
       <Navbar />
       <main className="App-content">
         <Sidebar />
-        <div className="section-view" style={!seenDialogue ? {
-        filter: "blur(2px)", 
-        opacity: 0.1
-      } : {}}>
+        <div className="section-view">
           <section>
             <Switch>
               <Route path="/about" component={About} />
@@ -146,7 +142,7 @@ function App() {
           </section>
         </div>
       </main>
-      <span className="build-ver">dev build 06.30.21</span>
+      <span className="build-ver">dev build 07.02.21</span>
     </div>
   )
 }

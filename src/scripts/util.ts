@@ -1,4 +1,4 @@
 export function getShortName(name: string) {
-  return name.toLowerCase().replace(" ", "");
+  return name.split(" ").join("").replace("-", "").toLocaleLowerCase();
 }
 

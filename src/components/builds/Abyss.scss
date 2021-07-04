@@ -15,6 +15,10 @@
   h1 {
     margin: 2rem auto;
   }
+
+  .dropdown {
+    margin-left: 0.5rem;
+  }
 }
 
 .floor-container {
@@ -23,10 +27,12 @@
   align-items: center;
 
   .party-container {
-    display: flex;
-    margin: 2rem 1rem 2rem 2rem;
-    border-radius: 6px;
-    overflow: hidden;
+    margin: 2rem 1rem;   
+    
+    .party-grid {
+      border-radius: 8px;
+      overflow: hidden;
+    }
 
     .popularity-line {
       margin: 0.2rem;
@@ -119,13 +125,12 @@
     font-size: 2rem;
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
     height: 135px;
-    min-width: 135px;
     display: flex;
     flex-flow: column;
     justify-content: center;
   }
 
-  .party-characters {
+  .party-grid {
     display: flex;
     background-color: #e9e5dc;
 
@@ -181,17 +186,18 @@
 
 @media (max-width: 1018px) {
   .party-container {
-    display: flex;
-    flex-flow: column;
-    margin: 1rem;
+    align-items: center;
+    margin: 2rem 1rem;
 
-    .party-characters {
+    .party-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
 
     .party-popularity {
-      width: 100%;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      padding-top: 0;
       height: 100%;
     }
   }

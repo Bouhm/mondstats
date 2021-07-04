@@ -8,7 +8,7 @@ function ArtifactSetCard({ _id, oid, name, affixes, activation }: IArtifactSetDa
   return (
     <div className={`artifact-card`}>
       <div className="artifact-header">
-        <img src={`/assets/artifacts/${oid}.png`} alt={name} />
+        <img src={`/assets/artifacts/${oid}.webp`} alt={name} />
         <div className="artifact-detail">
           <div className="artifact-name">
             {activation}x {name}
