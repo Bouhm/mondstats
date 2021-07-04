@@ -9,6 +9,7 @@ import {
   IArtifactSetStats,
   ICharacterBuild,
   ICharacterDb,
+  ICharacterStats,
   IWeaponDb,
   IWeaponStats,
 } from './data/types';
@@ -24,8 +25,9 @@ interface IState {
   characterBuilds: ICharacterBuild[],
   abyssBattles: IAbyssBattle[],
   f2p: boolean,
-  artifactSetStats: IArtifactSetStats,
-  weaponStats: IWeaponStats
+  artifactSetStats: IArtifactSetStats[],
+  weaponStats: IWeaponStats[],
+  characterStats: ICharacterStats[]
 }
 
 const initialState: IState = {
@@ -39,8 +41,9 @@ const initialState: IState = {
   characterBuilds: [],
   abyssBattles: [],
   f2p: false,
-  artifactSetStats: {},
-  weaponStats: {}
+  artifactSetStats: [],
+  weaponStats: [],
+  characterStats: []
 }
 
 const dataSlice = createSlice({
@@ -77,13 +80,15 @@ const dataSlice = createSlice({
     setF2p: (state, action: PayloadAction<boolean>) => {
       state.f2p = action.payload
     },
-    setArtifactSetStats:(state, action: PayloadAction<IArtifactSetStats>) => {
+    setArtifactSetStats: (state, action: PayloadAction<IArtifactSetStats[]>) => {
       state.artifactSetStats = action.payload
     },
-    setWeaponStats:(state, action: PayloadAction<IWeaponStats>) => {
+    setWeaponStats: (state, action: PayloadAction<IWeaponStats[]>) => {
       state.weaponStats = action.payload
     },
-    
+    setCharacterStats: (state, action: PayloadAction<ICharacterStats[]>) => {
+      state.characterStats = action.payload
+    },
   }
 })
 
@@ -92,14 +97,15 @@ export const {
   selectCharacter,
   setArtifactDb,
   setArtifactSetDb,
+  setArtifactSetStats,
   setWeaponDb,
+  setWeaponStats,
   setCharacterDb,
   setElementColor,
   setCharacterBuilds,
+  setCharacterStats,
   setAbyssbattles,
   setF2p,
-  setArtifactSetStats,
-  setWeaponStats
 } = dataSlice.actions;
 
 const store = configureStore({ reducer: { data: dataSlice.reducer } })

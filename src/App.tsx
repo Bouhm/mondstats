@@ -18,8 +18,9 @@ import Dialogue from './components/ui/Dialogue';
 import AbyssBattles from './data/abyssBattles.json';
 import ArtifactDb from './data/artifacts.json';
 import ArtifactSetDb from './data/artifactSets.json';
-import CharacterBuilds from './data/characterBuilds.json';
+import ArtifactSetStats from './data/artifactSetStats.json';
 import CharacterDb from './data/characters.json';
+import CharacterStats from './data/characterStats.json';
 import {
   IArtifactData,
   IArtifactDb,
@@ -31,16 +32,20 @@ import {
   IWeaponDb,
 } from './data/types';
 import WeaponDb from './data/weapons.json';
+import WeaponStats from './data/weaponStats.json';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { getShortName } from './scripts/util';
 import {
   setAbyssbattles,
   setArtifactDb,
   setArtifactSetDb,
+  setArtifactSetStats,
   setCharacterBuilds,
   setCharacterDb,
   setCharacterIdMap,
+  setCharacterStats,
   setWeaponDb,
+  setWeaponStats,
 } from './Store';
 
 function App() {
@@ -103,6 +108,7 @@ function App() {
     dispatch(setAbyssbattles(AbyssBattles))
     dispatch(setCharacterIdMap(charIdMap))
     dispatch(setWeaponDb(weaponDb))
+    dispatch(setCharacterStats(CharacterStats))
   }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
 
 
