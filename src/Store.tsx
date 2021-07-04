@@ -98,7 +98,8 @@ export const {
   setCharacterBuilds,
   setAbyssbattles,
   setF2p,
-  setSeenDialogues
+  setArtifactSetStats,
+  setWeaponStats
 } = dataSlice.actions;
 
 const store = configureStore({ reducer: { data: dataSlice.reducer } })
