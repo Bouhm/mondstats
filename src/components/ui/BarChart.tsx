@@ -5,18 +5,22 @@ import React, { ReactNode, useEffect } from 'react';
 
 type BarChartProps = {
   data: {
+    tooltip?: string,
     content?: ReactNode,
     value: number,
-    color?: string
-  }[]
+    color?: string,
+  }[],
+  orientation?: string
 }
 
-function BarChart({data}: BarChartProps) {
+function BarChart({data, orientation="vertical"}: BarChartProps) {
+  const barStyle = orientation === "vertical" ? {gridTemplateColumns: `repeat(${data.length}, 1fr)`} : {gridTemplateRows: `repeat(${data.length}, 1fr)`}
+
   return (
     <>
       <div 
         className="barchart-container"
-        style={{gridTemplateColumns: `repeat(${data.length}, 1fr)`}}
+        style={barStyle}
       >
         {_.map(data, ({ content, color, value }, i) => {
           return (
@@ -26,7 +30,7 @@ function BarChart({data}: BarChartProps) {
       </div>
       <div 
         className="content-container"
-        style={{gridTemplateColumns: `repeat(${data.length}, 1fr)`}}
+        style={barStyle}
       >
         {_.map(data, ({ content }, i) => <div key={i}  className={"bar-content"}>{content}</div>)}
       </div>

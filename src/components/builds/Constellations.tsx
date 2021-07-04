@@ -38,7 +38,7 @@ function Constellations({ constellations, total }: ConstellationsProps ) {
   const generateChartData = () => {
     return _.map(constellations, (count, i) => {
       return { 
-        label: `C${i}`, 
+        tooltip: `C${i}`, 
         value: 1 + Math.round((count / total * 1000)/10), 
         color: i === 0 ? elemColors.none : elementColor,
         content: (

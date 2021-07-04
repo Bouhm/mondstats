@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 
 import { IWeaponBuild } from '../../../data/types';
 import { useAppSelector } from '../../../hooks';
+import BarChart from '../../ui/BarChart';
 import Tooltip from '../../ui/Tooltip';
 import WeaponCard from './WeaponCard';
 
@@ -17,39 +18,35 @@ function WeaponBuild({ weapons, total, f2p }: WeaponBuild) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
 
+  const generateChartData = () => {    
+    return _.map(_.take(_.orderBy(_.filter(weapons, ({_id}) => {
+      if (f2p) {
+        const weapon = weaponDb[_id]
+        return weapon.rarity < 5 && !_.includes(BP_WEAPONS, weapon.oid)
+      }
+
+      return true
+    }), 'count', 'desc'), 8), ({count, _id}, i) => {
+      const popularity = Math.round((count / total) * 100)
+      const weapon = weaponDb[_id];
+
+      return { 
+        label: `C${i}`, 
+        value: 1 + Math.round((count / total * 1000)/10), 
+        color: elementColor,
+        content: <WeaponCard {...weapon} popularity={popularity} />
+      }
+    })
+  }
+
   return (
     <div className="weapons-list-container">
       <h1>Weapons</h1>
       <div className="weapons-list">
-        {_.map(_.take(_.orderBy(_.filter(weapons, ({_id}) => {
-          if (f2p) {
-            const weapon = weaponDb[_id]
-            return weapon.rarity < 5 && !_.includes(BP_WEAPONS, weapon.oid)
-          }
-
-          return true
-        }), 'count', 'desc'), 8), ({ _id, count }, i) => {
-          const weapon = weaponDb[_id];
-          if (!weapon) return null;
-
-          const popularity = Math.round((count / total) * 100)
-
-          return (
-            <div key={`${_id}-${count}-${i}`} className="weapon-container withTooltip">
-              <WeaponCard {...weapon} popularity={popularity} />
-              <div className="bar-chart weapon-bar-chart">
-                <div
-                  className={`bar-chart-bar weapon-bar`} 
-                  style={{ width: `${popularity}%`, backgroundColor: elementColor }} 
-                />
-              </div>
-              <Tooltip 
-                alignment="horizontal"
-                content={`${weapon.name}: ${count}`}
-              />
-            </div>
-          )
-        })}
+        <BarChart 
+          data={generateChartData()} 
+          orientation="horizontal"
+        ></BarChart>
       </div>
     </div>
   )
