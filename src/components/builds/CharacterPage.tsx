@@ -11,7 +11,7 @@ import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../data/types'
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectCharacter, setElementColor } from '../../Store';
 import Toggle from '../ui/Toggle';
-import Abyss from './Abyss';
+import Abyss from '../characters/Abyss';
 import BuildSelector from './BuildSelector';
 import elemColors from './colors';
 import Constellations from './Constellations';
