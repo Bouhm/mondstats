@@ -1,33 +1,15 @@
-$totalRows: 101;
-
 .barchart-container {
   position: relative;
   display: grid;
-  grid-template-rows: repeat($totalRows, 1fr);
-  grid-column-gap: 5px;
-  bottom: -0.22rem;
   height: 40vh;
   padding: 0 2rem;
   margin: 0 auto;
   max-width: 80rem;
 
-  [class*="_bar"] {
+  .barchart-bar {
     transition: all .6s ease;
-    grid-row-start: 1;
-    grid-row-end: $totalRows;
     border: 2px solid white;
     border-bottom: none;
-  }
-
-  @mixin chartValue($data) {
-    $result: $totalRows - $data;
-    grid-row-start: $result;
-  }
-
-  @for $i from 1 through $totalRows {
-    ._bar-#{$i} {
-      @include chartValue($i);
-    }
   }
 }
 
@@ -35,7 +17,6 @@ $totalRows: 101;
   display: grid;
   position: relative;
   top: 0rem;
-  grid-column-gap: 5px;
   padding: 0 2rem;
   margin: 0 auto 2rem auto;
   max-width: 80rem;
@@ -55,3 +36,12 @@ $totalRows: 101;
   }
 }
 
+
+@keyframes horibar {
+  0% {
+    max-width: 0;
+  }
+  100% {
+    max-width: 100%;
+  }
+}

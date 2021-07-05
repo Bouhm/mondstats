@@ -9,28 +9,38 @@ type BarChartProps = {
     content?: ReactNode,
     value: number,
     color?: string,
-  }[],
-  orientation?: string
+  }[]
 }
 
-function BarChart({data, orientation="vertical"}: BarChartProps) {
-  const barStyle = orientation === "vertical" ? {gridTemplateColumns: `repeat(${data.length}, 1fr)`} : {gridTemplateRows: `repeat(${data.length}, 1fr)`}
+function BarChart({data}: BarChartProps) {
+  const total = 101;
+  const barChartStyle = {
+    gridTemplateColumns: `repeat(${data.length}, 1fr)`,
+    gridColumnGap: '5px'
+  } 
+
+  const barStyle = (value: number) => {
+    return {
+      gridRowEnd: total,
+      gridRowStart: total - value
+    }
+  } 
 
   return (
     <>
       <div 
         className="barchart-container"
-        style={barStyle}
+        style={barChartStyle}
       >
         {_.map(data, ({ content, color, value }, i) => {
           return (
-            <div key ={`_bar-${value}-${i}`} className={`_bar-${value}`} style={{backgroundColor: color}} />
+            <div key ={`${value}-${i}`} className={`barchart-bar`} style={{ ...barStyle(value), backgroundColor: color}} />
           )
         })}
       </div>
       <div 
         className="content-container"
-        style={barStyle}
+        style={barChartStyle}
       >
         {_.map(data, ({ content }, i) => <div key={i}  className={"bar-content"}>{content}</div>)}
       </div>
