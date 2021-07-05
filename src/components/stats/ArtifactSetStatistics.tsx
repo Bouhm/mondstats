@@ -5,10 +5,10 @@ import React, { useEffect, useState } from 'react';
 import { IArtifactSetStats } from '../../data/types';
 
 function ArtifactSetStatistics() { 
-  const [artifactSetStats, setArtifactSetStats] = useState<IArtifactSetStats | undefined>(undefined)
+  const [artifactSetStats, setArtifactSetStats] = useState<IArtifactSetStats[] | undefined>(undefined)
   
   useEffect(() => {
-    setArtifactSetStats(artifactSetStats)
+    setArtifactSetStats(ArtifactSetStats as unknown as IArtifactSetStats[])
   }, [setArtifactSetStats, ArtifactSetStats])
 
 

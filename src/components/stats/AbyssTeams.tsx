@@ -8,7 +8,7 @@ function AbyssTeams() {
   const [abyssBattles, setAbyssBattles] = useState<IAbyssBattle[] | undefined>(undefined)
   
   useEffect(() => {
-    setAbyssBattles(abyssBattles)
+    setAbyssBattles(AbyssBattles)
   }, [setAbyssBattles, AbyssBattles])
 
 

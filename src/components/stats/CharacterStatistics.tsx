@@ -8,7 +8,7 @@ function CharacterStatistics() {
   const [characterStats, setCharacterStats] = useState<ICharacterStats[] | undefined>(undefined)
   
   useEffect(() => {
-    setCharacterStats(characterStats)
+    setCharacterStats(CharacterStats as unknown as ICharacterStats[])
   }, [setCharacterStats, CharacterStats])
 
   return (

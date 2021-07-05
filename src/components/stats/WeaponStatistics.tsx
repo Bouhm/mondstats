@@ -8,7 +8,7 @@ function WeaponStatistics() {
   const [weaponStats, setWeaponStats] = useState<IWeaponStats[] | undefined>(undefined)
   
   useEffect(() => {
-    setWeaponStats(weaponStats)
+    setWeaponStats(WeaponStats as unknown as IWeaponStats[])
   }, [setWeaponStats, WeaponStats])
 
   return (
