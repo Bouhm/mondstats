@@ -69,7 +69,7 @@ export interface IWeaponBuild {
 export interface IArtifactBuild {
   _id: string,
   activation_number: number,
-  rarity: number
+  rarity?: number
 }
 
 export interface IBuild {

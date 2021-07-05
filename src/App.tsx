@@ -2,7 +2,6 @@ import './App.css';
 
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
 
 import { gql, useQuery } from '@apollo/client';
@@ -15,12 +14,9 @@ import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 import Dialogue from './components/ui/Dialogue';
-import AbyssBattles from './data/abyssBattles.json';
 import ArtifactDb from './data/artifacts.json';
 import ArtifactSetDb from './data/artifactSets.json';
-import ArtifactSetStats from './data/artifactSetStats.json';
 import CharacterDb from './data/characters.json';
-import CharacterStats from './data/characterStats.json';
 import {
   IArtifactData,
   IArtifactDb,
@@ -32,25 +28,17 @@ import {
   IWeaponDb,
 } from './data/types';
 import WeaponDb from './data/weapons.json';
-import WeaponStats from './data/weaponStats.json';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { getShortName } from './scripts/util';
 import {
-  setAbyssbattles,
   setArtifactDb,
   setArtifactSetDb,
-  setArtifactSetStats,
-  setCharacterBuilds,
   setCharacterDb,
   setCharacterIdMap,
-  setCharacterStats,
   setWeaponDb,
-  setWeaponStats,
 } from './Store';
 
 function App() {
-  const characterBuilds = useAppSelector((state) => state.data.characterBuilds)
-  const abyssBattles = useAppSelector((state) => state.data.abyssBattles)
   const dispatch = useAppDispatch()
 
   const dialogueWidthLimit = 1078;
@@ -104,15 +92,9 @@ function App() {
     dispatch(setArtifactDb(artifactDb))
     dispatch(setArtifactSetDb(artifactSetDb))
     dispatch(setCharacterDb(characterDb))
-    dispatch(setCharacterBuilds(characterBuilds))
-    dispatch(setAbyssbattles(AbyssBattles))
     dispatch(setCharacterIdMap(charIdMap))
     dispatch(setWeaponDb(weaponDb))
-    dispatch(setCharacterStats(CharacterStats))
   }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
-
-
-  const renderCharacterPage = () => <CharacterPage data={{ characters: characterBuilds, abyss: abyssBattles }} />
 
   return (
     <div className="App">
@@ -135,7 +117,7 @@ function App() {
               <Route path="/artifacts" component={UnderConstruction} />
               <Route path="/weapons" component={UnderConstruction} />
               <Route exact path="/" component={CharacterSearch} />
-              <Route path="/builds/:shortName" render={renderCharacterPage} />
+              <Route path="/builds/:shortName" component={CharacterPage} />
               <Redirect exact path="/builds" to="/" />
             </Switch>
           </section>

@@ -4,6 +4,8 @@ import AmberSad from '/assets/amberSad.png';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import CharacterBuilds from '../../data/characterBuilds.json';
+import AbyssBattles from '../../data/abyssBattles.json';
 
 import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../data/types';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -14,14 +16,7 @@ import BuildSelector from './BuildSelector';
 import elemColors from './colors';
 import Constellations from './Constellations';
 
-type CharacterPageProps = {
-  data: { 
-    characters: ICharacterBuild[],
-    abyss: IAbyssBattle[]
-  }
-}
-
-function CharacterPage({ data }: CharacterPageProps) {  
+function CharacterPage() {  
   const { shortName } = useParams<{ shortName: string }>();
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
@@ -29,20 +24,12 @@ function CharacterPage({ data }: CharacterPageProps) {
   const elementColor = useAppSelector((state) => state.data.elementColor)
   const dispatch = useAppDispatch()
 
-  const [charData, setCharData] = useState<ICharacterBuild | undefined>(undefined)
+  const [characterBuild, setCharacterBuild] = useState<ICharacterBuild | undefined>(undefined)
   const [abyssData, setAbyssData] = useState<IAbyssBattle[] | undefined>(undefined)
   const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
   const [f2p, setF2p] = useState(false);
   const charId = characterIdMap[shortName]
 
-  let filteredAbyss = _.cloneDeep(data.abyss)
-  _.forEach(filteredAbyss, floor => _.forEach(floor.party_stats, (battles) => {
-    _.forEach(battles, (battle, i) => {
-      if (battle && !_.includes(battle.party, charId)) {
-        battles.splice(i, 1)
-      }
-    })
-  }));
 
   const handleToggleF2p = () => {
     setF2p(!f2p)
@@ -52,15 +39,24 @@ function CharacterPage({ data }: CharacterPageProps) {
     if (!_.isEmpty(characterDb)) {
       const char = characterDb[charId];
       setCharacter(char)
-      setCharData(_.find(data.characters, charData => charData.char_id === charId ));
+      setCharacterBuild(_.find(CharacterBuilds, { char_id: charId }) as ICharacterBuild);
+
+      let filteredAbyss = _.cloneDeep(AbyssBattles)
+      _.forEach(filteredAbyss, floor => _.forEach(floor.party_stats, (battles) => {
+        _.forEach(battles, (battle, i) => {
+          if (battle && !_.includes(battle.party, charId)) {
+            battles.splice(i, 1)
+          }
+        })
+      }));
       setAbyssData(filteredAbyss)
       
       dispatch(selectCharacter(charId))
       dispatch(setElementColor(elemColors[char.element.toLowerCase()]))
     }
-  }, [setCharacter, setCharData, setAbyssData, dispatch, charId, characterDb, elemColors, elementColor])
+  }, [setCharacter, setCharacterBuild, setAbyssData, dispatch, charId, characterDb, elemColors, elementColor])
 
-  if (!character || !charData) {
+  if (!character || !characterBuild) {
     return <div>
       <div className="its-empty"><img src={AmberSad} alt="empty" /></div>
     </div>
@@ -69,20 +65,20 @@ function CharacterPage({ data }: CharacterPageProps) {
   return (
     <div className="character-page" style={{ backgroundImage: `url("/assets/characters/${character.oid}_bg.webp")` }}>
       <div className="character-page-stats-count" style={{ backgroundColor: elementColor }}>
-        <span>{charData.total} {character.name} Builds</span>
+        <span>{characterBuild.total} {character.name} Builds</span>
       </div>
       <div className="character-page-controls">
         <Toggle color={elementColor} label={"F2P"} defaultValue={f2p} onChange={handleToggleF2p} />
       </div>
 
-      {charData.builds &&
+      {characterBuild.builds &&
         <>
           <BuildSelector
-            builds={_.take(charData.builds, 8)}
-            total={charData.total}
+            builds={_.take(characterBuild.builds, 8)}
+            total={characterBuild.total}
             f2p={f2p}
           />
-          <Constellations constellations={charData.constellations} total={charData.total} />
+          <Constellations constellations={characterBuild.constellations} total={characterBuild.total} />
         </>
       }
       {abyssData &&

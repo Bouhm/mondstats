@@ -3,15 +3,10 @@ import React from 'react';
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
-  IAbyssBattle,
   IArtifactDb,
   IArtifactSetDb,
-  IArtifactSetStats,
-  ICharacterBuild,
   ICharacterDb,
-  ICharacterStats,
   IWeaponDb,
-  IWeaponStats,
 } from './data/types';
 
 interface IState {
@@ -22,12 +17,6 @@ interface IState {
   characterDb: ICharacterDb,
   weaponDb: IWeaponDb,
   elementColor: string,
-  characterBuilds: ICharacterBuild[],
-  abyssBattles: IAbyssBattle[],
-  f2p: boolean,
-  artifactSetStats: IArtifactSetStats[],
-  weaponStats: IWeaponStats[],
-  characterStats: ICharacterStats[]
 }
 
 const initialState: IState = {
@@ -37,13 +26,7 @@ const initialState: IState = {
   artifactDb: {},
   weaponDb: {},
   characterDb: {},
-  elementColor: "",
-  characterBuilds: [],
-  abyssBattles: [],
-  f2p: false,
-  artifactSetStats: [],
-  weaponStats: [],
-  characterStats: []
+  elementColor: ""
 }
 
 const dataSlice = createSlice({
@@ -70,25 +53,7 @@ const dataSlice = createSlice({
     },
     setElementColor: (state, action: PayloadAction<string>) => {
       state.elementColor = action.payload
-    },
-    setCharacterBuilds: (state, action: PayloadAction<ICharacterBuild[]>) => {
-      state.characterBuilds = action.payload
-    },
-    setAbyssbattles: (state, action: PayloadAction<IAbyssBattle[]>) => {
-      state.abyssBattles = action.payload
-    },
-    setF2p: (state, action: PayloadAction<boolean>) => {
-      state.f2p = action.payload
-    },
-    setArtifactSetStats: (state, action: PayloadAction<IArtifactSetStats[]>) => {
-      state.artifactSetStats = action.payload
-    },
-    setWeaponStats: (state, action: PayloadAction<IWeaponStats[]>) => {
-      state.weaponStats = action.payload
-    },
-    setCharacterStats: (state, action: PayloadAction<ICharacterStats[]>) => {
-      state.characterStats = action.payload
-    },
+    }
   }
 })
 
@@ -97,15 +62,9 @@ export const {
   selectCharacter,
   setArtifactDb,
   setArtifactSetDb,
-  setArtifactSetStats,
   setWeaponDb,
-  setWeaponStats,
   setCharacterDb,
-  setElementColor,
-  setCharacterBuilds,
-  setCharacterStats,
-  setAbyssbattles,
-  setF2p,
+  setElementColor
 } = dataSlice.actions;
 
 const store = configureStore({ reducer: { data: dataSlice.reducer } })
