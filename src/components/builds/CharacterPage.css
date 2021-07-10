@@ -2,10 +2,20 @@
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+
+  .character-page-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    z-index: -1;
+    opacity: 0.5;
+  }
 
   h1 {
     text-align: center;

@@ -3,7 +3,7 @@ import './artifacts/Artifact.css';
 import './weapons/Weapon.css';
 
 import _ from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { IBuild } from '../../data/types';
 import { useAppSelector } from '../../hooks';
@@ -24,7 +24,9 @@ function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
+  const mobileWidth = window.matchMedia("(max-width: 617px)")
 
   const filteredBuilds = _.orderBy(builds, 'count', 'desc');
   let labels: string[] = [];
@@ -56,13 +58,19 @@ function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
   colors = Array(labels.length).fill(elemColors.none)
   colors[activeBuildIdx] = elementColor;
 
+  useEffect(() => {
+    mobileWidth.addEventListener('change', () => {
+      setIsMobile(mobileWidth.matches)
+    })
+  },[])
+
   const handleToggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   }
 
   const handleSelectSet = (i: number) => {
     setActiveBuildIdx(i);
-    setIsMenuOpen(false);
+    if (isMobile) setIsMenuOpen(false);
   }
 
   return (
@@ -91,12 +99,13 @@ function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
           </div>
         </div>
         <div className="character-builds-selector">
-          <div className="artifacts-menu-controls" onClick={handleToggleMenu}>
-            <ArtifactSets artifacts={filteredBuilds[activeBuildIdx].artifacts} />
-            <EllipsisV color={"#000"} />
+          <div className="artifacts-menu-controls" >
+            <div className={`artifacts-menu-button ${isMenuOpen ? "active" : ""}`} onClick={handleToggleMenu}>
+              <EllipsisV color={"#000"} />
+            </div>
           </div>
           <div className="artifacts-menu">
-            {isMenuOpen &&
+            {((isMenuOpen && isMobile) || !isMobile) &&
               _.map(filteredBuilds, (build, i) => {
                 return (
                   <div key={`artifacts-thumb=${i}`} onClick={() => handleSelectSet(i)}>
