@@ -23,7 +23,7 @@ type BuildSelectorProps = {
 function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
-  const [isMenuOpen, setIsMenuOpen] = useState(true)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
 
   const filteredBuilds = _.orderBy(builds, 'count', 'desc');
@@ -60,7 +60,7 @@ function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
     setIsMenuOpen(!isMenuOpen);
   }
 
-  const handleSelectSet = (i) => {
+  const handleSelectSet = (i: number) => {
     setActiveBuildIdx(i);
     setIsMenuOpen(false);
   }
@@ -91,15 +91,21 @@ function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
           </div>
         </div>
         <div className="character-builds-selector">
-          <div className="artifacts-menu-button" onClick={handleToggleMenu}><EllipsisV color={"#000"} /></div>
-          {isMenuOpen &&
-            _.map(filteredBuilds, (build, i) => {
-              return (
-                <div key={`artifacts-thumb=${i}`} onClick={() => handleSelectSet(i)}>
-                  <ArtifactSets artifacts={build.artifacts} selected={activeBuildIdx === i} />
-                </div>
-              )
-            })}
+          <div className="artifacts-menu-controls" onClick={handleToggleMenu}>
+            <ArtifactSets artifacts={filteredBuilds[activeBuildIdx].artifacts} />
+            <EllipsisV color={"#000"} />
+          </div>
+          <div className="artifacts-menu">
+            {isMenuOpen &&
+              _.map(filteredBuilds, (build, i) => {
+                return (
+                  <div key={`artifacts-thumb=${i}`} onClick={() => handleSelectSet(i)}>
+                    <ArtifactSets artifacts={build.artifacts} selected={i === activeBuildIdx} />
+                  </div>
+                )
+              })
+            }
+          </div>
         </div>
       </div>
     </div>
