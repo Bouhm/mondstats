@@ -1,5 +1,5 @@
 #navbar {
-  position: fixed;
+  position: relative;
   display: flex;
   top: 0;
   width: 100%;
@@ -8,14 +8,15 @@
   border-bottom: 2px solid rgba(255, 255, 255, 0.4);
   z-index: 99;
 
-  /* &.invis {
-    background: linear-gradient(180deg, #2e3142 50%, rgba(0, 0, 0, 0) 100%);
+  &.invis {
+    background: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-  } */
+  }
 
   .nav-logo {
+    display: sticky;
     line-height: 3rem;
     margin-left: 0.5rem;
     padding: 0.3rem;

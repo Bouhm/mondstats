@@ -11,22 +11,23 @@ const Navtabs: { name: string, linkto: string }[] = [
 ]
 
 function Navbar() {
-  // const navRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   document.addEventListener('scroll', () => {
-  //     if (navRef.current) {
-  //       if (window.scrollY === 0) {
-  //         navRef.current!.classList.remove("invis")
-  //       } else {
-  //         navRef.current!.classList.add("invis")
-  //       }
-  //     }
-  //   })
-  // }, [navRef])
+  useEffect(() => {
+    document.addEventListener('scroll', () => {
+      if (navRef.current) {
+        if (window.scrollY === 0) {
+          navRef.current!.classList.remove("invis")
+        } else {
+          console.log("scrolled")
+          navRef.current!.classList.add("invis")
+        }
+      }
+    })
+  }, [navRef])
 
   return (
-      <div id="navbar">
+      <div id="navbar" ref={navRef}>
         <div className="nav-logo">
           <Link to="/"><img src={Logo} alt="logo" /></Link>
         </div>

@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { IBuild } from '../../data/types';
 import { useAppSelector } from '../../hooks';
 import Chart from '../ui/Chart';
+import { EllipsisV } from '../ui/Icons';
 import ArtifactBuild from './artifacts/ArtifactBuild';
 import ArtifactSets from './artifacts/ArtifactSets';
 import elemColors from './colors';
@@ -22,6 +23,7 @@ type BuildSelectorProps = {
 function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
+  const [isMenuOpen, setIsMenuOpen] = useState(true)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
 
   const filteredBuilds = _.orderBy(builds, 'count', 'desc');
@@ -54,6 +56,15 @@ function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
   colors = Array(labels.length).fill(elemColors.none)
   colors[activeBuildIdx] = elementColor;
 
+  const handleToggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  }
+
+  const handleSelectSet = (i) => {
+    setActiveBuildIdx(i);
+    setIsMenuOpen(false);
+  }
+
   return (
     <div className="builds-selector">
       <WeaponBuild
@@ -80,13 +91,15 @@ function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
           </div>
         </div>
         <div className="character-builds-selector">
-          {_.map(filteredBuilds, (build, i) => {
-            return (
-              <div key={`artifacts-thumb=${i}`} onClick={() => setActiveBuildIdx(i)}>
-                <ArtifactSets artifacts={build.artifacts} selected={activeBuildIdx === i} />
-              </div>
-            )
-          })}
+          <div className="artifacts-menu-button" onClick={handleToggleMenu}><EllipsisV color={"#000"} /></div>
+          {isMenuOpen &&
+            _.map(filteredBuilds, (build, i) => {
+              return (
+                <div key={`artifacts-thumb=${i}`} onClick={() => handleSelectSet(i)}>
+                  <ArtifactSets artifacts={build.artifacts} selected={activeBuildIdx === i} />
+                </div>
+              )
+            })}
         </div>
       </div>
     </div>

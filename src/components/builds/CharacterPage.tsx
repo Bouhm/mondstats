@@ -4,14 +4,14 @@ import AmberSad from '/assets/amberSad.png';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CharacterBuilds from '../../data/characterBuilds.json';
-import AbyssBattles from '../../data/abyssBattles.json';
 
+import AbyssBattles from '../../data/abyssBattles.json';
+import CharacterBuilds from '../../data/characterBuilds.json';
 import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../data/types';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectCharacter, setElementColor } from '../../Store';
-import Toggle from '../ui/Toggle';
 import Abyss from '../characters/Abyss';
+import Toggle from '../ui/Toggle';
 import BuildSelector from './BuildSelector';
 import elemColors from './colors';
 import Constellations from './Constellations';
@@ -29,7 +29,6 @@ function CharacterPage() {
   const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
   const [f2p, setF2p] = useState(false);
   const charId = characterIdMap[shortName]
-
 
   const handleToggleF2p = () => {
     setF2p(!f2p)

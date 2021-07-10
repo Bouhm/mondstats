@@ -51,12 +51,22 @@
 }
 
 .character-builds-selector {
-  margin-top: 5.9rem;
   margin-right: 1rem;
   width: 10rem;
 
   .artifact-thumb {
     overflow: hidden;
+  }
+
+  .artifacts-menu-button {
+    visibility: hidden;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 4rem;
+    background: #e9e5dc;
+    cursor: pointer;
   }
 }
 
@@ -88,14 +98,12 @@
   }
 }
 
-@media (max-width: 516px) {
-  .character-builds-selector {
+@media (max-width: 617px) {
+  .artifacts-menu {
     width: 100%;
     display: flex;
     flex-flow: column;
     align-items: center;
-
-    margin-top: 3rem;
   }
 
   .builds-selector {
@@ -110,6 +118,10 @@
     height: 100%;
     max-height: 100%;
     flex-wrap: wrap-reverse;
+
+    .artifacts-menu-button {
+      visibility: visible;
+    }
 
     .artifact-build-stats {
       margin-right: 0;
