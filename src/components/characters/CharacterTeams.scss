@@ -1,27 +1,4 @@
-.abyss-container {
-  margin-top: 2rem;
-  padding: 0.5rem 2rem 2rem 2rem;
-  min-height: 28rem;
-  background-color: rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-
-  .abyss-disclaimer {
-    color: #e9e5dc;
-    padding: 1rem;
-    width: 100%;
-    text-align: center;
-  }
-
-  h1 {
-    margin: 2rem auto;
-  }
-
-  .dropdown {
-    margin-left: 0.5rem;
-  }
-}
-
-.floor-container {
+.teams-container {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -40,46 +17,8 @@
       text-shadow: none;
       font-size: 1rem;
     }
-  }
 
-  .TEMP-SINGLE-COL {
-    display: flex !important;
-    flex-flow: column;
-    align-items: center;
-  }
-
-  .stage-container {
-    display: grid;
-    width: 100%;
-
-    .stage-label {
-      width: 100%;
-      text-align: center;
-      color: white;
-      font-size: 2.5rem;
-      padding: 1rem;
-      background: url('https://webstatic-sea.hoyolab.com/app/community-game-records-sea/images/pc-abyss-bg.dc0c3ac6.png')
-        0% 0% / 100% no-repeat;
-    }
-
-    .stage-half {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      color: white;
-      text-align: center;
-
-      h2 {
-        color: white;
-        width: 100%;
-      }
-
-      .emote-empty {
-        width: 160px;
-      }
-    }
-
-    .stage-teams-show-more {
+    .party-show-more {
       color: black;
       text-align: center;
       font-size: 1.5rem;
@@ -106,13 +45,6 @@
         transform: translateY(-2px);
       }
     }
-  }
-
-  .battle-container {
-    flex: 1;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
   }
 
   .party-popularity {
@@ -149,18 +81,6 @@
         }
       }
     }
-  }
-}
-
-.floors-chart-container {
-  max-width: 65rem;
-  margin: 0 auto;
-
-  .floors-chart {
-    margin: 2rem;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 1rem;
-    border-radius: 8px;
   }
 }
 

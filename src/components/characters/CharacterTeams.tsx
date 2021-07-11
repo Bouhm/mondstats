@@ -20,34 +20,44 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
 
+  const [ showMore, setShowMore ] = useState(false);
   const [ filteredTeams, setFilteredTeams ] = useState<ITeam[]>([])
 
   const _filterTeams = (data: IAbyssBattle[], charId: string) => {
     let filteredTeams: ITeam[] = [];
     
-    _.reduce(data, function(sum, floor) {
-      _.forEach(floor, (parties) => {
-        console.log(parties)
+    _.forEach(data, floor => {
+      _.forEach(floor.party_stats, (battle, i) => {
+        _.forEach(floor.party_stats[i], ({ party }) => {
+          if (f2p) {
+            let fivesCount =  characterDb[charId].rarity > 4 ? 1 : 0;
+            if (!(party.includes(charId) && _.filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length === fivesCount)) {
+              return;
+            }
+          } else {
+            if (!party.includes(charId)) {
+              return;
+            }
+          }
+
+          const partyIdx = _.findIndex(filteredTeams, { party })
+          if (partyIdx > -1) {
+            filteredTeams[partyIdx].count++
+          } else {
+            filteredTeams.push({
+              party,
+              count: 1
+            })
+          }
+        })
       })
-      return {}
-    }, {})
-    // _.forEach(data, floor => {
-    //   floor.reduce((sum, obj) => {
+    })
 
-    //   }, {})
-    //   _.forEach(floor.party_stats, (battle, i) => {
-    //     floor.party_stats[i] = _.filter(battle, ({party}) => {
-    //       if (f2p) {
-    //         let fivesCount =  characterDb[charId].rarity > 4 ? 1 : 0;
-    //         return party.includes(charId) && _.filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length === fivesCount;
-    //       }
+    return _.orderBy(filteredTeams, 'count', 'desc');
+  }
 
-    //       return party.includes(charId)
-    //     })
-    //   })
-    // })
-
-    return filteredTeams;
+  const handleToggleShowMore = () => {
+    setShowMore(!showMore);
   }
 
   useEffect(() => {
@@ -55,8 +65,8 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
   }, [setFilteredTeams, selectedCharacter, f2p])
 
   const renderParties = () => (
-    <div className="floor-container">
-      {_.map(filteredTeams, ({party, count}, i) => {
+    <div className="teams-container">
+      {_.map(_.take(filteredTeams, showMore ? 8 : 3), ({party, count}, i) => {
         return (
           <div key={`party-${i}`} className="party-container">
             <div className="party-grid">
@@ -64,18 +74,25 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
                 return <CharacterTile id={char+''} key={`party-${char}-${j}`} labeled={false} />
               })}
               <div className="party-popularity">
-                {/* <p className="popularity-pct">{Math.round((count/(_.reduce(party_stats[0], (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%</p> */}
+                <p className="popularity-pct">{Math.round((count/(_.reduce(filteredTeams, (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%</p>
                 <p className="popularity-line">Count: {count}</p>
               </div>
             </div>
           </div>
         )})}
+        {filteredTeams.length > 3 && (
+          !showMore 
+          ?
+          <div className="party-show-more" onClick={handleToggleShowMore}>Show more <ChevronDown size={20} color={"#202020"} /></div>
+          :
+          <div className="party-show-more" onClick={handleToggleShowMore}>Show less <ChevronUp size={20} color={"#202020"} /></div>
+        )}
     </div>
   )
 
   return (
     <div className="abyss-container">
-      <h1>Teams</h1>
+      <h1>Top Teams</h1>
       {renderParties()}
     </div>
   )
