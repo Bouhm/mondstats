@@ -21,12 +21,12 @@ type BuildSelectorProps = {
 }
 
 function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
+  const mobileWidth = window.matchMedia("(max-width: 617px)")
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(mobileWidth.matches)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
-  const mobileWidth = window.matchMedia("(max-width: 617px)")
 
   const filteredBuilds = _.orderBy(builds, 'count', 'desc');
   let labels: string[] = [];
