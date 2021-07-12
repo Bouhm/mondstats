@@ -1,0 +1,210 @@
+.abyss-container {
+  margin-top: 2rem;
+  padding: 0.5rem 2rem 2rem 2rem;
+  min-height: 28rem;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+
+  .abyss-disclaimer {
+    color: #e9e5dc;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  h1 {
+    margin: 2rem auto;
+  }
+
+  .dropdown {
+    margin-left: 0.5rem;
+  }
+}
+
+.floor-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  .party-container {
+    margin: 2rem 1rem;   
+    
+    .party-grid {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .popularity-line {
+      margin: 0.2rem;
+      color: dimgray;
+      text-shadow: none;
+      font-size: 1rem;
+    }
+  }
+
+  .TEMP-SINGLE-COL {
+    display: flex !important;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .stage-container {
+    display: grid;
+    width: 100%;
+
+    .stage-label {
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 2.5rem;
+      padding: 1rem;
+      background: url('https://webstatic-sea.hoyolab.com/app/community-game-records-sea/images/pc-abyss-bg.dc0c3ac6.png')
+        0% 0% / 100% no-repeat;
+    }
+
+    .stage-half {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      color: white;
+      text-align: center;
+
+      h2 {
+        color: white;
+        width: 100%;
+      }
+
+      .emote-empty {
+        width: 160px;
+      }
+    }
+
+    .stage-teams-show-more {
+      color: black;
+      text-align: center;
+      font-size: 1.5rem;
+      margin: 1rem auto;
+      background-color: #e9e5dc;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      width: 15rem;
+
+      font-weight: 500;
+      color: #202020;
+      border: none;
+      border-radius: 45px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.1s ease 0s;
+      cursor: pointer;
+      outline: none;
+
+      &:hover,
+      &:active {
+        cursor: pointer;
+        color: #000;
+        box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .battle-container {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .party-popularity {
+    position: relative;
+    text-align: center;
+    padding: 1rem;
+    background-color: #e9e5dc;
+    line-height: 30%;
+    color: white;
+    font-size: 2rem;
+    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+    height: 135px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+
+  .party-grid {
+    display: flex;
+    background-color: #e9e5dc;
+
+    .character-tile-container {
+      height: auto;
+      margin: 0;
+
+      .character-tile {
+        margin: 0;
+        border-radius: 0;
+
+        &:hover,
+        &:active {
+          transform: none;
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+.floors-chart-container {
+  max-width: 65rem;
+  margin: 0 auto;
+
+  .floors-chart {
+    margin: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 1244px) {
+  .party-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: auto;
+  }
+}
+
+@media (max-width: 1000px) {
+  .floors-chart-container {
+    width: 100%;
+
+    .floors-chart {
+      margin: 1rem 0;
+    }
+  }
+}
+
+@media (max-width: 1018px) {
+  .party-container {
+    align-items: center;
+    margin: 2rem 1rem;
+
+    .party-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .party-popularity {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      padding-top: 0;
+      height: 100%;
+    }
+  }
+}
+
+@media (max-width: 516px) {
+  .abyss-container {
+    padding: 0 0.5rem 0 0;
+  }
+}
