@@ -10,7 +10,7 @@ import CharacterBuilds from '../../data/characterBuilds.json';
 import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../data/types';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectCharacter, setElementColor } from '../../Store';
-import CharacterTeams from '../characters/CharacterTeams';
+import Abyss from '../characters/Abyss';
 import Toggle from '../ui/Toggle';
 import BuildSelector from './BuildSelector';
 import elemColors from './colors';
@@ -82,7 +82,7 @@ function CharacterPage() {
         </>
       }
       {abyssData &&
-        <CharacterTeams abyssData={abyssData} f2p={f2p} />
+        <Abyss abyssData={abyssData} f2p={f2p} />
       }
     </div>
   )
