@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { element } from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 
+import AbyssBattles from '../../data/abyssBattles.json';
 import { IAbyssBattle } from '../../data/types';
 import { useAppSelector } from '../../hooks';
 import CharacterTile from '../characters/CharacterTile';
@@ -22,8 +23,9 @@ const _compareFloor = (f1: Option, f2: Option) => {
   }
 }
 
-function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) {
-  const options = _.map(abyssData, stage => {
+function Abyss() {
+  const f2p = false;
+  const options = _.map(AbyssBattles, stage => {
     return { label: stage.floor_level, value: stage.floor_level}
   }).sort(_compareFloor)
 
@@ -33,9 +35,9 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
 
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
   const [ selectedStages, selectStages ] = useState<Option[]>(defaultStages)
-  const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssBattle[]>(abyssData)
+  const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssBattle[]>(AbyssBattles)
 
-  const _filterAbyss = (data: IAbyssBattle[], charId: string) => {
+  const getTopTeams = (data: IAbyssBattle[], charId: string) => {
     let filteredAbyss = _.cloneDeep(data)
     
     _.forEach(filteredAbyss, floor => {
@@ -55,9 +57,8 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
   }
 
   useEffect(() => {
-    console.log("useEffect")
-    setFilteredAbyss(_filterAbyss(abyssData, selectedCharacter));
-  }, [setFilteredAbyss, selectedCharacter, selectedStages, f2p])
+    setFilteredAbyss(getTopTeams(AbyssBattles));
+  }, [setFilteredAbyss, selectedStages, f2p])
 
   const handleSelect = (selected: Option[]) => {
     selectStages(selected);

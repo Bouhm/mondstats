@@ -1,22 +1,20 @@
-import './CharacterPage.css';
+import './CharacterBuilds.css';
 
 import AmberSad from '/assets/amberSad.png';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import AbyssBattles from '../../data/abyssBattles.json';
-import CharacterBuilds from '../../data/characterBuilds.json';
+import builds from '../../data/characterBuilds.json';
 import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../data/types';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectCharacter, setElementColor } from '../../Store';
-import Abyss from '../characters/Abyss';
 import Toggle from '../ui/Toggle';
 import BuildSelector from './BuildSelector';
 import elemColors from './colors';
 import Constellations from './Constellations';
 
-function CharacterPage() {  
+function CharacterBuilds() {  
   const { shortName } = useParams<{ shortName: string }>();
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
@@ -25,7 +23,6 @@ function CharacterPage() {
   const dispatch = useAppDispatch()
 
   const [characterBuild, setCharacterBuild] = useState<ICharacterBuild | undefined>(undefined)
-  const [abyssData, setAbyssData] = useState<IAbyssBattle[] | undefined>(undefined)
   const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
   const [f2p, setF2p] = useState(false);
   const charId = characterIdMap[shortName]
@@ -38,22 +35,12 @@ function CharacterPage() {
     if (!_.isEmpty(characterDb)) {
       const char = characterDb[charId];
       setCharacter(char)
-      setCharacterBuild(_.find(CharacterBuilds, { char_id: charId }) as ICharacterBuild);
-
-      let filteredAbyss = _.cloneDeep(AbyssBattles)
-      _.forEach(filteredAbyss, floor => _.forEach(floor.party_stats, (battles) => {
-        _.forEach(battles, (battle, i) => {
-          if (battle && !_.includes(battle.party, charId)) {
-            battles.splice(i, 1)
-          }
-        })
-      }));
-      setAbyssData(filteredAbyss)
+      setCharacterBuild(_.find(builds, { char_id: charId }) as ICharacterBuild);
       
       dispatch(selectCharacter(charId))
       dispatch(setElementColor(elemColors[char.element.toLowerCase()]))
     }
-  }, [setCharacter, setCharacterBuild, setAbyssData, dispatch, charId, characterDb, elemColors, elementColor])
+  }, [setCharacter, setCharacterBuild, dispatch, charId, characterDb, elemColors, elementColor])
 
   if (!character || !characterBuild) {
     return <div>
@@ -81,11 +68,8 @@ function CharacterPage() {
           <Constellations constellations={characterBuild.constellations} total={characterBuild.total} />
         </>
       }
-      {abyssData &&
-        <Abyss abyssData={abyssData} f2p={f2p} />
-      }
     </div>
   )
 }
 
-export default CharacterPage
+export default CharacterBuilds
