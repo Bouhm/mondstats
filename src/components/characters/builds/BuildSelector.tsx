@@ -5,14 +5,14 @@ import './weapons/Weapon.css';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 
-import { IBuild } from '../../data/types';
-import { useAppSelector } from '../../hooks';
-import Chart from '../ui/Chart';
-import { EllipsisV } from '../ui/Icons';
-import ArtifactBuild from './artifacts/ArtifactBuild';
-import ArtifactSets from './artifacts/ArtifactSets';
-import elemColors from './colors';
-import WeaponBuild from './weapons/WeaponBuild';
+import { IBuild } from '../../../data/types';
+import { useAppSelector } from '../../../hooks';
+import Chart from '../../ui/Chart';
+import { EllipsisV } from '../../ui/Icons';
+import ArtifactBuild from './ArtifactBuild';
+import ArtifactSets from './ArtifactSets';
+import { ElementColors } from '../../../data/constants';
+import WeaponBuild from './WeaponBuild';
 
 type BuildSelectorProps = {
   builds: IBuild[],
@@ -55,7 +55,7 @@ function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
     countSum += build.count;
   })
 
-  colors = Array(labels.length).fill(elemColors.none)
+  colors = Array(labels.length).fill(ElementColors.none)
   colors[activeBuildIdx] = elementColor;
 
   useEffect(() => {
