@@ -27,11 +27,27 @@
   align-items: center;
 
   .party-container {
-    margin: 2rem 1rem;   
-    
+    margin: 0.8rem;
+
     .party-grid {
-      border-radius: 8px;
-      overflow: hidden;
+      display: flex;
+      background-color: #e9e5dc;
+  
+      .character-tile-container {
+        height: auto;
+        margin: 0;
+  
+        .character-tile {
+          margin: 0;
+          border-radius: 0;
+  
+          &:hover,
+          &:active {
+            transform: none;
+            border: none;
+          }
+        }
+      }
     }
 
     .popularity-line {
@@ -40,12 +56,6 @@
       text-shadow: none;
       font-size: 1rem;
     }
-  }
-
-  .TEMP-SINGLE-COL {
-    display: flex !important;
-    flex-flow: column;
-    align-items: center;
   }
 
   .stage-container {
@@ -58,8 +68,7 @@
       color: white;
       font-size: 2.5rem;
       padding: 1rem;
-      background: url('https://webstatic-sea.hoyolab.com/app/community-game-records-sea/images/pc-abyss-bg.dc0c3ac6.png')
-        0% 0% / 100% no-repeat;
+      background: rgba(0,0,0,0.3);
     }
 
     .stage-half {
@@ -129,27 +138,6 @@
     flex-flow: column;
     justify-content: center;
   }
-
-  .party-grid {
-    display: flex;
-    background-color: #e9e5dc;
-
-    .character-tile-container {
-      height: auto;
-      margin: 0;
-
-      .character-tile {
-        margin: 0;
-        border-radius: 0;
-
-        &:hover,
-        &:active {
-          transform: none;
-          border: none;
-        }
-      }
-    }
-  }
 }
 
 .floors-chart-container {
@@ -164,6 +152,7 @@
   }
 }
 
+
 @media (max-width: 1244px) {
   .party-container {
     display: flex;
@@ -171,16 +160,6 @@
     justify-content: center;
     flex-wrap: wrap;
     height: auto;
-  }
-}
-
-@media (max-width: 1000px) {
-  .floors-chart-container {
-    width: 100%;
-
-    .floors-chart {
-      margin: 1rem 0;
-    }
   }
 }
 
@@ -200,11 +179,5 @@
       padding-top: 0;
       height: 100%;
     }
-  }
-}
-
-@media (max-width: 516px) {
-  .abyss-container {
-    padding: 0 0.5rem 0 0;
   }
 }

@@ -5,11 +5,24 @@ import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 
 import AbyssData from '../../data/abyssData.json';
-import { IAbyssBattle, IParty } from '../../data/types';
+import { IAbyssBattle } from '../../data/types';
 import { useAppSelector } from '../../hooks';
 import CharacterTile from '../characters/CharacterTile';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
+import Tooltip from '../ui/Tooltip';
+
+function _filterAbyss(data: IAbyssBattle[], charId: string) {
+  let filteredAbyss = _.cloneDeep(data)
+  
+  _.forEach(filteredAbyss, floor => {
+    _.forEach(floor.battle_parties, battle => {
+      battle = _.filter(battle, team => team.party.includes(charId))
+    })
+  })
+
+  return filteredAbyss;
+}
 
 const _compareFloor = (f1: Option, f2: Option) => {
   const f1Strs = f1.value.split("-")
@@ -23,25 +36,21 @@ const _compareFloor = (f1: Option, f2: Option) => {
 }
 
 function Abyss() {
-  const f2p = false;
-
-  const options = _.map(AbyssData.battles, stage => {
+  const options = _.map(AbyssData.abyss, stage => {
     return { label: stage.floor_level, value: stage.floor_level}
-  }).sort(_compareFloor)
+  })
 
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const defaultStages = options.slice(options.length-6)
+  const defaultStages = options.slice(options.length-3)
 
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
   const [ selectedStages, selectStages ] = useState<Option[]>(defaultStages)
-  const [ filteredAbyssTeams, setFilteredAbyssTeams ] = useState<IParty[]>([])
-  const [ filteredAbyssBattles, setFilteredAbyssBattles ] = useState<IAbyssBattle[]>([])
+  const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssBattle[]>(AbyssData.abyss)
 
   useEffect(() => {
-    setFilteredAbyssBattles(AbyssData.battles);
-    setFilteredAbyssTeams(AbyssData.teams);
-  }, [setFilteredAbyssBattles, setFilteredAbyssTeams, f2p])
+    setFilteredAbyss(_filterAbyss(AbyssData.abyss, selectedCharacter));
+  }, [setFilteredAbyss, selectedCharacter, selectedStages])
 
   const handleSelect = (selected: Option[]) => {
     selectStages(selected);
@@ -56,26 +65,27 @@ function Abyss() {
   const renderParties = () => (
     <div className="floor-container">
       {_.map(selectedStages.sort(_compareFloor), selectedStage => {
-        return <div key={selectedStage.value} className="stage-container TEMP-SINGLE-COL">
+        return <div key={selectedStage.value} className="stage-container">
           <h2 className="stage-label">Floor {selectedStage.label}</h2>
-          <div className="stage-half TEMP-SINGLE-COL">
-            {_.map(_.filter(filteredAbyssBattles, { floor_level: selectedStage.value }), ({battle_parties}, i) => {
+          <div className="stage-half">
+            {_.map(_.filter(filteredAbyss, { floor_level: selectedStage.value }), ({battle_parties}) => {
               return _.map(battle_parties, (parties, i) => {
                 return (
                   <div key={`battle-${i}`} className="battle-container">
                     <h2>{i+1}{i+1 === 1 ? 'st' : 'nd'} Half</h2>
                     {parties.length > 1 ? 
-                      <> 
+                      <>
                         {_.map(_.take(_.orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 10 : 5), ({party, count}, j) => {
                             return (
                               <div key={`party-${i}-${j}`} className="party-container">
-                                <div className="party-grid">
-                                  {_.map(_.sortBy(party, char => characterDb[char].name), (char, i) => {
-                                    return <CharacterTile id={char+''} key={`party-${i}`} />
+                               <div className="party-grid">
+                                  {_.map(party, (char, k) => {
+                                    return <CharacterTile id={char+''} key={`party-${char}-${k}`} labeled={false} />
                                   })}
-                                </div>
-                                <div className="party-popularity">
-                                  {Math.round((count/(_.reduce(parties, (sum,curr) => sum + curr.count, 0)) * 10) / 10 * 100)}%
+                                  <div className="party-popularity">
+                                    <p className="popularity-pct">{Math.round((count / _.reduce(parties, (sum,curr) => sum + curr.count, 0) * 1000)/10)}%</p>
+                                    <p className="popularity-line">Count: {count}</p>
+                                  </div>
                                 </div>
                               </div>
                             )
@@ -90,6 +100,11 @@ function Abyss() {
               })
             })}
             </div>
+            {!stageLimitToggle[selectedStage.value] ?
+              <div className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show more <ChevronDown size={20} color={"#202020"} /></div>
+              :
+              <div className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show less <ChevronUp size={20} color={"#202020"} /></div>
+            }
         </div>
       })}
     </div>

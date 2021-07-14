@@ -5,7 +5,7 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import builds from '../../../data/characterBuilds.json';
+import CharacterBuildData from '../../../data/characterBuilds.json';
 import { ElementColors } from '../../../data/constants';
 import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../../data/types';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
@@ -36,7 +36,7 @@ function CharacterBuilds() {
     if (!_.isEmpty(characterDb)) {
       const char = characterDb[charId];
       setCharacter(char)
-      setCharacterBuild(_.find(builds, { char_id: charId }) as ICharacterBuild);
+      setCharacterBuild(_.find(CharacterBuildData, { char_id: charId }) as ICharacterBuild);
       
       dispatch(selectCharacter(charId))
       dispatch(setElementColor(ElementColors[char.element.toLowerCase()]))
