@@ -58,6 +58,7 @@ export interface ICharacterBuild {
   constellations: number[],
   char_id: string,
   builds: IBuild[],
+  teams: IParty[],
   total: number
 }
 
@@ -80,10 +81,12 @@ export interface IBuild {
 
 export interface IAbyssBattle {
   floor_level: string,
-  party_stats: {
-    party: string[]
-    count: number
-  }[][]
+  party_stats: IParty[][]
+}
+
+export interface IParty {
+  party: string[],
+  count: number
 }
 
 export interface IArtifactSetStats {

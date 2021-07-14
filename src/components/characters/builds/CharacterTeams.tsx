@@ -3,17 +3,17 @@ import './CharacterTeams.scss';
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 
-import { IAbyssBattle } from '../../data/types';
-import { useAppSelector } from '../../hooks';
-import CharacterTile from '../characters/CharacterTile';
-import { ChevronDown, ChevronUp } from '../ui/Icons';
+import { IAbyssBattle, IParty } from '../../../data/types';
+import { useAppSelector } from '../../../hooks';
+import CharacterTile from '../../characters/CharacterTile';
+import { ChevronDown, ChevronUp } from '../../ui/Icons';
 
 interface ITeam {
   party: string[],
   count: number
 }
 
-function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) {
+function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
 
@@ -21,37 +21,15 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
   const [ filteredTeams, setFilteredTeams ] = useState<ITeam[]>([])
   const [ totalTeams, setTotalTeams ] = useState(0);
 
-  const _filterTeams = (data: IAbyssBattle[], charId: string) => {
-    let filteredTeams: ITeam[] = [];
-    
-    _.forEach(data, floor => {
-      _.forEach(floor.party_stats, (battle, i) => {
-        _.forEach(floor.party_stats[i], ({ party }) => {
-          if (f2p) {
-            let fivesCount =  characterDb[charId].rarity > 4 ? 1 : 0;
-            if (!(party.includes(charId) && _.filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length === fivesCount)) {
-              return;
-            }
-          } else {
-            if (!party.includes(charId)) {
-              return;
-            }
-          }
+  const filterTeams = (teams: IParty[], charId: string) => {
+    return _.filter(teams, ({ party }) => {
+      if (f2p) {
+        let fivesCount =  characterDb[charId].rarity > 4 ? 1 : 0;
+        return (_.filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length === fivesCount)
+      }
 
-          const partyIdx = _.findIndex(filteredTeams, { party })
-          if (partyIdx > -1) {
-            filteredTeams[partyIdx].count++
-          } else {
-            filteredTeams.push({
-              party,
-              count: 1
-            })
-          }
-        })
-      })
+      return true
     })
-
-    return _.orderBy(filteredTeams, 'count', 'desc');
   }
 
   const handleToggleShowMore = () => {
@@ -59,14 +37,15 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
   }
 
   useEffect(() => {
-    setFilteredTeams(_filterTeams(abyssData, selectedCharacter));
-    setTotalTeams(_.reduce(filteredTeams, (sum,curr) => sum + curr.count, 0));
+    const updatedTeams = filterTeams(teams, selectedCharacter);
+    setFilteredTeams(updatedTeams);
+    setTotalTeams(_.reduce(updatedTeams, (sum,curr) => sum + curr.count, 0));
   }, [setFilteredTeams, setTotalTeams, selectedCharacter, f2p])
 
   const renderParties = () => (
     <div className="parties-container">
        <h2>Total: {totalTeams} {characterDb[selectedCharacter].name} Teams</h2>
-      {_.map(_.take(filteredTeams, showMore ? 8 : 3), ({party, count}, i) => {
+      {_.map(_.take(filteredTeams, showMore ? 10 : 5), ({party, count}, i) => {
         return (
           <div key={`party-${i}`} className="party-container">
             <div className="party-grid">
@@ -80,7 +59,7 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
             </div>
           </div>
         )})}
-        {filteredTeams.length > 3 && (
+        {filteredTeams.length > 5 && (
           !showMore 
           ?
           <div className="party-show-more" onClick={handleToggleShowMore}>Show more <ChevronDown size={20} color={"#202020"} /></div>
@@ -98,4 +77,4 @@ function Abyss({ abyssData, f2p }: { abyssData: IAbyssBattle[], f2p: boolean }) 
   )
 }
 
-export default Abyss;
+export default CharacterTeams;

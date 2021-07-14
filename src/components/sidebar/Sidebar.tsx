@@ -12,7 +12,7 @@ interface ITab {
 
 const tabs: ITab[] = [
   { name: "Spiral Abyss", linkto: "/abyss", icon: "spiralAbyss.png" },
-  { name: "Characters", linkto: "/characters", icon: "characters.png" },
+  // { name: "Characters", linkto: "/characters", icon: "characters.png" },
   { name: "Artifacts", linkto: "/artifacts", icon: "artifacts.png" },
   { name: "Weapons", linkto: "/weapons", icon: "weapons.png" }
 ]

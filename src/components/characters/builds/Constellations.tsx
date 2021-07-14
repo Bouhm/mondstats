@@ -3,9 +3,9 @@ import './Constellations.scss';
 import _ from 'lodash';
 import React, { ReactNode, useContext } from 'react';
 
-import { useAppSelector } from '../../hooks';
-import BarChart from '../ui/BarChart';
-import elemColors from './colors';
+import { ElementColors } from '../../../data/constants';
+import { useAppSelector } from '../../../hooks';
+import BarChart from '../../ui/BarChart';
 
 type ConstellationsProps = {
   constellations: number[],
@@ -40,7 +40,7 @@ function Constellations({ constellations, total }: ConstellationsProps ) {
       return { 
         tooltip: `C${i}`, 
         value: 1 + Math.round((count / total * 1000)/10), 
-        color: i === 0 ? elemColors.none : elementColor,
+        color: i === 0 ? ElementColors.none : elementColor,
         content: (
           <>
           {i === 0 ?

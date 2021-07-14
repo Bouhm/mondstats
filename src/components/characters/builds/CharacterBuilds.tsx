@@ -5,13 +5,14 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import builds from '../../data/characterBuilds.json';
-import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../data/types';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectCharacter, setElementColor } from '../../Store';
-import Toggle from '../ui/Toggle';
+import builds from '../../../data/characterBuilds.json';
+import { ElementColors } from '../../../data/constants';
+import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../../data/types';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { selectCharacter, setElementColor } from '../../../Store';
+import Toggle from '../../ui/Toggle';
 import BuildSelector from './BuildSelector';
-import elemColors from './colors';
+import CharacterTeams from './CharacterTeams';
 import Constellations from './Constellations';
 
 function CharacterBuilds() {  
@@ -38,9 +39,9 @@ function CharacterBuilds() {
       setCharacterBuild(_.find(builds, { char_id: charId }) as ICharacterBuild);
       
       dispatch(selectCharacter(charId))
-      dispatch(setElementColor(elemColors[char.element.toLowerCase()]))
+      dispatch(setElementColor(ElementColors[char.element.toLowerCase()]))
     }
-  }, [setCharacter, setCharacterBuild, dispatch, charId, characterDb, elemColors, elementColor])
+  }, [setCharacter, setCharacterBuild, dispatch, charId, characterDb, ElementColors, elementColor])
 
   if (!character || !characterBuild) {
     return <div>
@@ -66,6 +67,7 @@ function CharacterBuilds() {
             f2p={f2p}
           />
           <Constellations constellations={characterBuild.constellations} total={characterBuild.total} />
+          <CharacterTeams teams={characterBuild.teams} f2p={f2p} />
         </>
       }
     </div>

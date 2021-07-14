@@ -7,7 +7,7 @@ import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 
 import Abyss from './components/abyss/Abyss';
-import CharacterBuilds from './components/builds/CharacterBuilds';
+import CharacterBuilds from './components/characters/builds/CharacterBuilds';
 import CharacterSearch from './components/characters/CharacterSearch';
 import Navbar from './components/navbar/Navbar';
 import About from './components/pages/About';
@@ -108,7 +108,6 @@ function App() {
               <Route path="/about" component={About} />
               <Route path="/changelog" component={Changelog} />
               <Route path="/abyss" component={Abyss} />
-              <Route path="/characters" component={UnderConstruction} />
               <Route path="/artifacts" component={UnderConstruction} />
               <Route path="/weapons" component={UnderConstruction} />
               <Route exact path="/" component={CharacterSearch} />
