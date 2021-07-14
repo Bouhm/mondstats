@@ -57,7 +57,7 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
                 return <CharacterTile id={char+''} key={`party-${char}-${j}`} labeled={false} />
               })}
               <div className="party-popularity">
-                <p className="popularity-pct">{Math.round((count/totalTeams) * 10) / 10 * 100}%</p>
+                <p className="popularity-pct">{Math.round((count / totalTeams * 1000)/10)}%</p>
                 <p className="popularity-line">Count: {count}</p>
               </div>
             </div>
