@@ -16,20 +16,24 @@ interface ITeam {
 function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
+  const max = 10;
 
   const [ showMore, setShowMore ] = useState(false);
   const [ filteredTeams, setFilteredTeams ] = useState<ITeam[]>([])
   const [ totalTeams, setTotalTeams ] = useState(0);
 
   const filterTeams = (teams: IParty[], charId: string) => {
-    return _.filter(teams, ({ party }) => {
+    const filtered = _.take(_.filter(teams, ({ party }) => {
       if (f2p) {
         let fivesCount =  characterDb[charId].rarity > 4 ? 1 : 0;
         return (_.filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length === fivesCount)
       }
 
       return true
-    })
+    }), max);
+
+    _.forEach(filtered, ({party}, i) => filtered[i].party = [charId, ..._.filter(party, char => char !== charId)]);
+    return filtered;
   }
 
   const handleToggleShowMore = () => {
@@ -45,11 +49,11 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
   const renderParties = () => (
     <div className="parties-container">
        <h2>Total: {totalTeams} {characterDb[selectedCharacter].name} Teams</h2>
-      {_.map(_.take(filteredTeams, showMore ? 10 : 5), ({party, count}, i) => {
+      {_.map(_.take(filteredTeams, showMore ? max : 5), ({party, count}, i) => {
         return (
           <div key={`party-${i}`} className="party-container">
             <div className="party-grid">
-              {_.map(_.sortBy(party, char => characterDb[char].name), (char, j) => {
+              {_.map(party, (char, j) => {
                 return <CharacterTile id={char+''} key={`party-${char}-${j}`} labeled={false} />
               })}
               <div className="party-popularity">
