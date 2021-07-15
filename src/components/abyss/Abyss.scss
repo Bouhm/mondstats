@@ -2,7 +2,6 @@
   margin-top: 2rem;
   padding: 0.5rem 2rem 2rem 2rem;
   min-height: 28rem;
-  background-color: rgba(0, 0, 0, 0.15);
   border-radius: 10px;
 
   .abyss-disclaimer {
@@ -28,27 +27,6 @@
 
   .party-container {
     margin: 0.8rem;
-
-    .party-grid {
-      display: flex;
-      background-color: #e9e5dc;
-  
-      .character-tile-container {
-        height: auto;
-        margin: 0;
-  
-        .character-tile {
-          margin: 0;
-          border-radius: 0;
-  
-          &:hover,
-          &:active {
-            transform: none;
-            border: none;
-          }
-        }
-      }
-    }
 
     .popularity-line {
       margin: 0.2rem;
@@ -137,6 +115,23 @@
     display: flex;
     flex-flow: column;
     justify-content: center;
+  }
+
+  .party-grid {
+    display: flex;
+    background-color: #e9e5dc;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .character-tile-container {
+      height: auto;
+      margin: 0;
+
+      .character-tile {
+        margin: 0;
+        border-radius: 0;
+      }
+    }
   }
 }
 

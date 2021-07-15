@@ -11,6 +11,7 @@ import CharacterTile from '../characters/CharacterTile';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Tooltip from '../ui/Tooltip';
+import PartySelector from './PartySelector';
 
 function _filterAbyss(data: IAbyssBattle[], charId: string) {
   let filteredAbyss = _.cloneDeep(data)
@@ -112,7 +113,7 @@ function Abyss() {
 
   return (
     <div className="abyss-container">
-      <h1>Abyss Teams</h1>
+      <PartySelector />
       <Dropdown options={options} onChange={handleSelect} defaultValue={defaultStages} isMulti />
       {renderParties()}
     </div>

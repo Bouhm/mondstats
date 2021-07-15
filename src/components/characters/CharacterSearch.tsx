@@ -8,10 +8,11 @@ import Searchbar from '../ui/Searchbar';
 import CharacterTile from './CharacterTile';
 
 type CharacterSearchProps = {
-  dataTotal: number;
+  showAll?: boolean;
+  onSelect?: (char: string) => void;
 }
 
-function CharacterSearch({ dataTotal }: CharacterSearchProps) {
+function CharacterSearch({ showAll = false, onSelect }: CharacterSearchProps) {
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const [unfilteredChars, setUnfilteredChars] = useState<string[]>([]);
   const [filteredChars, setFilteredChars] = useState<string[]>([]);
@@ -34,14 +35,16 @@ function CharacterSearch({ dataTotal }: CharacterSearchProps) {
       <div className="character-tiles">
         <div className="searched-character">
           {_.map(filteredChars, char => (
-            <CharacterTile key={characterIdMap[char]} id={characterIdMap[char]} />
+            <CharacterTile onClick={onSelect} key={characterIdMap[char]} id={characterIdMap[char]} />
           ))}
         </div>
-        <div className="unfiltered-characters">
-          {_.map(unfilteredChars.sort(), char => (
-            <CharacterTile key={characterIdMap[char]} id={characterIdMap[char]} />
-          ))}
-        </div>
+        {showAll && 
+          <div className="unfiltered-characters">
+            {_.map(unfilteredChars.sort(), char => (
+              <CharacterTile onClick={onSelect} key={characterIdMap[char]} id={characterIdMap[char]} />
+            ))}
+          </div>
+        }
       </div>
     </div>
   )

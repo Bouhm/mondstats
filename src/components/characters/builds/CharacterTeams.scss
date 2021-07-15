@@ -20,11 +20,6 @@
   .party-container {
     margin: 0.8rem;
 
-    .party-grid {
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
     .popularity-line {
       margin: 0.2rem;
       color: dimgray;
@@ -79,6 +74,8 @@
   .party-grid {
     display: flex;
     background-color: #e9e5dc;
+    border-radius: 8px;
+    overflow: hidden;
 
     .character-tile-container {
       height: auto;
@@ -87,12 +84,6 @@
       .character-tile {
         margin: 0;
         border-radius: 0;
-
-        &:hover,
-        &:active {
-          transform: none;
-          border: none;
-        }
       }
     }
   }
