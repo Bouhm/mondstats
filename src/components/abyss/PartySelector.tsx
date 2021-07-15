@@ -1,4 +1,4 @@
-import './PartySelector.css';
+import './PartySelector.scss';
 
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
@@ -6,8 +6,9 @@ import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import CharacterSearch from '../characters/CharacterSearch';
 import CharacterTile from '../characters/CharacterTile';
-import { Plus } from '../ui/Icons';
+import { Close, Plus } from '../ui/Icons';
 import Searchbar from '../ui/Searchbar';
+import Modal from '../ui/Modal';
 
 function PartySelector() {
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
@@ -21,14 +22,19 @@ function PartySelector() {
   const handleSelect = (char: string) => {
     const characters = [char, ...selectedCharacters]
     setSelectedCharacters(characters);
+    setShowCharacterSearch(false)
+  }
+
+  const handleClose = () => {
+    setShowCharacterSearch(false)
   }
 
   return (
     <div className="party-selector">
       {showCharacterSearch &&
-        <div className="party-selector-modal">
-          <CharacterSearch showAll={false} onSelect={handleSelect} />
-        </div>
+       <Modal onClose={handleClose}>
+         <CharacterSearch showAll={false} onSelect={handleSelect} />
+       </Modal>
       }
       {_.map(selectedCharacters, char => (
         <div key={char} className="character-slot">

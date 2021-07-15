@@ -1,5 +1,4 @@
 .abyss-container {
-  margin-top: 2rem;
   padding: 0.5rem 2rem 2rem 2rem;
   min-height: 28rem;
   border-radius: 10px;
@@ -46,7 +45,7 @@
       color: white;
       font-size: 2.5rem;
       padding: 1rem;
-      background: rgba(0,0,0,0.3);
+      background: rgba(0, 0, 0, 0.3);
     }
 
     .stage-half {
@@ -146,7 +145,6 @@
     border-radius: 8px;
   }
 }
-
 
 @media (max-width: 1244px) {
   .party-container {

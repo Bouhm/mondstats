@@ -91,6 +91,23 @@ export const EllipsisV = ({size = 25, color = "#e9e5dc", className=""}: IconProp
   )
 }
 
+export const Close = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+  return (
+    <svg 
+      aria-hidden="true" 
+      focusable="false" 
+      className={className}
+      role="img" 
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 352 512"
+    >
+      <path fill={color} d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
+    </svg>
+  )
+}
+
 export const Plus = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
   return (
     <svg 
@@ -104,6 +121,23 @@ export const Plus = ({size = 25, color = "#e9e5dc", className=""}: IconProps) =>
       viewBox="0 0 448 512"
     >
       <path fill={color} d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
+    </svg>
+  )
+}
+
+export const Hamburger = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+  return (
+    <svg 
+      aria-hidden="true" 
+      focusable="false" 
+      className={className}
+      role="img" 
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 448 512"
+    >
+      <path fill={color} d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path>
     </svg>
   )
 }

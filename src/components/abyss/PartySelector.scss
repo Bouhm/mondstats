@@ -1,28 +1,22 @@
 .party-selector {
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
 
-  .party-selector-modal {
-    position: fixed;
-    width: 80%;
-    background-color: black;
-    z-index: 9;
-  }
-
   .character-slot {
-    height: 190px;
+    height: 160px;
     width: 135px;
     text-align: center;
-    line-height: 190px;
-    border: solid 2px rgba(255,255,255,0.4);
+    line-height: 160px;
+    border: solid 2px rgba(255, 255, 255, 0.4);
     margin: 1rem;
     border-radius: 8px;
     opacity: 0.8;
 
     &:hover {
       cursor: pointer;
-      border: solid 2px rgba(255,255,255,0.6);
+      border: solid 2px rgba(255, 255, 255, 0.6);
       opacity: 1;
     }
   }

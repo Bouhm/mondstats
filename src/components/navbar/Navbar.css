@@ -4,9 +4,9 @@
   top: 0;
   width: 100%;
   height: 4rem;
-  background: #2A2C3A;
+  background: #2a2c3a;
   border-bottom: 2px solid rgba(255, 255, 255, 0.4);
-  z-index: 99;
+  z-index: 9;
 
   &.invis {
     background: none;
