@@ -7,6 +7,7 @@
 
   .character-slots {
     display: flex;
+    flex-wrap: wrap;
 
     .character-slot {
       position: relative;
@@ -45,6 +46,23 @@
         cursor: pointer;
         border: solid 2px rgba(255, 255, 255, 0.6);
         opacity: 1;
+      }
+    }
+  }
+}
+
+@media (max-width: 714px) {
+  .party-selector {
+    .character-slots {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+
+      .character-slot {
+        position: relative;
+        min-height: 100px;
+        min-width: 100px;
+     
       }
     }
   }

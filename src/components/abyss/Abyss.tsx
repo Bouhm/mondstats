@@ -31,7 +31,7 @@ const _compareFloor = (f1: Option, f2: Option) => {
 function Abyss() {
   const options = _.map(AbyssData.abyss, stage => {
     return { label: stage.floor_level, value: stage.floor_level}
-  })
+  }).sort(_compareFloor)
 
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const defaultStages = _.filter(options, option => _.includes(["12-1", "12-2", "12-3"], option.value));

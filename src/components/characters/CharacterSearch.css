@@ -55,3 +55,21 @@
     max-width: 35rem;
   }
 }
+
+@media (max-width: 714px) {
+  .character-search{
+    width: 100%;
+  }
+
+  .character-tile-container:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  .character-searchbar {
+    width: 100%;
+    
+    input {
+      max-width: 100%;
+    }
+  }
+}

@@ -50,7 +50,7 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
 
   const renderParties = () => (
     <div className="parties-container">
-       <h2>Total: {totalTeams} {characterDb[selectedCharacter].name} Teams</h2>
+       <h2>{totalTeams} Teams</h2>
       {_.map(_.take(filteredTeams, showMore ? max : 5), ({party, count}, i) => {
         return (
           <div key={`party-${i}`} className="party-container">

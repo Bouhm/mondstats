@@ -61,6 +61,13 @@
   }
 }
 
+
+@media (max-width: 887px) {
+  h2 {
+    font-size: 1.2rem;
+  }
+}
+
 @media (max-width: 1244px) {
   .party-container {
     display: flex;
