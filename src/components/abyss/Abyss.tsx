@@ -16,14 +16,16 @@ import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Tooltip from '../ui/Tooltip';
 import PartySelector from './PartySelector';
 
-function _filterAbyss(data: IAbyssBattle[], charId: string) {
+function _filterAbyss(data: IAbyssBattle[], characters: string[]) {
   let filteredAbyss = _.cloneDeep(data)
-  
-  _.forEach(filteredAbyss, floor => {
-    _.forEach(floor.battle_parties, battle => {
-      battle = _.filter(battle, team => team.party.includes(charId))
+
+  if (characters.length) {
+    _.forEach(filteredAbyss, floor => {
+      _.forEach(floor.battle_parties, (battle, i) => {
+        floor.battle_parties[i] = _.filter(battle, team => _.difference(characters, team.party).length === 0)
+      })
     })
-  })
+  }
 
   return filteredAbyss;
 }
@@ -44,17 +46,17 @@ function Abyss() {
     return { label: stage.floor_level, value: stage.floor_level}
   })
 
-  const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const defaultStages = options.slice(options.length-3)
+  const defaultStages = _.filter(options, option => _.includes(["12-1", "12-2", "12-3"], option.value));
 
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
   const [ selectedStages, selectStages ] = useState<Option[]>(defaultStages)
   const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssBattle[]>(AbyssData.abyss)
+  const [ characters, setCharacters ] = useState<string[]>([]);
 
   useEffect(() => {
-    setFilteredAbyss(_filterAbyss(AbyssData.abyss, selectedCharacter));
-  }, [setFilteredAbyss, selectedCharacter, selectedStages])
+    setFilteredAbyss(_filterAbyss(AbyssData.abyss, characters));
+  }, [setFilteredAbyss, characters, selectedStages])
 
   const handleSelect = (selected: Option[]) => {
     selectStages(selected);
@@ -64,6 +66,10 @@ function Abyss() {
     let newMap: { [stage: string]: boolean } = _.clone(stageLimitToggle)
     newMap[selectedStage] = newMap[selectedStage] ? !newMap[selectedStage] : true;
     setStageLimitToggle(newMap)
+  }
+
+  const handlePartyChange = (party: string[]) => {
+    setCharacters(party)
   }
 
   const renderParties = () => (
@@ -117,7 +123,7 @@ function Abyss() {
 
   return (
     <div className="abyss-container">
-      <PartySelector />
+      <PartySelector onPartyChange={handlePartyChange} />
       <Dropdown options={options} onChange={handleSelect} defaultValue={defaultStages} isMulti />
       {!_.isEmpty(characterDb) && renderParties()}
     </div>

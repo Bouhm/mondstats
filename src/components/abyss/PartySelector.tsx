@@ -12,7 +12,11 @@ import { ChevronDown, Close, Plus } from '../ui/Icons';
 import Modal from '../ui/Modal';
 import Searchbar from '../ui/Searchbar';
 
-function PartySelector() {
+type PartySelectorProps = {
+  onPartyChange: (party: string[]) => void;
+}
+
+function PartySelector({ onPartyChange }: PartySelectorProps) {
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const [showCharacterSearch, setShowCharacterSearch] = useState(false);
   const [selectedCharacters, setSelectedCharacters] = useState<string[]>([]);
@@ -22,12 +26,15 @@ function PartySelector() {
   }
 
   const handleSelect = (char: string) => {
-    const characters = [...selectedCharacters, char]
+    const characters = _.uniq([...selectedCharacters, char])
     setSelectedCharacters(characters);
+    onPartyChange(_.map(characters, charName => characterIdMap[charName]));
   }
 
   const handleDeselect = (char: string) => {
-    setSelectedCharacters(_.filter(selectedCharacters, selected => selected !== char));
+    const characters = _.uniq(_.filter(selectedCharacters, selected => selected !== char));
+    setSelectedCharacters(characters);
+    onPartyChange(_.map(characters, charName => characterIdMap[charName]));
   }
 
   const handleClose = () => {

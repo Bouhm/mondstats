@@ -19,26 +19,23 @@ function CharacterSearch({ showAll = true, linked = true, filter = [], onSelect 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const [unfilteredChars, setUnfilteredChars] = useState<string[]>([]);
   const [filteredChars, setFilteredChars] = useState<string[]>([]);
-  const [, updateState] = React.useState({});
-  const forceUpdate = React.useCallback(() => updateState({}), []);
 
   useEffect(() => {
     setUnfilteredChars(_.keys(characterIdMap))
   }, [characterIdMap, setUnfilteredChars])
 
+  useEffect(() => {
+    setFilteredChars(filteredChars)
+  }, [filter, setFilteredChars])
+
   // Set character search filter
   const handleSearchCharacter = (filteredChars: string[]) => {
-    let filtered = filteredChars;
-
-    if (filter) filtered = _.filter(filteredChars, char => !_.includes(filter, char));
-
-    setFilteredChars(filtered);
-    setUnfilteredChars(_.filter(_.keys(characterIdMap), name => !filtered.includes(name)));
+    setFilteredChars(filteredChars);
+    setUnfilteredChars(_.filter(_.keys(characterIdMap), name => !filteredChars.includes(name)));
   }
 
   const handleSelect = (char: string) => {
     onSelect && onSelect(char);
-    if (filter) setFilteredChars(_.filter(filteredChars, filteredChar => !_.includes([...filter, char], filteredChar)));
   }
 
   return (
@@ -48,7 +45,7 @@ function CharacterSearch({ showAll = true, linked = true, filter = [], onSelect 
       </div>
       <div className="character-tiles">
         <div className="searched-character">
-          {_.map(filteredChars, charName => linked ? (
+          {_.map(_.filter(filteredChars, char => !_.includes(filter, char)), charName => linked ? (
             <Link key={`filtered-${charName}`} to={`/builds/${charName}`}>
               <CharacterTile onClick={handleSelect} key={characterIdMap[charName]} id={characterIdMap[charName]} />
             </Link>
