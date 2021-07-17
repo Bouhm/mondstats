@@ -2,7 +2,7 @@ import './Searchbar.css';
 
 import Fuse from 'fuse.js';
 import _ from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Search } from './Icons';
 
@@ -11,9 +11,11 @@ type SearchbarProps = {
   onSearch: (filtered: string[]) => void
   maxResults: number
   placeholder: string
+  focused: boolean
 }
 
-function Searchbar({ list, maxResults, onSearch, placeholder = "" }: SearchbarProps) {
+function Searchbar({ list, maxResults, onSearch, focused = false, placeholder = "" }: SearchbarProps) {
+  const searchRef = useRef<HTMLInputElement>(null);
   const [input, useInput] = useState("");
   const fuse = new Fuse(list, { threshold: 0.3 });
 
@@ -41,10 +43,14 @@ function Searchbar({ list, maxResults, onSearch, placeholder = "" }: SearchbarPr
     }, 150)();
   }
 
+  useEffect(() => {
+    focused && searchRef.current && searchRef.current.focus();
+  }, [focused, searchRef])
+
   return (
     <div className="searchbar">
       <Search className="search-icon" size={22} />
-      <input placeholder={placeholder} list="search-input" name="search-input" onChange={handleInputChange} value={input} />
+      <input ref={searchRef} placeholder={placeholder} list="search-input" name="search-input" onChange={handleInputChange} value={input} />
     </div>
   )
 }

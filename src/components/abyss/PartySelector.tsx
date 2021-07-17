@@ -4,11 +4,13 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../hooks';
+import { getShortName } from '../../scripts/util';
 import CharacterSearch from '../characters/CharacterSearch';
 import CharacterTile from '../characters/CharacterTile';
-import { Close, Plus } from '../ui/Icons';
-import Searchbar from '../ui/Searchbar';
+import Button from '../ui/Button';
+import { ChevronDown, Close, Plus } from '../ui/Icons';
 import Modal from '../ui/Modal';
+import Searchbar from '../ui/Searchbar';
 
 function PartySelector() {
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
@@ -20,9 +22,12 @@ function PartySelector() {
   }
 
   const handleSelect = (char: string) => {
-    const characters = [char, ...selectedCharacters]
+    const characters = [...selectedCharacters, char]
     setSelectedCharacters(characters);
-    setShowCharacterSearch(false)
+  }
+
+  const handleDeselect = (char: string) => {
+    setSelectedCharacters(_.filter(selectedCharacters, selected => selected !== char));
   }
 
   const handleClose = () => {
@@ -31,21 +36,27 @@ function PartySelector() {
 
   return (
     <div className="party-selector">
-      {showCharacterSearch &&
-       <Modal onClose={handleClose}>
-         <CharacterSearch showAll={false} onSelect={handleSelect} />
-       </Modal>
+      <div className="character-slots">
+        {_.map(selectedCharacters, char => (
+          <div key={char} className="character-slot" onClick={() => handleDeselect(char)}>
+            <CharacterTile id={characterIdMap[char]} labeled={false} />
+            <span className="close-icon"><Close /></span>
+          </div>
+        ))}
+        {_.map(Array(4 - selectedCharacters.length), (_, i) => (
+          <div key={`empty-${i}`} className="character-slot asEmpty" onClick={handleClickAddCharacter}>
+            <div className="plus-icon">
+              <Plus />
+            </div>
+          </div>
+        ))}
+      </div>
+      {showCharacterSearch && 
+        <>
+          <CharacterSearch showAll={false} linked={false} filter={selectedCharacters} onSelect={handleSelect} />
+          {<Button onClick={handleClose}>Cancel</Button>}
+        </>
       }
-      {_.map(selectedCharacters, char => (
-        <div key={char} className="character-slot">
-          <CharacterTile id={char} />
-        </div>
-      ))}
-      {_.map(Array(4 - selectedCharacters.length), (_, i) => (
-        <div key={`empty-${i}`} className="character-slot asEmpty" onClick={handleClickAddCharacter}>
-          <Plus />
-        </div>
-      ))}
     </div>
   )
 }

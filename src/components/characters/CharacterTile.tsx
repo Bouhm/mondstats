@@ -30,8 +30,8 @@ function CharacterTile({ id, labeled = true, onClick }: CharacterTileProps) {
     onClick && onClick(char);
   }
 
-  const renderCharacterTile = () => (
-    <div className={`character-tile-container ${!onClick ? "asLink" : ""}`} onClick={() => handleClick(charName)}>
+  return (
+    <div className={`character-tile-container`} onClick={() => handleClick(charName)}>
       <div className={classes}>
         <img className="character-portrait" src={`/assets/characters/${character.oid}.webp`} alt={`${character.name}-portrait`}></img>
           {charElement && <img className="element-icon" src={ElementIcons[character.element]} alt={character.element}></img>}
@@ -40,20 +40,6 @@ function CharacterTile({ id, labeled = true, onClick }: CharacterTileProps) {
           </div>}
       </div>
     </div>
-  )
-
-  return (
-    <>
-      {onClick ? 
-        <Link to={`/builds/${charName}`}>
-          {renderCharacterTile()}
-        </Link>
-        :
-        <>
-          {renderCharacterTile()}
-        </>
-      }
-    </>
   )
 }
 

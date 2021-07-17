@@ -93,12 +93,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* {!seenDialogue && (
-        <Dialogue 
-        onClose={handleCloseDialogue}>
-          The past month was spent on database migration and building out a back-end server. Now that that's done, I'll finally implement more interesting content with the data in the following weeks. Please feel free to throw any suggestions at <b>Bouhm#2205</b> on Discord.
-        </Dialogue>
-      )} */}
       <Navbar />
       <main className="App-content">
         <Sidebar />

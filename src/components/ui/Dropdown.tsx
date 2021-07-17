@@ -27,7 +27,6 @@ function Dropdown({ options, onChange, isMulti=false, defaultValue=options.slice
           indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
           menu: base => ({ ...base, backgroundColor: "#21232D", color: "white",  }),
           option: base => ({ ...base, backgroundColor: "#21232D !important", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.6) !important" }}),
-
         }}
       />
     </div>

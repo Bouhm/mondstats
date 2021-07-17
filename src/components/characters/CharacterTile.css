@@ -1,6 +1,4 @@
 .character-tile-container {
-  height: 190px;
-  margin: 0 0.5rem;
 }
 
 .character-tile {
@@ -22,10 +20,16 @@
     height: 40px;
   }
 
-  &.asLink {
+  &:hover,
+  &:active {
+    cursor: pointer;
+    -moz-box-shadow: inset 0 0 5px #f2eee6;
+    -webkit-box-shadow: inset 0 0 5px #f2eee6;
+  }
+
+  a {
     &:hover,
     &:active {
-      cursor: pointer;
       -webkit-transform: scale(1.08, 1.08);
       transform: scale(1.08, 1.08);
       -moz-box-shadow: inset 0 0 5px #f2eee6;

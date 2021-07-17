@@ -3,11 +3,14 @@ import './Abyss.scss';
 import AmberSad from '/assets/amberSad.png';
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import AbyssData from '../../data/abyssData.json';
 import { IAbyssBattle } from '../../data/types';
 import { useAppSelector } from '../../hooks';
+import { getShortName } from '../../scripts/util';
 import CharacterTile from '../characters/CharacterTile';
+import Button from '../ui/Button';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Tooltip from '../ui/Tooltip';
@@ -70,8 +73,7 @@ function Abyss() {
           <h2 className="stage-label">Floor {selectedStage.label}</h2>
           <div className="stage-half">
             {_.map(_.filter(filteredAbyss, { floor_level: selectedStage.value }), ({battle_parties}) => {
-              return _.map(battle_parties, (parties, i) => {
-                return (
+              return _.map(battle_parties, (parties, i) => (
                   <div key={`battle-${i}`} className="battle-container">
                     <h2>{i+1}{i+1 === 1 ? 'st' : 'nd'} Half</h2>
                     {parties.length > 1 ? 
@@ -80,9 +82,11 @@ function Abyss() {
                             return (
                               <div key={`party-${i}-${j}`} className="party-container">
                                <div className="party-grid">
-                                  {_.map(party, (char, k) => {
-                                    return <CharacterTile id={char+''} key={`party-${char}-${k}`} labeled={false} />
-                                  })}
+                                  {_.map(party, (char, k) => (
+                                    <Link key={`party-${char}-${i}`} to={`/builds/${getShortName(characterDb[char].name)}`}>
+                                      <CharacterTile id={char+''} labeled={false} />
+                                    </Link>
+                                  ))}
                                   <div className="party-popularity">
                                     <p className="popularity-pct">{Math.round((count / _.reduce(parties, (sum,curr) => sum + curr.count, 0) * 1000)/10)}%</p>
                                     <p className="popularity-line">Count: {count}</p>
@@ -98,13 +102,13 @@ function Abyss() {
                     }
                   </div>
                 )
-              })
+              )
             })}
             </div>
             {!stageLimitToggle[selectedStage.value] ?
-              <div className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show more <ChevronDown size={20} color={"#202020"} /></div>
+              <Button className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
               :
-              <div className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show less <ChevronUp size={20} color={"#202020"} /></div>
+              <Button className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
             }
         </div>
       })}
@@ -115,7 +119,7 @@ function Abyss() {
     <div className="abyss-container">
       <PartySelector />
       <Dropdown options={options} onChange={handleSelect} defaultValue={defaultStages} isMulti />
-      {renderParties()}
+      {!_.isEmpty(characterDb) && renderParties()}
     </div>
   )
 }

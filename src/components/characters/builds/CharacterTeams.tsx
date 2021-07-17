@@ -2,10 +2,13 @@ import './CharacterTeams.scss';
 
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { IAbyssBattle, IParty } from '../../../data/types';
 import { useAppSelector } from '../../../hooks';
+import { getShortName } from '../../../scripts/util';
 import CharacterTile from '../../characters/CharacterTile';
+import Button from '../../ui/Button';
 import { ChevronDown, ChevronUp } from '../../ui/Icons';
 
 interface ITeam {
@@ -53,9 +56,11 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
         return (
           <div key={`party-${i}`} className="party-container">
             <div className="party-grid">
-              {_.map(party, (char, j) => {
-                return <CharacterTile id={char+''} key={`party-${char}-${j}`} labeled={false} />
-              })}
+              {_.map(party, (char, j) => (
+                <Link key={`party-${char}-${i}`} to={`/builds/${getShortName(characterDb[char].name)}`}>
+                  <CharacterTile id={char+''} labeled={false} />
+                </Link>
+              ))}
               <div className="party-popularity">
                 <p className="popularity-pct">{Math.round((count / totalTeams * 1000)/10)}%</p>
                 <p className="popularity-line">Count: {count}</p>
@@ -66,9 +71,9 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
         {filteredTeams.length > 5 && (
           !showMore 
           ?
-          <div className="party-show-more" onClick={handleToggleShowMore}>Show more <ChevronDown size={20} color={"#202020"} /></div>
+          <Button className="party-show-more" onClick={handleToggleShowMore}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
           :
-          <div className="party-show-more" onClick={handleToggleShowMore}>Show less <ChevronUp size={20} color={"#202020"} /></div>
+          <Button className="party-show-more" onClick={handleToggleShowMore}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
         )}
     </div>
   )

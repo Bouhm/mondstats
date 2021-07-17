@@ -28,23 +28,29 @@
 .searched-character {
   display: flex;
   justify-content: center;
-  min-height: 12rem;
-  margin-bottom: 1rem;
   flex-wrap: wrap;
+  min-height: 175px;
+  margin-right: -1rem;
+
+  .character-tile {
+    margin-right: 1rem;
+  }
 }
 
 .unfiltered-characters {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 160px);
+  grid-template-columns: repeat(auto-fill, calc(135px + 1rem));
   grid-auto-rows: 190px;
   justify-content: center;
+  margin-top: 2rem;
+  margin-right: -1rem;
 }
 
 .character-searchbar {
   overflow: hidden;
   display: flex;
   justify-content: center;
-  padding: 1rem 1rem 2rem 1rem;
+  padding: 1rem;
 
   input {
     max-width: 35rem;
