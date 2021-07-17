@@ -88,19 +88,20 @@ function Abyss() {
   const renderParties = () => (
     <div className="floor-container">
       {_.map(selectedStages.sort(_compareFloor), selectedStage => {
-        return <div key={selectedStage.value} className="stage-container">
+        return (
+          <div key={selectedStage.value} className="stage-container">
           <h2 className="stage-label">Floor {selectedStage.label}</h2>
           <div className="stage-half">
             {_.map(_.filter(filteredAbyss, { floor_level: selectedStage.value }), ({battle_parties}) => {
-              return _.map(battle_parties, (parties, i) => (
+              return _.map([battle_parties[0]], (parties, i) => (
                   <div key={`battle-${i}`} className="battle-container">
-                    <h2>{i+1}{i+1 === 1 ? 'st' : 'nd'} Half</h2>
+                    {/* <h2>{i+1}{i+1 === 1 ? 'st' : 'nd'} Half</h2> */}
                     {parties.length > 1 ? 
                       <>
                         {_.map(_.take(_.orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 10 : 5), ({party, count}, j) => {
                             return (
                               <div key={`party-${i}-${j}`} className="party-container">
-                               <div className="party-grid">
+                              <div className="party-grid">
                                   {_.map(party, (char, k) => (
                                     <Link key={`party-${char}-${i}`} to={`/builds/${getShortName(characterDb[char].name)}`}>
                                       <CharacterTile id={char+''} labeled={false} />
@@ -130,6 +131,7 @@ function Abyss() {
               <Button className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
             }
         </div>
+        )
       })}
     </div>
   )
@@ -141,6 +143,7 @@ function Abyss() {
       </div>
       <PartySelector onPartyChange={handlePartyChange} />
       <Dropdown options={options} onChange={handleSelect} defaultValue={defaultStages} isMulti />
+      <div className="abyss-disclaimer">{"* 1st & 2nd halves have been temporarily merged until there is more data."}</div>
       {!_.isEmpty(characterDb) && renderParties()}
     </div>
   )
