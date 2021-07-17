@@ -51,6 +51,7 @@
 
     .stage-half {
       display: flex;
+      flex-flow: column;
       justify-content: center;
       flex-wrap: wrap;
       color: white;
@@ -64,10 +65,6 @@
       .emote-empty {
         width: 160px;
       }
-    }
-
-    .stage-teams-show-more {
- 
     }
   }
 
