@@ -24,7 +24,7 @@
   padding: 0.5rem;
 }
 
-.searched-character {
+.searched-characters {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -59,6 +59,15 @@
 @media (max-width: 714px) {
   .character-search{
     width: 100%;
+  }
+
+  .unfiltered-characters {
+    grid-template-columns: repeat(auto-fill, calc(100px + 1rem));
+    grid-auto-rows: 145px;
+  }
+
+  .searched-characters {
+    min-height: 145px;
   }
 
   .character-tile-container:not(:last-child) {

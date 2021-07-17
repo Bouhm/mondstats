@@ -44,7 +44,7 @@ function CharacterSearch({ showAll = true, linked = true, filter = [], onSelect 
         <Searchbar maxResults={4} onSearch={handleSearchCharacter} list={_.keys(characterIdMap)} placeholder="Search character" focused={true} />
       </div>
       <div className="character-tiles">
-        <div className="searched-character">
+        <div className="searched-characters">
           {_.map(_.filter(filteredChars, char => !_.includes(filter, char)), charName => linked ? (
             <Link key={`filtered-${charName}`} to={`/builds/${charName}`}>
               <CharacterTile onClick={handleSelect} key={characterIdMap[charName]} id={characterIdMap[charName]} />
