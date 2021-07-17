@@ -23,7 +23,6 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
 
   const [ showMore, setShowMore ] = useState(false);
   const [ filteredTeams, setFilteredTeams ] = useState<ITeam[]>([])
-  const [ totalTeams, setTotalTeams ] = useState(0);
 
   const filterTeams = (teams: IParty[], charId: string) => {
     let filtered = teams;
@@ -34,8 +33,8 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
       })
     }
 
-    _.forEach(_.take(filtered, max), ({party}, i) => filtered[i].party = [charId, ..._.filter(party, char => char !== charId)]);
-    return filtered;
+    _.forEach(filtered, ({party}, i) => filtered[i].party = [charId, ..._.filter(party, char => char !== charId)]);
+    return _.take(filtered, max);
   }
 
   const handleToggleShowMore = () => {
@@ -45,12 +44,11 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
   useEffect(() => {
     const updatedTeams = filterTeams(teams, selectedCharacter);
     setFilteredTeams(updatedTeams);
-    setTotalTeams(_.reduce(updatedTeams, (sum,curr) => sum + curr.count, 0));
-  }, [setFilteredTeams, setTotalTeams, selectedCharacter, f2p])
+  }, [setFilteredTeams, selectedCharacter, f2p])
 
   const renderParties = () => (
     <div className="parties-container">
-       <h2>{totalTeams} Teams</h2>
+       <h2>{_.reduce(filteredTeams, (sum,curr) => sum + curr.count, 0)} Teams</h2>
       {_.map(_.take(filteredTeams, showMore ? max : 5), ({party, count}, i) => {
         return (
           <div key={`party-${i}`} className="party-container">
@@ -61,7 +59,7 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
                 </Link>
               ))}
               <div className="party-popularity">
-                <p className="popularity-pct">{Math.round((count / totalTeams * 1000)/10)}%</p>
+                <p className="popularity-pct">{Math.round((count / _.reduce(filteredTeams, (sum,curr) => sum + curr.count, 0) * 1000)/10)}%</p>
                 <p className="popularity-line">Count: {count}</p>
               </div>
             </div>
