@@ -94,6 +94,8 @@ function Abyss() {
           <div className="stage-half">
             {_.map(_.filter(filteredAbyss, { floor_level: selectedStage.value }), ({battle_parties}) => {
               return _.map([battle_parties[0]], (parties, i) => (
+                <>
+                  <h2>{_.reduce(parties, (sum,curr) => sum + curr.count, 0)} Teams</h2>
                   <div key={`battle-${i}`} className="battle-container">
                     {/* <h2>{i+1}{i+1 === 1 ? 'st' : 'nd'} Half</h2> */}
                     {parties.length > 1 ? 
@@ -121,6 +123,7 @@ function Abyss() {
                       <img src={AmberSad} alt="empty" />
                     }
                   </div>
+                </>
                 )
               )
             })}
