@@ -13,22 +13,9 @@ import CharacterTile from '../characters/CharacterTile';
 import Button from '../ui/Button';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
+import Toggle from '../ui/Toggle';
 import Tooltip from '../ui/Tooltip';
 import PartySelector from './PartySelector';
-
-function _filterAbyss(data: IAbyssBattle[], characters: string[]) {
-  let filteredAbyss = _.cloneDeep(data)
-
-  if (characters.length) {
-    _.forEach(filteredAbyss, floor => {
-      _.forEach(floor.battle_parties, (battle, i) => {
-        floor.battle_parties[i] = _.filter(battle, team => _.difference(characters, team.party).length === 0)
-      })
-    })
-  }
-
-  return filteredAbyss;
-}
 
 const _compareFloor = (f1: Option, f2: Option) => {
   const f1Strs = f1.value.split("-")
@@ -53,10 +40,32 @@ function Abyss() {
   const [ selectedStages, selectStages ] = useState<Option[]>(defaultStages)
   const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssBattle[]>(AbyssData.abyss)
   const [ characters, setCharacters ] = useState<string[]>([]);
+  const [ f2p, setF2p ] = useState(false);
 
   useEffect(() => {
-    setFilteredAbyss(_filterAbyss(AbyssData.abyss, characters));
-  }, [setFilteredAbyss, characters, selectedStages])
+    setFilteredAbyss(_filterAbyss(AbyssData.abyss));
+  }, [setFilteredAbyss, characters, selectedStages, f2p])
+
+  function _filterAbyss(data: IAbyssBattle[]) {
+    let filteredAbyss = _.cloneDeep(data)
+  
+    _.forEach(filteredAbyss, floor => {
+      _.forEach(floor.battle_parties, (battle, i) => {
+        floor.battle_parties[i] = _.filter(battle, ({party}) => {
+          let f2pFilter = !f2p;
+
+          if (f2p) {
+            const fivesCount = _.filter(characters, charId => characterDb[charId].rarity > 4 ? 1 : 0).length;
+            f2pFilter = (_.filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length === fivesCount)
+          } 
+          
+          return f2pFilter && _.difference(characters, party).length === 0
+        })
+      })
+    })
+  
+    return filteredAbyss;
+  }
 
   const handleSelect = (selected: Option[]) => {
     selectStages(selected);
@@ -66,6 +75,10 @@ function Abyss() {
     let newMap: { [stage: string]: boolean } = _.clone(stageLimitToggle)
     newMap[selectedStage] = newMap[selectedStage] ? !newMap[selectedStage] : true;
     setStageLimitToggle(newMap)
+  }
+
+  const handleToggleF2p = () => {
+    setF2p(!f2p)
   }
 
   const handlePartyChange = (party: string[]) => {
@@ -123,6 +136,9 @@ function Abyss() {
 
   return (
     <div className="abyss-container">
+      <div className="abyss-controls">
+        <Toggle label={"F2P"} defaultValue={f2p} onChange={handleToggleF2p} />
+      </div>
       <PartySelector onPartyChange={handlePartyChange} />
       <Dropdown options={options} onChange={handleSelect} defaultValue={defaultStages} isMulti />
       {!_.isEmpty(characterDb) && renderParties()}

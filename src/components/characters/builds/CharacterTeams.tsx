@@ -26,16 +26,15 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
   const [ totalTeams, setTotalTeams ] = useState(0);
 
   const filterTeams = (teams: IParty[], charId: string) => {
-    const filtered = _.take(_.filter(teams, ({ party }) => {
-      if (f2p) {
+    let filtered = teams;
+    if (f2p) {
+      filtered =_.filter(teams, ({ party }) => {
         let fivesCount =  characterDb[charId].rarity > 4 ? 1 : 0;
         return (_.filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length === fivesCount)
-      }
+      })
+    }
 
-      return true
-    }), max);
-
-    _.forEach(filtered, ({party}, i) => filtered[i].party = [charId, ..._.filter(party, char => char !== charId)]);
+    _.forEach(_.take(filtered, max), ({party}, i) => filtered[i].party = [charId, ..._.filter(party, char => char !== charId)]);
     return filtered;
   }
 
