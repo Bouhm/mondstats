@@ -56,6 +56,13 @@
   }
 }
 
+
+@media (max-width: 516px) {
+  .unfiltered-characters {
+    display: none;
+  }
+}
+
 @media (max-width: 714px) {
   .character-search{
     width: 100%;

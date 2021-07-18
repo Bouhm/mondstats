@@ -97,7 +97,7 @@ function App() {
       <main className="App-content">
         <Sidebar />
         <div className="section-view">
-          <section>
+          <main>
             <Switch>
               <Route path="/about" component={About} />
               <Route path="/changelog" component={Changelog} />
@@ -108,8 +108,8 @@ function App() {
               <Route path="/builds/:shortName" component={CharacterBuilds} />
               <Redirect exact path="/builds" to="/" />
             </Switch>
-          </section>
-          <section>
+          </main>
+          <section className="footer">
             <div className="links">
               <Link to="/about">About</Link>
               <Link to="/changelog">Changelog</Link>

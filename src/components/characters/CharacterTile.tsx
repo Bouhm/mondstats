@@ -33,11 +33,13 @@ function CharacterTile({ id, labeled = true, onClick }: CharacterTileProps) {
   return (
     <div className={`character-tile-container`} onClick={() => handleClick(charName)}>
       <div className={classes}>
-        <img className="character-portrait" src={`/assets/characters/${character.oid}.webp`} alt={`${character.name}-portrait`}></img>
+        <div className="character-image">
+          <img className="character-portrait" src={`/assets/characters/${character.oid}.webp`} alt={`${character.name}-portrait`}></img>
           {charElement && <img className="element-icon" src={ElementIcons[character.element]} alt={character.element}></img>}
-          {labeled && <div className="character-tile-name">
-            {character.name}
-          </div>}
+        </div>
+        {labeled && <div className="character-tile-name">
+          {character.name}
+        </div>}
       </div>
     </div>
   )
