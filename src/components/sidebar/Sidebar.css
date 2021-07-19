@@ -1,16 +1,16 @@
-#sidebar {
+.sidebar {
+  position: relative;
   display: flex;
   flex-flow: column;
   background: #2e3142;
-  width: 12rem;
+  width: 11rem;
   -webkit-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
   z-index: 9;
 
   .sidebar-menu {
-    right: 0;
-    line-height: 3.5rem;
+    position: fixed;
     display: flex;
     flex-flow: column;
     color: rgba(255, 255, 255, 0.6);
@@ -23,7 +23,47 @@
       padding: 0.5rem;
 
       .tab-name {
-        margin-left: 1rem;
+        margin-left: 0.5rem;
+        white-space: no-wrap;
+      }
+
+      img {
+        width: 40px;
+      }
+    }
+  }
+}
+
+.sidebar-collapsible {
+  display: none;
+  z-index: 11;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .sidebar-menu {
+    background: #2a2c3a;
+    position: fixed;
+    display: flex;
+    flex-flow: column;
+    color: rgba(255, 255, 255, 0.6);
+    left: 0;
+    right: 0;
+    top: 4rem;
+
+    .sidebar-tab {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      height: 4.5rem;
+      padding: 0.5rem;
+
+      .tab-name {
+        margin-left: 0.5rem;
         white-space: no-wrap;
       }
 
@@ -35,8 +75,8 @@
 }
 
 @media (max-width: 1024px) {
-  #sidebar {
-    width: auto;
+  .sidebar {
+    width: 3.5rem;
 
     .tab-name {
       display: none;
@@ -45,7 +85,11 @@
 }
 
 @media (max-width: 516px) {
-  #sidebar {
+  .sidebar {
     display: none;
+  }
+
+  .sidebar-collapsible {
+    display: block;
   }
 }

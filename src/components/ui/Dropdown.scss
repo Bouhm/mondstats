@@ -27,6 +27,12 @@
 
 @media (max-width: 676px) {
   .search-select {
-    
+    .search-placeholder {
+      font-size: 1rem;
+
+      .search-icon svg {
+        width: 15px;
+      }
+    } 
   }
 }

@@ -4,6 +4,7 @@
 - Change character select components to dropdown 
 - Responsive team containers instead of grids
 - Move data counts to tooltips for charts
+- More collapsible menu/popups 
 
 ## dev build 7.17.21 
 
@@ -11,6 +12,7 @@
 
 ## dev build 7.08.21
 
+- Use menu for artifact set selection
 - More aggregation for weapons, artifact sets, and spiral abyss data
 - At this point just assume every update = more data
 

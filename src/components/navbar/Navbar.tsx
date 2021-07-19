@@ -14,16 +14,16 @@ function Navbar() {
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.addEventListener('scroll', () => {
-      if (navRef.current) {
-        if (window.scrollY === 0) {
-          navRef.current!.classList.remove("invis")
-        } else {
-          console.log("scrolled")
-          navRef.current!.classList.add("invis")
-        }
-      }
-    })
+    // document.addEventListener('scroll', () => {
+    //   if (navRef.current) {
+    //     if (window.scrollY === 0) {
+    //       navRef.current!.classList.remove("invis")
+    //     } else {
+    //       console.log("scrolled")
+    //       navRef.current!.classList.add("invis")
+    //     }
+    //   }
+    // })
   }, [navRef])
 
   return (

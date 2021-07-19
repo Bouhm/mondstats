@@ -1,8 +1,10 @@
 import './Sidebar.css';
 
 import _ from 'lodash';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import { Hamburger } from '../ui/Icons';
 
 interface ITab {
   name: string
@@ -18,19 +20,39 @@ const tabs: ITab[] = [
 ]
 
 function Sidebar() {
-  return (
-    <div id="sidebar">
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleBurgerClick = () => {
+    setIsOpen(!isOpen)  
+  }
+
+  const renderMenu = () => {
+    return (
       <div className="sidebar-menu">
         {_.map(tabs, tab => {
           return <Link key={tab.name} to={tab.linkto}>
-            <div className="sidebar-tab">
+            <div className="sidebar-tab" onClick={() => setIsOpen(false)}>
               <img src={`/assets/icons/${tab.icon}`} />
               <span className="tab-name">{tab.name}</span>
             </div>
           </Link>
         })}
       </div>
-    </div>
+    )
+  }
+
+  return (
+    <>
+     <div className="sidebar-collapsible">
+        <div className="sidebar-menu-burger" onClick={handleBurgerClick}>
+          <Hamburger size={30} />
+        </div>
+        {isOpen && renderMenu()}
+      </div>
+      <div className="sidebar">
+       {renderMenu()}
+      </div>
+    </>
   )
 }
 
