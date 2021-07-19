@@ -1,5 +1,5 @@
 .weapon-card {
-  width: 300px;
+  min-width: 300px;
   margin: 0.1rem 0 0.1rem 0;
   overflow: hidden;
   background-color: #e9e5dc;
@@ -45,5 +45,11 @@
         font-size: 1.1rem;
       }
     }
+  }
+}
+
+@media (max-width: 676px) {
+  .weapon-card {
+    width: 100%;
   }
 }

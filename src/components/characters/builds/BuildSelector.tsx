@@ -85,16 +85,18 @@ function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
           <ArtifactBuild
             artifacts={filteredBuilds[activeBuildIdx].artifacts}
           />
-          <div className="artifacts-donut-chart">
-            <Chart
-              id="artifacts-donut"
-              type="doughnut"
-              labels={labels}
-              data={data}
-              colors={colors}
-              max={countSum}
-              showScale={false}
-            />
+          <div className="artifacts-donut-container">
+            <div className="artifacts-donut-chart">
+              <Chart
+                id="artifacts-donut"
+                type="doughnut"
+                labels={labels}
+                data={data}
+                colors={colors}
+                max={countSum}
+                showScale={false}
+              />
+              </div>
             <div className="artifact-popularity">{Math.round((filteredBuilds[activeBuildIdx].count / countSum) * 100)}%</div>
           </div>
         </div>

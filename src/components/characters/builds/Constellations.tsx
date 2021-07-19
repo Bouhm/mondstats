@@ -2,6 +2,7 @@ import './Constellations.scss';
 
 import _ from 'lodash';
 import React, { ReactNode, useContext } from 'react';
+import { usePopperTooltip } from 'react-popper-tooltip';
 
 import { ElementColors } from '../../../data/constants';
 import { useAppSelector } from '../../../hooks';
@@ -16,12 +17,25 @@ type ConstellationCardProps = {
   name: string,
   oid?: number,
   effect?: string,
+  count: number, 
   children: ReactNode
 }
 
-function ConstellationCard({ oid, name, effect, children }: ConstellationCardProps) {
+function ConstellationCard({ oid, name, count, children }: ConstellationCardProps) {
+  const {
+    getTooltipProps,
+    setTooltipRef,
+    setTriggerRef,
+    visible,
+  } = usePopperTooltip();
+
   return (
-    <div className="constellation-card">
+    <div ref={setTriggerRef} className="constellation-card">
+      {visible && 
+        <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
+          {name}: {count}
+        </div>
+      }
       <div className="constellation-card-icon">
         {oid ? <img src={`/assets/characters/constellations/${oid}.webp`} /> : "C0"}
       </div>
@@ -44,14 +58,14 @@ function Constellations({ constellations, total }: ConstellationsProps ) {
         content: (
           <>
           {i === 0 ?
-            <ConstellationCard name={"None"}>
+            <ConstellationCard name={"None"} count={count}>
               <div className="constellation-popularity">{Math.round((count / total * 1000)/10)}%</div>
-              <p>Count: {count}</p>
+              {/* <p>Count: {count}</p> */}
             </ConstellationCard>
             :
-            <ConstellationCard {...characterDb[selectedCharacter].constellations[i-1]}>
+            <ConstellationCard {...characterDb[selectedCharacter].constellations[i-1]} count={count}>
               <div className="constellation-popularity">{Math.round((count / total * 1000)/10)}%</div>
-              <p>Count: {count}</p>
+              {/* <p>Count: {count}</p> */}
             </ConstellationCard>
           }
           </>

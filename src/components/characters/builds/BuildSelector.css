@@ -25,22 +25,25 @@
       min-height: 480px;
     }
 
-    .artifacts-donut-chart {
+    .artifacts-donut-container {
       position: relative;
       display: flex;
+      width: 100%;
       justify-content: center;
-      padding: 2rem 0 0 2rem;
-      max-width: 350px;
 
-      canvas {
-        z-index: 1;
+      .artifacts-donut-chart {
+        max-width: 400px;
+
+        canvas {
+          z-index: 1;
+        }
       }
 
       .artifact-popularity {
         position: absolute;
         text-align: center;
         z-index: 0;
-        top: calc(50% - 0.5rem);
+        top: calc(50% - 1.5rem);
         width: 100%;
         color: white;
         font-size: 3rem;
@@ -151,8 +154,9 @@
     flex-flow: column;
     align-items: center;
 
-    .weapon-container .weapon-card {
-      width: 300px;
+    .weapon-container {
+      width: 100%;
+      display: flex;
     }
 
     .weapon-bar-chart {
@@ -173,5 +177,3 @@
   }
 }
 
-@media (max-width: 1280px) {
-}

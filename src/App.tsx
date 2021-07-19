@@ -1,4 +1,6 @@
 import './App.css';
+import 'react-popper-tooltip/dist/styles.css';
+import './components/ui/PopperTooltip.scss';
 
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
