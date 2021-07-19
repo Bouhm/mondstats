@@ -1,6 +1,6 @@
 import './Abyss.scss';
 
-import AmberSad from '/assets/amberSad.png';
+import AmberSad from '/assets/amberSad.webp';
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 

@@ -1,6 +1,6 @@
 import './Navbar.css';
 
-import Logo from '/assets/logo_sm.png';
+import Logo from '/assets/logo_sm.webp';
 import _ from 'lodash';
 import React, { useContext, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';

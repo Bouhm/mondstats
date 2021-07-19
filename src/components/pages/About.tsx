@@ -37,10 +37,10 @@ function About() {
       </div>
       <div className="pls">
         Please contribute by setting your Battle Chronicle to public in HoYoLAB. Thank you!
-        <img src="/assets/pls.png" alt="pls"/>
+        <img src="/assets/pls.webp" alt="pls"/>
       </div>
       <div className="hoyolab-image">
-        <img src="/assets/hoyolab.jpg" alt="hoyolab" />
+        <img src="/assets/hoyolab.webp" alt="hoyolab" />
       </div>
     </div>
   )

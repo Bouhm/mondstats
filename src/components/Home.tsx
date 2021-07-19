@@ -1,6 +1,6 @@
 import './Home.scss';
 
-import Logo from '/assets/logo_m.png';
+import Logo from '/assets/logo_m.webp';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 

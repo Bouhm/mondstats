@@ -1,6 +1,6 @@
 import './CharacterBuilds.css';
 
-import AmberSad from '/assets/amberSad.png';
+import AmberSad from '/assets/amberSad.webp';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';

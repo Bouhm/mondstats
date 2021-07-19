@@ -13,10 +13,10 @@ interface ITab {
 }
 
 const tabs: ITab[] = [
-  { name: "Spiral Abyss", linkto: "/abyss", icon: "spiralAbyss.png" },
-  // { name: "Characters", linkto: "/characters", icon: "characters.png" },
-  // { name: "Artifacts", linkto: "/artifacts", icon: "artifacts.png" },
-  // { name: "Weapons", linkto: "/weapons", icon: "weapons.png" }
+  { name: "Spiral Abyss", linkto: "/abyss", icon: "spiralAbyss.webp" },
+  // { name: "Characters", linkto: "/characters", icon: "characters.webp" },
+  // { name: "Artifacts", linkto: "/artifacts", icon: "artifacts.webp" },
+  // { name: "Weapons", linkto: "/weapons", icon: "weapons.webp" }
 ]
 
 function Sidebar() {
