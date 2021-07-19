@@ -29,6 +29,7 @@ function PartySelector({ onPartyChange }: PartySelectorProps) {
     const characters = _.uniq([...selectedCharacters, char])
     setSelectedCharacters(characters);
     onPartyChange(_.map(characters, charName => characterIdMap[charName]));
+    handleClose()
   }
 
   const handleDeselect = (char: string) => {
@@ -52,15 +53,14 @@ function PartySelector({ onPartyChange }: PartySelectorProps) {
         ))}
         {_.map(Array(4 - selectedCharacters.length), (_, i) => (
           <div key={`empty-${i}`} className="character-slot asEmpty" onClick={handleClickAddCharacter}>
-            <div className="plus-icon">
-              <Plus />
-            </div>
+            <CharacterTile id={characterIdMap["amber"]} labeled={false} />
+            <span className="plus-icon"><Plus /></span>
           </div>
         ))}
       </div>
       {showCharacterSearch && 
         <>
-          <CharacterSearch showAll={false} linked={false} filter={selectedCharacters} onSelect={handleSelect} />
+          <CharacterSearch showAll={false} asLink={false} filter={selectedCharacters} onSelect={handleSelect} />
           {<Button onClick={handleClose}>Cancel</Button>}
         </>
       }

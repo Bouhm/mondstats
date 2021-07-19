@@ -11,8 +11,6 @@
 
     .character-slot {
       position: relative;
-      min-height: 139px;
-      min-width: 139px;
       text-align: center;
       border: solid 2px rgba(255, 255, 255, 0.4);
       background: rgba(255,255,255,0.05);
@@ -20,11 +18,11 @@
       border-radius: 10px;
 
       .plus-icon {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        position: absolute;
+        width: 22px;
+        height: auto;
+        left: calc(50% - 12px);
+        top: calc(50% - 12px);
       }
       
       .close-icon {
@@ -40,6 +38,10 @@
   
       &.asEmpty {
         opacity: 0.8;
+
+        .character-tile-container {
+          visibility: hidden;
+        }
       }
 
       &:hover {
@@ -51,18 +53,31 @@
   }
 }
 
+
+@media (max-width: 476px) {
+  .party-selector {
+    .character-slots {
+      .character-slot {
+        .plus-icon {
+          width: 14px;
+          height: auto;
+        }
+        
+        .close-icon {
+          width: 14px;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 714px) {
   .party-selector {
     .character-slots {
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-
       .character-slot {
         position: relative;
-        min-height: 100px;
-        min-width: 100px;
-     
+
       }
     }
   }

@@ -14,8 +14,8 @@
 }
 
 .character-search {
-  position: relative;
-  height: 100%;
+  width: 35rem;
+  margin: 0 auto;
 }
 
 .character-tiles {
@@ -46,9 +46,7 @@
 }
 
 .character-searchbar {
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
+  margin-top: 1rem;
 
   input {
     max-width: 35rem;

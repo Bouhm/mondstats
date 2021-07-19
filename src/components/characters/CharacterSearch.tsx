@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks';
 import { getShortName } from '../../scripts/util';
-import Dropdown from '../ui/Dropdown';
+import Dropdown, { Option } from '../ui/Dropdown';
 import Searchbar from '../ui/Searchbar';
 import CharacterTile from './CharacterTile';
 
@@ -15,10 +15,10 @@ type CharacterSearchProps =
   showAll?: boolean;
   onSelect?: (char: string) => void;
   filter?: string[];
-  linked?: boolean;
+  asLink?: boolean;
 }
 
-function CharacterSearch({ showAll = true, linked = true, filter = [], onSelect }: CharacterSearchProps) {
+function CharacterSearch({ showAll = true, asLink = true, filter = [], onSelect }: CharacterSearchProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   // const [unfilteredChars, setUnfilteredChars] = useState<string[]>([]);
   // const [filteredChars, setFilteredChars] = useState<string[]>([]);
@@ -37,8 +37,8 @@ function CharacterSearch({ showAll = true, linked = true, filter = [], onSelect 
   //   setUnfilteredChars(_.filter(_.keys(characterIdMap), name => !filteredChars.includes(name)));
   // }
 
-  const handleSelect = (char: string) => {
-    onSelect && onSelect(char);
+  const handleSelect = (char: Option) => {
+    onSelect && onSelect(char.value);
   }
 
   return (

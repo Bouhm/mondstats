@@ -10,6 +10,7 @@ import { getShortName } from '../../../scripts/util';
 import CharacterTile from '../../characters/CharacterTile';
 import Button from '../../ui/Button';
 import { ChevronDown, ChevronUp } from '../../ui/Icons';
+import Team from '../Team';
 
 interface ITeam {
   party: string[],
@@ -49,29 +50,16 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
   const renderParties = () => (
     <div className="parties-container">
        <h2>{_.reduce(filteredTeams, (sum,curr) => sum + curr.count, 0)} Teams</h2>
-      {_.map(_.take(filteredTeams, showMore ? max : 5), ({party, count}, i) => {
-        return (
-          <div key={`party-${i}`} className="party-container">
-            <div className="party-grid">
-              {_.map(party, (char, j) => (
-                <Link key={`party-${char}-${i}`} to={`/builds/${getShortName(characterDb[char].name)}`}>
-                  <CharacterTile id={char+''} labeled={false} />
-                </Link>
-              ))}
-              <div className="party-popularity">
-                <p className="popularity-pct">{Math.round((count / _.reduce(filteredTeams, (sum,curr) => sum + curr.count, 0) * 1000)/10)}%</p>
-                <p className="popularity-line">Count: {count}</p>
-              </div>
-            </div>
-          </div>
-        )})}
-        {filteredTeams.length > 5 && (
-          !showMore 
-          ?
-          <Button className="party-show-more" onClick={handleToggleShowMore}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
-          :
-          <Button className="party-show-more" onClick={handleToggleShowMore}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
-        )}
+      {_.map(_.take(filteredTeams, showMore ? max : 5), ({party, count}, i) => (
+        <Team key={`team-${i}`} team={party} count={count} percent={`${Math.round((count / _.reduce(filteredTeams, (sum,curr) => sum + curr.count, 0) * 1000)/10)}%`} />
+      ))}
+      {filteredTeams.length > 5 && (
+        !showMore 
+        ?
+        <Button className="party-show-more" onClick={handleToggleShowMore}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
+        :
+        <Button className="party-show-more" onClick={handleToggleShowMore}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
+      )}
     </div>
   )
 

@@ -1,11 +1,10 @@
 import './App.css';
 
 import _ from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, Redirect, Route, Switch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
-import { gql, useQuery } from '@apollo/client';
-
+// import { gql, useQuery } from '@apollo/client';
 import Abyss from './components/abyss/Abyss';
 import CharacterBuilds from './components/characters/builds/CharacterBuilds';
 import CharacterSearch from './components/characters/CharacterSearch';
@@ -14,7 +13,7 @@ import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
-import Dialogue from './components/ui/Dialogue';
+// import Dialogue from './components/ui/Dialogue';
 import ArtifactDb from './data/artifacts.json';
 import ArtifactSetDb from './data/artifactSets.json';
 import CharacterDb from './data/characters.json';
@@ -35,6 +34,7 @@ import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, set
 
 function App() {
   const dispatch = useAppDispatch()
+  const routerHistory = useHistory();
 
   const dialogueWidthLimit = 1078;
   const [seenDialogue, setSeenDialogue] = useState(window.innerWidth < dialogueWidthLimit || JSON.parse(localStorage.getItem('seenDialogue')!))
@@ -91,6 +91,11 @@ function App() {
     dispatch(setWeaponDb(weaponDb))
   }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
 
+
+  const renderCharacterSearch = () => (
+    <CharacterSearch onSelect={(charName) => routerHistory.push(`/builds/${charName}`)} />
+  )
+
   return (
     <div className="App">
       <Navbar />
@@ -104,7 +109,7 @@ function App() {
               <Route path="/abyss" component={Abyss} />
               <Route path="/artifacts" component={UnderConstruction} />
               <Route path="/weapons" component={UnderConstruction} />
-              <Route exact path="/" component={CharacterSearch} />
+              <Route exact path="/" render={renderCharacterSearch} />
               <Route path="/builds/:shortName" component={CharacterBuilds} />
               <Redirect exact path="/builds" to="/" />
             </Switch>

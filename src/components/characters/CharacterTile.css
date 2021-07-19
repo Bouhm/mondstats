@@ -77,3 +77,51 @@
     }
   }
 }
+
+@media (max-width: 676px) {
+  .character-tile-container {
+    .character-tile {
+      width: 100px;
+
+      .character-portrait {
+        height: 100px;
+        width: auto;
+      }
+
+      .element-icon {
+        width: 30px;
+        height: auto;
+      }
+
+      .character-tile-name {
+        font-size: 0.9rem;
+        line-height: 0.8rem;
+        height: 2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 544px) {
+  .character-tile-container {
+    .character-tile {
+      width: 68px;
+
+      .character-portrait {
+        height: 68px;
+        width: auto;
+      }
+
+      .element-icon {
+        width: 20px;
+        height: auto;
+      }
+
+      .character-tile-name {
+        font-size: 0.8rem;
+        line-height: 0.7rem;
+        height: 2rem;
+      }
+    }
+  }
+}

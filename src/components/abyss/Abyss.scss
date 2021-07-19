@@ -1,5 +1,5 @@
 .abyss-container {
-  padding: 0.5rem 2rem 2rem 2rem;
+  padding: 1rem;
   min-height: 28rem;
   border-radius: 10px;
 
@@ -24,15 +24,6 @@
   flex-flow: column;
   align-items: center;
 
-  .party-container {
-    margin: 0.8rem;
-
-    .popularity-line {
-      margin: 0.2rem;
-      color: dimgray;
-      text-shadow: none;
-      font-size: 1rem;
-    }
   }
 
   .stage-container {
@@ -74,38 +65,6 @@
     flex-flow: column;
     align-items: center;
   }
-
-  .party-popularity {
-    position: relative;
-    text-align: center;
-    padding: 1rem;
-    background-color: #e9e5dc;
-    line-height: 30%;
-    color: white;
-    font-size: 2rem;
-    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-    height: 135px;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-  }
-
-  .party-grid {
-    display: flex;
-    background-color: #e9e5dc;
-    border-radius: 8px;
-    overflow: hidden;
-
-    .character-tile-container {
-      height: auto;
-      margin: 0;
-
-      .character-tile {
-        margin: 0;
-        border-radius: 0;
-      }
-    }
-  }
 }
 
 .floors-chart-container {
@@ -123,34 +82,5 @@
 @media (max-width: 887px) {
   h2 {
     font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 1244px) {
-  .party-container {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    flex-wrap: wrap;
-    height: auto;
-  }
-}
-
-@media (max-width: 1018px) {
-  .party-container {
-    align-items: center;
-    margin: 2rem 1rem;
-
-    .party-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .party-popularity {
-      grid-column-start: 1;
-      grid-column-end: 3;
-      padding-top: 0;
-      height: 100%;
-    }
   }
 }

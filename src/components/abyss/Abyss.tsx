@@ -10,6 +10,7 @@ import { IAbyssBattle } from '../../data/types';
 import { useAppSelector } from '../../hooks';
 import { getShortName } from '../../scripts/util';
 import CharacterTile from '../characters/CharacterTile';
+import Team from '../characters/Team';
 import Button from '../ui/Button';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
@@ -103,19 +104,7 @@ function Abyss() {
                         <>
                           {_.map(_.take(_.orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 10 : 5), ({party, count}, j) => {
                               return (
-                                <div key={`party-${i}-${j}`} className="party-container">
-                                <div className="party-grid">
-                                    {_.map(party, (char, k) => (
-                                      <Link key={`party-${char}-${i}`} to={`/builds/${getShortName(characterDb[char].name)}`}>
-                                        <CharacterTile id={char+''} labeled={false} />
-                                      </Link>
-                                    ))}
-                                    <div className="party-popularity">
-                                      <p className="popularity-pct">{Math.round((count / _.reduce(parties, (sum,curr) => sum + curr.count, 0) * 1000)/10)}%</p>
-                                      <p className="popularity-line">Count: {count}</p>
-                                    </div>
-                                  </div>
-                                </div>
+                                <Team key={`team-${i}`} team={party} count={count} percent={`${Math.round((count / _.reduce(parties, (sum,curr) => sum + curr.count, 0) * 1000)/10)}%`} />
                               )
                             })
                           }
@@ -146,7 +135,7 @@ function Abyss() {
         <Toggle label={"F2P"} defaultValue={f2p} onChange={handleToggleF2p} />
       </div>
       <PartySelector onPartyChange={handlePartyChange} />
-      <Dropdown options={options} onChange={handleSelect} defaultValue={defaultStages} isMulti />
+      <Dropdown.MultiSelect options={options} onChange={handleSelect} defaultValue={defaultStages} isMulti={true} />
       <div className="abyss-disclaimer">{"* 1st & 2nd halves have been temporarily merged until there is more data."}</div>
       {!_.isEmpty(characterDb) && renderParties()}
     </div>
