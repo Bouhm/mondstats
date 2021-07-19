@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  margin: 1rem 5rem;
+  margin: 1rem 0rem;
 
   h1 {
     font-size: 2rem;
