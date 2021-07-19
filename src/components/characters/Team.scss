@@ -28,18 +28,18 @@
   text-align: center;
   background-color: #e9e5dc;
   color: white;
-  text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
   display: flex;
   flex-flow: column;
   justify-content: center;
 
   .team-popularity-pct {
+    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
     font-size: 4vw;
   }
 
   .team-popularity-count {
     margin: 0.2rem;
-    color: dimgray;
+    color: rgba(73, 83, 102,0.9);
     text-shadow: none;
     font-size: 2.4vw;
     white-space: nowrap;
@@ -58,19 +58,13 @@
   }
 }
 
-// @media (max-width: 747px) {
-//   .team-popularity {
-//     width: calc(100px - 1rem);
-
-//     .team-popularity-pct {
-//       font-size: 1.5rem;
-//     }
-
-//     .team-popularity-count {
-//       font-size: 0.8rem;
-//     }
-//   }
-// }
+@media (max-width: 544px) {
+  .team-popularity {
+    .team-popularity-pct {
+      text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+    }
+  }
+}
 
 // @media (max-width: 544px) {
 //   .team-container {

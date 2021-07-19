@@ -32,11 +32,11 @@ function WeaponBuild({ weapons, total, f2p }: WeaponBuild) {
           const weapon = weaponDb[_id];
           if (!weapon) return null;
 
-          const popularity = Math.round((count / total) * 100)
+          const popularity = Math.round((count / total * 1000) / 10)
 
           return (
             <div key={`${_id}-${count}-${i}`} className="weapon-container">
-              <WeaponCard {...weapon} popularity={popularity} />
+              <WeaponCard {...weapon} count={count} popularity={popularity} />
               <div className="barchart weapon-bar-chart">
                 <div
                   className={`barchart-bar weapon-bar`} 

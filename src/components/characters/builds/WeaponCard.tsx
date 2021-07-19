@@ -3,7 +3,7 @@ import React from 'react';
 
 import { IWeaponData, IWeaponDb } from '../../../data/types';
 
-function WeaponCard({ oid, name, rarity, popularity }: IWeaponData & { popularity: number }) {
+function WeaponCard({ oid, name, rarity, count, popularity }: IWeaponData & { count: number, popularity: number }) {
   return (
     <div className={`weapon-card`}>
       <img className={`rarity-${rarity}`} src={`/assets/weapons/${oid}.webp`} alt={name} />
@@ -12,7 +12,8 @@ function WeaponCard({ oid, name, rarity, popularity }: IWeaponData & { popularit
           {name}
         </div>
         <div className="weapon-popularity">
-          {popularity}%
+          <div className="weapon-popularity-pct">{popularity}%</div>
+          <div className="weapon-popularity-count">{count}</div>
         </div>
       </div>
     </div>
