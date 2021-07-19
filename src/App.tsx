@@ -10,6 +10,7 @@ import { Link, Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Abyss from './components/abyss/Abyss';
 import CharacterBuilds from './components/characters/builds/CharacterBuilds';
 import CharacterSearch from './components/characters/CharacterSearch';
+import Home from './components/Home';
 import Navbar from './components/navbar/Navbar';
 import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';
@@ -36,28 +37,7 @@ import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, set
 
 function App() {
   const dispatch = useAppDispatch()
-  const routerHistory = useHistory();
 
-  const dialogueWidthLimit = 1078;
-  const [seenDialogue, setSeenDialogue] = useState(window.innerWidth < dialogueWidthLimit || JSON.parse(localStorage.getItem('seenDialogue')!))
-
-  const handleCloseDialogue = () => {
-    setSeenDialogue(true);
-  }
-
-  const handleWindowResize = () => {
-    if (window.innerWidth < dialogueWidthLimit) {
-      setSeenDialogue(true);
-    } else if (!JSON.parse(localStorage.getItem('seenDialogue')!)) {
-      setSeenDialogue(false);
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('resize', handleWindowResize)
-  },[])
-
-  
   // const { loading, error, data } = useQuery(Query);
 
   useEffect(() => {
@@ -93,13 +73,6 @@ function App() {
     dispatch(setWeaponDb(weaponDb))
   }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
 
-
-  const renderHome = () => (
-    <div className="home">
-      <CharacterSearch onSelect={(charName) => routerHistory.push(`/builds/${charName}`)} />
-    </div>
-  )
-
   return (
     <div className="App">
       <Navbar />
@@ -113,7 +86,7 @@ function App() {
               <Route path="/abyss" component={Abyss} />
               <Route path="/artifacts" component={UnderConstruction} />
               <Route path="/weapons" component={UnderConstruction} />
-              <Route exact path="/" render={renderHome} />
+              <Route exact path="/" component={Home} />
               <Route path="/builds/:shortName" component={CharacterBuilds} />
               <Redirect exact path="/builds" to="/" />
             </Switch>
