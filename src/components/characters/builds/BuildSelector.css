@@ -43,8 +43,7 @@
         position: absolute;
         text-align: center;
         z-index: 0;
-        left: 1rem;
-        top: calc(50% - 0.5rem);
+        top: calc(50% - 1.5rem);
         width: 100%;
         color: white;
         font-size: 3rem;
