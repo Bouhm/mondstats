@@ -1,35 +1,17 @@
 .team-container {
-  margin: 0.8rem;
-
-  .popularity-line {
-    margin: 0.2rem;
-    color: dimgray;
-    text-shadow: none;
-    font-size: 1rem;
-  }
+  margin: 0.8rem 0;
+  max-width: 40rem;
 }
 
-.team-popularity {
-  position: relative;
-  text-align: center;
-  padding: 1rem;
-  background-color: #e9e5dc;
-  line-height: 30%;
-  color: white;
-  font-size: 2rem;
-  text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-  height: 135px;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-}
-
-.team-grid {
-  display: flex;
+.team-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   background-color: #e9e5dc;
   border-radius: 8px;
   overflow: hidden;
+}
 
+.team-characters {
   .character-tile-container {
     height: auto;
     margin: 0;
@@ -41,31 +23,71 @@
   }
 }
 
-@media (max-width: 1244px) {
-  .team-container {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    flex-wrap: wrap;
-    height: auto;
+.team-popularity {
+  position: relative;
+  text-align: center;
+  background-color: #e9e5dc;
+  color: white;
+  text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+
+  .team-popularity-pct {
+    font-size: 4vw;
+  }
+
+  .team-popularity-count {
+    margin: 0.2rem;
+    color: dimgray;
+    text-shadow: none;
+    font-size: 2.4vw;
+    white-space: nowrap;
   }
 }
 
-@media (max-width: 1018px) {
-  .team-container {
-    align-items: center;
-    margin: 2rem 1rem;
-
-    .team-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+@media (min-width: 1024px) {
+  .team-popularity {
+    .team-popularity-pct {
+      font-size: 2.4rem;
     }
-
-    .team-popularity {
-      grid-column-start: 1;
-      grid-column-end: 3;
-      padding-top: 0;
-      height: 100%;
+  
+    .team-popularity-count {
+      font-size: 1.4rem;
     }
   }
 }
+
+// @media (max-width: 747px) {
+//   .team-popularity {
+//     width: calc(100px - 1rem);
+
+//     .team-popularity-pct {
+//       font-size: 1.5rem;
+//     }
+
+//     .team-popularity-count {
+//       font-size: 0.8rem;
+//     }
+//   }
+// }
+
+// @media (max-width: 544px) {
+//   .team-container {
+//     margin: 0.5rem 0;
+//   }
+
+//   .team-popularity {
+//     width: calc(68px - 1rem);
+
+//     .team-popularity-pct {
+//       margin: 0;
+//       line-height: 1.5rem;
+//       font-size: 1rem;
+//     }
+
+//     .team-popularity-count {
+//       font-size: 0.7rem;
+//     }
+//   }
+// }

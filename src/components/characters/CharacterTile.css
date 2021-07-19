@@ -3,9 +3,7 @@
 
 .character-tile {
   position: relative;
-  width: 135px;
   background-color: white;
-  border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s;
   box-sizing: border-box;
@@ -40,9 +38,8 @@
   }
 
   .character-portrait {
-    width: 135px;
-    height: 135px;
     vertical-align: middle;
+    width: 100%;
   }
 
   .character-tile-name {
@@ -61,33 +58,17 @@
 
 @media (max-width: 676px) {
   .character-tile-container {
-    .character-tile {
-      width: 100px;
-
-      .character-portrait {
-        height: 100px;
-        width: auto;
-      }
-
-      .character-tile-name {
-        font-size: 0.9rem;
-        line-height: 0.8rem;
-        height: 2rem;
-      }
+    .character-tile-name {
+      font-size: 0.9rem;
+      line-height: 0.8rem;
+      height: 2rem;
     }
   }
 }
 
-@media (max-width: 676px) {
+@media (max-width: 747px) {
   .character-tile-container {
     .character-tile {
-      width: 100px;
-
-      .character-portrait {
-        height: 100px;
-        width: auto;
-      }
-
       .element-icon {
         width: 30px;
         height: auto;
@@ -105,13 +86,6 @@
 @media (max-width: 544px) {
   .character-tile-container {
     .character-tile {
-      width: 68px;
-
-      .character-portrait {
-        height: 68px;
-        width: auto;
-      }
-
       .element-icon {
         width: 20px;
         height: auto;

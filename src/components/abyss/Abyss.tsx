@@ -3,19 +3,15 @@ import './Abyss.scss';
 import AmberSad from '/assets/amberSad.png';
 import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import AbyssData from '../../data/abyssData.json';
 import { IAbyssBattle } from '../../data/types';
 import { useAppSelector } from '../../hooks';
-import { getShortName } from '../../scripts/util';
-import CharacterTile from '../characters/CharacterTile';
 import Team from '../characters/Team';
 import Button from '../ui/Button';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Toggle from '../ui/Toggle';
-import Tooltip from '../ui/Tooltip';
 import PartySelector from './PartySelector';
 
 const _compareFloor = (f1: Option, f2: Option) => {

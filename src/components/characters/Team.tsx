@@ -1,4 +1,4 @@
-import './CharacterTeams.scss';
+import './Team.scss';
 
 import _ from 'lodash';
 import React from 'react';
@@ -21,15 +21,15 @@ function CharacterTeams({ team, percent, count }: TeamProps) {
  
   return (
     <div className="team-container">
-      <div className="team-grid">
+      <div className="team-stats">
         {_.map(team, (char, i) => (
           <Link key={`team-${char}-${i}`} to={`/builds/${getShortName(characterDb[char].name)}`}>
             <CharacterTile id={char+''} labeled={false} />
           </Link>
         ))}
         <div className="team-popularity">
-          <p className="team-popularity-pct">{percent}</p>
-          <p className="team-popularity-count">Count: {count}</p>
+          <div className="team-popularity-pct">{percent}</div>
+          <div className="team-popularity-count">{count}</div>
         </div>
       </div>
     </div>
