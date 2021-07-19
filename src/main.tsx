@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 import App from './App';
+import ScrollToTop from './components/ScrollToTop';
 import store from './Store';
 
 // const client = new ApolloClient({
@@ -20,6 +21,7 @@ import store from './Store';
 ReactDOM.render(
   <React.StrictMode>
     <Router>
+      <ScrollToTop />
       <Provider store={store}>
           <App />
       </Provider>
