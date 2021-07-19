@@ -1,3 +1,19 @@
+## dev build 7.19.21
+
+- Lots of UI changes to be more mobile friendly including:
+- Change character select components to dropdown 
+- Responsive team containers instead of grids
+- Move data counts to tooltips for charts
+
+## dev build 7.17.21 
+
+- Build spiral abyss page, replace spiral abyss data in character builds with top teams
+
+## dev build 7.08.21
+
+- More aggregation for weapons, artifact sets, and spiral abyss data
+- At this point just assume every update = more data
+
 ## dev build 7.02.21
 
 - Update assets and convert images to slightly more optimized WebP 

@@ -131,6 +131,8 @@ function Abyss() {
         <Toggle label={"F2P"} defaultValue={f2p} onChange={handleToggleF2p} />
       </div>
       <PartySelector onPartyChange={handlePartyChange} />
+      <br />
+      <h1>Abyss Teams</h1>
       <Dropdown.MultiSelect options={options} onChange={handleSelect} defaultValue={defaultStages} isMulti={true} />
       <div className="abyss-disclaimer">{"* 1st & 2nd halves have been temporarily merged until there is more data."}</div>
       {!_.isEmpty(characterDb) && renderParties()}

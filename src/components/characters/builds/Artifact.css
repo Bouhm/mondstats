@@ -94,29 +94,51 @@
   }
 }
 
-@media (max-width: 640px) {
-  table,
-  table td,
-  table tr,
-  table th {
-    display: block;
-    text-align: left;
+@media (max-width: 1036px) {
+  .artifact-card {
+    .artifact-effects {
+      font-size: 1rem;
+    }
   }
-  table th,
-  table td {
-    margin: 0;
-    padding-left: 25px;
-  }
-  table td {
-    padding-left: 0;
+}
 
-    &:nth-child(odd) {
-      border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-      font-size: 1.3rem;
+@media (max-width: 640px) {
+  .artifact-card {
+    .artifact-detail {
+      .artifact-name {
+        font-size: 1.3  rem;
+      }
+    } 
+    
+    .artifact-effects {
+      font-size: 1rem;
     }
 
-    &:nth-child(even) {
-      margin-bottom: 1.2rem;
+    table,
+    table td,
+    table tr,
+    table th {
+      display: block;
+      text-align: left;
+    }
+
+    table th,
+    table td {
+      margin: 0;
+      padding-left: 25px;
+    }
+
+    table td {
+      padding-left: 0;
+  
+      &:nth-child(odd) {
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        font-size: 1.3rem;
+      }
+  
+      &:nth-child(even) {
+        margin-bottom: 1.2rem;
+      }
     }
   }
 }

@@ -16,6 +16,7 @@
 .character-search {
   width: 35rem;
   margin: 0 auto;
+  padding: 0 0.5rem;
 }
 
 .character-tiles {

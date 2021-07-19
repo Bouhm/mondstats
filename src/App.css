@@ -18,6 +18,10 @@
       flex: 1;
       width: 100%;
       overflow-y: auto;
+
+      .home {
+        margin-top: 5rem;
+      }
     }
 
     main {
@@ -126,5 +130,21 @@ footer {
   .character-filter {
     width: 100%;
     margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 1.5rem !important;
+  }
+
+  .links {
+    font-size: 0.9rem;
+  }
+
+  .build-ver {
+    font-size: 0.8rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
   }
 }

@@ -45,7 +45,13 @@ function CharacterSearch({ showAll = true, asLink = true, filter = [], onSelect 
     <div className="character-search">
       <div className="character-searchbar">
         <Dropdown.SearchSelect
-          options={_.orderBy(_.map(characterDb, ({element, name}) => ({ label: name, value: name === "Traveler" ? getShortName(`${name}-${element}`) : getShortName(name) })), 'label', 'asc')} 
+          options={
+            _.orderBy(
+              _.filter(
+                _.map(characterDb, ({element, name}) => ({ label: name, value: name === "Traveler" ? getShortName(`${name}-${element}`) : getShortName(name) })), 
+              ({ value }) => !_.includes(filter, value)), 
+            'label', 'asc')
+          } 
           onChange={handleSelect}
         />
       </div>

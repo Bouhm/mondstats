@@ -94,8 +94,10 @@ function App() {
   }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
 
 
-  const renderCharacterSearch = () => (
-    <CharacterSearch onSelect={(charName) => routerHistory.push(`/builds/${charName}`)} />
+  const renderHome = () => (
+    <div className="home">
+      <CharacterSearch onSelect={(charName) => routerHistory.push(`/builds/${charName}`)} />
+    </div>
   )
 
   return (
@@ -111,7 +113,7 @@ function App() {
               <Route path="/abyss" component={Abyss} />
               <Route path="/artifacts" component={UnderConstruction} />
               <Route path="/weapons" component={UnderConstruction} />
-              <Route exact path="/" render={renderCharacterSearch} />
+              <Route exact path="/" render={renderHome} />
               <Route path="/builds/:shortName" component={CharacterBuilds} />
               <Redirect exact path="/builds" to="/" />
             </Switch>
@@ -125,7 +127,7 @@ function App() {
           </section>
         </div>
       </main>
-      <span className="build-ver">dev build 07.02.21</span>
+      <span className="build-ver">dev build 07.19.21</span>
     </div>
   )
 }

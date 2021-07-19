@@ -29,7 +29,7 @@ function PartySelector({ onPartyChange }: PartySelectorProps) {
     const characters = _.uniq([...selectedCharacters, char])
     setSelectedCharacters(characters);
     onPartyChange(_.map(characters, charName => characterIdMap[charName]));
-    handleClose()
+    handleClose();
   }
 
   const handleDeselect = (char: string) => {
@@ -58,7 +58,7 @@ function PartySelector({ onPartyChange }: PartySelectorProps) {
           </div>
         ))}
       </div>
-      {showCharacterSearch && 
+      {showCharacterSearch && selectedCharacters.length < 4 && 
         <>
           <CharacterSearch showAll={false} asLink={false} filter={selectedCharacters} onSelect={handleSelect} />
           {<Button onClick={handleClose}>Cancel</Button>}

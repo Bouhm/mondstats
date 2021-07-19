@@ -11,7 +11,12 @@
   }
 
   h1 {
-    margin: 2rem auto 1rem auto;
+    text-align: center;
+    font-size: 2rem;
+    width: 300px;
+    color: white;
+    border-bottom: solid 1px grey;
+    margin: 2rem auto;
   }
 
   .dropdown {
@@ -80,5 +85,23 @@
 @media (max-width: 887px) {
   h2 {
     font-size: 1.2rem;
+  }
+  
+  .floor-container {
+    .stage-container {
+      .stage-label {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 516px) {
+  .floor-container {
+    .stage-container {
+      .stage-label {
+        font-size: 1.5rem;
+      }
+    }
   }
 }
