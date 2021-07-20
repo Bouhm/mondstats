@@ -1,0 +1,13 @@
+.elevator-container {
+
+  &.asDisabled {
+    opacity: 0.5;
+    pointer-events: none;  
+  }
+
+  .elevator {
+    display: flex;
+    flex-flow: column;
+  }
+}
+

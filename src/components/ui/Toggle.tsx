@@ -5,13 +5,13 @@ import React, { useState } from 'react';
 
 type ToggleProps = {
   label?: string;
-  defaultValue?: boolean
+  value: boolean
   color?: string
   onChange: () => void;
 }
 
-function Toggle({ label, color="#CECBC4", defaultValue = false, onChange }: ToggleProps) {
-  const [checked, setChecked] = useState(defaultValue)
+function Toggle({ label, color="#CECBC4", value, onChange }: ToggleProps) {
+  const [checked, setChecked] = useState(value)
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setChecked(e.currentTarget.checked);
