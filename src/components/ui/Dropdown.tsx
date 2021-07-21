@@ -53,10 +53,14 @@ function SearchSelect({options, onChange, defaultValue }: SearchProps) {
   if (_.isEmpty(characterDb) || _.isEmpty(characterIdMap)) return null;
 
   const OptionLabel = ({ value, label }: any) => {
-    console.log(value, label)
+    const { element, oid } = characterDb[characterIdMap[value]];
+
     return (
       <div className="character-option">
-        <img className="character-option-portrait" src={`/assets/characters/${characterDb[characterIdMap[value]].oid}.webp`} alt={`${value}-portrait`} />
+        <div className="character-option-image">
+          <img className="character-option-element" src={`/assets/elements/${element}.webp`} />
+          <img className="character-option-portrait" src={`/assets/characters/${oid}.webp`} alt={`${value}-portrait`} />
+        </div>
         <div className="character-option-label">{label}</div>
       </div>
     )

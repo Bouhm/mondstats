@@ -48,8 +48,14 @@ function CharacterSearch({ showAll = true, asLink = true, filter = [], onSelect 
           options={
             _.orderBy(
               _.filter(
-                _.map(characterDb, ({element, name}) => ({ label: name, value: name === "Traveler" ? getShortName(`${name}-${element}`) : getShortName(name) })), 
-              ({ value }) => !_.includes(filter, value)), 
+                _.map(characterDb, ({element, name}) => {
+                  if (name === "Traveler") {
+                    return { label: `${name} (${element})`, value: getShortName(`${name}-${element}`)}
+                  } else {
+                    return { label: name, value: getShortName(name) }
+                  }
+                }),
+              ({ value }) => !_.includes(filter, value)),
             'label', 'asc')
           } 
           onChange={handleSelect}

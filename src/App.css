@@ -61,43 +61,6 @@ footer {
   position: absolute;
 }
 
-.rarity-3 {
-  background: linear-gradient(#5d6887, #608eab, #5484a7);
-}
-
-.rarity-4 {
-  background: linear-gradient(#605a86, #9476ac, #a67ab9);
-}
-
-.rarity-5 {
-  background: linear-gradient(#8d5e2e, #b1792c, #b8742b);
-}
-
-.pyro {
-  background-color: #ee7033;
-}
-.anemo {
-  background-color: #58dbab;
-}
-.cryo {
-  background-color: #a1f9ff;
-}
-.hydro {
-  background-color: #35cbfc;
-}
-.electro {
-  background-color: #d795ff;
-}
-.dendro {
-  background-color: #a5d533;
-}
-.geo {
-  background-color: #f0b738;
-}
-.none {
-  background-color: #4b0082;
-}
-
 .build-ver {
   position: fixed;
   bottom: 0;

@@ -4,7 +4,6 @@ import _ from 'lodash';
 import React, { ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ElementIcons } from '../../data/constants';
 import { useAppSelector } from '../../hooks';
 import { getShortName } from '../../scripts/util';
 
@@ -23,7 +22,6 @@ function CharacterTile({ id, labeled = true, onClick }: CharacterTileProps) {
   let classes = "character-tile";
   classes += ` rarity-${character.rarity}`;
 
-  const charElement = ElementIcons[character.element];
   const charName = character.name === "Traveler" ? getShortName(`${character.name}-${character.element}`) : getShortName(character.name);
 
   const handleClick = (char: string) => {
@@ -35,7 +33,7 @@ function CharacterTile({ id, labeled = true, onClick }: CharacterTileProps) {
       <div className={classes}>
         <div className="character-image">
           <img className="character-portrait" src={`/assets/characters/${character.oid}.webp`} alt={`${character.name}-portrait`}></img>
-          {charElement && <img className="element-icon" src={ElementIcons[character.element]} alt={character.element}></img>}
+          <img className="element-icon" src={`/assets/elements/${character.element}.webp`} alt={character.element}></img>
         </div>
         {labeled && <div className="character-tile-name">
           {character.name}
