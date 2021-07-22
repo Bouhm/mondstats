@@ -23,11 +23,11 @@ import { IAbyssBattle } from '../../data/types';
 import { useAppSelector } from '../../useRedux';
 import Team from '../characters/Team';
 import F2P from '../filters/F2P';
+import useFilters from '../filters/useFilters';
 import Button from '../ui/Button';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import PartySelector from './PartySelector';
-import useFilters from '../filters/useFilters';
 
 const _compareFloor = (f1: Option, f2: Option) => {
   const f1Strs = f1.value.split("-")

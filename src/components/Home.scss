@@ -9,7 +9,7 @@
     margin: 3rem auto 0 auto;
 
     img {
-      width: 200px;
+      width: 180px;
       height: auto;
     }
   }
@@ -18,20 +18,20 @@
     display: flex;
     flex-flow: column;
     justify-content: center;
-    flex: 1;
+    flex: 0.5;
     margin: 0 auto;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     opacity: 0.8;
     color:  rgba(255,255,255,0.4);
     padding: 2rem;
 
     .home-data-line-2 {
-      margin-left: 5.5rem;
+      margin-left: 5rem;
     }
 
     span {
       color:  #e9e5dc;
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 600;
     }
   }

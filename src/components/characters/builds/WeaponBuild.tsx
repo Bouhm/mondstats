@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { IWeaponBuild } from '../../../data/types';
 import { useAppSelector } from '../../../useRedux';
-import { Filters } from '../../filters/useFilters';
 import WeaponCard from './WeaponCard';
 
 type WeaponBuild = {

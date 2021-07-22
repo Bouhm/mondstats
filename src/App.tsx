@@ -31,9 +31,9 @@ import {
   IWeaponDb,
 } from './data/types';
 import WeaponDb from './data/weapons.json';
-import { useAppDispatch, useAppSelector } from './useRedux';
 import { getShortName } from './scripts/util';
 import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
 function App() {
   const dispatch = useAppDispatch()
@@ -100,7 +100,7 @@ function App() {
           </section>
         </div>
       </main>
-      <span className="build-ver">dev build 07.19.21</span>
+      <span className="build-ver">dev build 07.21.21</span>
     </div>
   )
 }

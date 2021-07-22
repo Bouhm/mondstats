@@ -1,10 +1,10 @@
 import './Toggle.scss';
 
 import _ from 'lodash';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 type ToggleProps = {
-  label?: string;
+  label?: ReactNode;
   value: boolean
   color?: string
   onChange: () => void;

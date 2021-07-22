@@ -18,8 +18,8 @@ function F2P({ color, onChange, f2p, max5 }: ToggleProps) {
   const values = [0,1,2,3,4];
   
   const handleToggleF2p = () => {
+    console.log("TOGGLE F2P", !f2p)
     onChange('f2p', !f2p)
-    console.log("toggle", f2p)
   }
 
   const handleIndexChange = (index: number) => {
@@ -28,8 +28,10 @@ function F2P({ color, onChange, f2p, max5 }: ToggleProps) {
 
   return (
     <div className="f2p-filter">
-      <Toggle color={color} label={`${max5 > 2 ? "F2P?" : "F2P"}`} value={!!f2p} onChange={handleToggleF2p} />
-      <Elevator disabled={!f2p} onIndexChange={handleIndexChange} index={indexOf(values, max5)} values={values} />
+      <Toggle 
+        color={color} 
+        label={'F2P'} value={f2p} onChange={handleToggleF2p} />
+      <Elevator label={"MAX 5-Stars"} disabled={!f2p} onIndexChange={handleIndexChange} index={indexOf(values, max5)} values={values} />
     </div>
   )
 }

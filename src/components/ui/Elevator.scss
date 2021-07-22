@@ -1,4 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap');
+
 .elevator-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  margin: -0.5rem 1rem 0 1rem;
+
+  .elevator-label {
+    font-family: 'Source Sans Pro', sans-serif;
+    text-transform: uppercase;
+    color: white;
+    margin-top: -0.5rem;
+    font-size: 0.9rem;
+  }
 
   &.asDisabled {
     opacity: 0.5;
@@ -8,6 +22,25 @@
   .elevator {
     display: flex;
     flex-flow: column;
+    justify-content: center;
+    line-height: 0.8rem;
+    color: white;
+    align-items: center;
+
+    .elevator-up-button, .elevator-down-button {
+      line-height: 0;
+      opacity: 0.7;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 1;
+      }
+    }
+
+    .elevator-value {
+      margin-bottom: -4px;
+      margin-top: 3px;
+    }
   }
 }
 

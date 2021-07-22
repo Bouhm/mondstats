@@ -30,14 +30,14 @@ function Elevator({ label, index, disabled=false, values, onIndexChange }: Toggl
 
   return (
     <div className={`elevator-container ${disabled ? 'asDisabled' : ''}`}>
-      <span>{label}</span>
+      <span className="elevator-label">{label}</span>
       <div className="elevator">
         <div className="elevator-up-button" onClick={handleIncrease}>
-          <ChevronUp />
+          <ChevronUp size={20} />
         </div>
         <div className="elevator-value">{values[valIdx]}</div> 
         <div className="elevator-down-button" onClick={handleDecrease}>
-          <ChevronDown />
+          <ChevronDown size={20} />
         </div>
       </div>
     </div>

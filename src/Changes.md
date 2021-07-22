@@ -1,3 +1,8 @@
+## dev build 7.21.21
+
+- Add F2P filtering by maximum number of 5-stars
+- Update for 2.0 
+
 ## dev build 7.19.21
 
 - Lots of UI changes to be more mobile friendly including:
