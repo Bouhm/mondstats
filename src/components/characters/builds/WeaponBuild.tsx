@@ -1,33 +1,60 @@
 import _ from 'lodash';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { IWeaponBuild } from '../../../data/types';
 import { useAppSelector } from '../../../hooks';
 import WeaponCard from './WeaponCard';
 
 type WeaponBuild = {
-  weapons: IWeaponBuild[]
+  weaponBuilds: IWeaponBuild[]
   total: number
-} & { f2p: boolean }
+}
 
 const BP_WEAPONS = [11409, 12409, 14405, 15409, 13405]
 
-function WeaponBuild({ weapons, total, f2p }: WeaponBuild) {
+function WeaponBuild({ weaponBuilds, total, max5 }: WeaponBuild & { max5 : number}) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
+  const max = 8;
+  const [filteredWeapons, setFilteredWeapons] = useState<IWeaponBuild[] | []>([])
+
+  useEffect(() => {
+    let orderedWeapons = _.orderBy(weaponBuilds, 'count', 'desc');
+    console.log(orderedWeapons.length)
+    console.log("weapons effect", max5)
+
+    if (max5 > -1) {
+      let weapons: IWeaponBuild[] = []
+      let count5 = 0;
+
+      for (let i = 0; i < orderedWeapons.length; i++) {
+        if (weaponDb[orderedWeapons[i]._id].rarity > 4) {
+          count5++;      
+          
+          if (count5 > max5) continue;
+        }
+
+        if (_.includes(BP_WEAPONS, weaponDb[orderedWeapons[i]._id].oid)) continue;
+  
+        weapons.push(orderedWeapons[i]);
+        
+        if (weapons.length >= max) {
+          break;
+        }
+      }
+
+      setFilteredWeapons(weapons);
+    } else {
+      setFilteredWeapons(_.take(orderedWeapons, max));
+    }
+
+  }, [setFilteredWeapons, weaponBuilds, max5])
 
   return (
     <div className="weapons-list-container">
       <h1>Weapons</h1>
       <div className="weapons-list">
-        {_.map(_.take(_.orderBy(_.filter(weapons, ({_id}) => {
-          if (f2p) {
-            const weapon = weaponDb[_id]
-            return weapon.rarity < 5 && !_.includes(BP_WEAPONS, weapon.oid)
-          }
-
-          return true
-        }), 'count', 'desc'), 8), ({ _id, count }, i) => {
+        {_.map(filteredWeapons, ({ _id, count }, i) => {
           const weapon = weaponDb[_id];
           if (!weapon) return null;
 

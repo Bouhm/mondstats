@@ -2,12 +2,7 @@ import React from 'react';
 
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import {
-  IArtifactDb,
-  IArtifactSetDb,
-  ICharacterDb,
-  IWeaponDb,
-} from './data/types';
+import { IArtifactDb, IArtifactSetDb, ICharacterDb, IWeaponDb } from './data/types';
 
 interface IState {
   characterIdMap: {[shortname: string]: string},
@@ -16,7 +11,7 @@ interface IState {
   artifactSetDb: IArtifactSetDb,
   characterDb: ICharacterDb,
   weaponDb: IWeaponDb,
-  elementColor: string,
+  elementColor: string
 }
 
 const initialState: IState = {

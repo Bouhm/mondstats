@@ -17,10 +17,10 @@ import WeaponBuild from './WeaponBuild';
 type BuildSelectorProps = {
   builds: IBuild[],
   total: number,
-  f2p: boolean
+  max5: number
 }
 
-function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
+function BuildSelector({ builds, total, max5 }: BuildSelectorProps) {
   const mobileWidth = window.matchMedia("(max-width: 617px)")
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
@@ -76,9 +76,9 @@ function BuildSelector({ builds, total, f2p }: BuildSelectorProps) {
   return (
     <div className="builds-selector">
       <WeaponBuild
-        weapons={filteredBuilds[activeBuildIdx].weapons}
+        weaponBuilds={filteredBuilds[activeBuildIdx].weapons}
         total={filteredBuilds[activeBuildIdx].count}
-        f2p={f2p}
+        max5={max5}
       />
       <div className="artifact-build-container">
         <div className="artifact-build-stats">

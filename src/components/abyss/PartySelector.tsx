@@ -4,13 +4,10 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../hooks';
-import { getShortName } from '../../scripts/util';
 import CharacterSearch from '../characters/CharacterSearch';
 import CharacterTile from '../characters/CharacterTile';
 import Button from '../ui/Button';
-import { ChevronDown, Close, Plus } from '../ui/Icons';
-import Modal from '../ui/Modal';
-import Searchbar from '../ui/Searchbar';
+import { Close, Plus } from '../ui/Icons';
 
 type PartySelectorProps = {
   onPartyChange: (party: string[]) => void;

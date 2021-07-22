@@ -16,7 +16,7 @@ type TeamProps = {
   count: number
 }
 
-function CharacterTeams({ team, percent, count }: TeamProps) {
+function Team({ team, percent, count }: TeamProps) {
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const {
@@ -25,6 +25,7 @@ function CharacterTeams({ team, percent, count }: TeamProps) {
     setTriggerRef,
     visible,
   } = usePopperTooltip();
+
 
   return (
     <div className="team-container">
@@ -48,4 +49,4 @@ function CharacterTeams({ team, percent, count }: TeamProps) {
   )
 }
 
-export default CharacterTeams;
+export default Team;

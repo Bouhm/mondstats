@@ -4,10 +4,8 @@ import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { IAbyssBattle, IParty } from '../../../data/types';
+import { IParty } from '../../../data/types';
 import { useAppSelector } from '../../../hooks';
-import { getShortName } from '../../../scripts/util';
-import CharacterTile from '../../characters/CharacterTile';
 import Button from '../../ui/Button';
 import { ChevronDown, ChevronUp } from '../../ui/Icons';
 import Team from '../Team';
@@ -17,9 +15,10 @@ interface ITeam {
   count: number
 }
 
-function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
+function CharacterTeams({ teams, max5 }: { teams: IParty[], max5: number }) {
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
+  
   const max = 10;
 
   const [ showMore, setShowMore ] = useState(false);
@@ -27,12 +26,21 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
 
   const filterTeams = (teams: IParty[], charId: string) => {
     let filtered = teams;
-    if (f2p) {
-      filtered =_.filter(teams, ({ party }) => {
-        let fivesCount =  characterDb[charId].rarity > 4 ? 1 : 0;
-        return (_.filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length === fivesCount)
-      })
+    let max5WithChar = max5;
+
+    if (characterDb[selectedCharacter].rarity) {
+      if (max5 === 0) {
+        max5WithChar++;
+      }
     }
+
+    filtered =_.filter(teams, ({ party }) => {
+      if (max5 > -1) {
+        return (_.filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length <= max5WithChar)
+      } else {
+        return true
+      }
+    })
 
     _.forEach(filtered, ({party}, i) => filtered[i].party = [charId, ..._.filter(party, char => char !== charId)]);
     return _.take(filtered, max);
@@ -45,7 +53,7 @@ function CharacterTeams({ teams, f2p }: { teams: IParty[], f2p: boolean }) {
   useEffect(() => {
     const updatedTeams = filterTeams(teams, selectedCharacter);
     setFilteredTeams(updatedTeams);
-  }, [setFilteredTeams, selectedCharacter, f2p])
+  }, [setFilteredTeams, selectedCharacter, max5])
 
   const renderParties = () => (
     <div className="parties-container">

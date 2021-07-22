@@ -9,7 +9,9 @@ import CharacterBuildData from '../../../data/characterBuilds.json';
 import { ElementColors } from '../../../data/constants';
 import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../../data/types';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { getCharacterFileName } from '../../../scripts/util';
 import { selectCharacter, setElementColor } from '../../../Store';
+import F2P from '../../filters/F2P';
 import Toggle from '../../ui/Toggle';
 import BuildSelector from './BuildSelector';
 import CharacterTeams from './CharacterTeams';
@@ -25,13 +27,9 @@ function CharacterBuilds() {
 
   const [characterBuild, setCharacterBuild] = useState<ICharacterBuild | undefined>(undefined)
   const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
-  const [f2p, setF2p] = useState(false);
+  const [max5, setMax5] = useState(-1)
   const charId = characterIdMap[shortName]
 
-  const handleToggleF2p = () => {
-    setF2p(!f2p)
-  }
-  
   useEffect(() => {
     if (!_.isEmpty(characterDb)) {
       const char = characterDb[charId];
@@ -49,16 +47,18 @@ function CharacterBuilds() {
     </div>
   }
 
-  const imgFile = character.name === "Traveler" ? "traveler" : character.oid;
+  const handleFilterChange = (val: number) => {
+    setMax5(val)
+  }
 
   return (
     <div className="character-page">
-      <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${imgFile}_bg.webp")` }} />
+      <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} />
       <div className="character-page-stats-count" style={{ backgroundColor: elementColor }}>
         <span>{characterBuild.total} {character.name} Builds</span>
       </div>
       <div className="character-page-controls">
-        <Toggle color={elementColor} label={"F2P"} value={f2p} onChange={handleToggleF2p} />
+        <F2P onChange={handleFilterChange} value={max5} color={elementColor} />
       </div>
 
       {characterBuild.builds &&
@@ -66,10 +66,10 @@ function CharacterBuilds() {
           <BuildSelector
             builds={_.take(characterBuild.builds, 8)}
             total={characterBuild.total}
-            f2p={f2p}
+            max5={max5}
           />
           <Constellations constellations={characterBuild.constellations} total={characterBuild.total} />
-          <CharacterTeams teams={characterBuild.teams} f2p={f2p} />
+          <CharacterTeams max5={max5} teams={characterBuild.teams} />
         </>
       }
     </div>
