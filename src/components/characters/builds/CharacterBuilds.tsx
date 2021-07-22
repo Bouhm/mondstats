@@ -8,10 +8,11 @@ import { useParams } from 'react-router-dom';
 import CharacterBuildData from '../../../data/characterBuilds.json';
 import { ElementColors } from '../../../data/constants';
 import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../../data/types';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getCharacterFileName } from '../../../scripts/util';
 import { selectCharacter, setElementColor } from '../../../Store';
+import { useAppDispatch, useAppSelector } from '../../../useRedux';
 import F2P from '../../filters/F2P';
+import useFilters from '../../filters/useFilters';
 import Toggle from '../../ui/Toggle';
 import BuildSelector from './BuildSelector';
 import CharacterTeams from './CharacterTeams';
@@ -27,7 +28,13 @@ function CharacterBuilds() {
 
   const [characterBuild, setCharacterBuild] = useState<ICharacterBuild | undefined>(undefined)
   const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
-  const [max5, setMax5] = useState(-1)
+  const {
+    f2p,
+    max5,
+    handleToggleF2p,
+    handleMax5Change
+  } = useFilters();
+
   const charId = characterIdMap[shortName]
 
   useEffect(() => {

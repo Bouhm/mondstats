@@ -1,9 +1,10 @@
 import './Abyss.scss';
 
 import AmberSad from '/assets/amberSad.webp';
-import {
+import _, {
   clone,
   cloneDeep,
+  countBy,
   difference,
   filter,
   forEach,
@@ -102,6 +103,15 @@ function Abyss() {
 
   const handlePartyChange = (party: string[]) => {
     setCharacters(party)
+    const count5 = countBy(party, char => characterDb[char].rarity);
+
+    if (max5 > -1) {
+      if (count5['5'] > max5) {
+      console.log(count5, max5)
+
+        setMax5(count5['5'])
+      }
+    }
   }
 
   const renderParties = () => (

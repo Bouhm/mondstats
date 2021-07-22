@@ -5,7 +5,7 @@ import React, { ReactNode, useContext } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 
 import { ElementColors } from '../../../data/constants';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../../useRedux';
 import BarChart from '../../ui/BarChart';
 
 type ConstellationsProps = {

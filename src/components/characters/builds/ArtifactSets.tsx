@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { useContext } from 'react';
 
 import { IArtifactBuild } from '../../../data/types';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../../useRedux';
 
 type ArtifactSetsProps = {
   artifacts: IArtifactBuild[]
