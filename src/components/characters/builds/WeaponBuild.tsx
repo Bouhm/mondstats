@@ -2,7 +2,8 @@ import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 
 import { IWeaponBuild } from '../../../data/types';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../../useRedux';
+import { Filters } from '../../filters/useFilters';
 import WeaponCard from './WeaponCard';
 
 type WeaponBuild = {
@@ -12,7 +13,7 @@ type WeaponBuild = {
 
 const BP_WEAPONS = [11409, 12409, 14405, 15409, 13405]
 
-function WeaponBuild({ weaponBuilds, total, max5 }: WeaponBuild & { max5 : number}) {
+function WeaponBuild({ weaponBuilds, total, filters }: WeaponBuild & { filters : Filters}) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
   const max = 8;
@@ -20,10 +21,8 @@ function WeaponBuild({ weaponBuilds, total, max5 }: WeaponBuild & { max5 : numbe
 
   useEffect(() => {
     let orderedWeapons = _.orderBy(weaponBuilds, 'count', 'desc');
-    console.log(orderedWeapons.length)
-    console.log("weapons effect", max5)
 
-    if (max5 > -1) {
+    if (filters.f2p) {
       let weapons: IWeaponBuild[] = []
       let count5 = 0;
 
@@ -31,7 +30,7 @@ function WeaponBuild({ weaponBuilds, total, max5 }: WeaponBuild & { max5 : numbe
         if (weaponDb[orderedWeapons[i]._id].rarity > 4) {
           count5++;      
           
-          if (count5 > max5) continue;
+          if (count5 > filters.max5) continue;
         }
 
         if (_.includes(BP_WEAPONS, weaponDb[orderedWeapons[i]._id].oid)) continue;
@@ -48,7 +47,7 @@ function WeaponBuild({ weaponBuilds, total, max5 }: WeaponBuild & { max5 : numbe
       setFilteredWeapons(_.take(orderedWeapons, max));
     }
 
-  }, [setFilteredWeapons, weaponBuilds, max5])
+  }, [setFilteredWeapons, weaponBuilds, filters])
 
   return (
     <div className="weapons-list-container">

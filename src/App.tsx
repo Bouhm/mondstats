@@ -31,7 +31,7 @@ import {
   IWeaponDb,
 } from './data/types';
 import WeaponDb from './data/weapons.json';
-import { useAppDispatch, useAppSelector } from './hooks';
+import { useAppDispatch, useAppSelector } from './useRedux';
 import { getShortName } from './scripts/util';
 import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
 

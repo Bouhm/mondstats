@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 
 import { ElementColors } from '../../../data/constants';
 import { IBuild } from '../../../data/types';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../../useRedux';
 import Chart from '../../ui/Chart';
 import { EllipsisV } from '../../ui/Icons';
 import ArtifactBuild from './ArtifactBuild';
@@ -17,10 +17,10 @@ import WeaponBuild from './WeaponBuild';
 type BuildSelectorProps = {
   builds: IBuild[],
   total: number,
-  max5: number
+  filters: Filters
 }
 
-function BuildSelector({ builds, total, max5 }: BuildSelectorProps) {
+function BuildSelector({ builds, total, filters }: BuildSelectorProps) {
   const mobileWidth = window.matchMedia("(max-width: 617px)")
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const elementColor = useAppSelector((state) => state.data.elementColor)
@@ -78,7 +78,7 @@ function BuildSelector({ builds, total, max5 }: BuildSelectorProps) {
       <WeaponBuild
         weaponBuilds={filteredBuilds[activeBuildIdx].weapons}
         total={filteredBuilds[activeBuildIdx].count}
-        max5={max5}
+        filters={filters}
       />
       <div className="artifact-build-container">
         <div className="artifact-build-stats">

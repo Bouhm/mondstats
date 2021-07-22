@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, { ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../useRedux';
 import { getCharacterFileName, getShortName } from '../../scripts/util';
 
 export type CharacterTileProps = {

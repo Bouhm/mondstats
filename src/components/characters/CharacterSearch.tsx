@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../useRedux';
 import { getShortName } from '../../scripts/util';
 import Dropdown, { Option } from '../ui/Dropdown';
 import Searchbar from '../ui/Searchbar';

@@ -5,17 +5,18 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { IParty } from '../../../data/types';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../../useRedux';
 import Button from '../../ui/Button';
 import { ChevronDown, ChevronUp } from '../../ui/Icons';
 import Team from '../Team';
+import useFilters, { Filters } from '../../filters/useFilters';
 
 interface ITeam {
   party: string[],
   count: number
 }
 
-function CharacterTeams({ teams, max5 }: { teams: IParty[], max5: number }) {
+function CharacterTeams({ teams, filters }: { teams: IParty[], filters: Filters }) {
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
   
@@ -26,16 +27,16 @@ function CharacterTeams({ teams, max5 }: { teams: IParty[], max5: number }) {
 
   const filterTeams = (teams: IParty[], charId: string) => {
     let filtered = teams;
-    let max5WithChar = max5;
+    let max5WithChar = filters.max5;
 
     if (characterDb[selectedCharacter].rarity) {
-      if (max5 === 0) {
+      if (filters.max5 === 0) {
         max5WithChar++;
       }
     }
 
     filtered =_.filter(teams, ({ party }) => {
-      if (max5 > -1) {
+      if (filters.f2p) {
         return (_.filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length <= max5WithChar)
       } else {
         return true
@@ -53,7 +54,7 @@ function CharacterTeams({ teams, max5 }: { teams: IParty[], max5: number }) {
   useEffect(() => {
     const updatedTeams = filterTeams(teams, selectedCharacter);
     setFilteredTeams(updatedTeams);
-  }, [setFilteredTeams, selectedCharacter, max5])
+  }, [setFilteredTeams, selectedCharacter, filters])
 
   const renderParties = () => (
     <div className="parties-container">

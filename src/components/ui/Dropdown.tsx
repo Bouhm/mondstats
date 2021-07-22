@@ -5,7 +5,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../useRedux';
 import { getCharacterFileName } from '../../scripts/util';
 import { Search } from './Icons';
 

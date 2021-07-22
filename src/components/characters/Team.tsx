@@ -6,7 +6,7 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 import { Link } from 'react-router-dom';
 
 import { IParty } from '../../data/types';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../useRedux';
 import { getShortName } from '../../scripts/util';
 import CharacterTile from './CharacterTile';
 

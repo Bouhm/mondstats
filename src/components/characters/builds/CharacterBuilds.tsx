@@ -29,10 +29,8 @@ function CharacterBuilds() {
   const [characterBuild, setCharacterBuild] = useState<ICharacterBuild | undefined>(undefined)
   const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
   const {
-    f2p,
-    max5,
-    handleToggleF2p,
-    handleMax5Change
+    filters,
+    handleFilterChange
   } = useFilters();
 
   const charId = characterIdMap[shortName]
@@ -54,10 +52,6 @@ function CharacterBuilds() {
     </div>
   }
 
-  const handleFilterChange = (val: number) => {
-    setMax5(val)
-  }
-
   return (
     <div className="character-page">
       <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} />
@@ -65,7 +59,7 @@ function CharacterBuilds() {
         <span>{characterBuild.total} {character.name} Builds</span>
       </div>
       <div className="character-page-controls">
-        <F2P onChange={handleFilterChange} value={max5} color={elementColor} />
+        <F2P onChange={handleFilterChange} f2p={filters.f2p} max5={filters.max5} color={elementColor} />
       </div>
 
       {characterBuild.builds &&
@@ -73,10 +67,10 @@ function CharacterBuilds() {
           <BuildSelector
             builds={_.take(characterBuild.builds, 8)}
             total={characterBuild.total}
-            max5={max5}
+            filters={filters}
           />
           <Constellations constellations={characterBuild.constellations} total={characterBuild.total} />
-          <CharacterTeams max5={max5} teams={characterBuild.teams} />
+          <CharacterTeams filters={filters} teams={characterBuild.teams} />
         </>
       }
     </div>

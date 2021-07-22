@@ -20,13 +20,14 @@ import React, { useEffect, useState } from 'react';
 
 import AbyssData from '../../data/abyssData.json';
 import { IAbyssBattle } from '../../data/types';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../useRedux';
 import Team from '../characters/Team';
 import F2P from '../filters/F2P';
 import Button from '../ui/Button';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import PartySelector from './PartySelector';
+import useFilters from '../filters/useFilters';
 
 const _compareFloor = (f1: Option, f2: Option) => {
   const f1Strs = f1.value.split("-")
@@ -51,20 +52,20 @@ function Abyss() {
   const [ selectedStages, selectStages ] = useState<Option[]>(defaultStages)
   const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssBattle[]>(AbyssData.abyss)
   const [ characters, setCharacters ] = useState<string[]>([]);
-  const [ max5, setMax5 ] = useState(-1);
+  const { filters, handleFilterChange } = useFilters();
 
   useEffect(() => {
     setFilteredAbyss(_filterAbyss(AbyssData.abyss));
-  }, [setFilteredAbyss, characters, selectedStages, max5])
+  }, [setFilteredAbyss, characters, selectedStages, filters])
 
   function _filterAbyss(data: IAbyssBattle[]) {
     let filteredAbyss = cloneDeep(data)
   
-    let max5WithChar = max5;
+    let max5WithChar = filters.max5;
 
     forEach(characters, character => {
       if (characterDb[character].rarity) {
-        if (max5 === 0) {
+        if (filters.max5 === 0) {
           max5WithChar++;
         }
       }
@@ -75,8 +76,10 @@ function Abyss() {
         floor.battle_parties[i] = filter(battle, ({party}) => {
           let charFilter = true;
 
-          if (max5 > -1) {
-            charFilter = (filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length <= max5WithChar)
+          if (filters.f2p) {
+            charFilter = (filter(party, char => {
+              return characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler"
+            }).length <= max5WithChar)
           } 
           
           return charFilter && difference(characters, party).length === 0
@@ -97,19 +100,13 @@ function Abyss() {
     setStageLimitToggle(newMap)
   }
 
-  const handleFilterChange = (val: number) => {
-    setMax5(val)
-  }
-
   const handlePartyChange = (party: string[]) => {
     setCharacters(party)
     const count5 = countBy(party, char => characterDb[char].rarity);
 
-    if (max5 > -1) {
-      if (count5['5'] > max5) {
-      console.log(count5, max5)
-
-        setMax5(count5['5'])
+    if (filters.f2p) {
+      if (count5['5'] > filters.max5) {
+        handleFilterChange('max5', count5['5'])
       }
     }
   }
@@ -160,7 +157,7 @@ function Abyss() {
   return (
     <div className="abyss-container">
       <div className="abyss-controls">
-        <F2P onChange={handleFilterChange} value={max5} />
+        <F2P onChange={handleFilterChange} f2p={filters.f2p} max5={filters.max5} />
       </div>
       <PartySelector onPartyChange={handlePartyChange} />
       <br />

@@ -1,23 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
+export type FilterChangeFunc = (name: keyof Filters, value: string | number | boolean) => void
+
+export type Filters = {
+  f2p: boolean,
+  max5: number
+}
 
 const useFilters = () => {
-  // const [filters, setFilters] = useState({})
-  const [f2p, setF2p] = useState(false)
-  const [max5, setMax5] = useState(0)
+  const [filters, setFilters] = useState<Filters>({ f2p: false, max5: 0 })
 
-  const handleToggleF2p = () => {
-    setF2p(!f2p)
-  }
-
-  const handleMax5Change = (value: number) => {
-    setMax5(value)
+  const handleFilterChange = (name: keyof Filters, value: string | number | boolean) => {
+    let updatedFilters = filters as any;
+    updatedFilters[name] = value;
+    setFilters(updatedFilters)
   }
 
   return {
-    f2p,
-    max5,
-    handleToggleF2p,
-    handleMax5Change
+    filters,
+    handleFilterChange
   }
 }
 

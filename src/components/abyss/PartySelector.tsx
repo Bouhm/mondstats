@@ -3,7 +3,7 @@ import './PartySelector.scss';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../useRedux';
 import CharacterSearch from '../characters/CharacterSearch';
 import CharacterTile from '../characters/CharacterTile';
 import Button from '../ui/Button';
