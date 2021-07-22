@@ -49,14 +49,16 @@ function CharacterBuilds() {
     </div>
   }
 
+  const imgFile = character.name === "Traveler" ? "traveler" : character.oid;
+
   return (
     <div className="character-page">
-      <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${character.oid}_bg.webp")` }} />
+      <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${imgFile}_bg.webp")` }} />
       <div className="character-page-stats-count" style={{ backgroundColor: elementColor }}>
         <span>{characterBuild.total} {character.name} Builds</span>
       </div>
       <div className="character-page-controls">
-        <Toggle color={elementColor} label={"F2P"} defaultValue={f2p} onChange={handleToggleF2p} />
+        <Toggle color={elementColor} label={"F2P"} value={f2p} onChange={handleToggleF2p} />
       </div>
 
       {characterBuild.builds &&

@@ -90,17 +90,17 @@ function Abyss() {
           <h2 className="stage-label">Floor {selectedStage.label}</h2>
           <div className="stage-half">
             {_.map(_.filter(filteredAbyss, { floor_level: selectedStage.value }), ({battle_parties}) => (
-              <>
-                {_.map([battle_parties[0]], (parties, i) => (
-                  <>
+              <React.Fragment key={`floor-${selectedStage.value}`}>
+                {_.map([battle_parties[0]], (parties) => (
+                  <React.Fragment key={`parties-${selectedStage.value}`}>
                     <h2>{_.reduce(parties, (sum,curr) => sum + curr.count, 0)} Teams</h2>
-                    <div key={`battle-${i}`} className="battle-container">
+                    <div key={`battle-${selectedStage.value}}`} className="battle-container">
                       {/* <h2>{i+1}{i+1 === 1 ? 'st' : 'nd'} Half</h2> */}
                       {parties.length > 1 ? 
                         <>
-                          {_.map(_.take(_.orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 10 : 5), ({party, count}, j) => {
+                          {_.map(_.take(_.orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 10 : 5), ({party, count}, i) => {
                               return (
-                                <Team key={`team-${i}`} team={party} count={count} percent={`${Math.round((count / _.reduce(parties, (sum,curr) => sum + curr.count, 0) * 1000)/10)}%`} />
+                                <Team key={`team-${selectedStage.value}-${i}`} team={party} count={count} percent={`${Math.round((count / _.reduce(parties, (sum,curr) => sum + curr.count, 0) * 1000)/10)}%`} />
                               )
                             })
                           }
@@ -109,14 +109,14 @@ function Abyss() {
                         <img src={AmberSad} alt="empty" />
                       }
                     </div>
-                  </>
+                  </React.Fragment>
                 ))}
                 {_.some(battle_parties, parties => parties.length > 5) && (!stageLimitToggle[selectedStage.value] ?
                   <Button className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
                   :
                   <Button className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </div>
         </div>
@@ -128,7 +128,7 @@ function Abyss() {
   return (
     <div className="abyss-container">
       <div className="abyss-controls">
-        <Toggle label={"F2P"} defaultValue={f2p} onChange={handleToggleF2p} />
+        <Toggle label={"F2P"} value={f2p} onChange={handleToggleF2p} />
       </div>
       <PartySelector onPartyChange={handlePartyChange} />
       <br />

@@ -17,10 +17,10 @@ function Home() {
       </div>
       <div className="home-data-info">
         <div className="home-data-line-1">
-          Data from <span className="home-data-number">13,783 </span> players
+          Data from <span className="home-data-number">14,247 </span> players
         </div>
         <div className="home-data-line-2">
-          and <span className="home-data-number">179,354 </span> characters total
+          and <span className="home-data-number">184,519 </span> characters total
         </div>
       </div>
     </div>

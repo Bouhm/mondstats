@@ -55,7 +55,7 @@ function CharacterSearch({ showAll = true, asLink = true, filter = [], onSelect 
                     return { label: name, value: getShortName(name) }
                   }
                 }),
-              ({ value }) => !_.includes(filter, value)),
+              ({ value }) => !_.some(filter, name => value.split('-')[0] === name.split('-')[0])),
             'label', 'asc')
           } 
           onChange={handleSelect}

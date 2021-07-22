@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import 'react-popper-tooltip/dist/styles.css';
 import './components/ui/PopperTooltip.scss';
 

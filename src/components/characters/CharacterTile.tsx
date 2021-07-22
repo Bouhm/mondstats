@@ -5,7 +5,7 @@ import React, { ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks';
-import { getShortName } from '../../scripts/util';
+import { getCharacterFileName, getShortName } from '../../scripts/util';
 
 export type CharacterTileProps = {
   id: string,
@@ -32,7 +32,7 @@ function CharacterTile({ id, labeled = true, onClick }: CharacterTileProps) {
     <div className={`character-tile-container`} onClick={() => handleClick(charName)}>
       <div className={classes}>
         <div className="character-image">
-          <img className="character-portrait" src={`/assets/characters/${character.oid}.webp`} alt={`${character.name}-portrait`}></img>
+          <img className="character-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${character.name}-portrait`}></img>
           <img className="element-icon" src={`/assets/elements/${character.element}.webp`} alt={character.element}></img>
         </div>
         {labeled && <div className="character-tile-name">

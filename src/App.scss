@@ -1,0 +1,143 @@
+@use 'variables' as var;
+
+@font-face {
+  font-family: font;
+  src: url(/font.ttf);
+}
+
+.App {
+  font-family: font;
+  overflow: hidden;
+
+  .App-content {
+    display: flex;
+    min-height: calc(100vh - 4rem);
+    height: 100%;
+    margin-top: 4rem;
+
+    .section-view {
+      display: flex;
+      flex-flow: column;
+      flex: 1;
+      width: 100%;
+      overflow-y: auto;
+    }
+
+    main {
+      flex: 1;
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  color: white;
+}
+
+footer {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0.5rem;
+}
+
+.withTooltip {
+  position: relative;
+
+  &:hover,
+  &:active {
+    .tooltip {
+      opacity: 1;
+    }
+  }
+}
+
+.icon {
+  position: absolute;
+}
+
+.build-ver {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  color: #e9e5dc;
+  margin: 1rem;
+  font-size: 1.1rem;
+
+  a {
+    margin: 1rem;
+  }
+}
+
+.character-filter {
+  position: absolute;
+  top: 7.1rem;
+  right: 0;
+}
+
+.Pyro {
+  background-color: var.$element-pyro;
+}
+.Anemo {
+  background-color: var.$element-anemo;
+}
+.Cryo {
+  background-color: var.$element-cryo;
+}
+.Hydro {
+  background-color: var.$element-hydro;
+}
+.Electro {
+  background-color: var.$element-electro;
+}
+.Dendro {
+  background-color: var.$element-dendro;
+}
+.Geo {
+  background-color: var.$element-geo;
+}
+.rarity-3 {
+  background: var.$rarity-3;
+}
+.rarity-4 {
+  background: var.$rarity-4;
+}
+.rarity-5 {
+  background: var.$rarity-5;
+}
+
+@media (max-width: 516px) {
+  .character-filter {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 1.5rem !important;
+  }
+
+  .links {
+    font-size: 0.9rem;
+  }
+
+  .build-ver {
+    font-size: 0.8rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+  }
+}

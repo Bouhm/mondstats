@@ -28,14 +28,14 @@ function PartySelector({ onPartyChange }: PartySelectorProps) {
   const handleSelect = (char: string) => {
     const characters = _.uniq([...selectedCharacters, char])
     setSelectedCharacters(characters);
-    onPartyChange(_.map(characters, charName => characterIdMap[charName]));
+    onPartyChange(_.map(characters, name => characterIdMap[name]));
     handleClose();
   }
 
   const handleDeselect = (char: string) => {
     const characters = _.uniq(_.filter(selectedCharacters, selected => selected !== char));
     setSelectedCharacters(characters);
-    onPartyChange(_.map(characters, charName => characterIdMap[charName]));
+    onPartyChange(_.map(characters, name => characterIdMap[name]));
   }
 
   const handleClose = () => {

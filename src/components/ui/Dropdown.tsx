@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
 import { useAppSelector } from '../../hooks';
+import { getCharacterFileName } from '../../scripts/util';
 import { Search } from './Icons';
 
 export type Option = { value: string, label: string }
@@ -53,13 +54,13 @@ function SearchSelect({options, onChange, defaultValue }: SearchProps) {
   if (_.isEmpty(characterDb) || _.isEmpty(characterIdMap)) return null;
 
   const OptionLabel = ({ value, label }: any) => {
-    const { element, oid } = characterDb[characterIdMap[value]];
+    const character = characterDb[characterIdMap[value]];
 
     return (
-      <div className="character-option">
+      <div className="character-option" key={label}>
         <div className="character-option-image">
-          <img className="character-option-element" src={`/assets/elements/${element}.webp`} />
-          <img className="character-option-portrait" src={`/assets/characters/${oid}.webp`} alt={`${value}-portrait`} />
+          <img className="character-option-element" src={`/assets/elements/${character.element}.webp`} />
+          <img className="character-option-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${value}-portrait`} />
         </div>
         <div className="character-option-label">{label}</div>
       </div>
