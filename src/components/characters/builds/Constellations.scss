@@ -107,6 +107,12 @@
 }
 
 @media (max-width: 747px) {
+  .constellations-chart {
+    .barchart-container {
+      height: 30vh;
+    }
+  }
+  
   .constellation-card {
     .constellation-card-icon {
       line-height: 1.8rem ;
