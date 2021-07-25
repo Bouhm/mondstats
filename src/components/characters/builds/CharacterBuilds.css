@@ -65,12 +65,12 @@
       width: 100%;
       margin: 2rem auto 1rem auto;
     }
-  }
 
-  .character-page-stats-count {
-    span {
-      font-size: 1.2rem;
-      line-height: 2rem;
+    .character-page-stats-count {
+      span {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+      }
     }
   }
 }
