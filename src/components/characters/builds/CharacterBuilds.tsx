@@ -5,7 +5,8 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import CharacterBuildData from '../../../data/characterBuilds.json';
+import { request } from '@octokit/request';
+
 import { ElementColors } from '../../../data/constants';
 import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../../data/types';
 import { getCharacterFileName } from '../../../scripts/util';
@@ -36,15 +37,27 @@ function CharacterBuilds() {
   const charId = characterIdMap[shortName]
 
   useEffect(() => {
+    request(`GET repos/{owner}/{repo}/contents/{path}`, {
+      headers: {
+        authorization: `token ${import.meta.env.VITE_GH_PAT}`
+      },
+      owner: "Bouhm", 
+      type: 'private',
+      repo: "favonius-server",
+      path: `data/characters/${shortName}.json`
+    })
+      .then(res => console.log(res))
+  }, [setCharacterBuild])
+
+  useEffect(() => {
     if (!_.isEmpty(characterDb)) {
       const char = characterDb[charId];
       setCharacter(char)
-      setCharacterBuild(_.find(CharacterBuildData, { char_id: charId }) as ICharacterBuild);
       
       dispatch(selectCharacter(charId))
       dispatch(setElementColor(ElementColors[char.element.toLowerCase()]))
     }
-  }, [setCharacter, setCharacterBuild, dispatch, charId, characterDb, ElementColors, elementColor])
+  }, [setCharacter, dispatch, charId, characterDb, ElementColors, elementColor])
 
   if (!character || !characterBuild) {
     return <div>

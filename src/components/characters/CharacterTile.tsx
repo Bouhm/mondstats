@@ -4,8 +4,8 @@ import _ from 'lodash';
 import React, { ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useAppSelector } from '../../useRedux';
 import { getCharacterFileName, getShortName } from '../../scripts/util';
+import { useAppSelector } from '../../useRedux';
 
 export type CharacterTileProps = {
   id: string,
@@ -22,14 +22,12 @@ function CharacterTile({ id, labeled = true, onClick }: CharacterTileProps) {
   let classes = "character-tile";
   classes += ` rarity-${character.rarity}`;
 
-  const charName = character.name === "Traveler" ? getShortName(`${character.name}-${character.element}`) : getShortName(character.name);
-
   const handleClick = (char: string) => {
     onClick && onClick(char);
   }
 
   return (
-    <div className={`character-tile-container`} onClick={() => handleClick(charName)}>
+    <div className={`character-tile-container`} onClick={() => handleClick(getShortName(character))}>
       <div className={classes}>
         <div className="character-image">
           <img className="character-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${character.name}-portrait`}></img>

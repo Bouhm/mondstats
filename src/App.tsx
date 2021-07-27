@@ -50,8 +50,7 @@ function App() {
     _.forEach(CharacterDb, (character: ICharacterData) => {
       characterDb[character._id] = character;
 
-      const charName = character.name === "Traveler" ? getShortName(`${character.name}-${character.element}`) : getShortName(character.name);
-      charIdMap[charName] = character._id;
+      charIdMap[getShortName(character)] = character._id;
     })
 
     _.forEach(WeaponDb, (weapon: IWeaponData) => {
