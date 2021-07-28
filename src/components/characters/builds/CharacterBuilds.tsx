@@ -5,8 +5,6 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { request } from '@octokit/request';
-
 import { ElementColors } from '../../../data/constants';
 import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../../data/types';
 import { getCharacterFileName } from '../../../scripts/util';
@@ -37,16 +35,14 @@ function CharacterBuilds() {
   const charId = characterIdMap[shortName]
 
   useEffect(() => {
-    request(`GET repos/{owner}/{repo}/contents/{path}`, {
+    fetch(`https://api.github.com/repos/bouhm/favonius-server/contents/data/characters/${shortName}.json`, {
       headers: {
-        authorization: `token ${import.meta.env.VITE_GH_PAT}`
+        authorization: `token ${import.meta.env.VITE_GH_PAT}`,
+        'accept': 'application/vnd.github.v3.raw+json'
       },
-      owner: "Bouhm", 
-      type: 'private',
-      repo: "favonius-server",
-      path: `data/characters/${shortName}.json`
     })
-      .then(res => console.log(res))
+      .then(res => res.json())
+      .then(data => setCharacterBuild(data))
   }, [setCharacterBuild])
 
   useEffect(() => {
