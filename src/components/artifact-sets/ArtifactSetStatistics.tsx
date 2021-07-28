@@ -1,17 +1,12 @@
 import './ArtifactSetStatistics.css';
-import ArtifactSetStats from '../../data/artifactSetStats.json';
 
 import React, { useEffect, useState } from 'react';
+
 import { IArtifactSetStats } from '../../data/types';
 
 function ArtifactSetStatistics() { 
   const [artifactSetStats, setArtifactSetStats] = useState<IArtifactSetStats[] | undefined>(undefined)
   
-  useEffect(() => {
-    setArtifactSetStats(ArtifactSetStats as unknown as IArtifactSetStats[])
-  }, [setArtifactSetStats, ArtifactSetStats])
-
-
   return (
     <div className="artifact-set-stats-container" />
   )
