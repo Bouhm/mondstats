@@ -1,0 +1,13 @@
+.loader {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color: white;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+
+  .logo {
+    width: 150px;
+    height: auto;
+  }
+}

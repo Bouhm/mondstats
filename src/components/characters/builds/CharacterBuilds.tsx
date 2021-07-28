@@ -5,7 +5,6 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import CharacterBuildData from '../../../data/characterBuilds.json';
 import { ElementColors } from '../../../data/constants';
 import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../../data/types';
 import { getCharacterFileName } from '../../../scripts/util';
@@ -13,6 +12,7 @@ import { selectCharacter, setElementColor } from '../../../Store';
 import { useAppDispatch, useAppSelector } from '../../../useRedux';
 import F2P from '../../filters/F2P';
 import useFilters from '../../filters/useFilters';
+import Loader from '../../ui/Loader';
 import Toggle from '../../ui/Toggle';
 import BuildSelector from './BuildSelector';
 import CharacterTeams from './CharacterTeams';
@@ -23,9 +23,11 @@ function CharacterBuilds() {
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const characterDb = useAppSelector((state) => state.data.characterDb)
+  const dbLoaded = useAppSelector((state) => state.data.dbLoaded)
   const elementColor = useAppSelector((state) => state.data.elementColor)
   const dispatch = useAppDispatch()
 
+  const [isLoading, setIsLoading] = useState(true);
   const [characterBuild, setCharacterBuild] = useState<ICharacterBuild | undefined>(undefined)
   const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
   const {
@@ -36,15 +38,34 @@ function CharacterBuilds() {
   const charId = characterIdMap[shortName]
 
   useEffect(() => {
+    fetch(`https://api.github.com/repos/bouhm/favonius-server/contents/data/characters/${shortName}.json`, {
+      headers: {
+        authorization: `token ${import.meta.env.VITE_GH_PAT}`,
+        'accept': 'application/vnd.github.v3.raw+json'
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setCharacterBuild(data)
+        setIsLoading(false)
+      })
+  }, [setCharacterBuild, setIsLoading])
+
+  useEffect(() => {
     if (!_.isEmpty(characterDb)) {
       const char = characterDb[charId];
       setCharacter(char)
-      setCharacterBuild(_.find(CharacterBuildData, { char_id: charId }) as ICharacterBuild);
       
       dispatch(selectCharacter(charId))
       dispatch(setElementColor(ElementColors[char.element.toLowerCase()]))
     }
-  }, [setCharacter, setCharacterBuild, dispatch, charId, characterDb, ElementColors, elementColor])
+  }, [setCharacter, dispatch, charId, characterDb, ElementColors, elementColor])
+
+  if (isLoading || !dbLoaded) {
+    return <div>
+      <Loader />
+    </div>
+  }
 
   if (!character || !characterBuild) {
     return <div>

@@ -4,8 +4,8 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useAppSelector } from '../../useRedux';
 import { getShortName } from '../../scripts/util';
+import { useAppSelector } from '../../useRedux';
 import Dropdown, { Option } from '../ui/Dropdown';
 import Searchbar from '../ui/Searchbar';
 import CharacterTile from './CharacterTile';
@@ -48,11 +48,11 @@ function CharacterSearch({ showAll = true, asLink = true, filter = [], onSelect 
           options={
             _.orderBy(
               _.filter(
-                _.map(characterDb, ({element, name}) => {
-                  if (name === "Traveler") {
-                    return { label: `${name} (${element})`, value: getShortName(`${name}-${element}`)}
+                _.map(characterDb, (char) => {
+                  if (char.name === "Traveler") {
+                    return { label: `${char.name} (${char.element})`, value: getShortName(char)}
                   } else {
-                    return { label: name, value: getShortName(name) }
+                    return { label: char.name, value: getShortName(char) }
                   }
                 }),
               ({ value }) => !_.some(filter, name => value.split('-')[0] === name.split('-')[0])),

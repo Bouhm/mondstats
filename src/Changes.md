@@ -1,3 +1,7 @@
+## dev build 7.27.21
+- Fetch data from Favonius API instead of local
+- Add minimal loaders accordingly
+
 ## dev build 7.21.21
 
 - Add F2P filtering by maximum number of 5-stars

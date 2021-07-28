@@ -2,9 +2,9 @@ import './App.scss';
 import 'react-popper-tooltip/dist/styles.css';
 import './components/ui/PopperTooltip.scss';
 
-import _ from 'lodash';
+import { forEach, isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { Link, Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { Link, Redirect, Route, Switch, useHistory, withRouter } from 'react-router-dom';
 
 // import { gql, useQuery } from '@apollo/client';
 import Abyss from './components/abyss/Abyss';
@@ -17,9 +17,6 @@ import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 // import Dialogue from './components/ui/Dialogue';
-import ArtifactDb from './data/artifacts.json';
-import ArtifactSetDb from './data/artifactSets.json';
-import CharacterDb from './data/characters.json';
 import {
   IArtifactData,
   IArtifactDb,
@@ -30,15 +27,53 @@ import {
   IWeaponData,
   IWeaponDb,
 } from './data/types';
-import WeaponDb from './data/weapons.json';
 import { getShortName } from './scripts/util';
-import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
+import {
+  setArtifactDb,
+  setArtifactSetDb,
+  setCharacterDb,
+  setCharacterIdMap,
+  setDbLoaded,
+  setWeaponDb,
+} from './Store';
 import { useAppDispatch, useAppSelector } from './useRedux';
 
 function App() {
   const dispatch = useAppDispatch()
+  const characterDb = useAppSelector((state) => state.data.characterDb)
+  const artifactDb = useAppSelector((state) => state.data.artifactDb)
+  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
+  const weaponDb = useAppSelector((state) => state.data.weaponDb)
+
+  const [CharacterJson, setCharacterJson] = useState<ICharacterData[]>();
+  const [WeaponJson, setWeaponJson] = useState<IWeaponData[]>();
+  const [ArtifactJson, setArtifactJson] = useState<IArtifactData[]>();
+  const [ArtifactSetJson, setArtifactSetJson] = useState<IArtifactSetData[]>();
 
   // const { loading, error, data } = useQuery(Query);
+
+  useEffect(() => {
+    fetch(`https://api.github.com/repos/bouhm/favonius-server/contents/data/db.json`, {
+      headers: {
+        authorization: `token ${import.meta.env.VITE_GH_PAT}`,
+        'accept': 'application/vnd.github.v3.raw+json'
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setCharacterJson(data.characters)
+        setArtifactJson(data.artifacts)
+        setArtifactSetJson(data.artifactSets)
+        setWeaponJson(data.weapons)
+      })
+
+  }, [setCharacterJson, setArtifactJson, setWeaponJson, setArtifactSetJson, setDbLoaded])
+
+  useEffect(() => {
+    if (!(isEmpty(characterDb) || isEmpty(artifactDb) || isEmpty(artifactSetDb) || isEmpty(weaponDb))) {
+      dispatch(setDbLoaded(true))
+    }
+  }, [characterDb, artifactDb, artifactSetDb, weaponDb, dispatch, setDbLoaded])
 
   useEffect(() => {
     let charIdMap: { [shortname: string]: string } = {}
@@ -47,22 +82,21 @@ function App() {
     let artifactDb: IArtifactDb = {}
     let artifactSetDb: IArtifactSetDb = {}
 
-    _.forEach(CharacterDb, (character: ICharacterData) => {
+    forEach(CharacterJson, (character: ICharacterData) => {
       characterDb[character._id] = character;
 
-      const charName = character.name === "Traveler" ? getShortName(`${character.name}-${character.element}`) : getShortName(character.name);
-      charIdMap[charName] = character._id;
+      charIdMap[getShortName(character)] = character._id;
     })
 
-    _.forEach(WeaponDb, (weapon: IWeaponData) => {
+    forEach(WeaponJson, (weapon: IWeaponData) => {
       weaponDb[weapon._id] = weapon
     })
 
-    _.forEach(ArtifactDb, (artifact: IArtifactData) => {
+    forEach(ArtifactJson, (artifact: IArtifactData) => {
       artifactDb[artifact._id] = artifact
     })
 
-    _.forEach(ArtifactSetDb, (set: IArtifactSetData) => {
+    forEach(ArtifactSetJson, (set: IArtifactSetData) => {
       artifactSetDb[set._id] = set
     })
 
@@ -71,7 +105,7 @@ function App() {
     dispatch(setCharacterDb(characterDb))
     dispatch(setCharacterIdMap(charIdMap))
     dispatch(setWeaponDb(weaponDb))
-  }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
+  }, [CharacterJson, ArtifactJson, ArtifactSetJson, WeaponJson, getShortName, dispatch])
 
   return (
     <div className="App">
@@ -100,9 +134,9 @@ function App() {
           </section>
         </div>
       </main>
-      <span className="build-ver">dev build 07.21.21</span>
+      <span className="build-ver">dev build 07.27.21</span>
     </div>
   )
 }
 
-export default App
+export default withRouter(App)

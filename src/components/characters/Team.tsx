@@ -6,8 +6,8 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 import { Link } from 'react-router-dom';
 
 import { IParty } from '../../data/types';
-import { useAppSelector } from '../../useRedux';
 import { getShortName } from '../../scripts/util';
+import { useAppSelector } from '../../useRedux';
 import CharacterTile from './CharacterTile';
 
 type TeamProps = {
@@ -31,7 +31,7 @@ function Team({ team, percent, count }: TeamProps) {
     <div className="team-container">
       <div className="team-stats" ref={setTriggerRef}>
         {_.map(team, (char, i) => (
-          <Link key={`team-${char}-${i}`} to={`/builds/${getShortName(characterDb[char].name)}`}>
+          <Link key={`team-${char}-${i}`} to={`/builds/${getShortName(characterDb[char])}`}>
             <CharacterTile id={char+''} labeled={false} />
           </Link>
         ))}
