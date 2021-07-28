@@ -53,7 +53,10 @@ function CharacterSearchSelect({ onChange, defaultValue, placeholder="Search cha
 
   const options = orderBy(
     filter(
-      map(characterDb, (char) => ({ label: char.name, value: getShortName(char) })),
+      map(characterDb, (char) => {
+        if (char.name === "Traveler") return { label: `${char.name} (${char.element})`, value: getShortName(char) }
+        return { label: char.name, value: getShortName(char) }
+      }),
     ({ value }) => !some(charFilter, name => value.split('-')[0] === name.split('-')[0])),
   'label', 'asc')
 
