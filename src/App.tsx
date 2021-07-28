@@ -53,6 +53,7 @@ function App() {
   // const { loading, error, data } = useQuery(Query);
 
   useEffect(() => {
+    console.log(import.meta.env, process.env)
     const token = import.meta.env.PROD ? process.env.GH_PAT : import.meta.env.VITE_GH_PAT;
 
     fetch(`https://api.github.com/repos/bouhm/favonius-server/contents/data/db.json`, {
