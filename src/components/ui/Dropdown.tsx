@@ -1,12 +1,11 @@
 import './Dropdown.scss';
 
-import _ from 'lodash';
+import { filter, map, orderBy, some } from 'lodash';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
+import { getCharacterFileName, getShortName } from '../../scripts/util';
 import { useAppSelector } from '../../useRedux';
-import { getCharacterFileName } from '../../scripts/util';
 import { Search } from './Icons';
 
 export type Option = { value: string, label: string }
@@ -42,16 +41,21 @@ function MultiSelect({ options, onChange, isMulti=false, defaultValue=options.sl
 }
 
 type SearchProps = {
-  options: Option[]
   onChange: (e: any) => void
+  placeholder?: string
+  charFilter?: string[]
   defaultValue?: Option[] | Option
 }
 
-function SearchSelect({options, onChange, defaultValue }: SearchProps) {
+function CharacterSearchSelect({ onChange, defaultValue, placeholder="Search character", charFilter=[] }: SearchProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
 
-  if (_.isEmpty(characterDb) || _.isEmpty(characterIdMap)) return null;
+  const options = orderBy(
+    filter(
+      map(characterDb, (char) => ({ label: char.name, value: getShortName(char) })),
+    ({ value }) => !some(charFilter, name => value.split('-')[0] === name.split('-')[0])),
+  'label', 'asc')
 
   const OptionLabel = ({ value, label }: any) => {
     const character = characterDb[characterIdMap[value]];
@@ -79,7 +83,7 @@ function SearchSelect({options, onChange, defaultValue }: SearchProps) {
         placeholder={
           <div className="search-placeholder">
             <Search className="search-icon" size={20} />
-            Search character&hellip;
+            {placeholder}&hellip;
           </div>
         }
         styles={{ 
@@ -98,4 +102,4 @@ function SearchSelect({options, onChange, defaultValue }: SearchProps) {
   )
 }
 
-export default { MultiSelect, SearchSelect }
+export default { MultiSelect, CharacterSearchSelect }

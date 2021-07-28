@@ -87,8 +87,6 @@ function Abyss() {
 
   function _filterAbyss(data: IAbyssBattle[]) {
     let filteredAbyss = cloneDeep(data)
-  
-    console.log(data);
     let max5WithChar = filters.max5;
 
     forEach(characters, character => {
