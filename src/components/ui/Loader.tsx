@@ -7,6 +7,7 @@ const Loader = () => {
   return (
     <div className="loader">
       <img className="logo" src={Logo} alt="logo" />
+      Loading&hellip;
     </div>
   )
 }

@@ -1,47 +1,13 @@
 .loader {
-  display: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color: white;
+  text-transform: uppercase;
+  font-size: 1.3rem;
 
   .logo {
-    -webkit-animation:oscill 1s ease-in-out infinite alternate; 
-    -moz-animation:oscill 1s ease-in-out infinite alternate; 
-    -ms-animation:oscill 1s ease-in-out infinite alternate; 
-    animation:oscill 1s ease-in-out infinite alternate; 
-  }
-}
-
-@-webkit-keyframes oscill {
-  0% {
-      top: 5%;
-  }        
-  100% {
-      top: -5%;
-  }
-}
-@-moz-keyframes oscill {
-  0% {
-      top: 5%;
-  }        
-  100% {
-      top: -5%;
-  }
-}
-@-ms-keyframes oscill {
-  0% {
-      top: 5%;
-  }        
-  100% {
-      top: -5%;
-  }
-}
-@keyframes oscill {
-  0% {
-      top: 5%;
-  }        
-  100% {
-      top: -5%;
+    width: 150px;
+    height: auto;
   }
 }

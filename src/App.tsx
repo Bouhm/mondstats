@@ -2,9 +2,9 @@ import './App.scss';
 import 'react-popper-tooltip/dist/styles.css';
 import './components/ui/PopperTooltip.scss';
 
-import _ from 'lodash';
+import { forEach, isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { Link, Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { Link, Redirect, Route, Switch, useHistory, withRouter } from 'react-router-dom';
 
 // import { gql, useQuery } from '@apollo/client';
 import Abyss from './components/abyss/Abyss';
@@ -28,11 +28,23 @@ import {
   IWeaponDb,
 } from './data/types';
 import { getShortName } from './scripts/util';
-import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
+import {
+  setArtifactDb,
+  setArtifactSetDb,
+  setCharacterDb,
+  setCharacterIdMap,
+  setDbLoaded,
+  setWeaponDb,
+} from './Store';
 import { useAppDispatch, useAppSelector } from './useRedux';
 
 function App() {
   const dispatch = useAppDispatch()
+  const characterDb = useAppSelector((state) => state.data.characterDb)
+  const artifactDb = useAppSelector((state) => state.data.artifactDb)
+  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
+  const weaponDb = useAppSelector((state) => state.data.weaponDb)
+
   const [CharacterJson, setCharacterJson] = useState<ICharacterData[]>();
   const [WeaponJson, setWeaponJson] = useState<IWeaponData[]>();
   const [ArtifactJson, setArtifactJson] = useState<IArtifactData[]>();
@@ -54,7 +66,14 @@ function App() {
         setArtifactSetJson(data.artifactSets)
         setWeaponJson(data.weapons)
       })
-  }, [setCharacterJson, setArtifactJson, setWeaponJson, setArtifactSetJson])
+
+  }, [setCharacterJson, setArtifactJson, setWeaponJson, setArtifactSetJson, setDbLoaded])
+
+  useEffect(() => {
+    if (!(isEmpty(characterDb) || isEmpty(artifactDb) || isEmpty(artifactSetDb) || isEmpty(weaponDb))) {
+      dispatch(setDbLoaded(true))
+    }
+  }, [characterDb, artifactDb, artifactSetDb, weaponDb, dispatch, setDbLoaded])
 
   useEffect(() => {
     let charIdMap: { [shortname: string]: string } = {}
@@ -63,21 +82,21 @@ function App() {
     let artifactDb: IArtifactDb = {}
     let artifactSetDb: IArtifactSetDb = {}
 
-    _.forEach(CharacterJson, (character: ICharacterData) => {
+    forEach(CharacterJson, (character: ICharacterData) => {
       characterDb[character._id] = character;
 
       charIdMap[getShortName(character)] = character._id;
     })
 
-    _.forEach(WeaponJson, (weapon: IWeaponData) => {
+    forEach(WeaponJson, (weapon: IWeaponData) => {
       weaponDb[weapon._id] = weapon
     })
 
-    _.forEach(ArtifactJson, (artifact: IArtifactData) => {
+    forEach(ArtifactJson, (artifact: IArtifactData) => {
       artifactDb[artifact._id] = artifact
     })
 
-    _.forEach(ArtifactSetJson, (set: IArtifactSetData) => {
+    forEach(ArtifactSetJson, (set: IArtifactSetData) => {
       artifactSetDb[set._id] = set
     })
 
@@ -86,7 +105,7 @@ function App() {
     dispatch(setCharacterDb(characterDb))
     dispatch(setCharacterIdMap(charIdMap))
     dispatch(setWeaponDb(weaponDb))
-  }, [CharacterJson, ArtifactJson, ArtifactSetJson, WeaponJson,  getShortName, dispatch])
+  }, [CharacterJson, ArtifactJson, ArtifactSetJson, WeaponJson, getShortName, dispatch])
 
   return (
     <div className="App">
@@ -120,4 +139,4 @@ function App() {
   )
 }
 
-export default App
+export default withRouter(App)

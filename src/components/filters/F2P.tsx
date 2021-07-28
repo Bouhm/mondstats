@@ -18,7 +18,6 @@ function F2P({ color, onChange, f2p, max5 }: ToggleProps) {
   const values = [0,1,2,3,4];
   
   const handleToggleF2p = () => {
-    console.log("TOGGLE F2P", !f2p)
     onChange('f2p', !f2p)
   }
 

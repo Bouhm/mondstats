@@ -28,6 +28,7 @@ import useFilters from '../filters/useFilters';
 import Button from '../ui/Button';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
+import Loader from '../ui/Loader';
 import PartySelector from './PartySelector';
 
 const _compareFloor = (f1: Option, f2: Option) => {
@@ -65,7 +66,6 @@ function Abyss() {
   useEffect(() => {
     async function fetchAbyssData() {
       await Promise.all(map(selectedStages, floor => {
-        console.log(floor.value)
         const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
 
         if (floorIdx < 0) {
@@ -90,7 +90,6 @@ function Abyss() {
 
   useEffect(() => {
     setFilteredAbyss(_filterAbyss(AbyssData));
-    console.log(AbyssData)
   }, [AbyssData, setFilteredAbyss, characters, filters])
 
   function _filterAbyss(data: IAbyssBattle[]) {
@@ -147,12 +146,14 @@ function Abyss() {
   }
 
   const renderParties = () => (
+    
     <div className="floor-container">
       {map(selectedStages.sort(_compareFloor), selectedStage => {
         return (
           <div key={selectedStage.value} className="stage-container">
           <h2 className="stage-label">Floor {selectedStage.label}</h2>
           <div className="stage-half">
+            {!some(filteredAbyss, { floor_level: selectedStage.value }) && <Loader />}
             {map(filter(filteredAbyss, { floor_level: selectedStage.value }), ({battle_parties}, i) => (
               <React.Fragment key={`floor-${selectedStage.value}-${i}`}>
                 {map([battle_parties[0]], (parties) => (

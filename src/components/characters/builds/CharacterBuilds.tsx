@@ -12,6 +12,7 @@ import { selectCharacter, setElementColor } from '../../../Store';
 import { useAppDispatch, useAppSelector } from '../../../useRedux';
 import F2P from '../../filters/F2P';
 import useFilters from '../../filters/useFilters';
+import Loader from '../../ui/Loader';
 import Toggle from '../../ui/Toggle';
 import BuildSelector from './BuildSelector';
 import CharacterTeams from './CharacterTeams';
@@ -22,9 +23,11 @@ function CharacterBuilds() {
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const characterDb = useAppSelector((state) => state.data.characterDb)
+  const dbLoaded = useAppSelector((state) => state.data.dbLoaded)
   const elementColor = useAppSelector((state) => state.data.elementColor)
   const dispatch = useAppDispatch()
 
+  const [isLoading, setIsLoading] = useState(true);
   const [characterBuild, setCharacterBuild] = useState<ICharacterBuild | undefined>(undefined)
   const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
   const {
@@ -42,8 +45,11 @@ function CharacterBuilds() {
       },
     })
       .then(res => res.json())
-      .then(data => setCharacterBuild(data))
-  }, [setCharacterBuild])
+      .then(data => {
+        setCharacterBuild(data)
+        setIsLoading(false)
+      })
+  }, [setCharacterBuild, setIsLoading])
 
   useEffect(() => {
     if (!_.isEmpty(characterDb)) {
@@ -55,7 +61,13 @@ function CharacterBuilds() {
     }
   }, [setCharacter, dispatch, charId, characterDb, ElementColors, elementColor])
 
-  if (!characterDb || !characterBuild) {
+  if (isLoading || !dbLoaded) {
+    return <div>
+      <Loader />
+    </div>
+  }
+
+  if (!character || !characterBuild) {
     return <div>
       <div className="its-empty"><img src={AmberSad} alt="empty" /></div>
     </div>
