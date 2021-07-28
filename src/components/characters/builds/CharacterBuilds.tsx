@@ -55,7 +55,7 @@ function CharacterBuilds() {
     }
   }, [setCharacter, dispatch, charId, characterDb, ElementColors, elementColor])
 
-  if (!character || !characterBuild) {
+  if (!characterDb || !characterBuild) {
     return <div>
       <div className="its-empty"><img src={AmberSad} alt="empty" /></div>
     </div>

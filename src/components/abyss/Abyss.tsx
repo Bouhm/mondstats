@@ -7,6 +7,8 @@ import _, {
   countBy,
   difference,
   filter,
+  findIndex,
+  flatten,
   forEach,
   includes,
   isEmpty,
@@ -18,7 +20,6 @@ import _, {
 } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
-import AbyssData from '../../data/abyssData.json';
 import { IAbyssBattle } from '../../data/types';
 import { useAppSelector } from '../../useRedux';
 import Team from '../characters/Team';
@@ -40,23 +41,57 @@ const _compareFloor = (f1: Option, f2: Option) => {
   }
 }
 
-function Abyss() {
-  const options = map(AbyssData.abyss, stage => {
-    return { label: stage.floor_level, value: stage.floor_level}
-  }).sort(_compareFloor)
+function _range(size: number, startAt = 0) {
+  return [...Array(size).keys()].map(i => i + startAt);
+}
 
-  const characterDb = useAppSelector((state) => state.data.characterDb)
+function Abyss() {
+  const options = flatten(map(_range(4, 9), floor => {
+    return map(_range(3,1), stage => {
+      return { label: `${floor}-${stage}`, value: `${floor}-${stage}`}
+    })
+  })).sort(_compareFloor)
+
   const defaultStages = filter(options, option => includes(["12-1", "12-2", "12-3"], option.value));
 
+  const characterDb = useAppSelector((state) => state.data.characterDb)
+  const [ AbyssData, setAbyssData ] = useState<IAbyssBattle[]>([]);
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
   const [ selectedStages, selectStages ] = useState<Option[]>(defaultStages)
-  const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssBattle[]>(AbyssData.abyss)
+  const [ filteredAbyss, setFilteredAbyss ] = useState<IAbyssBattle[]>(AbyssData)
   const [ characters, setCharacters ] = useState<string[]>([]);
   const { filters, handleFilterChange } = useFilters();
 
   useEffect(() => {
-    setFilteredAbyss(_filterAbyss(AbyssData.abyss));
-  }, [setFilteredAbyss, characters, selectedStages, filters])
+    async function fetchAbyssData() {
+      await Promise.all(map(selectedStages, floor => {
+        console.log(floor.value)
+        const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
+
+        if (floorIdx < 0) {
+          fetch(`https://api.github.com/repos/bouhm/favonius-server/contents/data/abyss/${floor.value}.json`, {
+          headers: {
+            authorization: `token ${import.meta.env.VITE_GH_PAT}`,
+            'accept': 'application/vnd.github.v3.raw+json'
+          },
+        })
+          .then(res => res.json())
+          .then(data => {
+            let newAbyss = cloneDeep(AbyssData);
+            newAbyss.push(data)
+            setAbyssData(newAbyss)
+          })
+        }
+      }))
+    }
+
+    fetchAbyssData();
+  }, [AbyssData, setAbyssData, selectedStages])
+
+  useEffect(() => {
+    setFilteredAbyss(_filterAbyss(AbyssData));
+    console.log(AbyssData)
+  }, [AbyssData, setFilteredAbyss, characters, filters])
 
   function _filterAbyss(data: IAbyssBattle[]) {
     let filteredAbyss = cloneDeep(data)
@@ -118,8 +153,8 @@ function Abyss() {
           <div key={selectedStage.value} className="stage-container">
           <h2 className="stage-label">Floor {selectedStage.label}</h2>
           <div className="stage-half">
-            {map(filter(filteredAbyss, { floor_level: selectedStage.value }), ({battle_parties}) => (
-              <React.Fragment key={`floor-${selectedStage.value}`}>
+            {map(filter(filteredAbyss, { floor_level: selectedStage.value }), ({battle_parties}, i) => (
+              <React.Fragment key={`floor-${selectedStage.value}-${i}`}>
                 {map([battle_parties[0]], (parties) => (
                   <React.Fragment key={`parties-${selectedStage.value}`}>
                     <h2>{reduce(parties, (sum,curr) => sum + curr.count, 0)} Teams</h2>
@@ -153,6 +188,13 @@ function Abyss() {
       })}
     </div>
   )
+
+  
+  if (!characterDb) {
+    return <div>
+      <div className="its-empty"><img src={AmberSad} alt="empty" /></div>
+    </div>
+  }
 
   return (
     <div className="abyss-container">

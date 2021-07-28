@@ -17,9 +17,6 @@ import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 // import Dialogue from './components/ui/Dialogue';
-import ArtifactDb from './data/artifacts.json';
-import ArtifactSetDb from './data/artifactSets.json';
-import CharacterDb from './data/characters.json';
 import {
   IArtifactData,
   IArtifactDb,
@@ -30,15 +27,34 @@ import {
   IWeaponData,
   IWeaponDb,
 } from './data/types';
-import WeaponDb from './data/weapons.json';
 import { getShortName } from './scripts/util';
 import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
 import { useAppDispatch, useAppSelector } from './useRedux';
 
 function App() {
   const dispatch = useAppDispatch()
+  const [CharacterJson, setCharacterJson] = useState<ICharacterData[]>();
+  const [WeaponJson, setWeaponJson] = useState<IWeaponData[]>();
+  const [ArtifactJson, setArtifactJson] = useState<IArtifactData[]>();
+  const [ArtifactSetJson, setArtifactSetJson] = useState<IArtifactSetData[]>();
 
   // const { loading, error, data } = useQuery(Query);
+
+  useEffect(() => {
+    fetch(`https://api.github.com/repos/bouhm/favonius-server/contents/data/db.json`, {
+      headers: {
+        authorization: `token ${import.meta.env.VITE_GH_PAT}`,
+        'accept': 'application/vnd.github.v3.raw+json'
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setCharacterJson(data.characters)
+        setArtifactJson(data.artifacts)
+        setArtifactSetJson(data.artifactSets)
+        setWeaponJson(data.weapons)
+      })
+  }, [setCharacterJson, setArtifactJson, setWeaponJson, setArtifactSetJson])
 
   useEffect(() => {
     let charIdMap: { [shortname: string]: string } = {}
@@ -47,21 +63,21 @@ function App() {
     let artifactDb: IArtifactDb = {}
     let artifactSetDb: IArtifactSetDb = {}
 
-    _.forEach(CharacterDb, (character: ICharacterData) => {
+    _.forEach(CharacterJson, (character: ICharacterData) => {
       characterDb[character._id] = character;
 
       charIdMap[getShortName(character)] = character._id;
     })
 
-    _.forEach(WeaponDb, (weapon: IWeaponData) => {
+    _.forEach(WeaponJson, (weapon: IWeaponData) => {
       weaponDb[weapon._id] = weapon
     })
 
-    _.forEach(ArtifactDb, (artifact: IArtifactData) => {
+    _.forEach(ArtifactJson, (artifact: IArtifactData) => {
       artifactDb[artifact._id] = artifact
     })
 
-    _.forEach(ArtifactSetDb, (set: IArtifactSetData) => {
+    _.forEach(ArtifactSetJson, (set: IArtifactSetData) => {
       artifactSetDb[set._id] = set
     })
 
@@ -70,7 +86,7 @@ function App() {
     dispatch(setCharacterDb(characterDb))
     dispatch(setCharacterIdMap(charIdMap))
     dispatch(setWeaponDb(weaponDb))
-  }, [CharacterDb, ArtifactDb, ArtifactSetDb, WeaponDb,  getShortName, dispatch])
+  }, [CharacterJson, ArtifactJson, ArtifactSetJson, WeaponJson,  getShortName, dispatch])
 
   return (
     <div className="App">
