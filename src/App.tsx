@@ -55,11 +55,8 @@ function App() {
   useEffect(() => {
     const token = import.meta.env.VITE_GH_PAT;
 
-    fetch(`https://api.github.com/repos/bouhm/favonius-server/contents/data/db.json`, {
-      headers: {
-        authorization: `token ${token}`,
-        'accept': 'application/vnd.github.v3.raw+json'
-      },
+    fetch(`https://api.github.com/repos/bouhm/favonius-data/contents/db.json`, {
+      headers: {'accept': 'application/vnd.github.v3.raw+json'},
     })
       .then(res => res.json())
       .then(data => {

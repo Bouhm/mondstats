@@ -69,20 +69,15 @@ function Abyss() {
         const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
 
         if (floorIdx < 0) {
-          const token = import.meta.env.PROD ? process.env.GH_PAT : import.meta.env.VITE_GH_PAT;
-
-          fetch(`https://api.github.com/repos/bouhm/favonius-server/contents/data/abyss/${floor.value}.json`, {
-          headers: {
-            authorization: `token ${token}`,
-            'accept': 'application/vnd.github.v3.raw+json'
-          },
-        })
-          .then(res => res.json())
-          .then(data => {
-            let newAbyss = cloneDeep(AbyssData);
-            newAbyss.push(data)
-            setAbyssData(newAbyss)
+          fetch(`https://api.github.com/repos/bouhm/favonius-data/contents/abyss/${floor.value}.json`, {
+            headers: { 'accept': 'application/vnd.github.v3.raw+json' },
           })
+            .then(res => res.json())
+            .then(data => {
+              let newAbyss = cloneDeep(AbyssData);
+              newAbyss.push(data)
+              setAbyssData(newAbyss)
+            })
         }
       }))
     }
