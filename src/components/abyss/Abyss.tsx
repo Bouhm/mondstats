@@ -69,21 +69,17 @@ function Abyss() {
         const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
 
         if (floorIdx < 0) {
-          fetch(`https://api.github.com/repos/bouhm/favonius-data/contents/abyss/${floor.value}.json`, {
+          return fetch(`https://api.github.com/repos/bouhm/favonius-data/contents/abyss/${floor.value}.json`, {
             headers: { 'accept': 'application/vnd.github.v3.raw+json' },
-          })
-            .then(res => res.json())
-            .then(data => {
-              let newAbyss = cloneDeep(AbyssData);
-              newAbyss.push(data)
-              setAbyssData(newAbyss)
-            })
+          }).then(res => res.json())
+        } else {
+          return AbyssData[floorIdx]
         }
-      }))
+      })).then(data => setAbyssData(data))
     }
 
     fetchAbyssData();
-  }, [AbyssData, setAbyssData, selectedStages])
+  }, [setAbyssData, selectedStages])
 
   useEffect(() => {
     setFilteredAbyss(_filterAbyss(AbyssData));
@@ -92,6 +88,7 @@ function Abyss() {
   function _filterAbyss(data: IAbyssBattle[]) {
     let filteredAbyss = cloneDeep(data)
   
+    console.log(data);
     let max5WithChar = filters.max5;
 
     forEach(characters, character => {
@@ -143,7 +140,6 @@ function Abyss() {
   }
 
   const renderParties = () => (
-    
     <div className="floor-container">
       {map(selectedStages.sort(_compareFloor), selectedStage => {
         return (

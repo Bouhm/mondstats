@@ -53,8 +53,6 @@ function App() {
   // const { loading, error, data } = useQuery(Query);
 
   useEffect(() => {
-    const token = import.meta.env.VITE_GH_PAT;
-
     fetch(`https://api.github.com/repos/bouhm/favonius-data/contents/db.json`, {
       headers: {'accept': 'application/vnd.github.v3.raw+json'},
     })

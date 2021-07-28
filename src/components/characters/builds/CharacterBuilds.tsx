@@ -38,8 +38,6 @@ function CharacterBuilds() {
   const charId = characterIdMap[shortName]
 
   useEffect(() => {
-    const token = import.meta.env.PROD ? process.env.GH_PAT : import.meta.env.VITE_GH_PAT;
-
     fetch(`https://api.github.com/repos/bouhm/favonius-data/contents/characters/${shortName}.json`, {
       headers: { 'accept': 'application/vnd.github.v3.raw+json' },
     })
