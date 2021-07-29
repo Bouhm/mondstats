@@ -4,6 +4,7 @@ import Logo from '/assets/logo_m.webp';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { numberWithCommas } from '../scripts/util';
 import CharacterSearch from './characters/CharacterSearch';
 
 interface IFeatured {
@@ -32,10 +33,10 @@ function Home() {
       {featured &&
         <div className="home-data-info">
           <div className="home-data-line-1">
-            Data from <span className="home-data-number">{featured.player_total} </span> players
+            Data from <span className="home-data-number">{numberWithCommas(featured.player_total)} </span> players
           </div>
           <div className="home-data-line-2">
-            and <span className="home-data-number">{featured.character_total} </span> characters total
+            and <span className="home-data-number">{numberWithCommas(featured.character_total)} </span> characters total
           </div>
         </div>
       }

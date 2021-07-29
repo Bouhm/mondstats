@@ -6,3 +6,7 @@ export function getShortName(char: { name: string, element: string }) {
 export function getCharacterFileName(char: { name: string, oid: number }) {
   return char.name === "Traveler" ? "traveler" : char.oid;
 }
+
+export function numberWithCommas(n: number) {
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
