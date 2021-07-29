@@ -1,3 +1,7 @@
+## dev build 7.29.21
+- Update data collection to auto-update weekly
+- Purge data more than 6 weeks old
+
 ## dev build 7.27.21
 - Fetch data from Favonius API instead of local
 - Add minimal loaders accordingly
