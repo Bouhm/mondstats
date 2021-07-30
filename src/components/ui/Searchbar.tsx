@@ -1,23 +1,28 @@
 import './Searchbar.css';
 
 import Fuse from 'fuse.js';
-import _ from 'lodash';
+import _, { filter, includes, map } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Search } from './Icons';
 
+export interface ISearchItem {
+  name: string,
+  _id: string
+}
+
 type SearchbarProps = {
-  list: string[]
-  onSearch: (filtered: string[]) => void
+  list: ISearchItem[]
+  onSearch: (filtered: ISearchItem[]) => void
   maxResults: number
   placeholder: string
-  focused: boolean
+  focused?: boolean
 }
 
 function Searchbar({ list, maxResults, onSearch, focused = false, placeholder = "" }: SearchbarProps) {
   const searchRef = useRef<HTMLInputElement>(null);
   const [input, useInput] = useState("");
-  const fuse = new Fuse(list, { threshold: 0.3 });
+  const fuse = new Fuse(map(list, item => item.name), { threshold: 0.3 });
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     // Controlled input
@@ -29,17 +34,17 @@ function Searchbar({ list, maxResults, onSearch, focused = false, placeholder = 
       let searchResults = fuse.search(name);
 
       // Fuzzy search
-      let filteredChars = [];
+      let filtered: string[] = [];
 
       if (searchResults.length > 0) {
         // Only filter up to maximum number of results
         const max = Math.min(maxResults, searchResults.length);
         for (let i = 0; i < max; i++) {
-          filteredChars.push(searchResults[i].item)
+          filtered.push(searchResults[i].item)
         }
       }
 
-      onSearch(filteredChars);
+      onSearch(filter(list, (item: ISearchItem) => includes(filtered, item.name)));
     }, 150)();
   }
 

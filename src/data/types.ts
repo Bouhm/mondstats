@@ -29,6 +29,7 @@ export interface IArtifactSetData {
   _id: string,
   oid: number,
   name: string,
+  rarity: number,
   affixes: IAffix[]
 }
 

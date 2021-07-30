@@ -9,8 +9,8 @@ import { Link, Redirect, Route, Switch, useHistory, withRouter } from 'react-rou
 
 // import { gql, useQuery } from '@apollo/client';
 import Abyss from './components/abyss/Abyss';
+import ArtifactSetStatistics from './components/artifact-sets/ArtifactSetStatistics';
 import CharacterBuilds from './components/characters/builds/CharacterBuilds';
-import CharacterSearch from './components/characters/CharacterSearch';
 import Home from './components/Home';
 import useApi from './components/hooks/useApi';
 import { useAppDispatch, useAppSelector } from './components/hooks/useRedux';
@@ -35,7 +35,6 @@ import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, set
 
 function App() {
   const dispatch = useAppDispatch()
-  const [ArtifactSetJson, setArtifactSetJson] = useState<IArtifactSetData[]>();
 
   // const { loading, error, data } = useQuery(Query);
   const db = useApi(`https://api.github.com/repos/bouhm/favonius-data/contents/db.json`);
@@ -85,7 +84,7 @@ function App() {
               <Route path="/about" component={About} />
               <Route path="/changelog" component={Changelog} />
               <Route path="/abyss" component={Abyss} />
-              <Route path="/artifacts" component={UnderConstruction} />
+              <Route path="/artifacts" component={ArtifactSetStatistics} />
               <Route path="/weapons" component={UnderConstruction} />
               <Route exact path="/" component={Home} />
               <Route path="/builds/:shortName" component={CharacterBuilds} />

@@ -1,7 +1,7 @@
 import './Dropdown.scss';
 
 import { filter, map, orderBy, some } from 'lodash';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Select from 'react-select';
 
 import { getCharacterFileName, getShortName } from '../../scripts/util';
@@ -43,11 +43,10 @@ function MultiSelect({ options, onChange, isMulti=false, defaultValue=options.sl
 type SearchProps = {
   onChange: (e: any) => void
   placeholder?: string
-  charFilter?: string[]
   defaultValue?: Option[] | Option
 }
 
-function CharacterSearchSelect({ onChange, defaultValue, placeholder="Search character", charFilter=[] }: SearchProps) {
+function CharacterSearchSelect(props: SearchProps & { charFilter: string[]}) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
 
@@ -57,10 +56,10 @@ function CharacterSearchSelect({ onChange, defaultValue, placeholder="Search cha
         if (char.name === "Traveler") return { label: `${char.name} (${char.element})`, value: getShortName(char) }
         return { label: char.name, value: getShortName(char) }
       }),
-    ({ value }) => !some(charFilter, name => value.split('-')[0] === name.split('-')[0])),
+    ({ value }) => !some(props.charFilter, name => value.split('-')[0] === name.split('-')[0])),
   'label', 'asc')
 
-  const OptionLabel = ({ value, label }: any) => {
+  const OptionLabel = ({ value, label }: Option) => {
     const character = characterDb[characterIdMap[value]];
 
     return (
@@ -71,9 +70,13 @@ function CharacterSearchSelect({ onChange, defaultValue, placeholder="Search cha
         </div>
         <div className="character-option-label">{label}</div>
       </div>
-    )
+    ) as ReactNode;
   }
-  
+
+  return <SearchSelect {...props} optionLabel={OptionLabel} options={options} />
+}
+
+function SearchSelect({ onChange, options, defaultValue, placeholder="Search character", optionLabel }: SearchProps & { options: Option[], optionLabel: (opt: Option)=>ReactNode }) {
   return (
     <div className="search-select">
       <Select 
@@ -82,7 +85,7 @@ function CharacterSearchSelect({ onChange, defaultValue, placeholder="Search cha
         defaultValue={defaultValue} 
         isMulti={false}
         isSearchable={true}
-        formatOptionLabel={OptionLabel}
+        formatOptionLabel={optionLabel}
         placeholder={
           <div className="search-placeholder">
             <Search className="search-icon" size={20} />

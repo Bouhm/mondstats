@@ -24,8 +24,8 @@
     img {
       cursor: pointer;
       vertical-align: middle;
-      height: 50px;
-      width: 50px;
+      height: auto;
+      width: 35px;
     }
   }
 
