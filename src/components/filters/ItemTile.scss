@@ -1,7 +1,7 @@
-.artifact-set-tile-container {
+.item-tile-container {
 }
 
-.artifact-set-tile {
+.item-tile {
   position: relative;
   background-color: white;
   overflow: hidden;
@@ -29,12 +29,12 @@
     }
   }
 
-  .artifact-set-thumb {
+  .item-thumb {
     vertical-align: middle;
     width: 80px;
   }
 
-  .artifact-set-tile-name {
+  .item-tile-name {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,8 +49,8 @@
 }
 
 @media (max-width: 676px) {
-  .artifact-set-tile-container {
-    .artifact-set-tile-name {
+  .item-tile-container {
+    .item-tile-name {
       font-size: 0.9rem;
       line-height: 0.8rem;
       height: 2rem;
@@ -59,14 +59,9 @@
 }
 
 @media (max-width: 747px) {
-  .artifact-set-tile-container {
-    .artifact-set-tile {
-      .element-icon {
-        width: 30px;
-        height: auto;
-      }
-
-      .artifact-set-tile-name {
+  .item-tile-container {
+    .item-tile {
+      .item-tile-name {
         font-size: 0.9rem;
         line-height: 0.8rem;
         height: 2rem;
@@ -76,14 +71,14 @@
 }
 
 @media (max-width: 544px) {
-  .artifact-set-tile-container {
-    .artifact-set-tile {
+  .item-tile-container {
+    .item-tile {
       .element-icon {
         width: 20px;
         height: auto;
       }
 
-      .artifact-set-tile-name {
+      .item-tile-name {
         font-size: 0.8rem;
         line-height: 0.7rem;
         height: 2rem;

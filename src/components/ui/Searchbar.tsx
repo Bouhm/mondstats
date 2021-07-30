@@ -1,19 +1,15 @@
 import './Searchbar.css';
 
 import Fuse from 'fuse.js';
-import _, { filter, includes, map } from 'lodash';
+import { filter, debounce, includes, map } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Search } from './Icons';
-
-export interface ISearchItem {
-  name: string,
-  _id: string
-}
+import { SearchItem } from '../filters/ItemSearch';
 
 type SearchbarProps = {
-  list: ISearchItem[]
-  onSearch: (filtered: ISearchItem[]) => void
+  list: SearchItem[]
+  onSearch: (filtered: SearchItem[]) => void
   maxResults: number
   placeholder: string
   focused?: boolean
@@ -30,7 +26,7 @@ function Searchbar({ list, maxResults, onSearch, focused = false, placeholder = 
     const name = e.currentTarget.value;
     useInput(name);
 
-    _.debounce(() => {
+    debounce(() => {
       let searchResults = fuse.search(name);
 
       // Fuzzy search
@@ -44,7 +40,7 @@ function Searchbar({ list, maxResults, onSearch, focused = false, placeholder = 
         }
       }
 
-      onSearch(filter(list, (item: ISearchItem) => includes(filtered, item.name)));
+      onSearch(filter(list, (item: SearchItem) => includes(filtered, item.name)));
     }, 150)();
   }
 

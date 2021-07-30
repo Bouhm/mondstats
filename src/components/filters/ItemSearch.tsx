@@ -1,24 +1,25 @@
-import './ItemSearch.css';
+import './ItemSearch.scss';
+import './ItemTile.scss';
 
 import { difference, filter, map, orderBy, values } from 'lodash';
 import React, { ReactNode, useEffect, useState } from 'react';
 
-import Searchbar, { ISearchItem } from '../ui/Searchbar';
+import Searchbar from '../ui/Searchbar';
 
 type ItemSearchProps = {
   onSearch?: ()=>void,
   onSelect: ()=>void,
-  items: ISearchItem[],
-  tile: ItemTileProps
+  items: SearchItem[]
 }
 
-type ItemTileProps = {
+export type SearchItem = {
+  _id: string
   rarity: number,
   imgUrl: string,
   name: string
 }
 
-function ItemTile({ rarity, name, imgUrl, onClick }: ItemTileProps & { onClick: (name: string)=>void }) {
+function ItemTile({ _id, rarity, name, imgUrl, onClick }: SearchItem & { onClick: (name: string)=>void }) {
   let classes = "item-tile";
   classes += ` rarity-${rarity}`;
 
@@ -37,15 +38,15 @@ function ItemTile({ rarity, name, imgUrl, onClick }: ItemTileProps & { onClick: 
   )
 }
 
-function ItemSearch({ onSearch, onSelect, items, tile }: ItemSearchProps) { 
-  const [filteredItems, setFilteredItems] = useState<ISearchItem[]>([]);
+function ItemSearch({ onSearch, onSelect, items }: ItemSearchProps) { 
+  const [filteredItems, setFilteredItems] = useState<SearchItem[]>([]);
 
   useEffect(() => {
     setFilteredItems(filteredItems)
   }, [setFilteredItems])
 
   // Set character search filter
-  const handleSearchArtifactSet = (filteredItems: ISearchItem[]) => {
+  const handleSearch = (filteredItems: SearchItem[]) => {
     setFilteredItems(filteredItems);    
   }
 
@@ -56,17 +57,17 @@ function ItemSearch({ onSearch, onSelect, items, tile }: ItemSearchProps) {
   return (
     <div className="item-stats-container">
       <div className="item-searchbar">
-        <Searchbar maxResults={4} onSearch={handleSearchArtifactSet} list={items} placeholder="Search artifact sets&hellip;" />
+        <Searchbar maxResults={4} onSearch={handleSearch} list={items} placeholder="Search artifact sets&hellip;" />
       </div>
       <div className="item-tiles">
         <div className="searched-items">
-          {map(filteredItems, ({_id, name}) => (
-            <ItemTile onClick={handleSelect} key={_id} {...tile} />
+          {map(filteredItems, (item) => (
+            <ItemTile onClick={handleSelect} key={item._id} {...item} />
           ))}
         </div>
         <div className="unfiltered-items">
-          {map(orderBy(difference(items, filteredItems), 'name', 'desc'), ({_id, name}) => (
-            <ItemTile onClick={handleSelect} key={_id} {...tile} />
+          {map(orderBy(difference(items, filteredItems), 'name', 'desc'), (item) => (
+            <ItemTile onClick={handleSelect} key={item._id} {...item} />
           ))}
         </div>
       </div>
