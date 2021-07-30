@@ -8,14 +8,14 @@ import WeaponCard from './WeaponCard';
 
 type WeaponBuild = {
   weaponBuilds: IWeaponBuild[]
-  total: number
+  total: number,
+  color: string
 }
 
 const BP_WEAPONS = [11409, 12409, 14405, 15409, 13405]
 
-function WeaponBuild({ weaponBuilds, total, filters }: WeaponBuild & { filters : Filters}) {
+function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { filters : Filters}) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
-  const elementColor = useAppSelector((state) => state.data.elementColor)
   const max = 8;
   const [filteredWeapons, setFilteredWeapons] = useState<IWeaponBuild[] | []>([])
 
@@ -65,7 +65,7 @@ function WeaponBuild({ weaponBuilds, total, filters }: WeaponBuild & { filters :
               <div className="barchart weapon-bar-chart">
                 <div
                   className={`barchart-bar weapon-bar`} 
-                  style={{ width: `${popularity}%`, backgroundColor: elementColor }} 
+                  style={{ width: `${popularity}%`, backgroundColor: color }} 
                 />
               </div>
             </div>

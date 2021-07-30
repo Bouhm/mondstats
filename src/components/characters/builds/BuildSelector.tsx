@@ -18,13 +18,13 @@ import WeaponBuild from './WeaponBuild';
 type BuildSelectorProps = {
   builds: IBuild[],
   total: number,
-  filters: Filters
+  filters: Filters,
+  color: string
 }
 
-function BuildSelector({ builds, total, filters }: BuildSelectorProps) {
+function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
   const mobileWidth = window.matchMedia("(max-width: 617px)")
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
-  const elementColor = useAppSelector((state) => state.data.elementColor)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(mobileWidth.matches)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
@@ -57,7 +57,7 @@ function BuildSelector({ builds, total, filters }: BuildSelectorProps) {
   })
 
   colors = Array(labels.length).fill(ElementColors.none)
-  colors[activeBuildIdx] = elementColor;
+  colors[activeBuildIdx] = color;
 
   useEffect(() => {
     mobileWidth.addEventListener('change', () => {
@@ -79,6 +79,7 @@ function BuildSelector({ builds, total, filters }: BuildSelectorProps) {
       <WeaponBuild
         weaponBuilds={filteredBuilds[activeBuildIdx].weapons}
         total={filteredBuilds[activeBuildIdx].count}
+        color={color}
         filters={filters}
       />
       <div className="artifact-build-container">
@@ -112,7 +113,7 @@ function BuildSelector({ builds, total, filters }: BuildSelectorProps) {
               _.map(filteredBuilds, (build, i) => {
                 return (
                   <div key={`artifacts-thumb=${i}`} onClick={() => handleSelectSet(i)}>
-                    <ArtifactSets artifacts={build.artifacts} selected={i === activeBuildIdx} />
+                    <ArtifactSets artifacts={build.artifacts} color={color} selected={i === activeBuildIdx} />
                   </div>
                 )
               })

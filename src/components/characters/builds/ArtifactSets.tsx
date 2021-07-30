@@ -1,21 +1,21 @@
-import _ from 'lodash';
-import React, { useContext } from 'react';
+import { map } from 'lodash';
+import React from 'react';
 
 import { IArtifactBuild } from '../../../data/types';
 import { useAppSelector } from '../../hooks/useRedux';
 
 type ArtifactSetsProps = {
   artifacts: IArtifactBuild[]
-  selected?: boolean
+  selected?: boolean,
+  color: string
 }
 
-function ArtifactSets({ artifacts, selected=false }: ArtifactSetsProps) {
+function ArtifactSets({ artifacts, color, selected=false }: ArtifactSetsProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
-  const elementColor = useAppSelector((state) => state.data.elementColor)
 
   return (
-    <div className={`artifact-sets-container ${selected ? "selected" : ""}`} style={selected ? {backgroundColor: elementColor }:{}}>
-      {_.map(artifacts, ({ _id, activation_number }, i) => {
+    <div className={`artifact-sets-container ${selected ? "selected" : ""}`} style={selected ? {backgroundColor: color }:{}}>
+      {map(artifacts, ({ _id, activation_number }, i) => {
         return (
           <div key={`thumb-${_id}-i`} className={"artifact-thumb"}>
             <img src={`/assets/artifacts/${artifactSetDb[_id].oid}.webp`} alt={artifactSetDb[_id].name} />

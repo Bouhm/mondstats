@@ -10,7 +10,8 @@ import BarChart from '../../ui/BarChart';
 
 type ConstellationsProps = {
   constellations: number[],
-  total: number
+  total: number,
+  color: string
 }
 
 type ConstellationCardProps = {
@@ -44,17 +45,16 @@ function ConstellationCard({ oid, name, count, children }: ConstellationCardProp
   )
 }
 
-function Constellations({ constellations, total }: ConstellationsProps ) {
+function Constellations({ constellations, total, color }: ConstellationsProps ) {
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const elementColor = useAppSelector((state) => state.data.elementColor)
 
   const generateChartData = () => {
     return _.map(constellations, (count, i) => {
       return { 
         tooltip: `C${i}`, 
         value: 1 + Math.round((count / total * 1000)/10), 
-        color: i === 0 ? ElementColors.none : elementColor,
+        color: i === 0 ? ElementColors.none : color,
         content: (
           <>
           {i === 0 ?

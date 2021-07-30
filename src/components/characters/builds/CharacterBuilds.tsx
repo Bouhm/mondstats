@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { ElementColors } from '../../../data/constants';
 import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../../data/types';
 import { getCharacterFileName } from '../../../scripts/util';
-import { selectCharacter, setElementColor } from '../../../Store';
+import { selectCharacter } from '../../../Store';
 import F2P from '../../filters/F2P';
 import useFilters from '../../filters/useFilters';
 import useApi from '../../hooks/useApi';
@@ -24,7 +24,7 @@ function CharacterBuilds() {
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const elementColor = useAppSelector((state) => state.data.elementColor)
+  const [elementColor, setElementColor] = useState("");
   const dispatch = useAppDispatch()
 
   const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
@@ -40,13 +40,13 @@ function CharacterBuilds() {
     if (!_.isEmpty(characterDb)) {
       const char = characterDb[charId];
       setCharacter(char)
+      setElementColor(ElementColors[char.element.toLowerCase()]);
       
       dispatch(selectCharacter(charId))
-      dispatch(setElementColor(ElementColors[char.element.toLowerCase()]))
     }
-  }, [setCharacter, dispatch, charId, characterDb, ElementColors, elementColor])
+  }, [setCharacter, dispatch, charId, characterDb])
 
-  if (!characterBuild || !characterDb) {
+  if (!characterBuild || !characterDb || !characterIdMap) {
     return <div>
       <Loader />
     </div>
@@ -73,9 +73,10 @@ function CharacterBuilds() {
           <BuildSelector
             builds={_.take(characterBuild.builds, 8)}
             total={characterBuild.total}
+            color={elementColor}
             filters={filters}
           />
-          <Constellations constellations={characterBuild.constellations} total={characterBuild.total} />
+          <Constellations constellations={characterBuild.constellations} color={elementColor} total={characterBuild.total} />
           <CharacterTeams filters={filters} teams={characterBuild.teams} />
         </>
       }
