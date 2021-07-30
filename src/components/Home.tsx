@@ -1,11 +1,13 @@
 import './Home.scss';
 
 import Logo from '/assets/logo_m.webp';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { numberWithCommas } from '../scripts/util';
 import CharacterSearch from './characters/CharacterSearch';
+import useApi from './hooks/useApi';
 
 interface IFeatured {
   player_total: number,
@@ -14,15 +16,7 @@ interface IFeatured {
 
 function Home() {
   const routerHistory = useHistory();
-  const [featured, setFeatured] = useState<IFeatured|undefined>(undefined)
-
-  useEffect(() => {
-    fetch(`https://api.github.com/repos/bouhm/favonius-data/contents/featured.json`, {
-      headers: {'accept': 'application/vnd.github.v3.raw+json'},
-    })
-      .then(res => res.json())
-      .then(data => setFeatured(data))
-  }, [setFeatured])
+  const featured = useApi(`https://api.github.com/repos/bouhm/favonius-data/contents/featured.json`);
   
   return (
     <div className="home">

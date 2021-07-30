@@ -5,7 +5,7 @@ import React, { ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getCharacterFileName, getShortName } from '../../scripts/util';
-import { useAppSelector } from '../../useRedux';
+import { useAppSelector } from '../hooks/useRedux';
 
 export type CharacterTileProps = {
   id: string,

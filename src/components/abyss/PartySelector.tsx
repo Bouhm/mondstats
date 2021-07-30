@@ -3,9 +3,9 @@ import './PartySelector.scss';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 
-import { useAppSelector } from '../../useRedux';
 import CharacterSearch from '../characters/CharacterSearch';
 import CharacterTile from '../characters/CharacterTile';
+import { useAppSelector } from '../hooks/useRedux';
 import Button from '../ui/Button';
 import { Close, Plus } from '../ui/Icons';
 

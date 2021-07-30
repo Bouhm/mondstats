@@ -2,6 +2,7 @@ import './App.scss';
 import 'react-popper-tooltip/dist/styles.css';
 import './components/ui/PopperTooltip.scss';
 
+import axios from 'axios';
 import { forEach, isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Link, Redirect, Route, Switch, useHistory, withRouter } from 'react-router-dom';
@@ -11,6 +12,8 @@ import Abyss from './components/abyss/Abyss';
 import CharacterBuilds from './components/characters/builds/CharacterBuilds';
 import CharacterSearch from './components/characters/CharacterSearch';
 import Home from './components/Home';
+import useApi from './components/hooks/useApi';
+import { useAppDispatch, useAppSelector } from './components/hooks/useRedux';
 import Navbar from './components/navbar/Navbar';
 import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';
@@ -28,81 +31,48 @@ import {
   IWeaponDb,
 } from './data/types';
 import { getShortName } from './scripts/util';
-import {
-  setArtifactDb,
-  setArtifactSetDb,
-  setCharacterDb,
-  setCharacterIdMap,
-  setDbLoaded,
-  setWeaponDb,
-} from './Store';
-import { useAppDispatch, useAppSelector } from './useRedux';
+import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
 
 function App() {
   const dispatch = useAppDispatch()
-  const characterDb = useAppSelector((state) => state.data.characterDb)
-  const artifactDb = useAppSelector((state) => state.data.artifactDb)
-  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
-  const weaponDb = useAppSelector((state) => state.data.weaponDb)
-
-  const [CharacterJson, setCharacterJson] = useState<ICharacterData[]>();
-  const [WeaponJson, setWeaponJson] = useState<IWeaponData[]>();
-  const [ArtifactJson, setArtifactJson] = useState<IArtifactData[]>();
   const [ArtifactSetJson, setArtifactSetJson] = useState<IArtifactSetData[]>();
 
   // const { loading, error, data } = useQuery(Query);
+  const db = useApi(`https://api.github.com/repos/bouhm/favonius-data/contents/db.json`);
 
   useEffect(() => {
-    fetch(`https://api.github.com/repos/bouhm/favonius-data/contents/db.json`, {
-      headers: {'accept': 'application/vnd.github.v3.raw+json'},
-    })
-      .then(res => res.json())
-      .then(data => {
-        setCharacterJson(data.characters)
-        setArtifactJson(data.artifacts)
-        setArtifactSetJson(data.artifactSets)
-        setWeaponJson(data.weapons)
+    if (db) {
+      let charIdMap: { [shortname: string]: string } = {}
+      let characterDb: ICharacterDb = {}
+      let weaponDb: IWeaponDb = {}
+      let artifactDb: IArtifactDb = {}
+      let artifactSetDb: IArtifactSetDb = {}
+  
+      forEach(db.characters, (character: ICharacterData) => {
+        characterDb[character._id] = character;
+  
+        charIdMap[getShortName(character)] = character._id;
       })
-
-  }, [setCharacterJson, setArtifactJson, setWeaponJson, setArtifactSetJson, setDbLoaded])
-
-  useEffect(() => {
-    if (!(isEmpty(characterDb) || isEmpty(artifactDb) || isEmpty(artifactSetDb) || isEmpty(weaponDb))) {
-      dispatch(setDbLoaded(true))
+  
+      forEach(db.weapons, (weapon: IWeaponData) => {
+        weaponDb[weapon._id] = weapon
+      })
+  
+      forEach(db.artifacts, (artifact: IArtifactData) => {
+        artifactDb[artifact._id] = artifact
+      })
+  
+      forEach(db.artifactSets, (set: IArtifactSetData) => {
+        artifactSetDb[set._id] = set
+      })
+  
+      dispatch(setArtifactDb(artifactDb))
+      dispatch(setArtifactSetDb(artifactSetDb))
+      dispatch(setCharacterDb(characterDb))
+      dispatch(setCharacterIdMap(charIdMap))
+      dispatch(setWeaponDb(weaponDb))
     }
-  }, [characterDb, artifactDb, artifactSetDb, weaponDb, dispatch, setDbLoaded])
-
-  useEffect(() => {
-    let charIdMap: { [shortname: string]: string } = {}
-    let characterDb: ICharacterDb = {}
-    let weaponDb: IWeaponDb = {}
-    let artifactDb: IArtifactDb = {}
-    let artifactSetDb: IArtifactSetDb = {}
-
-    forEach(CharacterJson, (character: ICharacterData) => {
-      characterDb[character._id] = character;
-
-      charIdMap[getShortName(character)] = character._id;
-    })
-
-    forEach(WeaponJson, (weapon: IWeaponData) => {
-      weaponDb[weapon._id] = weapon
-    })
-
-    forEach(ArtifactJson, (artifact: IArtifactData) => {
-      artifactDb[artifact._id] = artifact
-    })
-
-    forEach(ArtifactSetJson, (set: IArtifactSetData) => {
-      artifactSetDb[set._id] = set
-    })
-
-    dispatch(setArtifactDb(artifactDb))
-    dispatch(setArtifactSetDb(artifactSetDb))
-    dispatch(setCharacterDb(characterDb))
-    dispatch(setCharacterIdMap(charIdMap))
-    dispatch(setWeaponDb(weaponDb))
-  }, [CharacterJson, ArtifactJson, ArtifactSetJson, WeaponJson, getShortName, dispatch])
+  }, [db])
 
   return (
     <div className="App">

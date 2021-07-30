@@ -5,11 +5,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { IParty } from '../../../data/types';
-import { useAppSelector } from '../../../useRedux';
+import useFilters, { Filters } from '../../filters/useFilters';
+import { useAppSelector } from '../../hooks/useRedux';
 import Button from '../../ui/Button';
 import { ChevronDown, ChevronUp } from '../../ui/Icons';
 import Team from '../Team';
-import useFilters, { Filters } from '../../filters/useFilters';
 
 interface ITeam {
   party: string[],

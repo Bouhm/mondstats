@@ -1,6 +1,7 @@
 import './Abyss.scss';
 
 import AmberSad from '/assets/amberSad.webp';
+import axios from 'axios';
 import _, {
   clone,
   cloneDeep,
@@ -21,10 +22,10 @@ import _, {
 import React, { useEffect, useState } from 'react';
 
 import { IAbyssBattle } from '../../data/types';
-import { useAppSelector } from '../../useRedux';
 import Team from '../characters/Team';
 import F2P from '../filters/F2P';
 import useFilters from '../filters/useFilters';
+import { useAppSelector } from '../hooks/useRedux';
 import Button from '../ui/Button';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
@@ -69,9 +70,9 @@ function Abyss() {
         const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
 
         if (floorIdx < 0) {
-          return fetch(`https://api.github.com/repos/bouhm/favonius-data/contents/abyss/${floor.value}.json`, {
+          return axios.get(`https://api.github.com/repos/bouhm/favonius-data/contents/abyss/${floor.value}.json`, {
             headers: { 'accept': 'application/vnd.github.v3.raw+json' },
-          }).then(res => res.json())
+          }).then(res => res.data)
         } else {
           return AbyssData[floorIdx]
         }

@@ -4,7 +4,7 @@ import _, { isEmpty } from 'lodash';
 import React from 'react';
 
 import { getShortName } from '../../scripts/util';
-import { useAppSelector } from '../../useRedux';
+import { useAppSelector } from '../hooks/useRedux';
 import Dropdown, { Option } from '../ui/Dropdown';
 
 type CharacterSearchProps =

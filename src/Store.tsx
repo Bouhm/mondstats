@@ -11,8 +11,7 @@ interface IState {
   artifactSetDb: IArtifactSetDb,
   characterDb: ICharacterDb,
   weaponDb: IWeaponDb,
-  elementColor: string,
-  dbLoaded: boolean
+  elementColor: string
 }
 
 const initialState: IState = {
@@ -22,8 +21,7 @@ const initialState: IState = {
   artifactDb: {},
   weaponDb: {},
   characterDb: {},
-  elementColor: "",
-  dbLoaded: false
+  elementColor: ""
 }
 
 const dataSlice = createSlice({
@@ -50,9 +48,6 @@ const dataSlice = createSlice({
     },
     setElementColor: (state, action: PayloadAction<string>) => {
       state.elementColor = action.payload
-    },
-    setDbLoaded: (state, action: PayloadAction<boolean>) => {
-      state.dbLoaded = action.payload
     }
   }
 })
@@ -64,8 +59,7 @@ export const {
   setArtifactSetDb,
   setWeaponDb,
   setCharacterDb,
-  setElementColor,
-  setDbLoaded
+  setElementColor
 } = dataSlice.actions;
 
 const store = configureStore({ reducer: { data: dataSlice.reducer } })

@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 
 import { IWeaponBuild } from '../../../data/types';
-import { useAppSelector } from '../../../useRedux';
 import { Filters } from '../../filters/useFilters';
+import { useAppSelector } from '../../hooks/useRedux';
 import WeaponCard from './WeaponCard';
 
 type WeaponBuild = {

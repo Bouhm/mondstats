@@ -5,7 +5,7 @@ import React from 'react';
 import Select from 'react-select';
 
 import { getCharacterFileName, getShortName } from '../../scripts/util';
-import { useAppSelector } from '../../useRedux';
+import { useAppSelector } from '../hooks/useRedux';
 import { Search } from './Icons';
 
 export type Option = { value: string, label: string }

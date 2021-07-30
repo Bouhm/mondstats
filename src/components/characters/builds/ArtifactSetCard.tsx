@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { useContext } from 'react';
 
 import { IArtifactSetData } from '../../../data/types';
-import { useAppSelector } from '../../../useRedux';
+import { useAppSelector } from '../../hooks/useRedux';
 
 function ArtifactSetCard({ _id, oid, name, affixes, activation }: IArtifactSetData & { activation: number }) {
   return (

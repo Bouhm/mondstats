@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { IParty } from '../../data/types';
 import { getShortName } from '../../scripts/util';
-import { useAppSelector } from '../../useRedux';
+import { useAppSelector } from '../hooks/useRedux';
 import CharacterTile from './CharacterTile';
 
 type TeamProps = {
