@@ -55,7 +55,7 @@ function ItemSearch({ onSearch, onSelect, items }: ItemSearchProps) {
   }
   
   return (
-    <div className="item-stats-container">
+    <div className="items-container">
       <div className="item-searchbar">
         <Searchbar maxResults={4} onSearch={handleSearch} list={items} placeholder="Search artifact sets&hellip;" />
       </div>
