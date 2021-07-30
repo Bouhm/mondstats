@@ -9,11 +9,10 @@ import { useAppSelector } from '../hooks/useRedux';
 
 export type CharacterTileProps = {
   id: string,
-  labeled?: boolean,
   onClick?: (set: string) => void
 }
 
-function ArtifactSetTile({ id, labeled = true, onClick }: CharacterTileProps) {
+function ArtifactSetTile({ id, onClick }: CharacterTileProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const artifactSet = artifactSetDb[id]
 
@@ -32,9 +31,6 @@ function ArtifactSetTile({ id, labeled = true, onClick }: CharacterTileProps) {
         <div className="artifact-set-image">
           <img className="artifact-set-thumb" src={`/assets/artifacts/${getCharacterFileName(artifactSet)}.webp`} alt={`${artifactSet.name}-thumb`}></img>
         </div>
-        {labeled && <div className="artifact-set-tile-name">
-          {artifactSet.name}
-        </div>}
       </div>
     </div>
   )
