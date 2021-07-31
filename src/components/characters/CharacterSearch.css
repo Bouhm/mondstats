@@ -54,7 +54,6 @@
   }
 }
 
-
 @media (max-width: 516px) {
   .unfiltered-characters {
     display: none;
@@ -62,7 +61,7 @@
 }
 
 @media (max-width: 714px) {
-  .character-search{
+  .character-search {
     width: 100%;
   }
 
@@ -81,7 +80,7 @@
 
   .character-searchbar {
     width: 100%;
-    
+
     input {
       max-width: 100%;
     }

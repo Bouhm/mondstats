@@ -32,6 +32,9 @@ function ItemTile({ _id, rarity, name, imgUrl, onClick }: SearchItem & { onClick
       <div className={classes}>
         <div className="item-image">
           <img className="item-thumb" src={imgUrl} alt={`${name}-thumb`}></img>
+          <div className="item-name">
+            {name}
+          </div>
         </div>
       </div>
     </div>

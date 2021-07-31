@@ -1,12 +1,6 @@
 @use 'variables' as var;
 
-@font-face {
-  font-family: font;
-  src: url(/font.ttf);
-}
-
 .App {
-  font-family: font;
   overflow: hidden;
 
   .App-content {

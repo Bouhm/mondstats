@@ -8,8 +8,9 @@
   transition: transform 0.2s;
   box-sizing: border-box;
   padding: 0;
+  width: 130px;
   border-radius: 8px;
-  margin: 0.2rem;
+  margin: 0.3rem;
 
   &:hover,
   &:active {
@@ -32,29 +33,32 @@
 
   .item-thumb {
     vertical-align: middle;
-    width: 80px;
+    width: 130px;
   }
 
-  .item-tile-name {
+  .item-name {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 2.5rem;
     color: rgb(73, 83, 102);
     background-color: #e9e5dc;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    height: 3rem;
     text-align: center;
-    line-height: 1.1rem;
     text-decoration: none;
   }
 }
 
 @media (max-width: 676px) {
   .item-tile-container {
-    .item-tile-name {
-      font-size: 0.9rem;
-      line-height: 0.8rem;
-      height: 2rem;
+    .item-tile {
+      margin: 0.2rem;
+
+      .item-name {
+        font-size: 0.9rem;
+        line-height: 0.8rem;
+        height: 2rem;
+      }
     }
   }
 }
@@ -62,7 +66,7 @@
 @media (max-width: 747px) {
   .item-tile-container {
     .item-tile {
-      .item-tile-name {
+      .item-name {
         font-size: 0.9rem;
         line-height: 0.8rem;
         height: 2rem;
@@ -74,14 +78,15 @@
 @media (max-width: 544px) {
   .item-tile-container {
     .item-tile {
-      .element-icon {
-        width: 20px;
-        height: auto;
+      width: 100px;
+
+      .item-thumb {
+        width: 100px;
       }
 
-      .item-tile-name {
+      .item-name {
         font-size: 0.8rem;
-        line-height: 0.7rem;
+        line-height: 0.8rem;
         height: 2rem;
       }
     }
