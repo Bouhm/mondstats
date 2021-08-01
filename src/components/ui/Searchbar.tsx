@@ -1,11 +1,40 @@
 import './Searchbar.css';
 
 import Fuse from 'fuse.js';
-import { filter, debounce, includes, map } from 'lodash';
+import { debounce, filter, includes, map } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Search } from './Icons';
 import { SearchItem } from '../filters/ItemSearch';
+import { Search } from './Icons';
+
+export const KEYWORDS = [
+  "normal", 
+  "charged",
+  "elemental skill",
+  "elemental burst",
+  "elemental mastery",
+  "energy recharge",
+  "anemo", 
+  "pyro", 
+  "geo", 
+  "electro", 
+  "cryo", 
+  "dendro", 
+  "physical",
+  "atk", 
+  "def",
+  "hp",
+  "sword",
+  "claymore",
+  "bow",
+  "catalyst",
+  "polearm",
+  "crit rate",
+  "crit dmg",
+  "dmg",
+  "healing",
+
+]
 
 type SearchbarProps = {
   list: SearchItem[]
@@ -18,16 +47,16 @@ type SearchbarProps = {
 function Searchbar({ list, maxResults, onSearch, focused = false, placeholder = "" }: SearchbarProps) {
   const searchRef = useRef<HTMLInputElement>(null);
   const [input, useInput] = useState("");
-  const fuse = new Fuse(map(list, item => item.name), { threshold: 0.3 });
+  const fuse = new Fuse(list, { threshold: 0.3, keys: [{name: 'name', weight: 1}, {name: 'keys', weight: 0.5}] });
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     // Controlled input
     e.preventDefault();
-    const name = e.currentTarget.value;
-    useInput(name);
+    const query = e.currentTarget.value;
+    useInput(query);
 
     debounce(() => {
-      let searchResults = fuse.search(name);
+      let searchResults = fuse.search(query);
 
       // Fuzzy search
       let filtered: string[] = [];
@@ -36,7 +65,7 @@ function Searchbar({ list, maxResults, onSearch, focused = false, placeholder = 
         // Only filter up to maximum number of results
         const max = Math.min(maxResults, searchResults.length);
         for (let i = 0; i < max; i++) {
-          filtered.push(searchResults[i].item)
+          filtered.push(searchResults[i].item.name)
         }
       }
 

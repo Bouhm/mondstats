@@ -16,7 +16,6 @@ function StatsTable() {
     imgUrl: `/assets/artifacts/${set.oid}.webp`
   }));
   const artifactSetStats = useApi(`https://api.github.com/repos/bouhm/favonius-data/contents/artifacts/top-artifactsets.json`)
-  console.log(artifactSetStats)
 
   const handleSelect = () => {
 

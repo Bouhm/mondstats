@@ -13,13 +13,14 @@ type ItemSearchProps = {
 
 export type SearchItem = {
   _id: string
-  rarity: number,
   imgUrl: string,
-  name: string
+  name: string,
+  rarity: number,
+  keys: string
 }
 
 type ItemTileProps = { 
-  onClick: (name: string)=>void, 
+  onClick: (name: string)=>void,
   faded?: boolean 
 } & SearchItem
 
