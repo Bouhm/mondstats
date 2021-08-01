@@ -1,4 +1,4 @@
-import './ArtifactSetStatistics.css';
+import './StatsTable.scss';
 
 import { map } from 'lodash';
 import React, { useEffect, useState } from 'react';
@@ -7,7 +7,7 @@ import ItemSearch, { SearchItem } from '../filters/ItemSearch';
 import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
 
-function ArtifactSetStatistics() { 
+function StatsTable() { 
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const artifactSets = map(artifactSetDb, (set) => ({
     _id: set._id,
@@ -23,12 +23,12 @@ function ArtifactSetStatistics() {
   }
   
   return (
-    <div className="artifact-set-stats-container">
-      <ItemSearch items={artifactSets} onSelect={handleSelect} />
-      <div className="artifact-set-top">
-      </div>
+    <div className="stats-table">
+      <div className=""></div>
+      <div className=""></div>
+      <div className=""></div>
     </div>
   )
 }
 
-export default ArtifactSetStatistics
+export default StatsTable

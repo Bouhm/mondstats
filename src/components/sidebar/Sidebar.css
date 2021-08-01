@@ -3,11 +3,11 @@
   display: flex;
   flex-flow: column;
   background: #2e3142;
-  width: 11rem;
   -webkit-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
   z-index: 9;
+  width: 9.8rem;
 
   .sidebar-menu {
     position: fixed;
@@ -19,7 +19,7 @@
       display: flex;
       align-items: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      height: 4.5rem;
+      height: 4rem;
       padding: 0.5rem;
 
       .tab-name {
@@ -59,7 +59,7 @@
       display: flex;
       align-items: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      height: 4.5rem;
+      height: 4rem;
       padding: 0.5rem;
 
       .tab-name {

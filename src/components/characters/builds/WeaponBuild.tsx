@@ -16,7 +16,7 @@ const BP_WEAPONS = [11409, 12409, 14405, 15409, 13405]
 
 function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { filters : Filters}) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
-  const max = 8;
+  const max = 10;
   const [filteredWeapons, setFilteredWeapons] = useState<IWeaponBuild[] | []>([])
 
   useEffect(() => {

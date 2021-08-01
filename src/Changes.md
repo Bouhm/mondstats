@@ -1,3 +1,8 @@
+## dev build 7.31.21
+- Fix bug in character build page where parties of 5 would appear
+- Change to a font that is more legible in smaller size
+- Increase shown weapons/artifact builds from 8 to 10
+
 ## dev build 7.29.21
 - Update data collection to auto-update weekly
 - Purge data more than 6 weeks old

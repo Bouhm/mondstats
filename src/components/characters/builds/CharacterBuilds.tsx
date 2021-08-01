@@ -24,6 +24,7 @@ function CharacterBuilds() {
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const characterDb = useAppSelector((state) => state.data.characterDb)
+  const maxBuilds = 10;
   const [elementColor, setElementColor] = useState("");
   const dispatch = useAppDispatch()
 
@@ -71,7 +72,7 @@ function CharacterBuilds() {
       {characterBuild.builds &&
         <>
           <BuildSelector
-            builds={_.take(characterBuild.builds, 8)}
+            builds={_.take(characterBuild.builds, maxBuilds)}
             total={characterBuild.total}
             color={elementColor}
             filters={filters}
