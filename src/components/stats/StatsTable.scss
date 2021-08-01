@@ -1,0 +1,31 @@
+.stats-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  .row-stats {
+    flex: 1;
+    margin: 0.1rem 0;
+    
+    .row-card {
+      display: flex;
+    }
+
+    .row-stats-bar {
+      height: 100%;
+      display: inline-block;
+      animation-name: horibar;
+      animation-duration: 1s;
+      animation-direction: forwards;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+    }
+
+    @keyframes horibar {
+      0% {
+        max-width: 0;
+      }
+      100% {
+        max-width: 100%;
+      }
+    }
+  }
+}

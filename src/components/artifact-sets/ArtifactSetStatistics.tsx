@@ -1,10 +1,11 @@
 import './ArtifactSetStatistics.css';
 
-import _, { filter, flatten, includes, map, uniq } from 'lodash';
+import _, { filter, flatten, includes, isEmpty, map, uniq } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
 import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
+import StatsTable from '../stats/StatsTable';
 import ItemSearch, { SearchItem } from '../ui/CardSearch';
 import { KEYWORDS } from '../ui/Searchbar';
 
@@ -20,18 +21,16 @@ function ArtifactSetStatistics() {
     )))).join(" ")
   }));
 
-  const artifactSetStats = useApi(`https://api.github.com/repos/bouhm/favonius-data/contents/artifacts/top-artifactsets.json`)
-  console.log(artifactSetStats)
-
   const handleSelect = () => {
 
   }
   
+  if (isEmpty(artifactSetDb)) return null;
+  
   return (
     <div className="artifact-set-stats-container">
       <ItemSearch items={artifactSets} onSelect={handleSelect} />
-      <div className="artifact-set-top">
-      </div>
+      <StatsTable.ArtifactSets />
     </div>
   )
 }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://favonius.io</loc><priority>0.5</priority></url>
-<url><loc>https://favonius.io/abyss</loc><priority>0.5</priority></url>
 <url><loc>https://favonius.io/about</loc><priority>0.1</priority></url>
+<url><loc>https://favonius.io/abyss</loc><priority>0.5</priority></url>
+<url><loc>https://favonius.io/artifacts</loc><priority>0.5</priority></url>
 <url><loc>https://favonius.io/changelog</loc><priority>0.1</priority></url>
+<url><loc>https://favonius.io/weapons</loc><priority>0.5</priority></url>
 <url><loc>https://favonius.io/builds/amber</loc><priority>0.5</priority></url>
 <url><loc>https://favonius.io/builds/albedo</loc><priority>0.5</priority></url>
 <url><loc>https://favonius.io/builds/barbara</loc><priority>0.5</priority></url>

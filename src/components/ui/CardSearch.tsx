@@ -17,7 +17,7 @@ export type SearchItem = {
   imgUrl: string,
   name: string,
   rarity: number,
-  keys: string
+  keys?: string
 }
 
 function CardSearch({ onSearch, onSelect, items }: ItemSearchProps) { 

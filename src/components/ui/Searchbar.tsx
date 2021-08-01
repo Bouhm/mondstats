@@ -8,13 +8,6 @@ import { SearchItem } from '../ui/CardSearch';
 import { Search } from './Icons';
 
 export const KEYWORDS = [
-  "normal", 
-  "charged",
-  "elemental skill",
-  "elemental burst",
-  "elemental mastery",
-  "energy recharge",
-  "party",
   "anemo", 
   "pyro", 
   "hydro",
@@ -23,19 +16,21 @@ export const KEYWORDS = [
   "cryo", 
   "dendro", 
   "physical",
-  "atk", 
   "def",
   "hp",
-  "sword",
-  "claymore",
-  "bow",
-  "catalyst",
-  "polearm",
+  "elemental skill",
+  "elemental burst",
+  "elemental mastery",
+  "energy recharge",
+  "atk", 
   "crit rate",
   "crit dmg",
   "shield",
-  "dmg",
+  "normal", 
+  "charged",
   "healing",
+  "party",
+  "dmg",
 ]
 
 type SearchbarProps = {
