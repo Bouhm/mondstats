@@ -4,7 +4,7 @@ import Fuse from 'fuse.js';
 import { debounce, filter, includes, map } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { SearchItem } from '../filters/ItemSearch';
+import { SearchItem } from '../ui/CardSearch';
 import { Search } from './Icons';
 
 export const KEYWORDS = [
@@ -14,8 +14,10 @@ export const KEYWORDS = [
   "elemental burst",
   "elemental mastery",
   "energy recharge",
+  "party",
   "anemo", 
   "pyro", 
+  "hydro",
   "geo", 
   "electro", 
   "cryo", 
@@ -31,20 +33,20 @@ export const KEYWORDS = [
   "polearm",
   "crit rate",
   "crit dmg",
+  "shield",
   "dmg",
   "healing",
-
 ]
 
 type SearchbarProps = {
   list: SearchItem[]
   onSearch: (filtered: SearchItem[]) => void
-  maxResults: number
+  maxResults?: number
   placeholder: string
   focused?: boolean
 }
 
-function Searchbar({ list, maxResults, onSearch, focused = false, placeholder = "" }: SearchbarProps) {
+function Searchbar({ list, maxResults=99, onSearch, focused = false, placeholder = "" }: SearchbarProps) {
   const searchRef = useRef<HTMLInputElement>(null);
   const [input, useInput] = useState("");
   const fuse = new Fuse(list, { threshold: 0.3, keys: [{name: 'name', weight: 1}, {name: 'keys', weight: 0.5}] });

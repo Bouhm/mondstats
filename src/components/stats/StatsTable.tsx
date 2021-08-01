@@ -3,9 +3,9 @@ import './StatsTable.scss';
 import { map } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
-import ItemSearch, { SearchItem } from '../filters/ItemSearch';
 import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
+import CardSearch, { SearchItem } from '../ui/CardSearch';
 
 function StatsTable() { 
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
@@ -23,9 +23,9 @@ function StatsTable() {
   
   return (
     <div className="stats-table">
-      <div className=""></div>
-      <div className=""></div>
-      <div className=""></div>
+      <div className="row-card"></div>
+      <div className="row-stats"></div>
+      <div className="row-related"></div>
     </div>
   )
 }

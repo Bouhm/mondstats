@@ -1,0 +1,47 @@
+.cards-container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.card-search {
+  width: 35rem;
+  margin: 0 auto;
+  padding: 0 0.6rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 120px);
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-searchbar {
+  margin-top: 1rem;
+
+input {
+    max-width: 35rem;
+  }
+}
+
+@media (max-width: 544px) {
+  .cards {
+    grid-template-columns: repeat(3, 100px);
+    column-gap: 0.5rem;
+  }
+}
+
+@media (max-width: 826px) {
+  .card-search {
+    width: 100%;
+  }
+
+  .card-searchbar {
+    width: 100%;
+
+    input {
+      max-width: 100%;
+    }
+  }
+}

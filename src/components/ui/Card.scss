@@ -1,31 +1,5 @@
-.items-container {
-  max-width: 100%;
-  overflow-x: hidden;
-}
 
-.item-search {
-  width: 35rem;
-  margin: 0 auto;
-  padding: 0 0.6rem;
-}
-
-.item-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 120px);
-  gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.item-searchbar {
-  margin-top: 1rem;
-
-input {
-    max-width: 35rem;
-  }
-}
-
-.item-tile {
+.card {
   position: relative;
   background-color: white;
   overflow: hidden;
@@ -58,12 +32,12 @@ input {
     }
   }
 
-  .item-thumb {
+  .card-thumb {
     vertical-align: middle;
     width: 120px;
   }
 
-  .item-name {
+  .card-name {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,21 +50,17 @@ input {
   }
 }
 
-@media (max-width: 544px) {
-  .item-tiles {
-    grid-template-columns: repeat(3, 100px);
-    column-gap: 0.5rem;
-  }
 
-  .item-tile-container {
-    .item-tile {
+@media (max-width: 544px) {
+  .card-container {
+    .card {
       width: 100px;
 
-      .item-thumb {
+      .card-thumb {
         width: 100px;
       }
 
-      .item-name {
+      .card-name {
         font-size: 0.8rem;
         line-height: 0.8rem;
         height: 2rem;
@@ -100,25 +70,13 @@ input {
 }
 
 @media (max-width: 826px) {
-  .item-tile-container {
-    .item-tile {
-      .item-name {
+  .card-container {
+    .card {
+      .card-name {
         font-size: 0.85rem;
         line-height: 0.8rem;
         height: 2rem;
       }
-    }
-  }
-
-  .item-search {
-    width: 100%;
-  }
-
-  .item-searchbar {
-    width: 100%;
-
-    input {
-      max-width: 100%;
     }
   }
 }
