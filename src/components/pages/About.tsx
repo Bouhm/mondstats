@@ -7,17 +7,17 @@ function About() {
     <div className="about-container">
       <div className="about-header">
         <h1>About Favonius.io</h1>
-        <p>Favonius.io is a website that aims to help players build characters and formulate teams to optimize their gameplay. You can browse the statistics on how players of different skills and preferences like to build and use certain characters.</p>
+        <p>Favonius.io is a website that aims to help players build characters and formulate teams to optimize their gameplay. You can browse the statistics on how players like to build and use certain characters.</p>
         <p>This is a hobby project by Bouhm who loves to explore and share the many ways players find success and enjoyment in the game.</p>
       </div>
       <hr />
       <div className="about-section">
         <h2>How are you collecting data?</h2>
-        <p>Favonius.io collects its data using the APIs from HoYoLAB. Only data from users who opt-in to display their Battle Chronicles publicly can be collected. Due to the API rate limit, it takes a long time to accumulate a large sample size. Favonius.io will perform rolling updates and perform updates in batches over a looong period of time.</p>
+        <p>Favonius.io collects its data using the APIs from HoYoLAB. Only data from users who opt-in to display their Battle Chronicles publicly can be collected. Due to the API rate limit, it takes a long time to accumulate data. The aggregate data is updated daily and any data more than 6 weeks old is purged every patch cycle. Since data collection is slow, small chunks are updated at a time in order of time since last update.</p>
       </div>
       <div className="about-section">
         <h2>How can I contribute?</h2>
-        <p>Thank you for asking! Creating an account in HoYoLAB (miHoYo's official forum) if you haven't done so already and toggling your Battle Chronicle to 'Public' in your profile will allow your data to be visible. Favonius.io collects data indiscriminately so it won't have your data for certain.</p>
+        <p>Creating an account in HoYoLAB (miHoYo's official forum) if you haven't done so already and toggling your Battle Chronicle to 'Public' in your profile will allow your data to be visible. Favonius.io collects data indiscriminately so it won't have your data for certain.</p>
       </div>
       <div className="about-section">
         <h2>Where is my 4-Bloodstained Chivalry Klee build?</h2>
