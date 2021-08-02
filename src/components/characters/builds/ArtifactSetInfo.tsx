@@ -2,9 +2,8 @@ import _ from 'lodash';
 import React, { useContext } from 'react';
 
 import { IArtifactSetData } from '../../../data/types';
-import { useAppSelector } from '../../hooks/useRedux';
 
-function ArtifactSetCard({ _id, oid, name, affixes, activation }: IArtifactSetData & { activation: number }) {
+function ArtifactSetInfo({ _id, oid, name, affixes, activation }: IArtifactSetData & { activation: number }) {
   return (
     <div className={`artifact-card`}>
       <div className="artifact-header">
@@ -33,4 +32,4 @@ function ArtifactSetCard({ _id, oid, name, affixes, activation }: IArtifactSetDa
   )
 }
 
-export default ArtifactSetCard
+export default ArtifactSetInfo

@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 
 import { IArtifactBuild } from '../../../data/types';
 import { useAppSelector } from '../../hooks/useRedux';
-import ArtifactSetCard from './ArtifactSetCard';
+import ArtifactSetCard from './ArtifactSetInfo';
 
 type ArtifactBuildProps = {
   artifacts: IArtifactBuild[]

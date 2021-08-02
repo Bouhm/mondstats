@@ -37,7 +37,7 @@ function App() {
   const dispatch = useAppDispatch()
 
   // const { loading, error, data } = useQuery(Query);
-  const db = useApi(`https://api.github.com/repos/bouhm/favonius-data/contents/db.json`);
+  const db = useApi(`/db.json`);
 
   useEffect(() => {
     if (db) {

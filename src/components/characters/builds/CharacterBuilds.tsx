@@ -35,7 +35,7 @@ function CharacterBuilds() {
   } = useFilters();
 
   const charId = characterIdMap[shortName]
-  const characterBuild = useApi(`https://api.github.com/repos/bouhm/favonius-data/contents/characters/${shortName}.json`);
+  const characterBuild = useApi(`/characters/${shortName}.json`);
 
   useEffect(() => {
     if (!_.isEmpty(characterDb)) {

@@ -16,7 +16,7 @@ interface IFeatured {
 
 function Home() {
   const routerHistory = useHistory();
-  const featured = useApi(`https://api.github.com/repos/bouhm/favonius-data/contents/featured.json`);
+  const featured = useApi(`/featured.json`);
   
   return (
     <div className="home">

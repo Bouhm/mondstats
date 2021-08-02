@@ -1,11 +1,14 @@
 .stats-table {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 150px 1fr 1fr;
 
   .row-stats {
     flex: 1;
     margin: 0.1rem 0;
-    
+    display: flex;
+    align-items: center;
+    color: white;
+
     .row-card {
       display: flex;
     }
@@ -17,6 +20,8 @@
       animation-duration: 1s;
       animation-direction: forwards;
       border: 2px solid rgba(255, 255, 255, 0.7);
+      background-color: rgba(255, 255, 255, 0.6);
+      margin-right: 0.5rem;
     }
 
     @keyframes horibar {

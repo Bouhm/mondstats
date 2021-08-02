@@ -30,7 +30,7 @@ function ArtifactSetStatistics() {
   return (
     <div className="artifact-set-stats-container">
       <ItemSearch items={artifactSets} onSelect={handleSelect} />
-      <StatsTable.ArtifactSets />
+      <StatsTable.ArtifactSetStatistics />
     </div>
   )
 }
