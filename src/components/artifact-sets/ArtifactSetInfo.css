@@ -1,51 +1,4 @@
-.artifact-sets-container {
-  display: flex;
-  width: 150px;
-  transition: transform 0.2s;
-  height: 5rem;
-
-  .artifact-thumb {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 0.1rem;
-
-    .artifact-set-activation {
-      color: white;
-      font-size: 1.3rem;
-      font-weight: 700;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-      padding: 0.3rem;
-    }
-  }
-
-  img {
-    width: 80px;
-    height: 80px;
-  }
-
-  &:hover,
-  &:active {
-    cursor: pointer;
-    transform: scale(1.03);
-    background-color: rgba(223, 229, 220, 0.5);
-    border: 3px solid rgba(223, 229, 220, 0.5);
-    border-radius: 8px;
-  }
-
-  &.selected {
-    border: 3px solid #e9e5dc;
-    border-radius: 8px;
-  }
-}
-
-.artifact-card {
+.artifact-set-info {
   color: #e9e5dc;
   border-radius: 8px;
   margin: 0.1rem 0 1rem 0;
@@ -55,7 +8,7 @@
   display: flex;
   flex-flow: column;
 
-  .artifact-header {
+  .artifact-set-header {
     display: flex;
   }
 
@@ -64,14 +17,14 @@
     height: 100px;
   }
 
-  .artifact-detail {
+  .artifact-set-detail {
     display: flex;
     width: 100%;
     flex-flow: column;
     padding: 1rem;
     justify-content: center;
 
-    .artifact-name {
+    .artifact-set-name {
       padding: 0 0.1rem;
       color: white;
       font-size: 1.5rem;
@@ -79,7 +32,7 @@
     }
   }
 
-  .artifact-effects {
+  .artifact-set-effects {
     font-size: 1.2rem;
     border-spacing: 0.5rem;
     display: inline-block;
@@ -95,22 +48,22 @@
 }
 
 @media (max-width: 1036px) {
-  .artifact-card {
-    .artifact-effects {
+  .artifact-set-info {
+    .artifact-set-effects {
       font-size: 1rem;
     }
   }
 }
 
 @media (max-width: 640px) {
-  .artifact-card {
-    .artifact-detail {
-      .artifact-name {
+  .artifact-set-info {
+    .artifact-set-detail {
+      .artifact-set-name {
         font-size: 1.3  rem;
       }
     } 
     
-    .artifact-effects {
+    .artifact-set-effects {
       font-size: 1rem;
     }
 

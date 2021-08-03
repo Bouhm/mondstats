@@ -68,7 +68,7 @@ export interface IWeaponBuild {
   count: number
 }
 
-export interface IArtifactBuild {
+export interface IArtifactSet {
   _id: string,
   activation_number: number,
   rarity?: number
@@ -76,7 +76,7 @@ export interface IArtifactBuild {
 
 export interface IBuild {
   weapons: IWeaponBuild[],
-  artifacts: IArtifactBuild[]
+  artifacts: IArtifactSet[]
   count: number
 }
 
@@ -98,7 +98,7 @@ export interface IParty {
 export interface IArtifactSetStats {
   _id: string
   weapons: {
-    artifacts: IArtifactBuild[]
+    artifacts: IArtifactSet[]
   },
   characters: {
     [charId: string]: number

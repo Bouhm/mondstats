@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import React, { useContext } from 'react';
 
-import { IArtifactBuild } from '../../../data/types';
+import { IArtifactSet } from '../../../data/types';
+import ArtifactSetInfo from '../../artifact-sets/ArtifactSetInfo';
 import { useAppSelector } from '../../hooks/useRedux';
-import ArtifactSetCard from './ArtifactSetInfo';
 
 type ArtifactBuildProps = {
-  artifacts: IArtifactBuild[]
+  artifacts: IArtifactSet[]
 }
 
 function ArtifactBuild({ artifacts }: ArtifactBuildProps) {
@@ -20,7 +20,7 @@ function ArtifactBuild({ artifacts }: ArtifactBuildProps) {
       {_.map(artifacts, ({ _id, activation_number }, i) => {
         const set = artifactSetDb[_id]
 
-        return <ArtifactSetCard key={`${_id}-${i}`} {...set} activation={activation_number} />
+        return <ArtifactSetInfo key={`${_id}-${i}`} {...set} activation={activation_number} />
       })}
     </div>
   )

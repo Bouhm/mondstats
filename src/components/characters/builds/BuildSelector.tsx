@@ -1,5 +1,4 @@
 import './BuildSelector.css';
-import './Artifact.css';
 import './Weapon.css';
 
 import _ from 'lodash';
@@ -7,12 +6,12 @@ import React, { useEffect, useState } from 'react';
 
 import { ElementColors } from '../../../data/constants';
 import { IBuild } from '../../../data/types';
+import ArtifactSets from '../../artifact-sets/ArtifactSets';
 import { Filters } from '../../filters/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import Chart from '../../ui/Chart';
 import { EllipsisV } from '../../ui/Icons';
 import ArtifactBuild from './ArtifactBuild';
-import ArtifactSets from './ArtifactSets';
 import WeaponBuild from './WeaponBuild';
 
 type BuildSelectorProps = {

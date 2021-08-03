@@ -7,13 +7,14 @@
   -moz-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
   z-index: 9;
-  width: 9.8rem;
+  width: 12rem;
 
   .sidebar-menu {
     position: fixed;
     display: flex;
     flex-flow: column;
     color: rgba(255, 255, 255, 0.6);
+    width: inherit;
 
     .sidebar-tab {
       display: flex;
@@ -77,6 +78,10 @@
 @media (max-width: 1024px) {
   .sidebar {
     width: 3.5rem;
+
+    .sidebar-menu {
+      width: inherit;
+    }
 
     .tab-name {
       display: none;

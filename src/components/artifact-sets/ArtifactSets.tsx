@@ -1,11 +1,13 @@
+import './ArtifactSets.scss';
+
 import { map } from 'lodash';
 import React from 'react';
 
-import { IArtifactBuild } from '../../../data/types';
-import { useAppSelector } from '../../hooks/useRedux';
+import { IArtifactSet } from '../../data/types';
+import { useAppSelector } from '../hooks/useRedux';
 
 type ArtifactSetsProps = {
-  artifacts: IArtifactBuild[]
+  artifacts: IArtifactSet[]
   selected?: boolean,
   color: string
 }

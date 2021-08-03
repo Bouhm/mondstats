@@ -1,0 +1,66 @@
+.artifact-sets-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  transition: transform 0.2s;
+
+  .artifact-thumb {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0.1rem;
+
+    .artifact-set-activation {
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      position: absolute;
+      bottom: 0;
+      right: -3px;
+      text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+      padding: 0.3rem;
+    }
+
+    &:not(:first-child) {
+      margin-left: -1rem;
+    }
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+  }
+
+  &:hover,
+  &:active {
+    cursor: pointer;
+    transform: scale(1.03);
+    background-color: rgba(223, 229, 220, 0.5);
+    border: 3px solid rgba(223, 229, 220, 0.5);
+    border-radius: 8px;
+  }
+
+  &.selected {
+    border: 3px solid #e9e5dc;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 1036px) {
+  .artifact-sets-container {
+    img {
+      width: 70px;
+      height: 70px;
+    }
+  }
+}
+
+@media (max-width: 617px) {
+  .artifact-sets-container {
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}

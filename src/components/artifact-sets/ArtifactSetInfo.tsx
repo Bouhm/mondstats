@@ -1,21 +1,23 @@
+import './ArtifactSetInfo.css';
+
 import _ from 'lodash';
 import React, { useContext } from 'react';
 
-import { IArtifactSetData } from '../../../data/types';
+import { IArtifactSetData } from '../../data/types';
 
 function ArtifactSetInfo({ _id, oid, name, affixes, activation }: IArtifactSetData & { activation: number }) {
   return (
-    <div className={`artifact-card`}>
-      <div className="artifact-header">
+    <div className={`artifact-set-info`}>
+      <div className="artifact-set-header">
         <img src={`/assets/artifacts/${oid}.webp`} alt={name} />
-        <div className="artifact-detail">
-          <div className="artifact-name">
+        <div className="artifact-set-detail">
+          <div className="artifact-set-name">
             {activation}x {name}
           </div>
         </div>
       </div>
       <table>
-        <tbody className="artifact-effects">
+        <tbody className="artifact-set-effects">
           {_.map(affixes, (affix, i) => {
             if (activation < affix.activation_number) return null;
 

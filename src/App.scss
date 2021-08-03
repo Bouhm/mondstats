@@ -1,7 +1,6 @@
 @use 'variables' as var;
 
 .App {
-  overflow: hidden;
 
   .App-content {
     display: flex;
@@ -12,6 +11,7 @@
     .section-view {
       display: flex;
       flex-flow: column;
+      padding: 0 4rem;
       flex: 1;
       width: 100%;
       overflow-y: auto;
@@ -113,7 +113,25 @@ footer {
   background: var.$rarity-5;
 }
 
+@media (max-width: 1036px) {
+  .App {
+    .App-content {
+      .section-view {
+        padding: 2rem;
+      }
+    }
+  }
+}
+
 @media (max-width: 516px) {
+  .App {
+    .App-content {
+      .section-view {
+        padding: 0;
+      }
+    }
+  }
+
   .character-filter {
     width: 100%;
     margin: 0 auto;
