@@ -1,12 +1,12 @@
 import './ArtifactSetStatistics.css';
 
-import _, { filter, flatten, includes, isEmpty, map, uniq } from 'lodash';
+import _, { clone, filter, flatten, includes, isEmpty, map, uniq } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
 import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
 import StatsTable from '../stats/StatsTable';
-import ItemSearch, { SearchItem } from '../ui/CardSearch';
+import CardSearch, { SearchItem } from '../ui/CardSearch';
 import { KEYWORDS } from '../ui/Searchbar';
 
 function ArtifactSetStatistics() { 
@@ -21,16 +21,18 @@ function ArtifactSetStatistics() {
     )))).join(" ")
   }));
 
-  const handleSelect = () => {
+  const [selectedSets, setSelectedSets] = useState<string[]>([])
 
+  const handleSelect = (id: string) => {
+    setSelectedSets([...selectedSets, id])
   }
   
   if (isEmpty(artifactSetDb)) return null;
   
   return (
     <div className="artifact-set-stats-container">
-      <ItemSearch items={artifactSets} onSelect={handleSelect} />
-      <StatsTable.ArtifactSetStatistics />
+      <CardSearch items={artifactSets} onSelect={handleSelect} />
+      <StatsTable.ArtifactSetStatistics selected={selectedSets} />
     </div>
   )
 }

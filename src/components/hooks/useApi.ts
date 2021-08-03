@@ -11,7 +11,7 @@ const useApi = (apiUrl: string) => {
       axios.get('https://api.github.com/repos/bouhm/favonius-data/contents' + apiUrl, { 
         headers: { 
           'accept': 'application/vnd.github.v3.raw+json',
-          'authorization': `token ${ghp}`
+          // 'authorization': `token ${ghp}`
         }
       })
         .then(res => setData(res.data))

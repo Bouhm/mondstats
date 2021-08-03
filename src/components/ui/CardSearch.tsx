@@ -6,9 +6,9 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import Card from './Card';
 import Searchbar from './Searchbar';
 
-type ItemSearchProps = {
+type CardSearchProps = {
   onSearch?: ()=>void,
-  onSelect: ()=>void,
+  onSelect: (id: string)=>void,
   items: SearchItem[]
 }
 
@@ -20,7 +20,7 @@ export type SearchItem = {
   keys?: string
 }
 
-function CardSearch({ onSearch, onSelect, items }: ItemSearchProps) { 
+function CardSearch({ onSearch, onSelect, items }: CardSearchProps) { 
   const [filteredItems, setFilteredItems] = useState<SearchItem[]>([]);
 
   useEffect(() => {
@@ -32,8 +32,8 @@ function CardSearch({ onSearch, onSelect, items }: ItemSearchProps) {
     setFilteredItems(filteredItems);    
   }
 
-  const handleSelect = () => {
-    onSelect();
+  const handleSelect = (id: string) => {
+    onSelect(id);
   }
   
   return (
@@ -43,10 +43,10 @@ function CardSearch({ onSearch, onSelect, items }: ItemSearchProps) {
       </div>
       <div className="cards">
         {map(filteredItems, (item) => (
-          <Card onClick={handleSelect} key={item._id} {...item} />
+          <Card onClick={() => handleSelect(item._id)} key={item._id} {...item} />
         ))}
         {map(orderBy(difference(items, filteredItems), 'name', 'desc'), (item) => (
-          <Card onClick={handleSelect} key={item._id} {...item} faded={!!filteredItems.length} />
+          <Card onClick={() => handleSelect(item._id)} key={item._id} {...item} faded={!!filteredItems.length} />
         ))}
       </div>
     </div>

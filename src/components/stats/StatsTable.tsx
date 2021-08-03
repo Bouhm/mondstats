@@ -1,6 +1,6 @@
 import './StatsTable.scss';
 
-import { clone, keys, map, orderBy, reduce, take } from 'lodash';
+import { clone, filter, includes, intersection, keys, map, orderBy, reduce, take } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { ICharacterData } from '../../data/types';
@@ -15,14 +15,18 @@ function renderCharacterStats(character: ICharacterData, count: number, key: str
   )
 }
 
-function ArtifactSetStatistics() {
+function ArtifactSetStatistics(props: any) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
-  const artifactSetStats = useApi(`/artifacts/top-artifactsets.json`)
+  let artifactSetStats = useApi(`/artifacts/top-artifactsets.json`)
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const total = reduce(artifactSetStats, (sum: number, curr: any) => sum + curr.count, 0)
   const maxChars = 8;
-
+  
   if (!artifactSetStats || !artifactSetDb) return null;
+
+  artifactSetStats = props.selected.length ? filter(artifactSetStats, (set: any) => intersection(props.selected, set.artifacts).length) : artifactSetStats;
+  console.log(artifactSetStats)
+
   return (
     <div className="stats-table">
       <div className="stats-table-row">
