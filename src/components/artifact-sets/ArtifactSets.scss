@@ -32,18 +32,20 @@
     height: 80px;
   }
 
-  &:hover,
-  &:active {
-    cursor: pointer;
-    transform: scale(1.03);
-    background-color: rgba(223, 229, 220, 0.5);
-    border: 3px solid rgba(223, 229, 220, 0.5);
-    border-radius: 8px;
-  }
-
-  &.selected {
-    border: 3px solid #e9e5dc;
-    border-radius: 8px;
+  &.asSelector {
+    &:hover,
+    &:active {
+      cursor: pointer;
+      transform: scale(1.03);
+      background-color: rgba(223, 229, 220, 0.5);
+      border: 3px solid rgba(223, 229, 220, 0.5);
+      border-radius: 8px;
+    }
+  
+    &.selected {
+      border: 3px solid #e9e5dc;
+      border-radius: 8px;
+    }
   }
 }
 

@@ -1,21 +1,38 @@
 .stats-table {
+  color: white;
   width: 100%; 
 
   .stats-table-row {
     display: grid;
-    grid-template-columns: 150px 200px 1fr;  
+    grid-template-columns: 150px 180px 1fr;  
     width: 100%; 
+    
+    &:nth-child(even) {
+      background-color: rgba(0,0,0,0.1);
+    }
+
+    .col {
+      &:not(:first-child) {
+        border-left: 1px solid rgba(255,255,255,0.5);
+      }
+    }
+
+    span {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .row-card {
+    display: flex;
+    margin-right: 1rem;
   }
 
   .row-stats {
     flex: 1;
     display: flex;
     align-items: center;
-    color: white;
-
-    .row-card {
-      display: flex;
-    }
 
     .row-stats-bar {
       height: 2rem;
@@ -23,7 +40,7 @@
       animation-name: horibar;
       animation-duration: 1s;
       animation-direction: forwards;
-      border-right: 1px solid rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.7);
       background-color: rgba(255, 255, 255, 0.6);
       margin-right: 0.5rem;
     }
@@ -44,16 +61,23 @@
     padding: 0.2rem;
     overflow-x: auto;
     cursor: grab;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    -webkit-user-drag: none;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
 
     .character-stats {
+      -webkit-overflow-scrolling: touch;
       width: 60px;
       height: 60px;
       margin-right: 0.2rem;
       border-radius: 6px;
+      -webkit-user-drag: none;
+
+      &::selection {
+        color: none;
+        background: none;
+        
+      }
     }
   }
 }

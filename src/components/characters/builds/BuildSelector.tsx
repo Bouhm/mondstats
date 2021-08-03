@@ -112,7 +112,7 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
               _.map(filteredBuilds, (build, i) => {
                 return (
                   <div key={`artifacts-thumb=${i}`} onClick={() => handleSelectSet(i)}>
-                    <ArtifactSets artifacts={build.artifacts} color={color} selected={i === activeBuildIdx} />
+                    <ArtifactSets artifacts={build.artifacts} color={color} selected={i === activeBuildIdx} selector={true} />
                   </div>
                 )
               })

@@ -9,14 +9,15 @@ import { useAppSelector } from '../hooks/useRedux';
 type ArtifactSetsProps = {
   artifacts: IArtifactSet[]
   selected?: boolean,
-  color: string
+  color: string,
+  selector?: boolean,
 }
 
-function ArtifactSets({ artifacts, color, selected=false }: ArtifactSetsProps) {
+function ArtifactSets({ artifacts, color, selected=false, selector=false }: ArtifactSetsProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
 
   return (
-    <div className={`artifact-sets-container ${selected ? "selected" : ""}`} style={selected ? {backgroundColor: color }:{}}>
+    <div className={`artifact-sets-container ${selector ? 'asSelector' : ''} ${selected ? "selected" : ""}`} style={selected ? {backgroundColor: color }:{}}>
       {map(artifacts, ({ _id, activation_number }, i) => {
         return (
           <div key={`thumb-${_id}-i`} className={"artifact-thumb"}>
