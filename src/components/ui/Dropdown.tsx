@@ -49,9 +49,10 @@ type SearchProps = {
   maxSelected?: number
   showDropdown?: boolean
   optionLabel: ReactNode
+  value?: Option[]
 }
 
-function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="Search character", optionLabel, isMulti = false, showDropdown = true}: SearchProps & { options: Option[], optionLabel: (opt: Option)=>ReactNode }) {
+function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="Search", optionLabel, isMulti = false, showDropdown = true, value=[]}: SearchProps & { options: Option[], optionLabel: (opt: Option)=>ReactNode }) {
   return (
     <div className="search-select">
       <Select 
@@ -62,6 +63,7 @@ function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="S
         isMulti={isMulti}
         isSearchable={true}
         formatOptionLabel={optionLabel}
+        value={value}
         placeholder={
           <div className="search-placeholder">
             <Search className="search-icon" size={20} />

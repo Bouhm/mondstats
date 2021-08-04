@@ -20,7 +20,15 @@
 .card-searchbar {
   margin-top: 1rem;
 
-input {
+  .item-option {
+    .item-option-image {
+      .item-option-portrait {
+        width: 50px;
+      }
+    }
+  }
+
+  input {
     max-width: 35rem;
   }
 }

@@ -7,9 +7,9 @@ import { SearchItem } from './CardSearch';
 type CardProps = { 
   onClick?: (name: string)=>void,
   faded?: boolean 
-} & SearchItem
+} & SearchItem & {imgPath: string}
 
-function Card({ _id, rarity, name, imgUrl, onClick, faded=false }: CardProps) {
+function Card({ _id, oid, rarity, name, imgPath, onClick, faded=false }: CardProps) {
   let classes = "card";
   classes += ` rarity-${rarity}`;
 
@@ -17,15 +17,15 @@ function Card({ _id, rarity, name, imgUrl, onClick, faded=false }: CardProps) {
     classes += ' faded'
   }
 
-  const handleClick = (name: string) => {
-    onClick && onClick(name);
+  const handleClick = (oid: number) => {
+    onClick && onClick(oid);
   }
 
   return (
-    <div className={`card-container`} onClick={() => handleClick(name)}>
+    <div className={`card-container`} onClick={() => handleClick(oid)}>
       <div className={classes}>
         <div className="card-image">
-          <img className="card-thumb" src={imgUrl} alt={`${name}-thumb`}></img>
+          <img className="card-thumb" src={`/assets/${imgPath}/${oid}.webp`} alt={`${name}-thumb`}></img>
           <div className="card-name">
             {name}
           </div>
