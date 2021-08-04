@@ -1,38 +1,27 @@
 import './ArtifactSetStatistics.css';
 
-import _, { clone, filter, flatten, includes, isEmpty, map, uniq } from 'lodash';
+import { filter, flatten, includes, isEmpty, map, reduce, uniq } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
 import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
 import StatsTable from '../stats/StatsTable';
 import CardSearch, { SearchItem } from '../ui/CardSearch';
+import Loader from '../ui/Loader';
 import { KEYWORDS } from '../ui/Searchbar';
 
 function ArtifactSetStatistics() { 
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
-  const artifactSets = map(artifactSetDb, (set) => ({
-    _id: set._id,
-    name: set.name,
-    rarity: set.rarity,
-    imgUrl: `/assets/artifacts/${set.oid}.webp`,
-    keys: uniq(flatten(map(set.affixes, affix => (
-      filter(KEYWORDS, key => includes(affix.effect.toLowerCase(), key))
-    )))).join(" ")
-  }));
-
-  const [selectedSets, setSelectedSets] = useState<string[]>([])
-
-  const handleSelect = (id: string) => {
-    setSelectedSets([...selectedSets, id])
-  }
+  const artifactSetStats = useApi(`/artifacts/top-artifactsets.json`)
   
-  if (isEmpty(artifactSetDb)) return null;
-  
+  if (isEmpty(artifactSetDb) || !artifactSetStats) return <Loader />
+
+  const artifactSetIds = uniq(reduce(artifactSetStats, (arr, curr) => flatten([...arr, ...map(curr.artifacts, artifact => artifact._id)]) as unknown as any, []));
+
   return (
     <div className="artifact-set-stats-container">
-      <CardSearch items={artifactSets} onSelect={handleSelect} />
-      <StatsTable.ArtifactSetStatistics selected={selectedSets} />
+      <CardSearch.ArtifactSets items={artifactSetIds} />
+      <StatsTable.ArtifactSetStatistics data={artifactSetStats} />
     </div>
   )
 }

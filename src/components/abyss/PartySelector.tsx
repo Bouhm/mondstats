@@ -57,7 +57,7 @@ function PartySelector({ onPartyChange }: PartySelectorProps) {
       </div>
       {showCharacterSearch && selectedCharacters.length < 4 && 
         <>
-          <CharacterSearch filter={selectedCharacters} onSelect={handleSelect} />
+          <CharacterSearch charFilter={selectedCharacters} onSelect={handleSelect} />
           {<Button onClick={handleClose}>Cancel</Button>}
         </>
       }

@@ -2,7 +2,7 @@ import './Dropdown.scss';
 
 import { filter, map, orderBy, some } from 'lodash';
 import React, { ReactNode } from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 
 import { getCharacterFileName, getShortName } from '../../scripts/util';
 import { useAppSelector } from '../hooks/useRedux';
@@ -42,48 +42,24 @@ function MultiSelect({ options, onChange, isMulti=false, defaultValue=options.sl
 
 type SearchProps = {
   onChange: (e: any) => void
+  onInput?: (s: string) => void
   placeholder?: string
   defaultValue?: Option[] | Option
+  isMulti?: boolean
+  maxSelected?: number
+  showDropdown?: boolean
+  optionLabel: ReactNode
 }
 
-function CharacterSearchSelect(props: SearchProps & { charFilter: string[]}) {
-  const characterDb = useAppSelector((state) => state.data.characterDb)
-  const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
-
-  const options = orderBy(
-    filter(
-      map(characterDb, (char) => {
-        if (char.name === "Traveler") return { label: `${char.name} (${char.element})`, value: getShortName(char) }
-        return { label: char.name, value: getShortName(char) }
-      }),
-    ({ value }) => !some(props.charFilter, name => value.split('-')[0] === name.split('-')[0])),
-  'label', 'asc')
-
-  const OptionLabel = ({ value, label }: Option) => {
-    const character = characterDb[characterIdMap[value]];
-
-    return (
-      <div className="character-option" key={label}>
-        <div className="character-option-image">
-          <img className="character-option-element" src={`/assets/elements/${character.element}.webp`} />
-          <img className="character-option-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${value}-portrait`} />
-        </div>
-        <div className="character-option-label">{label}</div>
-      </div>
-    ) as ReactNode;
-  }
-
-  return <SearchSelect {...props} optionLabel={OptionLabel} options={options} />
-}
-
-function SearchSelect({ onChange, options, defaultValue, placeholder="Search character", optionLabel }: SearchProps & { options: Option[], optionLabel: (opt: Option)=>ReactNode }) {
+function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="Search character", optionLabel, isMulti = false, showDropdown = true}: SearchProps & { options: Option[], optionLabel: (opt: Option)=>ReactNode }) {
   return (
     <div className="search-select">
       <Select 
         options={options} 
         onChange={onChange} 
+        onInputChange={onInput}
         defaultValue={defaultValue} 
-        isMulti={false}
+        isMulti={isMulti}
         isSearchable={true}
         formatOptionLabel={optionLabel}
         placeholder={
@@ -92,6 +68,10 @@ function SearchSelect({ onChange, options, defaultValue, placeholder="Search cha
             {placeholder}&hellip;
           </div>
         }
+        components={{
+          Menu: showDropdown ?  (props) => <components.Menu {...props} /> : () => null,
+          DropdownIndicator: showDropdown ?  (props) => <components.DropdownIndicator {...props} /> : () => null
+        }}
         styles={{ 
           container: base => ({ ...base }),
           singleValue: base => ({ ...base, color: "white" }),
@@ -99,8 +79,8 @@ function SearchSelect({ onChange, options, defaultValue, placeholder="Search cha
           valueContainer: base => ({ ...base, backgroundColor: "#232530",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
           placeholder: base => ({ ...base, width: '100%' }),
           control: base =>  ({ ...base, borderColor: "none" }),
-          indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
-          menu: base => ({ ...base, backgroundColor: "#21232D", color: "white",  }),
+          indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)", display: `${showDropdown ? 'initial' : 'none'}` }),
+          menu: base => ({ ...base, backgroundColor: "#21232D", color: "white" }),
           option: base => ({ ...base, backgroundColor: "#21232D !important", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.6) !important" }}),
         }}
       />
@@ -108,4 +88,4 @@ function SearchSelect({ onChange, options, defaultValue, placeholder="Search cha
   )
 }
 
-export default { MultiSelect, CharacterSearchSelect }
+export default { MultiSelect, SearchSelect }

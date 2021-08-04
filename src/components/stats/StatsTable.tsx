@@ -1,6 +1,6 @@
 import './StatsTable.scss';
 
-import { clone, filter, includes, intersection, keys, map, orderBy, reduce, take } from 'lodash';
+import { clone, keys, map, orderBy, reduce, take } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { ICharacterData } from '../../data/types';
@@ -15,18 +15,13 @@ function renderCharacterStats(character: ICharacterData, count: number, key: str
   )
 }
 
-function ArtifactSetStatistics(props: any) {
+function ArtifactSetStatistics({data}: any) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
-  let artifactSetStats = useApi(`/artifacts/top-artifactsets.json`)
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const total = reduce(artifactSetStats, (sum: number, curr: any) => sum + curr.count, 0)
-  const maxChars = 8;
-  
-  if (!artifactSetStats || !artifactSetDb) return null;
+  const total = reduce(data, (sum: number, curr: any) => sum + curr.count, 0)
+  const maxChars = 20;
 
-  artifactSetStats = props.selected.length ? filter(artifactSetStats, (set: any) => intersection(props.selected, set.artifacts).length) : artifactSetStats;
-  console.log(artifactSetStats)
-
+  if (!data || !artifactSetDb) return null;
   return (
     <div className="stats-table">
       <div className="stats-table-row">
@@ -40,7 +35,7 @@ function ArtifactSetStatistics(props: any) {
           <span>Used by</span>
           </div>
       </div>
-      {map(take(artifactSetStats, 10), (itemStat: any, i) => {
+      {map(take(data, 10), (itemStat: any, i) => {
         return (
           <div key={`row-${i}`} className="stats-table-row">
             <div className="row-card col">
@@ -54,7 +49,7 @@ function ArtifactSetStatistics(props: any) {
               <div className="row-stats-pct">{ `${Math.round((itemStat.count / total * 1000)/10)}%`}</div>
             </div>
             <div className="row-related col">
-              {map(take(keys(itemStat.characters), maxChars), (charId, j) => renderCharacterStats(characterDb[charId], itemStat.characters[charId], `${charId}-${i}-${j}`))}
+              {map(itemStat.characters, (charStat, j) => renderCharacterStats(characterDb[charStat._id], charStat.count, `${charStat._id}-${i}-${j}`))}
             </div>
         </div>
       )})}
