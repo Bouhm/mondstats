@@ -1,18 +1,15 @@
 import './CardSearch.scss';
 
 import Fuse from 'fuse.js';
-import { debounce, difference, filter, find, includes, map, orderBy, some, uniq, values } from 'lodash';
-import { list } from 'postcss';
+import { debounce, difference, filter, find, includes, map, orderBy, uniq } from 'lodash';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
-import { getShortName } from '../../scripts/util';
-import { useAppSelector } from '../hooks/useRedux';
 import Dropdown, { Option } from '../ui/Dropdown';
 import Card from './Card';
-import Searchbar from './Searchbar';
 
 type ItemSearchProps = {
-  items: string[]
+  items: SearchItem[]
+  onSelect: (selectedIds: string[]) => void
 }
 
 export type SearchItem = {
@@ -29,7 +26,6 @@ type DDProps = {
 }
 
 function ArtifactSets(props: ItemSearchProps) { 
-  const db = useAppSelector((state) => state.data.artifactSetDb)
   const options: Option[] = orderBy(map(props.items, (item) => {
     return { label: item.name, value: item.oid.toString() }
   }),'label', 'asc')
@@ -49,7 +45,6 @@ function ArtifactSets(props: ItemSearchProps) {
 }
 
 function Weapons(props: ItemSearchProps) { 
-  const db = useAppSelector((state) => state.data.weaponDb)
   const options: Option[] = orderBy(map(props.items, (item) => {
     return { label: item.name, value: item.oid.toString() }
   }),'label', 'asc')
@@ -68,7 +63,7 @@ function Weapons(props: ItemSearchProps) {
   return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"weapons"} {...props} />
 }
 
-function CardSearch({ items, imgPath, options, OptionLabel }: ItemSearchProps & DDProps & { imgPath: string }) { 
+function CardSearch({ items, imgPath, options, onSelect, OptionLabel }: ItemSearchProps & DDProps & { imgPath: string }) { 
   const [filteredItems, setFilteredItems] = useState<SearchItem[]>([]);
   const [selectedItems, setSelectedItems] = useState<SearchItem[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -76,8 +71,8 @@ function CardSearch({ items, imgPath, options, OptionLabel }: ItemSearchProps & 
   const fuse = new Fuse(items, { threshold: 0.3, keys: [{name: 'name', weight: 1}, {name: 'keys', weight: 0.5}] });
 
   // Set character search filter
-  const handleSearch = (filteredItems: SearchItem[]) => {
-    setFilteredItems(filteredItems);    
+  const handleSearch = (filtered: SearchItem[]) => {
+    setFilteredItems(filtered);    
   }
 
   const handleInput = (input: string) => {
@@ -100,19 +95,22 @@ function CardSearch({ items, imgPath, options, OptionLabel }: ItemSearchProps & 
   }
 
   const handleChange = (selected: Option[]) => {
-    const selectedItem = find(items, { oid: selected.value });
-    setSelectedItems(selected);
+    const selectedItems = filter(items, item => includes(map(selected, option => option.value), item.oid.toString()) )
+    if (selectedItems) {
+      setSelectedItems(selectedItems);
+      onSelect(map(selectedItems, item => item._id ))
+    }
   }
 
   const handleSelect = (oid: number) => {
-    const selectedItem = find(items, { oid: number });
-    if (selectedItem) setSelectedItems([...selectedItems, ({ label: selectedItem.name, value: selectedItem.oid.toString() })])
+    const selectedItem = find(items, { oid });
+    if (selectedItem) {
+      const newSelected = [...selectedItems, selectedItem];
+      setSelectedItems(newSelected)
+      onSelect(map(newSelected, item => item._id ))
+    }
   }
 
-  useEffect(() => {
-    setFilteredItems(uniq([...filteredItems, ...map(selectedItems)]))
-  }, [selectedItems])
-  
   return (
     <div className="cards-container">
       <div className="card-searchbar">
@@ -123,15 +121,15 @@ function CardSearch({ items, imgPath, options, OptionLabel }: ItemSearchProps & 
           optionLabel={OptionLabel}
           showDropdown={false}
           isMulti={true}
-          value={selectedItems}
+          value={map(selectedItems, item => ({ label: item.name, value: item.oid.toString() }))}
         />
       </div>
       <div className="cards">
-        {map(filteredItems, (item) => (
-          <Card onClick={handleSelect} key={`filtered-${item._id}`} imgPath={imgPath} {...item} />
+      {map(filteredItems, (item, i) => (
+          <Card onClick={handleSelect} key={`${item._id}-${i}`} imgPath={imgPath} {...item} />
         ))}
-        {map(orderBy(difference(items, filteredItems), 'name', 'desc'), (item) => (
-          <Card onClick={handleSelect} key={item._id} imgPath={imgPath} {...item} faded={!!filteredItems.length} />
+        {map(orderBy(difference(items, filteredItems), 'name', 'asc'), (item, i) => (
+          <Card onClick={handleSelect} key={`${item._id}-${i}`} imgPath={imgPath} {...item} faded={!!filteredItems.length} />
         ))}
       </div>
     </div>

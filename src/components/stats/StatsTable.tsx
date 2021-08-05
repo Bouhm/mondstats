@@ -1,6 +1,6 @@
 import './StatsTable.scss';
 
-import { clone, keys, map, orderBy, reduce, take } from 'lodash';
+import { clone, isEmpty, keys, map, orderBy, reduce, take } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { ICharacterData } from '../../data/types';
@@ -21,7 +21,8 @@ function ArtifactSetStatistics({data}: any) {
   const total = reduce(data, (sum: number, curr: any) => sum + curr.count, 0)
   const maxChars = 20;
 
-  if (!data || !artifactSetDb) return null;
+  if (!data || isEmpty(artifactSetDb)) return null;
+
   return (
     <div className="stats-table">
       <div className="stats-table-row">
@@ -35,7 +36,7 @@ function ArtifactSetStatistics({data}: any) {
           <span>Used by</span>
           </div>
       </div>
-      {map(take(data, 10), (itemStat: any, i) => {
+      {map(data, (itemStat: any, i) => {
         return (
           <div key={`row-${i}`} className="stats-table-row">
             <div className="row-card col">

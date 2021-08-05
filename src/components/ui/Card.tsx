@@ -5,7 +5,7 @@ import React from 'react';
 import { SearchItem } from './CardSearch';
 
 type CardProps = { 
-  onClick?: (name: string)=>void,
+  onClick?: (oid: number)=>void,
   faded?: boolean 
 } & SearchItem & {imgPath: string}
 
