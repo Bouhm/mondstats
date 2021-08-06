@@ -1,21 +1,18 @@
 .artifact-sets-container {
-  width: auto;
-  height: inherit;
+  height: 100%;
   display: flex;
   justify-content: center;
   transition: transform 0.2s;
 
   .artifact-thumb {
     position: relative;
-    width: 100%;
     height: 100%;
     border-radius: 8px;
     overflow: hidden;
     margin: 0.1rem;
 
     img {
-      width: 100%;
-      height: 100%;
+      height: inherit;
     }
 
     .artifact-set-activation {

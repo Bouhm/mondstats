@@ -62,6 +62,12 @@
     overflow: hidden;
   }
 
+  .artifacts-menu {
+    .artifact-sets-container {
+      height: 80px;
+    }
+  }
+
   .artifacts-menu-controls {
     display: none;
 
@@ -77,7 +83,8 @@
       opacity: 0.8;
       cursor: pointer;
 
-      &:hover, &.active {
+      &:hover,
+      &.active {
         background: #e9e5dc;
         opacity: 1;
       }
@@ -134,9 +141,9 @@
     max-height: 100%;
     flex-wrap: wrap-reverse;
 
-    .character-builds-selector { 
+    .character-builds-selector {
       width: 100%;
-      
+
       .artifacts-menu-controls {
         display: block;
       }
@@ -176,4 +183,3 @@
     flex-flow: column-reverse;
   }
 }
-
