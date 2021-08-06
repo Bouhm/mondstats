@@ -5,11 +5,11 @@ import React, { useContext } from 'react';
 
 import { IArtifactSetData } from '../../data/types';
 
-function ArtifactSetInfo({ _id, oid, name, affixes, activation }: IArtifactSetData & { activation: number }) {
+function ArtifactSetInfo({ _id, name, affixes, activation }: IArtifactSetData & { activation: number }) {
   return (
     <div className={`artifact-set-info`}>
       <div className="artifact-set-header">
-        <img src={`/assets/artifacts/${oid}.webp`} alt={name} />
+        <img src={`/assets/artifacts/${_id}.webp`} alt={name} />
         <div className="artifact-set-detail">
           <div className="artifact-set-name">
             {activation}x {name}

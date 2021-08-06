@@ -23,7 +23,6 @@ function ArtifactSetStatistics() {
     return ({
       _id,
       name: set.name,
-      oid: set.oid,
       rarity: set.rarity,
       keys: uniq(flatten(map(set.affixes, affix => (
         filter(KEYWORDS, key => includes(affix.effect.toLowerCase(), key))

@@ -23,7 +23,6 @@ function WeaponStatistics() {
     return ({
       _id,
       name: weapon.name,
-      oid: weapon.oid,
       rarity: weapon.rarity,
       keys: uniq(
         filter(KEYWORDS, key => includes(weapon.effect, key))

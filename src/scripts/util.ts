@@ -3,8 +3,8 @@ export function getShortName(char: { name: string, element: string }) {
   return charName;
 }
 
-export function getCharacterFileName(char: { name: string, oid: number }) {
-  return char.name === "Traveler" ? "traveler" : char.oid;
+export function getCharacterFileName(char: { name: string, _id: string }) {
+  return char.name === "Traveler" ? "traveler" : char._id;
 }
 
 export function numberWithCommas(n: number) {

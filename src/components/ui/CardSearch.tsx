@@ -15,7 +15,6 @@ type ItemSearchProps = {
 export type SearchItem = {
   _id: string
   name: string,
-  oid: number,
   rarity: number,
   keys?: string
 }
@@ -27,7 +26,7 @@ type DDProps = {
 
 function ArtifactSets(props: ItemSearchProps) { 
   const options: Option[] = orderBy(map(props.items, (item) => {
-    return { label: item.name, value: item.oid.toString() }
+    return ({ label: item.name, value: item._id }) as Option
   }),'label', 'asc')
 
   const OptionLabel = ({ value, label }: Option) => {
@@ -46,7 +45,7 @@ function ArtifactSets(props: ItemSearchProps) {
 
 function Weapons(props: ItemSearchProps) { 
   const options: Option[] = orderBy(map(props.items, (item) => {
-    return { label: item.name, value: item.oid.toString() }
+    return { label: item.name, value: item._id }
   }),'label', 'asc')
 
   const OptionLabel = ({ value, label }: Option) => {
@@ -64,15 +63,15 @@ function Weapons(props: ItemSearchProps) {
 }
 
 function CardSearch({ items, imgPath, options, onSelect, OptionLabel }: ItemSearchProps & DDProps & { imgPath: string }) { 
-  const [filteredItems, setFilteredItems] = useState<SearchItem[]>([]);
-  const [selectedItems, setSelectedItems] = useState<SearchItem[]>([]);
+  const [searchedItems, setSearchedItems] = useState<SearchItem[]>([]);
+  const [selectedItems, setSelectedItems] = useState<Option[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
   const maxResults = 10;
   const fuse = new Fuse(items, { threshold: 0.3, keys: [{name: 'name', weight: 1}, {name: 'keys', weight: 0.5}] });
 
   // Set character search filter
   const handleSearch = (filtered: SearchItem[]) => {
-    setFilteredItems(filtered);    
+    setSearchedItems(filtered);    
   }
 
   const handleInput = (input: string) => {
@@ -95,19 +94,16 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel }: ItemSear
   }
 
   const handleChange = (selected: Option[]) => {
-    const selectedItems = filter(items, item => includes(map(selected, option => option.value), item.oid.toString()) )
-    if (selectedItems) {
-      setSelectedItems(selectedItems);
-      onSelect(map(selectedItems, item => item._id ))
-    }
+    setSelectedItems(selected);
+    onSelect(map(selected, item => item.value ))
   }
 
-  const handleSelect = (oid: number) => {
-    const selectedItem = find(items, { oid });
+  const handleSelect = (_id: string) => {
+    const selectedItem = find(items, { _id });
     if (selectedItem) {
-      const newSelected = [...selectedItems, selectedItem];
+      const newSelected = [...selectedItems, { label: selectedItem.name, value: selectedItem._id }];
       setSelectedItems(newSelected)
-      onSelect(map(newSelected, item => item._id ))
+      onSelect(map(newSelected, item => item.value ))
     }
   }
 
@@ -121,15 +117,15 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel }: ItemSear
           optionLabel={OptionLabel}
           showDropdown={false}
           isMulti={true}
-          value={map(selectedItems, item => ({ label: item.name, value: item.oid.toString() }))}
+          value={selectedItems}
         />
       </div>
       <div className="cards">
-      {map(filteredItems, (item, i) => (
+        {map(searchedItems, (item, i) => (
           <Card onClick={handleSelect} key={`${item._id}-${i}`} imgPath={imgPath} {...item} />
         ))}
-        {map(orderBy(difference(items, filteredItems), 'name', 'asc'), (item, i) => (
-          <Card onClick={handleSelect} key={`${item._id}-${i}`} imgPath={imgPath} {...item} faded={!!filteredItems.length} />
+        {map(orderBy(difference(items, searchedItems), 'name', 'asc'), (item, i) => (
+          <Card onClick={handleSelect} key={`${item._id}-${i}`} imgPath={imgPath} {...item} faded={!!searchedItems.length} />
         ))}
       </div>
     </div>

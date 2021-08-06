@@ -5,6 +5,7 @@ export interface ICharacterData {
   rarity: number,
   element: string
   constellations: {
+    _id: string,
     oid: number,
     name: string,
     effect: string
