@@ -1,19 +1,18 @@
 .stats-table {
   color: white;
-  width: 100%; 
+  width: 100%;
 
   .stats-table-row {
     display: grid;
-    grid-template-columns: 150px 180px 1fr;  
-    width: 100%; 
-    
-    &:nth-child(even) {
-      background-color: rgba(0,0,0,0.1);
-    }ww
+    grid-template-columns: 150px 180px 1fr;
+    width: 100%;
 
-    .col {
+    &:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    ww .col {
       &:not(:first-child) {
-        border-left: 1px solid rgba(255,255,255,0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.5);
       }
     }
 
@@ -24,6 +23,8 @@
   }
 
   .row-card {
+    width: auto;
+    height: 80px;
     display: flex;
     margin-right: 1rem;
   }
@@ -53,7 +54,7 @@
       }
     }
   }
-  
+
   .row-related {
     display: flex;
     align-items: center;
@@ -75,7 +76,6 @@
       &::selection {
         color: none;
         background: none;
-        
       }
     }
   }
@@ -84,8 +84,13 @@
 @media (max-width: 1036px) {
   .stats-table {
     .stats-table-row {
-      grid-template-columns: 100px 150px 1fr; 
-      
+      grid-template-columns: 100px 150px 1fr;
+
+      .row-card {
+        width: auto;
+        height: 70px;
+      }
+
       .character-stats {
         width: 50px;
         height: 50px;
@@ -98,8 +103,13 @@
 @media (max-width: 676px) {
   .stats-table {
     .stats-table-row {
-      grid-template-columns: 90px 100px 1fr; 
-      
+      grid-template-columns: 90px 100px 1fr;
+
+      .row-card {
+        width: auto;
+        height: 50px;
+      }
+
       .character-stats {
         width: 35px;
         height: 35px;

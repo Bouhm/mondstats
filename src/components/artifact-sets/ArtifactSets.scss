@@ -1,15 +1,22 @@
 .artifact-sets-container {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: inherit;
   display: flex;
   justify-content: center;
   transition: transform 0.2s;
 
   .artifact-thumb {
     position: relative;
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
     overflow: hidden;
     margin: 0.1rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
 
     .artifact-set-activation {
       color: white;
@@ -27,11 +34,6 @@
     }
   }
 
-  img {
-    width: 80px;
-    height: 80px;
-  }
-
   &.asSelector {
     &:hover,
     &:active {
@@ -41,28 +43,10 @@
       border: 3px solid rgba(223, 229, 220, 0.5);
       border-radius: 8px;
     }
-  
+
     &.selected {
       border: 3px solid #e9e5dc;
       border-radius: 8px;
-    }
-  }
-}
-
-@media (max-width: 1036px) {
-  .artifact-sets-container {
-    img {
-      width: 70px;
-      height: 70px;
-    }
-  }
-}
-
-@media (max-width: 617px) {
-  .artifact-sets-container {
-    img {
-      width: 50px;
-      height: 50px;
     }
   }
 }
