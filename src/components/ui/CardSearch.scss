@@ -35,13 +35,6 @@
   }
 }
 
-@media (max-width: 544px) {
-  .cards {
-    grid-template-columns: repeat(3, 100px);
-    column-gap: 0.5rem;
-  }
-}
-
 @media (max-width: 826px) {
   .card-search {
     width: 100%;
@@ -49,9 +42,21 @@
 
   .card-searchbar {
     width: 100%;
+    padding: 0 0.5rem;
 
     input {
       max-width: 100%;
     }
+  }
+
+  .cards {
+    grid-template-columns: repeat(auto-fill, 100px);
+  }
+}
+
+@media (max-width: 544px) {
+  .cards {
+    grid-template-columns: repeat(4, 70px);
+    column-gap: 0.5rem;
   }
 }

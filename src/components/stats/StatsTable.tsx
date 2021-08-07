@@ -8,6 +8,7 @@ import { getCharacterFileName } from '../../scripts/util';
 import ArtifactSets from '../artifact-sets/ArtifactSets';
 import { useAppSelector } from '../hooks/useRedux';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import { usePopperTooltip } from 'react-popper-tooltip';
 
 function renderCharacterStats(character: ICharacterData, count: number, key: string) {
   return (
@@ -20,6 +21,12 @@ function ArtifactSetStatistics({data}: any) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const total = reduce(data, (sum: number, curr: any) => sum + curr.count, 0)
   const maxChars = 20;
+  const {
+    getTooltipProps,
+    setTooltipRef,
+    setTriggerRef,
+    visible,
+  } = usePopperTooltip();
 
   if (!data || isEmpty(artifactSetDb)) return null;
 

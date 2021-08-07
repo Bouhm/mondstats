@@ -47,3 +47,25 @@
     }
   }
 }
+
+@media (max-width: 826px) {
+  .artifact-sets-container {
+    .artifact-thumb {
+      .artifact-set-activation {
+        font-size: 1rem;
+        right: -2px;
+      }
+    }
+  }
+}
+
+@media (max-width: 544px) {
+  .artifact-sets-container {
+    .artifact-thumb {
+      .artifact-set-activation {
+        font-size: 0.8rem;
+        right: -1px;
+      }
+    }
+  }
+}
