@@ -4,7 +4,7 @@
 
   .stats-table-row {
     display: grid;
-    grid-template-columns: 150px 180px 1fr;
+    grid-template-columns: 150px 200px 1fr;
     width: 100%;
 
     &:nth-child(even) {
@@ -18,6 +18,7 @@
 
     span {
       display: flex;
+      align-items: center;
       width: 100%;
     }
   }
@@ -59,14 +60,8 @@
     display: flex;
     align-items: center;
     padding: 0.2rem;
-    overflow-x: auto;
-    cursor: grab;
-    -webkit-user-drag: none;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
 
     .character-stats {
-      -webkit-overflow-scrolling: touch;
       width: 60px;
       height: 60px;
       margin-right: 0.2rem;

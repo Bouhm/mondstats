@@ -1,4 +1,4 @@
-.builds-selector {
+.build-details {
   display: flex;
   flex-flow: row;
   padding: 2rem;
@@ -53,17 +53,17 @@
   }
 }
 
-.character-builds-selector {
-  margin-right: 1rem;
-  position: relative;
-  width: 7rem;
-
+.artifacts-selector {
   .artifact-thumb {
     overflow: hidden;
   }
 
   .artifacts-menu {
+    display: flex;
+    overflow-y: hidden;
+
     .artifact-sets-container {
+      width: 160px;
       height: 80px;
     }
   }
@@ -121,14 +121,7 @@
 }
 
 @media (max-width: 617px) {
-  .artifacts-menu {
-    width: 100%;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-  }
-
-  .builds-selector {
+  .build-details {
     flex-flow: column-reverse;
   }
 
@@ -141,12 +134,8 @@
     max-height: 100%;
     flex-wrap: wrap-reverse;
 
-    .character-builds-selector {
-      width: 100%;
-
-      .artifacts-menu-controls {
-        display: block;
-      }
+    .artifacts-menu-controls {
+      display: block;
     }
 
     .artifact-build-stats {
@@ -179,7 +168,7 @@
 }
 
 @media (max-width: 1036px) {
-  .builds-selector {
+  .build-details {
     flex-flow: column-reverse;
   }
 }

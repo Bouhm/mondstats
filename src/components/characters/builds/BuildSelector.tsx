@@ -1,7 +1,7 @@
 import './BuildSelector.css';
 import './Weapon.css';
 
-import _ from 'lodash';
+import _, { forEach, map, orderBy } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
 import { ElementColors } from '../../../data/constants';
@@ -10,9 +10,9 @@ import ArtifactSets from '../../artifact-sets/ArtifactSets';
 import { Filters } from '../../filters/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import Chart from '../../ui/Chart';
-import { EllipsisV } from '../../ui/Icons';
 import ArtifactBuild from './ArtifactBuild';
 import WeaponBuild from './WeaponBuild';
+import ScrollContainer from 'react-indiana-drag-scroll';
 
 type BuildSelectorProps = {
   builds: IBuild[],
@@ -22,22 +22,19 @@ type BuildSelectorProps = {
 }
 
 function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
-  const mobileWidth = window.matchMedia("(max-width: 617px)")
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(mobileWidth.matches)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
 
-  const filteredBuilds = _.orderBy(builds, 'count', 'desc');
+  const filteredBuilds = orderBy(builds, 'count', 'desc');
   let labels: string[] = [];
   let data: number[] = [];
   let colors: string[] = [];
   let countSum = 0; 
 
-  _.forEach(filteredBuilds, build => {
+  forEach(filteredBuilds, build => {
     let label = "";
 
-    _.forEach(build.artifacts, (set, i) => {
+    forEach(build.artifacts, (set, i) => {
       let name = artifactSetDb[set._id].name;
       if (name.includes(" ")) {
         if (name.split(" ")[0] === "The") {
@@ -58,65 +55,50 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
   colors = Array(labels.length).fill(ElementColors.none)
   colors[activeBuildIdx] = color;
 
-  useEffect(() => {
-    mobileWidth.addEventListener('change', () => {
-      setIsMobile(mobileWidth.matches)
-    })
-  },[])
-
-  const handleToggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  }
-
   const handleSelectSet = (i: number) => {
     setActiveBuildIdx(i);
-    if (isMobile) setIsMenuOpen(false);
   }
 
   return (
-    <div className="builds-selector">
-      <WeaponBuild
-        weaponBuilds={filteredBuilds[activeBuildIdx].weapons}
-        total={filteredBuilds[activeBuildIdx].count}
-        color={color}
-        filters={filters}
-      />
-      <div className="artifact-build-container">
-        <div className="artifact-build-stats">
-          <ArtifactBuild
-            artifacts={filteredBuilds[activeBuildIdx].artifacts}
-          />
-          <div className="artifacts-donut-container">
-            <div className="artifacts-donut-chart">
-              <Chart
-                id="artifacts-donut"
-                type="doughnut"
-                labels={labels}
-                data={data}
-                colors={colors}
-                max={countSum}
-                showScale={false}
-              />
-              </div>
-            <div className="artifact-popularity">{Math.round((filteredBuilds[activeBuildIdx].count / countSum) * 100)}%</div>
-          </div>
-        </div>
-        <div className="character-builds-selector">
-          <div className="artifacts-menu-controls" >
-            <div className={`artifacts-menu-button ${isMenuOpen ? "active" : ""}`} onClick={handleToggleMenu}>
-              <EllipsisV color={"#000"} />
+    <div className="character-builds">
+      <div className="artifacts-selector">
+        <ScrollContainer vertical={false} hideScrollbars={false} className="artifacts-menu">
+          {map(filteredBuilds, (build, i) => {
+              return (
+                <div key={`artifacts-thumb-${i}`} onClick={() => handleSelectSet(i)}>
+                  <ArtifactSets artifacts={build.artifacts} color={color} selected={i === activeBuildIdx} selector={true} />
+                </div>
+              )
+            })
+          }
+        </ScrollContainer>
+      </div>
+      <div className="build-details">
+        <WeaponBuild
+          weaponBuilds={filteredBuilds[activeBuildIdx].weapons}
+          total={filteredBuilds[activeBuildIdx].count}
+          color={color}
+          filters={filters}
+        />
+        <div className="artifact-build-container">
+          <div className="artifact-build-stats">
+            <ArtifactBuild
+              artifacts={filteredBuilds[activeBuildIdx].artifacts}
+            />
+            <div className="artifacts-donut-container">
+              <div className="artifacts-donut-chart">
+                <Chart
+                  id="artifacts-donut"
+                  type="doughnut"
+                  labels={labels}
+                  data={data}
+                  colors={colors}
+                  max={countSum}
+                  showScale={false}
+                />
+                </div>
+              <div className="artifact-popularity">{Math.round((filteredBuilds[activeBuildIdx].count / countSum) * 100)}%</div>
             </div>
-          </div>
-          <div className="artifacts-menu">
-            {((isMenuOpen && isMobile) || !isMobile) &&
-              _.map(filteredBuilds, (build, i) => {
-                return (
-                  <div key={`artifacts-thumb=${i}`} onClick={() => handleSelectSet(i)}>
-                    <ArtifactSets artifacts={build.artifacts} color={color} selected={i === activeBuildIdx} selector={true} />
-                  </div>
-                )
-              })
-            }
           </div>
         </div>
       </div>

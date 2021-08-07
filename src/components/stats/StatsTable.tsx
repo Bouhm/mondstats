@@ -1,14 +1,13 @@
 import './StatsTable.scss';
 
-import { clone, isEmpty, keys, map, orderBy, reduce, take } from 'lodash';
-import React, { useEffect, useRef, useState } from 'react';
+import { isEmpty, map, reduce } from 'lodash';
+import React from 'react';
 
 import { ICharacterData } from '../../data/types';
 import { getCharacterFileName } from '../../scripts/util';
 import ArtifactSets from '../artifact-sets/ArtifactSets';
-import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
-import WeaponCard from '../characters/builds/WeaponCard';
+import ScrollContainer from 'react-indiana-drag-scroll';
 
 function renderCharacterStats(character: ICharacterData, count: number, key: string) {
   return (
@@ -50,9 +49,9 @@ function ArtifactSetStatistics({data}: any) {
               />
               <div className="row-stats-pct">{ `${Math.round((itemStat.count / total * 1000)/10)}%`}</div>
             </div>
-            <div className="row-related col">
+            <ScrollContainer vertical={false} className="row-related col">
               {map(itemStat.characters, (charStat, j) => renderCharacterStats(characterDb[charStat._id], charStat.count, `${charStat._id}-${i}-${j}`))}
-            </div>
+            </ScrollContainer>
         </div>
       )})}
     </div>
@@ -94,9 +93,9 @@ function WeaponStatistics({data}: any) {
               />
               <div className="row-stats-pct">{ `${Math.round((itemStat.count / total * 1000)/10)}%`}</div>
             </div>
-            <div className="row-related col">
+            <ScrollContainer vertical={false} className="row-related col">
               {map(itemStat.characters, (charStat, j) => renderCharacterStats(characterDb[charStat._id], charStat.count, `${charStat._id}-${i}-${j}`))}
-            </div>
+            </ScrollContainer>
         </div>
       )})}
     </div>
