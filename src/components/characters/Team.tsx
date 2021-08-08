@@ -26,7 +26,6 @@ function Team({ team, percent, count }: TeamProps) {
     visible,
   } = usePopperTooltip();
 
-
   return (
     <div className="team-container">
       <div className="team-stats" ref={setTriggerRef}>

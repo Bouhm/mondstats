@@ -9,11 +9,11 @@ import { useAppSelector } from '../hooks/useRedux';
 type ArtifactSetsProps = {
   artifacts: IArtifactSet[]
   selected?: boolean,
-  color: string,
+  color?: string,
   selector?: boolean,
 }
 
-function ArtifactSets({ artifacts, color, selected=false, selector=false }: ArtifactSetsProps) {
+function ArtifactSets({ artifacts, color='', selected=false, selector=false }: ArtifactSetsProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
 
   return (

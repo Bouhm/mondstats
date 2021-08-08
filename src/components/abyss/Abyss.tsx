@@ -148,11 +148,11 @@ function Abyss() {
             {!some(filteredAbyss, { floor_level: selectedStage.value }) && <Loader />}
             {map(filter(filteredAbyss, { floor_level: selectedStage.value }), ({battle_parties}, i) => (
               <React.Fragment key={`floor-${selectedStage.value}-${i}`}>
-                {map([battle_parties[0]], (parties) => (
-                  <React.Fragment key={`parties-${selectedStage.value}`}>
-                    <h2>{reduce(parties, (sum,curr) => sum + curr.count, 0)} Teams</h2>
-                    <div key={`battle-${selectedStage.value}}`} className="battle-container">
-                      {/* <h2>{i+1}{i+1 === 1 ? 'st' : 'nd'} Half</h2> */}
+                {map([battle_parties[0]], (parties, j) => (
+                  <React.Fragment key={`parties-${selectedStage.value}-${i}-${j}`}>
+                    {/* <h2>{reduce(parties, (sum,curr) => sum + curr.count, 0)} Teams</h2> */}
+                    <div key={`battle-${selectedStage.value}}-${i}-${j}`} className="battle-container">
+                      <h2>{j+1}{j+1 === 1 ? 'st' : 'nd'} Half</h2>
                       {parties.length > 1 ? 
                         <>
                           {map(take(orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 10 : 5), ({party, count}, i) => {

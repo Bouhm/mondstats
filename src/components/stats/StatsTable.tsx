@@ -1,14 +1,19 @@
 import './StatsTable.scss';
 
-import { isEmpty, map, reduce } from 'lodash';
+import { capitalize, isEmpty, map, reduce } from 'lodash';
 import React from 'react';
 
 import { ICharacterData } from '../../data/types';
 import { getCharacterFileName } from '../../scripts/util';
-import ArtifactSets from '../artifact-sets/ArtifactSets';
 import { useAppSelector } from '../hooks/useRedux';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { usePopperTooltip } from 'react-popper-tooltip';
+import ArtifactSets from '../artifact-sets/ArtifactSets';
+
+type StatsTableProps = {
+  data: any,
+  title: string
+}
 
 function renderCharacterStats(character: ICharacterData, count: number, key: string) {
   return (
@@ -17,10 +22,9 @@ function renderCharacterStats(character: ICharacterData, count: number, key: str
 }
 
 function ArtifactSetStatistics({data}: any) {
-  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const total = reduce(data, (sum: number, curr: any) => sum + curr.count, 0)
-  const maxChars = 20;
+  const title = "artifacts";
   const {
     getTooltipProps,
     setTooltipRef,
@@ -28,13 +32,11 @@ function ArtifactSetStatistics({data}: any) {
     visible,
   } = usePopperTooltip();
 
-  if (!data || isEmpty(artifactSetDb)) return null;
-
   return (
     <div className="stats-table">
       <div className="stats-table-row">
           <div className="row-card">
-            <span>Artifact Sets</span>
+            <span>{capitalize(title)}</span>
           </div>
           <div className="row-stats">
           <span>Usage %</span>
@@ -46,15 +48,20 @@ function ArtifactSetStatistics({data}: any) {
       {map(data, (itemStat: any, i) => {
         return (
           <div key={`row-${i}`} className="stats-table-row">
-            <div className="row-card col">
-              <ArtifactSets artifacts={itemStat.artifacts} color={'red'} />
+            <div className='row-card col'>
+              <ArtifactSets artifacts={itemStat.artifacts} />
             </div>
-            <div className="row-stats col">
+            <div ref={setTriggerRef} className='row-stats col'>
               <div
                 className={`row-stats-bar`} 
                 style={{ width: `${Math.round((itemStat.count / total * 1000)/10)}%`}} 
-              />
+              />    
               <div className="row-stats-pct">{ `${Math.round((itemStat.count / total * 1000)/10)}%`}</div>
+              {visible && 
+                <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
+                  {itemStat.count}
+                </div>
+              }
             </div>
             <ScrollContainer vertical={false} className="row-related col">
               {map(itemStat.characters, (charStat, j) => renderCharacterStats(characterDb[charStat._id], charStat.count, `${charStat._id}-${i}-${j}`))}
@@ -67,18 +74,21 @@ function ArtifactSetStatistics({data}: any) {
 
 
 function WeaponStatistics({data}: any) {
-  const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const total = reduce(data, (sum: number, curr: any) => sum + curr.count, 0)
-  const maxChars = 20;
-
-  if (!data || isEmpty(weaponDb)) return null;
+  const title = 'weapons';
+  const {
+    getTooltipProps,
+    setTooltipRef,
+    setTriggerRef,
+    visible,
+  } = usePopperTooltip();
 
   return (
     <div className="stats-table">
       <div className="stats-table-row">
           <div className="row-card">
-            <span>Weapons</span>
+            <span>{capitalize(title)}</span>
           </div>
           <div className="row-stats">
           <span>Usage %</span>
@@ -90,15 +100,20 @@ function WeaponStatistics({data}: any) {
       {map(data, (itemStat: any, i) => {
         return (
           <div key={`row-${i}`} className="stats-table-row">
-            <div className="row-card col">
-              <img src={`/assets/weapons/${itemStat._id}.webp`} />
+            <div className='row-card col'>
+              
             </div>
-            <div className="row-stats col">
+            <div ref={setTriggerRef} className='row-stats col'>
               <div
                 className={`row-stats-bar`} 
                 style={{ width: `${Math.round((itemStat.count / total * 1000)/10)}%`}} 
-              />
+              />    
               <div className="row-stats-pct">{ `${Math.round((itemStat.count / total * 1000)/10)}%`}</div>
+              {visible && 
+                <div ref={setTooltipRef} {...getTooltipProps({ className: 'tooltip-container' })}>
+                  {itemStat.count}
+                </div>
+              }
             </div>
             <ScrollContainer vertical={false} className="row-related col">
               {map(itemStat.characters, (charStat, j) => renderCharacterStats(characterDb[charStat._id], charStat.count, `${charStat._id}-${i}-${j}`))}
@@ -108,5 +123,6 @@ function WeaponStatistics({data}: any) {
     </div>
   )
 }
+
 
 export default { ArtifactSetStatistics, WeaponStatistics }
