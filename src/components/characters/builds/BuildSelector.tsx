@@ -62,7 +62,7 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
   return (
     <div className="character-builds">
       <div className="artifacts-selector">
-        <ScrollContainer vertical={false} hideScrollbars={false} className="artifacts-menu">
+        <ScrollContainer vertical={false} hideScrollbars={true} className="artifacts-menu">
           {map(filteredBuilds, (build, i) => {
               return (
                 <div key={`artifacts-thumb-${i}`} onClick={() => handleSelectSet(i)}>

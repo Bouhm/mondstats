@@ -101,7 +101,7 @@ function WeaponStatistics({data}: any) {
         return (
           <div key={`row-${i}`} className="stats-table-row">
             <div className='row-card col'>
-              
+              <img src={`/assets/${title}/${itemStat._id}.webp`} />
             </div>
             <div ref={setTriggerRef} className='row-stats col'>
               <div
