@@ -55,6 +55,17 @@
         font-size: 1rem;
         right: -2px;
       }
+
+      &.asSelector {
+        &:hover,
+        &:active {
+          border: 2px solid rgba(223, 229, 220, 0.5);
+        }
+
+        &.selected {
+          border: 2px solid #e9e5dc;
+        }
+      }
     }
   }
 }

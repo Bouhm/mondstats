@@ -10,7 +10,7 @@ type ArtifactSetsProps = {
   artifacts: IArtifactSet[]
   selected?: boolean,
   color?: string,
-  selector?: boolean,
+  selector?: boolean
 }
 
 function ArtifactSets({ artifacts, color='', selected=false, selector=false }: ArtifactSetsProps) {

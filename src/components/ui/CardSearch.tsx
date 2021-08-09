@@ -22,6 +22,7 @@ export type SearchItem = {
 type DDProps = {
   options: Option[], 
   OptionLabel: (o: Option)=>ReactNode 
+  placeholder: string
 }
 
 function ArtifactSets(props: ItemSearchProps) { 
@@ -40,7 +41,7 @@ function ArtifactSets(props: ItemSearchProps) {
     ) as ReactNode;
   }
 
-  return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"artifacts"} {...props} />
+  return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"artifacts"} placeholder={"Search artifact sets"} {...props} />
 }
 
 function Weapons(props: ItemSearchProps) { 
@@ -59,10 +60,10 @@ function Weapons(props: ItemSearchProps) {
     ) as ReactNode;
   }
 
-  return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"weapons"} {...props} />
+  return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"weapons"} placeholder={"Search weapons"} {...props} />
 }
 
-function CardSearch({ items, imgPath, options, onSelect, OptionLabel }: ItemSearchProps & DDProps & { imgPath: string }) { 
+function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholder }: ItemSearchProps & DDProps & { imgPath: string }) { 
   const [searchedItems, setSearchedItems] = useState<SearchItem[]>([]);
   const [selectedItems, setSelectedItems] = useState<Option[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -118,6 +119,7 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel }: ItemSear
           showDropdown={false}
           isMulti={true}
           value={selectedItems}
+          placeholder={placeholder}
         />
       </div>
       <div className="cards">
