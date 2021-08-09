@@ -1,5 +1,4 @@
 .home {
-  padding-top: 2.5rem;
   height: 100%;
   display: flex;
   flex-flow: column;
@@ -22,7 +21,7 @@
     margin: 0 auto;
     font-size: 1.6rem;
     opacity: 0.8;
-    color:  rgba(255,255,255,0.4);
+    color: rgba(255, 255, 255, 0.4);
     padding: 2rem;
 
     .home-data-line-2 {
@@ -30,7 +29,7 @@
     }
 
     span {
-      color:  #e9e5dc;
+      color: #e9e5dc;
       font-size: 1.8rem;
       font-weight: 600;
     }
