@@ -68,14 +68,15 @@
 @media (max-width: 544px) {
   .card-container {
     .card {
-      width: 70px;
+      width: 65px;
+      border-radius: 6px;
 
       .card-thumb {
-        width: 70px;
+        width: 65px;
       }
 
       .card-name {
-        font-size: 0.6rem;
+        font-size: 0.55rem;
         line-height: 0.5rem;
         height: 1.2rem;
       }

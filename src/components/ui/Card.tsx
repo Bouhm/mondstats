@@ -27,7 +27,7 @@ function Card({ _id, rarity, name, imgPath, onClick, faded=false }: CardProps) {
         <div className="card-image">
           <img className="card-thumb" src={`/assets/${imgPath}/${_id}.webp`} alt={`${name}-thumb`}></img>
           <div className="card-name">
-            {name}
+            {name.length > 22 ? name.slice(0, 22) + '…' : name}
           </div>
         </div>
       </div>
