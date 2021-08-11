@@ -2,13 +2,13 @@ import './StatsTable.scss';
 
 import { capitalize, isEmpty, map, reduce } from 'lodash';
 import React from 'react';
-
-import { ICharacterData } from '../../data/types';
-import { getCharacterFileName } from '../../scripts/util';
-import { useAppSelector } from '../hooks/useRedux';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { usePopperTooltip } from 'react-popper-tooltip';
+
+import { ICharacterData } from '../../data/types';
+import { getCharacterFileName, shortenId } from '../../scripts/util';
 import ArtifactSets from '../artifact-sets/ArtifactSets';
+import { useAppSelector } from '../hooks/useRedux';
 
 type StatsTableProps = {
   data: any,
@@ -101,7 +101,7 @@ function WeaponStatistics({data}: any) {
         return (
           <div key={`row-${i}`} className="stats-table-row">
             <div className='row-card col'>
-              <img src={`/assets/${title}/${itemStat._id}.webp`} />
+              <img src={`/assets/${title}/${shortenId(itemStat._id)}.webp`} />
             </div>
             <div ref={setTriggerRef} className='row-stats col'>
               <div

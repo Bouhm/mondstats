@@ -5,6 +5,7 @@ import React, { ReactNode, useContext } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 
 import { ElementColors } from '../../../data/constants';
+import { shortenId } from '../../../scripts/util';
 import { useAppSelector } from '../../hooks/useRedux';
 import BarChart from '../../ui/BarChart';
 
@@ -38,7 +39,7 @@ function ConstellationCard({ _id, name, count, children }: ConstellationCardProp
         </div>
       }
       <div className="constellation-card-icon">
-        {_id ? <img src={`/assets/characters/constellations/${_id}.webp`} /> : "C0"}
+        {_id ? <img src={`/assets/characters/constellations/${shortenId(_id)}.webp`} /> : "C0"}
       </div>
       {children}
     </div>

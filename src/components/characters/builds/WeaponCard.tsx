@@ -3,6 +3,7 @@ import React from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 
 import { IWeaponData } from '../../../data/types';
+import { shortenId } from '../../../scripts/util';
 
 function WeaponCard({ _id, name, rarity, count, popularity }: IWeaponData & { count: number, popularity: number }) {
   const {
@@ -19,7 +20,7 @@ function WeaponCard({ _id, name, rarity, count, popularity }: IWeaponData & { co
           {name}: {count}
         </div>
       }
-      <img className={`rarity-${rarity}`} src={`/assets/weapons/${_id}.webp`} alt={name} />
+      <img className={`rarity-${rarity}`} src={`/assets/weapons/${shortenId(_id)}.webp`} alt={name} />
       <div className="weapon-detail">
         <div className="weapon-name">
           {name}

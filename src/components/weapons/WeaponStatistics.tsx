@@ -30,8 +30,6 @@ function WeaponStatistics() {
     })
   });
 
-  console.log(weaponItems)
-
   const handleSelect = (selectedIds: string[]) => {
     setSelectedWeapons(selectedIds)
   }

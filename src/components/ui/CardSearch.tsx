@@ -4,6 +4,7 @@ import Fuse from 'fuse.js';
 import { debounce, difference, filter, find, includes, map, orderBy, uniq } from 'lodash';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
+import { shortenId } from '../../scripts/util';
 import Dropdown, { Option } from '../ui/Dropdown';
 import Card from './Card';
 
@@ -34,7 +35,7 @@ function ArtifactSets(props: ItemSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className="item-option-image">
-          <img className="item-option-portrait" src={`/assets/artifacts/${value}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-portrait" src={`/assets/artifacts/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
         </div>
         {/* <div className="item-option-label">{label}</div> */}
       </div>
@@ -53,7 +54,7 @@ function Weapons(props: ItemSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className="item-option-image">
-          <img className="item-option-portrait" src={`/assets/weapons/${value}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-portrait" src={`/assets/weapons/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
         </div>
         {/* <div className="item-option-label">{label}</div> */}
       </div>

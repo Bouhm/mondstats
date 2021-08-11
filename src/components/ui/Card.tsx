@@ -2,6 +2,7 @@ import './Card.scss';
 
 import React from 'react';
 
+import { shortenId } from '../../scripts/util';
 import { SearchItem } from './CardSearch';
 
 type CardProps = { 
@@ -25,7 +26,7 @@ function Card({ _id, rarity, name, imgPath, onClick, faded=false }: CardProps) {
     <div className={`card-container`} onClick={() => handleClick(_id)}>
       <div className={classes}>
         <div className="card-image">
-          <img className="card-thumb" src={`/assets/${imgPath}/${_id}.webp`} alt={`${name}-thumb`}></img>
+          <img className="card-thumb" src={`/assets/${imgPath}/${shortenId(_id)}.webp`} alt={`${name}-thumb`}></img>
           <div className="card-name">
             {name.length > 22 ? name.slice(0, 22) + '…' : name}
           </div>
