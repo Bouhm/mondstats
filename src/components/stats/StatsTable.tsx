@@ -23,7 +23,9 @@ function ArtifactSetStatistics({data}: any) {
   const title = 'artifacts'
   const renderCard = (itemStat: any) => (
     <Tooltip content={getArtifactSetNames(itemStat.artifacts, db)}>
-      <ArtifactSets artifacts={itemStat.artifacts} />
+      <div className="row-card col">
+        <ArtifactSets artifacts={itemStat.artifacts} />
+      </div>
     </Tooltip>
   )
 
@@ -35,7 +37,9 @@ function WeaponStatistics({data}: any) {
   const title = 'weapons'
   const renderCard = (itemStat: any) => (
     <Tooltip content={`${db[itemStat._id].name}`}>
-      <img src={`/assets/${title}/${shortenId(itemStat._id)}.webp`} />
+      <div className="row-card col">
+        <img src={`/assets/${title}/${shortenId(itemStat._id)}.webp`} />
+      </div>
     </Tooltip>
   )
 
@@ -70,9 +74,7 @@ function StatsTable({ data, title, renderCard }: StatsTableProps) {
 
         return (
           <div key={`row-${i}`} className="stats-table-row">
-            <div className='row-card col'>
-              {renderCard(itemStat)}
-            </div>
+            {renderCard(itemStat)}
             <Tooltip className={'row-stats col'} content={`Count: ${itemStat.count}`}>
               <>
                 <div

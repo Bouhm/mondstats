@@ -24,7 +24,7 @@
     }
   }
 
-  .row-card div {
+  .row-card {
     width: auto;
     height: 80px;
     display: flex;
@@ -83,7 +83,7 @@
     .stats-table-row {
       grid-template-columns: 120px 150px 1fr;
 
-      .row-card div {
+      .row-card {
         width: auto;
         height: 70px;
         margin-right: 0.6rem;
@@ -103,7 +103,7 @@
     .stats-table-row {
       grid-template-columns: 65px 90px 1fr;
 
-      .row-card div {
+      .row-card {
         width: auto;
         height: 40px;
         margin-right: 0.2rem;
