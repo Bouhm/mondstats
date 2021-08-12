@@ -1,3 +1,8 @@
+## dev build 8.12.21
+
+- Make percentages accurate to the tenth 
+- Update tooltips
+
 ## dev build 8.09.21
 
 - Utilize horizontal scrolling where appropriate instead of vertical lists
