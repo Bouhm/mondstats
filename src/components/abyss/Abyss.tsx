@@ -106,6 +106,7 @@ function Abyss() {
 
           if (filters.f2p) {
             charFilter = (filter(party, char => {
+              if (typeof char !== "string") return false;
               return characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler"
             }).length <= max5WithChar)
           } 
