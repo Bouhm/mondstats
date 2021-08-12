@@ -8,7 +8,7 @@ import { getCharacterFileName, getShortName } from '../../scripts/util';
 import { useAppSelector } from '../hooks/useRedux';
 import { Search } from './Icons';
 
-export type Option = { value: string, label: string }
+export type Option = { value: string, rarity?: number, label: string }
 
 type SelectProps = {
   options: Option[]

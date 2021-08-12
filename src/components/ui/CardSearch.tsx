@@ -28,13 +28,13 @@ type DDProps = {
 
 function ArtifactSets(props: ItemSearchProps) { 
   const options: Option[] = orderBy(map(props.items, (item) => {
-    return ({ label: item.name, value: item._id }) as Option
+    return ({ label: item.name, rarity: item.rarity, value: item._id }) as Option
   }),'label', 'asc')
 
-  const OptionLabel = ({ value, label }: Option) => {
+  const OptionLabel = ({ value, rarity, label }: Option) => {
     return (
       <div className="item-option" key={label}>
-        <div className="item-option-image">
+        <div className={`item-option-image rarity-${rarity}`}>
           <img className="item-option-portrait" src={`/assets/artifacts/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
         </div>
         {/* <div className="item-option-label">{label}</div> */}
@@ -47,13 +47,13 @@ function ArtifactSets(props: ItemSearchProps) {
 
 function Weapons(props: ItemSearchProps) { 
   const options: Option[] = orderBy(map(props.items, (item) => {
-    return { label: item.name, value: item._id }
+    return ({ label: item.name, rarity: item.rarity, value: item._id }) as Option
   }),'label', 'asc')
 
-  const OptionLabel = ({ value, label }: Option) => {
+  const OptionLabel = ({ value, rarity, label }: Option) => {
     return (
       <div className="item-option" key={label}>
-        <div className="item-option-image">
+        <div className={`item-option-image rarity-${rarity}`}>
           <img className="item-option-portrait" src={`/assets/weapons/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
         </div>
         {/* <div className="item-option-label">{label}</div> */}
@@ -103,7 +103,7 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholde
   const handleSelect = (_id: string) => {
     const selectedItem = find(items, { _id });
     if (selectedItem) {
-      const newSelected = [...selectedItems, { label: selectedItem.name, value: selectedItem._id }];
+      const newSelected = [...selectedItems, { label: selectedItem.name, rarity: selectedItem.rarity, value: selectedItem._id }];
       setSelectedItems(newSelected)
       onSelect(map(newSelected, item => item.value ))
     }
