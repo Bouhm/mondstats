@@ -60,13 +60,13 @@ function StatsTable({ data, title, renderCard }: StatsTableProps) {
     <div className="stats-table">
       <div className="stats-table-row">
           <div className="row-card">
-            <span>{capitalize(title)}</span>
+            <span className="col-header">{capitalize(title)}</span>
           </div>
           <div className="row-stats">
-          <span>Usage %</span>
+          <span className="col-header">Usage %</span>
           </div>
           <div className="row-related">
-          <span>Used by</span>
+          <span className="col-header">Used by</span>
           </div>
       </div>
       {map(data, (itemStat: any, i) => {
