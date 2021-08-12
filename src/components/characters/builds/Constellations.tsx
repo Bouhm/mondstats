@@ -18,19 +18,19 @@ type ConstellationsProps = {
 
 type ConstellationCardProps = {
   name: string,
-  _id?: string,
+  oid?: number,
   effect?: string,
   count: number, 
   children: ReactNode
 }
 
-function ConstellationCard({ _id, name, count, children }: ConstellationCardProps) {
+function ConstellationCard({ oid, name, count, children }: ConstellationCardProps) {
   return (
     <Tooltip content={`${name}: ${count}`}>
       <div className="constellation-card"> 
         <div className="constellation-card-icon">
           {name === "C0" ? 
-            <>C0</> : <>{_id && <img src={`/assets/characters/constellations/${shortenId(_id!)}.webp`} />}</>
+            <>C0</> : <>{oid && <img src={`/assets/characters/constellations/${oid}.webp`} />}</>
           }
         </div>
         {children}
