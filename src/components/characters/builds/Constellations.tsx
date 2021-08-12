@@ -29,7 +29,7 @@ function ConstellationCard({ _id, name, count, children }: ConstellationCardProp
     <Tooltip content={`${name}: ${count}`}>
       <div className="constellation-card"> 
         <div className="constellation-card-icon">
-          {name === "_C0" ? 
+          {name === "C0" ? 
             <>C0</> : <>{_id && <img src={`/assets/characters/constellations/${shortenId(_id!)}.webp`} />}</>
           }
         </div>
@@ -54,7 +54,7 @@ function Constellations({ constellations, total, color }: ConstellationsProps ) 
         content: (
           <>
           {i === 0 ?
-            <ConstellationCard name={"_C0"} count={count}>
+            <ConstellationCard name={"C0"} count={count}>
               <div className="constellation-popularity">{percentage}%</div>
               {/* <p>Count: {count}</p> */}
             </ConstellationCard>
