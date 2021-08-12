@@ -48,6 +48,7 @@ function CharacterSearch({ charFilter = [], onSelect }: CharacterSearchProps) {
     <div className="character-search">
       <div className="character-searchbar">
         <Dropdown.SearchSelect
+          placeholder={"Search character builds"}
           onChange={handleSelect}
           options={options}
           optionLabel={OptionLabel}
