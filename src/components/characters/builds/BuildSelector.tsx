@@ -3,16 +3,17 @@ import './Weapon.css';
 
 import _, { forEach, map, orderBy } from 'lodash';
 import React, { useEffect, useState } from 'react';
+import ScrollContainer from 'react-indiana-drag-scroll';
 
 import { ElementColors } from '../../../data/constants';
 import { IBuild } from '../../../data/types';
+import { getArtifactSetNames, getPercentage } from '../../../scripts/util';
 import ArtifactSets from '../../artifact-sets/ArtifactSets';
 import { Filters } from '../../filters/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import Chart from '../../ui/Chart';
 import ArtifactBuild from './ArtifactBuild';
 import WeaponBuild from './WeaponBuild';
-import ScrollContainer from 'react-indiana-drag-scroll';
 
 type BuildSelectorProps = {
   builds: IBuild[],
@@ -32,21 +33,8 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
   let countSum = 0; 
 
   forEach(filteredBuilds, build => {
-    let label = "";
-
-    forEach(build.artifacts, (set, i) => {
-      let name = artifactSetDb[set._id].name;
-      if (name.includes(" ")) {
-        if (name.split(" ")[0] === "The") {
-          name = name.split(" ")[1]
-        } else {
-          name = name.split(" ")[0]
-        }
-      }
-      label += set.activation_number + "-" + name
-      if (i !== build.artifacts.length - 1) label += " "
-    })
-
+    const label = getArtifactSetNames(build.artifacts, artifactSetDb)
+    
     labels.push(label);
     data.push(build.count);
     countSum += build.count;
@@ -97,7 +85,7 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
                   showScale={false}
                 />
                 </div>
-              <div className="artifact-popularity">{Math.round((filteredBuilds[activeBuildIdx].count / countSum) * 100)}%</div>
+              <div className="artifact-popularity">{getPercentage(filteredBuilds[activeBuildIdx].count, countSum)}%</div>
             </div>
           </div>
         </div>

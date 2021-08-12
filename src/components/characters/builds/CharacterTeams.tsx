@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { IParty } from '../../../data/types';
+import { getPercentage } from '../../../scripts/util';
 import useFilters, { Filters } from '../../filters/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import Button from '../../ui/Button';
@@ -35,6 +36,8 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: Filters 
     }
 
     filtered = filter(teams, ({ party }) => {
+      if (party.length !== 4) return false;
+
       if (filters.f2p) {
         return (includes(party, charId) && filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length <= max5WithChar)
       } else {
@@ -61,7 +64,7 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: Filters 
     <div className="parties-container">
        <h2>{reduce(filteredTeams, (sum, curr) => sum + curr.count, 0)} Teams</h2>
       {map(take(filteredTeams, showMore ? max : 5), ({party, count}, i) => (
-        <Team key={`team-${i}`} team={party} count={count} percent={`${Math.round((count / reduce(filteredTeams, (sum,curr) => sum + curr.count, 0) * 1000)/10)}%`} />
+        <Team key={`team-${i}`} team={party} count={count} percent={`${getPercentage(count, reduce(filteredTeams, (sum,curr) => sum + curr.count, 0))}%`} />
       ))}
       {filteredTeams.length > 5 && (
         !showMore 

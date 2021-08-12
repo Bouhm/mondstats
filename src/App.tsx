@@ -1,6 +1,5 @@
 import './App.scss';
 import 'react-popper-tooltip/dist/styles.css';
-import './components/ui/PopperTooltip.scss';
 
 import axios from 'axios';
 import { forEach, isEmpty } from 'lodash';
@@ -19,6 +18,7 @@ import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
+import WeaponStatistics from './components/weapons/WeaponStatistics';
 // import Dialogue from './components/ui/Dialogue';
 import {
   IArtifactData,
@@ -32,7 +32,6 @@ import {
 } from './data/types';
 import { getShortName } from './scripts/util';
 import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
-import WeaponStatistics from './components/weapons/WeaponStatistics';
 
 function App() {
   const dispatch = useAppDispatch()

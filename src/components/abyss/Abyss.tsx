@@ -22,6 +22,7 @@ import _, {
 import React, { useEffect, useState } from 'react';
 
 import { IAbyssBattle } from '../../data/types';
+import { getPercentage } from '../../scripts/util';
 import Team from '../characters/Team';
 import F2P from '../filters/F2P';
 import useFilters from '../filters/useFilters';
@@ -152,12 +153,12 @@ function Abyss() {
                   <React.Fragment key={`parties-${selectedStage.value}-${i}-${j}`}>
                     {/* <h2>{reduce(parties, (sum,curr) => sum + curr.count, 0)} Teams</h2> */}
                     <div key={`battle-${selectedStage.value}}-${i}-${j}`} className="battle-container">
-                      <h2>{j+1}{j+1 === 1 ? 'st' : 'nd'} Half</h2>
+                      {/* <h2>{j+1}{j+1 === 1 ? 'st' : 'nd'} Half</h2> */}
                       {parties.length > 1 ? 
                         <>
                           {map(take(orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 10 : 5), ({party, count}, i) => {
                               return (
-                                <Team key={`team-${selectedStage.value}-${i}`} team={party} count={count} percent={`${Math.round((count / reduce(parties, (sum,curr) => sum + curr.count, 0) * 1000)/10)}%`} />
+                                <Team key={`team-${selectedStage.value}-${i}`} team={party} count={count} percent={`${getPercentage(count, reduce(parties, (sum,curr) => sum + curr.count, 0))}%`} />
                               )
                             })
                           }

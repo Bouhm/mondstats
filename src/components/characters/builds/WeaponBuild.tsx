@@ -1,7 +1,8 @@
-import _ from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
+import { includes, map, orderBy, take } from 'lodash';
+import React, { useEffect, useState } from 'react';
 
 import { IWeaponBuild } from '../../../data/types';
+import { getPercentage } from '../../../scripts/util';
 import { Filters } from '../../filters/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import WeaponCard from './WeaponCard';
@@ -20,7 +21,7 @@ function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { fi
   const [filteredWeapons, setFilteredWeapons] = useState<IWeaponBuild[] | []>([])
 
   useEffect(() => {
-    let orderedWeapons = _.orderBy(weaponBuilds, 'count', 'desc');
+    let orderedWeapons = orderBy(weaponBuilds, 'count', 'desc');
 
     if (filters.f2p) {
       let weapons: IWeaponBuild[] = []
@@ -33,7 +34,7 @@ function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { fi
           if (count5 > filters.max5) continue;
         }
 
-        if (_.includes(BP_WEAPONS, weaponDb[orderedWeapons[i]._id].oid)) continue;
+        if (includes(BP_WEAPONS, weaponDb[orderedWeapons[i]._id].oid)) continue;
   
         weapons.push(orderedWeapons[i]);
         
@@ -44,7 +45,7 @@ function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { fi
 
       setFilteredWeapons(weapons);
     } else {
-      setFilteredWeapons(_.take(orderedWeapons, max));
+      setFilteredWeapons(take(orderedWeapons, max));
     }
 
   }, [setFilteredWeapons, weaponBuilds, filters])
@@ -53,11 +54,11 @@ function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { fi
     <div className="weapons-list-container">
       <h1>Weapons</h1>
       <div className="weapons-list">
-        {_.map(filteredWeapons, ({ _id, count }, i) => {
+        {map(filteredWeapons, ({ _id, count }, i) => {
           const weapon = weaponDb[_id];
           if (!weapon) return null;
 
-          const popularity = Math.round((count / total * 1000) / 10)
+          const popularity = getPercentage(count, total);
 
           return (
             <div key={`${_id}-${count}-${i}`} className="weapon-container">

@@ -42,17 +42,6 @@ footer {
   padding: 0.5rem;
 }
 
-.withTooltip {
-  position: relative;
-
-  &:hover,
-  &:active {
-    .tooltip {
-      opacity: 1;
-    }
-  }
-}
-
 .icon {
   position: absolute;
 }
@@ -80,6 +69,10 @@ footer {
   position: absolute;
   top: 7.1rem;
   right: 0;
+}
+
+.rc-tooltip-inner div {
+  z-index: 9;
 }
 
 .Pyro {

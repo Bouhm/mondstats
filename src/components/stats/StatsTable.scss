@@ -17,7 +17,7 @@
       }
     }
 
-    span {
+    .stats-table-headers {
       display: flex;
       align-items: center;
       width: 100%;
@@ -116,7 +116,7 @@
         border-radius: 5px;
       }
 
-      span {
+      .stats-table-headers {
         font-size: 0.8rem;
         text-align: center;
         justify-content: center;

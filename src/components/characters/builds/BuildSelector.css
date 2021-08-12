@@ -32,11 +32,8 @@
       justify-content: center;
 
       .artifacts-donut-chart {
+        z-index: 1;
         max-width: 400px;
-
-        canvas {
-          z-index: 1;
-        }
       }
 
       .artifact-popularity {
@@ -46,7 +43,7 @@
         top: calc(50% - 1.5rem);
         width: 100%;
         color: white;
-        font-size: 3rem;
+        font-size: 2.8rem;
         text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
       }
     }
@@ -155,8 +152,14 @@
     align-items: center;
 
     .weapon-container {
-      width: 100%;
+      width: 100% !important;
+      max-width: 100%;
       display: flex;
+      justify-content: center;
+
+      & > div {
+        width: 100%;
+      }
     }
 
     .weapon-bar-chart {
