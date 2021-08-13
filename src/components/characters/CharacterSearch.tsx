@@ -24,11 +24,11 @@ function CharacterSearch({ charFilter = [], onSelect }: CharacterSearchProps) {
   const options = orderBy(
     filter(
       map(characterDb, (char) => {
-        if (char.name === "Traveler") return { label: `${char.name} (${char.element})`, value: getShortName(char) }
-        return { label: char.name, value: getShortName(char) }
+        if (char.name === "Traveler") return { label: `${char.name} (${char.element})`, rarity: char.rarity, value: getShortName(char) }
+        return { label: char.name, rarity: char.rarity, value: getShortName(char) }
       }),
     ({ value }: Option) => !some(charFilter, name => value.split('-')[0] === name.split('-')[0])),
-  'label', 'asc')
+  'label', 'asc') as Option[]
 
   const OptionLabel = ({ value, label }: Option) => {
     const character = characterDb[characterIdMap[value]];
