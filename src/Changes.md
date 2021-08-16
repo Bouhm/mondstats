@@ -1,3 +1,7 @@
+## dev build 8.16.21
+
+- Switch to GH pages static json API to avoid GH API rate limit (slower to load)
+
 ## dev build 8.12.21
 
 - Make percentages accurate to the tenth 
@@ -27,6 +31,7 @@
 ## dev build 7.27.21
 
 - Fetch data from Favonius API instead of local
+- Break up data to fetch only relevant parts 
 - Add minimal loaders accordingly
 
 ## dev build 7.21.21
