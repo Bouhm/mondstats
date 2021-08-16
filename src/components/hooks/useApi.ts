@@ -2,13 +2,15 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const useApi = (apiUrl: string) => {
+  // const apiBase = 'https://api.github.com/repos/bouhm/favonius-data/contents'
+  const apiBase = 'https://bouhm.github.io/favonius-data/'
   const [data, setData] = useState<any>(undefined)
 
   useEffect(() => {
     const ghp = import.meta.env.DEV ? import.meta.env.VITE_GH_PAT : import.meta.env.GH_PAT;
 
     const fetchApi = async () => {
-      axios.get('https://api.github.com/repos/bouhm/favonius-data/contents' + apiUrl, { 
+      axios.get(apiBase + apiUrl, { 
         headers: { 
           'accept': 'application/vnd.github.v3.raw+json',
           // 'authorization': `token ${ghp}`
