@@ -2,6 +2,7 @@
   width: 100%;
   max-width: 100%;
   overflow: hidden;
+  margin-top: 3rem;
 
   .character-page-background {
     position: fixed;
@@ -24,22 +25,23 @@
     color: white;
     border-bottom: solid 1px grey;
   }
+}
 
-  .character-page-stats-count {
-    margin: 0;
-    width: 100%;
-    text-align: center;
-    padding: 0.5rem;
-    height: 3.1rem;
+.character-page-stats-count {
+  position: absolute;
+  left: 12rem;
+  right: 0;
+  text-align: center;
+  padding: 0.5rem;
+  height: 3.1rem;
 
-    span {
-      color: rgba(0, 0, 0, 0.7);
-      font-size: 1.5rem;
-    }
+  span {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 1.5rem;
+  }
 
-    div {
-      float: right;
-    }
+  div {
+    float: right;
   }
 }
 
@@ -60,26 +62,32 @@
   justify-content: center;
 }
 
+@media (max-width: 1024px) {
+  .character-page {
+    h1 {
+      width: 100%;
+    }
+  }
+
+  .character-page-stats-count {
+    left: 3.5rem;
+  }
+}
+
 @media (max-width: 516px) {
   .character-page {
     h1 {
       width: 100%;
       margin: 2rem auto 1rem auto;
     }
-
-    .character-page-stats-count {
-      span {
-        font-size: 1.2rem;
-        line-height: 1.8rem;
-      }
-    }
   }
-}
 
-@media (max-width: 1036px) {
-  .character-page {
-    h1 {
-      width: 100%;
+  .character-page-stats-count {
+    left: 0;
+
+    span {
+      font-size: 1.2rem;
+      line-height: 1.8rem;
     }
   }
 }

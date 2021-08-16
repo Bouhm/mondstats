@@ -60,28 +60,30 @@ function CharacterBuilds() {
   }
 
   return (
-    <div className="character-page">
-      <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} />
+    <>
       <div className="character-page-stats-count" style={{ backgroundColor: elementColor }}>
         <span>{characterBuild.total} {character.name} Builds</span>
       </div>
-      <div className="character-page-controls">
-        <F2P onChange={handleFilterChange} f2p={filters.f2p} max5={filters.max5} color={elementColor} />
-      </div>
+      <div className="character-page">
+        <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} />
+        <div className="character-page-controls">
+          <F2P onChange={handleFilterChange} f2p={filters.f2p} max5={filters.max5} color={elementColor} />
+        </div>
 
-      {characterBuild.builds &&
-        <>
-          <BuildSelector
-            builds={_.take(characterBuild.builds, maxBuilds)}
-            total={characterBuild.total}
-            color={elementColor}
-            filters={filters}
-          />
-          <Constellations constellations={characterBuild.constellations} color={elementColor} total={characterBuild.total} />
-          <CharacterTeams filters={filters} teams={characterBuild.teams} />
-        </>
-      }
-    </div>
+        {characterBuild.builds &&
+          <>
+            <BuildSelector
+              builds={_.take(characterBuild.builds, maxBuilds)}
+              total={characterBuild.total}
+              color={elementColor}
+              filters={filters}
+            />
+            <Constellations constellations={characterBuild.constellations} color={elementColor} total={characterBuild.total} />
+            <CharacterTeams filters={filters} teams={characterBuild.teams} />
+          </>
+        }
+      </div>
+    </>
   )
 }
 
