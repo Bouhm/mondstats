@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const useApi = (apiUrl: string) => {
   // const apiBase = 'https://api.github.com/repos/bouhm/favonius-data/contents'
-  const apiBase = 'https://bouhm.github.io/favonius-data/'
+  const apiBase = 'https://favonius-data.pages.dev'
   const [data, setData] = useState<any>(undefined)
 
   useEffect(() => {
