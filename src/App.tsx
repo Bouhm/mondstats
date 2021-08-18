@@ -84,6 +84,7 @@ function App() {
               <Route path="/about" component={About} />
               <Route path="/changelog" component={Changelog} />
               <Route path="/abyss" component={Abyss} />
+              <Route path="/characters" component={UnderConstruction} />
               <Route path="/artifacts" component={ArtifactSetStatistics} />
               <Route path="/weapons" component={WeaponStatistics} />
               <Route exact path="/" component={Home} />

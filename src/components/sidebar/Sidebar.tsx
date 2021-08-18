@@ -13,8 +13,9 @@ interface ITab {
 }
 
 const tabs: ITab[] = [
+  // { name: "Builds", linkto: "/builds", icon: "builds.webp" },
   { name: "Spiral Abyss", linkto: "/abyss", icon: "spiralAbyss.webp" },
-  // { name: "Characters", linkto: "/characters", icon: "characters.webp" },
+  { name: "Characters", linkto: "/characters", icon: "characters.webp" },
   { name: "Artifacts", linkto: "/artifacts", icon: "artifacts.webp" },
   { name: "Weapons", linkto: "/weapons", icon: "weapons.webp" }
 ]
