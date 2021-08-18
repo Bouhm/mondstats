@@ -167,43 +167,47 @@ function Abyss() {
     )
           }
 
-  const renderFloorParties = (selectedStage: Option) => (
-    <>
-      <h2 className="stage-label">Floor {selectedStage.label}</h2>
-      <div className="stage-half">
-        {!some(filteredAbyssFloors, { floor_level: selectedStage.value }) && <Loader />}
-        {map(filter(filteredAbyssFloors, { floor_level: selectedStage.value }), ({battle_parties}, i) => (
-          <React.Fragment key={`floor-${selectedStage.value}-${i}`}>
-            {map([battle_parties[0]], (parties, j) => (
-              <React.Fragment key={`parties-${selectedStage.value}-${i}-${j}`}>
-                <h2>{reduce(parties, (sum,curr) => sum + curr.count, 0)} Teams</h2>
-                <div key={`battle-${selectedStage.value}-${i}-${j}`} className="battle-container">
-                  {/* <h2>{j+1}{j+1 === 1 ? 'st' : 'nd'} Half</h2> */}
-                  {parties.length > 1 ? 
-                    <>
-                      {map(take(orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 10 : 5), ({party, count}, i) => {
-                          return (
-                            <Team key={`team-${selectedStage.value}-${i}`} team={party} count={count*2} percent={`${getPercentage(count*2, reduce(parties, (sum,curr) => sum + curr.count, 0))}%`} />
-                          )
-                        })
-                      }
-                    </>
-                    :
-                    <img src={AmberSad} alt="empty" />
-                  }
-                </div>
-              </React.Fragment>
-            ))}
-            {some(battle_parties, parties => parties.length > 5) && (!stageLimitToggle[selectedStage.value] ?
-              <Button className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
-              :
-              <Button className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
-    </>
-  )
+  const renderFloorParties = (selectedStage: Option) => {
+    const filteredAbyssFloors = _filterAbyss();
+
+    return (
+      <>
+        <h2 className="stage-label">Floor {selectedStage.label}</h2>
+        <div className="stage-half">
+          {!some(filteredAbyssFloors, { floor_level: selectedStage.value }) && <Loader />}
+          {map(filter(filteredAbyssFloors, { floor_level: selectedStage.value }), ({battle_parties}, i) => (
+            <React.Fragment key={`floor-${selectedStage.value}-${i}`}>
+              {map([battle_parties[0]], (parties, j) => (
+                <React.Fragment key={`parties-${selectedStage.value}-${i}-${j}`}>
+                  <h2>{reduce(parties, (sum,curr) => sum + curr.count, 0)} Teams</h2>
+                  <div key={`battle-${selectedStage.value}-${i}-${j}`} className="battle-container">
+                    {/* <h2>{j+1}{j+1 === 1 ? 'st' : 'nd'} Half</h2> */}
+                    {parties.length > 1 ? 
+                      <>
+                        {map(take(orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 10 : 5), ({party, count}, i) => {
+                            return (
+                              <Team key={`team-${selectedStage.value}-${i}`} team={party} count={count} percent={`${getPercentage(count, reduce(parties, (sum,curr) => sum + curr.count, 0))}%`} />
+                            )
+                          })
+                        }
+                      </>
+                      :
+                      <img src={AmberSad} alt="empty" />
+                    }
+                  </div>
+                </React.Fragment>
+              ))}
+              {some(battle_parties, parties => parties.length > 5) && (!stageLimitToggle[selectedStage.value] ?
+                <Button className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
+                :
+                <Button className="stage-teams-show-more" onClick={() => handleToggleLimit(selectedStage.value)}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      </>
+    )
+  }
   
   const renderParties = () => (
     <div className="floor-container">
