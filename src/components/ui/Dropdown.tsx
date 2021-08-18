@@ -15,9 +15,10 @@ type SelectProps = {
   onChange: (e: any) => void
   defaultValue?: Option[] | Option
   isMulti?: boolean
+  placeholder?: string
 }
 
-function MultiSelect({ options, onChange, isMulti=false, defaultValue=options.slice(0,1) }: SelectProps) {
+function MultiSelect({ options, onChange, isMulti=false, placeholder="", defaultValue=options.slice(0,1) }: SelectProps) {
   return (
     <div className="multi-select">
       <Select 
@@ -26,6 +27,7 @@ function MultiSelect({ options, onChange, isMulti=false, defaultValue=options.sl
         defaultValue={defaultValue} 
         isMulti={isMulti} 
         isSearchable={false}
+        placeholder={<>{placeholder}&hellip;</>}
         styles={{ 
           container: base => ({ ...base }),
           singleValue: base => ({ ...base, color: "white" }),
