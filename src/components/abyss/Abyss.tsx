@@ -194,7 +194,7 @@ function Abyss() {
                     <>
                       {map(take(orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 10 : 5), ({party, count}, i) => {
                           return (
-                            <Team key={`team-${selectedStage.value}-${i}`} team={party} count={count} percent={`${getPercentage(count, reduce(parties, (sum,curr) => sum + curr.count, 0))}%`} />
+                            <Team key={`team-${selectedStage.value}-${i}`} team={party} count={count*2} percent={`${getPercentage(count*2, reduce(parties, (sum,curr) => sum + curr.count, 0))}%`} />
                           )
                         })
                       }
