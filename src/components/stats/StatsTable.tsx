@@ -9,6 +9,9 @@ import { getArtifactSetNames, getCharacterFileName, getPercentage, shortenId } f
 import ArtifactSets from '../artifact-sets/ArtifactSets';
 import { useAppSelector } from '../hooks/useRedux';
 import Tooltip from '../ui/Tooltip';
+import Pagination from '../ui/Pagination';
+import usePaginate from '../hooks/usePaginate';
+import { useEffect } from 'react';
 
 function renderCharacterStats(character: ICharacterData, count: number, key: string) {
   return (
@@ -55,41 +58,50 @@ type StatsTableProps = {
 function StatsTable({ data, title, renderCard }: StatsTableProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const total = reduce(data, (sum: number, curr: any) => sum + curr.count, 0)
+  const pageSize = 20;
+  const { currentPage, onPageChange, handleReset, filterPageContent } = usePaginate(pageSize);
+
+  useEffect(() => {
+    handleReset()
+  }, [data])
 
   return (
-    <div className="stats-table">
-      <div className="stats-table-row">
-          <div className="row-card">
-            <span className="col-header">{capitalize(title)}</span>
-          </div>
-          <div className="row-stats">
-          <span className="col-header">Usage %</span>
-          </div>
-          <div className="row-related">
-          <span className="col-header">Used by</span>
-          </div>
-      </div>
-      {map(data, (itemStat: any, i) => {
-        const percentage = getPercentage(itemStat.count, total);
+    <div className="stats-table-container">
+      <div className="stats-table">
+        <div className="stats-table-row">
+            <div className="row-card">
+              <span className="col-header">{capitalize(title)}</span>
+            </div>
+            <div className="row-stats">
+            <span className="col-header">Usage %</span>
+            </div>
+            <div className="row-related">
+            <span className="col-header">Used by</span>
+            </div>
+        </div>
+        {map(filterPageContent(data), (itemStat: any, i) => {
+          const percentage = getPercentage(itemStat.count, total);
 
-        return (
-          <div key={`row-${i}`} className="stats-table-row">
-            {renderCard(itemStat)}
-            <Tooltip className={'row-stats col'} content={`Count: ${itemStat.count}`}>
-              <>
-                <div
-                  className={`row-stats-bar`} 
-                  style={{ width: `${percentage}%`}} 
-                />    
-                <div className="row-stats-pct">{ `${percentage}%`}</div>
-              </>
-            </Tooltip>
-            <ScrollContainer vertical={false} className="row-related col">
-              {map(itemStat.characters, (charStat, j) => renderCharacterStats(characterDb[charStat._id], charStat.count, `${charStat._id}-${i}-${j}`))}
-            </ScrollContainer>
-          </div>
-        )
-      })}
+          return (
+            <div key={`row-${i}`} className="stats-table-row">
+              {renderCard(itemStat)}
+              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.count}`}>
+                <>
+                  <div
+                    className={`row-stats-bar`} 
+                    style={{ width: `${percentage}%`}} 
+                  />    
+                  <div className="row-stats-pct">{ `${percentage}%`}</div>
+                </>
+              </Tooltip>
+              <ScrollContainer vertical={false} className="row-related col">
+                {map(itemStat.characters, (charStat, j) => renderCharacterStats(characterDb[charStat._id], charStat.count, `${charStat._id}-${i}-${j}`))}
+              </ScrollContainer>
+            </div>
+          )
+        })}
+      </div>
+      {data.length > pageSize && <Pagination current={currentPage} pageSize={pageSize} onChange={onPageChange} total={data.length} />}
     </div>
   )
 }

@@ -1,4 +1,6 @@
 .search-select {
+  z-index: 99 !important;
+
   .search-placeholder {
     position: relative;
     display: flex;
@@ -43,7 +45,6 @@
   }
 }
 
-
 @media (max-width: 676px) {
   .search-select {
     .search-placeholder {
@@ -52,6 +53,6 @@
       .search-icon svg {
         width: 15px;
       }
-    } 
+    }
   }
 }

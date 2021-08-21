@@ -4,8 +4,6 @@ import { filter, map, orderBy, some } from 'lodash';
 import React, { ReactNode } from 'react';
 import Select, { components } from 'react-select';
 
-import { getCharacterFileName, getShortName } from '../../scripts/util';
-import { useAppSelector } from '../hooks/useRedux';
 import { Search } from './Icons';
 
 export type Option = { value: string, rarity?: number, label: string }
