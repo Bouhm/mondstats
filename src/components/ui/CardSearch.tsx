@@ -37,7 +37,7 @@ function ArtifactSets(props: ItemSearchProps) {
         <div className={`item-option-image rarity-${rarity}`}>
           <img className="item-option-portrait" src={`/assets/artifacts/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
         </div>
-        {/* <div className="item-option-label">{label}</div> */}
+        <div className="item-option-label">{label}</div>
       </div>
     ) as ReactNode;
   }
@@ -56,7 +56,7 @@ function Weapons(props: ItemSearchProps) {
         <div className={`item-option-image rarity-${rarity}`}>
           <img className="item-option-portrait" src={`/assets/weapons/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
         </div>
-        {/* <div className="item-option-label">{label}</div> */}
+        <div className="item-option-label">{label}</div>
       </div>
     ) as ReactNode;
   }

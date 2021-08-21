@@ -1,7 +1,7 @@
 import './Dropdown.scss';
 
 import { filter, map, orderBy, some } from 'lodash';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import Select, { components } from 'react-select';
 
 import { Search } from './Icons';
@@ -17,8 +17,22 @@ type SelectProps = {
 }
 
 function MultiSelect({ options, onChange, isMulti=false, placeholder="", defaultValue=options.slice(0,1) }: SelectProps) {
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.addEventListener('scroll', () => {
+      if (searchRef.current) {
+        if (window.scrollY < 100) {
+          searchRef.current!.classList.remove("sticky")
+        } else {
+          searchRef.current!.classList.add("sticky")
+        }
+      }
+    })
+  }, [searchRef])
+
   return (
-    <div className="multi-select">
+    <div ref={searchRef} className="multi-select">
       <Select 
         options={options} 
         onChange={onChange} 
@@ -53,8 +67,25 @@ type SearchProps = {
 }
 
 function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="Search", optionLabel, isMulti = false, showDropdown = true, value=[]}: SearchProps & { options: Option[], optionLabel: (opt: Option)=>ReactNode }) {
+  const searchRef = useRef<HTMLDivElement>(null);
+  const [shouldStick, setShouldStick] = useState(false);
+  
+  useEffect(() => {
+    document.addEventListener('scroll', () => {
+      if (searchRef.current) {
+        if (window.scrollY < 100) {
+          searchRef.current!.classList.remove("sticky")
+          setShouldStick(false)
+        } else {
+          searchRef.current!.classList.add("sticky")
+          setShouldStick(true)
+        }
+      }
+    })
+  }, [searchRef])
+
   return (
-    <div className="search-select">
+    <div ref={searchRef} className="search-select">
       <Select 
         options={options} 
         onChange={onChange} 
@@ -71,7 +102,7 @@ function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="S
           </div>
         }
         components={{
-          Menu: showDropdown ?  (props) => <components.Menu {...props} /> : () => null,
+          Menu: (showDropdown || shouldStick) ?  (props) => <components.Menu {...props} /> : () => null,
           DropdownIndicator: showDropdown ?  (props) => <components.DropdownIndicator {...props} /> : () => null
         }}
         styles={{ 
@@ -81,7 +112,8 @@ function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="S
           valueContainer: base => ({ ...base, backgroundColor: "#232530",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
           placeholder: base => ({ ...base, width: '100%' }),
           control: base =>  ({ ...base, borderColor: "none" }),
-          indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)", display: `${showDropdown ? 'initial' : 'none'}` }),
+          indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
+          indicatorSeparator: base => ({ ...base, display: 'none '}),
           menu: base => ({ ...base, backgroundColor: "#21232D", color: "white" }),
           option: base => ({ ...base, backgroundColor: "#21232D !important", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.6) !important" }}),
         }}

@@ -13,6 +13,7 @@
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, 120px);
+  grid-template-rows: repeat(auto-fill, 170px);
   gap: 0.5rem;
   justify-content: center;
   flex-wrap: wrap;
@@ -26,15 +27,28 @@
   margin-bottom: 3rem;
 
   .item-option {
+    display: flex;
+    align-items: center;
+
     .item-option-image {
       .item-option-portrait {
         width: 35px;
       }
     }
+
+    .item-option-label {
+      margin-left: 0.5rem;
+    }
   }
 
   input {
     max-width: 35rem;
+  }
+}
+
+.search-select > div > div > div > div > div > .item-option {
+  .item-option-label {
+    display: none;
   }
 }
 
@@ -54,6 +68,7 @@
 
   .cards {
     grid-template-columns: repeat(auto-fill, 100px);
+    grid-template-rows: repeat(auto-fill, 130px);
     height: 43vh;
   }
 }
@@ -61,7 +76,7 @@
 @media (max-width: 544px) {
   .cards {
     grid-template-columns: repeat(5, 60px);
-    column-gap: 0.5rem;
+    grid-template-rows: repeat(auto-fill, 80px);
     height: 29vh;
   }
 }

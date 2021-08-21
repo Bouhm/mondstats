@@ -1,5 +1,10 @@
 .search-select {
-  z-index: 99 !important;
+  &.sticky {
+    position: fixed;
+    width: 35rem;
+    top: 0.1rem;
+    z-index: 19;
+  }
 
   .search-placeholder {
     position: relative;
@@ -53,6 +58,12 @@
       .search-icon svg {
         width: 15px;
       }
+    }
+
+    &.sticky {
+      width: 70vw;
+      left: 5rem;
+      right: 5rem;
     }
   }
 }
