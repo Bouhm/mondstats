@@ -1,0 +1,23 @@
+.pagination-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .rc-pagination {
+    .rc-pagination-item,
+    .rc-pagination-prev button,
+    .rc-pagination-next button {
+      background-color: #e9e5dc;
+      color: rgba(0, 0, 0, 0.7);
+      border-radius: 4px;
+
+      &.rc-pagination-item-active {
+        font-weight: 700;
+      }
+
+      a {
+        color: rgba(0, 0, 0, 0.7);
+      }
+    }
+  }
+}

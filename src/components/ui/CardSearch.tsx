@@ -1,14 +1,12 @@
 import './CardSearch.scss';
 
 import Fuse from 'fuse.js';
-import { debounce, difference, filter, find, includes, map, orderBy, uniq } from 'lodash';
+import { debounce, difference, filter, find, includes, map, orderBy, times, uniq } from 'lodash';
 import React, { ReactNode, useRef, useState } from 'react';
 
 import { shortenId } from '../../scripts/util';
 import Dropdown, { Option } from '../ui/Dropdown';
 import Card from './Card';
-import Pagination from 'rc-pagination';
-import usePaginate from '../hooks/usePaginate';
 
 type ItemSearchProps = {
   items: SearchItem[]
@@ -72,8 +70,6 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholde
   const searchRef = useRef<HTMLInputElement>(null);
   const maxResults = 10;
   const fuse = new Fuse(items, { threshold: 0.3, keys: [{name: 'name', weight: 1}, {name: 'keys', weight: 0.5}] });
-  const pageSize = 20;
-  const { currentPage, onPageChange, indexes } = usePaginate(pageSize);
 
   // Set character search filter
   const handleSearch = (filtered: SearchItem[]) => {
@@ -129,15 +125,11 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholde
           />
         </div>
         <div className="cards">
-          {map(orderBy(filter(difference(items, searchedItems),  (_, i) => indexes[0] <= i && indexes[1] >= i), 'name', 'asc'), (item, i) => (
-            <Card onClick={handleSelect} key={`${item._id}-${i}`} imgPath={imgPath} {...item} faded={!!searchedItems.length} />
-          ))}
-          {/* {map(searchedItems, (item, i) => (
+          {map(orderBy(searchedItems.length ? searchedItems : items, 'name', 'asc'), (item, i) => (
             <Card onClick={handleSelect} key={`${item._id}-${i}`} imgPath={imgPath} {...item} />
-          ))} */}
+          ))}
         </div>
       </div>
-      <Pagination current={currentPage} onChange={onPageChange} pageSize={pageSize} total={items.length} />
     </div>
   )
 }

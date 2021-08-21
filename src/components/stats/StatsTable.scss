@@ -103,6 +103,11 @@
     .stats-table-row {
       grid-template-columns: 65px 90px 1fr;
 
+      .col-header {
+        font-size: 0.8rem;
+        justify-content: center;
+      }
+
       .row-card {
         width: auto;
         height: 40px;
