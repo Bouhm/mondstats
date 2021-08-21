@@ -1,5 +1,6 @@
 import './App.scss';
 import 'react-popper-tooltip/dist/styles.css';
+import "rc-pagination/assets/index.css"
 
 import axios from 'axios';
 import { forEach, isEmpty } from 'lodash';

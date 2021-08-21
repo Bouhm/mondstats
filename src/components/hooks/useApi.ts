@@ -7,7 +7,7 @@ const useApi = (apiUrl: string) => {
   const [data, setData] = useState<any>(undefined)
 
   useEffect(() => {
-    const ghp = import.meta.env.DEV ? import.meta.env.VITE_GH_PAT : import.meta.env.GH_PAT;
+    // const ghp = import.meta.env.DEV ? import.meta.env.VITE_GH_PAT : import.meta.env.GH_PAT;
 
     const fetchApi = async () => {
       axios.get(apiBase + apiUrl, { 
