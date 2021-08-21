@@ -2,7 +2,7 @@
   &.sticky {
     position: fixed;
     width: 35rem;
-    top: 0.1rem;
+    top: 0.4rem;
     z-index: 19;
   }
 
@@ -62,8 +62,8 @@
 
     &.sticky {
       width: 70vw;
-      left: 5rem;
-      right: 5rem;
+      left: 4rem;
+      right: 4rem;
     }
   }
 }
