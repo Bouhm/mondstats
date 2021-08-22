@@ -162,14 +162,14 @@ function Abyss() {
         <h2 className="stage-label">Top Teams</h2>
         <div className="stage-half">
           <h2>{total} Teams</h2>
-          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 10 : 5), ({party, count}, i) => (
+          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({party, count}, i) => (
             <React.Fragment key={`parties-ALL-${i}`}>
               <div key={`battle-ALL-${i}`} className="battle-container">
                 <Team key={`team-ALL-${i}`} team={party} count={count} percent={`${getPercentage(count, total)}%`} />
               </div>
             </React.Fragment>
           ))}
-          {(filteredTopTeams.length > 5) && (!stageLimitToggle["ALL"] ?
+          {(filteredTopTeams.length > 10) && (!stageLimitToggle["ALL"] ?
             <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
             :
             <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
