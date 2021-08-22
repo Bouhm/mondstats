@@ -11,7 +11,6 @@ import _, {
   findIndex,
   flatten,
   forEach,
-  includes,
   isEmpty,
   map,
   orderBy,
@@ -33,6 +32,7 @@ import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 import PartySelector from './PartySelector';
+import Tabs, { useTabs } from '../ui/Tabs';
 
 const _compareFloor = (f1: Option, f2: Option) => {
   if (f1.value.startsWith('_') || f2.value.startsWith('_')) {
@@ -54,26 +54,27 @@ function _range(size: number, startAt = 0) {
 }
 
 function Abyss() {
-  let options = flatten(map(_range(4, 9), floor => {
+  const floors = _range(4, 9);
+  const tabs = ['ALL', ...floors]
+  const options = [{ label: "ALL", value: "ALL" }, ...flatten(map(floors, floor => {
     return map(_range(3,1), stage => {
       return { label: `${floor}-${stage}`, value: `${floor}-${stage}`}
     })
-  })).sort(_compareFloor)
-  options = [{ label: "ALL", value: "_ALL" }, ...options];
-
-  const defaultStages = [options[0]];
+  })).sort(_compareFloor)]
 
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const [ AbyssData, setAbyssData ] = useState<IAbyssBattle[]>([]);
+  const [ selectedStages, selectStages ] = useState<Option[]>([options[0]])
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
-  const [ selectedStages, selectStages ] = useState<Option[]>(defaultStages)
   const [ characters, setCharacters ] = useState<string[]>([]);
   const { filters, handleFilterChange } = useFilters();
   const abyssTopTeams = useApi('abyss/top-teams.json');
 
+  const { activeTabIdx, onTabChange } = useTabs();
+
   useEffect(() => {
     async function fetchAbyssData() {
-      await Promise.all(map(filter(selectedStages, stage => stage.value !== "_ALL"), floor => {
+      await Promise.all(map(filter(selectedStages, stage => stage.value !== "ALL"), floor => {
         const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
 
         if (floorIdx < 0) {
@@ -120,6 +121,11 @@ function Abyss() {
     return _filterParties(abyssTopTeams);
   }
 
+  const handleTabChange = (tabIdx: number) => {
+    handleSelect(filter(options, option => option.value.split('-')[0] === tabs[tabIdx] + ''))
+    onTabChange(tabIdx)
+  }
+
   const handleSelect = (selected: Option[]) => {
     selectStages(selected);
   }
@@ -150,17 +156,17 @@ function Abyss() {
         <h2 className="stage-label">Top Teams</h2>
         <div className="stage-half">
           <h2>{total} Teams</h2>
-          {map(take(filteredTopTeams, stageLimitToggle["_ALL"] ? 10 : 5), ({party, count}, i) => (
+          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 10 : 5), ({party, count}, i) => (
             <React.Fragment key={`parties-ALL-${i}`}>
               <div key={`battle-ALL-${i}`} className="battle-container">
                 <Team key={`team-ALL-${i}`} team={party} count={count} percent={`${getPercentage(count, total)}%`} />
               </div>
             </React.Fragment>
           ))}
-          {(filteredTopTeams.length > 5) && (!stageLimitToggle["_ALL"] ?
-            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("_ALL")}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
+          {(filteredTopTeams.length > 5) && (!stageLimitToggle["ALL"] ?
+            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
             :
-            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("_ALL")}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
+            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
           )}
         </div>
     </>
@@ -186,7 +192,7 @@ function Abyss() {
                       <>
                         {map(take(orderBy(parties, 'count', 'desc'), stageLimitToggle[selectedStage.value] ? 10 : 5), ({party, count}, i) => {
                             return (
-                              <Team key={`team-${selectedStage.value}-${i}`} team={party} count={count*2} percent={`${getPercentage(count*2, reduce(parties, (sum,curr) => sum + curr.count, 0))}%`} />
+                              <Team key={`team-${selectedStage.value}-${i}`} team={party} count={count} percent={`${getPercentage(count, reduce(parties, (sum,curr) => sum + curr.count, 0))}%`} />
                             )
                           })
                         }
@@ -214,7 +220,7 @@ function Abyss() {
       {map(selectedStages.sort(_compareFloor), selectedStage => {
         return (
           <div key={selectedStage.value} className="stage-container">
-            {selectedStage.value === "_ALL" ? renderTopTeams() : renderFloorParties(selectedStage)}
+            {selectedStage.value === "ALL" ? renderTopTeams() : renderFloorParties(selectedStage)}
           </div>
         )
       })}
@@ -233,7 +239,7 @@ function Abyss() {
       <PartySelector onPartyChange={handlePartyChange} />
       <br />
       <h1>Abyss Teams</h1>
-      <Dropdown.MultiSelect options={options} onChange={handleSelect} defaultValue={defaultStages} isMulti={true} placeholder={'Select floors'} />
+      <Tabs activeTabIdx={activeTabIdx} onChange={handleTabChange} tabs={map(tabs, (floor => typeof floor === 'number' ? `FLOOR ${floor}` : floor.toString()))} />
       {!isEmpty(characterDb) && renderParties()}
     </div>
   )

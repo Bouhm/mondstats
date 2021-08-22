@@ -1,0 +1,33 @@
+.tabs-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: #e9e5dc;
+  font-size: 1.2rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+
+  .tab {
+    width: 7rem;
+    text-align: center;
+    margin: 1rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.asActive {
+      font-weight: 700;
+      border-bottom: 2px solid white;
+    }
+  }
+}
+
+@media (max-width: 676px) {
+  .tabs-container {
+    font-size: 0.8rem;
+
+    .tab {
+    }
+  }
+}
