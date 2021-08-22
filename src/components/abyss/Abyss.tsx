@@ -210,7 +210,7 @@ function Abyss() {
                         }
                       </>
                       :
-                      <img src={AmberSad} alt="empty" />
+                      <LLImage src={AmberSad} alt="empty" />
                     }
                   </div>
                 </React.Fragment>

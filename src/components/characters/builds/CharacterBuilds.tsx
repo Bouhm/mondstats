@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ElementColors } from '../../../data/constants';
-import { IAbyssBattle, ICharacterBuild, ICharacterData } from '../../../data/types';
+import { ICharacterData } from '../../../data/types';
 import { getCharacterFileName } from '../../../scripts/util';
 import { selectCharacter } from '../../../Store';
 import F2P from '../../filters/F2P';
@@ -14,10 +14,10 @@ import useFilters from '../../filters/useFilters';
 import useApi from '../../hooks/useApi';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import Loader from '../../ui/Loader';
-import Toggle from '../../ui/Toggle';
 import BuildSelector from './BuildSelector';
 import CharacterTeams from './CharacterTeams';
 import Constellations from './Constellations';
+import LLImage from '../../ui/LLImage'
 
 function CharacterBuilds() {  
   const { shortName } = useParams<{ shortName: string }>();
@@ -55,7 +55,7 @@ function CharacterBuilds() {
 
   if (!character) {
     return <div>
-      <div className="its-empty"><img src={AmberSad} alt="empty" /></div>
+      <div className="its-empty"><LLImage src={AmberSad} alt="empty" /></div>
     </div>
   }
 

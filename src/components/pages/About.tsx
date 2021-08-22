@@ -1,6 +1,7 @@
 import './About.css';
 
 import React from 'react';
+import LLImage from '../ui/LLImage'
 
 function About() { 
   return (
@@ -33,10 +34,10 @@ function About() {
       </div>
       <div className="pls">
         Please contribute by setting your Battle Chronicle to public in HoYoLAB. Thank you!
-        <img src="/assets/pls.webp" alt="pls"/>
+        <LLImage src="/assets/pls.webp" alt="pls"/>
       </div>
       <div className="hoyolab-image">
-        <img src="/assets/hoyolab.webp" alt="hoyolab" />
+        <LLImage src="/assets/hoyolab.webp" alt="hoyolab" />
       </div>
     </div>
   )

@@ -6,8 +6,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { numberWithCommas } from '../scripts/util';
-import CharacterSearch from './characters/CharacterSearch';
 import useApi from './hooks/useApi';
+import LLImage from './ui/LLImage';
 
 interface IFeatured {
   player_total: number,
@@ -20,9 +20,8 @@ function Home() {
   
   return (
     <div className="home">
-      <CharacterSearch onSelect={(charName) => routerHistory.push(`/builds/${charName}`)} />
       <div className="home-logo">
-        <img src={Logo} alt="logo" />
+        <LLImage src={Logo} alt="logo" />
       </div>
       {featured &&
         <div className="home-data-info">

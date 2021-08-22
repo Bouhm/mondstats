@@ -2,6 +2,7 @@ import './Dialogue.scss';
 
 import _ from 'lodash';
 import React, { ReactNode } from 'react';
+import LLImage from './LLImage'
 
 type DialogueProps = {
   children: ReactNode
@@ -18,7 +19,7 @@ function Dialogue({ children, onClose }: DialogueProps) {
     <div className="dialogue-backdrop">
       <div className="dialogue">
         <div className="response">
-            <p onClick={handleClose}><img src={"/assets/icons/dialogue.webp"} alt="speech-bubble" />
+            <p onClick={handleClose}><LLImage src={"/assets/icons/dialogue.webp"} alt="speech-bubble" />
                 <span>
                     Okay.
                 </span>

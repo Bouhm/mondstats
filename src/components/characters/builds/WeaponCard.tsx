@@ -4,12 +4,13 @@ import React from 'react';
 import { IWeaponData } from '../../../data/types';
 import { shortenId } from '../../../scripts/util';
 import Tooltip from '../../ui/Tooltip';
+import LLImage from '../../ui/LLImage'
 
 function WeaponCard({ _id, name, rarity, count, popularity }: IWeaponData & { count: number, popularity: number }) {
   return (
     <Tooltip content={`${name}: ${count}`}>
       <div className={`weapon-card`}>
-        <img className={`rarity-${rarity}`} src={`/assets/weapons/${shortenId(_id)}.webp`} alt={name} />
+        <LLImage className={`rarity-${rarity}`} src={`/assets/weapons/${shortenId(_id)}.webp`} alt={name} />
         <div className="weapon-detail">
           <div className="weapon-name">
             {name}

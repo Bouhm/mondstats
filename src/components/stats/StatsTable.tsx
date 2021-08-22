@@ -14,11 +14,12 @@ import usePaginate from '../hooks/usePaginate';
 import { useEffect } from 'react';
 import Loader from '../ui/Loader';
 import useApi from '../hooks/useApi';
+import LLImage from '../ui/LLImage'
 
 function renderCharacterStats(character: ICharacterData, count: number, key: string) {
   return (
     <Tooltip key={key} content={`${character.name}: ${count}`}>
-      <img key={key} className={`character-stats rarity-${character.rarity}`} src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={character.name} />
+      <LLImage key={key} className={`character-stats rarity-${character.rarity}`} src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={character.name} />
     </Tooltip>
   )
 }
@@ -38,8 +39,8 @@ function CharacterStatistics({data}: any) {
     const name = getCharacterLabel(db[itemStat._id]);
     return <Tooltip content={name}>
       <div className="row-card col">
-        {/* <img className="row-card-element" src={`/assets/elements/${db[itemStat._id].element}.webp`} /> */}
-        <img src={`/assets/${title}/${getCharacterFileName(db[itemStat._id])}.webp`} />
+        {/* <LLImage className="row-card-element" src={`/assets/elements/${db[itemStat._id].element}.webp`} /> */}
+        <LLImage src={`/assets/${title}/${getCharacterFileName(db[itemStat._id])}.webp`} />
       </div>
     </Tooltip>
   }
@@ -114,7 +115,7 @@ function WeaponStatistics({data}: any) {
   const renderCard = (itemStat: any) => (
     <Tooltip content={`${db[itemStat._id].name}`}>
       <div className="row-card col">
-        <img src={`/assets/${title}/${shortenId(itemStat._id)}.webp`} />
+        <LLImage src={`/assets/${title}/${shortenId(itemStat._id)}.webp`} />
       </div>
     </Tooltip>
   )

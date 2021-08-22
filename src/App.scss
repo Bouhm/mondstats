@@ -75,6 +75,11 @@ footer {
   z-index: 9;
 }
 
+.lazyload-wrapper {
+  width: inherit;
+  height: inherit;
+}
+
 .Pyro {
   background-color: var.$element-pyro;
 }

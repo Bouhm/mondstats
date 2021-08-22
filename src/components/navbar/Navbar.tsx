@@ -2,8 +2,9 @@ import './Navbar.css';
 
 import Logo from '/assets/logo_sm.webp';
 import _ from 'lodash';
-import React, { useContext, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Link, useLocation } from 'react-router-dom'
+import LLImage from '../ui/LLImage';
 
 const Navtabs: { name: string, linkto: string }[] = [
   // { name: "Weapons", linkto: "/builds" },
@@ -28,7 +29,7 @@ function Navbar() {
   return (
       <div id="navbar" ref={navRef}>
         <div className="nav-logo">
-          <Link to="/"><img src={Logo} alt="logo" /></Link>
+          <Link to="/"><LLImage src={Logo} alt="logo" /></Link>
         </div>
         <div className="nav-announcement">
         </div>

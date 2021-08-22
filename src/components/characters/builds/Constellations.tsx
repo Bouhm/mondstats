@@ -1,14 +1,14 @@
 import './Constellations.scss';
 
 import _, { map } from 'lodash';
-import React, { ReactNode, useContext } from 'react';
-import { usePopperTooltip } from 'react-popper-tooltip';
+import React, { ReactNode } from 'react';
 
 import { ElementColors } from '../../../data/constants';
 import { getPercentage, shortenId } from '../../../scripts/util';
 import { useAppSelector } from '../../hooks/useRedux';
 import BarChart from '../../ui/BarChart';
 import Tooltip from '../../ui/Tooltip';
+import LLImage from '../../ui/LLImage'
 
 type ConstellationsProps = {
   constellations: number[],
@@ -21,16 +21,17 @@ type ConstellationCardProps = {
   oid?: number,
   effect?: string,
   count: number, 
-  children: ReactNode
+  children: ReactNode,
+  i: number
 }
 
-function ConstellationCard({ oid, name, count, children }: ConstellationCardProps) {
+function ConstellationCard({ oid, i, name, count, children }: ConstellationCardProps) {
   return (
     <Tooltip content={`${name}: ${count}`}>
       <div className="constellation-card"> 
         <div className="constellation-card-icon">
           {name === "C0" ? 
-            <>C0</> : <>{oid && <img src={`/assets/characters/constellations/${oid}.webp`} />}</>
+            <>C0</> : <>{oid && <LLImage src={`/assets/characters/constellations/${oid}.webp`} alt={`C${i}`} />}</>
           }
         </div>
         {children}
@@ -54,12 +55,12 @@ function Constellations({ constellations, total, color }: ConstellationsProps ) 
         content: (
           <>
           {i === 0 ?
-            <ConstellationCard name={"C0"} count={count}>
+            <ConstellationCard name={"C0"} i={i} count={count}>
               <div className="constellation-popularity">{percentage}%</div>
               {/* <p>Count: {count}</p> */}
             </ConstellationCard>
             :
-            <ConstellationCard {...characterDb[selectedCharacter].constellations[i-1]} count={count}>
+            <ConstellationCard {...characterDb[selectedCharacter].constellations[i-1]} i={i} count={count}>
               <div className="constellation-popularity">{percentage}%</div>
               {/* <p>Count: {count}</p> */}
             </ConstellationCard>

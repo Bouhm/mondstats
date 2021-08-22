@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { getCharacterFileName, getShortName } from '../../scripts/util';
 import { useAppSelector } from '../hooks/useRedux';
+import LLImage from '../ui/LLImage';
 
 export type CharacterTileProps = {
   id: string,
@@ -30,8 +31,8 @@ function CharacterTile({ id, labeled = true, onClick }: CharacterTileProps) {
     <div className={`character-tile-container`} onClick={() => handleClick(getShortName(character))}>
       <div className={classes}>
         <div className="character-image">
-          <img className="character-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${character.name}-portrait`}></img>
-          <img className="element-icon" src={`/assets/elements/${character.element}.webp`} alt={character.element}></img>
+          <LLImage className="character-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${character.name}-portrait`} />
+          <LLImage className="element-icon" src={`/assets/elements/${character.element}.webp`} alt={character.element} />
         </div>
         {labeled && <div className="character-tile-name">
           {character.name}

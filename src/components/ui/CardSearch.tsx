@@ -8,6 +8,7 @@ import { getCharacterFileName, shortenId } from '../../scripts/util';
 import Dropdown, { Option } from '../ui/Dropdown';
 import Card from './Card';
 import { useAppSelector } from '../hooks/useRedux';
+import LLImage from './LLImage'
 
 type CardSearchProps = {
   items: SearchItem[]
@@ -42,8 +43,8 @@ function Characters(props: CardSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
-          <img className="item-option-element" src={`/assets/elements/${character.element}.webp`} />
-          <img className="item-option-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${label}-portrait`} />
+          <LLImage className="item-option-element" src={`/assets/elements/${character.element}.webp`} />
+          <LLImage className="item-option-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>
@@ -62,7 +63,7 @@ function ArtifactSets(props: CardSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
-          <img className="item-option-portrait" src={`/assets/artifacts/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
+          <LLImage className="item-option-portrait" src={`/assets/artifacts/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>
@@ -81,7 +82,7 @@ function Weapons(props: CardSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
-          <img className="item-option-portrait" src={`/assets/weapons/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
+          <LLImage className="item-option-portrait" src={`/assets/weapons/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>

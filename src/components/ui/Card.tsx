@@ -4,6 +4,7 @@ import React from 'react';
 
 import { shortenId } from '../../scripts/util';
 import { SearchItem } from './CardSearch';
+import LLImage from './LLImage'
 
 type CardProps = { 
   onClick?: (_id: string)=>void,
@@ -26,8 +27,8 @@ function Card({ _id, rarity, name, element, imgPath, onClick, faded=false }: Car
     <div className={`card-container`} onClick={() => handleClick(_id)}>
       <div className={classes}>
         <div className="card-image">
-          {element && <img className="card-element" src={`/assets/elements/${element}.webp`} />}
-          <img className="card-thumb" src={`/assets/${imgPath}/${name.startsWith('Traveler') ? 'traveler' : shortenId(_id)}.webp`} alt={`${name}-thumb`}></img>
+          {element && <LLImage className="card-element" src={`/assets/elements/${element}.webp`} />}
+          <LLImage className="card-thumb" src={`/assets/${imgPath}/${name.startsWith('Traveler') ? 'traveler' : shortenId(_id)}.webp`} alt={`${name}-thumb`} />
           <div className="card-name">
             {name.length > 22 ? name.slice(0, 22) + '…' : name}
           </div>
