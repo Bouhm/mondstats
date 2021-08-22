@@ -5,6 +5,30 @@
   margin-bottom: 2rem;
   margin-top: 2rem;
 
+  &.characters-stats {
+    .row-stats {
+      .row-stats-bar {
+        background-color: rgb(31, 120, 150);
+      }
+    }
+  }
+
+  &.artifacts-stats {
+    .row-stats {
+      .row-stats-bar {
+        background-color: rgb(48, 150, 113);
+      }
+    }
+  }
+
+  &.weapons-stats {
+    .row-stats {
+      .row-stats-bar {
+        background-color: rgb(172, 34, 18);
+      }
+    }
+  }
+
   .stats-table-row {
     display: grid;
     grid-template-columns: 150px 1fr 1fr;
@@ -51,7 +75,7 @@
     align-items: center;
 
     .row-stats-bar {
-      height: 2rem;
+      height: 3rem;
       display: inline-block;
       animation-name: horibar;
       animation-duration: 1s;
@@ -93,6 +117,12 @@
 
 @media (max-width: 1036px) {
   .stats-table {
+    .row-stats {
+      .row-stats-bar {
+        height: 2rem;
+      }
+    }
+
     .stats-table-row {
       &.asItems {
         grid-template-columns: 120px 150px 1fr;

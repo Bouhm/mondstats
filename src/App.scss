@@ -76,30 +76,29 @@ footer {
 }
 
 .lazyload-wrapper {
-  width: inherit;
   height: inherit;
 }
 
 .Pyro {
-  background-color: var.$element-pyro;
+  background-color: var.$element-pyro !important;
 }
 .Anemo {
-  background-color: var.$element-anemo;
+  background-color: var.$element-anemo !important;
 }
 .Cryo {
-  background-color: var.$element-cryo;
+  background-color: var.$element-cryo !important;
 }
 .Hydro {
-  background-color: var.$element-hydro;
+  background-color: var.$element-hydro !important;
 }
 .Electro {
-  background-color: var.$element-electro;
+  background-color: var.$element-electro !important;
 }
 .Dendro {
-  background-color: var.$element-dendro;
+  background-color: var.$element-dendro !important;
 }
 .Geo {
-  background-color: var.$element-geo;
+  background-color: var.$element-geo !important;
 }
 .rarity-3 {
   background: var.$rarity-3;

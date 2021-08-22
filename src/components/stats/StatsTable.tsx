@@ -48,8 +48,8 @@ function CharacterStatistics({data}: any) {
   if (!featured) return <Loader />
 
   return (
-    <div className="stats-table-container">
-      <div className="stats-table">
+    <div className='stats-table-container'>
+      <div className={`stats-table ${title}-stats`}>
         <div className="stats-table-row">
             <div className="row-card">
               <span className="col-header">{capitalize(title)}</span>
@@ -140,8 +140,8 @@ function ItemStatsTable({ data, title, renderCard }: StatsTableProps) {
   }, [data])
 
   return (
-    <div className="stats-table-container">
-      <div className="stats-table">
+    <div className='stats-table-container'>
+      <div className={`stats-table ${title}-stats`}>
         <div className="stats-table-row asItems">
             <div className="row-card">
               <span className="col-header">{capitalize(title)}</span>
@@ -163,7 +163,7 @@ function ItemStatsTable({ data, title, renderCard }: StatsTableProps) {
                 <>
                   <div
                     className={`row-stats-bar`} 
-                    style={{ width: `${percentage}%`}} 
+                    style={{ width: `${percentage}%`, backgroundColor: ''}} 
                   />    
                   <div className="row-stats-pct">{ `${percentage}%`}</div>
                 </>
