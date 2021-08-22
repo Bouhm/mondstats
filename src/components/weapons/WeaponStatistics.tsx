@@ -9,6 +9,7 @@ import StatsTable from '../stats/StatsTable';
 import CardSearch, { SearchItem } from '../ui/CardSearch';
 import Loader from '../ui/Loader';
 import { KEYWORDS } from '../ui/Searchbar';
+import useWeaponSearch from '../hooks/useWeaponSearch';
 
 function WeaponStatistics() { 
   const weaponDb = useAppSelector((state) => state.data.weaponDb)

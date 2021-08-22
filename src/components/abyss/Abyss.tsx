@@ -36,6 +36,7 @@ import PartySelector from './PartySelector';
 import Tabs, { useTabs } from '../ui/Tabs';
 import CardSearch from '../ui/CardSearch';
 import LLImage from '../ui/LLImage';
+import useCharacterSearch from '../hooks/useCharacterSearch';
 
 const _compareFloor = (f1: Option, f2: Option) => {
   if (f1.value.startsWith('_') || f2.value.startsWith('_')) {
@@ -252,7 +253,3 @@ function Abyss() {
 }
 
 export default Abyss;
-
-function useCharacterSearch(characterDb: ICharacterDb): { searchCharacters: any; } {
-  throw new Error('Function not implemented.');
-}

@@ -32,7 +32,7 @@ function Sidebar() {
       <div className="sidebar-menu">
         {_.map(tabs, tab => {
           return <Link key={tab.name} to={tab.linkto}>
-            <div className={`sidebar-tab ${location.pathname === tab.linkto ? 'asActive' : ''}`} onClick={() => setIsOpen(false)}>
+            <div className={`sidebar-tab ${location.pathname.startsWith(tab.linkto) ? 'asActive' : ''}`} onClick={() => setIsOpen(false)}>
               <img src={`/assets/icons/${tab.icon}`} />
               <span className="tab-name">{tab.name}</span>
             </div>
