@@ -6,8 +6,12 @@
 
   .stats-table-row {
     display: grid;
-    grid-template-columns: 150px 200px 1fr;
+    grid-template-columns: 150px 1fr 1fr;
     width: 100%;
+
+    &.asItems {
+      grid-template-columns: 150px 200px 1fr;
+    }
 
     &:nth-child(even) {
       background-color: rgba(0, 0, 0, 0.1);
@@ -82,7 +86,9 @@
 @media (max-width: 1036px) {
   .stats-table {
     .stats-table-row {
-      grid-template-columns: 120px 150px 1fr;
+      &.asItems {
+        grid-template-columns: 120px 150px 1fr;
+      }
 
       .row-card {
         width: auto;
@@ -102,7 +108,9 @@
 @media (max-width: 676px) {
   .stats-table {
     .stats-table-row {
-      grid-template-columns: 65px 90px 1fr;
+      &.asItems {
+        grid-template-columns: 65px 90px 1fr;
+      }
 
       .col-header {
         font-size: 0.8rem;

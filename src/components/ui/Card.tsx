@@ -10,7 +10,7 @@ type CardProps = {
   faded?: boolean 
 } & SearchItem & {imgPath: string}
 
-function Card({ _id, rarity, name, imgPath, onClick, faded=false }: CardProps) {
+function Card({ _id, rarity, name, element, imgPath, onClick, faded=false }: CardProps) {
   let classes = "card";
   classes += ` rarity-${rarity}`;
 
@@ -26,7 +26,8 @@ function Card({ _id, rarity, name, imgPath, onClick, faded=false }: CardProps) {
     <div className={`card-container`} onClick={() => handleClick(_id)}>
       <div className={classes}>
         <div className="card-image">
-          <img className="card-thumb" src={`/assets/${imgPath}/${shortenId(_id)}.webp`} alt={`${name}-thumb`}></img>
+          {element && <img className="card-element" src={`/assets/elements/${element}.webp`} />}
+          <img className="card-thumb" src={`/assets/${imgPath}/${name.startsWith('Traveler') ? 'traveler' : shortenId(_id)}.webp`} alt={`${name}-thumb`}></img>
           <div className="card-name">
             {name.length > 22 ? name.slice(0, 22) + '…' : name}
           </div>

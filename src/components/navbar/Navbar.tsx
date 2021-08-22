@@ -19,7 +19,6 @@ function Navbar() {
     //     if (window.scrollY === 0) {
     //       navRef.current!.classList.remove("invis")
     //     } else {
-    //       console.log("scrolled")
     //       navRef.current!.classList.add("invis")
     //     }
     //   }

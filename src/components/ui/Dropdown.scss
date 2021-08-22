@@ -1,8 +1,8 @@
 .search-select {
   &.sticky {
     position: fixed;
-    width: 35rem;
-    top: 0.3rem;
+    width: 36rem;
+    top: 0.1rem;
     z-index: 19;
   }
 
@@ -50,7 +50,16 @@
   }
 }
 
-@media (max-width: 676px) {
+@media (max-width: 887px) {
+  .search-select {
+    &.sticky {
+      width: 70vw;
+      left: calc(50% - 30vw);
+    }
+  }
+}
+
+@media (max-width: 516px) {
   .search-select {
     .search-placeholder {
       font-size: 1rem;
@@ -62,7 +71,6 @@
 
     &.sticky {
       width: 70vw;
-      top: 0.4rem;
       left: 4rem;
       right: 4rem;
     }

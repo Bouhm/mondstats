@@ -12,6 +12,8 @@ import Tooltip from '../ui/Tooltip';
 import Pagination from '../ui/Pagination';
 import usePaginate from '../hooks/usePaginate';
 import { useEffect } from 'react';
+import Loader from '../ui/Loader';
+import useApi from '../hooks/useApi';
 
 function renderCharacterStats(character: ICharacterData, count: number, key: string) {
   return (
@@ -23,7 +25,7 @@ function renderCharacterStats(character: ICharacterData, count: number, key: str
 
 function CharacterStatistics({data}: any) {
   const db = useAppSelector((state) => state.data.characterDb)
-  const total = reduce(data, (sum: number, curr: any) => sum + curr.count, 0)
+  const featured = useApi(`/featured.json`);
   const pageSize = 20;
   const { currentPage, onPageChange, handleReset, filterPageContent } = usePaginate(pageSize);
 
@@ -33,12 +35,14 @@ function CharacterStatistics({data}: any) {
 
   const title = 'characters'
   const renderCard = (itemStat: any) => (
-    <Tooltip content={db[itemStat._id].name}>
+    <Tooltip content={`${db[itemStat._id].name}`}>
       <div className="row-card col">
-        <ArtifactSets artifacts={itemStat.artifacts} />
+        <img src={`/assets/${title}/${getCharacterFileName(db[itemStat._id])}.webp`} />
       </div>
     </Tooltip>
   )
+
+  if (!featured) return <Loader />
 
   return (
     <div className="stats-table-container">
@@ -48,28 +52,37 @@ function CharacterStatistics({data}: any) {
               <span className="col-header">{capitalize(title)}</span>
             </div>
             <div className="row-stats">
-            <span className="col-header">Usage %</span>
+            <span className="col-header" title="*Players who own and have fully built the character">Built %</span>
             </div>
-            <div className="row-related">
-            <span className="col-header">Used by</span>
+            <div className="row-stats">
+            <span className="col-header" title="*Pick rates in the Spiral Abyss">Pick Rate %</span>
             </div>
         </div>
         {map(filterPageContent(data), (itemStat: any, i) => {
-          const percentage = getPercentage(itemStat.count, total);
+          const ownedPercentage = getPercentage(itemStat.total, featured.player_total);
+          const pickedPercentage = getPercentage(itemStat.abyssCount, featured.abyss_total);
 
           return (
             <div key={`row-${i}`} className="stats-table-row">
               {renderCard(itemStat)}
-              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.count}`}>
+              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.total}`}>
                 <>
                   <div
                     className={`row-stats-bar`} 
-                    style={{ width: `${percentage}%`}} 
+                    style={{ width: `${ownedPercentage}%`}} 
                   />    
-                  <div className="row-stats-pct">{ `${percentage}%`}</div>
+                  <div className="row-stats-pct">{ `${ownedPercentage}%`}</div>
                 </>
               </Tooltip>
-             
+              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.abyssCount}`}>
+                <>
+                  <div
+                    className={`row-stats-bar`} 
+                    style={{ width: `${pickedPercentage}%`}} 
+                  />    
+                  <div className="row-stats-pct">{ `${pickedPercentage}%`}</div>
+                </>
+              </Tooltip>
             </div>
           )
         })}
@@ -141,7 +154,7 @@ function ItemStatsTable({ data, title, renderCard }: StatsTableProps) {
           const percentage = getPercentage(itemStat.count, total);
 
           return (
-            <div key={`row-${i}`} className="stats-table-row">
+            <div key={`row-${i}`} className="stats-table-row asItems">
               {renderCard(itemStat)}
               <Tooltip className={'row-stats col'} content={`Count: ${itemStat.count}`}>
                 <>

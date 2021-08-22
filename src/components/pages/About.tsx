@@ -1,13 +1,13 @@
 import './About.css';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 
 function About() { 
   return (
     <div className="about-container">
       <div className="about-header">
         <h1>About Favonius.io</h1>
-        <p>Favonius.io is a website that aims to help players build characters and formulate teams to optimize their gameplay. You can browse the statistics on how players like to build and use certain characters.</p>
+        <p>Favonius.io is a website that aims to help players build characters and teams to improve their gameplay. You can browse statistics on how players like to build and use certain characters.</p>
         <p>This is a hobby project by Bouhm who loves to explore and share the many ways players find success and enjoyment in the game.</p>
       </div>
       <hr />
@@ -24,11 +24,11 @@ function About() {
         <p>There are several reasons why a build might not be included. If the build is used by a very small percentage of players, it is omitted. With a large enough sample size, the displayed builds will skew toward established meta builds. You can apply filters to search for less conventional builds such as those used by Barbara mains.</p>
       </div>
       <div className="about-section">
-        <h2>I need more charts and numbers!</h2>
-        <p>This is still a work in progress, there are much more nifty charts and statistics to come!</p>
+        <h2>How is the data filtered?</h2>
+        <p>All of the character and team data is filtered to only include characters that are fully built (complete artifact sets and equipped with at least 3-star weapons) and from abyss battles that have been 3-starred.</p>
       </div>
       <div className="about-section">
-        <h2>How can I contact you?</h2>
+        <h2>How can I contact you about an issue?</h2>
         <p>You can find me in Discord under <b>Bouhm#2205</b>. I'd love to hear your feedback, suggestions, and/or criticisms!</p>
       </div>
       <div className="pls">

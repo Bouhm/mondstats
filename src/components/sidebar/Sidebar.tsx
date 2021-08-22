@@ -2,7 +2,7 @@ import './Sidebar.css';
 
 import _ from 'lodash';
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { Hamburger } from '../ui/Icons';
 
@@ -22,6 +22,7 @@ const tabs: ITab[] = [
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation();
 
   const handleBurgerClick = () => {
     setIsOpen(!isOpen)  
@@ -32,7 +33,7 @@ function Sidebar() {
       <div className="sidebar-menu">
         {_.map(tabs, tab => {
           return <Link key={tab.name} to={tab.linkto}>
-            <div className="sidebar-tab" onClick={() => setIsOpen(false)}>
+            <div className={`sidebar-tab ${location.pathname === tab.linkto ? 'asActive' : ''}`} onClick={() => setIsOpen(false)}>
               <img src={`/assets/icons/${tab.icon}`} />
               <span className="tab-name">{tab.name}</span>
             </div>

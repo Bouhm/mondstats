@@ -1,12 +1,12 @@
 import './CharacterStatistics.css';
 
-import { filter, flatten, includes, intersection, isEmpty, map, reduce, some, union, uniq } from 'lodash';
+import { filter, includes, isEmpty, map } from 'lodash';
 import React, { useState } from 'react';
 
 import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
 import StatsTable from '../stats/StatsTable';
-import CardSearch, { SearchItem } from '../ui/CardSearch';
+import CardSearch from '../ui/CardSearch';
 import Loader from '../ui/Loader';
 
 function CharacterStatistics() { 
@@ -21,7 +21,8 @@ function CharacterStatistics() {
 
     return ({
       _id,
-      name: character.name,
+      name: character.name === 'Traveler' ? `Traveler (${character.element})` : character.name,
+      element: character.element,
       rarity: character.rarity,
       keys: character.element
     })

@@ -23,6 +23,11 @@
       height: 4rem;
       padding: 0.5rem;
 
+      &.asActive {
+        font-weight: 700;
+        border-right: 2px solid rgba(255, 255, 255, 0.5);
+      }
+
       .tab-name {
         margin: 0 0.5rem;
         white-space: no-wrap;
@@ -62,6 +67,11 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       height: 4rem;
       padding: 0.5rem;
+
+      &.asActive {
+        border-right: 2px solid rgba(255, 255, 255, 0.5);
+        font-weight: 700;
+      }
 
       .tab-name {
         margin-left: 0.5rem;

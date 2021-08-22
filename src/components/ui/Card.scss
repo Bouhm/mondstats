@@ -29,6 +29,13 @@
     }
   }
 
+  .card-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 37px;
+  }
+
   .card-thumb {
     vertical-align: middle;
     width: 120px;
@@ -51,6 +58,10 @@
   .card-container {
     .card {
       width: 100px;
+
+      .card-element {
+        width: 30px;
+      }
 
       .card-thumb {
         width: 100px;
