@@ -2,3 +2,10 @@
   display: flex;
   margin: 1.5rem;
 }
+
+@media (max-width: 516px) {
+  .f2p-filter {
+    display: flex;
+    justify-content: center;
+  }
+}

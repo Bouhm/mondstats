@@ -16,7 +16,7 @@
 
   &.asDisabled {
     opacity: 0.5;
-    pointer-events: none;  
+    pointer-events: none;
   }
 
   .elevator {
@@ -27,7 +27,8 @@
     color: white;
     align-items: center;
 
-    .elevator-up-button, .elevator-down-button {
+    .elevator-up-button,
+    .elevator-down-button {
       line-height: 0;
       opacity: 0.7;
 
@@ -44,3 +45,10 @@
   }
 }
 
+@media (max-width: 516px) {
+  .elevator-container {
+    .elevator-label {
+      font-size: 0.8rem;
+    }
+  }
+}
