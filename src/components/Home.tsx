@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { numberWithCommas } from '../scripts/util';
 import useApi from './hooks/useApi';
 import LLImage from './ui/LLImage';
+import Banner from './characters/Banner';
 
 interface IFeatured {
   player_total: number,
@@ -33,6 +34,7 @@ function Home() {
           </div>
         </div>
       }
+      <Banner />
     </div>
   )
 }

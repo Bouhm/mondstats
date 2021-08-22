@@ -7,7 +7,7 @@ import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
 import CardSearch from '../ui/CardSearch';
 import Loader from '../ui/Loader';
-import { getCharacterLabel, getShortName } from '../../scripts/util';
+import { getShortName } from '../../scripts/util';
 import { useHistory } from 'react-router-dom';
 import useCharacterSearch from '../hooks/useCharacterSearch';
 

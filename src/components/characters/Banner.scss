@@ -1,0 +1,25 @@
+.banner-container {
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 2rem 3rem;
+  border-radius: 6px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  h2 {
+    margin: 0 0 1.5rem 0;
+    color: white;
+    border-bottom: 1px solid white;
+    padding: 0 2rem;
+  }
+
+  .banner-cards {
+    display: flex;
+
+    .banner-card {
+      margin: 0.3rem;
+    }
+  }
+}
