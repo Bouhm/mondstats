@@ -7,9 +7,12 @@ import Card from '../ui/Card';
 import { getShortName } from '../../scripts/util';
 import { useHistory } from 'react-router-dom';
 
-function Banner() {
+type BannerProps = {
+  characters: string[]
+}
+
+function Banner({characters}: BannerProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const bannerCharacters = ['Yoimiya', 'Xinyan', 'Sayu', 'Diona'];
   const routerHistory = useHistory();
 
   const handleClick = (shortname: string) => {
@@ -22,7 +25,7 @@ function Banner() {
     <div className='banner-container'>
       <h2>Featured</h2>
       <div className='banner-cards'>
-        {map(bannerCharacters, name => {
+        {map(characters, name => {
           const character = find(characterDb, char => char.name === name);
           if (!character) return null;
           return <div key={`banner-${name}`} className="banner-card">
