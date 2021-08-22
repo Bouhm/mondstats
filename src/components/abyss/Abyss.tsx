@@ -86,7 +86,7 @@ function Abyss() {
         const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
 
         if (floorIdx < 0) {
-          return axios.get(`https://bouhm.github.io/favonius-data/abyss/${floor.value}.json`, {
+          return axios.get(`https://raw.githubusercontent.com/bouhm/favonius-data/develop/abyss/${floor.value}.json`, {
             headers: { 'accept': 'application/vnd.github.v3.raw+json' },
           }).then(res => res.data)
         } else {
@@ -182,7 +182,7 @@ function Abyss() {
   }
 
   const renderFloorParties = (selectedStage: Option) => {
-    const filteredAbyssFloors = _filterAbyss();
+    const filteredAbyssFloors = filter(_filterAbyss(), { floor_level: selectedStage.value });
     return <AbyssFloor 
       abyssFloors={filteredAbyssFloors} 
       selectedStage={selectedStage}

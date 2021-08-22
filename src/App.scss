@@ -61,7 +61,9 @@ footer {
   margin: 1rem;
   font-size: 1.1rem;
 
-  a {
+  a,
+  div {
+    cursor: pointer;
     margin: 1rem;
   }
 }

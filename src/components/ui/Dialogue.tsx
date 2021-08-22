@@ -16,17 +16,15 @@ function Dialogue({ children, onClose }: DialogueProps) {
   }
 
   return (
-    <div className="dialogue-backdrop">
+    <div className="dialogue-backdrop" onClick={handleClose}>
       <div className="dialogue">
         <div className="response">
-            <p onClick={handleClose}><LLImage src={"/assets/icons/dialogue.webp"} alt="speech-bubble" />
-                <span>
-                    Okay.
-                </span>
-            </p>
+            <div className="response-message" onClick={handleClose}><LLImage src={"/assets/icons/dialogue.webp"} alt="speech-bubble" />
+                I understand.
+            </div>
         </div>
         <div className="content">
-            <div className="name">Bouhm</div>
+            <div className="name"><span>Bouhm</span></div>
             <div className="text">
                 {children}
             </div>

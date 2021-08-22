@@ -20,7 +20,7 @@ import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 import WeaponStatistics from './components/weapons/WeaponStatistics';
-// import Dialogue from './components/ui/Dialogue';
+import Dialogue from './components/ui/Dialogue';
 import {
   IArtifactData,
   IArtifactDb,
@@ -38,9 +38,15 @@ import BuildSearch from './components/characters/BuildSearch';
 
 function App() {
   const dispatch = useAppDispatch()
-
+  const [showNotice, setShowNotice] = useState(false)
   // const { loading, error, data } = useQuery(Query);
   const db = useApi(`/db.json`);
+  const notice = <p>
+    This site shows the most <i>used</i> builds which don't necessarily translate to the <i>best</i> builds.
+    <br/><br />
+    Please also be mindful of other players' monetary investment in the game which may be more representative of
+    their comfort in spending rather than the objective value of a certain character or item.
+  </p>
 
   useEffect(() => {
     if (db) {
@@ -80,8 +86,13 @@ function App() {
     <div className="App">
       <Navbar />
       <main className="App-content">
+        {showNotice && 
+          <Dialogue onClose={() => setShowNotice(false)}>
+            {notice}
+          </Dialogue>
+        }
         <Sidebar />
-        <div className="section-view">
+        <div className="section-view" style={showNotice ? {filter: 'blur(3px)'} : {}}  >
           <main>
             <Switch>
               <Route exact path="/" component={Home} />
@@ -99,6 +110,7 @@ function App() {
             <div className="links">
               <Link to="/about">About</Link>
               <Link to="/changelog">Changelog</Link>
+              <div onClick={() => setShowNotice(true)}>⚠️</div>
             </div>
             <footer>Favonius.io is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoYo.</footer>
           </section>
