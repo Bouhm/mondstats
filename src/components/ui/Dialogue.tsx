@@ -24,7 +24,9 @@ function Dialogue({ children, onClose }: DialogueProps) {
             </div>
         </div>
         <div className="content">
-            <div className="name"><span>Bouhm</span></div>
+            <div className="name">
+              <span>Bouhm</span>
+            </div>
             <div className="text">
                 {children}
             </div>
