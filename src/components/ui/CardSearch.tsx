@@ -13,7 +13,9 @@ import LLImage from './LLImage'
 type CardSearchProps = {
   items: SearchItem[]
   onSelect: (selectedIds: string[]) => void
-  showCards?: boolean
+  showCards?: boolean,
+  placeholder?: string
+  showAll?: boolean
 }
 
 export type SearchItem = {
@@ -92,7 +94,7 @@ function Weapons(props: CardSearchProps) {
   return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"weapons"} placeholder={"Search weapons"} {...props} />
 }
 
-function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholder, showCards = true }: CardSearchProps & DDProps & { imgPath: string }) { 
+function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholder, showCards = true, showAll = false }: CardSearchProps & DDProps & { imgPath: string }) { 
   const [searchedItems, setSearchedItems] = useState<SearchItem[]>([]);
   const [selectedItems, setSelectedItems] = useState<Option[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -138,7 +140,7 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholde
   }
 
   return (
-    <div className="card-search-container">
+    <div className='card-search-container'>
       <div className="cards-container">
         <div className="card-searchbar">
           <Dropdown.SearchSelect
@@ -153,7 +155,7 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholde
           />
         </div>
         {showCards && 
-          <div className="cards">
+          <div className={`cards ${showAll ? 'asFull' : ''}`}>
             {map(orderBy(searchedItems.length ? searchedItems : items, 'name', 'asc'), (item, i) => (
               <Card onClick={handleSelect} key={`${item._id}-${i}`} imgPath={imgPath} {...item} />
             ))}

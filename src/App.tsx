@@ -10,7 +10,7 @@ import { Link, Redirect, Route, Switch, useHistory, withRouter } from 'react-rou
 // import { gql, useQuery } from '@apollo/client';
 import Abyss from './components/abyss/Abyss';
 import ArtifactSetStatistics from './components/artifact-sets/ArtifactSetStatistics';
-import CharacterBuilds from './components/characters/builds/CharacterBuilds';
+import CharacterBuild from './components/characters/builds/CharacterBuild';
 import Home from './components/Home';
 import useApi from './components/hooks/useApi';
 import { useAppDispatch, useAppSelector } from './components/hooks/useRedux';
@@ -34,6 +34,7 @@ import {
 import { getShortName } from './scripts/util';
 import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
 import CharacterStatistics from './components/characters/CharacterStatistics';
+import BuildSearch from './components/characters/BuildSearch';
 
 function App() {
   const dispatch = useAppDispatch()
@@ -83,15 +84,15 @@ function App() {
         <div className="section-view">
           <main>
             <Switch>
-              <Redirect exact path="/" to="/builds" />
+              <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
               <Route path="/changelog" component={Changelog} />
               <Route path="/abyss" component={Abyss} />
               <Route path="/characters" component={CharacterStatistics} />
               <Route path="/artifacts" component={ArtifactSetStatistics} />
               <Route path="/weapons" component={WeaponStatistics} />
-              <Route exact path="/builds" component={Home} />
-              <Route path="/builds/:shortName" component={CharacterBuilds} />
+              <Route path="/builds/:shortName" component={CharacterBuild} />
+              <Route path="/builds" component={BuildSearch} />
             </Switch>
           </main>
           <section className="footer">

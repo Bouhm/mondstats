@@ -5,27 +5,26 @@ import React, { useState } from 'react';
 
 import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
-import StatsTable from '../stats/StatsTable';
 import CardSearch from '../ui/CardSearch';
 import Loader from '../ui/Loader';
+import { getCharacterLabel, getShortName } from '../../scripts/util';
+import { useHistory } from 'react-router-dom';
 import useCharacterSearch from '../hooks/useCharacterSearch';
 
 function CharacterStatistics() { 
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const characterStats = useApi(`/characters/top-characters.json`)
-  const [selectedCharacters, setSelectedCharacters] = useState<string[]>([])
-
-  if (isEmpty(characterDb) || isEmpty(characterStats)) return <Loader />
   const { searchCharacters } = useCharacterSearch(characterDb);
+  const routerHistory = useHistory();
+
+  if (isEmpty(characterDb)) return <Loader />
 
   const handleSelect = (selectedIds: string[]) => {
-    setSelectedCharacters(selectedIds)
+    routerHistory.push(`/builds/${getShortName(characterDb[selectedIds[0]])}`)
   }
     
   return (
     <div className="character-stats-container">
-      <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handleSelect} />
-      <StatsTable.CharacterStatistics data={isEmpty(selectedCharacters) ? characterStats : filter(characterStats, character => includes(selectedCharacters, character._id))} />
+      <CardSearch.Characters items={searchCharacters} onSelect={handleSelect} showAll={true} placeholder='Search character builds'/>
     </div>
   )
 }

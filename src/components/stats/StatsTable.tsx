@@ -55,7 +55,7 @@ function CharacterStatistics({data}: any) {
               <span className="col-header">{capitalize(title)}</span>
             </div>
             <div className="row-stats">
-            <span className="col-header" title="*Players who own and have fully built the character">Built %</span>
+            <span className="col-header" title="*Players who own and have fully built the character">Usage %</span>
             </div>
             <div className="row-stats">
             <span className="col-header" title="*Pick rates in the Spiral Abyss">Pick Rate %</span>
@@ -77,7 +77,7 @@ function CharacterStatistics({data}: any) {
                   <div className="row-stats-pct">{ `${ownedPercentage}%`}</div>
                 </>
               </Tooltip>
-              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.abyssCount}`}>
+              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.abyssCount || 0}`}>
                 <>
                   <div
                     className={`row-stats-bar`} 
@@ -142,7 +142,7 @@ function ItemStatsTable({ data, title, renderCard }: StatsTableProps) {
   return (
     <div className="stats-table-container">
       <div className="stats-table">
-        <div className="stats-table-row">
+        <div className="stats-table-row asItems">
             <div className="row-card">
               <span className="col-header">{capitalize(title)}</span>
             </div>

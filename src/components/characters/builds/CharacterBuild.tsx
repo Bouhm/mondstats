@@ -1,4 +1,4 @@
-import './CharacterBuilds.css';
+import './CharacterBuild.css';
 
 import AmberSad from '/assets/amberSad.webp';
 import _ from 'lodash';
@@ -19,7 +19,7 @@ import CharacterTeams from './CharacterTeams';
 import Constellations from './Constellations';
 import LLImage from '../../ui/LLImage'
 
-function CharacterBuilds() {  
+function CharacterBuild() {  
   const { shortName } = useParams<{ shortName: string }>();
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
@@ -87,4 +87,4 @@ function CharacterBuilds() {
   )
 }
 
-export default CharacterBuilds
+export default CharacterBuild

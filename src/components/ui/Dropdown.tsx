@@ -1,6 +1,5 @@
 import './Dropdown.scss';
 
-import { filter, map, orderBy, some } from 'lodash';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import Select, { components } from 'react-select';
 

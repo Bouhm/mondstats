@@ -3,6 +3,7 @@
   width: 100%;
   padding: 0 0.5rem;
   margin-bottom: 2rem;
+  margin-top: 2rem;
 
   .stats-table-row {
     display: grid;
@@ -23,6 +24,8 @@
     }
 
     .col-header {
+      font-size: 1.2rem;
+      justify-content: center;
       display: flex;
       align-items: center;
       width: 100%;

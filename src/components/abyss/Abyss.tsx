@@ -35,6 +35,7 @@ import Loader from '../ui/Loader';
 import PartySelector from './PartySelector';
 import Tabs, { useTabs } from '../ui/Tabs';
 import CardSearch from '../ui/CardSearch';
+import LLImage from '../ui/LLImage';
 
 const _compareFloor = (f1: Option, f2: Option) => {
   if (f1.value.startsWith('_') || f2.value.startsWith('_')) {
@@ -65,14 +66,7 @@ function Abyss() {
   })).sort(_compareFloor)]
 
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const characters = map(characterDb, (character) => {
-    return ({
-      _id: character._id,
-      name: getCharacterLabel(character),
-      rarity: character.rarity,
-      keys: character.element
-    })
-  });
+  const { searchCharacters } = useCharacterSearch(characterDb);
 
   const [ AbyssData, setAbyssData ] = useState<IAbyssBattle[]>([]);
   const [ selectedStages, selectStages ] = useState<Option[]>([options[0]])
@@ -248,7 +242,7 @@ function Abyss() {
       <div className="abyss-controls">
         <F2P onChange={handleFilterChange} f2p={filters.f2p} max5={filters.max5} />
       </div>
-      <CardSearch.Characters items={filter(characters, character => !includes(selectedCharacters, character._id))} onSelect={handlePartyChange} showCards={false}/>
+      <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handlePartyChange} showCards={false}/>
       <br />
       <h1 title={"Data from teams that 3-starred the respective floors"}>Abyss Teams</h1>
       <Tabs activeTabIdx={activeTabIdx} onChange={handleTabChange} tabs={map(tabs, (floor => typeof floor === 'number' ? `FLOOR ${floor}` : floor.toString()))} />
@@ -258,3 +252,7 @@ function Abyss() {
 }
 
 export default Abyss;
+
+function useCharacterSearch(characterDb: ICharacterDb): { searchCharacters: any; } {
+  throw new Error('Function not implemented.');
+}

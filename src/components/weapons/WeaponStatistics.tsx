@@ -17,18 +17,7 @@ function WeaponStatistics() {
 
   if (isEmpty(weaponDb) || isEmpty(weaponStats)) return <Loader />
 
-  const weaponItems = map(weaponStats, ({_id}) => {
-    const weapon = weaponDb[_id]
-
-    return ({
-      _id,
-      name: weapon.name,
-      rarity: weapon.rarity,
-      keys: uniq(
-        filter(KEYWORDS, key => includes(weapon.effect, key))
-      ).join(" ")
-    })
-  });
+  const { searchWeapons } = useWeaponSearch(weaponDb, weaponStats);
 
   const handleSelect = (selectedIds: string[]) => {
     setSelectedWeapons(selectedIds)
@@ -36,7 +25,7 @@ function WeaponStatistics() {
     
   return (
     <div className="weapon-stats-container">
-      <CardSearch.Weapons items={filter(weaponItems, weapon => !includes(selectedWeapons, weapon._id))} onSelect={handleSelect} />
+      <CardSearch.Weapons items={filter(searchWeapons, weapon => !includes(selectedWeapons, weapon._id))} onSelect={handleSelect} />
       <StatsTable.WeaponStatistics data={isEmpty(selectedWeapons) ? weaponStats : filter(weaponStats, weapon => includes(selectedWeapons, weapon._id))} />
     </div>
   )
