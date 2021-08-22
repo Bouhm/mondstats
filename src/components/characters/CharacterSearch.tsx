@@ -3,7 +3,7 @@ import './CharacterSearch.css';
 import { filter, map, orderBy, some } from 'lodash';
 import React, { ReactNode } from 'react';
 
-import { getCharacterFileName, getShortName } from '../../scripts/util';
+import { getCharacterFileName, getCharacterLabel, getShortName } from '../../scripts/util';
 import { useAppSelector } from '../hooks/useRedux';
 import Dropdown, { Option } from '../ui/Dropdown';
 
@@ -24,8 +24,7 @@ function CharacterSearch({ charFilter = [], onSelect }: CharacterSearchProps) {
   const options = orderBy(
     filter(
       map(characterDb, (char) => {
-        if (char.name === "Traveler") return { label: `${char.name} (${char.element})`, rarity: char.rarity, value: getShortName(char) }
-        return { label: char.name, rarity: char.rarity, value: getShortName(char) }
+        return { label: getCharacterLabel(char), rarity: char.rarity, value: getShortName(char) }
       }),
     ({ value }: Option) => !some(charFilter, name => value.split('-')[0] === name.split('-')[0])),
   'label', 'asc') as Option[]
@@ -48,7 +47,7 @@ function CharacterSearch({ charFilter = [], onSelect }: CharacterSearchProps) {
     <div className="character-search">
       <div className="character-searchbar">
         <Dropdown.SearchSelect
-          placeholder={"Search characters"}
+          placeholder={"Search character builds"}
           onChange={handleSelect}
           options={options}
           optionLabel={OptionLabel}

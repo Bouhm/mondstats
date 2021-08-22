@@ -8,6 +8,7 @@ import { useAppSelector } from '../hooks/useRedux';
 import StatsTable from '../stats/StatsTable';
 import CardSearch from '../ui/CardSearch';
 import Loader from '../ui/Loader';
+import { getCharacterLabel } from '../../scripts/util';
 
 function CharacterStatistics() { 
   const characterDb = useAppSelector((state) => state.data.characterDb)
@@ -21,7 +22,7 @@ function CharacterStatistics() {
 
     return ({
       _id,
-      name: character.name === 'Traveler' ? `Traveler (${character.element})` : character.name,
+      name: getCharacterLabel(character),
       element: character.element,
       rarity: character.rarity,
       keys: character.element

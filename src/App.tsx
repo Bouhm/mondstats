@@ -83,15 +83,15 @@ function App() {
         <div className="section-view">
           <main>
             <Switch>
+              <Redirect exact path="/" to="/builds" />
               <Route path="/about" component={About} />
               <Route path="/changelog" component={Changelog} />
               <Route path="/abyss" component={Abyss} />
               <Route path="/characters" component={CharacterStatistics} />
               <Route path="/artifacts" component={ArtifactSetStatistics} />
               <Route path="/weapons" component={WeaponStatistics} />
-              <Route exact path="/" component={Home} />
+              <Route exact path="/builds" component={Home} />
               <Route path="/builds/:shortName" component={CharacterBuilds} />
-              <Redirect exact path="/builds" to="/" />
             </Switch>
           </main>
           <section className="footer">

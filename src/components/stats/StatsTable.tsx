@@ -5,7 +5,7 @@ import React from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
 import { ICharacterData } from '../../data/types';
-import { getArtifactSetNames, getCharacterFileName, getPercentage, shortenId } from '../../scripts/util';
+import { getArtifactSetNames, getCharacterFileName, getCharacterLabel, getPercentage, shortenId } from '../../scripts/util';
 import ArtifactSets from '../artifact-sets/ArtifactSets';
 import { useAppSelector } from '../hooks/useRedux';
 import Tooltip from '../ui/Tooltip';
@@ -34,13 +34,15 @@ function CharacterStatistics({data}: any) {
   }, [data])
 
   const title = 'characters'
-  const renderCard = (itemStat: any) => (
-    <Tooltip content={`${db[itemStat._id].name}`}>
+  const renderCard = (itemStat: any) => {
+    const name = getCharacterLabel(db[itemStat._id]);
+    return <Tooltip content={name}>
       <div className="row-card col">
+        {/* <img className="row-card-element" src={`/assets/elements/${db[itemStat._id].element}.webp`} /> */}
         <img src={`/assets/${title}/${getCharacterFileName(db[itemStat._id])}.webp`} />
       </div>
     </Tooltip>
-  )
+  }
 
   if (!featured) return <Loader />
 

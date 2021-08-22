@@ -22,7 +22,7 @@ import _, {
 import React, { useEffect, useState } from 'react';
 
 import { IAbyssBattle, IParty } from '../../data/types';
-import { getPercentage } from '../../scripts/util';
+import { getCharacterLabel, getPercentage } from '../../scripts/util';
 import Team from '../characters/Team';
 import F2P from '../filters/F2P';
 import useFilters from '../filters/useFilters';
@@ -68,7 +68,7 @@ function Abyss() {
   const characters = map(characterDb, (character) => {
     return ({
       _id: character._id,
-      name: character.name === 'Traveler' ? `Traveler (${character.element})` : character.name,
+      name: getCharacterLabel(character),
       rarity: character.rarity,
       keys: character.element
     })
