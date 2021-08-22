@@ -33,6 +33,7 @@ import {
 } from './data/types';
 import { getShortName } from './scripts/util';
 import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
+import CharacterStatistics from './components/characters/CharacterStatistics';
 
 function App() {
   const dispatch = useAppDispatch()
@@ -85,7 +86,7 @@ function App() {
               <Route path="/about" component={About} />
               <Route path="/changelog" component={Changelog} />
               <Route path="/abyss" component={Abyss} />
-              <Route path="/characters" component={UnderConstruction} />
+              <Route path="/characters" component={CharacterStatistics} />
               <Route path="/artifacts" component={ArtifactSetStatistics} />
               <Route path="/weapons" component={WeaponStatistics} />
               <Route exact path="/" component={Home} />

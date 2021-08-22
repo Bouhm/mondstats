@@ -7,8 +7,9 @@ import React, { ReactNode, useRef, useState } from 'react';
 import { shortenId } from '../../scripts/util';
 import Dropdown, { Option } from '../ui/Dropdown';
 import Card from './Card';
+import { useAppSelector } from '../hooks/useRedux';
 
-type ItemSearchProps = {
+type CardSearchProps = {
   items: SearchItem[]
   onSelect: (selectedIds: string[]) => void
 }
@@ -26,7 +27,29 @@ type DDProps = {
   placeholder: string
 }
 
-function ArtifactSets(props: ItemSearchProps) { 
+
+function Characters(props: CardSearchProps) { 
+  const characterDb = useAppSelector((state) => state.data.characterDb)
+  const options: Option[] = orderBy(map(props.items, (item) => {
+    return ({ label: item.name, rarity: item.rarity, value: item._id }) as Option
+  }),'label', 'asc')
+
+  const OptionLabel = ({ value, rarity, label }: Option) => {
+    return (
+      <div className="item-option" key={label}>
+        <div className={`item-option-image rarity-${rarity}`}>
+          <img className="character-option-element" src={`/assets/elements/${characterDb[value].element}.webp`} />
+          <img className="item-option-portrait" src={`/assets/artifacts/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
+        </div>
+        <div className="item-option-label">{label}</div>
+      </div>
+    ) as ReactNode;
+  }
+
+  return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"artifacts"} placeholder={"Search artifact sets"} {...props} />
+}
+
+function ArtifactSets(props: CardSearchProps) { 
   const options: Option[] = orderBy(map(props.items, (item) => {
     return ({ label: item.name, rarity: item.rarity, value: item._id }) as Option
   }),'label', 'asc')
@@ -45,7 +68,7 @@ function ArtifactSets(props: ItemSearchProps) {
   return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"artifacts"} placeholder={"Search artifact sets"} {...props} />
 }
 
-function Weapons(props: ItemSearchProps) { 
+function Weapons(props: CardSearchProps) { 
   const options: Option[] = orderBy(map(props.items, (item) => {
     return ({ label: item.name, rarity: item.rarity, value: item._id }) as Option
   }),'label', 'asc')
@@ -64,7 +87,7 @@ function Weapons(props: ItemSearchProps) {
   return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"weapons"} placeholder={"Search weapons"} {...props} />
 }
 
-function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholder }: ItemSearchProps & DDProps & { imgPath: string }) { 
+function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholder }: CardSearchProps & DDProps & { imgPath: string }) { 
   const [searchedItems, setSearchedItems] = useState<SearchItem[]>([]);
   const [selectedItems, setSelectedItems] = useState<Option[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -134,4 +157,4 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholde
   )
 }
 
-export default { ArtifactSets, Weapons }
+export default { ArtifactSets, Weapons, Characters }

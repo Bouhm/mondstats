@@ -21,6 +21,64 @@ function renderCharacterStats(character: ICharacterData, count: number, key: str
   )
 }
 
+function CharacterStatistics({data}: any) {
+  const db = useAppSelector((state) => state.data.characterDb)
+  const total = reduce(data, (sum: number, curr: any) => sum + curr.count, 0)
+  const pageSize = 20;
+  const { currentPage, onPageChange, handleReset, filterPageContent } = usePaginate(pageSize);
+
+  useEffect(() => {
+    handleReset()
+  }, [data])
+
+  const title = 'characters'
+  const renderCard = (itemStat: any) => (
+    <Tooltip content={db[itemStat._id].name}>
+      <div className="row-card col">
+        <ArtifactSets artifacts={itemStat.artifacts} />
+      </div>
+    </Tooltip>
+  )
+
+  return (
+    <div className="stats-table-container">
+      <div className="stats-table">
+        <div className="stats-table-row">
+            <div className="row-card">
+              <span className="col-header">{capitalize(title)}</span>
+            </div>
+            <div className="row-stats">
+            <span className="col-header">Usage %</span>
+            </div>
+            <div className="row-related">
+            <span className="col-header">Used by</span>
+            </div>
+        </div>
+        {map(filterPageContent(data), (itemStat: any, i) => {
+          const percentage = getPercentage(itemStat.count, total);
+
+          return (
+            <div key={`row-${i}`} className="stats-table-row">
+              {renderCard(itemStat)}
+              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.count}`}>
+                <>
+                  <div
+                    className={`row-stats-bar`} 
+                    style={{ width: `${percentage}%`}} 
+                  />    
+                  <div className="row-stats-pct">{ `${percentage}%`}</div>
+                </>
+              </Tooltip>
+             
+            </div>
+          )
+        })}
+      </div>
+      {data.length > pageSize && <Pagination current={currentPage} pageSize={pageSize} onChange={onPageChange} total={data.length} />}
+    </div>
+  )
+}
+
 function ArtifactSetStatistics({data}: any) {
   const db = useAppSelector((state) => state.data.artifactSetDb)
   const title = 'artifacts'
@@ -32,7 +90,7 @@ function ArtifactSetStatistics({data}: any) {
     </Tooltip>
   )
 
-  return <StatsTable data={data} title={title} renderCard={renderCard} />
+  return <ItemStatsTable data={data} title={title} renderCard={renderCard} />
 }
 
 function WeaponStatistics({data}: any) {
@@ -46,7 +104,7 @@ function WeaponStatistics({data}: any) {
     </Tooltip>
   )
 
-  return <StatsTable data={data} title={title} renderCard={renderCard} />
+  return <ItemStatsTable data={data} title={title} renderCard={renderCard} />
 }
 
 type StatsTableProps = {
@@ -55,7 +113,7 @@ type StatsTableProps = {
   renderCard: (itemStat: any) => JSX.Element
 } 
 
-function StatsTable({ data, title, renderCard }: StatsTableProps) {
+function ItemStatsTable({ data, title, renderCard }: StatsTableProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const total = reduce(data, (sum: number, curr: any) => sum + curr.count, 0)
   const pageSize = 20;
@@ -107,4 +165,4 @@ function StatsTable({ data, title, renderCard }: StatsTableProps) {
 }
 
 
-export default { ArtifactSetStatistics, WeaponStatistics }
+export default { ArtifactSetStatistics, WeaponStatistics, CharacterStatistics }

@@ -1,6 +1,6 @@
 import './CharacterSearch.css';
 
-import { filter, isEmpty, map, orderBy, some } from 'lodash';
+import { filter, map, orderBy, some } from 'lodash';
 import React, { ReactNode } from 'react';
 
 import { getCharacterFileName, getShortName } from '../../scripts/util';
