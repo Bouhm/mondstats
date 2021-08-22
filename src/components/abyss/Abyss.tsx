@@ -71,7 +71,7 @@ function Abyss() {
   const [ AbyssData, setAbyssData ] = useState<IAbyssBattle[]>([]);
   const [ selectedStages, selectStages ] = useState<Option[]>([options[0]])
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
-  const [selectedCharacters, setSelectedCharacters] = useState<string[]>([])
+  const [ selectedCharacters, setSelectedCharacters] = useState<string[]>([])
   
   const { filters, handleFilterChange } = useFilters();
   const abyssTopTeams = useApi('abyss/top-teams.json');

@@ -10,7 +10,7 @@ type ToggleProps = {
   onChange: () => void;
 }
 
-function Toggle({ label, color="#CECBC4", value, onChange }: ToggleProps) {
+function Toggle({ label, color="#1F7896", value, onChange }: ToggleProps) {
   const [checked, setChecked] = useState(value)
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {

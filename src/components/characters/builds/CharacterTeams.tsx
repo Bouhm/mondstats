@@ -11,6 +11,7 @@ import { useAppSelector } from '../../hooks/useRedux';
 import Button from '../../ui/Button';
 import { ChevronDown, ChevronUp } from '../../ui/Icons';
 import Team from '../Team';
+import useExpand from '../../hooks/useExpand';
 
 interface ITeam {
   party: string[],
@@ -20,9 +21,9 @@ interface ITeam {
 function CharacterTeams({ teams, filters }: { teams: IParty[], filters: Filters }) {
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
+  const { expanded, handleExpand } = useExpand();
   const max = 10;
 
-  const [ showMore, setShowMore ] = useState(false);
   const [ filteredTeams, setFilteredTeams ] = useState<ITeam[]>([])
 
   const filterTeams = (teams: IParty[], charId: string) => {
@@ -51,10 +52,6 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: Filters 
     return take(filtered, max);
   }
 
-  const handleToggleShowMore = () => {
-    setShowMore(!showMore);
-  }
-
   useEffect(() => {
     const updatedTeams = filterTeams(teams, selectedCharacter);
     setFilteredTeams(updatedTeams);
@@ -63,15 +60,15 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: Filters 
   const renderParties = () => (
     <div className="parties-container">
        <h2>{reduce(filteredTeams, (sum, curr) => sum + curr.count, 0)} Teams</h2>
-      {map(take(filteredTeams, showMore ? max : 5), ({party, count}, i) => (
+      {map(take(filteredTeams, expanded ? max : 5), ({party, count}, i) => (
         <Team key={`team-${i}`} team={party} count={count} percent={`${getPercentage(count, reduce(filteredTeams, (sum,curr) => sum + curr.count, 0))}%`} />
       ))}
       {filteredTeams.length > 5 && (
-        !showMore 
+        !expanded 
         ?
-        <Button className="party-show-more" onClick={handleToggleShowMore}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
+        <Button className="party-show-more" onClick={handleExpand}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
         :
-        <Button className="party-show-more" onClick={handleToggleShowMore}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
+        <Button className="party-show-more" onClick={handleExpand}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
       )}
     </div>
   )

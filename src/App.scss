@@ -110,6 +110,18 @@ footer {
   background: var.$rarity-5;
 }
 
+.Characters {
+  background-color: rgb(31, 120, 150) !important;
+}
+
+.Weapons {
+  background-color: rgb(172, 34, 18) !important;
+}
+
+.Artifacts {
+  background-color: rgb(48, 150, 113) !important;
+}
+
 @media (max-width: 1036px) {
   .App {
     .App-content {
