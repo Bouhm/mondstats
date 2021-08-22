@@ -22,7 +22,7 @@ import _, {
 import React, { useEffect, useState } from 'react';
 
 import { IAbyssBattle, IParty } from '../../data/types';
-import { getCharacterLabel, getPercentage } from '../../scripts/util';
+import { getPercentage } from '../../scripts/util';
 import Team from '../characters/Team';
 import F2P from '../filters/F2P';
 import useFilters from '../filters/useFilters';
@@ -32,7 +32,6 @@ import Button from '../ui/Button';
 import Dropdown, { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
-import PartySelector from './PartySelector';
 import Tabs, { useTabs } from '../ui/Tabs';
 import CardSearch from '../ui/CardSearch';
 import LLImage from '../ui/LLImage';
