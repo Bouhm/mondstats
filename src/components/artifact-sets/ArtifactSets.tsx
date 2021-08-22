@@ -19,7 +19,7 @@ function ArtifactSets({ artifacts, color='', selected=false, selector=false }: A
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
 
   return (
-    <div className={`artifact-sets-container ${selector ? 'asSelector' : ''} ${selected ? "selected" : ""}`} style={selected ? {backgroundColor: color }:{}}>
+    <div className={`artifact-sets-container ${selector ? 'asSelector' : ''} ${selected ? "asSelected" : ""}`} style={selected ? {backgroundColor: color }:{}}>
       {map(artifacts, ({ _id, activation_number }, i) => {
         return (
           <div key={`thumb-${shortenId(_id)}-i`} className={"artifact-thumb"}>

@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: row;
   padding: 2rem;
-  margin: 2rem 0;
+  margin: 0 0 2rem 0;
   background-color: rgba(0, 0, 0, 0.15);
   border-radius: 10px;
 }
@@ -34,6 +34,7 @@
       .artifacts-donut-chart {
         z-index: 1;
         max-width: 400px;
+        width: 100%;
       }
 
       .artifact-popularity {
@@ -53,7 +54,9 @@
 .artifacts-selector {
   display: flex;
   justify-content: center;
-  padding: 0 0.5rem;
+  padding: 1rem 1rem 0 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
 
   .artifact-thumb {
     overflow: hidden;
@@ -121,76 +124,6 @@
   }
 }
 
-@media (max-width: 617px) {
-  .build-details {
-    flex-flow: column-reverse;
-  }
-
-  .artifact-popularity {
-    font-size: 2rem;
-  }
-
-  .artifact-build-container {
-    height: 100%;
-    max-height: 100%;
-    flex-wrap: wrap-reverse;
-
-    .artifacts-menu-controls {
-      display: block;
-    }
-
-    .artifact-build-stats {
-      margin-right: 0;
-    }
-  }
-}
-
-@media (max-width: 676px) {
-  .weapons-list {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-
-    .weapon-container {
-      width: 100% !important;
-      max-width: 100%;
-      display: flex;
-      justify-content: center;
-
-      & > div {
-        width: 100%;
-      }
-    }
-
-    .weapon-bar-chart {
-      display: none;
-    }
-  }
-
-  .artifacts-donut-chart {
-    .artifact-popularity {
-      font-size: 2.5rem !important;
-    }
-  }
-}
-
-@media (max-width: 1280px) {
-  .artifacts-selector {
-    .artifacts-menu {
-      height: 70px;
-
-      div {
-        height: 100%;
-
-        .artifact-sets-container {
-          height: inherit;
-          width: 140px;
-        }
-      }
-    }
-  }
-}
-
 @media (max-width: 1280px) {
   .artifacts-selector {
     .artifacts-menu {
@@ -225,22 +158,12 @@
       }
     }
   }
-}
 
-@media (max-width: 1036px) {
-  .build-details {
-    flex-flow: column-reverse;
-  }
-
-  .artifacts-selector {
-    .artifacts-menu {
-      height: 70px;
-
-      div {
-        .artifact-sets-container {
-          height: inherit;
-          width: 130px;
-        }
+  .artifact-build-container {
+    .artifact-build-stats {
+      .artifact-build {
+        min-height: 0;
+        height: 100%;
       }
     }
   }
@@ -257,6 +180,59 @@
           width: 100px;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 676px) {
+  .weapons-list {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    .weapon-container {
+      width: 100% !important;
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+
+      & > div {
+        width: 100%;
+      }
+    }
+
+    .weapon-bar-chart {
+      display: none;
+    }
+  }
+
+  .artifacts-donut-chart {
+    .artifact-popularity {
+      font-size: 2.5rem !important;
+    }
+  }
+}
+
+@media (max-width: 617px) {
+  .build-details {
+    flex-flow: column-reverse;
+  }
+
+  .artifact-popularity {
+    font-size: 2rem;
+  }
+
+  .artifact-build-container {
+    height: 100%;
+    max-height: 100%;
+    flex-wrap: wrap-reverse;
+
+    .artifacts-menu-controls {
+      display: block;
+    }
+
+    .artifact-build-stats {
+      margin-right: 0;
     }
   }
 }

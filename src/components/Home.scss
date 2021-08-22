@@ -35,3 +35,21 @@
     }
   }
 }
+
+@media (max-width: 544px) {
+  .home {
+    .home-logo {
+      img {
+        width: 110px;
+      }
+    }
+
+    .home-data-info {
+      font-size: 1.2rem;
+
+      span {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
