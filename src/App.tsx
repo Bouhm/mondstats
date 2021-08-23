@@ -1,6 +1,6 @@
 import './App.scss';
 import 'react-popper-tooltip/dist/styles.css';
-import "rc-pagination/assets/index.css"
+import 'rc-pagination/assets/index.css';
 
 import axios from 'axios';
 import { forEach, isEmpty } from 'lodash';
@@ -11,6 +11,8 @@ import { Link, Redirect, Route, Switch, useHistory, withRouter } from 'react-rou
 import Abyss from './components/abyss/Abyss';
 import ArtifactSetStatistics from './components/artifact-sets/ArtifactSetStatistics';
 import CharacterBuild from './components/characters/builds/CharacterBuild';
+import BuildSearch from './components/characters/BuildSearch';
+import CharacterStatistics from './components/characters/CharacterStatistics';
 import Home from './components/Home';
 import useApi from './components/hooks/useApi';
 import { useAppDispatch, useAppSelector } from './components/hooks/useRedux';
@@ -19,8 +21,8 @@ import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
-import WeaponStatistics from './components/weapons/WeaponStatistics';
 import Dialogue from './components/ui/Dialogue';
+import WeaponStatistics from './components/weapons/WeaponStatistics';
 import {
   IArtifactData,
   IArtifactDb,
@@ -33,8 +35,6 @@ import {
 } from './data/types';
 import { getShortName } from './scripts/util';
 import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
-import CharacterStatistics from './components/characters/CharacterStatistics';
-import BuildSearch from './components/characters/BuildSearch';
 
 function App() {
   const dispatch = useAppDispatch()
@@ -110,7 +110,7 @@ function App() {
             <div className="links">
               <Link to="/about">About</Link>
               <Link to="/changelog">Changelog</Link>
-              <div onClick={() => setShowNotice(true)}>⚠️</div>
+              <div className="notice" onClick={() => setShowNotice(true)}>⚠️</div>
             </div>
             <footer>Favonius.io is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoYo.</footer>
           </section>

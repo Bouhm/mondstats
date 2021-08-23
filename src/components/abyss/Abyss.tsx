@@ -19,6 +19,7 @@ import _, {
   some,
   take,
 } from 'lodash';
+import Pagination from 'rc-pagination';
 import React, { useEffect, useState } from 'react';
 
 import { IAbyssBattle, IParty } from '../../data/types';
@@ -27,17 +28,16 @@ import Team from '../characters/Team';
 import F2P from '../filters/F2P';
 import useFilters from '../filters/useFilters';
 import useApi from '../hooks/useApi';
-import { useAppSelector } from '../hooks/useRedux';
-import Button from '../ui/Button';
-import Dropdown, { Option } from '../ui/Dropdown';
-import { ChevronDown, ChevronUp } from '../ui/Icons';
-import Loader from '../ui/Loader';
-import Tabs, { useTabs } from '../ui/Tabs';
-import CardSearch from '../ui/CardSearch';
-import LLImage from '../ui/LLImage';
 import useCharacterSearch from '../hooks/useCharacterSearch';
 import usePaginate from '../hooks/usePaginate';
-import Pagination from 'rc-pagination';
+import { useAppSelector } from '../hooks/useRedux';
+import Button from '../ui/Button';
+import CardSearch from '../ui/CardSearch';
+import Dropdown, { Option } from '../ui/Dropdown';
+import { ChevronDown, ChevronUp } from '../ui/Icons';
+import LLImage from '../ui/LLImage';
+import Loader from '../ui/Loader';
+import Tabs, { useTabs } from '../ui/Tabs';
 import AbyssFloor from './AbyssFloor';
 
 const _compareFloor = (f1: Option, f2: Option) => {
@@ -80,13 +80,15 @@ function Abyss() {
   const abyssTopTeams = useApi('abyss/top-teams.json');
   const { activeTabIdx, onTabChange } = useTabs();
 
+  console.log(abyssTopTeams)
+
   useEffect(() => {
     async function fetchAbyssData() {
       await Promise.all(map(filter(selectedStages, stage => stage.value !== "ALL"), floor => {
         const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
 
         if (floorIdx < 0) {
-          return axios.get(`https://raw.githubusercontent.com/bouhm/favonius-data/develop/abyss/${floor.value}.json`, {
+          return axios.get(`https://api.github.com/repos/bouhm/favonius-data/contents/abyss/${floor.value}.json`, {
             headers: { 'accept': 'application/vnd.github.v3.raw+json' },
           }).then(res => res.data)
         } else {
@@ -183,6 +185,7 @@ function Abyss() {
 
   const renderFloorParties = (selectedStage: Option) => {
     const filteredAbyssFloors = filter(_filterAbyss(), { floor_level: selectedStage.value });
+    console.log(filteredAbyssFloors);
     return <AbyssFloor 
       abyssFloors={filteredAbyssFloors} 
       selectedStage={selectedStage}
@@ -203,7 +206,7 @@ function Abyss() {
     </div>
   )
 
-  if (!characterDb || isEmpty(abyssTopTeams)) {
+  if (!characterDb || !abyssTopTeams) {
     return <Loader />
   }
 
