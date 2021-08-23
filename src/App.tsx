@@ -42,10 +42,10 @@ function App() {
   // const { loading, error, data } = useQuery(Query);
   const db = useApi(`/db.json`);
   const notice = <p>
-    This site shows the most <i>used</i> builds which don't necessarily mean the <i>best</i> builds.
+    This site shows the most <i>used</i> builds and teams which don't necessarily mean the <i>best</i>.
     <br/><br />
-    Please also be mindful of other players' investment in the game which may be more representative of
-    their comfort with spending rather than the objective value of a certain character or item.
+    Please also be mindful of other players' monetary investment in the game which 
+    may not be reflective of the objective value of a certain character or item.
   </p>
 
   useEffect(() => {

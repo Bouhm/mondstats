@@ -1,7 +1,8 @@
 import './About.css';
 
 import React from 'react';
-import LLImage from '../ui/LLImage'
+
+import LLImage from '../ui/LLImage';
 
 function About() { 
   return (
@@ -14,7 +15,7 @@ function About() {
       <hr />
       <div className="about-section">
         <h2>How are you collecting data?</h2>
-        <p>Favonius.io collects its data using the APIs from HoYoLAB. Only data from users who opt-in to display their Battle Chronicles publicly can be collected. Due to the API rate limit, it takes a long time to accumulate data. The aggregate data is updated daily and any data more than 6 weeks old is purged every patch cycle. Since data collection is slow, small chunks are updated at a time in order of time since last update.</p>
+        <p>Favonius.io collects its data using the APIs from HoYoLAB. Only data from users who opt-in to display their Battle Chronicles publicly can be collected. Due to the API rate limit, it takes a long time to accumulate data. The aggregate data is updated routinely and any data more than 6 weeks old is purged every patch cycle. Since data collection is slow, small chunks are updated at a time in order of time since last update.</p>
       </div>
       <div className="about-section">
         <h2>How can I contribute?</h2>
