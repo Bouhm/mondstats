@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const useApi = (apiUrl: string) => {
-  const apiBase = 'https://api.github.com/repos/bouhm/favonius-data/contents/'
+  const apiBase = 'https://bouhm.github.io/favonius-data/'
   // const apiBase = 'https://raw.githubusercontent.com/bouhm/favonius-data/develop/'
   const [data, setData] = useState<any>(undefined)
 
