@@ -1,3 +1,7 @@
+## dev build 8.22.21
+
+- Fix Abyss data aggregation and filtering, show halves for every floor
+
 ## dev build 8.21.21
 
 - Add character statistics page
