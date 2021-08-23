@@ -1,6 +1,5 @@
 import './Abyss.scss';
 
-import AmberSad from '/assets/amberSad.webp';
 import axios from 'axios';
 import _, {
   clone,
@@ -19,7 +18,6 @@ import _, {
   some,
   take,
 } from 'lodash';
-import Pagination from 'rc-pagination';
 import React, { useEffect, useState } from 'react';
 
 import { IAbyssBattle, IParty } from '../../data/types';

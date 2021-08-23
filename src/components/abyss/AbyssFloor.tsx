@@ -1,11 +1,9 @@
 import AmberSad from '/assets/amberSad.webp';
-import { filter, isEmpty, map, orderBy, reduce, some, take } from 'lodash';
-import Pagination from 'rc-pagination';
+import { isEmpty, map, orderBy, reduce, some, take } from 'lodash';
 import React from 'react';
 
 import { getPercentage } from '../../scripts/util';
 import Team from '../characters/Team';
-import usePaginate from '../hooks/usePaginate';
 import Button from '../ui/Button';
 import { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
@@ -39,7 +37,7 @@ const AbyssFloor = ({ abyssFloors, selectedStage, stageLimitToggle, onToggleLimi
             <React.Fragment key={`parties-${selectedStage.value}-${i}-${activeTabIdx}`}>
               <h2>{reduce(battle_parties[activeTabIdx], (sum,curr) => sum + curr.count, 0)} Teams</h2>
               <div key={`battle-${selectedStage.value}-${i}-${activeTabIdx}`} className="battle-container">
-                {battle_parties[activeTabIdx].length > 1 ? 
+                {battle_parties[activeTabIdx].length > 0 ? 
                   <>
                     {map(take(orderBy(battle_parties[activeTabIdx], 'count', 'desc'), stageLimitToggle[selectedStage.value] ? maxParties : pageSize), ({party, count}, k) => {
                         return (
