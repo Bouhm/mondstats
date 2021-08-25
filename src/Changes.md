@@ -40,7 +40,7 @@
 
 ## dev build 7.27.21
 
-- Fetch data from Favonius API instead of local
+- Fetch data from Mondstats API instead of local
 - Break up data to fetch only relevant parts
 - Add minimal loaders accordingly
 

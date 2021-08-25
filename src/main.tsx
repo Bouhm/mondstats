@@ -12,7 +12,7 @@ import ScrollToTop from './components/ScrollToTop';
 import store from './Store';
 
 // const client = new ApolloClient({
-//   uri: 'https://favonius-server.herokuapp.com/graphql',
+//   uri: 'https://mondstats-server.herokuapp.com/graphql',
 //   cache: new InMemoryCache(({
 //     addTypename: false
 //   })),

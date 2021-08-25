@@ -112,7 +112,7 @@ function App() {
               <Link to="/changelog">Changelog</Link>
               <div className="notice" onClick={() => setShowNotice(true)}>⚠️</div>
             </div>
-            <footer>Favonius.io is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoYo.</footer>
+            <footer>Mondstats is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoYo.</footer>
           </section>
         </div>
       </main>
