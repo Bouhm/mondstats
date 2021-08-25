@@ -1,6 +1,6 @@
 ## dev build 8.25.21
 
--- Favonius.io is now Mondstats!
+- Favonius.io is now Mondstats!
 
 ## dev build 8.22.21
 
