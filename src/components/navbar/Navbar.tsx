@@ -3,7 +3,8 @@ import './Navbar.css';
 import Logo from '/assets/logo_sm.webp';
 import _ from 'lodash';
 import React, { useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Link, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Link, useLocation } from 'react-router-dom';
+
 import LLImage from '../ui/LLImage';
 
 const Navtabs: { name: string, linkto: string }[] = [
@@ -32,6 +33,7 @@ function Navbar() {
           <Link to="/"><LLImage src={Logo} alt="logo" /></Link>
         </div>
         <div className="nav-announcement">
+          Favonius.io will become Mondstats.com!
         </div>
         <div className="nav-menu">
           {_.map(Navtabs, tab => {
