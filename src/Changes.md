@@ -1,3 +1,7 @@
+## dev build 8.25.21
+
+-- Favonius.io is now Mondstats!
+
 ## dev build 8.22.21
 
 - Fix Abyss data aggregation and filtering, show halves for every floor
