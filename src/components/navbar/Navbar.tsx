@@ -33,7 +33,6 @@ function Navbar() {
           <Link to="/"><LLImage src={Logo} alt="logo" /></Link>
         </div>
         <div className="nav-announcement">
-          Favonius.io will become Mondstats.com!
         </div>
         <div className="nav-menu">
           {_.map(Navtabs, tab => {
