@@ -4,23 +4,27 @@ import { map } from 'lodash';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { IParty } from '../../data/types';
+import { IFlexChar, IParty } from '../../data/types';
 import { getShortName } from '../../scripts/util';
 import { useAppSelector } from '../hooks/useRedux';
 import Tooltip from '../ui/Tooltip';
 import CharacterTile from './CharacterTile';
+import useExpand from '../hooks/useExpand';
+import CharacterCount from './CharacterCount';
 
 type TeamProps = {
   team: string[],
   percent: string,
-  count: number
+  count: number,
+  flex: IFlexChar[]
 }
 
-function Team({ team, percent, count }: TeamProps) {
+function Team({ team, percent, count, flex }: TeamProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
+  const { expanded, handleExpand } = useExpand();
 
   return (
-    <div className="team-container">
+    <div className="team-container" onClick={handleExpand}>
       <Tooltip content={`${map(team, char => characterDb[char].name).join(', ')}: ${count}`}>
         <div className="team-stats">
           {map(team, (char, i) => (
@@ -34,6 +38,7 @@ function Team({ team, percent, count }: TeamProps) {
           </div>
         </div>
       </Tooltip>
+      {expanded && map(flex, ({charId, count}) => <CharacterCount character={characterDb[charId]} count={count} />)}
     </div>
   )
 }

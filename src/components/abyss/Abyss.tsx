@@ -78,15 +78,14 @@ function Abyss() {
   const abyssTopTeams = useApi('abyss/top-teams.json');
   const { activeTabIdx, onTabChange } = useTabs();
 
-  console.log(abyssTopTeams)
-
   useEffect(() => {
     async function fetchAbyssData() {
       await Promise.all(map(filter(selectedStages, stage => stage.value !== "ALL"), floor => {
         const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
 
         if (floorIdx < 0) {
-          return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floor.value}.json`, {
+          return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floor.value}.json`, {
+          // return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floor.value}.json`, {
             headers: { 'accept': 'application/vnd.github.v3.raw+json' },
           }).then(res => res.data)
         } else {
@@ -99,8 +98,9 @@ function Abyss() {
   }, [setAbyssData, selectedStages])
 
   function _filterParties(parties: IParty[]) {
-    return filter(parties, ({party}) => {
+    return filter(parties, ({core_party, flex}) => {
       let charFilter = true;
+      const party = [...core_party, flex[0].charId];
 
       if (filters.f2p) {
         charFilter = (filter(party, char => {
@@ -164,13 +164,14 @@ function Abyss() {
         <h2 className="stage-label">Top Teams</h2>
         <div className="stage-half">
           <h2>{total} Teams</h2>
-          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({party, count}, i) => (
-            <React.Fragment key={`parties-ALL-${i}`}>
+          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({core_party, flex, count}, i) => {
+            const party = [...core_party, flex[0].charId];
+            return <React.Fragment key={`parties-ALL-${i}`}>
               <div key={`battle-ALL-${i}`} className="battle-container">
                 <Team key={`team-ALL-${i}`} team={party} count={count} percent={`${getPercentage(count, total)}%`} />
               </div>
             </React.Fragment>
-          ))}
+          })}
           {(filteredTopTeams.length > 10) && (!stageLimitToggle["ALL"] ?
             <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
             :

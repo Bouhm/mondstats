@@ -15,14 +15,7 @@ import { useEffect } from 'react';
 import Loader from '../ui/Loader';
 import useApi from '../hooks/useApi';
 import LLImage from '../ui/LLImage'
-
-function renderCharacterStats(character: ICharacterData, count: number, key: string) {
-  return (
-    <Tooltip key={key} content={`${character.name}: ${count}`}>
-      <LLImage key={key} className={`character-stats rarity-${character.rarity}`} src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={character.name} />
-    </Tooltip>
-  )
-}
+import CharacterCount from '../characters/CharacterCount';
 
 function CharacterStatistics({data}: any) {
   const db = useAppSelector((state) => state.data.characterDb)
@@ -169,7 +162,7 @@ function ItemStatsTable({ data, title, renderCard }: StatsTableProps) {
                 </>
               </Tooltip>
               <ScrollContainer vertical={false} className="row-related col">
-                {map(itemStat.characters, (charStat, j) => renderCharacterStats(characterDb[charStat._id], charStat.count, `${charStat._id}-${i}-${j}`))}
+                {map(itemStat.characters, (charStat, j) => <CharacterCount character={characterDb[charStat._id]} count={charStat.count} key={`${charStat._id}-${i}-${j}`}/>)}
               </ScrollContainer>
             </div>
           )
