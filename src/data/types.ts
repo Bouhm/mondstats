@@ -93,7 +93,6 @@ export interface IAbyssBattle {
 }
 
 export interface IParty {
-  party: string[],
   core_party: string[],
   flex: IFlexChar[]
   count: number

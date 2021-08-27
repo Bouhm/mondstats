@@ -7,8 +7,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   background-color: #e9e5dc;
-  border-radius: 8px 8px 0 0;
+  border-radius: 8px;
   overflow: hidden;
+
+  &.asExpandable {
+    border-radius: 8px 8px 0 0;
+  }
 }
 
 .team-characters {

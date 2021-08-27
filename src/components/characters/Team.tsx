@@ -28,7 +28,7 @@ function Team({ team, percent, count, flex = [], core = [] }: TeamProps) {
   return (
     <div className="team-container" onClick={handleExpand}>
       <Tooltip content={`${map(team, char => characterDb[char].name).join(', ')}: ${count}`}>
-        <div className="team-stats">
+        <div className={`team-stats ${flex.length > 1 ? 'asExpandable' : ''}`}>
           {map(team, (char, i) => (
             <Link key={`team-${char}-${i}`} to={`/builds/${getShortName(characterDb[char])}`}>
               <CharacterTile id={char+''} labeled={false} />
