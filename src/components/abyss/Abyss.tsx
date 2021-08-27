@@ -98,9 +98,8 @@ function Abyss() {
   }, [setAbyssData, selectedStages])
 
   function _filterParties(parties: IParty[]) {
-    return filter(parties, ({core_party, flex}) => {
+    return filter(parties, ({party, core_party, flex}) => {
       let charFilter = true;
-      const party = [...core_party, flex[0].charId];
 
       if (filters.f2p) {
         charFilter = (filter(party, char => {
@@ -164,11 +163,11 @@ function Abyss() {
         <h2 className="stage-label">Top Teams</h2>
         <div className="stage-half">
           <h2>{total} Teams</h2>
-          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({core_party, flex, count}, i) => {
-            const party = [...core_party, flex[0].charId];
+          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({party, core_party, flex, count}, i) => {
+
             return <React.Fragment key={`parties-ALL-${i}`}>
               <div key={`battle-ALL-${i}`} className="battle-container">
-                <Team key={`team-ALL-${i}`} team={party} count={count} percent={`${getPercentage(count, total)}%`} />
+                <Team key={`team-ALL-${i}`} team={party} count={count} flex={flex} percent={`${getPercentage(count, total)}%`} />
               </div>
             </React.Fragment>
           })}

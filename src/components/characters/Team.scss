@@ -7,7 +7,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   background-color: #e9e5dc;
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
   overflow: hidden;
 }
 
@@ -19,6 +19,41 @@
     .character-tile {
       margin: 0;
       border-radius: 0;
+    }
+  }
+}
+
+.team-flex-container {
+  display: flex;
+  justify-content: center;  
+  align-items: center;
+  flex-flow: column;
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 0 0 8px 8px;
+
+  .team-flex {
+    display: flex;
+    padding: 0.5rem;
+
+    div > div > img, svg {
+      height: 50px;
+    }
+
+    svg {
+      margin: 0 0.5rem;
+    }
+  }
+
+  .team-expand {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.3rem;
+    background-color: rgba(255,255,255,0.4);
+    border-radius: 0 0 8px 8px;
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }
