@@ -38,6 +38,8 @@ import Loader from '../ui/Loader';
 import Tabs, { useTabs } from '../ui/Tabs';
 import AbyssFloor from './AbyssFloor';
 
+// import abyssJson from './top-teams.json';
+
 const _compareFloor = (f1: Option, f2: Option) => {
   if (f1.value.startsWith('_') || f2.value.startsWith('_')) {
     return f1.value.startsWith('_') ? 0 : 1;
@@ -76,6 +78,7 @@ function Abyss() {
   
   const { filters, handleFilterChange } = useFilters();
   const abyssTopTeams = useApi('abyss/top-teams.json');
+  // const abyssTopTeams = abyssJson;
   const { activeTabIdx, onTabChange } = useTabs();
 
   useEffect(() => {
