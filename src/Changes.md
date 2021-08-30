@@ -1,3 +1,8 @@
+## dev build 8.29.21
+
+- NEW Abyss teams now show "flex" characters"
+- - This is aggregated by a "core" team, identified by the most used trio from a party of 4. Then the 4th character represents the flex character which can in theory be interchangeable, ordered from most to least used.
+
 ## dev build 8.25.21
 
 - Favonius.io is now Mondstats!

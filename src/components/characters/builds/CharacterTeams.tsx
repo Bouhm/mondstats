@@ -1,17 +1,16 @@
 import './CharacterTeams.scss';
 
 import { filter, includes, map, reduce, sortBy, take } from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 import { IParty } from '../../../data/types';
 import { getPercentage } from '../../../scripts/util';
-import useFilters, { Filters } from '../../filters/useFilters';
+import { Filters } from '../../filters/useFilters';
+import useExpand from '../../hooks/useExpand';
 import { useAppSelector } from '../../hooks/useRedux';
 import Button from '../../ui/Button';
 import { ChevronDown, ChevronUp } from '../../ui/Icons';
 import Team from '../Team';
-import useExpand from '../../hooks/useExpand';
 
 interface ITeam {
   party: string[],
