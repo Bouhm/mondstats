@@ -1,6 +1,6 @@
 import './Team.scss';
 
-import { isEmpty, map } from 'lodash';
+import { isEmpty, map, take } from 'lodash';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -15,19 +15,20 @@ import CharacterTile from './CharacterTile';
 
 type TeamProps = {
   team: string[],
-  core?: string[],
   percent: string,
   count: number,
   flex?: IFlexChar[]
 }
 
-function Team({ team, percent, count, flex = [], core = [] }: TeamProps) {
+function Team({ team, percent, count, flex = [] }: TeamProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const { expanded, handleExpand } = useExpand();
 
+  const tooltipContent = flex.length > 1 ? `${take(map(team, char => characterDb[char].name), 3).join(', ')}, +${flex.length}: ${count}` : `${map(team, char => characterDb[char].name).join(', ')}: ${count}`
+
   return (
     <div className="team-container" onClick={handleExpand}>
-      <Tooltip content={`${map(team, char => characterDb[char].name).join(', ')}: ${count}`}>
+      <Tooltip content={tooltipContent}>
         <div className={`team-stats ${flex.length > 1 ? 'asExpandable' : ''}`}>
           {map(team, (char, i) => (
             <Link key={`team-${char}-${i}`} to={`/builds/${getShortName(characterDb[char])}`}>
