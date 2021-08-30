@@ -171,8 +171,8 @@ function Abyss() {
           {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({core_party, flex, count}, i) => {
             const party = [...core_party, flex[0].charId]
             return <React.Fragment key={`parties-ALL-${i}`}>
-              <div key={`battle-ALL-${i}`} className="battle-container">
-                <Team key={`team-ALL-${i}`} team={party} count={count} flex={flex} percent={`${getPercentage(count, total)}%`} />
+              <div className="battle-container">
+                <Team team={party} count={count} flex={flex} percent={`${getPercentage(count, total)}%`} />
               </div>
             </React.Fragment>
           })}
@@ -189,6 +189,7 @@ function Abyss() {
   const renderFloorParties = (selectedStage: Option) => {
     const filteredAbyssFloors = filter(_filterAbyss(), { floor_level: selectedStage.value });
     return <AbyssFloor 
+      key={`floor-${selectedStage.value}-teams`}
       abyssFloors={filteredAbyssFloors} 
       selectedStage={selectedStage}
       stageLimitToggle={stageLimitToggle} 
