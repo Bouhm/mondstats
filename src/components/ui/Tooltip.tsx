@@ -6,11 +6,10 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 type TooltipProps = {
   children: JSX.Element,
   className?: string,
-  placement?: string,
   content: string
 }
 
-function Tooltip({ children, placement='top', content, className }: TooltipProps) {
+function Tooltip({ children, content, className }: TooltipProps) {
   const {
     getTooltipProps,
     getArrowProps,

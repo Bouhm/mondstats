@@ -27,9 +27,9 @@ function Team({ team, percent, count, flex = [] }: TeamProps) {
   const tooltipContent = flex.length > 1 ? `${take(map(team, char => characterDb[char].name), 3).join(', ')}, +${flex.length}: ${count}` : `${map(team, char => characterDb[char].name).join(', ')}: ${count}`
 
   return (
-    <div className="team-container" onClick={handleExpand}>
+    <div className="team-container">
       <Tooltip content={tooltipContent}>
-        <div className={`team-stats ${flex.length > 1 ? 'asExpandable' : ''}`}>
+        <div className={`team-stats ${flex.length > 1 ? 'asExpandable' : ''}`} onClick={handleExpand}>
           {map(team, (char, i) => (
             <CharacterTile key={`team-${char}-${i}`} id={char+''} labeled={false} clickable={false} />
           ))}
@@ -45,10 +45,10 @@ function Team({ team, percent, count, flex = [] }: TeamProps) {
               <div className="team-flex">
                 <CharacterCount character={characterDb[flex[0].charId]} count={flex[0].count} />
                 <Exchange size={22} />
-                {map(flex.slice(1), ({charId, count}) => <CharacterCount character={characterDb[charId]} count={count} />)}
+                {map(flex.slice(1), ({charId, count}, i) => <CharacterCount key={`${charId}-${i}`} character={characterDb[charId]} count={count} />)}
               </div>
           }
-          <div className="team-expand">
+          <div className="team-expand" onClick={handleExpand}>
             {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
         </div>
