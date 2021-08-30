@@ -1,7 +1,7 @@
 import './Abyss.scss';
 
 import axios from 'axios';
-import _, {
+import {
   clone,
   cloneDeep,
   countBy,
@@ -13,9 +13,7 @@ import _, {
   includes,
   isEmpty,
   map,
-  orderBy,
   reduce,
-  some,
   take,
 } from 'lodash';
 import React, { useEffect, useState } from 'react';
@@ -27,19 +25,14 @@ import F2P from '../filters/F2P';
 import useFilters from '../filters/useFilters';
 import useApi from '../hooks/useApi';
 import useCharacterSearch from '../hooks/useCharacterSearch';
-import usePaginate from '../hooks/usePaginate';
 import { useAppSelector } from '../hooks/useRedux';
 import Button from '../ui/Button';
 import CardSearch from '../ui/CardSearch';
-import Dropdown, { Option } from '../ui/Dropdown';
+import { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
-import LLImage from '../ui/LLImage';
 import Loader from '../ui/Loader';
 import Tabs, { useTabs } from '../ui/Tabs';
 import AbyssFloor from './AbyssFloor';
-
-// import abyssFloors from './abyssFloors.json';
-// import abyssJson from './top-teams.json';
 
 const _compareFloor = (f1: Option, f2: Option) => {
   if (f1.value.startsWith('_') || f2.value.startsWith('_')) {
@@ -79,7 +72,6 @@ function Abyss() {
   
   const { filters, handleFilterChange } = useFilters();
   const abyssTopTeams = useApi('abyss/top-teams.json');
-  // const abyssTopTeams = abyssJson;
   const { activeTabIdx, onTabChange } = useTabs();
 
   useEffect(() => {
