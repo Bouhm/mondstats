@@ -26,7 +26,6 @@
 <url><loc>https://mondstats.com/builds/kaeya</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/kamisatoayaka</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/keqing</loc><priority>0.5</priority></url>
-<url><loc>https://mondstats.com/builds/kokomi</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/kujousara</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/klee</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/lisa</loc><priority>0.5</priority></url>
@@ -38,11 +37,12 @@
 <url><loc>https://mondstats.com/builds/razor</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/rosaria</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/sayu</loc><priority>0.5</priority></url>
+<url><loc>https://mondstats.com/builds/sangonomiyakokomi</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/sucrose</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/tartaglia</loc><priority>0.5</priority></url>
-<url><loc>https://mondstats.com/builds/traveleranemo</loc><priority>0.5</priority></url>
-<url><loc>https://mondstats.com/builds/travelerelectro</loc><priority>0.5</priority></url>
-<url><loc>https://mondstats.com/builds/travelergeo</loc><priority>0.5</priority></url>
+<url><loc>https://mondstats.com/builds/traveler-anemo</loc><priority>0.5</priority></url>
+<url><loc>https://mondstats.com/builds/traveler-electro</loc><priority>0.5</priority></url>
+<url><loc>https://mondstats.com/builds/traveler-geo</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/venti</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/xiangling</loc><priority>0.5</priority></url>
 <url><loc>https://mondstats.com/builds/xiao</loc><priority>0.5</priority></url>

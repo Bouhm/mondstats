@@ -45,8 +45,8 @@ function Characters(props: CardSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
-          <LLImage className="item-option-element" src={`/assets/elements/${character.element}.webp`} />
-          <LLImage className="item-option-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-element" src={`/assets/elements/${character.element}.webp`} />
+          <img className="item-option-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>
@@ -65,7 +65,7 @@ function ArtifactSets(props: CardSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
-          <LLImage className="item-option-portrait" src={`/assets/artifacts/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-portrait" src={`/assets/artifacts/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>
@@ -84,7 +84,7 @@ function Weapons(props: CardSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
-          <LLImage className="item-option-portrait" src={`/assets/weapons/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-portrait" src={`/assets/weapons/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>
