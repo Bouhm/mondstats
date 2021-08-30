@@ -31,9 +31,7 @@ function Team({ team, percent, count, flex = [] }: TeamProps) {
       <Tooltip content={tooltipContent}>
         <div className={`team-stats ${flex.length > 1 ? 'asExpandable' : ''}`}>
           {map(team, (char, i) => (
-            <Link key={`team-${char}-${i}`} to={`/builds/${getShortName(characterDb[char])}`}>
-              <CharacterTile id={char+''} labeled={false} />
-            </Link>
+            <CharacterTile key={`team-${char}-${i}`} id={char+''} labeled={false} clickable={false} />
           ))}
           <div className="team-popularity">
             <div className="team-popularity-pct">{percent}</div>

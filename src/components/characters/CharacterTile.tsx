@@ -11,10 +11,11 @@ import LLImage from '../ui/LLImage';
 export type CharacterTileProps = {
   id: string,
   labeled?: boolean,
+  clickable?: boolean,
   onClick?: (char: string) => void
 }
 
-function CharacterTile({ id, labeled = true, onClick }: CharacterTileProps) {
+function CharacterTile({ id, labeled = true, onClick, clickable = true }: CharacterTileProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const character = characterDb[id]
 
@@ -28,7 +29,7 @@ function CharacterTile({ id, labeled = true, onClick }: CharacterTileProps) {
   }
 
   return (
-    <div className={`character-tile-container`} onClick={() => handleClick(getShortName(character))}>
+    <div className={`character-tile-container ${clickable ? 'asClickable' : ''}`} onClick={() => handleClick(getShortName(character))}>
       <div className={classes}>
         <div className="character-image">
           <LLImage className="character-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${character.name}-portrait`} />

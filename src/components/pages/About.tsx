@@ -27,7 +27,7 @@ function About() {
       </div>
       <div className="about-section">
         <h2>How is the data filtered?</h2>
-        <p>All of the character and team data is filtered to only include characters that are fully built (complete artifact sets and equipped with at least 3-star weapons) and from abyss battles that have been 3-starred.</p>
+        <p>All of the character and team data is filtered to only include characters that are fully built (complete artifact sets and equipped with at least 3-star weapons) and from abyss battles that have been 3-starred. Additional filtering is applied when aggregating to exclude stats that represent a VERY small percentage of players.</p>
       </div>
       <div className="about-section">
         <h2>How can I contact you about an issue?</h2>
