@@ -18,7 +18,7 @@ import {
 } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
-import { IAbyssBattle, IParty } from '../../data/types';
+import { IAbyssBattle, IAbyssParty } from '../../data/types';
 import { getPercentage } from '../../scripts/util';
 import Team from '../characters/Team';
 import F2P from '../filters/F2P';
@@ -93,7 +93,7 @@ function Abyss() {
     fetchAbyssData();
   }, [setAbyssData, selectedStages])
 
-  function _filterParties(parties: IParty[]) {
+  function _filterParties(parties: IAbyssParty[]) {
     return filter(parties, ({ core_party, flex}) => {
       let charFilter = true;
       const party = [...core_party, flex[0].charId]

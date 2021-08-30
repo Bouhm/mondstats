@@ -83,18 +83,24 @@ export interface IBuild {
 }
 
 export interface IAbyssData {
-  teams: IParty[],
+  teams: IAbyssParty[],
   batttles: IAbyssBattle[]
 }
 
 export interface IAbyssBattle {
   floor_level: string,
-  battle_parties: IParty[][]
+  battle_parties: IAbyssParty[][]
+}
+
+export interface IAbyssParty {
+  party: string[],
+  core_party: string[],
+  flex: IFlexChar[]
+  count: number
 }
 
 export interface IParty {
-  core_party: string[],
-  flex: IFlexChar[]
+  party: string[],
   count: number
 }
 
