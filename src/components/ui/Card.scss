@@ -94,3 +94,22 @@
     }
   }
 }
+
+@media (max-width: 414px) {
+  .card-container {
+    .card {
+      width: 55px;
+      border-radius: 5px;
+
+      .card-thumb {
+        width: 55px;
+      }
+
+      .card-name {
+        font-size: 0.55rem;
+        line-height: 0.5rem;
+        height: 1.2rem;
+      }
+    }
+  }
+}
