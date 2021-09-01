@@ -2,7 +2,7 @@
 <Error>
   <Code>NoSuchKey</Code>
   <Message>The specified key does not exist.</Message>
-  <RequestId>612F2D1864BB293432588A2C</RequestId>
+  <RequestId>612F408031C32F363424E50C</RequestId>
   <HostId>plat-bbs-upload-sea.oss-cn-hongkong.aliyuncs.com</HostId>
   <Key>game_record/genshin/constellation_icon/UI_Talent_S_Sara_05.png</Key>
 </Error>

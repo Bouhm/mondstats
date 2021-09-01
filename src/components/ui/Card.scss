@@ -82,6 +82,10 @@
       width: 65px;
       border-radius: 6px;
 
+      .card-element {
+        width: 25px;
+      }
+
       .card-thumb {
         width: 65px;
       }
@@ -100,6 +104,10 @@
     .card {
       width: 55px;
       border-radius: 5px;
+      
+      .card-element {
+        width: 20px;
+      }
 
       .card-thumb {
         width: 55px;
