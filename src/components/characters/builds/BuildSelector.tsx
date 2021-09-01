@@ -1,6 +1,7 @@
 import './BuildSelector.css';
 import './Weapon.css';
 
+import AmberSad from '/assets/amberSad.webp';
 import _, { forEach, map, orderBy } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
@@ -12,6 +13,7 @@ import ArtifactSets from '../../artifact-sets/ArtifactSets';
 import { Filters } from '../../filters/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import Chart from '../../ui/Chart';
+import LLImage from '../../ui/LLImage';
 import ArtifactBuild from './ArtifactBuild';
 import WeaponBuild from './WeaponBuild';
 

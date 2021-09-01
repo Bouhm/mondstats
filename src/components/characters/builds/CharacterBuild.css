@@ -57,9 +57,10 @@
 }
 
 .its-empty {
+  margin-top: 2rem;
+  color: white;
+  text-align: center;
   width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
 @media (max-width: 1024px) {

@@ -1,7 +1,7 @@
 import './CharacterBuild.css';
 
 import AmberSad from '/assets/amberSad.webp';
-import _ from 'lodash';
+import _, { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -13,11 +13,11 @@ import F2P from '../../filters/F2P';
 import useFilters from '../../filters/useFilters';
 import useApi from '../../hooks/useApi';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
+import LLImage from '../../ui/LLImage';
 import Loader from '../../ui/Loader';
 import BuildSelector from './BuildSelector';
 import CharacterTeams from './CharacterTeams';
 import Constellations from './Constellations';
-import LLImage from '../../ui/LLImage'
 
 function CharacterBuild() {  
   const { shortName } = useParams<{ shortName: string }>();
@@ -53,9 +53,12 @@ function CharacterBuild() {
     </div>
   }
 
-  if (!character) {
+  if (!character || isEmpty(characterBuild.builds)) {
     return <div>
-      <div className="its-empty"><LLImage src={AmberSad} alt="empty" /></div>
+      <div className="its-empty">
+        <LLImage src={AmberSad} alt="empty" />
+        <h3>Data not found</h3>
+      </div>
     </div>
   }
 
