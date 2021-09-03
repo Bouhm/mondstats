@@ -47,17 +47,17 @@ function CharacterBuild() {
     }
   }, [setCharacter, dispatch, charId, characterDb])
 
-  if (!characterBuild || !characterDb || !characterIdMap) {
+  if (!characterDb || !characterIdMap) {
     return <div>
       <Loader />
     </div>
   }
 
-  if (!character || isEmpty(characterBuild.builds)) {
+  if (!character || !characterBuild || isEmpty(characterBuild.builds)) {
     return <div>
       <div className="its-empty">
         <LLImage src={AmberSad} alt="empty" />
-        <h3>Data not found</h3>
+        <h3>Not enough data</h3>
       </div>
     </div>
   }
