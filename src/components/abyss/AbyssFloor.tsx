@@ -4,8 +4,8 @@ import React from 'react';
 
 import { getPercentage } from '../../scripts/util';
 import Team from '../characters/Team';
-import Button from '../ui/Button';
-import { Option } from '../ui/Dropdown';
+import Button from '../controls/Button';
+import { Option } from '../controls/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import LLImage from '../ui/LLImage';
 import Loader from '../ui/Loader';

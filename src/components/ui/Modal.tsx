@@ -2,6 +2,7 @@ import './Modal.scss';
 
 import _ from 'lodash';
 import React, { ReactNode } from 'react';
+
 import { Close } from './Icons';
 
 type ModalProps = {

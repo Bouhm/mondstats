@@ -10,8 +10,8 @@ import { ICharacterData } from '../../../data/types';
 import { getCharacterFileName } from '../../../scripts/util';
 import { selectCharacter } from '../../../Store';
 import F2P from '../../filters/F2P';
-import useFilters from '../../filters/useFilters';
 import useApi from '../../hooks/useApi';
+import useFilters from '../../hooks/useFilters';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import LLImage from '../../ui/LLImage';
 import Loader from '../../ui/Loader';
@@ -47,13 +47,13 @@ function CharacterBuild() {
     }
   }, [setCharacter, dispatch, charId, characterDb])
 
-  if (!characterDb || !characterIdMap) {
+  if (!characterDb || !characterIdMap || !character) {
     return <div>
       <Loader />
     </div>
   }
 
-  if (!character || !characterBuild || isEmpty(characterBuild.builds)) {
+  if (!characterBuild || isEmpty(characterBuild.builds)) {
     return <div>
       <div className="its-empty">
         <LLImage src={AmberSad} alt="empty" />

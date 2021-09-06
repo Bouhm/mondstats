@@ -3,7 +3,7 @@ import './Elevator.scss';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 
-import { ChevronDown, ChevronUp } from './Icons';
+import { ChevronDown, ChevronUp } from '../ui/Icons';
 
 type ToggleProps = {
   label?: string;

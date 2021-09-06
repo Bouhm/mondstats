@@ -3,9 +3,9 @@ import './F2P.scss';
 import { indexOf } from 'lodash';
 import React, { useState } from 'react';
 
-import Elevator from '../ui/Elevator';
-import Toggle from '../ui/Toggle';
-import { FilterChangeFunc, Filters } from './useFilters';
+import Elevator from '../controls/Elevator';
+import Toggle from '../controls/Toggle';
+import { FilterChangeFunc, Filters } from '../hooks/useFilters';
 
 type ToggleProps = {
   color?: string,

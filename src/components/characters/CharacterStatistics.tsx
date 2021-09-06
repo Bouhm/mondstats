@@ -3,12 +3,12 @@ import './CharacterStatistics.css';
 import { filter, includes, isEmpty, map } from 'lodash';
 import React, { useState } from 'react';
 
+import CardSearch from '../controls/CardSearch';
 import useApi from '../hooks/useApi';
+import useCharacterSearch from '../hooks/useCharacterSearch';
 import { useAppSelector } from '../hooks/useRedux';
 import StatsTable from '../stats/StatsTable';
-import CardSearch from '../ui/CardSearch';
 import Loader from '../ui/Loader';
-import useCharacterSearch from '../hooks/useCharacterSearch';
 
 function CharacterStatistics() { 
   const characterDb = useAppSelector((state) => state.data.characterDb)

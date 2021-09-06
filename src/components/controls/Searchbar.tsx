@@ -4,8 +4,8 @@ import Fuse from 'fuse.js';
 import { debounce, filter, includes, map } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { SearchItem } from '../ui/CardSearch';
-import { Search } from './Icons';
+import { SearchItem } from '../controls/CardSearch';
+import { Search } from '../ui/Icons';
 
 export const KEYWORDS = [
   "anemo", 

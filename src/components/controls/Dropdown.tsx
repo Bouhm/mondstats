@@ -3,7 +3,7 @@ import './Dropdown.scss';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import Select, { components } from 'react-select';
 
-import { Search } from './Icons';
+import { Search } from '../ui/Icons';
 
 export type Option = { value: string, rarity?: number, label: string }
 
