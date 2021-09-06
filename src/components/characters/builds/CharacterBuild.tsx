@@ -10,6 +10,7 @@ import { ICharacterData } from '../../../data/types';
 import { getCharacterFileName } from '../../../scripts/util';
 import { selectCharacter } from '../../../Store';
 import F2P from '../../filters/F2P';
+import Filters from '../../filters/Filters';
 import useApi from '../../hooks/useApi';
 import useFilters from '../../hooks/useFilters';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
@@ -69,9 +70,7 @@ function CharacterBuild() {
       </div>
       <div className="character-page">
         <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} />
-        <div className="character-page-controls">
-          <F2P onChange={handleFilterChange} f2p={filters.f2p} max5={filters.max5} color={elementColor} />
-        </div>
+        <Filters filterKeys={['a6', 'f2p', 'max5']} />
 
         {characterBuild.builds &&
           <>

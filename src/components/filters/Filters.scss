@@ -1,0 +1,17 @@
+.filters-container {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+
+  .tabs-container {
+    height: 4rem;
+
+    .tab {
+      max-width: 10rem;
+    }
+  }
+
+  .divider {
+    height: 4rem;
+  }
+}

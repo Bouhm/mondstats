@@ -208,7 +208,6 @@ function Abyss() {
   return (
     <div className="abyss-container">
       <div className="abyss-controls">
-        <F2P onChange={handleFilterChange} f2p={filters.f2p} max5={filters.max5} />
       </div>
       <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handlePartyChange} showCards={false}/>
       <br />

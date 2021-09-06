@@ -4,7 +4,7 @@
   align-items: center;
 
   span {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: white;
   }
 
@@ -21,8 +21,8 @@
     label {
       cursor: pointer;
       text-indent: -9999px;
-      width: 80px;
-      height: 40px;
+      width: 60px;
+      height: 30px;
       background: #242632;
       display: block;
       border-radius: 50px;
@@ -32,10 +32,10 @@
     label:after {
       content: '';
       position: absolute;
-      top: 5px;
-      left: 5px;
-      width: 30px;
-      height: 30px;
+      top: 4px;
+      left: 4px;
+      width: 22px;
+      height: 22px;
       background: #fff;
       border-radius: 90px;
       transition: 0.3s;
@@ -58,18 +58,6 @@
 
     span {
       font-size: 1.2rem;
-    }
-
-    .toggle {
-      label {
-        width: 65px;
-        height: 35px;
-      }
-
-      label:after {
-        width: 25px;
-        height: 25px;
-      }
     }
   }
 }

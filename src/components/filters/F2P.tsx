@@ -30,7 +30,7 @@ function F2P({ color, onChange, f2p, max5 }: ToggleProps) {
       <Toggle 
         color={color} 
         label={'F2P'} value={f2p} onChange={handleToggleF2p} />
-      <Elevator label={"MAX 5-Stars"} disabled={!f2p} onIndexChange={handleIndexChange} index={indexOf(values, max5)} values={values} />
+      <Elevator label={"MAX 5★"} disabled={!f2p} onIndexChange={handleIndexChange} index={indexOf(values, max5)} values={values} />
     </div>
   )
 }
