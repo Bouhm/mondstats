@@ -1,7 +1,7 @@
 import './CharacterBuild.css';
 
 import AmberSad from '/assets/amberSad.webp';
-import _, { isEmpty } from 'lodash';
+import _, { isEmpty, reduce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -81,7 +81,9 @@ function CharacterBuild() {
               color={elementColor}
               filters={filters}
             />
-            <Constellations constellations={characterBuild.constellations} color={elementColor} total={characterBuild.total} />
+            {character.rarity < 100 &&
+              <Constellations constellations={characterBuild.constellations} color={elementColor} total={reduce(characterBuild.constellations, (sum, curr) => sum += curr, 0)} />
+            }
             <CharacterTeams filters={filters} teams={characterBuild.teams} />
           </>
         }

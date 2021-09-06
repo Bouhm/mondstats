@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-function useExpand() {
-  const [ expanded, setExpanded ] = useState(false);
+function useExpand(isExpanded=false) {
+  const [ expanded, setExpanded ] = useState(isExpanded);
   
   const handleExpand = () => {
     setExpanded(!expanded);

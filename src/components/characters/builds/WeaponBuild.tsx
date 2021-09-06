@@ -20,10 +20,10 @@ const BP_WEAPONS = [11409, 12409, 14405, 15409, 13405]
 
 function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { filters : Filters}) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
-  const { expanded, handleExpand } = useExpand();
+  const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const max = 10;
   const [filteredWeapons, setFilteredWeapons] = useState<IWeaponBuild[] | []>([]) 
-
+  
   useEffect(() => {
     let orderedWeapons = orderBy(weaponBuilds, 'count', 'desc');
 
@@ -78,11 +78,9 @@ function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { fi
         })}
         <br />
         {filteredWeapons.length > 5 && (
-          !expanded 
-          ?
-          <Button className="party-show-more" onClick={handleExpand}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
-          :
-          <Button className="party-show-more" onClick={handleExpand}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
+          <Button className="weapons-show-more" onClick={handleExpand}>
+            {!expanded ? <>Show more <ChevronDown size={20} color={"#202020"} /></> : <>Show less <ChevronUp size={20} color={"#202020"} /></>}
+          </Button>
         )}
       </div>
     </div>
