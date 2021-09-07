@@ -9,7 +9,7 @@
   align-items: center;
   border-radius: 6px;
   margin: 0.5rem 0;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   position: sticky;
   color: white;
   background-color: rgba(0,0,0,0.2);
@@ -28,15 +28,15 @@
     .filter-button {
       padding: 1rem;
       border-radius: 5px;
+      margin-right: 0.5rem;
 
       &:hover {
+        background-color: rgba(223, 229, 220, 0.5);
         cursor: pointer;
-        background-color: rgba(0,0,0,0.2);
       }
 
       &.asActive {
-        background-color: rgba(0,0,0,0.3);
-        text-decoration: underline;
+        color: rgba(0, 0, 0, 0.7);
       }
     }
   }

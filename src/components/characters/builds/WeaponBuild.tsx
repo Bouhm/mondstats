@@ -27,30 +27,26 @@ function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { fi
   useEffect(() => {
     let orderedWeapons = orderBy(weaponBuilds, 'count', 'desc');
 
-    if (filters.f2p) {
-      let weapons: IWeaponBuild[] = []
-      let count5 = 0;
+    let weapons: IWeaponBuild[] = []
+    let count5 = 0;
 
-      for (let i = 0; i < orderedWeapons.length; i++) {
-        if (weaponDb[orderedWeapons[i]._id].rarity > 4) {
-          count5++;      
-          
-          if (count5 > filters.max5) continue;
-        }
-
-        if (includes(BP_WEAPONS, weaponDb[orderedWeapons[i]._id].oid)) continue;
-  
-        weapons.push(orderedWeapons[i]);
+    for (let i = 0; i < orderedWeapons.length; i++) {
+      if (weaponDb[orderedWeapons[i]._id].rarity > 4) {
+        count5++;      
         
-        if (weapons.length >= max) {
-          break;
-        }
+        if (count5 > filters.max5.value) continue;
       }
 
-      setFilteredWeapons(weapons);
-    } else {
-      setFilteredWeapons(take(orderedWeapons, max));
+      if (includes(BP_WEAPONS, weaponDb[orderedWeapons[i]._id].oid)) continue;
+
+      weapons.push(orderedWeapons[i]);
+      
+      if (weapons.length >= max) {
+        break;
+      }
     }
+
+    setFilteredWeapons(weapons);
 
   }, [setFilteredWeapons, weaponBuilds, filters])
 

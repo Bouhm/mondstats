@@ -27,10 +27,10 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: Filters 
 
   const filterTeams = (teams: IParty[], charId: string) => {
     let filtered = teams;
-    let max5WithChar = filters.max5;
+    let max5WithChar = filters.max5.value;
 
     if (characterDb[selectedCharacter].rarity === 5) {
-      if (filters.max5 === 0) {
+      if (filters.max5.value === 0) {
         max5WithChar++;
       }
     }
@@ -38,11 +38,7 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: Filters 
     filtered = filter(teams, ({ party }) => {
       if (party.length !== 4) return false;
 
-      if (filters.f2p) {
-        return (includes(party, charId) && filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length <= max5WithChar)
-      } else {
-        return includes(party, charId)
-      }
+      return (includes(party, charId) && filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length <= max5WithChar)
     })
 
     // Bring selected character to the front

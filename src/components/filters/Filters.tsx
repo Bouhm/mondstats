@@ -1,102 +1,48 @@
 import './Filters.scss';
 
-import { clone, flatten, forEach, includes, indexOf, map, reduce } from 'lodash';
-import React, { useCallback, useState } from 'react';
+import { includes, keys, map, omit } from 'lodash';
+import React, { useState } from 'react';
 
-import { CharacterElements, WeaponTypes } from '../../data/constants';
+import { FiltersType } from '../hooks/useFilters';
 import Divider from '../ui/Divider';
-import Tabs, { useTabs } from '../ui/Tabs';
-import F2P from './F2P';
-
-export type FilterChangeFunc = (name: keyof Filters, value: string | number | boolean | string[]) => void
-
-export type Filters = {
-  f2p?: boolean,
-  max5?: number,
-  a6?: boolean,
-  types?: string[],
-  elements?: string[]
-}
-
-type FilterMap = { [key: string]: string | number | boolean | string[] }
-
-const useFilters = (filterKeys: string[]) => {
-  const defaults: FilterMap = {
-    f2p: false,
-    max5: 1,
-    a6: false,
-  }
-
-  let defaultState: FilterMap = {}
-  forEach(filterKeys, key => defaultState[key] = defaults[key])
-
-  const [filters, setFilters] = useState<Filters>(defaultState)
-
-  const handleFilterChange = (name: keyof Filters, value: string | number | boolean) => {
-    let updatedFilters = clone(filters) as any;
-    updatedFilters[name] = value;
-    setFilters(updatedFilters)
-  }
-
-  return {
-    filters,
-    handleFilterChange
-  }
-}
+import FiveStarFilter from './FiveStarFilter';
 
 type FilterTabProps = {
   isActive: boolean,
-  label: string
+  label: JSX.Element,
+  color?: string
 }
 
-const FilterButton = ({isActive = false, label}: FilterTabProps) => {
-  return <div className={`filter-button ${isActive ? 'asActive' : ''}`}>
+const FilterButton = ({isActive = false, label, color=''}: FilterTabProps) => {
+  return <div className={`filter-button ${isActive ? 'asActive' : ''}`} style={isActive ? {backgroundColor: color }:{}}>
     {label}
   </div>
 }
 
 type FiltersProps = {
-  filterKeys: string[],
-  style?: Object
+  filters: FiltersType,
+  onFilterChange: (name: string, value: number | boolean) => void,
+  color?: string
 }
 
-const Filters = ({ filterKeys, style={} }: FiltersProps) => {
-  const labels = reduce(filterKeys, (arr: string[], curr) => {
-    switch (curr) {
-      case 'types':
-        return [...arr, ...WeaponTypes]
-      case 'elements':
-        return [...arr, ...CharacterElements]
-      case 'a6':
-        return [...arr, 'Lv80+']
-      default:
-        return arr
-    }
-  }, [])
-
-  const [activeFilters, setActiveFilters] = useState<string[]>([]);
-  const { filters, handleFilterChange } = useFilters(filterKeys)
-
-  const handleClick = (filter: string) => {
-    let newFilters = [...activeFilters];
-
-    if (includes(activeFilters, filter)) {
-      newFilters.splice(indexOf(activeFilters, filter), 1)
-    } else {
-      newFilters.push(filter)
-    }
-
-    setActiveFilters(newFilters)
+const Filters = ({ filters, onFilterChange, color='' }: FiltersProps) => {
+  const handleFilterChange = (name: string, value: number | boolean) => {
+    onFilterChange(name, value);
   }
 
   return (
-    <div style={style} className="filters-container">
+    <div className="filters-container">
       {/* <div className="filters-label">Filters</div> */}
       <div className="filter-options">
-        {map(labels, (label, i) => <div key={`${label}-${i}`} onClick={() => handleClick(label)}><FilterButton label={label} isActive={includes(activeFilters, label)} /></div>)}
+        {map(Object.entries(omit(filters, 'max5')), ([key, filter])=> <div key={`${key}`} onClick={() => handleFilterChange(key, !filter.value)}><FilterButton color={color} label={filter.label} isActive={filter.value} /></div>)}
       </div>
-      <Divider />
-      <F2P onChange={handleFilterChange} f2p={!!filters.f2p} max5={filters.max5!} />
+      {
+        includes(keys(filters), 'max5') && 
+        <>
+          <Divider />
+          <FiveStarFilter onChange={handleFilterChange} max5={filters.max5!.value} />
+        </>
+      }
     </div>
   )
 }
