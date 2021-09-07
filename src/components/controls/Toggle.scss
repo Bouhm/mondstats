@@ -23,7 +23,7 @@
       text-indent: -9999px;
       width: 60px;
       height: 30px;
-      background: #242632;
+      background: rgba(0,0,0,0.6);
       display: block;
       border-radius: 50px;
       position: relative;
@@ -57,7 +57,21 @@
     justify-content: center;
 
     span {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+    }
+
+    .toggle {
+      label {
+        width: 50px;
+        height: 25px;
+      }
+  
+      label:after {
+        top: 4px;
+        left: 4px;
+        width: 18px;
+        height: 18px;
+      }
     }
   }
 }

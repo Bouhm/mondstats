@@ -1,6 +1,6 @@
 import './Filters.scss';
 
-import { clone, flatten, forEach, map, reduce } from 'lodash';
+import { clone, flatten, forEach, includes, indexOf, map, reduce } from 'lodash';
 import React, { useCallback, useState } from 'react';
 
 import { CharacterElements, WeaponTypes } from '../../data/constants';
@@ -25,8 +25,6 @@ const useFilters = (filterKeys: string[]) => {
     f2p: false,
     max5: 1,
     a6: false,
-    types: [],
-    elements: []
   }
 
   let defaultState: FilterMap = {}
@@ -46,31 +44,57 @@ const useFilters = (filterKeys: string[]) => {
   }
 }
 
-type FiltersProps = {
-  filterKeys: string[]
+type FilterTabProps = {
+  isActive: boolean,
+  label: string
 }
 
-const Filters = ({ filterKeys }: FiltersProps) => {
+const FilterButton = ({isActive = false, label}: FilterTabProps) => {
+  return <div className={`filter-button ${isActive ? 'asActive' : ''}`}>
+    {label}
+  </div>
+}
+
+type FiltersProps = {
+  filterKeys: string[],
+  style?: Object
+}
+
+const Filters = ({ filterKeys, style={} }: FiltersProps) => {
   const labels = reduce(filterKeys, (arr: string[], curr) => {
     switch (curr) {
-      case 'a6':
-        return [...arr, 'Lv80+']
       case 'types':
         return [...arr, ...WeaponTypes]
       case 'elements':
         return [...arr, ...CharacterElements]
+      case 'a6':
+        return [...arr, 'Lv80+']
       default:
         return arr
     }
   }, [])
 
-  const { activeTabIdx, onTabChange } = useTabs();
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const { filters, handleFilterChange } = useFilters(filterKeys)
 
-  console.log(labels)
+  const handleClick = (filter: string) => {
+    let newFilters = [...activeFilters];
+
+    if (includes(activeFilters, filter)) {
+      newFilters.splice(indexOf(activeFilters, filter), 1)
+    } else {
+      newFilters.push(filter)
+    }
+
+    setActiveFilters(newFilters)
+  }
+
   return (
-    <div className="filters-container">
-      <Tabs tabs={labels} activeTabIdx={activeTabIdx} onChange={onTabChange} />
+    <div style={style} className="filters-container">
+      {/* <div className="filters-label">Filters</div> */}
+      <div className="filter-options">
+        {map(labels, (label, i) => <div key={`${label}-${i}`} onClick={() => handleClick(label)}><FilterButton label={label} isActive={includes(activeFilters, label)} /></div>)}
+      </div>
       <Divider />
       <F2P onChange={handleFilterChange} f2p={!!filters.f2p} max5={filters.max5!} />
     </div>

@@ -1,17 +1,64 @@
+@font-face {
+  font-family: font;
+  src: url(/font.woff2);
+}
+
 .filters-container {
+  position: sticky;
   display: flex;
   align-items: center;
-  margin: 1rem;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  position: sticky;
+  color: white;
+  background-color: rgba(0,0,0,0.2);
 
-  .tabs-container {
-    height: 4rem;
+  .filters-label {
+    padding: 0 1rem;
+    text-transform: uppercase;
+  }
 
-    .tab {
-      max-width: 10rem;
+  .filter-options {
+    font-family: font;
+    width: 100%;
+    color: white;
+    display: flex;
+
+    .filter-button {
+      padding: 1rem;
+      border-radius: 5px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgba(0,0,0,0.2);
+      }
+
+      &.asActive {
+        background-color: rgba(0,0,0,0.3);
+        text-decoration: underline;
+      }
     }
   }
 
   .divider {
     height: 4rem;
+  }
+}
+
+@media (max-width: 676px) {
+  .filters-container {
+
+    .filters-label {
+      font-size: 0.9rem;
+    }
+  
+    .filter-button {
+      font-size: 0.8rem;
+    }
+  
+    .divider {
+      height: 2rem;
+    }
   }
 }
