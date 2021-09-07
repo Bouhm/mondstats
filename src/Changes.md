@@ -1,3 +1,7 @@
+## dev build 9.7.21
+
+- Added additional filtering options including Lvl 80+ character builds
+
 ## dev build 8.29.21
 
 - NEW Abyss teams now show "flex" characters
