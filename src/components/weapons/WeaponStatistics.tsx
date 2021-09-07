@@ -3,13 +3,13 @@ import './WeaponStatistics.css';
 import { filter, flatten, includes, intersection, isEmpty, map, reduce, some, union, uniq } from 'lodash';
 import React, { useState } from 'react';
 
+import CardSearch, { SearchItem } from '../controls/CardSearch';
+import { KEYWORDS } from '../controls/Searchbar';
 import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
-import StatsTable from '../stats/StatsTable';
-import CardSearch, { SearchItem } from '../ui/CardSearch';
-import Loader from '../ui/Loader';
-import { KEYWORDS } from '../ui/Searchbar';
 import useWeaponSearch from '../hooks/useWeaponSearch';
+import StatsTable from '../stats/StatsTable';
+import Loader from '../ui/Loader';
 
 function WeaponStatistics() { 
   const weaponDb = useAppSelector((state) => state.data.weaponDb)

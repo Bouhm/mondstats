@@ -1,5 +1,6 @@
-import { filter, flatten, includes, map, reduce, uniq } from "lodash";
-import { KEYWORDS } from "../ui/Searchbar";
+import { filter, flatten, includes, map, reduce, uniq } from 'lodash';
+
+import { KEYWORDS } from '../controls/Searchbar';
 
 function useArtifactSetSearch(artifactSetDb: any, data: any) {
   const searchArtifactSets = map(uniq(reduce(data, (arr, curr) => flatten([...arr, ...map(curr.artifacts, artifact => artifact._id)]) as unknown as any, [])), (_id) => {

@@ -21,14 +21,14 @@ import React, { useEffect, useState } from 'react';
 import { IAbyssBattle, IAbyssParty } from '../../data/types';
 import { getPercentage } from '../../scripts/util';
 import Team from '../characters/Team';
-import F2P from '../filters/F2P';
-import useFilters from '../filters/useFilters';
+import Button from '../controls/Button';
+import CardSearch from '../controls/CardSearch';
+import { Option } from '../controls/Dropdown';
+import F2P from '../filters/FiveStarFilter';
 import useApi from '../hooks/useApi';
 import useCharacterSearch from '../hooks/useCharacterSearch';
+import useFilters from '../hooks/useFilters';
 import { useAppSelector } from '../hooks/useRedux';
-import Button from '../ui/Button';
-import CardSearch from '../ui/CardSearch';
-import { Option } from '../ui/Dropdown';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 import Tabs, { useTabs } from '../ui/Tabs';
@@ -70,7 +70,7 @@ function Abyss() {
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
   const [ selectedCharacters, setSelectedCharacters] = useState<string[]>([])
   
-  const { filters, handleFilterChange } = useFilters();
+  const { filters, handleFilterChange } = useFilters(['f2p', 'max5']);
   const abyssTopTeams = useApi('abyss/top-teams.json');
   const { activeTabIdx, onTabChange } = useTabs();
 
@@ -98,12 +98,10 @@ function Abyss() {
       let charFilter = true;
       const party = [...core_party, flex[0].charId]
 
-      if (filters.f2p) {
-        charFilter = (filter(party, char => {
-          if (typeof char !== "string") return false;
-          return characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler"
-        }).length <= filters.max5)
-      } 
+      charFilter = (filter(party, char => {
+        if (typeof char !== "string") return false;
+        return characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler"
+      }).length <= filters.max5!.value)
       
       return charFilter && difference(selectedCharacters, party).length === 0
     })
@@ -144,10 +142,8 @@ function Abyss() {
     setSelectedCharacters(party)
     const count5 = countBy(party, char => characterDb[char].rarity);
 
-    if (filters.f2p) {
-      if (count5['5'] > filters.max5) {
-        handleFilterChange('max5', count5['5'])
-      }
+    if (count5['5'] > filters.max5!.value) {
+      handleFilterChange('max5', count5['5'])
     }
   }
 
@@ -208,7 +204,6 @@ function Abyss() {
   return (
     <div className="abyss-container">
       <div className="abyss-controls">
-        <F2P onChange={handleFilterChange} f2p={filters.f2p} max5={filters.max5} />
       </div>
       <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handlePartyChange} showCards={false}/>
       <br />

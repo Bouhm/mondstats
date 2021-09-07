@@ -1,0 +1,64 @@
+@font-face {
+  font-family: font;
+  src: url(/font.woff2);
+}
+
+.filters-container {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  position: sticky;
+  color: white;
+  background-color: rgba(0,0,0,0.2);
+
+  .filters-label {
+    padding: 0 1rem;
+    text-transform: uppercase;
+  }
+
+  .filter-options {
+    font-family: font;
+    width: 100%;
+    color: white;
+    display: flex;
+
+    .filter-button {
+      padding: 1rem;
+      border-radius: 5px;
+      margin-right: 0.5rem;
+
+      &:hover {
+        background-color: rgba(223, 229, 220, 0.5);
+        cursor: pointer;
+      }
+
+      &.asActive {
+        color: rgba(0, 0, 0, 0.7);
+      }
+    }
+  }
+
+  .divider {
+    height: 4rem;
+  }
+}
+
+@media (max-width: 676px) {
+  .filters-container {
+
+    .filters-label {
+      font-size: 0.9rem;
+    }
+  
+    .filter-button {
+      font-size: 0.8rem;
+    }
+  
+    .divider {
+      height: 2rem;
+    }
+  }
+}

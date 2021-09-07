@@ -9,3 +9,6 @@ export const ElementColors: { [key: string]: string } = {
   adaptive: "#4B0082",
   none: "#a4a4a4"
 }
+
+export const CharacterElements = ["Anemo", "Cryo", "Electro", "Geo", "Hydro", "Pyro"]
+export const WeaponTypes = ["Bow", "Catalyst", "Claymore", "Polearm", "Sword"]

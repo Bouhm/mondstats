@@ -5,10 +5,10 @@ import { debounce, difference, filter, find, includes, map, orderBy, times, uniq
 import React, { ReactNode, useRef, useState } from 'react';
 
 import { getCharacterFileName, shortenId } from '../../scripts/util';
+import Dropdown, { Option } from '../controls/Dropdown';
 import { useAppSelector } from '../hooks/useRedux';
-import Dropdown, { Option } from '../ui/Dropdown';
-import Card from './Card';
-import LLImage from './LLImage';
+import Card from '../ui/Card';
+import LLImage from '../ui/LLImage';
 
 type CardSearchProps = {
   items: SearchItem[]

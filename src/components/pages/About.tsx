@@ -18,6 +18,10 @@ function About() {
         <p>Mondstats collects its data using the APIs from HoYoLAB. Only data from users who opt-in to display their Battle Chronicles publicly can be collected. Due to the API rate limit, it takes a long time to accumulate data. The aggregate data is updated routinely and any data more than 6 weeks old is purged every patch cycle. Since data collection is slow, small chunks are updated at a time in order of time since last update.</p>
       </div>
       <div className="about-section">
+        <h2>How reliable is the information on site?</h2>
+        <p>I encourage players to be critical about interpreting the data presented on this site. Behavioral data does not translate into an objective conclusion on what is the 'best' due to many factors including player investment, playstyle, etc. To objectively evaluate an optimal build or team, a theorycrafting resource will be better suited for your needs.</p>
+      </div>
+      <div className="about-section">
         <h2>How can I contribute?</h2>
         <p>Creating an account in HoYoLAB (miHoYo's official forum) if you haven't done so already and toggling your Battle Chronicle to 'Public' in your profile will allow your data to be visible. Mondstats collects data indiscriminately so it won't have your data for certain.</p>
       </div>

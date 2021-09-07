@@ -10,7 +10,7 @@ import { ElementColors } from '../../../data/constants';
 import { IBuild } from '../../../data/types';
 import { getArtifactSetNames, getPercentage } from '../../../scripts/util';
 import ArtifactSets from '../../artifact-sets/ArtifactSets';
-import { Filters } from '../../filters/useFilters';
+import { Filters } from '../../hooks/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import Chart from '../../ui/Chart';
 import LLImage from '../../ui/LLImage';

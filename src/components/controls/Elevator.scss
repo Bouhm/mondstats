@@ -4,14 +4,15 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
-  margin: -0.5rem 1rem 0 1rem;
+  margin: 0 0.5rem;
 
   .elevator-label {
     font-family: 'Source Sans Pro', sans-serif;
     text-transform: uppercase;
     color: white;
     margin-top: -0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
   }
 
   &.asDisabled {
@@ -23,7 +24,7 @@
     display: flex;
     flex-flow: column;
     justify-content: center;
-    line-height: 0.8rem;
+    line-height: 0.5rem;
     color: white;
     align-items: center;
 
@@ -39,16 +40,30 @@
     }
 
     .elevator-value {
-      margin-bottom: -4px;
-      margin-top: 3px;
+      margin-bottom: -2px;
     }
   }
 }
 
-@media (max-width: 516px) {
+
+@media (max-width: 676px) {
   .elevator-container {
     .elevator-label {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
+    }
+
+    .elevator {
+      .elevator-up-button,
+      .elevator-down-button {
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+  
+      .elevator-value {
+        font-size: 1rem;
+      }
     }
   }
 }

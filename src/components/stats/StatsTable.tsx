@@ -1,21 +1,26 @@
 import './StatsTable.scss';
 
 import { capitalize, isEmpty, map, reduce } from 'lodash';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
 import { ICharacterData } from '../../data/types';
-import { getArtifactSetNames, getCharacterFileName, getCharacterLabel, getPercentage, shortenId } from '../../scripts/util';
+import {
+  getArtifactSetNames,
+  getCharacterFileName,
+  getCharacterLabel,
+  getPercentage,
+  shortenId,
+} from '../../scripts/util';
 import ArtifactSets from '../artifact-sets/ArtifactSets';
-import { useAppSelector } from '../hooks/useRedux';
-import Tooltip from '../ui/Tooltip';
-import Pagination from '../ui/Pagination';
-import usePaginate from '../hooks/usePaginate';
-import { useEffect } from 'react';
-import Loader from '../ui/Loader';
-import useApi from '../hooks/useApi';
-import LLImage from '../ui/LLImage'
 import CharacterCount from '../characters/CharacterCount';
+import Pagination from '../controls/Pagination';
+import useApi from '../hooks/useApi';
+import usePaginate from '../hooks/usePaginate';
+import { useAppSelector } from '../hooks/useRedux';
+import LLImage from '../ui/LLImage';
+import Loader from '../ui/Loader';
+import Tooltip from '../ui/Tooltip';
 
 function CharacterStatistics({data}: any) {
   const db = useAppSelector((state) => state.data.characterDb)

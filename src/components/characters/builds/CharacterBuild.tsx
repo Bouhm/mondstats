@@ -1,7 +1,7 @@
 import './CharacterBuild.css';
 
 import AmberSad from '/assets/amberSad.webp';
-import _, { isEmpty } from 'lodash';
+import _, { isEmpty, reduce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -9,9 +9,9 @@ import { ElementColors } from '../../../data/constants';
 import { ICharacterData } from '../../../data/types';
 import { getCharacterFileName } from '../../../scripts/util';
 import { selectCharacter } from '../../../Store';
-import F2P from '../../filters/F2P';
-import useFilters from '../../filters/useFilters';
+import Filters from '../../filters/Filters';
 import useApi from '../../hooks/useApi';
+import useFilters from '../../hooks/useFilters';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import LLImage from '../../ui/LLImage';
 import Loader from '../../ui/Loader';
@@ -32,10 +32,12 @@ function CharacterBuild() {
   const {
     filters,
     handleFilterChange
-  } = useFilters();
+  } = useFilters(['f2p','a6','max5']);
 
   const charId = characterIdMap[shortName]
-  const characterBuild = useApi(`/characters/${shortName}.json`);
+  const _characterBuilds = useApi(`/characters/${shortName}.json`);
+  const _characterMainBuilds = useApi(`/characters/mains/${shortName}.json`);
+  const [characterBuilds, setCharacterBuilds] = useState(_characterBuilds)
 
   useEffect(() => {
     if (!_.isEmpty(characterDb)) {
@@ -47,13 +49,21 @@ function CharacterBuild() {
     }
   }, [setCharacter, dispatch, charId, characterDb])
 
-  if (!characterDb || !characterIdMap) {
+  useEffect(() => {
+    if (filters.a6.value) {
+      setCharacterBuilds(_characterMainBuilds)
+    } else {
+      setCharacterBuilds(_characterBuilds)
+    }
+  }, [_characterBuilds, _characterMainBuilds, filters])
+
+  if (!characterDb || !characterIdMap || !character) {
     return <div>
       <Loader />
     </div>
   }
 
-  if (!character || !characterBuild || isEmpty(characterBuild.builds)) {
+  if (!characterBuilds || isEmpty(characterBuilds.builds)) {
     return <div>
       <div className="its-empty">
         <LLImage src={AmberSad} alt="empty" />
@@ -65,24 +75,24 @@ function CharacterBuild() {
   return (
     <>
       <div className="character-page-stats-count" style={{ backgroundColor: elementColor }}>
-        <span>{characterBuild.total} {character.name} Builds</span>
+        <span>{characterBuilds.total} {character.name} Builds</span>
       </div>
       <div className="character-page">
         <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} />
-        <div className="character-page-controls">
-          <F2P onChange={handleFilterChange} f2p={filters.f2p} max5={filters.max5} color={elementColor} />
-        </div>
+        <Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} />
 
-        {characterBuild.builds &&
+        {characterBuilds.builds &&
           <>
             <BuildSelector
-              builds={_.take(characterBuild.builds, maxBuilds)}
-              total={characterBuild.total}
+              builds={_.take(characterBuilds.builds, maxBuilds)}
+              total={characterBuilds.total}
               color={elementColor}
               filters={filters}
             />
-            <Constellations constellations={characterBuild.constellations} color={elementColor} total={characterBuild.total} />
-            <CharacterTeams filters={filters} teams={characterBuild.teams} />
+            {character.rarity < 100 &&
+              <Constellations constellations={characterBuilds.constellations} color={elementColor} total={reduce(characterBuilds.constellations, (sum, curr) => sum += curr, 0)} />
+            }
+            <CharacterTeams filters={filters} teams={characterBuilds.teams} />
           </>
         }
       </div>

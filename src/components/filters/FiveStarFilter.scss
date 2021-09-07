@@ -1,0 +1,10 @@
+.five-star-filter {
+  display: flex;
+}
+
+@media (max-width: 676px) {
+  .five-star-filter {
+    display: flex;
+    justify-content: center;
+  }
+}

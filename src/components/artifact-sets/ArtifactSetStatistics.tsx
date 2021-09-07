@@ -3,12 +3,12 @@ import './ArtifactSetStatistics.css';
 import { filter, includes, intersection, isEmpty, map } from 'lodash';
 import React, { useState } from 'react';
 
+import CardSearch from '../controls/CardSearch';
 import useApi from '../hooks/useApi';
+import useArtifactSetSearch from '../hooks/useArtifactSetSearch';
 import { useAppSelector } from '../hooks/useRedux';
 import StatsTable from '../stats/StatsTable';
-import CardSearch from '../ui/CardSearch';
 import Loader from '../ui/Loader';
-import useArtifactSetSearch from '../hooks/useArtifactSetSearch';
 
 function ArtifactSetStatistics() { 
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
