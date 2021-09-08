@@ -3,8 +3,8 @@ import './Card.scss';
 import React from 'react';
 
 import { shortenId } from '../../scripts/util';
-import { SearchItem } from './CardSearch';
-import LLImage from './LLImage'
+import { SearchItem } from '../controls/CardSearch';
+import LLImage from './LLImage';
 
 type CardProps = { 
   onClick?: (_id: string)=>void,

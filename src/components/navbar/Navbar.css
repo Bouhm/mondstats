@@ -56,7 +56,9 @@
 }
 
 @media (max-width: 516px) {
-  .nav-announcement {
-    display: none;
+  #nav-bar {
+    .nav-announcement {
+      display: none;
+    }
   }
 }
