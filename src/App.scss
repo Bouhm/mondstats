@@ -82,6 +82,11 @@ footer {
   height: inherit;
 }
 
+.sticky-outer-wrapper {
+  position: relative;
+  z-index: 11;
+}
+
 .Pyro {
   background-color: var.$element-pyro !important;
 }

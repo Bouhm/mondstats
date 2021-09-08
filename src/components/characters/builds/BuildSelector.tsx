@@ -10,7 +10,7 @@ import { ElementColors } from '../../../data/constants';
 import { IBuild } from '../../../data/types';
 import { getArtifactSetNames, getPercentage } from '../../../scripts/util';
 import ArtifactSets from '../../artifact-sets/ArtifactSets';
-import { Filters } from '../../hooks/useFilters';
+import { FiltersType } from '../../hooks/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import Chart from '../../ui/Chart';
 import LLImage from '../../ui/LLImage';
@@ -20,7 +20,7 @@ import WeaponBuild from './WeaponBuild';
 type BuildSelectorProps = {
   builds: IBuild[],
   total: number,
-  filters: Filters,
+  filters: FiltersType,
   color: string
 }
 
@@ -86,7 +86,7 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
                   max={countSum}
                   showScale={false}
                 />
-                </div>
+              </div>
               <div className="artifact-popularity">{getPercentage(filteredBuilds[activeBuildIdx].count, countSum)}%</div>
             </div>
           </div>

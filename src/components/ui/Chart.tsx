@@ -63,7 +63,7 @@ function _Chart({ id = "", className = "", type, max, labels, colors = [], data 
                 max,
                 display: showScale
             }
-          } 
+          }, 
         },
       });
     }

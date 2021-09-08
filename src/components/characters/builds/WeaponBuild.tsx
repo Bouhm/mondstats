@@ -5,7 +5,7 @@ import { IWeaponBuild } from '../../../data/types';
 import { getPercentage } from '../../../scripts/util';
 import Button from '../../controls/Button';
 import useExpand from '../../hooks/useExpand';
-import { Filters } from '../../hooks/useFilters';
+import { FiltersType } from '../../hooks/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import { ChevronDown, ChevronUp } from '../../ui/Icons';
 import WeaponCard from './WeaponCard';
@@ -18,7 +18,7 @@ type WeaponBuild = {
 
 const BP_WEAPONS = [11409, 12409, 14405, 15409, 13405]
 
-function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { filters : Filters}) {
+function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { filters : FiltersType}) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const max = 10;
@@ -34,7 +34,7 @@ function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { fi
       if (weaponDb[orderedWeapons[i]._id].rarity > 4) {
         count5++;      
         
-        if (count5 > filters.max5.value) continue;
+        if (count5 > filters.max5!.value) continue;
       }
 
       if (includes(BP_WEAPONS, weaponDb[orderedWeapons[i]._id].oid)) continue;

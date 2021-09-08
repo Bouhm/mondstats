@@ -7,7 +7,7 @@ import { IParty } from '../../../data/types';
 import { getPercentage } from '../../../scripts/util';
 import Button from '../../controls/Button';
 import useExpand from '../../hooks/useExpand';
-import { Filters } from '../../hooks/useFilters';
+import { FiltersType } from '../../hooks/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import { ChevronDown, ChevronUp } from '../../ui/Icons';
 import Team from '../Team';
@@ -17,7 +17,7 @@ interface ITeam {
   count: number
 }
 
-function CharacterTeams({ teams, filters }: { teams: IParty[], filters: Filters }) {
+function CharacterTeams({ teams, filters }: { teams: IParty[], filters: FiltersType }) {
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const { expanded, handleExpand } = useExpand();
@@ -27,10 +27,10 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: Filters 
 
   const filterTeams = (teams: IParty[], charId: string) => {
     let filtered = teams;
-    let max5WithChar = filters.max5.value;
+    let max5WithChar = filters.max5!.value;
 
     if (characterDb[selectedCharacter].rarity === 5) {
-      if (filters.max5.value === 0) {
+      if (filters.max5!.value === 0) {
         max5WithChar++;
       }
     }

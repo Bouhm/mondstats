@@ -4,6 +4,7 @@ import AmberSad from '/assets/amberSad.webp';
 import _, { isEmpty, reduce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Sticky from 'react-stickynode';
 
 import { ElementColors } from '../../../data/constants';
 import { ICharacterData } from '../../../data/types';
@@ -79,7 +80,7 @@ function CharacterBuild() {
       </div>
       <div className="character-page">
         <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} />
-        <Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} />
+        <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky>
 
         {characterBuilds.builds &&
           <>
