@@ -66,7 +66,7 @@
     display: flex;
     overflow-y: hidden;
 
-    .artifact-sets-container {
+    .artifact-set-build-container {
       width: 160px;
       height: 80px;
     }
@@ -131,7 +131,7 @@
       div {
         height: 100%;
 
-        .artifact-sets-container {
+        .artifact-set-build-container {
           height: inherit;
           width: 140px;
         }
@@ -155,7 +155,7 @@
       height: 60px;
 
       div {
-        .artifact-sets-container {
+        .artifact-set-build-container {
           height: inherit;
           width: 120px;
         }
@@ -179,7 +179,7 @@
       height: 60px;
 
       div {
-        .artifact-sets-container {
+        .artifact-set-build-container {
           height: inherit;
           width: 100px;
         }
@@ -247,7 +247,7 @@
       height: 50px;
 
       div {
-        .artifact-sets-container {
+        .artifact-set-build-container {
           height: inherit;
           width: 90px;
         }

@@ -9,10 +9,10 @@ import { Link, Redirect, Route, Switch, useHistory, withRouter } from 'react-rou
 
 // import { gql, useQuery } from '@apollo/client';
 import Abyss from './components/abyss/Abyss';
-import ArtifactSetStatistics from './components/artifact-sets/ArtifactSetStatistics';
+import ArtifactSetTable from './components/artifact-sets/ArtifactSetTable';
 import CharacterBuild from './components/characters/builds/CharacterBuild';
 import BuildSearch from './components/characters/BuildSearch';
-import CharacterStatistics from './components/characters/CharacterStatistics';
+import CharacterTable from './components/characters/CharacterTable';
 import Home from './components/Home';
 import useApi from './components/hooks/useApi';
 import { useAppDispatch, useAppSelector } from './components/hooks/useRedux';
@@ -22,7 +22,7 @@ import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 import Dialogue from './components/ui/Dialogue';
-import WeaponStatistics from './components/weapons/WeaponStatistics';
+import WeaponTable from './components/weapons/WeaponTable';
 import {
   IArtifactData,
   IArtifactDb,
@@ -99,9 +99,9 @@ function App() {
               <Route path="/about" component={About} />
               <Route path="/changelog" component={Changelog} />
               <Route path="/abyss" component={Abyss} />
-              <Route path="/characters" component={CharacterStatistics} />
-              <Route path="/artifacts" component={ArtifactSetStatistics} />
-              <Route path="/weapons" component={WeaponStatistics} />
+              <Route path="/characters" component={CharacterTable} />
+              <Route path="/artifacts" component={ArtifactSetTable} />
+              <Route path="/weapons" component={WeaponTable} />
               <Route path="/builds/:shortName" component={CharacterBuild} />
               <Route path="/builds" component={BuildSearch} />
             </Switch>

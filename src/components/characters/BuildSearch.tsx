@@ -1,4 +1,4 @@
-import './CharacterStatistics.css';
+import './CharacterTable.css';
 
 import { filter, includes, isEmpty, map } from 'lodash';
 import React, { useState } from 'react';
@@ -11,7 +11,7 @@ import useCharacterSearch from '../hooks/useCharacterSearch';
 import { useAppSelector } from '../hooks/useRedux';
 import Loader from '../ui/Loader';
 
-function CharacterStatistics() { 
+function CharacterTable() { 
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const { searchCharacters } = useCharacterSearch(characterDb);
   const routerHistory = useHistory();
@@ -29,4 +29,4 @@ function CharacterStatistics() {
   )
 }
 
-export default CharacterStatistics
+export default CharacterTable

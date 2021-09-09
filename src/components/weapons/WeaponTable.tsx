@@ -1,4 +1,4 @@
-import './WeaponStatistics.css';
+import './WeaponTable.css';
 
 import { filter, flatten, includes, intersection, isEmpty, map, reduce, some, union, uniq } from 'lodash';
 import React, { useState } from 'react';
@@ -11,7 +11,7 @@ import useWeaponSearch from '../hooks/useWeaponSearch';
 import StatsTable from '../stats/StatsTable';
 import Loader from '../ui/Loader';
 
-function WeaponStatistics() { 
+function WeaponTable() { 
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const weaponStats = useApi(`/weapons/top-weapons.json`)
   const [selectedWeapons, setSelectedWeapons] = useState<string[]>([])
@@ -25,11 +25,11 @@ function WeaponStatistics() {
   }
     
   return (
-    <div className="weapon-stats-container">
+    <div className="weapon-table-container">
       <CardSearch.Weapons items={filter(searchWeapons, weapon => !includes(selectedWeapons, weapon._id))} onSelect={handleSelect} />
-      <StatsTable.WeaponStatistics data={isEmpty(selectedWeapons) ? weaponStats : filter(weaponStats, weapon => includes(selectedWeapons, weapon._id))} />
+      <StatsTable.Weapons data={isEmpty(selectedWeapons) ? weaponStats : filter(weaponStats, weapon => includes(selectedWeapons, weapon._id))} />
     </div>
   )
 }
 
-export default WeaponStatistics
+export default WeaponTable

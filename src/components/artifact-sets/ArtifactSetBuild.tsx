@@ -1,4 +1,4 @@
-import './ArtifactSets.scss';
+import './ArtifactSetBuild.scss';
 
 import { map } from 'lodash';
 import React from 'react';
@@ -8,18 +8,18 @@ import { shortenId } from '../../scripts/util';
 import { useAppSelector } from '../hooks/useRedux';
 import LLImage from '../ui/LLImage'
 
-type ArtifactSetsProps = {
+type ArtifactSetBuildProps = {
   artifacts: IArtifactSet[]
   selected?: boolean,
   color?: string,
   selector?: boolean
 }
 
-function ArtifactSets({ artifacts, color='', selected=false, selector=false }: ArtifactSetsProps) {
+function ArtifactSetBuild({ artifacts, color='', selected=false, selector=false }: ArtifactSetBuildProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
 
   return (
-    <div className={`artifact-sets-container ${selector ? 'asSelector' : ''} ${selected ? "asSelected" : ""}`} style={selected ? {backgroundColor: color }:{}}>
+    <div className={`artifact-set-build-container ${selector ? 'asSelector' : ''} ${selected ? "asSelected" : ""}`} style={selected ? {backgroundColor: color }:{}}>
       {map(artifacts, ({ _id, activation_number }, i) => {
         return (
           <div key={`thumb-${shortenId(_id)}-i`} className={"artifact-thumb"}>
@@ -32,4 +32,4 @@ function ArtifactSets({ artifacts, color='', selected=false, selector=false }: A
   )
 }
 
-export default ArtifactSets
+export default ArtifactSetBuild

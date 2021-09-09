@@ -12,7 +12,7 @@ import {
   getPercentage,
   shortenId,
 } from '../../scripts/util';
-import ArtifactSets from '../artifact-sets/ArtifactSets';
+import ArtifactSetBuild from '../artifact-sets/ArtifactSetBuild';
 import CharacterCount from '../characters/CharacterCount';
 import Pagination from '../controls/Pagination';
 import useApi from '../hooks/useApi';
@@ -22,7 +22,7 @@ import LLImage from '../ui/LLImage';
 import Loader from '../ui/Loader';
 import Tooltip from '../ui/Tooltip';
 
-function CharacterStatistics({data}: any) {
+function Characters({data}: any) {
   const db = useAppSelector((state) => state.data.characterDb)
   const featured = useApi(`/featured.json`);
   const pageSize = 20;
@@ -93,13 +93,13 @@ function CharacterStatistics({data}: any) {
   )
 }
 
-function ArtifactSetStatistics({data}: any) {
+function ArtifactSets({data}: any) {
   const db = useAppSelector((state) => state.data.artifactSetDb)
   const title = 'artifacts'
   const renderCard = (itemStat: any) => (
     <Tooltip content={getArtifactSetNames(itemStat.artifacts, db)}>
       <div className="row-card col">
-        <ArtifactSets artifacts={itemStat.artifacts} />
+        <ArtifactSetBuild artifacts={itemStat.artifacts} />
       </div>
     </Tooltip>
   )
@@ -107,7 +107,7 @@ function ArtifactSetStatistics({data}: any) {
   return <ItemStatsTable data={data} title={title} renderCard={renderCard} />
 }
 
-function WeaponStatistics({data}: any) {
+function Weapons({data}: any) {
   const db = useAppSelector((state) => state.data.weaponDb)
   const title = 'weapons'
   const renderCard = (itemStat: any) => (
@@ -179,4 +179,4 @@ function ItemStatsTable({ data, title, renderCard }: StatsTableProps) {
 }
 
 
-export default { ArtifactSetStatistics, WeaponStatistics, CharacterStatistics }
+export default { ArtifactSets, Weapons, Characters }

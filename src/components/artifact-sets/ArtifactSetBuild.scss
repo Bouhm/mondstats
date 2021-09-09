@@ -1,4 +1,4 @@
-.artifact-sets-container {
+.artifact-set-build-container {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -49,7 +49,7 @@
 }
 
 @media (max-width: 826px) {
-  .artifact-sets-container {
+  .artifact-set-build-container {
     .artifact-thumb {
       .artifact-set-activation {
         font-size: 1rem;
@@ -71,7 +71,7 @@
 }
 
 @media (max-width: 544px) {
-  .artifact-sets-container {
+  .artifact-set-build-container {
     .artifact-thumb {
       .artifact-set-activation {
         font-size: 0.8rem;

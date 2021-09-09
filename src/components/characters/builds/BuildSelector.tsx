@@ -9,7 +9,7 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import { ElementColors } from '../../../data/constants';
 import { IBuild } from '../../../data/types';
 import { getArtifactSetNames, getPercentage } from '../../../scripts/util';
-import ArtifactSets from '../../artifact-sets/ArtifactSets';
+import ArtifactSetBuild from '../../artifact-sets/ArtifactSetBuild';
 import { FiltersType } from '../../hooks/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import Chart from '../../ui/Chart';
@@ -56,7 +56,7 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
           {map(filteredBuilds, (build, i) => {
               return (
                 <div key={`artifacts-thumb-${i}`} onClick={() => handleSelectSet(i)}>
-                  <ArtifactSets artifacts={build.artifacts} color={color} selected={i === activeBuildIdx} selector={true} />
+                  <ArtifactSetBuild artifacts={build.artifacts} color={color} selected={i === activeBuildIdx} selector={true} />
                 </div>
               )
             })
