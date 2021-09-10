@@ -6,7 +6,7 @@
   -webkit-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
-  z-index: 9;
+  z-index: 7;
   width: 12rem;
 
   .sidebar-menu {
