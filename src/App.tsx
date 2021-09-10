@@ -84,7 +84,6 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
       <main className="App-content">
         {showNotice && 
           <Dialogue onClose={() => setShowNotice(false)}>
@@ -116,6 +115,8 @@ function App() {
           </section>
         </div>
       </main>
+      <Navbar />
+
       <span className="build-ver">dev build 09.07.21</span>
     </div>
   )
