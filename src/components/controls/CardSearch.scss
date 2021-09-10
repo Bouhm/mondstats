@@ -92,3 +92,9 @@
     height: 29vh;
   }
 }
+
+@media (max-width: 516px) {
+  .card-searchbar {
+    padding: 0 4rem;
+  }
+}
