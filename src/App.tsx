@@ -112,7 +112,7 @@ function App() {
               <Link to="/changelog">Changelog</Link>
               <div className="notice" onClick={() => setShowNotice(true)}>⚠️</div>
             </div>
-            <footer>Mondstats is not affiliated, associated, authorized, endorsed by, or in any way officially connected with miHoYo.</footer>
+            <footer>Genshin Impact is a registered trademark of miHoYo Co., Ltd. Mondstats is not affiliated or in any way officially connected with miHoYo.</footer>
           </section>
         </div>
       </main>
