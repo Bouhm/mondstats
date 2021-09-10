@@ -96,6 +96,7 @@ function Abyss() {
   function _filterParties(parties: IAbyssParty[]) {
     return filter(parties, ({ core_party, flex}) => {
       let charFilter = true;
+      if (!flex[0]) return false;
       const party = [...core_party, flex[0].charId]
 
       charFilter = (filter(party, char => {
