@@ -63,9 +63,7 @@ function _Chart({ id = "", className = "", type, max, labels, colors = [], data 
                 max,
                 display: showScale
             }
-          }, 
-          rotation: 1 * Math.PI,
-          circumference: 1 * Math.PI
+          }
         },
       });
     }
