@@ -23,13 +23,19 @@ type TeamProps = {
 function Team({ team, percent, count, flex = [] }: TeamProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const { expanded, handleExpand } = useExpand();
+  let tooltipContent = ''
 
-  const tooltipContent = (flex[0].length > 1) ? `${map(team, charId => characterDb[charId].name).join(', ')}*: ${count}` : `${map(team, charId => characterDb[charId].name).join(', ')}: ${count}`
+  if (!flex[0]) { 
+    tooltipContent = `${map(team, charId => characterDb[charId].name).join(', ')}: ${count}`
+  } else {
+    tooltipContent = (flex[0].length > 1) ? `${map(team, charId => characterDb[charId].name).join(', ')}*: ${count}` : `${map(team, charId => characterDb[charId].name).join(', ')}: ${count}`
+  }
+
 
   return (
     <div className="team-container">
       <Tooltip content={tooltipContent}>
-        <div className={`team-stats ${flex[0].length > 1 ? 'asExpandable' : ''}`} onClick={handleExpand}>
+        <div className={`team-stats ${flex[0] && flex[0].length > 1 ? 'asExpandable' : ''}`} onClick={handleExpand}>
           {map(team, (char, i) => (
             <CharacterTile key={`team-${char}-${i}`} id={char+''} labeled={false} clickable={false} />
           ))}
@@ -39,7 +45,7 @@ function Team({ team, percent, count, flex = [] }: TeamProps) {
           </div>
         </div>
       </Tooltip>
-      {flex[0].length > 1 && 
+      {flex[0] && flex[0].length > 1 && 
         <div className="team-flex-container">
             {expanded && <>
               {map(filter(flex, party => party.length > 1), (party, i) => (
