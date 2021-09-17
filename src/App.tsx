@@ -117,7 +117,7 @@ function App() {
       </main>
       <Navbar />
 
-      <span className="build-ver">dev build 09.07.21</span>
+      <span className="build-ver">dev build 09.17.21</span>
     </div>
   )
 }

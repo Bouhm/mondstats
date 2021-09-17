@@ -4,6 +4,7 @@ import axios from 'axios';
 import {
   clone,
   cloneDeep,
+  cond,
   countBy,
   difference,
   filter,
@@ -33,6 +34,9 @@ import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 import Tabs, { useTabs } from '../ui/Tabs';
 import AbyssFloor from './AbyssFloor';
+
+// import abyssFloors from './abyssFloors.json';
+// import abyssTopTeams from './top-teams.json';
 
 const _compareFloor = (f1: Option, f2: Option) => {
   if (f1.value.startsWith('_') || f2.value.startsWith('_')) {
@@ -77,8 +81,9 @@ function Abyss() {
   useEffect(() => {
     async function fetchAbyssData() {
       await Promise.all(map(filter(selectedStages, stage => stage.value !== "ALL"), floor => {
-        const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
+        // return abyssFloors[floor.value]
 
+        const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
         if (floorIdx < 0) {
           // return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floor.value}.json`, {
           return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floor.value}.json`, {
@@ -96,15 +101,22 @@ function Abyss() {
   function _filterParties(parties: IAbyssParty[]) {
     return filter(parties, ({ core_party, flex}) => {
       let charFilter = true;
-      if (!flex[0]) return false;
-      const party = [...core_party, flex[0].charId]
+      let cond = false;
 
-      charFilter = (filter(party, char => {
-        if (typeof char !== "string") return false;
-        return characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler"
-      }).length <= filters.max5!.value)
-      
-      return charFilter && difference(selectedCharacters, party).length === 0
+      forEach(flex, _flex => {
+        if (!_flex[0]) return false;
+
+        const party = [...core_party, _flex[0].charId]
+  
+        charFilter = (filter(party, char => {
+          if (typeof char !== "string") return false;
+          return characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler"
+        }).length <= filters.max5!.value)
+        
+        if (!cond) cond = (charFilter && difference(selectedCharacters, party).length === 0);
+      })
+
+      return cond;
     })
   }
 
@@ -158,7 +170,7 @@ function Abyss() {
         <div className="stage-half">
           <h2>{total} Teams</h2>
           {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({core_party, flex, count}, i) => {
-            const party = [...core_party, flex[0].charId]
+            const party = [...core_party, flex[0][0].charId]
             return <React.Fragment key={`parties-ALL-${i}`}>
               <div className="battle-container">
                 <Team team={party} count={count} flex={flex} percent={`${getPercentage(count, total)}%`} />

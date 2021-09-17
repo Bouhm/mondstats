@@ -40,7 +40,7 @@ const AbyssFloor = ({ abyssFloors, selectedStage, stageLimitToggle, onToggleLimi
                 {battle_parties[activeTabIdx].length > 0 ? 
                   <>
                     {map(take(orderBy(battle_parties[activeTabIdx], 'count', 'desc'), stageLimitToggle[selectedStage.value] ? maxParties : pageSize), ({core_party, flex, count}, k) => {
-                        const party = [...core_party, flex[0].charId]
+                        const party = [...core_party, flex[0][0].charId]
                         return (
                           <Team key={`team-${selectedStage.value}-${k}`} team={party} flex={flex} count={count} percent={`${getPercentage(count, reduce(battle_parties[activeTabIdx], (sum,curr) => sum + curr.count, 0))}%`} />
                         )

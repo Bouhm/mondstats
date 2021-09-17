@@ -1,3 +1,9 @@
+## dev build 9.17.21
+
+- Improved abyss team aggregation to show multiple flex options
+- Decreased abyss stage clear threshold from 3-stars to 1-star. Additional filtering options WIP
+- Improved team search such that searching for teams by character will always show some results
+
 ## dev build 9.7.21
 
 - Added additional filtering options including Lvl 80+ character builds
