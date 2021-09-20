@@ -1,4 +1,4 @@
-import { Chart, registerables, ChartOptions } from 'chart.js';
+import { Chart, ChartOptions, registerables } from 'chart.js';
 import _ from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -65,7 +65,7 @@ function Donut({ id = "", className = "", max, labels=[], colors = [], data = []
       if (semi) {
         chartOptions.rotation = -90;
         chartOptions.circumference = 180;
-        chartOptions.cutout = 100;
+        chartOptions.cutout = 120;
       }
       
       chart = new Chart(ref.current.getContext("2d"), {
