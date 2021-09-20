@@ -1,7 +1,7 @@
 import './CharacterBuild.css';
 
 import AmberSad from '/assets/amberSad.webp';
-import { find, isEmpty, reduce, take } from 'lodash';
+import { find, isEmpty, map, reduce, take } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Sticky from 'react-stickynode';
@@ -20,6 +20,11 @@ import Loader from '../../ui/Loader';
 import BuildSelector from './BuildSelector';
 import CharacterTeams from './CharacterTeams';
 import Constellations from './Constellations';
+
+interface ITotals { 
+  total: number,
+  abyssCount: number
+}
 
 function CharacterBuild() {  
   const { shortName } = useParams<{ shortName: string }>();
@@ -42,8 +47,7 @@ function CharacterBuild() {
   const [characterBuilds, setCharacterBuilds] = useState(_characterBuilds)
   const [characterStats, setCharacterStats] = useState<any>({})
   const _characterStats = useApi(`/characters/top-characters.json`)
-  const [ownedTotal, setOwnedTotal] = useState(0)
-  const [pickedTotal, setPickedTotal] = useState(0)
+  const [totals, setTotals] = useState<ITotals|{}>({})
 
   useEffect(() => {
     if (!isEmpty(characterDb)) {
@@ -67,9 +71,10 @@ function CharacterBuild() {
     if (_characterStats) {
       const charStats = find(_characterStats, { _id: charId });
       setCharacterStats(charStats)
-      setOwnedTotal(_characterStats.reduce((sum, curr) => sum + curr.total, 0))
-      setPickedTotal(_characterStats.reduce((sum, curr) => sum + (curr.abyssCount || 0), 0))
-      console.log(pickedTotal, ownedTotal)
+      let statTotals: ITotals = {} as ITotals;
+      statTotals.total = _characterStats.reduce((sum, curr) => sum + curr.total, 0)
+      statTotals.abyssCount = _characterStats.reduce((sum, curr) => sum + (curr.abyssCount || 0), 0)
+      setTotals(statTotals);
     }
   }, [_characterStats, charId])
 
@@ -110,20 +115,17 @@ function CharacterBuild() {
           </>
         }
         <div className="character-stats-container">
-          <Chart.Donut
-            data={[characterStats.total, ownedTotal - characterStats.total]}
-            colors={[elementColor, ElementColors.none]}
-            max={ownedTotal}
-            showScale={false}
-            semi={true}
-          />
-          <Chart.Donut
-            data={[characterStats.abyssCount, pickedTotal - characterStats.abyssCount]}
-            colors={[elementColor, ElementColors.none]}
-            max={pickedTotal}
-            showScale={false}
-            semi={true}
-          />
+            {map(['total', 'abyssCount'], (stat: string) => {
+              return <div className="character-stats-chart">
+                <Chart.Donut
+                  data={[characterStats[stat], totals[stat] - characterStats[stat]]}
+                  colors={[elementColor, ElementColors.none]}
+                  max={totals[stat]}
+                  showScale={false}
+                  semi={true}
+                />
+              </div>
+            })}
         </div>
       </div>
     </>

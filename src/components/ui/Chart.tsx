@@ -1,4 +1,4 @@
-import { Chart, ChartItem, ChartTypeRegistry, registerables } from 'chart.js';
+import { Chart, registerables, ChartOptions } from 'chart.js';
 import _ from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -49,39 +49,42 @@ function Donut({ id = "", className = "", max, labels=[], colors = [], data = []
       ]
 
     if (ref && ref.current) {
-      chart = new Chart(ref.current.getContext("2d") as ChartItem, {
+      const chartOptions: ChartOptions<any> = {
+        borderColor: "rgba(255,255,255,0.7)",
+        animation: {
+          duration: hasMounted ? 0 : 600,
+        },
+        scales: {
+          y: {
+              max,
+              display: showScale
+          }
+        }
+      }
+
+      if (semi) {
+        chartOptions.rotation = -90;
+        chartOptions.circumference = 180;
+        chartOptions.cutout = 100;
+      }
+      
+      chart = new Chart(ref.current.getContext("2d"), {
         type: "doughnut",
         data: {
           labels,
           datasets: _datasets
         },
-        options: {
-          borderColor: "rgba(255,255,255,0.7)",
-          animation: {
-            duration: hasMounted ? 0 : 600,
-          },
-          scales: {
-            y: {
-                max,
-                display: showScale
-            }
-          }
-        },
+        options: chartOptions
       });
-
-      if (semi) {
-        chart.options.rotation = -90;
-        chart.options.circumference = 180;
-      }
     }
 
     return () => {
       chart.destroy();
       setHasMounted(true)
     }
-  }, [hasMounted, setHasMounted, max, showScale, Chart, labels, data, datasets, colors, ref])
+  }, [hasMounted, setHasMounted, max, semi, showScale, Chart, labels, data, datasets, colors, ref])
 
-  return <canvas className={className} id={id} ref={ref} />
+  return <canvas className={`chart ${className}`} id={id} ref={ref} />
 }
 
 export default { Donut }

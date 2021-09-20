@@ -18,6 +18,15 @@
     opacity: 0.5;
   }
 
+  .character-stats-container {
+    display: flex;
+    justify-content: center;
+
+    .character-stats-chart {
+      margin: 0 1rem;
+    }
+  }
+
   h1 {
     text-align: center;
     font-size: 2rem;
