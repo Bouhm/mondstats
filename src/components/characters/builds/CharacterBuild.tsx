@@ -116,7 +116,7 @@ function CharacterBuild() {
         }
         <div className="character-stats-container">
             {map(['total', 'abyssCount'], (stat: string) => {
-              return <div className="character-stats-chart">
+              return <div key={stat} className="character-stats-chart">
                 <Chart.Donut
                   data={[characterStats[stat], totals[stat] - characterStats[stat]]}
                   colors={[elementColor, ElementColors.none]}

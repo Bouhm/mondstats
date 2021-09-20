@@ -114,11 +114,6 @@
 }
 
 @media (max-width: 1036px) {
-  .weapons-list {
-    .weapons-show-more {
-    }
-  }
-
   .build-details {
     flex-flow: column-reverse;
   }
@@ -157,20 +152,6 @@
           width: 100px;
         }
       }
-    }
-  }
-}
-
-@media (max-width: 676px) {
-  .weapons-list {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-  }
-
-  .artifacts-donut-chart {
-    .artifact-popularity {
-      font-size: 2.5rem !important;
     }
   }
 }

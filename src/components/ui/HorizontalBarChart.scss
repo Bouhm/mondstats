@@ -40,13 +40,13 @@
       height: 80px;
     }
   
-    .bar-detail {
+    .bar-card-detail {
       display: flex;
       width: 100%;
       flex-flow: column;
       text-align: center;
   
-      .bar-name {
+      .bar-card-name {
         padding: 0 0.1rem;
         margin-bottom: 0.5rem;
         color: rgb(73, 83, 102);
@@ -54,19 +54,19 @@
         text-decoration: none;
       }
   
-      .bar-popularity {
+      .bar-card-popularity {
         height: 100%;
         display: flex;
         flex-flow: column;
         justify-content: center;
   
-        .bar-popularity-pct {
+        .bar-card-popularity-pct {
           color: white;
           font-size: 1.7rem;
           text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
         }
   
-        .bar-popularity-count {
+        .bar-card-popularity-count {
           color: rgba(73, 83, 102, 0.9);
           font-size: 1.1rem;
         }
@@ -77,22 +77,28 @@
 
 
 @media (max-width: 676px) {
-  .horizontal-barchart {
-    width: 100% !important;
-    max-width: 100%;
+  .horizontal-barchart-container {
     display: flex;
-    justify-content: center;
+    flex-flow: column;
+    align-items: center;
 
-    & > div {
-      width: 100%;
+    .horizontal-barchart {
+      width: 100% !important;
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+  
+      & > div {
+        width: 100%;
+      }
     }
-
+    
     .bar-card {
       width: 100%;
     }
-  }
-
-  .horizontal-barchart-bar {
-    display: none;
+  
+    .horizontal-barchart-bar {
+      display: none;
+    }
   }
 }

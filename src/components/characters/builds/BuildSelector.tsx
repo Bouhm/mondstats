@@ -1,5 +1,4 @@
 import './BuildSelector.css';
-import './Weapon.css';
 
 import AmberSad from '/assets/amberSad.webp';
 import _, { forEach, map, orderBy } from 'lodash';

@@ -7,8 +7,8 @@ import Button from '../../controls/Button';
 import useExpand from '../../hooks/useExpand';
 import { FiltersType } from '../../hooks/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
+import HorizontalBarChart, { IBarChartData } from '../../ui/HorizontalBarChart';
 import { ChevronDown, ChevronUp } from '../../ui/Icons';
-import WeaponCard from './WeaponCard';
 
 type WeaponBuild = {
   weaponBuilds: IWeaponBuild[]
@@ -53,32 +53,13 @@ function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { fi
   return (
     <div className="weapons-list-container">
       <h1>Weapons</h1>
-      <div className="weapons-list">
-        {map(take(filteredWeapons, expanded ? max : 5), ({ _id, count }, i) => {
-          const weapon = weaponDb[_id];
-          if (!weapon) return null;
-
-          const popularity = getPercentage(count, total);
-
-          return (
-            <div key={`${_id}-${count}-${i}`} className="weapon-container">
-              <WeaponCard {...weapon} count={count} popularity={popularity} />
-              <div className="barchart weapon-bar-chart">
-                <div  
-                  className={`barchart-bar weapon-bar`} 
-                  style={{ width: `${popularity}%`, backgroundColor: color }} 
-                />
-              </div>
-            </div>
-          )
-        })}
-        <br />
-        {filteredWeapons.length > 5 && (
-          <Button className="weapons-show-more" onClick={handleExpand}>
-            {!expanded ? <>Show more <ChevronDown size={20} color={"#202020"} /></> : <>Show less <ChevronUp size={20} color={"#202020"} /></>}
-          </Button>
-        )}
-      </div>
+      <HorizontalBarChart data={take(filteredWeapons, expanded ? max : 5) as unknown as IBarChartData[]} db={weaponDb} total={total} color={color} />
+      <br />
+      {filteredWeapons.length > 5 && (
+        <Button className="weapons-show-more" onClick={handleExpand}>
+          {!expanded ? <>Show more <ChevronDown size={20} color={"#202020"} /></> : <>Show less <ChevronUp size={20} color={"#202020"} /></>}
+        </Button>
+      )}
     </div>
   )
 }
