@@ -1,7 +1,7 @@
 import './CharacterBuild.css';
 
 import AmberSad from '/assets/amberSad.webp';
-import _, { isEmpty, reduce } from 'lodash';
+import { find, isEmpty, reduce, take } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Sticky from 'react-stickynode';
@@ -14,6 +14,7 @@ import Filters from '../../filters/Filters';
 import useApi from '../../hooks/useApi';
 import useFilters from '../../hooks/useFilters';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
+import Chart from '../../ui/Chart';
 import LLImage from '../../ui/LLImage';
 import Loader from '../../ui/Loader';
 import BuildSelector from './BuildSelector';
@@ -39,9 +40,13 @@ function CharacterBuild() {
   const _characterBuilds = useApi(`/characters/${shortName}.json`);
   const _characterMainBuilds = useApi(`/characters/mains/${shortName}.json`);
   const [characterBuilds, setCharacterBuilds] = useState(_characterBuilds)
+  const [characterStats, setCharacterStats] = useState<any>({})
+  const _characterStats = useApi(`/characters/top-characters.json`)
+  const [ownedTotal, setOwnedTotal] = useState(0)
+  const [pickedTotal, setPickedTotal] = useState(0)
 
   useEffect(() => {
-    if (!_.isEmpty(characterDb)) {
+    if (!isEmpty(characterDb)) {
       const char = characterDb[charId];
       setCharacter(char)
       setElementColor(ElementColors[char.element.toLowerCase()]);
@@ -57,6 +62,16 @@ function CharacterBuild() {
       setCharacterBuilds(_characterBuilds)
     }
   }, [_characterBuilds, _characterMainBuilds, filters])
+
+  useEffect(() => {
+    if (_characterStats) {
+      const charStats = find(_characterStats, { _id: charId });
+      setCharacterStats(charStats)
+      setOwnedTotal(_characterStats.reduce((sum, curr) => sum + curr.total, 0))
+      setPickedTotal(_characterStats.reduce((sum, curr) => sum + (curr.abyssCount || 0), 0))
+      console.log(pickedTotal, ownedTotal)
+    }
+  }, [_characterStats, charId])
 
   if (!characterDb || !characterIdMap || !character) {
     return <div>
@@ -79,13 +94,12 @@ function CharacterBuild() {
         <span>{characterBuilds.total} {character.name} Builds</span>
       </div>
       <div className="character-page">
-        <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} />
-        <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky>
-
+        <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} /> 
         {characterBuilds.builds &&
           <>
+            <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky>
             <BuildSelector
-              builds={_.take(characterBuilds.builds, maxBuilds)}
+              builds={take(characterBuilds.builds, maxBuilds)}
               total={characterBuilds.total}
               color={elementColor}
               filters={filters}
@@ -93,9 +107,24 @@ function CharacterBuild() {
             {character.rarity < 100 &&
               <Constellations constellations={characterBuilds.constellations} color={elementColor} total={reduce(characterBuilds.constellations, (sum, curr) => sum += curr, 0)} />
             }
-            <CharacterTeams filters={filters} teams={characterBuilds.teams} />
           </>
         }
+        <div className="character-stats-container">
+          <Chart.Donut
+            data={[characterStats.total, ownedTotal - characterStats.total]}
+            colors={[elementColor, ElementColors.none]}
+            max={ownedTotal}
+            showScale={false}
+            semi={true}
+          />
+          <Chart.Donut
+            data={[characterStats.abyssCount, pickedTotal - characterStats.abyssCount]}
+            colors={[elementColor, ElementColors.none]}
+            max={pickedTotal}
+            showScale={false}
+            semi={true}
+          />
+        </div>
       </div>
     </>
   )

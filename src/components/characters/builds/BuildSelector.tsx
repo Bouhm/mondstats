@@ -77,9 +77,8 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
             />
             <div className="artifacts-donut-container">
               <div className="artifacts-donut-chart">
-                <Chart
+                <Chart.Donut
                   id="artifacts-donut"
-                  type="doughnut"
                   labels={labels}
                   data={data}
                   colors={colors}

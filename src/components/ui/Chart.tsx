@@ -17,21 +17,23 @@ export interface IDataset {
 type ChartProps = {
   id?: string
   className?: string
-  type: string
-  labels: string[]
+  labels?: string[]
   data?: number[]
   datasets?: IDataset[]
   colors?: string[]
   max: number
   showScale?: boolean
+  semi?: boolean
 }
 
-function _Chart({ id = "", className = "", type, max, labels, colors = [], data = [], datasets = [], showScale = true}: ChartProps) {
+function Donut({ id = "", className = "", max, labels=[], colors = [], data = [], datasets = [], showScale = true, semi=false}: ChartProps) {
   Chart.register(...registerables)
   Chart.defaults.plugins.tooltip.displayColors = false;
   Chart.defaults.plugins.legend.display = false;
   Chart.defaults.plugins.tooltip.animation.duration = 0;
   Chart.defaults.color = 'white';
+
+  if (semi) className += " asSemi"
   
   const [hasMounted, setHasMounted] = useState(false);
   const ref = useRef<HTMLCanvasElement>(null)
@@ -48,7 +50,7 @@ function _Chart({ id = "", className = "", type, max, labels, colors = [], data 
 
     if (ref && ref.current) {
       chart = new Chart(ref.current.getContext("2d") as ChartItem, {
-        type: type as keyof ChartTypeRegistry,
+        type: "doughnut",
         data: {
           labels,
           datasets: _datasets
@@ -66,15 +68,20 @@ function _Chart({ id = "", className = "", type, max, labels, colors = [], data 
           }
         },
       });
+
+      if (semi) {
+        chart.options.rotation = -90;
+        chart.options.circumference = 180;
+      }
     }
 
     return () => {
       chart.destroy();
       setHasMounted(true)
     }
-  }, [hasMounted, setHasMounted, max, showScale, Chart, labels, data, datasets, colors, type, ref])
+  }, [hasMounted, setHasMounted, max, showScale, Chart, labels, data, datasets, colors, ref])
 
   return <canvas className={className} id={id} ref={ref} />
 }
 
-export default _Chart
+export default { Donut }
