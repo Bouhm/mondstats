@@ -1,4 +1,4 @@
-import './CharacterBuild.css';
+import './CharacterPage.css';
 
 import AmberSad from '/assets/amberSad.webp';
 import { find, isEmpty, map, reduce, take } from 'lodash';
@@ -26,7 +26,7 @@ interface ITotals {
   abyssCount: number
 }
 
-function CharacterBuild() {  
+function CharacterPage() {  
   const { shortName } = useParams<{ shortName: string }>();
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
@@ -132,4 +132,4 @@ function CharacterBuild() {
   )
 }
 
-export default CharacterBuild
+export default CharacterPage

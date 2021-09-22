@@ -10,7 +10,7 @@ import { Link, Redirect, Route, Switch, useHistory, withRouter } from 'react-rou
 // import { gql, useQuery } from '@apollo/client';
 import Abyss from './components/abyss/Abyss';
 import ArtifactSetTable from './components/artifact-sets/ArtifactSetTable';
-import CharacterBuild from './components/characters/builds/CharacterBuild';
+import CharacterPage from './components/characters/builds/CharacterPage';
 import BuildSearch from './components/characters/BuildSearch';
 import CharacterTable from './components/characters/CharacterTable';
 import Home from './components/Home';
@@ -101,7 +101,7 @@ function App() {
               <Route path="/characters" component={CharacterTable} />
               <Route path="/artifacts" component={ArtifactSetTable} />
               <Route path="/weapons" component={WeaponTable} />
-              <Route path="/builds/:shortName" component={CharacterBuild} />
+              <Route path="/builds/:shortName" component={CharacterPage} />
               <Route path="/builds" component={BuildSearch} />
             </Switch>
           </main>
