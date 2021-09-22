@@ -20,7 +20,7 @@ const useFilters = (filterKeys: string[]) => {
         defaultFilters[key] = { value: 4 };
         break;
       case 'a6':
-        defaultFilters[key] = { label: createElement('div',{},'Lvl80+'), value: false };
+        defaultFilters[key] = { label: createElement('div',{},'Lvl90+'), value: false };
         break;
       // case 'elements':
       //   forEach(CharacterElements, element => {

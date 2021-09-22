@@ -6,7 +6,7 @@
 
 ## dev build 9.7.21
 
-- Added additional filtering options including Lvl 80+ character builds
+- Added additional filtering options including Lvl 90+ character builds
 
 ## dev build 8.29.21
 
