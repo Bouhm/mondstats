@@ -10,7 +10,7 @@ import Loader from '../ui/Loader';
 
 function WeaponPage() { 
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
-  const weaponStats = useApi(`/weapons/top-weapons.json`)
+  const weaponStats = useApi(`/weapons/weapon-stats.json`)
   const [selectedWeapons, setSelectedWeapons] = useState<string[]>([])
 
   if (isEmpty(weaponDb) || isEmpty(weaponStats)) return <Loader />
