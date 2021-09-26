@@ -22,6 +22,7 @@ import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 import Dialogue from './components/ui/Dialogue';
+import WeaponPage from './components/weapons/WeaponPage';
 import WeaponTable from './components/weapons/WeaponTable';
 import {
   IArtifactData,
@@ -98,11 +99,12 @@ function App() {
               <Route path="/about" component={About} />
               <Route path="/changelog" component={Changelog} />
               <Route path="/abyss" component={Abyss} />
+              <Route path="/characters/:shortName" component={CharacterPage} />
               <Route path="/characters" component={CharacterTable} />
+              <Route path="/artifacts/:shortName" component={ArtifactSetTable} />
               <Route path="/artifacts" component={ArtifactSetTable} />
+              <Route path="/weapons/:shortName" component={WeaponPage} />
               <Route path="/weapons" component={WeaponTable} />
-              <Route path="/builds/:shortName" component={CharacterPage} />
-              <Route path="/builds" component={BuildSearch} />
             </Switch>
           </main>
           <section className="footer">

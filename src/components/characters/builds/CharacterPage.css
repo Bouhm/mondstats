@@ -65,13 +65,6 @@
   opacity: 0.5;
 }
 
-.its-empty {
-  margin-top: 2rem;
-  color: white;
-  text-align: center;
-  width: 100%;
-}
-
 @media (max-width: 1024px) {
   .character-page {
     h1 {

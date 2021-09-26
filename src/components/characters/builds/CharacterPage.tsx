@@ -1,6 +1,5 @@
 import './CharacterPage.css';
 
-import AmberSad from '/assets/amberSad.webp';
 import { find, isEmpty, map, reduce, take } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -15,10 +14,9 @@ import useApi from '../../hooks/useApi';
 import useFilters from '../../hooks/useFilters';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import Chart from '../../ui/Chart';
-import LLImage from '../../ui/LLImage';
+import Empty from '../../ui/Empty';
 import Loader from '../../ui/Loader';
 import BuildSelector from './BuildSelector';
-import CharacterTeams from './CharacterTeams';
 import Constellations from './Constellations';
 
 interface ITotals { 
@@ -84,13 +82,8 @@ function CharacterPage() {
     </div>
   }
 
-  if (!characterBuilds || isEmpty(characterBuilds.builds)) {
-    return <div>
-      <div className="its-empty">
-        <LLImage src={AmberSad} alt="empty" />
-        <h3>Not enough data</h3>
-      </div>
-    </div>
+  if (!characterBuilds || !_characterMainBuilds || isEmpty(characterBuilds.builds) || isEmpty(_characterMainBuilds)) {
+    return <Empty />
   }
 
   return (
