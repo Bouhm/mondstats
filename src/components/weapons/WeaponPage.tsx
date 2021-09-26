@@ -17,14 +17,13 @@ function WeaponPage() {
   const { shortName } = useParams<{ shortName: string }>();
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const characterDb = useAppSelector((state) => state.data.characterDb)
-
-  const weapon = find(weaponDb, weapon => getShortName(weapon) === shortName)
-
-  if (!weapon) return null;
- 
-  const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const allWeaponStats = useApi(`/weapons/weapon-stats.json`)
+  const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
+  const weapon = find(weaponDb, weapon => getShortName(weapon) === shortName)
   const weaponStats = find(allWeaponStats, { _id: weapon!._id });
+
+  if (!weapon || !weaponStats) return null;
+ 
   const charsTotal = reduce(weaponStats.characters, (sum, curr) => sum + curr.count, 0)
   const max = 10;
   
