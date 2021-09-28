@@ -3,8 +3,8 @@ import { forEach, reverse } from 'lodash';
 import { IArtifactSet, IArtifactSetDb } from '../data/types';
 
 export function getShortName(item: { name: string, element?: string }) {
-  const charName = item.name === "Traveler" ? `${item.name}-${item.element}`.split(" ").join("").toLowerCase() : item.name.split(" ").join("").toLowerCase();
-  return charName;
+  const shortName = item.name === "Traveler" ? `${item.name}-${item.element}`.split(" ").join("").toLowerCase() : item.name.split(" ").join("").toLowerCase();
+  return shortName.replace(/[^\w\s]/gi, '');
 }
 
 export function getArtifactSetNames(artifacts: IArtifactSet[], db: IArtifactSetDb) {

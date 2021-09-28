@@ -3,8 +3,9 @@ import './CardSearch.scss';
 import Fuse from 'fuse.js';
 import { debounce, difference, filter, find, includes, map, orderBy, times, uniq } from 'lodash';
 import React, { ReactNode, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { getCharacterFileName, shortenId } from '../../scripts/util';
+import { getCharacterFileName, getShortName, shortenId } from '../../scripts/util';
 import Dropdown, { Option } from '../controls/Dropdown';
 import { useAppSelector } from '../hooks/useRedux';
 import Card from '../ui/Card';
@@ -53,7 +54,7 @@ function Characters(props: CardSearchProps) {
     ) as ReactNode;
   }
 
-  return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"characters"} placeholder={"Search characters"} {...props} />
+  return <CardSearch options={options} OptionLabel={OptionLabel} path={"characters"} placeholder={"Search characters"} {...props} />
 }
 
 function ArtifactSets(props: CardSearchProps) { 
@@ -72,7 +73,7 @@ function ArtifactSets(props: CardSearchProps) {
     ) as ReactNode;
   }
 
-  return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"artifacts"} placeholder={"Search artifact sets"} {...props} />
+  return <CardSearch options={options} OptionLabel={OptionLabel} path={"artifacts"} placeholder={"Search artifact sets"} {...props} />
 }
 
 function Weapons(props: CardSearchProps) { 
@@ -91,10 +92,10 @@ function Weapons(props: CardSearchProps) {
     ) as ReactNode;
   }
 
-  return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"weapons"} placeholder={"Search weapons"} {...props} />
+  return <CardSearch options={options} OptionLabel={OptionLabel} path={"weapons"} placeholder={"Search weapons"} {...props} />
 }
 
-function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholder, showCards = true, showAll = false }: CardSearchProps & DDProps & { imgPath: string }) { 
+function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, showCards = true, showAll = false }: CardSearchProps & DDProps & { path: string }) { 
   const [searchedItems, setSearchedItems] = useState<SearchItem[]>([]);
   const [selectedItems, setSelectedItems] = useState<Option[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -157,7 +158,7 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholde
         {showCards && 
           <div className={`cards ${showAll ? 'asFull' : ''}`}>
             {map(orderBy(searchedItems.length ? searchedItems : items, 'name', 'asc'), (item, i) => (
-              <Card onClick={handleSelect} key={`${item._id}-${i}`} imgPath={imgPath} {...item} />
+              <Link key={`${item._id}-${i}`} to={`${path}/${getShortName(item)}`}><Card onClick={handleSelect} path={path} {...item} /></Link>
             ))}
           </div>
         }

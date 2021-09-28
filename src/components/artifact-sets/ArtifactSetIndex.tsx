@@ -1,4 +1,4 @@
-import './ArtifactSetTable.css';
+import './ArtifactSetIndex.css';
 
 import { filter, includes, intersection, isEmpty, map } from 'lodash';
 import React, { useState } from 'react';
@@ -10,7 +10,7 @@ import { useAppSelector } from '../hooks/useRedux';
 import StatsTable from '../stats/StatsTable';
 import Loader from '../ui/Loader';
 
-function ArtifactSetTable() { 
+function ArtifactSetIndex() { 
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const artifactSetStats = useApi(`/artifacts/top-artifactsets.json`)
   const [selectedSets, setSelectedSets] = useState<string[]>([])
@@ -31,4 +31,4 @@ function ArtifactSetTable() {
   )
 }
 
-export default ArtifactSetTable
+export default ArtifactSetIndex

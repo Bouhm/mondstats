@@ -17,10 +17,11 @@ type HorizontalBarChart = {
   color: string, 
   total: number,
   db: any,
-  data: IBarChartData[]
+  data: IBarChartData[],
+  path: string
 }
 
-function HorizontalBarChart({ data, db, total, color }: HorizontalBarChart) {
+function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart) {
   return <div className="horizontal-barchart-container">
     {map(data, ({ _id, count }, i) => {
       const popularity = getPercentage(count, total);
@@ -30,7 +31,7 @@ function HorizontalBarChart({ data, db, total, color }: HorizontalBarChart) {
         <div key={`${_id}-${count}-${i}`} className="horizontal-barchart">
           <Tooltip content={`${name}: ${count}`}>
             <div className={`bar-card`}>
-              <LLImage className={`rarity-${rarity}`} src={`/assets/weapons/${shortenId(_id)}.webp`} alt={name} />
+              <LLImage className={`rarity-${rarity}`} src={`/assets/${path}/${shortenId(_id)}.webp`} alt={name} />
               <div className="bar-card-detail">
                 <div className="bar-card-name">
                   {name}

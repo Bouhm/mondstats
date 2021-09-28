@@ -1,0 +1,11 @@
+.weapon-page {
+  display: flex;
+  
+  .weapon-characters {
+    flex: 3
+  }
+
+  .weapon-detail {
+    flex: 2
+  }
+}

@@ -1,4 +1,4 @@
-import './CharacterTable.css';
+import './CharacterIndex.css';
 
 import { filter, includes, isEmpty, map } from 'lodash';
 import React, { useState } from 'react';
@@ -10,7 +10,7 @@ import { useAppSelector } from '../hooks/useRedux';
 import StatsTable from '../stats/StatsTable';
 import Loader from '../ui/Loader';
 
-function CharacterTable() { 
+function CharacterIndex() { 
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const characterStats = useApi(`/characters/top-characters.json`)
   const [selectedCharacters, setSelectedCharacters] = useState<string[]>([])
@@ -30,4 +30,4 @@ function CharacterTable() {
   )
 }
 
-export default CharacterTable
+export default CharacterIndex

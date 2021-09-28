@@ -1,4 +1,4 @@
-import './WeaponPage.css';
+import './ArtifactSetPage.css';
 
 import { find, isEmpty, orderBy, reduce, take } from 'lodash';
 import React, { useState } from 'react';
@@ -13,30 +13,29 @@ import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 
-function WeaponPage() { 
+function ArtifactSetPage() { 
   const { shortName } = useParams<{ shortName: string }>();
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const allWeaponStats = useApi(`/weapons/weapon-stats.json`)
   const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const weapon = find(weaponDb, weapon => getShortName(weapon) === shortName)
-  const max = 10;
 
   if (!weapon) return null;
  
   const weaponStats = find(allWeaponStats, { _id: weapon!._id });
+  const charsTotal = reduce(weaponStats.characters, (sum, curr) => sum + curr.count, 0)
+  const max = 10;
 
   if (!weaponStats || isEmpty(weaponDb) || isEmpty(weaponStats)) return <Loader />
 
-  const charsTotal = reduce(weaponStats.characters, (sum, curr) => sum + curr.count, 0)
-  
   return (
     <div className="weapon-page">
       <div className="weapon-characters">
         <h1>Characters</h1>
         <HorizontalBarChart data={take(orderBy(weaponStats.characters, 'count', 'desc'), expanded ? max : 5) as unknown as IBarChartData[]} db={characterDb} path='characters' total={charsTotal} color={''} />
         <br />
-        {weaponStats.characters > 5 && (
+        {weaponStats.length > 5 && (
           <Button className="weapons-show-more" onClick={handleExpand}>
             {!expanded ? <>Show more <ChevronDown size={20} color={"#202020"} /></> : <>Show less <ChevronUp size={20} color={"#202020"} /></>}
           </Button>
@@ -51,4 +50,4 @@ function WeaponPage() {
   )
 }
 
-export default WeaponPage
+export default ArtifactSetPage

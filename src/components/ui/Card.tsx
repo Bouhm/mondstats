@@ -9,9 +9,9 @@ import LLImage from './LLImage';
 type CardProps = { 
   onClick?: (_id: string)=>void,
   faded?: boolean 
-} & SearchItem & {imgPath: string}
+} & SearchItem & {path: string}
 
-function Card({ _id, rarity, name, element, imgPath, onClick, faded=false }: CardProps) {
+function Card({ _id, rarity, name, element, path, onClick, faded=false }: CardProps) {
   let classes = "card";
   classes += ` rarity-${rarity}`;
 
@@ -28,7 +28,7 @@ function Card({ _id, rarity, name, element, imgPath, onClick, faded=false }: Car
       <div className={classes}>
         <div className="card-image">
           {element && <LLImage className="card-element" src={`/assets/elements/${element}.webp`} />}
-          <LLImage className="card-thumb" src={`/assets/${imgPath}/${name.startsWith('Traveler ') ? 'traveler' : shortenId(_id)}.webp`} alt={`${name}-thumb`} />
+          <LLImage className="card-thumb" src={`/assets/${path}/${name.startsWith('Traveler ') ? 'traveler' : shortenId(_id)}.webp`} alt={`${name}-thumb`} />
           <div className="card-name">
             {name.length > 22 ? name.slice(0, 22) + '…' : name}
           </div>

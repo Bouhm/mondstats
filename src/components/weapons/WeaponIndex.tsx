@@ -1,4 +1,4 @@
-import './WeaponTable.css';
+import './WeaponIndex.css';
 
 import { filter, includes, isEmpty } from 'lodash';
 import React, { useState } from 'react';
@@ -10,7 +10,7 @@ import useWeaponSearch from '../hooks/useWeaponSearch';
 import StatsTable from '../stats/StatsTable';
 import Loader from '../ui/Loader';
 
-function WeaponTable() { 
+function WeaponIndex() { 
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const weaponStats = useApi(`/weapons/top-weapons.json`)
   const [selectedWeapons, setSelectedWeapons] = useState<string[]>([])
@@ -31,4 +31,4 @@ function WeaponTable() {
   )
 }
 
-export default WeaponTable
+export default WeaponIndex
