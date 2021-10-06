@@ -45,6 +45,9 @@ function WeaponPage() {
       <div className="weapon-detail">
         <div className="weapon-info">
           <img src={`/assets/weapons/${shortenId(weapon._id)}.webp`} />
+          <div>Base Atk: {weapon.baseAtk}</div>
+          <div>Substat: {weapon.subStat}</div>
+          <div>Effect: {weapon.effect}</div>
         </div>
       </div>
     </div>

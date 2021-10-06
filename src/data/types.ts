@@ -17,7 +17,10 @@ export interface IWeaponData {
   oid: number,
   name: string,
   rarity: number,
-  effect: string
+  baseAtk: number,
+  subStat: string, 
+  subValue: string,
+  effect: string,
 }
 
 export interface IArtifactData {

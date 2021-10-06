@@ -34,8 +34,9 @@ import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 import Tabs, { useTabs } from '../ui/Tabs';
 import AbyssFloor from './AbyssFloor';
-import abyssFloors from './abyssFloors.json';
-import abyssTopTeams from './top-teams.json';
+
+// import abyssFloors from './abyssFloors.json';
+// import abyssTopTeams from './top-teams.json';
 
 const _compareFloor = (f1: Option, f2: Option) => {
   if (f1.value.startsWith('_') || f2.value.startsWith('_')) {
@@ -74,17 +75,16 @@ function AbyssPage() {
   const [ selectedCharacters, setSelectedCharacters] = useState<string[]>([])
   
   const { filters, handleFilterChange } = useFilters(['f2p', 'max5']);
-  // const abyssTopTeams = useApi('abyss/top-teams.json');
+  const abyssTopTeams = useApi('abyss/top-teams.json');
   const { activeTabIdx, onTabChange } = useTabs();
 
   useEffect(() => {
     async function fetchAbyssData() {
       await Promise.all(map(filter(selectedStages, stage => stage.value !== "ALL"), floor => {
-        return abyssFloors[floor.value]
+        // return abyssFloors[floor.value]
 
         const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
         if (floorIdx < 0) {
-          return 
           // return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floor.value}.json`, {
           return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floor.value}.json`, {
             headers: { 'accept': 'application/vnd.github.v3.raw+json' },
