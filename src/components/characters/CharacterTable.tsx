@@ -25,7 +25,7 @@ function CharacterTable() {
   return (
     <div className="character-table-container">
       <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handleSelect} />
-      <StatsTable.Characters data={isEmpty(selectedCharacters) ? characterStats : filter(characterStats, character => includes(selectedCharacters, character._id))} />
+      <StatsTable.Characters data={isEmpty(selectedCharacters) ? characterStats.characters : filter(characterStats.characters, character => includes(selectedCharacters, character._id))} />
     </div>
   )
 }

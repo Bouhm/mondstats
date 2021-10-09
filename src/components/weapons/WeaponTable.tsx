@@ -18,7 +18,7 @@ function WeaponTable() {
 
   if (isEmpty(weaponDb) || isEmpty(weaponStats)) return <Loader />
 
-  const { searchWeapons } = useWeaponSearch(weaponDb, weaponStats);
+  const { searchWeapons } = useWeaponSearch(weaponDb, weaponStats.weapons);
 
   const handleSelect = (selectedIds: string[]) => {
     setSelectedWeapons(selectedIds)
@@ -27,7 +27,7 @@ function WeaponTable() {
   return (
     <div className="weapon-table-container">
       <CardSearch.Weapons items={filter(searchWeapons, weapon => !includes(selectedWeapons, weapon._id))} onSelect={handleSelect} />
-      <StatsTable.Weapons data={isEmpty(selectedWeapons) ? weaponStats : filter(weaponStats, weapon => includes(selectedWeapons, weapon._id))} />
+      <StatsTable.Weapons data={isEmpty(selectedWeapons) ? weaponStats.weapons : filter(weaponStats.weapons, weapon => includes(selectedWeapons, weapon._id))} />
     </div>
   )
 }
