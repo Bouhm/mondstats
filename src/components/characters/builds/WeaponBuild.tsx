@@ -31,18 +31,20 @@ function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { fi
     let count5 = 0;
 
     for (let i = 0; i < orderedWeapons.length; i++) {
-      if (weaponDb[orderedWeapons[i]._id].rarity > 4) {
-        count5++;      
+      if (weaponDb[orderedWeapons[i]._id]) {
+        if (weaponDb[orderedWeapons[i]._id].rarity > 4) {
+          count5++;      
+          
+          if (count5 > filters.max5!.value) continue;
+        }
+  
+        if (includes(BP_WEAPONS, weaponDb[orderedWeapons[i]._id].oid)) continue;
+  
+        weapons.push(orderedWeapons[i]);
         
-        if (count5 > filters.max5!.value) continue;
-      }
-
-      if (includes(BP_WEAPONS, weaponDb[orderedWeapons[i]._id].oid)) continue;
-
-      weapons.push(orderedWeapons[i]);
-      
-      if (weapons.length >= max) {
-        break;
+        if (weapons.length >= max) {
+          break;
+        }
       }
     }
 
