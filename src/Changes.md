@@ -1,3 +1,7 @@
+## dev build 9.29.21
+
+- Adjusted abyss team aggregation algorithm to include more teams and show more logical flex options
+
 ## dev build 9.17.21
 
 - Improved abyss team aggregation to show multiple flex options
