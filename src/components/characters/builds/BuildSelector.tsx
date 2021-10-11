@@ -2,7 +2,7 @@ import './BuildSelector.css';
 import './Weapon.css';
 
 import AmberSad from '/assets/amberSad.webp';
-import _, { forEach, map, orderBy } from 'lodash';
+import _, { every, filter, forEach, map, orderBy } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
@@ -28,7 +28,7 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
 
-  const filteredBuilds = orderBy(builds, 'count', 'desc');
+  const filteredBuilds = orderBy(filter(builds, (build: IBuild) => every(build.artifacts, set => !!artifactSetDb[set._id])), 'count', 'desc');
   let labels: string[] = [];
   let data: number[] = [];
   let colors: string[] = [];
