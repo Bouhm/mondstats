@@ -35,6 +35,10 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
 
   forEach(filteredBuilds, build => {
     const label = getArtifactSetNames(build.artifacts, artifactSetDb)
+    if (!label) {
+      console.log(build)
+      return;
+    }
     
     labels.push(label);
     data.push(build.count);

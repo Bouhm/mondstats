@@ -43,6 +43,7 @@ function WeaponPage() {
         )}
       </div>
       <div className="weapon-detail">
+        <h1>Weapon</h1>
         <div className="weapon-info">
           <img src={`/assets/weapons/${shortenId(weapon._id)}.webp`} />
           <div>Base Atk: {weapon.baseAtk}</div>

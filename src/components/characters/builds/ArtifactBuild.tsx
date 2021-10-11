@@ -19,6 +19,7 @@ function ArtifactBuild({ artifacts }: ArtifactBuildProps) {
       <h1>Artifacts</h1>
       {_.map(artifacts, ({ _id, activation_number }, i) => {
         const set = artifactSetDb[_id]
+        if (!set) return null;
 
         return <ArtifactSetInfo key={`${_id}-${i}`} {...set} activation={activation_number} />
       })}

@@ -11,17 +11,22 @@ export function getArtifactSetNames(artifacts: IArtifactSet[], db: IArtifactSetD
   let label = "";
 
   forEach(artifacts, (set, i) => {
-    let name = db[set._id].name;
-    if (name.includes(" ")) {
-      if (name.split(" ")[0] === "The") {
-        name = name.split(" ")[1]
-      } else {
-        name = name.split(" ")[0]
-      }
-    }
+    let dbSet = db[set._id]
 
-    label += set.activation_number + "-" + name
-    if (i !== artifacts.length - 1) label += " "
+    if (dbSet) {
+      let name = dbSet.name;
+      
+      if (name.includes(" ")) {
+        if (name.split(" ")[0] === "The") {
+          name = name.split(" ")[1]
+        } else {
+          name = name.split(" ")[0]
+        }
+      }
+  
+      label += set.activation_number + "-" + name
+      if (i !== artifacts.length - 1) label += " "
+    }
   })
 
   return label;

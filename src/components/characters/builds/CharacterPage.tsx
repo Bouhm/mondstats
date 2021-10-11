@@ -67,11 +67,11 @@ function CharacterPage() {
 
   useEffect(() => {
     if (_characterStats) {
-      const charStats = find(_characterStats, { _id: charId });
+      const charStats = find(_characterStats.characters, { _id: charId });
       setCharacterStats(charStats)
       let statTotals: ITotals = {} as ITotals;
-      statTotals.total = _characterStats.reduce((sum, curr) => sum + curr.total, 0)
-      statTotals.abyssCount = _characterStats.reduce((sum, curr) => sum + (curr.abyssCount || 0), 0)
+      statTotals.total = _characterStats.characters.reduce((sum, curr) => sum + curr.total, 0)
+      statTotals.abyssCount = _characterStats.characters.reduce((sum, curr) => sum + (curr.abyssCount || 0), 0)
       setTotals(statTotals);
     }
   }, [_characterStats, charId])
@@ -101,7 +101,7 @@ function CharacterPage() {
               total={characterBuilds.total}
               color={elementColor}
               filters={filters}
-            />
+            /> 
             {character.rarity < 100 &&
               <Constellations constellations={characterBuilds.constellations} color={elementColor} total={reduce(characterBuilds.constellations, (sum, curr) => sum += curr, 0)} />
             }
