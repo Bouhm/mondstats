@@ -1,3 +1,11 @@
+## dev build 10.10.21
+
+- Spending a lot of time on the backend for the following changes:
+  - Revamping weapons/artifact set data to show more statistics -- new data aggregation
+  - Working on performing data aggregation on the cloud instead of client-side aggregation
+
+*I'm currently taking online courses to learn the aggregation framework. During this period additional features to the site will be halted. Thank you for your patience.
+
 ## dev build 9.29.21
 
 - Adjusted abyss team aggregation algorithm to include more teams and show more logical flex options

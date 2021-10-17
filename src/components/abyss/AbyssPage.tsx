@@ -4,7 +4,6 @@ import axios from 'axios';
 import {
   clone,
   cloneDeep,
-  cond,
   countBy,
   difference,
   filter,
@@ -25,7 +24,6 @@ import Team from '../characters/Team';
 import Button from '../controls/Button';
 import CardSearch from '../controls/CardSearch';
 import { Option } from '../controls/Dropdown';
-import F2P from '../filters/FiveStarFilter';
 import useApi from '../hooks/useApi';
 import useCharacterSearch from '../hooks/useCharacterSearch';
 import useFilters from '../hooks/useFilters';
@@ -85,8 +83,8 @@ function AbyssPage() {
 
         const floorIdx = findIndex(AbyssData, { floor_level: floor.value })
         if (floorIdx < 0) {
-          // return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floor.value}.json`, {
-          return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floor.value}.json`, {
+          return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floor.value}.json`, {
+          // return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floor.value}.json`, {
             headers: { 'accept': 'application/vnd.github.v3.raw+json' },
           }).then(res => res.data)
         } else {

@@ -6,6 +6,15 @@
   }
 
   .weapon-detail {
-    flex: 2
+    flex: 2;
+    
+    .weapon-info {
+      display: flex;
+      flex-flow: column;
+
+      .weapon-profile {
+        display: flex;
+      }
+    }
   }
 }

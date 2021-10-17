@@ -44,8 +44,8 @@ function CharacterPage() {
   const _characterMainBuilds = useApi(`/characters/mains/${shortName}.json`);
   const [characterBuilds, setCharacterBuilds] = useState(_characterBuilds)
   const [characterStats, setCharacterStats] = useState<any>({})
-  const _characterStats = useApi(`/characters/top-characters.json`)
-  const [totals, setTotals] = useState<ITotals|{}>({})
+  const _characterStats = useApi(`/characters/stats/top-characters.json`)
+  const _characterTotals = useApi(`/characters/stats/character-totals.json`)
 
   useEffect(() => {
     if (!isEmpty(characterDb)) {
@@ -67,16 +67,12 @@ function CharacterPage() {
 
   useEffect(() => {
     if (_characterStats) {
-      const charStats = find(_characterStats.characters, { _id: charId });
+      const charStats = find(_characterStats, { _id: charId });
       setCharacterStats(charStats)
-      let statTotals: ITotals = {} as ITotals;
-      statTotals.total = _characterStats.characters.reduce((sum, curr) => sum + curr.total, 0)
-      statTotals.abyssCount = _characterStats.characters.reduce((sum, curr) => sum + (curr.abyssCount || 0), 0)
-      setTotals(statTotals);
     }
   }, [_characterStats, charId])
 
-  if (!characterDb || !characterIdMap || !character) {
+  if (!characterDb || !characterIdMap || !character || !characterStats) {
     return <div>
       <Loader />
     </div>
@@ -108,17 +104,22 @@ function CharacterPage() {
           </>
         }
         <div className="character-stats-container">
-            {map(['total', 'abyssCount'], (stat: string) => {
-              return <div key={stat} className="character-stats-chart">
-                <Chart.Donut
-                  data={[characterStats[stat], totals[stat] - characterStats[stat]]}
-                  colors={[elementColor, ElementColors.none]}
-                  max={totals[stat]}
-                  showScale={false}
-                  semi={true}
-                />
-              </div>
-            })}
+          <div className="character-stats-chart">
+            <Chart.Donut
+              data={[(characterStats.abyssCount * 100/_characterTotals.abyssTotal).toFixed(2), (100-(characterStats.abyssCount * 100/_characterTotals.abyssTotal)).toFixed(2)]}
+              colors={[elementColor, ElementColors.none]}
+              showScale={false}
+              semi={true}
+            />
+          </div>
+          <div className="character-stats-chart">
+            <Chart.Donut
+              data={[(characterStats.abyssWins * 100/characterStats.abyssCount).toFixed(2), (100-(characterStats.abyssWins * 100/characterStats.abyssCount)).toFixed(2)]}
+              colors={[elementColor, ElementColors.none]}
+              showScale={false}
+              semi={true}
+            />
+          </div>
         </div>
       </div>
     </>
