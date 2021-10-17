@@ -4,7 +4,7 @@
   - Revamping weapons/artifact set data to show more statistics -- new data aggregation
   - Working on performing data aggregation on the cloud instead of the client
 
-*I'm currently taking online courses to learn the aggregation framework for my database service. During this period additional features to the site will be halted until all backend optimizations and new data aggregation are complete.
+*I'm currently learning the aggregation framework for my database service. During this period additional features to the site will be halted until all backend optimizations and new data aggregation are complete.
 
 ## dev build 9.29.21
 
