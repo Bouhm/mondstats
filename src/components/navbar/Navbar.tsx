@@ -32,8 +32,6 @@ function Navbar() {
         <div className="nav-logo">
           <Link to="/"><LLImage src={Logo} alt="logo" /></Link>
         </div>
-        <div className="nav-announcement">
-        </div>
         <div className="nav-menu">
           {_.map(Navtabs, tab => {
             return <Link key={tab.name} to={tab.linkto}><div className="nav-tab">{tab.name}</div></Link>

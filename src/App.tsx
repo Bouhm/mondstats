@@ -44,8 +44,8 @@ function App() {
   const notice = <p>
     This site shows the most <i>used</i> builds and teams which don't necessarily mean the <i>best</i>.
     <br/><br />
-    Please also be mindful of other players' investment in the game which 
-    may not be reflective of the objective value of a certain character or item.
+    Please be mindful of other players' investment in the game which 
+    may not reflect the objective value of a character or item.
   </p>
 
   useEffect(() => {

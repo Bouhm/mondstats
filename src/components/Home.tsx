@@ -6,9 +6,9 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { numberWithCommas } from '../scripts/util';
+import Banner from './characters/Banner';
 import useApi from './hooks/useApi';
 import LLImage from './ui/LLImage';
-import Banner from './characters/Banner';
 
 interface IFeatured {
   player_total: number,
@@ -34,7 +34,11 @@ function Home() {
               and <span className="home-data-number">{numberWithCommas(featured.character_total)} </span> characters total
             </div>
           </div>
-          <Banner characters={featured.banner} />
+          <div className="home-announcement">
+            Updates are temporarily paused while undergoing data aggregation optimization.
+            Thank you for your patience.
+          </div>
+          {/* <Banner characters={featured.banner} /> */}
         </>
       }
     </div>

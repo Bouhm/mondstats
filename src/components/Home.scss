@@ -34,6 +34,13 @@
       font-weight: 600;
     }
   }
+
+  .home-announcement {
+    display: flex;
+    justify-content: center;
+    color: white;
+    padding: 3rem;
+  }
 }
 
 @media (max-width: 544px) {
