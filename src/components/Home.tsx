@@ -35,7 +35,7 @@ function Home() {
             </div>
           </div>
           <div className="home-announcement">
-            Updates are temporarily paused while reworking data aggregation for optimization.
+            Updates are temporarily paused while reworking data aggregation for optimization and improved analytics.
             Thank you for your patience.
           </div>
           {/* <Banner characters={featured.banner} /> */}
