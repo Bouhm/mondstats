@@ -18,6 +18,7 @@ function ArtifactSetTable() {
   if (isEmpty(artifactSetDb) || isEmpty(artifactSetStats)) return <Loader />
 
   const { searchArtifactSets } = useArtifactSetSearch(artifactSetDb, artifactSetStats.artifactSets);
+  console.log(searchArtifactSets)
 
   const handleSelect = (selectedIds: string[]) => {
     setSelectedSets(selectedIds)
@@ -25,7 +26,7 @@ function ArtifactSetTable() {
     
   return (
     <div className="artifact-set-stats-container">
-      <CardSearch.ArtifactSets items={filter(searchArtifactSets, set => !includes(selectedSets, set._id))} onSelect={handleSelect} />
+      <CardSearch.ArtifactSets items={filter(searchArtifactSets, set => set && !includes(selectedSets, set._id))} onSelect={handleSelect} />
       <StatsTable.ArtifactSets data={isEmpty(selectedSets) ? artifactSetStats.artifactSets : filter(artifactSetStats.artifactSets, set => intersection(selectedSets, map(set.artifacts, artifact => artifact._id)).length > 0)} />
     </div>
   )
