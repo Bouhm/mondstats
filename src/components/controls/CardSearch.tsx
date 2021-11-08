@@ -11,7 +11,7 @@ import Card from '../ui/Card';
 import LLImage from '../ui/LLImage';
 
 type CardSearchProps = {
-  items: SearchItem[] | any
+  items: SearchItem[]
   onSelect: (selectedIds: string[]) => void
   showCards?: boolean,
   placeholder?: string
