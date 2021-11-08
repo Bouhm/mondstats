@@ -99,8 +99,8 @@ function App() {
               <Route path="/changelog" component={Changelog} />
               <Route path="/abyss" component={Abyss} />
               <Route path="/characters" component={CharacterTable} />
-              <Route path="/artifacts" component={UnderConstruction} />
-              <Route path="/weapons" component={UnderConstruction} />
+              <Route path="/artifacts" component={ArtifactSetTable} />
+              <Route path="/weapons" component={WeaponTable} />
               <Route path="/builds/:shortName" component={CharacterBuild} />
               <Route path="/builds" component={BuildSearch} />
             </Switch>
