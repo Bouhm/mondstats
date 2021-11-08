@@ -34,11 +34,11 @@ function Home() {
               and <span className="home-data-number">{numberWithCommas(featured.character_total)} </span> characters total
             </div>
           </div>
+          <Banner characters={featured.banner} />
           <div className="home-announcement">
             Updates are temporarily paused while reworking data aggregation for optimization and improved analytics.
             Thank you for your patience.
           </div>
-          {/* <Banner characters={featured.banner} /> */}
         </>
       }
     </div>
