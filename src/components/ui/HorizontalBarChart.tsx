@@ -13,7 +13,8 @@ export interface IBarChartData {
   _id: string,
   count: number,
   avgStar?: number,
-  winCount?: number
+  winCount?: number,
+  battleCount : number
 }
 
 type HorizontalBarChart = {
@@ -26,7 +27,7 @@ type HorizontalBarChart = {
 
 function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart) {
   return <div className="horizontal-barchart-container">
-    {map(data, ({ _id, count, avgStar, winCount }, i) => {
+    {map(data, ({ _id, count, avgStar, winCount, battleCount }, i) => {
       const popularity = getPercentage(count, total);
       const { name, rarity } = db[_id];
 
@@ -50,9 +51,9 @@ function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart
               <>
                 <Divider />
                 <div className='bar-abyss-stats'>
-                  <Tooltip content={`Average Abyss Star: ${avgStar.toFixed(2)}`}>
+                  <Tooltip content={`Average Abyss Stars`}>
                     <div className={`bar-abyss-avgStar`}>
-                    <span className='bar-abyss-stat-title'>Avg Clear</span><br/>
+                    <div className='bar-abyss-stat-title'>Avg Clear</div><br/>
                       ★{avgStar?.toFixed(2)}
                     </div>
                   </Tooltip>
@@ -64,10 +65,10 @@ function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart
               <>
                 <Divider />
                 <div className='bar-abyss-stats'>
-                  <Tooltip content={`Abyss 3-Star Clears: ${winCount}`}>
+                  <Tooltip content={`3-Star Abyss Clears: ${winCount}`}>
                     <div className={`bar-abyss-winCount`}>
-                      <span className='bar-abyss-stat-title'>Win Rate</span><br/>
-                      {winCount}
+                      <div className='bar-abyss-stat-title'>Win Rate</div><br/>
+                      {getPercentage(winCount, battleCount)}%
                     </div>
                   </Tooltip>
                 </div>

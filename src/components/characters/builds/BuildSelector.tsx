@@ -1,4 +1,4 @@
-import './BuildSelector.css';
+import './BuildSelector.scss';
 
 import AmberSad from '/assets/amberSad.webp';
 import _, { every, filter, forEach, map, orderBy } from 'lodash';

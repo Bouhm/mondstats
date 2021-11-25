@@ -55,7 +55,7 @@ function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { fi
   return (
     <div className="weapons-list-container">
       <h1>Weapons</h1>
-      <HorizontalBarChart data={take(filteredWeapons, expanded ? max : 5) as unknown as IBarChartData[]} path='weapons' db={weaponDb} total={total} color={color} />
+      <HorizontalBarChart data={take(filteredWeapons, expanded ? max : 5) as unknown as IBarChartData[]} path='weapons' db={weaponDb} total={total} color={color} showAbyssStats={!!filters.abyss}/>
       <br />
       {filteredWeapons.length > 5 && (
         <Button className="weapons-show-more" onClick={handleExpand}>
