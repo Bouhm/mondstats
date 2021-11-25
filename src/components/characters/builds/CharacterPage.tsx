@@ -124,22 +124,26 @@ function CharacterPage() {
           </>
         }
         <div className="character-stats-container">
-          {/* <div className="character-stats-chart">
-            <Chart.Donut
-              data={[]}
+          <div className="character-stats-chart">
+            <Chart.Odometer
+              data={[characterBuilds.abyssCount]}
+              labels={['Abyss Battle Count']}
               colors={[elementColor, ElementColors.none]}
               showScale={false}
-              semi={true}
+              semi={true} 
+              max={characterBuilds.total}
             />
           </div>
           <div className="character-stats-chart">
-            <Chart.Donut
-              data={[]}
+            <Chart.Odometer
+              data={[characterBuilds.winCount]}
+              labels={['Win Count']}
               colors={[elementColor, ElementColors.none]}
               showScale={false}
               semi={true}
+              max={characterBuilds.abyssCount}
             />
-          </div> */}
+          </div>
         </div>
       </div>
     </>

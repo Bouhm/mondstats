@@ -1,7 +1,7 @@
 .tooltip-container {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.8rem;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0, 0, 0, 0.8);
   color: white;
   border: none;
   border-radius: 6px;
@@ -9,11 +9,14 @@
 }
 
 .tooltip-arrow {
+  position: relative !important;
+  top: -5px !important;
+
   &::before {
-    border-color: transparent transparent rgba(0,0,0,0.8) transparent !important;
+    border-color: transparent transparent rgba(0, 0, 0, 0.6) transparent !important;
   }
 
   &::after {
-    border-color: transparent transparent rgba(0,0,0,0.8) transparent !important;
+    border-color: transparent transparent rgba(0, 0, 0, 0.6) transparent !important;
   }
 }
