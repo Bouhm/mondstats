@@ -46,30 +46,40 @@ function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart
                   </div>
                 </div>
               </div>
-            </Tooltip>
-            {avgStar && winCount && 
-              <>
-                <Divider />
-                <div className='bar-abyss-stats-container'>
-                  <div className='bar-abyss-stats'>
-                    <Tooltip content={`Average Abyss Stars`}>
-                      <div className={`bar-abyss-avgStar`}>
+            </Tooltip>  
+            <Divider />
+            <div className='bar-abyss-stats-container'>
+              <div className='bar-abyss-stats'>
+                {avgStar ? 
+                  <Tooltip content={`Average Abyss Stars`}>
+                    <div className={`bar-abyss-avgStar`}>
                       <div className='bar-abyss-stat-title'>Avg Star</div><br/>
-                        ★{avgStar?.toFixed(2)}
-                      </div>
-                    </Tooltip>
-                  </div>
-                  <div className='bar-abyss-stats'>
-                    <Tooltip content={`3-Star Abyss Clears: ${winCount}`}>
-                      <div className={`bar-abyss-winCount`}>
-                        <div className='bar-abyss-stat-title'>Win Rate</div><br/>
-                        {getPercentage(winCount, battleCount)}%
-                      </div>
-                    </Tooltip>
-                  </div>
+                      ★{avgStar?.toFixed(2)}
+                    </div>
+                  </Tooltip>
+                  :
+                  <div className={`bar-abyss-avgStar`}>
+                    <div className='bar-abyss-stat-title'>Avg Star</div><br/>
+                    N/A
                 </div>
-              </>
-            }
+                }
+              </div>
+              <div className='bar-abyss-stats'>
+                {winCount ? 
+                  <Tooltip content={`3-Star Abyss Clears: ${winCount}`}>
+                    <div className={`bar-abyss-winCount`}>
+                      <div className='bar-abyss-stat-title'>Win Rate</div><br/>
+                      {getPercentage(winCount, battleCount)}%
+                    </div>
+                  </Tooltip>
+                  :
+                  <div className={`bar-abyss-winCount`}>
+                    <div className='bar-abyss-stat-title'>Win Rate</div><br/>
+                    N/A
+                  </div>
+                }
+              </div>
+            </div>
           </div>
           <div className="horizontal-barchart-bar">
             <div  

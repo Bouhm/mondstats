@@ -5,14 +5,14 @@
 
 .team-stats {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.8fr 0.8fr;
   background-color: #e9e5dc;
   border-radius: 8px;
   overflow: hidden;
 
   &.asExpandable {
     border-radius: 8px 8px 0 0;
-    
+
     &:hover {
       cursor: pointer;
     }
@@ -33,17 +33,18 @@
 
 .team-flex-container {
   display: flex;
-  justify-content: center;  
+  justify-content: center;
   align-items: center;
   flex-flow: column;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 0 0 8px 8px;
 
   .team-flex {
     display: flex;
     padding: 0.5rem;
 
-    div > div > img, svg {
+    div > div > img,
+    svg {
       height: 50px;
     }
 
@@ -57,7 +58,7 @@
     display: flex;
     justify-content: center;
     padding-bottom: 0.3rem;
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgba(255, 255, 255, 0.4);
     border-radius: 0 0 8px 8px;
 
     &:hover {
@@ -66,18 +67,35 @@
   }
 }
 
+.team-abyss-stats {
+  color: rgb(73, 83, 102);
+  margin: 0.3rem 0.3rem 0 0;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  font-size: 2vw;
+  justify-content: center;
+}
+
+.team-abyss-stat-title {
+  text-transform: uppercase;
+  color: rgb(73, 83, 102);
+  text-align: center;
+  font-size: 1.4vw;
+}
+
 .team-popularity {
   position: relative;
   text-align: center;
   background-color: #e9e5dc;
-  color: white;
   display: flex;
-  flex-flow: column;
-  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0 0.5rem 0.5rem;
 
   .team-popularity-pct {
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-    font-size: 4.8vw;
+    width: 11vw;
+    font-size: 4.4vw;
   }
 
   .team-popularity-count {
@@ -89,15 +107,27 @@
   }
 }
 
+@media (max-width: 747px) {
+}
+
 @media (min-width: 647px) {
   .team-popularity {
     .team-popularity-pct {
       font-size: 2.1rem;
+      width: 90px;
     }
 
     .team-popularity-count {
       font-size: 1.4rem;
     }
+  }
+
+  .team-abyss-stats {
+    font-size: 0.9rem;
+  }
+
+  .team-abyss-stat-title {
+    font-size: 0.6rem;
   }
 }
 
@@ -116,10 +146,11 @@
     .team-flex {
       padding: 0.3rem;
 
-      div > div > img, svg {
+      div > div > img,
+      svg {
         height: 30px;
       }
-  
+
       svg {
         margin: 0 0.2rem;
       }

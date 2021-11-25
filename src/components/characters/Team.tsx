@@ -5,13 +5,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { IFlexChar, IParty } from '../../data/types';
-import { getShortName } from '../../scripts/util';
+import { getPercentage, getShortName } from '../../scripts/util';
 import useExpand from '../hooks/useExpand';
 import { useAppSelector } from '../hooks/useRedux';
 import { ChevronDown, ChevronUp, Exchange } from '../ui/Icons';
 import Tooltip from '../ui/Tooltip';
 import CharacterCount from './CharacterCount';
 import CharacterTile from './CharacterTile';
+import Divider from '../ui/Divider';
 
 type TeamProps = {
   team: string[],
@@ -31,6 +32,9 @@ function Team({ team, percent, count, flex = [] }: TeamProps) {
     tooltipContent = (flex[0].length > 1) ? `${map(team, charId => characterDb[charId].name).join(', ')}*: ${count}` : `${map(team, charId => characterDb[charId].name).join(', ')}: ${count}`
   }
 
+  const winCount = 250;
+  const battleCount = 275;
+  const avgStar = 2.85;
 
   return (
     <div className="team-container">
@@ -41,7 +45,23 @@ function Team({ team, percent, count, flex = [] }: TeamProps) {
           ))}
           <div className="team-popularity">
             <div className="team-popularity-pct">{percent}</div>
-            {/* <div className="team-popularity-count">{count}</div> */}
+            <Divider />
+          </div>
+          <div className="team-abyss-stats">
+            <Tooltip content={`3-Star Abyss Clears: ${winCount}`}>
+              <div className={`team-abyss-winCount`}>
+                <div className='team-abyss-stat-title'>Win Rate</div><br/>
+                {getPercentage(winCount, battleCount)}%
+              </div>
+            </Tooltip>
+          </div>
+          <div className="team-abyss-stats">
+            <Tooltip content={`Average Abyss Stars`}>
+              <div className={`team-abyss-avgStar`}>
+                <div className='team-abyss-stat-title'>Avg Star</div><br/>
+                ★{avgStar?.toFixed(2)}
+              </div>
+            </Tooltip>
           </div>
         </div>
       </Tooltip>
