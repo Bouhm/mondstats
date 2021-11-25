@@ -1,6 +1,6 @@
-import './CharacterPage.css';
+  import './CharacterPage.css';
 
-import { find, isEmpty, map, reduce, take } from 'lodash';
+import { find, forEach, isEmpty, map, random, reduce, take, cloneDeep } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Sticky from 'react-stickynode';
@@ -18,6 +18,7 @@ import Empty from '../../ui/Empty';
 import Loader from '../../ui/Loader';
 import BuildSelector from './BuildSelector';
 import Constellations from './Constellations';
+import data from './albedo.json';
 
 interface ITotals { 
   total: number,
@@ -44,8 +45,27 @@ function CharacterPage() {
   const _characterMainBuilds = useApi(`/characters/mains/${shortName}.json`);
   const [characterBuilds, setCharacterBuilds] = useState(_characterBuilds)
   const [characterStats, setCharacterStats] = useState<any>({})
-  const _characterStats = useApi(`/characters/stats/top-characters.json`)
-  const _characterTotals = useApi(`/characters/stats/character-totals.json`)
+  // const _characterStats = useApi(`/characters/stats/top-characters.json`)
+  // const _characterTotals = useApi(`/characters/stats/character-totals.json`)
+
+  useEffect(() => {
+    let newData: any = cloneDeep(data);
+    newData.builds.forEach((build: any) => {
+      build.count *= 12;  
+      build.avgStar = 2 + Math.random();
+      build.battleCount = build.count - random(10, Math.floor(build.count/10));
+      build.winCount = build.battleCount - random(3, Math.floor(build.battleCount/10));    
+
+      build.weapons.forEach((weapon: any) => {
+        weapon.count *= 12;
+        weapon.avgStar = 2 + Math.random();
+        weapon.battleCount = weapon.count - random(10, Math.floor(weapon.count/10));
+        weapon.winCount = weapon.battleCount - random(3, Math.floor(weapon.battleCount/10));    
+      })
+    })
+
+    setCharacterBuilds(newData)
+  }, [])
 
   useEffect(() => {
     if (!isEmpty(characterDb)) {
@@ -57,20 +77,20 @@ function CharacterPage() {
     }
   }, [setCharacter, dispatch, charId, characterDb])
 
-  useEffect(() => {
-    if (filters.a6.value) {
-      setCharacterBuilds(_characterMainBuilds)
-    } else {
-      setCharacterBuilds(_characterBuilds)
-    }
-  }, [_characterBuilds, _characterMainBuilds, filters])
+  // useEffect(() => {
+  //   if (filters.a6.value) {
+  //     setCharacterBuilds(_characterMainBuilds)
+  //   } else {
+  //     setCharacterBuilds(_characterBuilds)
+  //   }
+  // }, [_characterBuilds, _characterMainBuilds, filters])
 
-  useEffect(() => {
-    if (_characterStats) {
-      const charStats = find(_characterStats, { _id: charId });
-      setCharacterStats(charStats)
-    }
-  }, [_characterStats, charId])
+  // useEffect(() => {
+  //   if (_characterStats) {
+  //     const charStats = find(_characterStats, { _id: charId });
+  //     setCharacterStats(charStats)
+  //   }
+  // }, [_characterStats, charId])
 
   if (!characterDb || !characterIdMap || !character || !characterStats) {
     return <div>
@@ -104,9 +124,9 @@ function CharacterPage() {
           </>
         }
         <div className="character-stats-container">
-          <div className="character-stats-chart">
+          {/* <div className="character-stats-chart">
             <Chart.Donut
-              data={[(characterStats.abyssCount * 100/_characterTotals.abyssTotal).toFixed(2), (100-(characterStats.abyssCount * 100/_characterTotals.abyssTotal)).toFixed(2)]}
+              data={[]}
               colors={[elementColor, ElementColors.none]}
               showScale={false}
               semi={true}
@@ -114,12 +134,12 @@ function CharacterPage() {
           </div>
           <div className="character-stats-chart">
             <Chart.Donut
-              data={[(characterStats.abyssWins * 100/characterStats.abyssCount).toFixed(2), (100-(characterStats.abyssWins * 100/characterStats.abyssCount)).toFixed(2)]}
+              data={[]}
               colors={[elementColor, ElementColors.none]}
               showScale={false}
               semi={true}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

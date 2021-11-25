@@ -1,4 +1,3 @@
-
 .horizontal-barchart {
   display: flex;
 
@@ -26,55 +25,71 @@
   }
 
   .bar-card {
-    width: 250px;
-    margin: 0.1rem 0 0.1rem 0;
     overflow: hidden;
     background-color: #e9e5dc;
-    padding: 0.3rem;
     display: flex;
     border: 2px solid white;
     border-right: 0;
-  
-    img {
-      width: 80px;
-      height: 80px;
-    }
-  
-    .bar-card-detail {
+    margin: 0.1rem 0 0.1rem 0;
+    padding: 0.3rem;
+
+    .bar-card-title {
       display: flex;
-      width: 100%;
-      flex-flow: column;
-      text-align: center;
-  
-      .bar-card-name {
-        padding: 0 0.1rem;
-        margin-bottom: 0.5rem;
-        color: rgb(73, 83, 102);
-        font-size: 1rem;
-        text-decoration: none;
+      width: 200px;
+
+      img {
+        width: 80px;
+        height: 80px;
       }
-  
-      .bar-card-popularity {
-        height: 100%;
+
+      .bar-card-detail {
         display: flex;
+        width: 100%;
         flex-flow: column;
-        justify-content: center;
-  
-        .bar-card-popularity-pct {
-          color: white;
-          font-size: 1.7rem;
-          text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+        text-align: center;
+
+        .bar-card-name {
+          padding: 0 0.1rem;
+          margin-bottom: 0.5rem;
+          color: rgb(73, 83, 102);
+          font-size: 1rem;
+          text-decoration: none;
         }
-  
-        .bar-card-popularity-count {
-          color: rgba(73, 83, 102, 0.9);
-          font-size: 1.1rem;
+
+        .bar-card-popularity {
+          height: 100%;
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+
+          .bar-card-popularity-pct {
+            color: white;
+            font-size: 1.7rem;
+            text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black,
+              0 0 2px black;
+          }
+
+          .bar-card-popularity-count {
+            color: rgba(73, 83, 102, 0.9);
+            font-size: 1.1rem;
+          }
         }
       }
+    }
+
+    .bar-abyss-stats {
+      width: 70px;
+      text-align: center;
+    }
+
+    .bar-abyss-stat-title {
+      text-transform: uppercase;
+      font-size: 0.6rem;
+      color: rgb(73, 83, 102);
+      text-align: center;
     }
   }
 }
-
 
 @media (max-width: 676px) {
   .horizontal-barchart-container {
@@ -87,16 +102,16 @@
       max-width: 100%;
       display: flex;
       justify-content: center;
-  
+
       & > div {
         width: 100%;
       }
     }
-    
+
     .bar-card {
       width: 100%;
     }
-  
+
     .horizontal-barchart-bar {
       display: none;
     }

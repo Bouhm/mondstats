@@ -61,7 +61,7 @@ function Donut({ id = "", className = "", max, labels=[], colors = [], data = []
           }
         }
       }
-
+  
       if (semi) {
         chartOptions.rotation = -90;
         chartOptions.circumference = 180;
