@@ -7,7 +7,7 @@ import Sticky from 'react-stickynode';
 
 import { ElementColors } from '../../../data/constants';
 import { ICharacterData } from '../../../data/types';
-import { getCharacterFileName } from '../../../scripts/util';
+import { getCharacterFileName, getPercentage } from '../../../scripts/util';
 import { selectCharacter } from '../../../Store';
 import Filters from '../../filters/Filters';
 import useApi from '../../hooks/useApi';
@@ -19,6 +19,7 @@ import Loader from '../../ui/Loader';
 import BuildSelector from './BuildSelector';
 import Constellations from './Constellations';
 import data from './albedo.json';
+import { CaretUp } from '../../ui/Icons';
 
 interface ITotals { 
   total: number,
@@ -109,6 +110,54 @@ function CharacterPage() {
       </div>
       <div className="character-page">
         <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} /> 
+        <div className="character-stats-container">
+          <div className="character-stats">
+            <h2 className="character-stats-title">
+              Popularity
+            </h2>
+            <div className="character-stats-content character-stats-popularity">
+              14 <CaretUp size={60} color={"#32CD32"}/>
+            </div>
+          </div>
+          <div className="character-stats-chart-container">
+            <div className="character-stats">
+              <h2 className="character-stats-title">
+                Pick Rate
+              </h2>
+              <div className="character-stats-content character-stats-chart">
+                <Chart.Odometer
+                  data={[characterBuilds.abyssCount]}
+                  labels={['Abyss Battle Count']}
+                  colors={[elementColor, ElementColors.none]}
+                  showScale={false}
+                  semi={true} 
+                  max={characterBuilds.total}
+                />
+                <div className="character-stats-pct">
+                  {getPercentage(characterBuilds.abyssCount, characterBuilds.total) }%
+                </div>
+              </div>
+            </div>
+            <div className="character-stats">
+              <h2 className="character-stats-title">
+                Win Rate
+              </h2>
+              <div className="character-stats-content character-stats-chart">
+                <Chart.Odometer
+                  data={[characterBuilds.winCount]}
+                  labels={['Win Count']}
+                  colors={[elementColor, ElementColors.none]}
+                  showScale={false}
+                  semi={true}
+                  max={characterBuilds.abyssCount}
+                />
+                <div className="character-stats-pct">
+                  {getPercentage(characterBuilds.winCount, characterBuilds.abyssCount)}%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {characterBuilds.builds &&
           <>
             <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky>
@@ -123,28 +172,6 @@ function CharacterPage() {
             }
           </>
         }
-        <div className="character-stats-container">
-          <div className="character-stats-chart">
-            <Chart.Odometer
-              data={[characterBuilds.abyssCount]}
-              labels={['Abyss Battle Count']}
-              colors={[elementColor, ElementColors.none]}
-              showScale={false}
-              semi={true} 
-              max={characterBuilds.total}
-            />
-          </div>
-          <div className="character-stats-chart">
-            <Chart.Odometer
-              data={[characterBuilds.winCount]}
-              labels={['Win Count']}
-              colors={[elementColor, ElementColors.none]}
-              showScale={false}
-              semi={true}
-              max={characterBuilds.abyssCount}
-            />
-          </div>
-        </div>
       </div>
     </>
   )
