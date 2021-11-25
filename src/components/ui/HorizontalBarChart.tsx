@@ -47,30 +47,26 @@ function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart
                 </div>
               </div>
             </Tooltip>
-            {avgStar &&
+            {avgStar && winCount && 
               <>
                 <Divider />
-                <div className='bar-abyss-stats'>
-                  <Tooltip content={`Average Abyss Stars`}>
-                    <div className={`bar-abyss-avgStar`}>
-                    <div className='bar-abyss-stat-title'>Avg Clear</div><br/>
-                      ★{avgStar?.toFixed(2)}
-                    </div>
-                  </Tooltip>
-                </div>
-              </>
-            }
-            {
-              winCount &&
-              <>
-                <Divider />
-                <div className='bar-abyss-stats'>
-                  <Tooltip content={`3-Star Abyss Clears: ${winCount}`}>
-                    <div className={`bar-abyss-winCount`}>
-                      <div className='bar-abyss-stat-title'>Win Rate</div><br/>
-                      {getPercentage(winCount, battleCount)}%
-                    </div>
-                  </Tooltip>
+                <div className='bar-abyss-stats-container'>
+                  <div className='bar-abyss-stats'>
+                    <Tooltip content={`Average Abyss Stars`}>
+                      <div className={`bar-abyss-avgStar`}>
+                      <div className='bar-abyss-stat-title'>Avg Star</div><br/>
+                        ★{avgStar?.toFixed(2)}
+                      </div>
+                    </Tooltip>
+                  </div>
+                  <div className='bar-abyss-stats'>
+                    <Tooltip content={`3-Star Abyss Clears: ${winCount}`}>
+                      <div className={`bar-abyss-winCount`}>
+                        <div className='bar-abyss-stat-title'>Win Rate</div><br/>
+                        {getPercentage(winCount, battleCount)}%
+                      </div>
+                    </Tooltip>
+                  </div>
                 </div>
               </>
             }

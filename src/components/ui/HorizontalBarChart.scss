@@ -78,17 +78,27 @@
       }
     }
 
-    .bar-abyss-stats {
-      width: 55px;
-      margin-top: 0.3rem;
-      text-align: center;
-    }
+    .bar-abyss-stats-container {
+      display: flex;
+      width: 100%;
+      justify-content: center;
 
-    .bar-abyss-stat-title {
-      text-transform: uppercase;
-      font-size: 0.6rem;
-      color: rgb(73, 83, 102);
-      text-align: center;
+      .bar-abyss-stats {
+        width: 55px;
+        margin-top: 0.3rem;
+        text-align: center;
+
+        &:first-child {
+          margin-right: 0.8rem;
+        }
+      }
+
+      .bar-abyss-stat-title {
+        text-transform: uppercase;
+        font-size: 0.6rem;
+        color: rgb(73, 83, 102);
+        text-align: center;
+      }
     }
   }
 }
@@ -112,6 +122,36 @@
 
     .bar-card {
       width: 100%;
+
+      .bar-card-title {
+        width: 190px;
+
+        .bar-card-detail {
+          .bar-card-name {
+            font-size: 0.9rem;
+          }
+
+          .bar-card-popularity {
+            .bar-card-popularity-pct {
+              font-size: 1.3rem;
+            }
+          }
+        }
+      }
+
+      .bar-abyss-stats-container {
+        .bar-abyss-stat-title {
+        }
+
+        .bar-abyss-stats {
+          width: 55px;
+          font-size: 0.9rem;
+
+          &:first-child {
+            margin-right: 0.6rem;
+          }
+        }
+      }
     }
 
     .horizontal-barchart-bar {
