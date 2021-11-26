@@ -176,9 +176,9 @@ function AbyssPage() {
             </React.Fragment>
           })}
           {(filteredTopTeams.length > 10) && (!stageLimitToggle["ALL"] ?
-            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
+            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show more <ChevronDown size={20} /></Button>
             :
-            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
+            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show less <ChevronUp size={20} /></Button>
           )}
         </div>
     </>

@@ -5,7 +5,7 @@
 
 .team-stats {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1.4fr;
   background-color: #e9e5dc;
   border-radius: 8px;
   overflow: hidden;
@@ -34,12 +34,14 @@
 .team-flex-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
   flex-flow: column;
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 0 0 8px 8px;
 
   .team-flex {
+    position: relative;
+    left: 35%;
     display: flex;
     padding-top: 0.3rem;
 

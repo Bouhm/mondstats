@@ -53,9 +53,9 @@ const AbyssFloor = ({ abyssFloors, selectedStage, stageLimitToggle, onToggleLimi
               </div>
             </React.Fragment>
             {some(battle_parties, parties => parties.length > pageSize) && (!stageLimitToggle[selectedStage.value] ?
-              <Button className="stage-teams-show-more" onClick={() => onToggleLimit(selectedStage.value)}>Show more <ChevronDown size={20} color={"#202020"} /></Button>
+              <Button className="stage-teams-show-more" onClick={() => onToggleLimit(selectedStage.value)}>Show more <ChevronDown size={20} /></Button>
               :
-              <Button className="stage-teams-show-more" onClick={() => onToggleLimit(selectedStage.value)}>Show less <ChevronUp size={20} color={"#202020"} /></Button>
+              <Button className="stage-teams-show-more" onClick={() => onToggleLimit(selectedStage.value)}>Show less <ChevronUp size={20} /></Button>
             )}
           </React.Fragment>
         ))}

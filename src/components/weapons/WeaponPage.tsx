@@ -38,7 +38,7 @@ function WeaponPage() {
         <br />
         {weaponStats.characters > 5 && (
           <Button className="weapons-show-more" onClick={handleExpand}>
-            {!expanded ? <>Show more <ChevronDown size={20} color={"#202020"} /></> : <>Show less <ChevronUp size={20} color={"#202020"} /></>}
+            {!expanded ? <>Show more <ChevronDown size={20}/></> : <>Show less <ChevronUp size={20} /></>}
           </Button>
         )}
       </div>
