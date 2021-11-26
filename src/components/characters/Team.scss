@@ -5,7 +5,7 @@
 
 .team-stats {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.8fr 0.8fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr;
   background-color: #e9e5dc;
   border-radius: 8px;
   overflow: hidden;
@@ -41,7 +41,7 @@
 
   .team-flex {
     display: flex;
-    padding: 0.5rem;
+    padding-top: 0.3rem;
 
     div > div > img,
     svg {
@@ -67,35 +67,34 @@
   }
 }
 
-.team-abyss-stats {
-  color: rgb(73, 83, 102);
-  margin: 0.3rem 0.3rem 0 0;
-  text-align: center;
-  display: flex;
-  flex-flow: column;
-  font-size: 2vw;
-  justify-content: center;
-}
-
-.team-abyss-stat-title {
-  text-transform: uppercase;
-  color: rgb(73, 83, 102);
-  text-align: center;
-  font-size: 1.4vw;
-}
-
 .team-popularity {
   position: relative;
   text-align: center;
   background-color: #e9e5dc;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 0 0.5rem 0.5rem;
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 3fr 2fr;
+
+  .team-abyss-stats-container {
+    display: flex;
+    color: rgba(73, 83, 102, 0.9);
+    justify-content: space-evenly;
+
+    .team-abyss-stats {
+      display: flex;
+      flex-flow: column;
+      height: 100%;
+      font-size: 1.8vw;
+    }
+  }
 
   .team-popularity-pct {
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-    width: 11vw;
-    font-size: 4.4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4.6vw;
   }
 
   .team-popularity-count {
@@ -107,27 +106,21 @@
   }
 }
 
-@media (max-width: 747px) {
-}
-
 @media (min-width: 647px) {
   .team-popularity {
+    .team-abyss-stats-container {
+      .team-abyss-stats {
+        font-size: 0.8rem;
+      }
+    }
+
     .team-popularity-pct {
       font-size: 2.1rem;
-      width: 90px;
     }
 
     .team-popularity-count {
       font-size: 1.4rem;
     }
-  }
-
-  .team-abyss-stats {
-    font-size: 0.9rem;
-  }
-
-  .team-abyss-stat-title {
-    font-size: 0.6rem;
   }
 }
 
@@ -144,7 +137,7 @@
 
   .team-flex-container {
     .team-flex {
-      padding: 0.3rem;
+      padding-top: 0.2rem;
 
       div > div > img,
       svg {
@@ -157,10 +150,9 @@
     }
 
     .team-expand {
-      padding: 0.2rem;
-
+      height: 8px;
       > svg {
-        height: 10px;
+        height: 7px;
       }
     }
   }

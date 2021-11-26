@@ -47,7 +47,7 @@ function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart
                 </div>
               </div>
             </Tooltip>  
-            <Divider />
+            {/* <Divider />
             <div className='bar-abyss-stats-container'>
               <div className='bar-abyss-stats'>
                 {avgStar ? 
@@ -79,7 +79,7 @@ function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart
                   </div>
                 }
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="horizontal-barchart-bar">
             <div  

@@ -45,23 +45,24 @@ function Team({ team, percent, count, flex = [] }: TeamProps) {
           ))}
           <div className="team-popularity">
             <div className="team-popularity-pct">{percent}</div>
-            <Divider />
-          </div>
-          <div className="team-abyss-stats">
-            <Tooltip content={`3-Star Abyss Clears: ${winCount}`}>
-              <div className={`team-abyss-winCount`}>
-                <div className='team-abyss-stat-title'>Win Rate</div><br/>
-                {getPercentage(winCount, battleCount)}%
-              </div>
-            </Tooltip>
-          </div>
-          <div className="team-abyss-stats">
-            <Tooltip content={`Average Abyss Stars`}>
-              <div className={`team-abyss-avgStar`}>
-                <div className='team-abyss-stat-title'>Avg Star</div><br/>
-                ★{avgStar?.toFixed(2)}
-              </div>
-            </Tooltip>
+            <div className="team-abyss-stats-container">
+              <Tooltip content={`3-Star Abyss Clears: ${winCount}`}>
+                <div className="team-abyss-stats">
+                  <div className={`team-abyss-winCount`}>
+                    <div className='team-abyss-stat-title'>Win Rate</div>
+                    <div className='team-abyss-stat-value'>{getPercentage(winCount, battleCount)}%</div>
+                  </div>
+                </div>
+              </Tooltip>
+              <Tooltip content={`Average Abyss Stars`}>
+                <div className="team-abyss-stats">
+                  <div className={`team-abyss-avgStar`}>
+                    <div className='team-abyss-stat-title'>Avg Star</div>
+                    <div className='team-abyss-stat-value'>★{avgStar?.toFixed(2)}</div>
+                  </div>
+                </div>
+              </Tooltip>
+            </div>
           </div>
         </div>
       </Tooltip>
@@ -77,7 +78,7 @@ function Team({ team, percent, count, flex = [] }: TeamProps) {
               ))}
             </>}
           <div className="team-expand" onClick={handleExpand}>
-            {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            {expanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
           </div>
         </div>
       }
