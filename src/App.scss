@@ -29,10 +29,6 @@ a {
   color: inherit;
 }
 
-h1 {
-  color: white;
-}
-
 footer {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -159,7 +155,12 @@ footer {
   }
 
   h1 {
-    font-size: 1.5rem !important;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2rem;
+    width: 300px;
+    color: white;
+    border-bottom: solid 1px grey;
   }
 
   .links {

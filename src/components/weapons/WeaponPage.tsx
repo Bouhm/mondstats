@@ -44,13 +44,17 @@ function WeaponPage() {
       </div>
       <div className="weapon-detail">
         <h1>Weapon</h1>
-        <div className="weapon-info">
-          <div className="weapon-profile">
+        <div className="weapon-info-container">
+          <div className="weapon-info">
             <img src={`/assets/weapons/${shortenId(weapon._id)}.webp`} />
-            <div>Base Atk: {weapon.baseAtk}</div>
-            <div>Substat: {weapon.subStat} {weapon.subValue}</div>
+            <div className="weapon-info-stats">
+              <div className="weapon-info-stat-title">Base Atk:</div>
+              <div className="weapon-info-stat-value">{weapon.baseAtk}</div>
+              <div className="weapon-info-stat-title">{weapon.subStat}:</div>
+              <div className="weapon-info-stat-value">{weapon.subValue}</div>
+            </div>
           </div>
-          <div className="weapon-effect">Effect: {weapon.effect}</div>
+          <div className="weapon-info-effect">{weapon.effect}</div>
         </div>
       </div>
     </div>
