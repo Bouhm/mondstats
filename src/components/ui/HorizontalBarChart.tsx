@@ -5,9 +5,9 @@ import { map } from 'lodash';
 import React from 'react';
 
 import { getPercentage, shortenId } from '../../scripts/util';
+import Divider from './Divider';
 import LLImage from './LLImage';
 import Tooltip from './Tooltip';
-import Divider from './Divider';
 
 export interface IBarChartData {
   _id: string,

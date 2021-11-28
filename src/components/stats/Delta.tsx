@@ -11,7 +11,7 @@ type DeltaProps = {
 }
 
 function Delta({ current, last }: DeltaProps) {
-  const diff = Math.floor((current - last) * 100) / 100;
+  const diff = Math.floor((current - last) * 10) / 10;
   const className = diff > 0 ? "asPos" : "asNeg";
 
   if (isEqual(diff, 0)) {

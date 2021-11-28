@@ -9,6 +9,7 @@
 
 .weapons-list-container {
   flex: 3;
+  padding-right: 1rem;
 }
 
 .artifact-build-container {
@@ -153,6 +154,12 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 676px) {
+  .weapons-list-container {
+    padding-right: 0;
   }
 }
 

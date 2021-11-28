@@ -11,7 +11,7 @@
       animation-name: horibar;
       animation-duration: 1s;
       animation-direction: forwards;
-      border: 2px solid rgba(255, 255, 255, 0.7);
+      border: 2px solid rgba(255,255,255,0.8);
     }
 
     @keyframes horibar {
@@ -66,8 +66,8 @@
           .bar-card-popularity-pct {
             color: white;
             font-size: 1.7rem;
-            text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black,
-              0 0 2px black;
+            text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black,
+              0 0 1px black;
           }
 
           .bar-card-popularity-count {
@@ -106,36 +106,42 @@
 }
 
 @media (max-width: 676px) {
-  .horizontal-barchart-container {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-
-    .horizontal-barchart {
-      width: 100% !important;
-      max-width: 100%;
-      display: flex;
-      justify-content: center;
-
-      & > div {
-        width: 100%;
+  .character-page {
+    .build-details, .constellations-container {
+      h1 {
+        width: 200px;
+        font-size: 1.5rem;
       }
+    }
+  }
+
+  .horizontal-barchart-container {
+
+    .horizontal-barchart-bar {
+      background-color: rgba(164, 164, 164, 0.2);
     }
 
     .bar-card {
-      width: 100%;
+      padding: 1px;
 
       .bar-card-title {
-        width: 190px;
+        width: 100px;
+        display: flex;
+
+        img {
+          display: flex;
+          height: 30px;
+          width: 30px;
+        }
 
         .bar-card-detail {
           .bar-card-name {
-            font-size: 0.9rem;
+            font-size: 0.45rem;
           }
 
           .bar-card-popularity {
             .bar-card-popularity-pct {
-              font-size: 1.3rem;
+              font-size: 0.6rem;
             }
           }
         }
@@ -154,7 +160,6 @@
     }
 
     .horizontal-barchart-bar {
-      display: none;
     }
   }
 }
