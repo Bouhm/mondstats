@@ -21,18 +21,19 @@
   .character-stats-container {
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
 
     .character-stats-content {
+      justify-content: center;
       height: 100%;
       display: flex;
       align-items: center;
-      height: 200px;
     }
 
     .character-stats {
       display: flex;
       flex-flow: column;
+      width: 100%;
+      flex: 1;
     }
 
     .character-stats-title {
@@ -44,7 +45,7 @@
     .character-stats-chart-container {
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
+      flex: 2
     }
 
     .character-stats-chart {
@@ -58,10 +59,6 @@
     }
 
     .character-stats-pct {
-      position: absolute;
-      text-align: center;
-      z-index: 0;
-      bottom: 12%;
       width: 100%;
       color: white;
       font-size: 2.5rem;

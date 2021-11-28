@@ -1,6 +1,6 @@
-  import './CharacterPage.css';
+import './CharacterPage.css';
 
-import { find, forEach, isEmpty, map, random, reduce, take, cloneDeep } from 'lodash';
+import { cloneDeep, find, forEach, isEmpty, map, random, reduce, take } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Sticky from 'react-stickynode';
@@ -13,15 +13,16 @@ import Filters from '../../filters/Filters';
 import useApi from '../../hooks/useApi';
 import useFilters from '../../hooks/useFilters';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
+import Delta from '../../stats/Delta';
 import Chart from '../../ui/Chart';
 import Empty from '../../ui/Empty';
+import { CaretUp } from '../../ui/Icons';
 import Loader from '../../ui/Loader';
+import data from './albedo.json';
 import BuildSelector from './BuildSelector';
 import Constellations from './Constellations';
-import data from './albedo.json';
-import { CaretUp } from '../../ui/Icons';
 
-interface ITotals { 
+  interface ITotals { 
   total: number,
   abyssCount: number
 }
@@ -116,45 +117,25 @@ function CharacterPage() {
               Popularity
             </h2>
             <div className="character-stats-content character-stats-popularity">
-              14 <CaretUp size={60} color={"#32CD32"}/>
+              14 <Delta current={14} last={13} />
             </div>
           </div>
-          <div className="character-stats-chart-container">
-            <div className="character-stats">
-              <h2 className="character-stats-title">
-                Pick Rate
-              </h2>
-              <div className="character-stats-content character-stats-chart">
-                <Chart.Odometer
-                  data={[characterBuilds.abyssCount]}
-                  labels={['Abyss Battle Count']}
-                  colors={[elementColor, ElementColors.none]}
-                  showScale={false}
-                  semi={true} 
-                  max={characterBuilds.total}
-                />
-                <div className="character-stats-pct">
-                  {getPercentage(characterBuilds.abyssCount, characterBuilds.total) }%
-                </div>
-              </div>
+          <div className="character-stats">
+            <h2 className="character-stats-title">
+              Pick Rate
+            </h2>
+            <div className="character-stats-content character-stats-pct">
+              {getPercentage(characterBuilds.abyssCount, characterBuilds.total) }%
+              <Delta current={getPercentage(characterBuilds.abyssCount, characterBuilds.total)} last={22.34} />
             </div>
-            <div className="character-stats">
-              <h2 className="character-stats-title">
-                Win Rate
-              </h2>
-              <div className="character-stats-content character-stats-chart">
-                <Chart.Odometer
-                  data={[characterBuilds.winCount]}
-                  labels={['Win Count']}
-                  colors={[elementColor, ElementColors.none]}
-                  showScale={false}
-                  semi={true}
-                  max={characterBuilds.abyssCount}
-                />
-                <div className="character-stats-pct">
-                  {getPercentage(characterBuilds.winCount, characterBuilds.abyssCount)}%
-                </div>
-              </div>
+          </div>
+          <div className="character-stats">
+            <h2 className="character-stats-title">
+              Win Rate
+            </h2>
+            <div className="character-stats-content character-stats-pct">
+              {getPercentage(characterBuilds.winCount, characterBuilds.abyssCount)}%
+              <Delta current={getPercentage(characterBuilds.abyssCount, characterBuilds.total)} last={85.35} />
             </div>
           </div>
         </div>
