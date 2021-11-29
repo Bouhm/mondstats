@@ -7,7 +7,6 @@ import CardSearch from '../controls/CardSearch';
 import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
 import useWeaponSearch from '../hooks/useWeaponSearch';
-import StatsTable from '../stats/StatsTable';
 import Loader from '../ui/Loader';
 
 function WeaponIndex() { 
@@ -26,7 +25,6 @@ function WeaponIndex() {
   return (
     <div className="weapon-table-container">
       <CardSearch.Weapons items={filter(searchWeapons, weapon => !includes(selectedWeapons, weapon._id))} onSelect={handleSelect} />
-      <StatsTable.Weapons data={isEmpty(selectedWeapons) ? weaponStats.weapons : filter(weaponStats.weapons, weapon => includes(selectedWeapons, weapon._id))} />
     </div>
   )
 }

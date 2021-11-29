@@ -18,54 +18,6 @@
     opacity: 0.5;
   }
 
-  .character-stats-container {
-    display: flex;
-    justify-content: space-evenly;
-
-    .character-stats-content {
-      justify-content: center;
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
-
-    .character-stats {
-      display: flex;
-      flex-flow: column;
-      width: 100%;
-      flex: 1;
-    }
-
-    .character-stats-title {
-      text-align: center;
-      color: white;
-      text-transform: uppercase;
-    }
-
-    .character-stats-chart-container {
-      display: flex;
-      justify-content: center;
-      flex: 2
-    }
-
-    .character-stats-chart {
-      position: relative;
-      margin: 0 1rem;
-    }
-
-    .character-stats-popularity {
-      color: white;
-      font-size: 4rem;
-    }
-
-    .character-stats-pct {
-      width: 100%;
-      color: white;
-      font-size: 2.5rem;
-      text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-    }
-  }
-
   h1 {
     text-transform: uppercase;
     text-align: center;
@@ -73,6 +25,49 @@
     width: 300px;
     color: white;
     border-bottom: solid 1px grey;
+  }
+}
+
+.character-stats-container {
+  display: flex;
+  justify-content: space-evenly;
+
+  .character-stats-content {
+    justify-content: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .character-stats {
+    display: flex;
+    flex-flow: column;
+    margin: 0 1rem;
+  }
+
+  .character-stats-title {
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: 4vw;
+  }
+
+  .character-stats-abyss {
+    display: flex;
+    justify-content: center;
+  }
+
+  .character-stats-popularity {
+    color: white;
+    font-size: 7vw;
+    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+  }
+
+  .character-stats-pct {
+    width: 100%;
+    color: white;
+    font-size: 7vw;
+    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
   }
 }
 
@@ -103,6 +98,22 @@
 .logo {
   padding: 1.5rem 0;
   opacity: 0.5;
+}
+
+@media (min-width: 647px) {
+  .character-stats-container {
+    .character-stats-title {
+      font-size: 2rem;
+    }
+
+    .character-stats-popularity {
+      font-size: 3.5rem;
+    }
+
+    .character-stats-pct {
+      font-size: 3.5rem;
+    }
+  }
 }
 
 @media (max-width: 1024px) {
@@ -136,13 +147,12 @@
 
   .character-stats-container {
     .character-stats {
+      margin: 0 0.1rem;
+
       .character-stats-pct {
       }
 
       .character-stats-popularity {
-        height: 5rem;
-        margin-bottom: 2rem;
-        font-size: 3rem;
       }
     }
   }

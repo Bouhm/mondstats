@@ -9,7 +9,6 @@ import { getCharacterFileName, getShortName, shortenId } from '../../scripts/uti
 import Dropdown, { Option } from '../controls/Dropdown';
 import { useAppSelector } from '../hooks/useRedux';
 import Card from '../ui/Card';
-import LLImage from '../ui/LLImage';
 
 type CardSearchProps = {
   items: SearchItem[]

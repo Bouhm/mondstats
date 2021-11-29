@@ -7,7 +7,6 @@ import CardSearch from '../controls/CardSearch';
 import useApi from '../hooks/useApi';
 import useArtifactSetSearch from '../hooks/useArtifactSetSearch';
 import { useAppSelector } from '../hooks/useRedux';
-import StatsTable from '../stats/StatsTable';
 import Loader from '../ui/Loader';
 
 function ArtifactSetIndex() { 
@@ -18,6 +17,7 @@ function ArtifactSetIndex() {
   if (isEmpty(artifactSetDb) || isEmpty(artifactSetStats)) return <Loader />
 
   const { searchArtifactSets } = useArtifactSetSearch(artifactSetDb, artifactSetStats.artifactSets);
+  console.log(searchArtifactSets)
 
   const handleSelect = (selectedIds: string[]) => {
     setSelectedSets(selectedIds)
@@ -25,8 +25,7 @@ function ArtifactSetIndex() {
     
   return (
     <div className="artifact-set-stats-container">
-      <CardSearch.ArtifactSets items={filter(searchArtifactSets, set => !includes(selectedSets, set._id))} onSelect={handleSelect} />
-      <StatsTable.ArtifactSets data={isEmpty(selectedSets) ? artifactSetStats.artifactSets : filter(artifactSetStats.artifactSets, set => intersection(selectedSets, map(set.artifacts, artifact => artifact._id)).length > 0)} />
+      <CardSearch.ArtifactSets items={filter(searchArtifactSets, set => { console.log(set); return !includes(selectedSets, set._id)})} onSelect={handleSelect} />
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { KEYWORDS } from '../controls/Searchbar';
 function useArtifactSetSearch(artifactSetDb: any, data: any) {
   const searchArtifactSets = map(uniq(reduce(data, (arr, curr) => flatten([...arr, ...map(curr.artifacts, artifact => artifact._id)]) as unknown as any, [])), (_id) => {
     const set = artifactSetDb[_id]
+    console.log(set)
 
     return ({
       _id,

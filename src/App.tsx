@@ -13,7 +13,7 @@ import ArtifactSetIndex from './components/artifact-sets/ArtifactSetIndex';
 import ArtifactSetPage from './components/artifact-sets/ArtifactSetPage';
 import CharacterPage from './components/characters/builds/CharacterPage';
 import BuildSearch from './components/characters/BuildSearch';
-import CharacterTable from './components/characters/CharacterIndex';
+import CharacterIndex from './components/characters/CharacterIndex';
 import Home from './components/Home';
 import useApi from './components/hooks/useApi';
 import { useAppDispatch, useAppSelector } from './components/hooks/useRedux';
@@ -23,7 +23,7 @@ import Changelog from './components/pages/Changelog';
 import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 import Dialogue from './components/ui/Dialogue';
-import WeaponTable from './components/weapons/WeaponIndex';
+import WeaponIndex from './components/weapons/WeaponIndex';
 import WeaponPage from './components/weapons/WeaponPage';
 import {
   IArtifactData,
@@ -101,11 +101,11 @@ function App() {
               <Route path="/changelog" component={Changelog} />
               <Route path="/abyss" component={AbyssPage} />
               <Route path="/characters/:shortName" component={CharacterPage} />
-              <Route path="/characters" component={CharacterTable} />
+              <Route path="/characters" component={CharacterIndex} />
               <Route path="/artifacts/:shortName" component={ArtifactSetPage} />
               <Route path="/artifacts" component={ArtifactSetIndex} />
               <Route path="/weapons/:shortName" component={WeaponPage} />
-              <Route path="/weapons" component={WeaponTable} />
+              <Route path="/weapons" component={WeaponIndex} />
             </Switch>
           </main>
           <section className="footer">

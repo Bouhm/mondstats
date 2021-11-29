@@ -8,7 +8,6 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1.4fr;
   background-color: #e9e5dc;
   border-radius: 8px;
-  overflow: hidden;
 
   &.asExpandable {
     border-radius: 8px 8px 0 0;
@@ -26,7 +25,6 @@
 
     .character-tile {
       margin: 0;
-      border-radius: 0;
     }
   }
 }

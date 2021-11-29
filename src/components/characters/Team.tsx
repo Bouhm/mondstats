@@ -8,11 +8,11 @@ import { IFlexChar, IParty } from '../../data/types';
 import { getPercentage, getShortName } from '../../scripts/util';
 import useExpand from '../hooks/useExpand';
 import { useAppSelector } from '../hooks/useRedux';
+import Divider from '../ui/Divider';
 import { ChevronDown, ChevronUp, Exchange } from '../ui/Icons';
 import Tooltip from '../ui/Tooltip';
 import CharacterCount from './CharacterCount';
 import CharacterTile from './CharacterTile';
-import Divider from '../ui/Divider';
 
 type TeamProps = {
   team: string[],
@@ -46,22 +46,18 @@ function Team({ team, percent, count, flex = [] }: TeamProps) {
           <div className="team-popularity">
             <div className="team-popularity-pct">{percent}</div>
             <div className="team-abyss-stats-container">
-              <Tooltip content={`3-Star Abyss Clears: ${winCount}`}>
-                <div className="team-abyss-stats">
-                  <div className={`team-abyss-winCount`}>
-                    <div className='team-abyss-stat-title'>Win Rate</div>
-                    <div className='team-abyss-stat-value'>{getPercentage(winCount, battleCount)}%</div>
-                  </div>
+              <div className="team-abyss-stats">
+                <div className={`team-abyss-winCount`}>
+                  <div className='team-abyss-stat-title'>Win Rate</div>
+                  <div className='team-abyss-stat-value'>{getPercentage(winCount, battleCount)}%</div>
                 </div>
-              </Tooltip>
-              <Tooltip content={`Average Abyss Stars`}>
-                <div className="team-abyss-stats">
-                  <div className={`team-abyss-avgStar`}>
-                    <div className='team-abyss-stat-title'>Avg Star</div>
-                    <div className='team-abyss-stat-value'>★{avgStar?.toFixed(2)}</div>
-                  </div>
+              </div>
+              <div className="team-abyss-stats">
+                <div className={`team-abyss-avgStar`}>
+                  <div className='team-abyss-stat-title'>Avg Star</div>
+                  <div className='team-abyss-stat-value'>★{avgStar?.toFixed(2)}</div>
                 </div>
-              </Tooltip>
+              </div>
             </div>
           </div>
         </div>

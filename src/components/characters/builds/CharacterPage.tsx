@@ -120,22 +120,24 @@ function CharacterPage() {
               14 <Delta current={14} last={13} />
             </div>
           </div>
-          <div className="character-stats">
-            <h2 className="character-stats-title">
-              Pick Rate
-            </h2>
-            <div className="character-stats-content character-stats-pct">
-              {getPercentage(characterBuilds.abyssCount, characterBuilds.total) }%
-              <Delta current={getPercentage(characterBuilds.abyssCount, characterBuilds.total)} last={22.34} />
+          <div className="character-stats-abyss">
+            <div className="character-stats">
+              <h2 className="character-stats-title">
+                Pick Rate
+              </h2>
+              <div className="character-stats-content character-stats-pct">
+                {getPercentage(characterBuilds.abyssCount, characterBuilds.total) }%
+                <Delta current={getPercentage(characterBuilds.abyssCount, characterBuilds.total)} last={22.34} />
+              </div>
             </div>
-          </div>
-          <div className="character-stats">
-            <h2 className="character-stats-title">
-              Win Rate
-            </h2>
-            <div className="character-stats-content character-stats-pct">
-              {getPercentage(characterBuilds.winCount, characterBuilds.abyssCount)}%
-              <Delta current={getPercentage(characterBuilds.abyssCount, characterBuilds.total)} last={85.35} />
+            <div className="character-stats">
+              <h2 className="character-stats-title">
+                Win Rate
+              </h2>
+              <div className="character-stats-content character-stats-pct">
+                {getPercentage(characterBuilds.winCount, characterBuilds.abyssCount)}%
+                <Delta current={getPercentage(characterBuilds.abyssCount, characterBuilds.total)} last={85.35} />
+              </div>
             </div>
           </div>
         </div>

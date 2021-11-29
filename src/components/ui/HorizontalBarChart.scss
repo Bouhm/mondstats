@@ -125,23 +125,23 @@
       padding: 1px;
 
       .bar-card-title {
-        width: 100px;
+        width: 110px;
         display: flex;
 
         img {
           display: flex;
-          height: 30px;
-          width: 30px;
+          height: 40px;
+          width: 40px;
         }
 
         .bar-card-detail {
           .bar-card-name {
-            font-size: 0.45rem;
+            font-size: 0.5rem;
           }
 
           .bar-card-popularity {
             .bar-card-popularity-pct {
-              font-size: 0.6rem;
+              font-size: 0.8rem;
             }
           }
         }
@@ -149,7 +149,7 @@
 
       .bar-abyss-stats-container {
         .bar-abyss-stats {
-          width: 55px;
+          width: 60px;
           font-size: 0.9rem;
 
           &:first-child {
