@@ -74,7 +74,7 @@ function AbyssPage() {
   const [ selectedCharacters, setSelectedCharacters] = useState<string[]>([])
   
   const { filters, handleFilterChange } = useFilters(['f2p', 'max5']);
-  const abyssTopTeams = useApi('abyss/top-teams.json');
+  const abyssTopTeams = useApi('abyss/stats/top-abyss-teams.json');
   const { activeTabIdx, onTabChange } = useTabs();
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -100,14 +100,14 @@ function AbyssPage() {
   }, [setAbyssData, selectedStages])
 
   function _filterParties(parties: IAbyssParty[]) {
-    return filter(parties, ({ core_party, flex}) => {
+    return filter(parties, ({ coreParty, flex}) => {
       let charFilter = true;
       let cond = false;
 
       forEach(flex, _flex => {
         if (!_flex[0]) return false;
 
-        const party = [...core_party, _flex[0].charId]
+        const party = [...coreParty, _flex[0].charId]
   
         charFilter = (filter(party, char => {
           if (typeof char !== "string") return false;
@@ -139,7 +139,6 @@ function AbyssPage() {
 
   const handleTabChange = (tabIdx: number) => {
     handleSelect(filter(options, option => option.value.split('-')[0] === tabs[tabIdx] + ''))
-    console.log(filter(options, option => option.value.split('-')[0] === tabs[tabIdx] + ''))
     onTabChange(tabIdx)
   }
 
@@ -164,18 +163,18 @@ function AbyssPage() {
 
   const renderTopTeams = () => {
     const filteredTopTeams = _filterTopTeams();
-    const total = reduce(filteredTopTeams, (sum,curr) => sum + curr.count, 0)
+    const total = reduce(filteredTopTeams, (sum,curr) => sum + curr.battleCount, 0)
 
     return (
       <>
         <h2 className="stage-label">Top Teams</h2>
         <div className="stage-half">
           <h2>{total} Teams</h2>
-          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({core_party, flex, count}, i) => {
-            const party = [...core_party, flex[0][0].charId]
+          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({coreParty, flex, battleCount, winCount, avgStar}, i) => {
+            const party = [...coreParty, flex[0][0].charId]
             return <React.Fragment key={`parties-ALL-${i}`}>
               <div className="battle-container">
-                <Team team={party} count={count} flex={flex} percent={`${getPercentage(count, total)}%`} />
+                <Team team={party} battleCount={battleCount} winCount={winCount} avgStar={avgStar} flex={flex} percent={`${getPercentage(battleCount, total)}%`} />
               </div>
             </React.Fragment>
           })}

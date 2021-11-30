@@ -17,28 +17,20 @@ import CharacterTile from './CharacterTile';
 type TeamProps = {
   team: string[],
   percent: string,
-  count: number,
+  winCount: number,
+  battleCount: number,
+  avgStar: number,
   flex?: IFlexChar[][]
 }
 
-function Team({ team, percent, count, flex = [] }: TeamProps) {
+function Team({ team, winCount, battleCount, avgStar, percent, flex = [] }: TeamProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const { expanded, handleExpand } = useExpand();
   let tooltipContent = ''
 
-  if (!flex[0]) { 
-    tooltipContent = `${map(team, charId => characterDb[charId].name).join(', ')}: ${count}`
-  } else {
-    tooltipContent = (flex[0].length > 1) ? `${map(team, charId => characterDb[charId].name).join(', ')}*: ${count}` : `${map(team, charId => characterDb[charId].name).join(', ')}: ${count}`
-  }
-
-  const winCount = 250;
-  const battleCount = 275;
-  const avgStar = 2.85;
-
   return (
     <div className="team-container">
-      <Tooltip content={tooltipContent}>
+      <Tooltip content={''}>
         <div className={`team-stats ${flex[0] && flex[0].length > 1 ? 'asExpandable' : ''}`} onClick={handleExpand}>
           {map(team, (char, i) => (
             <CharacterTile key={`team-${char}-${i}`} id={char+''} labeled={false} clickable={false} />
@@ -67,9 +59,9 @@ function Team({ team, percent, count, flex = [] }: TeamProps) {
             {expanded && <>
               {map(filter(flex, party => party.length > 1), (party, i) => (
                 <div className="team-flex" key={`${team[0]}-${flex[0][0].charId}-${i}`}>
-                  <CharacterCount character={characterDb[party[0].charId]} count={party[0].count} />
+                  <CharacterCount character={characterDb[party[0].charId]} count={party[0].battleCount} />
                   <Exchange size={22} />
-                  {map(party.slice(1), ({charId, count}, i) => <CharacterCount key={`${charId}-${i}`} character={characterDb[charId]} count={count} />)}
+                  {map(party.slice(1), ({charId, battleCount}, i) => <CharacterCount key={`${charId}-${i}`} character={characterDb[charId]} battleCount={battleCount} />)}
                 </div>
               ))}
             </>}

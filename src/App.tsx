@@ -96,7 +96,7 @@ function App() {
         <div className="section-view" style={showNotice ? {filter: 'blur(3px)'} : {}}  >
           <main>
             <Routes>
-              <Route path="*/" element={<Home/>} />
+              <Route path="/" element={<Home/>} />
               <Route path="/about" element={<About/>} />
               <Route path="/changelog" element={<Changelog/>} />
               <Route path="/abyss" element={<AbyssPage/>} />

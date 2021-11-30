@@ -22,13 +22,13 @@ import data from './albedo.json';
 import BuildSelector from './BuildSelector';
 import Constellations from './Constellations';
 
-  interface ITotals { 
+interface ITotals { 
   total: number,
-  abyssCount: number
+  battleCount: number
 }
 
 function CharacterPage() {  
-  const { shortName } = useParams<{ shortName: string }>();
+  const { shortName } = useParams();
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const characterDb = useAppSelector((state) => state.data.characterDb)
@@ -42,32 +42,10 @@ function CharacterPage() {
     handleFilterChange
   } = useFilters(['f2p','a6','max5']);
 
-  const charId = characterIdMap[shortName]
-  const _characterBuilds = useApi(`/characters/${shortName}.json`);
-  const _characterMainBuilds = useApi(`/characters/mains/${shortName}.json`);
+  const charId = characterIdMap[shortName as string]
+  const _characterBuilds = useApi(`/characters/${charId}.json`);
+  const _characterMainBuilds = useApi(`/characters/mains/${charId}.json`);
   const [characterBuilds, setCharacterBuilds] = useState(_characterBuilds)
-  const [characterStats, setCharacterStats] = useState<any>({})
-  // const _characterStats = useApi(`/characters/stats/top-characters.json`)
-  // const _characterTotals = useApi(`/characters/stats/character-totals.json`)
-
-  useEffect(() => {
-    let newData: any = cloneDeep(data);
-    newData.builds.forEach((build: any) => {
-      build.count *= 12;  
-      build.avgStar = 2 + Math.random();
-      build.battleCount = build.count - random(10, Math.floor(build.count/10));
-      build.winCount = build.battleCount - random(3, Math.floor(build.battleCount/10));    
-
-      build.weapons.forEach((weapon: any) => {
-        weapon.count *= 12;
-        weapon.avgStar = 2 + Math.random();
-        weapon.battleCount = weapon.count - random(10, Math.floor(weapon.count/10));
-        weapon.winCount = weapon.battleCount - random(3, Math.floor(weapon.battleCount/10));    
-      })
-    })
-
-    setCharacterBuilds(newData)
-  }, [])
 
   useEffect(() => {
     if (!isEmpty(characterDb)) {
@@ -126,8 +104,8 @@ function CharacterPage() {
                 Pick Rate
               </h2>
               <div className="character-stats-content character-stats-pct">
-                {getPercentage(characterBuilds.abyssCount, characterBuilds.total) }%
-                <Delta current={getPercentage(characterBuilds.abyssCount, characterBuilds.total)} last={22.34} />
+                {getPercentage(characterBuilds.battleCount, characterBuilds.total) }%
+                <Delta current={getPercentage(characterBuilds.battleCount, characterBuilds.total)} last={22.34} />
               </div>
             </div>
             <div className="character-stats">
@@ -135,8 +113,8 @@ function CharacterPage() {
                 Win Rate
               </h2>
               <div className="character-stats-content character-stats-pct">
-                {getPercentage(characterBuilds.winCount, characterBuilds.abyssCount)}%
-                <Delta current={getPercentage(characterBuilds.abyssCount, characterBuilds.total)} last={85.35} />
+                {getPercentage(characterBuilds.winCount, characterBuilds.battleCount)}%
+                <Delta current={getPercentage(characterBuilds.battleCount, characterBuilds.total)} last={85.35} />
               </div>
             </div>
           </div>
