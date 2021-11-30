@@ -59,7 +59,7 @@ function Team({ team, winCount, battleCount, avgStar, percent, flex = [] }: Team
             {expanded && <>
               {map(filter(flex, party => party.length > 1), (party, i) => (
                 <div className="team-flex" key={`${team[0]}-${flex[0][0].charId}-${i}`}>
-                  <CharacterCount character={characterDb[party[0].charId]} count={party[0].battleCount} />
+                  <CharacterCount character={characterDb[party[0].charId]} battleCount={party[0].battleCount} />
                   <Exchange size={22} />
                   {map(party.slice(1), ({charId, battleCount}, i) => <CharacterCount key={`${charId}-${i}`} character={characterDb[charId]} battleCount={battleCount} />)}
                 </div>

@@ -1,17 +1,25 @@
 .team-container {
   margin: 0.6rem 0;
   max-width: 40rem;
+  border: solid 5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
 }
 
 .team-stats {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1.4fr;
-  background-color: #e9e5dc;
-  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.3);
+
+  .character-tile-container {
+    overflow: hidden;
+
+    &:first-of-type {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+  }
 
   &.asExpandable {
-    border-radius: 8px 8px 0 0;
-
     &:hover {
       cursor: pointer;
     }
@@ -35,7 +43,6 @@
   align-items: baseline;
   flex-flow: column;
   background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 0 0 8px 8px;
 
   .team-flex {
     position: relative;
@@ -58,8 +65,7 @@
     display: flex;
     justify-content: center;
     padding-bottom: 0.3rem;
-    background-color: rgba(255, 255, 255, 0.4);
-    border-radius: 0 0 8px 8px;
+    background-color: rgba(0, 0, 0, 0.3);
 
     &:hover {
       cursor: pointer;
@@ -70,7 +76,7 @@
 .team-popularity {
   position: relative;
   text-align: center;
-  background-color: #e9e5dc;
+  background-color: rgba(0, 0, 0, 0.1);
   color: white;
   display: grid;
   grid-template-columns: 1fr;
@@ -78,7 +84,7 @@
 
   .team-abyss-stats-container {
     display: flex;
-    color: rgba(73, 83, 102, 0.9);
+    color: white;
     justify-content: space-evenly;
 
     .team-abyss-stats {
@@ -99,7 +105,7 @@
 
   .team-popularity-count {
     margin: 0.2rem;
-    color: rgba(73, 83, 102, 0.9);
+    color: white;
     text-shadow: none;
     font-size: 2.4vw;
     white-space: nowrap;

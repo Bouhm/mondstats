@@ -221,7 +221,7 @@ function AbyssPage() {
       </div>
       <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handlePartyChange} showCards={false}/>
       <br />
-      <h1 title={"Data from teams that 3-starred the respective floors"}>Abyss Teams</h1>
+      <h1>Abyss Teams</h1>
       <Tabs activeTabIdx={activeTabIdx} onChange={handleTabChange} tabs={map(tabs, (floor => typeof floor === 'number' ? `FLOOR ${floor}` : floor.toString()))} />
       {!isEmpty(characterDb) && renderParties()}
     </div>
