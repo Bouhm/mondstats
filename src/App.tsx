@@ -5,7 +5,7 @@ import 'rc-pagination/assets/index.css';
 import axios from 'axios';
 import { forEach, isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { Link, Redirect, Route, Switch, useHistory, withRouter } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 
 // import { gql, useQuery } from '@apollo/client';
 import AbyssPage from './components/abyss/AbyssPage';
@@ -95,18 +95,18 @@ function App() {
         <Sidebar />
         <div className="section-view" style={showNotice ? {filter: 'blur(3px)'} : {}}  >
           <main>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/about" component={About} />
-              <Route path="/changelog" component={Changelog} />
-              <Route path="/abyss" component={AbyssPage} />
-              <Route path="/characters/:shortName" component={CharacterPage} />
-              <Route path="/characters" component={CharacterIndex} />
-              <Route path="/artifacts/:shortName" component={ArtifactSetPage} />
-              <Route path="/artifacts" component={ArtifactSetIndex} />
-              <Route path="/weapons/:shortName" component={WeaponPage} />
-              <Route path="/weapons" component={WeaponIndex} />
-            </Switch>
+            <Routes>
+              <Route path="*/" element={<Home/>} />
+              <Route path="/about" element={<About/>} />
+              <Route path="/changelog" element={<Changelog/>} />
+              <Route path="/abyss" element={<AbyssPage/>} />
+              <Route path="/characters/:shortName" element={<CharacterPage/>} />
+              <Route path="/characters" element={<CharacterIndex/>} />
+              <Route path="/artifacts/:shortName" element={<ArtifactSetPage/>} />
+              <Route path="/artifacts" element={<ArtifactSetIndex/>} />
+              <Route path="/weapons/:shortName" element={<WeaponPage/>} />
+              <Route path="/weapons" element={<WeaponIndex/>} />
+            </Routes>
           </main>
           <section className="footer">
             <div className="links">
@@ -125,4 +125,4 @@ function App() {
   )
 }
 
-export default withRouter(App)
+export default App

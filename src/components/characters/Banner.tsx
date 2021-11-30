@@ -1,11 +1,12 @@
-import './Banner.scss'
+import './Banner.scss';
 
 import { find, isEmpty, map } from 'lodash';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { getShortName } from '../../scripts/util';
 import { useAppSelector } from '../hooks/useRedux';
 import Card from '../ui/Card';
-import { getShortName } from '../../scripts/util';
-import { useHistory } from 'react-router-dom';
 
 type BannerProps = {
   characters: string[]
@@ -13,10 +14,10 @@ type BannerProps = {
 
 function Banner({characters}: BannerProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const routerHistory = useHistory();
+  const navigate = useNavigate();
 
   const handleClick = (shortname: string) => {
-    routerHistory.push(`/builds/${shortname}`)
+    navigate(`/builds/${shortname}`);
   }
 
   if (isEmpty(characterDb)) return null;

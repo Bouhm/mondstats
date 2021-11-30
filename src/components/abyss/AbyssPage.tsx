@@ -17,6 +17,7 @@ import {
   take,
 } from 'lodash';
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { IAbyssBattle, IAbyssParty } from '../../data/types';
 import { getPercentage } from '../../scripts/util';
@@ -76,6 +77,8 @@ function AbyssPage() {
   const abyssTopTeams = useApi('abyss/top-teams.json');
   const { activeTabIdx, onTabChange } = useTabs();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  
   useEffect(() => {
     async function fetchAbyssData() {
       await Promise.all(map(filter(selectedStages, stage => stage.value !== "ALL"), floor => {
@@ -136,6 +139,7 @@ function AbyssPage() {
 
   const handleTabChange = (tabIdx: number) => {
     handleSelect(filter(options, option => option.value.split('-')[0] === tabs[tabIdx] + ''))
+    console.log(filter(options, option => option.value.split('-')[0] === tabs[tabIdx] + ''))
     onTabChange(tabIdx)
   }
 

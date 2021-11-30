@@ -3,12 +3,11 @@ import './Home.scss';
 import Logo from '/assets/logo_m.webp';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { numberWithCommas } from '../scripts/util';
+import Banner from './characters/Banner';
 import useApi from './hooks/useApi';
 import LLImage from './ui/LLImage';
-import Banner from './characters/Banner';
 
 interface IFeatured {
   player_total: number,
@@ -16,7 +15,6 @@ interface IFeatured {
 }
 
 function Home() {
-  const routerHistory = useHistory();
   const featured = useApi(`/featured.json`);
 
   return (
