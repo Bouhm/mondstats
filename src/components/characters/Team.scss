@@ -1,14 +1,14 @@
 .team-container {
   margin: 0.6rem 0;
   max-width: 40rem;
-  border: solid 5px rgba(0, 0, 0, 0.3);
+  border: solid 5px #20222D;
   border-radius: 8px;
 }
 
 .team-stats {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1.4fr;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: #20222D;
 
   .character-tile-container {
     overflow: hidden;
@@ -42,7 +42,7 @@
   justify-content: center;
   align-items: baseline;
   flex-flow: column;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: #20222D;
 
   .team-flex {
     position: relative;
@@ -65,7 +65,7 @@
     display: flex;
     justify-content: center;
     padding-bottom: 0.3rem;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: #20222D;
 
     &:hover {
       cursor: pointer;

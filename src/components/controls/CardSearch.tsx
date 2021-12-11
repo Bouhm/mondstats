@@ -5,7 +5,7 @@ import { debounce, difference, filter, find, includes, map, orderBy, times, uniq
 import React, { ReactNode, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getCharacterFileName, getShortName, shortenId } from '../../scripts/util';
+import { getCharacterFileName, getShortName } from '../../scripts/util';
 import Dropdown, { Option } from '../controls/Dropdown';
 import { useAppSelector } from '../hooks/useRedux';
 import Card from '../ui/Card';
@@ -65,7 +65,7 @@ function ArtifactSets(props: CardSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
-          <img className="item-option-portrait" src={`/assets/artifacts/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-portrait" src={`/assets/artifacts/${value}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>
@@ -84,7 +84,7 @@ function Weapons(props: CardSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
-          <img className="item-option-portrait" src={`/assets/weapons/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-portrait" src={`/assets/weapons/${value}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>

@@ -4,7 +4,7 @@ import './HorizontalBarChart.scss';
 import { map } from 'lodash';
 import React from 'react';
 
-import { getPercentage, shortenId } from '../../scripts/util';
+import { getPercentage } from '../../scripts/util';
 import Divider from './Divider';
 import LLImage from './LLImage';
 import Tooltip from './Tooltip';
@@ -36,7 +36,7 @@ function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart
           <div className={`bar-card`}>
             <Tooltip content={`${name}: ${count}`}>
               <div className='bar-card-title'>
-                <LLImage className={`rarity-${rarity}`} src={`/assets/${path}/${shortenId(_id)}.webp`} alt={name} />
+                <LLImage className={`rarity-${rarity}`} src={`/assets/${path}/${_id}.webp`} alt={name} />
                 <div className="bar-card-detail">
                   <div className="bar-card-name">
                     {name}

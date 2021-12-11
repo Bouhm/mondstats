@@ -4,7 +4,7 @@ import { find, isEmpty, orderBy, reduce, take } from 'lodash';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getShortName, shortenId } from '../../scripts/util';
+import { getShortName } from '../../scripts/util';
 import Button from '../controls/Button';
 import useApi from '../hooks/useApi';
 import useExpand from '../hooks/useExpand';
@@ -46,7 +46,7 @@ function WeaponPage() {
         <h1>Weapon</h1>
         <div className="weapon-info-container">
           <div className="weapon-info">
-            <img src={`/assets/weapons/${shortenId(weapon._id)}.webp`} />
+            <img src={`/assets/weapons/${weapon._id}.webp`} />
             <div className="weapon-info-stats">
               <div className="weapon-info-stat-title">Base Atk:</div>
               <div className="weapon-info-stat-value">{weapon.baseAtk}</div>

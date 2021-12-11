@@ -32,16 +32,16 @@ export function getArtifactSetNames(artifacts: IArtifactSet[], db: IArtifactSetD
   return label;
 }
 
-export function shortenId(_id: string) {
-  return reverse(_id.split('')).splice(0, _id.length/2).join('');
-}
+// export function shortenId(_id: string) {
+//   return reverse(_id.split('')).splice(0, _id.length/2).join('');
+// }
 
 export function getCharacterLabel(char: { name: string, element: string }) {
   return char.name === "Traveler" ? `Traveler (${char.element})` : char.name;
 }
 
 export function getCharacterFileName(char: { name: string, _id: string }) {
-  return char.name === "Traveler" ? "traveler" : shortenId(char._id);
+  return char.name === "Traveler" ? "traveler" : char._id;
 }
 
 export function numberWithCommas(n: number) {

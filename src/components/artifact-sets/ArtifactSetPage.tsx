@@ -4,7 +4,7 @@ import { find, isEmpty, orderBy, reduce, take } from 'lodash';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getShortName, shortenId } from '../../scripts/util';
+import { getShortName } from '../../scripts/util';
 import Button from '../controls/Button';
 import useApi from '../hooks/useApi';
 import useExpand from '../hooks/useExpand';
@@ -43,7 +43,7 @@ function ArtifactSetPage() {
       </div>
       <div className="weapon-detail">
         <div className="weapon-info">
-          <img src={`/assets/weapons/${shortenId(weapon._id)}.webp`} />
+          <img src={`/assets/weapons/${weapon._id}.webp`} />
         </div>
       </div>
     </div>

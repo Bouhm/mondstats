@@ -10,7 +10,6 @@ import {
   getCharacterFileName,
   getCharacterLabel,
   getPercentage,
-  shortenId,
 } from '../../scripts/util';
 import ArtifactSetBuild from '../artifact-sets/ArtifactSetBuild';
 import CharacterCount from '../characters/CharacterCount';
@@ -113,7 +112,7 @@ function Weapons({data}: any) {
   const renderCard = (itemStat: any) => (
     <Tooltip content={`${db[itemStat._id].name}`}>
       <div className="row-card col">
-        <LLImage src={`/assets/${title}/${shortenId(itemStat._id)}.webp`} />
+        <LLImage src={`/assets/${title}/${itemStat._id}.webp`} />
       </div>
     </Tooltip>
   )
