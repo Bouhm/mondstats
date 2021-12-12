@@ -28,6 +28,7 @@ interface ITotals {
 }
 
 function CharacterPage() {  
+  console.log("HELLO?????")
   const { shortName } = useParams();
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
@@ -44,9 +45,10 @@ function CharacterPage() {
 
   const charId = characterIdMap[shortName as string]
   const _characterBuilds = useApi(`/characters/${charId}.json`);
-  const _characterMainBuilds = useApi(`/characters/mains/${charId}.json`);
+  // const _characterMainBuilds = useApi(`/characters/mains/${charId}.json`);
   const [characterBuilds, setCharacterBuilds] = useState(_characterBuilds)
 
+  console.log(character, characterBuilds)
   useEffect(() => {
     if (!isEmpty(characterDb)) {
       const char = characterDb[charId];
@@ -72,13 +74,13 @@ function CharacterPage() {
   //   }
   // }, [_characterStats, charId])
 
-  if (!characterDb || !characterIdMap || !character || !characterStats) {
+  if (!characterDb || !characterIdMap || !character) {
     return <div>
       <Loader />
     </div>
   }
 
-  if (!characterBuilds || !_characterMainBuilds || isEmpty(characterBuilds.builds) || isEmpty(_characterMainBuilds)) {
+  if (!characterBuilds || isEmpty(characterBuilds.builds)) {
     return <Empty />
   }
 
@@ -121,7 +123,7 @@ function CharacterPage() {
         </div>
         {characterBuilds.builds &&
           <>
-            <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky>
+            {/* <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky> */}
             <BuildSelector
               builds={take(characterBuilds.builds, maxBuilds)}
               total={characterBuilds.total}

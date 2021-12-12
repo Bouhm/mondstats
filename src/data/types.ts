@@ -98,9 +98,9 @@ export interface IAbyssBattle {
 export interface IAbyssParty {
   coreParty: string[],
   flex: IFlexChar[][]
-  battleCount: number,
-  avgStar: number,
-  winCount: number
+  battleCount?: number,
+  avgStar?: number,
+  winCount?: number
 }
 
 export interface IParty {
@@ -110,7 +110,9 @@ export interface IParty {
 
 export interface IFlexChar {
   charId: string,
-  battleCount: number
+  battleCount: number,
+  avgStar: number,
+  winCount: number
 }
 
 export interface IArtifactSetStats {

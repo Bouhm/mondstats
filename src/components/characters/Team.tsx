@@ -61,7 +61,13 @@ function Team({ team, winCount, battleCount, avgStar, percent, flex = [] }: Team
                 <div className="team-flex" key={`${team[0]}-${flex[0][0].charId}-${i}`}>
                   <CharacterCount character={characterDb[party[0].charId]} battleCount={party[0].battleCount} />
                   <Exchange size={22} />
-                  {map(party.slice(1), ({charId, battleCount}, i) => <CharacterCount key={`${charId}-${i}`} character={characterDb[charId]} battleCount={battleCount} />)}
+                  <div className="team-flex-options">
+                    {map(party.slice(1), ({charId, battleCount}, i) => 
+                      <div className="team-flex-stats">
+                        <CharacterCount key={`${charId}-${i}`} character={characterDb[charId]} battleCount={battleCount} />
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
             </>}

@@ -4,7 +4,7 @@ import _, { map } from 'lodash';
 import React, { ReactNode } from 'react';
 
 import { ElementColors } from '../../../data/constants';
-import { getPercentage, shortenId } from '../../../scripts/util';
+import { getPercentage  } from '../../../scripts/util';
 import { useAppSelector } from '../../hooks/useRedux';
 import BarChart from '../../ui/BarChart';
 import Tooltip from '../../ui/Tooltip';

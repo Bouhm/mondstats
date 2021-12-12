@@ -166,7 +166,7 @@ function ItemStatsTable({ data, title, renderCard }: StatsTableProps) {
                 </>
               </Tooltip>
               <ScrollContainer vertical={false} className="row-related col">
-                {map(itemStat.characters, (charStat, j) => <CharacterCount character={characterDb[charStat._id]} count={charStat.count} key={`${charStat._id}-${i}-${j}`}/>)}
+                {map(itemStat.characters, (charStat, j) => <CharacterCount character={characterDb[charStat._id]} battleCount={charStat.battleCount} key={`${charStat._id}-${i}-${j}`}/>)}
               </ScrollContainer>
             </div>
           )
