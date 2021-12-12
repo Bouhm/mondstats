@@ -2,29 +2,16 @@ import './App.scss';
 import 'react-popper-tooltip/dist/styles.css';
 import 'rc-pagination/assets/index.css';
 
-import axios from 'axios';
-import { forEach, isEmpty } from 'lodash';
+import { forEach } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 // import { gql, useQuery } from '@apollo/client';
-import AbyssPage from './components/abyss/AbyssPage';
-import ArtifactSetIndex from './components/artifact-sets/ArtifactSetIndex';
-import ArtifactSetPage from './components/artifact-sets/ArtifactSetPage';
-import CharacterPage from './components/characters/builds/CharacterPage';
-import BuildSearch from './components/characters/BuildSearch';
-import CharacterIndex from './components/characters/CharacterIndex';
-import Home from './components/Home';
 import useApi from './components/hooks/useApi';
-import { useAppDispatch, useAppSelector } from './components/hooks/useRedux';
+import { useAppDispatch } from './components/hooks/useRedux';
 import Navbar from './components/navbar/Navbar';
-import About from './components/pages/About';
-import Changelog from './components/pages/Changelog';
-import UnderConstruction from './components/pages/WIP';
 import Sidebar from './components/sidebar/Sidebar';
 import Dialogue from './components/ui/Dialogue';
-import WeaponIndex from './components/weapons/WeaponIndex';
-import WeaponPage from './components/weapons/WeaponPage';
 import {
   IArtifactData,
   IArtifactDb,
@@ -39,6 +26,7 @@ import { getShortName } from './scripts/util';
 import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
 
 function App() {
+  console.log("app")
   const dispatch = useAppDispatch()
   const [showNotice, setShowNotice] = useState(false)
   // const { loading, error, data } = useQuery(Query);
@@ -95,18 +83,7 @@ function App() {
         <Sidebar />
         <div className="section-view" style={showNotice ? {filter: 'blur(3px)'} : {}}  >
           <main>
-            <Routes>
-              <Route path="/" element={<Home/>} />
-              <Route path="/about" element={<About/>} />
-              <Route path="/changelog" element={<Changelog/>} />
-              <Route path="/abyss" element={<AbyssPage/>} />
-              <Route path="/characters/:shortName" element={<CharacterPage/>} />
-              <Route path="/characters" element={<CharacterIndex/>} />
-              <Route path="/artifacts/:shortName" element={<ArtifactSetPage/>} />
-              <Route path="/artifacts" element={<ArtifactSetIndex/>} />
-              <Route path="/weapons/:shortName" element={<WeaponPage/>} />
-              <Route path="/weapons" element={<WeaponIndex/>} />
-            </Routes>
+            <Outlet />
           </main>
           <section className="footer">
             <div className="links">
@@ -119,7 +96,6 @@ function App() {
         </div>
       </main>
       <Navbar />
-
       <span className="build-ver">dev build 10.10.21</span>
     </div>
   )
