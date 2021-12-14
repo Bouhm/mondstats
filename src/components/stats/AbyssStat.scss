@@ -1,0 +1,11 @@
+.abyss-stat {
+  font-size: 1.8vw;
+  display: flex;
+  flex-flow: column;
+}
+
+@media (min-width: 700px) {
+  .abyss-stat {
+    font-size: 0.8rem;
+  }
+}

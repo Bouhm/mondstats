@@ -12,6 +12,7 @@ import { useAppDispatch } from './components/hooks/useRedux';
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
 import Dialogue from './components/ui/Dialogue';
+import Loader from './components/ui/Loader';
 import {
   IArtifactData,
   IArtifactDb,
@@ -26,9 +27,9 @@ import { getShortName } from './scripts/util';
 import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
 
 function App() {
-  console.log("app")
   const dispatch = useAppDispatch()
   const [showNotice, setShowNotice] = useState(false)
+  const [hasLoadedDb, setHasLoadedDb] = useState(false)
   // const { loading, error, data } = useQuery(Query);
   const db = useApi(`/db.json`);
   const notice = <p>
@@ -51,7 +52,7 @@ function App() {
   
         charIdMap[getShortName(character)] = character._id;
       })
-  
+
       forEach(db.weapons, (weapon: IWeaponData) => {
         weaponDb[weapon._id] = weapon
       })
@@ -69,8 +70,9 @@ function App() {
       dispatch(setCharacterDb(characterDb))
       dispatch(setCharacterIdMap(charIdMap))
       dispatch(setWeaponDb(weaponDb))
+      setHasLoadedDb(true)
     }
-  }, [db])
+  }, [db, setHasLoadedDb])
 
   return (
     <div className="App">
@@ -83,7 +85,7 @@ function App() {
         <Sidebar />
         <div className="section-view" style={showNotice ? {filter: 'blur(3px)'} : {}}  >
           <main>
-            <Outlet />
+            {hasLoadedDb ? <Outlet /> : <Loader />}
           </main>
           <section className="footer">
             <div className="links">

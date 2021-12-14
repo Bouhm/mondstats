@@ -2,10 +2,10 @@
   margin: 0.6rem 0;
   max-width: 40rem;
   border: solid 5px #20222D;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
-.team-stats {
+.team-stats-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1.4fr;
   background-color: #20222D;
@@ -14,13 +14,13 @@
     overflow: hidden;
 
     &:first-of-type {
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
     }
   }
 
   &.asExpandable {
-    &:hover {
+  &:hover {
       cursor: pointer;
     }
   }
@@ -40,13 +40,11 @@
 .team-flex-container {
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
   flex-flow: column;
   background-color: #20222D;
 
   .team-flex {
-    position: relative;
-    left: 30%;
     margin-top: 0.3rem;
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
@@ -66,8 +64,19 @@
       display: flex;
       flex-flow: column;
 
-      .team-flex-stats {
+      .team-flex-stats-container {
         display: flex;
+
+        .team-flex-stats {
+          margin-left: 0.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+
+          > div {
+            margin: 0 0.5rem;
+          }
+        }
       }
     }
   }
@@ -85,7 +94,7 @@
   }
 }
 
-.team-popularity {
+.team-stats {
   position: relative;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.1);
@@ -98,59 +107,12 @@
     display: flex;
     color: white;
     justify-content: space-evenly;
-
-    .team-abyss-stats {
-      display: flex;
-      flex-flow: column;
-      height: 100%;
-      font-size: 1.8vw;
-    }
-  }
-
-  .team-popularity-pct {
-    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 4.6vw;
-  }
-
-  .team-popularity-count {
-    margin: 0.2rem;
-    color: white;
-    text-shadow: none;
-    font-size: 2.4vw;
-    white-space: nowrap;
-  }
-}
-
-@media (min-width: 647px) {
-  .team-popularity {
-    .team-abyss-stats-container {
-      .team-abyss-stats {
-        font-size: 0.8rem;
-      }
-    }
-
-    .team-popularity-pct {
-      font-size: 2.1rem;
-    }
-
-    .team-popularity-count {
-      font-size: 1.4rem;
-    }
   }
 }
 
 @media (max-width: 544px) {
   .team-container {
-    margin: 0.3rem 0;
-  }
-
-  .team-popularity {
-    .team-popularity-pct {
-      text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
-    }
+    margin: 0.2rem 0;
   }
 
   .team-flex-container {
@@ -175,23 +137,3 @@
     }
   }
 }
-
-// @media (max-width: 544px) {
-//   .team-container {
-//     margin: 0.5rem 0;
-//   }
-
-//   .team-popularity {
-//     width: calc(68px - 1rem);
-
-//     .team-popularity-pct {
-//       margin: 0;
-//       line-height: 1.5rem;
-//       font-size: 1rem;
-//     }
-
-//     .team-popularity-count {
-//       font-size: 0.7rem;
-//     }
-//   }
-// }

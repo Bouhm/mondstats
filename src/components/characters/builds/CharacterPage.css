@@ -100,22 +100,6 @@
   opacity: 0.5;
 }
 
-@media (min-width: 647px) {
-  .character-stats-container {
-    .character-stats-title {
-      font-size: 2rem;
-    }
-
-    .character-stats-popularity {
-      font-size: 3.5rem;
-    }
-
-    .character-stats-pct {
-      font-size: 3.5rem;
-    }
-  }
-}
-
 @media (max-width: 1024px) {
   .character-page {
     h1 {

@@ -1,5 +1,7 @@
 import React from 'react';
 
+// https://fontawesome.com/
+
 type IconProps = {
   size?: number,
   color?: string,

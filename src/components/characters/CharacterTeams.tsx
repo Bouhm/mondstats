@@ -3,14 +3,14 @@ import './CharacterTeams.scss';
 import { filter, includes, map, reduce, sortBy, take } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
-import { IParty } from '../../../data/types';
-import { getPercentage } from '../../../scripts/util';
-import Button from '../../controls/Button';
-import useExpand from '../../hooks/useExpand';
-import { FiltersType } from '../../hooks/useFilters';
-import { useAppSelector } from '../../hooks/useRedux';
-import { ChevronDown, ChevronUp } from '../../ui/Icons';
-import Team from '../Team';
+import { IParty } from '../../data/types';
+import { getPercentage } from '../../scripts/util';
+import Team from '../abyss/Team';
+import Button from '../controls/Button';
+import useExpand from '../hooks/useExpand';
+import { FiltersType } from '../hooks/useFilters';
+import { useAppSelector } from '../hooks/useRedux';
+import { ChevronDown, ChevronUp } from '../ui/Icons';
 
 interface ITeam {
   party: string[],
@@ -56,7 +56,7 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: FiltersT
     <div className="parties-container">
        <h2>{reduce(filteredTeams, (sum, curr) => sum + curr.count, 0)} Teams</h2>
       {map(take(filteredTeams, expanded ? max : 5), ({party, count}, i) => (
-        <Team key={`team-${i}`} team={party} count={count} percent={`${getPercentage(count, reduce(filteredTeams, (sum,curr) => sum + curr.count, 0))}%`} />
+        <Team key={`team-${i}`} team={party} total={reduce(filteredTeams, (sum,curr) => sum + curr.count, 0)} />
       ))}
       {filteredTeams.length > 5 && (
         !expanded 

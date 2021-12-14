@@ -1,25 +1,12 @@
 import './Tabs.scss';
 
-import React, { useState } from 'react';
 import { map } from 'lodash';
+import React from 'react';
 
 type TabsProps = {
   tabs: string[]
   activeTabIdx: number;
   onChange: (tabIdx: number) => void;
-}
-
-export function useTabs() {
-  const [activeTabIdx, setCurrentTabIdx] = useState(0)
-
-  const onTabChange = (tabIdx: number) => {
-    setCurrentTabIdx(tabIdx);
-  }
-
-  return {
-    activeTabIdx,
-    onTabChange
-  }
 }
 
 const Tabs = ({ tabs, activeTabIdx, onChange }: TabsProps) => {

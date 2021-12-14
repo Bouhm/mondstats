@@ -3,13 +3,14 @@ import { isEmpty, map, orderBy, reduce, some, take } from 'lodash';
 import React from 'react';
 
 import { getPercentage } from '../../scripts/util';
-import Team from '../characters/Team';
+import Team from '../abyss/Team';
 import Button from '../controls/Button';
 import { Option } from '../controls/Dropdown';
+import { useTabs } from '../hooks/useTabs';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import LLImage from '../ui/LLImage';
 import Loader from '../ui/Loader';
-import Tabs, { useTabs } from '../ui/Tabs';
+import Tabs from '../ui/Tabs';
 
 type AbyssFloorProps = {
   abyssFloors: any,
@@ -39,10 +40,17 @@ const AbyssFloor = ({ abyssFloors, selectedStage, stageLimitToggle, onToggleLimi
               <div key={`battle-${selectedStage.value}-${i}-${activeTabIdx}`} className="battle-container">
                 {battle_parties[activeTabIdx].length > 0 ? 
                   <>
-                    {map(take(orderBy(battle_parties[activeTabIdx], 'count', 'desc'), stageLimitToggle[selectedStage.value] ? maxParties : pageSize), ({coreParty, flex, count}, k) => {
+                    {map(take(orderBy(battle_parties[activeTabIdx], 'count', 'desc'), stageLimitToggle[selectedStage.value] ? maxParties : pageSize), ({coreParty, flex, battleCount, winCount, avgStar}, k) => {
                         const party = [...coreParty, flex[0][0].charId]
                         return (
-                          <Team key={`team-${selectedStage.value}-${k}`} team={party} flex={flex} count={count} percent={`${getPercentage(count, reduce(battle_parties[activeTabIdx], (sum,curr) => sum + curr.count, 0))}%`} />
+                          <Team 
+                            key={`team-${selectedStage.value}-${k}`} 
+                            team={party} flex={flex} 
+                            total={reduce(battle_parties[activeTabIdx], (sum, curr) => sum + curr.count, 0)} 
+                            winCount={winCount} 
+                            battleCount={battleCount} 
+                            avgStar={avgStar} 
+                          />
                         )
                       })
                     }

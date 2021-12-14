@@ -21,7 +21,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { IAbyssBattle, IAbyssParty } from '../../data/types';
 import { getPercentage } from '../../scripts/util';
-import Team from '../characters/Team';
+import Team from '../abyss/Team';
 import Button from '../controls/Button';
 import CardSearch from '../controls/CardSearch';
 import { Option } from '../controls/Dropdown';
@@ -29,9 +29,10 @@ import useApi from '../hooks/useApi';
 import useCharacterSearch from '../hooks/useCharacterSearch';
 import useFilters from '../hooks/useFilters';
 import { useAppSelector } from '../hooks/useRedux';
+import { useTabs } from '../hooks/useTabs';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
-import Tabs, { useTabs } from '../ui/Tabs';
+import Tabs from '../ui/Tabs';
 import AbyssFloor from './AbyssFloor';
 
 // import abyssFloors from './abyssFloors.json';
@@ -174,7 +175,7 @@ function AbyssPage() {
             const party = [...coreParty, flex[0][0].charId]
             return <React.Fragment key={`parties-ALL-${i}`}>
               <div className="battle-container">
-                <Team team={party} battleCount={battleCount} winCount={winCount} avgStar={avgStar} flex={flex} percent={`${getPercentage(battleCount, total)}%`} />
+                <Team team={party} battleCount={battleCount} winCount={winCount} avgStar={avgStar} flex={flex} total={total} />
               </div>
             </React.Fragment>
           })}
