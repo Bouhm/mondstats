@@ -16,6 +16,7 @@ type ArtifactSetBuildProps = {
 
 function ArtifactSetBuild({ artifacts, color='', selected=false, selector=false }: ArtifactSetBuildProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
+  const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
 
   return (
     <div className={`artifact-set-build-container ${selector ? 'asSelector' : ''} ${selected ? "asSelected" : ""}`} style={selected ? {backgroundColor: color }:{}}>

@@ -4,11 +4,11 @@ import _, { map } from 'lodash';
 import React, { ReactNode } from 'react';
 
 import { ElementColors } from '../../../data/constants';
-import { getPercentage  } from '../../../scripts/util';
+import { getPercentage } from '../../../scripts/util';
 import { useAppSelector } from '../../hooks/useRedux';
 import BarChart from '../../ui/BarChart';
+import LLImage from '../../ui/LLImage';
 import Tooltip from '../../ui/Tooltip';
-import LLImage from '../../ui/LLImage'
 
 type ConstellationsProps = {
   constellations: number[],

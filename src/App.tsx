@@ -16,6 +16,8 @@ import Loader from './components/ui/Loader';
 import {
   IArtifactData,
   IArtifactDb,
+  IArtifactSetBuildData,
+  IArtifactSetBuildDb,
   IArtifactSetData,
   IArtifactSetDb,
   ICharacterData,
@@ -46,6 +48,7 @@ function App() {
       let weaponDb: IWeaponDb = {}
       let artifactDb: IArtifactDb = {}
       let artifactSetDb: IArtifactSetDb = {}
+      let artifactSetBuildDb: IArtifactSetBuildDb = {}
   
       forEach(db.characters, (character: ICharacterData) => {
         characterDb[character._id] = character;
@@ -64,9 +67,14 @@ function App() {
       forEach(db.artifactSets, (set: IArtifactSetData) => {
         artifactSetDb[set._id] = set
       })
+
+      forEach(db.artifactSetBuilds, (setBuild: IArtifactSetBuildData) => {
+        artifactSetBuildDb[setBuild._id] = setBuild
+      })
   
       dispatch(setArtifactDb(artifactDb))
       dispatch(setArtifactSetDb(artifactSetDb))
+      dispatch(setArtifactSetBuildDb(artifactSetBuildDb))
       dispatch(setCharacterDb(characterDb))
       dispatch(setCharacterIdMap(charIdMap))
       dispatch(setWeaponDb(weaponDb))
@@ -104,3 +112,7 @@ function App() {
 }
 
 export default App
+
+function setArtifactSetBuildDb(artifactSetBuildDb: IArtifactSetBuildDb): any {
+  throw new Error('Function not implemented.');
+}

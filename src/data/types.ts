@@ -38,6 +38,11 @@ export interface IArtifactSetData {
   affixes: IAffix[]
 }
 
+export interface IArtifactSetBuildData {
+  _id: string,
+  sets: IArtifactSet[]
+}
+
 export interface IAffix { 
   activation_number: number,
   effect: string
@@ -59,6 +64,10 @@ export interface IArtifactSetDb {
   [id: string]: IArtifactSetData
 }
 
+export interface IArtifactSetBuildDb {
+  [id: string]: IArtifactSetBuildData
+}
+
 export interface ICharacterBuild {
   avg_level: number,
   constellations: number[],
@@ -76,7 +85,6 @@ export interface IWeaponBuild {
 export interface IArtifactSet {
   _id: string,
   activation_number: number,
-  rarity?: number
 }
 
 export interface IBuild {
