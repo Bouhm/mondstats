@@ -14,7 +14,9 @@ import { ChevronDown, ChevronUp } from '../ui/Icons';
 
 interface ITeam {
   party: string[],
-  count: number
+  battleCount: number,
+  winCount: number,
+  avgStar: number
 }
 
 function CharacterTeams({ teams, filters }: { teams: IParty[], filters: FiltersType }) {
@@ -54,9 +56,9 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: FiltersT
 
   const renderParties = () => (
     <div className="parties-container">
-       <h2>{reduce(filteredTeams, (sum, curr) => sum + curr.count, 0)} Teams</h2>
-      {map(take(filteredTeams, expanded ? max : 5), ({party, count}, i) => (
-        <Team key={`team-${i}`} team={party} total={reduce(filteredTeams, (sum,curr) => sum + curr.count, 0)} />
+       <h2>{reduce(filteredTeams, (sum, curr) => sum + curr.battleCount, 0)} Teams</h2>
+      {map(take(filteredTeams, expanded ? max : 5), ({party, battleCount, winCount, avgStar}, i) => (
+        <Team key={`team-${i}`} team={party} total={reduce(filteredTeams, (sum,curr) => sum + curr.battleCount, 0)} battleCount={battleCount} winCount={winCount} avgStar={avgStar}  />
       ))}
       {filteredTeams.length > 5 && (
         !expanded 

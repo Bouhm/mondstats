@@ -105,7 +105,9 @@ export interface IAbyssParty {
 
 export interface IParty {
   party: string[],
-  count: number
+  battleCount: number,
+  avgStar: number,
+  winCount: number
 }
 
 export interface IFlexChar {

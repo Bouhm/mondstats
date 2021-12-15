@@ -23,7 +23,7 @@ type BuildSelectorProps = {
   color: string
 }
 
-function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
+function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) { 
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
 
