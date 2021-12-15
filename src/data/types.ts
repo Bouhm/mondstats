@@ -88,14 +88,13 @@ export interface IArtifactSet {
 }
 
 export interface IBuild {
+  artifactSetBuildId: string,
   weapons: IWeaponBuild[],
-  artifacts: IArtifactSet[]
-  count: number
 }
 
 export interface IAbyssData {
   teams: IAbyssParty[],
-  batttles: IAbyssBattle[]
+  battles: IAbyssBattle[]
 }
 
 export interface IAbyssBattle {

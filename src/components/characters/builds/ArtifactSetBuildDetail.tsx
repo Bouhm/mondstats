@@ -5,19 +5,20 @@ import { IArtifactSet } from '../../../data/types';
 import ArtifactSetInfo from '../../artifact-sets/ArtifactSetInfo';
 import { useAppSelector } from '../../hooks/useRedux';
 
-type ArtifactBuildProps = {
-  artifacts: IArtifactSet[]
+type ArtifactSetBuildDetail = {
+  id: string;
 }
 
-function ArtifactBuild({ artifacts }: ArtifactBuildProps) {
+function ArtifactSetBuildDetail({ id }: ArtifactSetBuildDetail) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
+  const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
 
   if (_.isEmpty(artifactSetDb)) return null;
 
   return (
-    <div className="artifact-build">
+    <div className="artifact-set-build-detail">
       <h1>Artifacts</h1>
-      {_.map(artifacts, ({ _id, activation_number }, i) => {
+      {_.map(artifactSetBuildDb[id].sets, ({ _id, activation_number }, i) => {
         const set = artifactSetDb[_id]
         if (!set) return null;
 
@@ -27,4 +28,4 @@ function ArtifactBuild({ artifacts }: ArtifactBuildProps) {
   )
 }
 
-export default ArtifactBuild
+export default ArtifactSetBuildDetail

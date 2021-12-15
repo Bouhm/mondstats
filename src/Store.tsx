@@ -57,6 +57,7 @@ export const {
   selectCharacter,
   setArtifactDb,
   setArtifactSetDb,
+  setArtifactSetBuildDb,
   setWeaponDb,
   setCharacterDb
 } = dataSlice.actions;

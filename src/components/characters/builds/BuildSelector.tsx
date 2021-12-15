@@ -1,19 +1,19 @@
 import './BuildSelector.scss';
 
 import AmberSad from '/assets/amberSad.webp';
-import _, { every, filter, forEach, map, orderBy } from 'lodash';
+import _, { every, filter, forEach, map, orderBy, reduce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
 import { ElementColors } from '../../../data/constants';
 import { IBuild } from '../../../data/types';
 import { getArtifactSetNames, getPercentage } from '../../../scripts/util';
-import ArtifactSetBuild from '../../artifact-sets/ArtifactSetBuild';
+import ArtifactSetBuild from '../../artifact-sets/ArtifactSetBuildCard';
 import { FiltersType } from '../../hooks/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import Chart from '../../ui/Chart';
 import LLImage from '../../ui/LLImage';
-import ArtifactBuild from './ArtifactBuild';
+import ArtifactBuild from './ArtifactSetBuildDetail';
 import WeaponBuild from './WeaponBuild';
 
 type BuildSelectorProps = {
@@ -25,24 +25,24 @@ type BuildSelectorProps = {
 
 function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) { 
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
+  const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
 
-  const filteredBuilds = orderBy(filter(builds, (build: IBuild) => every(build.artifacts, set => !!artifactSetDb[set._id])), 'count', 'desc');
+  const filteredBuilds = orderBy(filter(builds, ({artifactSetBuildId}: IBuild) => every(artifactSetBuildDb[artifactSetBuildId].sets, set => !!artifactSetDb[set._id])), 'count', 'desc');
   let labels: string[] = [];
   let data: number[] = [];
   let colors: string[] = [];
   let countSum = 0; 
 
-  forEach(filteredBuilds, build => {
-    const label = getArtifactSetNames(build.artifacts, artifactSetDb)
+  forEach(filteredBuilds, ({ artifactSetBuildId, count }) => {
+    const label = getArtifactSetNames(artifactSetBuildDb[artifactSetBuildId].sets, artifactSetDb)
     if (!label) {
-      console.log(build)
       return;
     }
     
     labels.push(label);
-    data.push(build.count);
-    countSum += build.count;
+    data.push(count);
+    countSum += count;
   })
 
   colors = Array(labels.length).fill(ElementColors.none)
@@ -54,12 +54,12 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
 
   return (
     <div className="character-builds">
-      <div className="artifacts-selector">
-        <ScrollContainer vertical={false} hideScrollbars={true} className="artifacts-menu">
+      <div className="artifact-set-builds-selector">
+        <ScrollContainer vertical={false} hideScrollbars={true} className="artifact-set-builds-menu">
           {map(filteredBuilds, (build, i) => {
               return (
                 <div key={`artifacts-thumb-${i}`} onClick={() => handleSelectSet(i)}>
-                  <ArtifactSetBuild artifacts={build.artifacts} color={color} selected={i === activeBuildIdx} selector={true} />
+                  <ArtifactSetBuild id={build.artifactSetBuildId} color={color} selected={i === activeBuildIdx} selector={true} />
                 </div>
               )
             })
@@ -69,19 +69,19 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
       <div className="build-details">
         <WeaponBuild
           weaponBuilds={filteredBuilds[activeBuildIdx].weapons}
-          total={filteredBuilds[activeBuildIdx].count}
+          total={reduce(filteredBuilds[activeBuildIdx].weapons, (sum, curr) => sum + curr.count, 0)}
           color={color}
           filters={filters}
         />
-        <div className="artifact-build-container">
-          <div className="artifact-build-stats">
+        <div className="artifact-set-build-container">
+          <div className="artifact-set-build-stats">
             <ArtifactBuild
-              artifacts={filteredBuilds[activeBuildIdx].artifacts}
+              id={filteredBuilds[activeBuildIdx].artifactSetBuildId}
             />
-            <div className="artifacts-donut-container">
-              <div className="artifacts-donut-chart">
+            <div className="artifact-set-builds-donut-container">
+              <div className="artifact-set-builds-donut-chart">
                 <Chart.Donut
-                  id="artifacts-donut"
+                  id="artifact-set-builds-donut"
                   labels={labels}
                   data={data}
                   colors={colors}

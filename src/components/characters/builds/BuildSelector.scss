@@ -12,27 +12,27 @@
   padding-right: 1rem;
 }
 
-.artifact-build-container {
+.artifact-set-build-container {
   display: flex;
   flex: 2;
 
-  .artifact-build-stats {
+  .artifact-set-build-stats {
     display: flex;
     flex-flow: column;
     margin-right: 1rem;
     width: 100%;
 
-    .artifact-build {
+    .artifact-set-build-detail {
       min-height: 480px;
     }
 
-    .artifacts-donut-container {
+    .artifact-set-builds-donut-container {
       position: relative;
       display: flex;
       width: 100%;
       justify-content: center;
 
-      .artifacts-donut-chart {
+      .artifact-set-builds-donut-chart {
         z-index: 1;
         max-width: 380px;
         width: 90%;
@@ -52,7 +52,7 @@
   }
 }
 
-.artifacts-selector {
+.artifact-set-builds-selector {
   display: flex;
   justify-content: center;
   padding: 1rem 1rem 0 1rem;
@@ -63,7 +63,7 @@
     overflow: hidden;
   }
 
-  .artifacts-menu {
+  .artifact-set-builds-menu {
     display: flex;
     overflow-y: hidden;
 
@@ -73,10 +73,10 @@
     }
   }
 
-  .artifacts-menu-controls {
+  .artifact-set-builds-menu-controls {
     display: none;
 
-    .artifacts-menu-button {
+    .artifact-set-builds-menu-button {
       position: absolute;
       right: -2rem;
       border-radius: 50%;
@@ -98,8 +98,8 @@
 }
 
 @media (max-width: 1280px) {
-  .artifacts-selector {
-    .artifacts-menu {
+  .artifact-set-builds-selector {
+    .artifact-set-builds-menu {
       height: 70px;
 
       div {
@@ -119,8 +119,8 @@
     flex-flow: column-reverse;
   }
 
-  .artifacts-selector {
-    .artifacts-menu {
+  .artifact-set-builds-selector {
+    .artifact-set-builds-menu {
       height: 60px;
 
       div {
@@ -132,9 +132,9 @@
     }
   }
 
-  .artifact-build-container {
-    .artifact-build-stats {
-      .artifact-build {
+  .artifact-set-build-container {
+    .artifact-set-build-stats {
+      .artifact-set-detail {
         min-height: 0;
         height: 100%;
       }
@@ -143,8 +143,8 @@
 }
 
 @media (max-width: 826px) {
-  .artifacts-selector {
-    .artifacts-menu {
+  .artifact-set-builds-selector {
+    .artifact-set-builds-menu {
       height: 60px;
 
       div {
@@ -172,24 +172,24 @@
     font-size: 2rem;
   }
 
-  .artifact-build-container {
+  .artifact-set-build-container {
     height: 100%;
     max-height: 100%;
     flex-wrap: wrap-reverse;
 
-    .artifacts-menu-controls {
+    .artifact-set-builds-menu-controls {
       display: block;
     }
 
-    .artifact-build-stats {
+    .artifact-set-build-stats {
       margin-right: 0;
     }
   }
 }
 
 @media (max-width: 544px) {
-  .artifacts-selector {
-    .artifacts-menu {
+  .artifact-set-builds-selector {
+    .artifact-set-builds-menu {
       height: 50px;
 
       div {

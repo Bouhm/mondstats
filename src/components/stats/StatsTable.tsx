@@ -11,7 +11,7 @@ import {
   getCharacterLabel,
   getPercentage,
 } from '../../scripts/util';
-import ArtifactSetBuild from '../artifact-sets/ArtifactSetBuild';
+import ArtifactSetBuild from '../artifact-sets/ArtifactSetBuildCard';
 import CharacterCount from '../characters/CharacterCount';
 import Pagination from '../controls/Pagination';
 import useApi from '../hooks/useApi';

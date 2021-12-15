@@ -26,7 +26,7 @@ import {
   IWeaponDb,
 } from './data/types';
 import { getShortName } from './scripts/util';
-import { setArtifactDb, setArtifactSetDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
+import { setArtifactDb, setArtifactSetDb, setArtifactSetBuildDb, setCharacterDb, setCharacterIdMap, setWeaponDb } from './Store';
 
 function App() {
   const dispatch = useAppDispatch()
@@ -112,7 +112,3 @@ function App() {
 }
 
 export default App
-
-function setArtifactSetBuildDb(artifactSetBuildDb: IArtifactSetBuildDb): any {
-  throw new Error('Function not implemented.');
-}
