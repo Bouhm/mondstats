@@ -4,6 +4,7 @@
   display: flex;
   flex-flow: column;
   align-item: center;
+  color: white;
 
   h1 {
     margin: 3rem 0;

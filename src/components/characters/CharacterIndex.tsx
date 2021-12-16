@@ -11,10 +11,9 @@ import Loader from '../ui/Loader';
 
 function CharacterIndex() { 
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const characterStats = useApi(`/characters/top-characters.json`)
   const [selectedCharacters, setSelectedCharacters] = useState<string[]>([])
 
-  if (isEmpty(characterDb) || isEmpty(characterStats)) return <Loader />
+  if (isEmpty(characterDb)) return <Loader />
   const { searchCharacters } = useCharacterSearch(characterDb);
 
   const handleSelect = (selectedIds: string[]) => {

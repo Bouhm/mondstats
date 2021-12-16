@@ -16,6 +16,7 @@ import CharacterIndex from './components/characters/CharacterIndex';
 import Home from './components/Home';
 import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';
+import WIP from './components/pages/WIP';
 import ScrollToTop from './components/ScrollToTop';
 import WeaponIndex from './components/weapons/WeaponIndex';
 import WeaponPage from './components/weapons/WeaponPage';
@@ -40,10 +41,15 @@ ReactDOM.render(
             <Route path="abyss" element={<AbyssPage/>} />
             <Route path="characters/:shortName" element={<CharacterPage/>} />
             <Route path="characters" element={<CharacterIndex/>} />
-            <Route path="artifacts/:shortName" element={<ArtifactSetPage/>} />
+            {/* <Route path="artifacts/:shortName" element={<ArtifactSetPage/>} />
             <Route path="artifacts" element={<ArtifactSetIndex/>} />
             <Route path="weapons/:shortName" element={<WeaponPage/>} />
-            <Route path="weapons" element={<WeaponIndex/>} />
+            <Route path="weapons" element={<WeaponIndex/>} /> */}
+            <Route path="artifacts/:shortName" element={<WIP />} />
+            <Route path="artifacts" element={<WIP />} />
+            <Route path="weapons/:shortName" element={<WIP />} />
+            <Route path="weapons" element={<WIP />} />
+            <Route path="charts" element={<WIP />} />
           </Route>
         </Routes>
       </BrowserRouter>

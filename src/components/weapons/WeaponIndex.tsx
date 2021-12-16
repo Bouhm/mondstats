@@ -11,12 +11,11 @@ import Loader from '../ui/Loader';
 
 function WeaponIndex() { 
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
-  const weaponStats = useApi(`/weapons/top-weapons.json`)
   const [selectedWeapons, setSelectedWeapons] = useState<string[]>([])
 
-  if (isEmpty(weaponDb) || isEmpty(weaponStats)) return <Loader />
+  if (isEmpty(weaponDb)) return <Loader />
 
-  const { searchWeapons } = useWeaponSearch(weaponDb, weaponStats.weapons);
+  const { searchWeapons } = useWeaponSearch(weaponDb);
 
   const handleSelect = (selectedIds: string[]) => {
     setSelectedWeapons(selectedIds)

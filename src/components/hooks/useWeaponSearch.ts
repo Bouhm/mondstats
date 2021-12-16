@@ -2,8 +2,8 @@ import { filter, includes, map, uniq } from 'lodash';
 
 import { KEYWORDS } from '../controls/Searchbar';
 
-function useWeaponSearch(weaponDb: any, data: any) {
-  const searchWeapons = map(data, ({_id}) => {
+function useWeaponSearch(weaponDb: any) {
+  const searchWeapons = map(weaponDb, (data, _id) => {
     const weapon = weaponDb[_id]
 
     return ({

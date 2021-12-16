@@ -1,4 +1,4 @@
-import { Chart, ChartOptions, registerables } from 'chart.js';
+import { Chart, ChartItem, ChartOptions, registerables } from 'chart.js';
 import _ from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -136,7 +136,7 @@ function Odometer({ id = "", className = "", max, labels=[], colors = [], data =
       }
       }
       
-      chart = new Chart(ref.current.getContext("2d"), {
+      chart = new Chart(ref.current.getContext("2d")! as unknown as ChartItem, {
         type: "doughnut",
         data: {
           labels,

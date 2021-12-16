@@ -78,7 +78,7 @@ function CharacterPage() {
     return <Loader />
   }
   
-  if (!character || isEmpty(characterBuilds)) {
+  if (!character || isEmpty(characterBuilds) || characterBuilds[tabs[activeTabIdx]]) {
     return <Empty />
   }
 
@@ -90,7 +90,7 @@ function CharacterPage() {
       <div className="character-page">
         <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} /> 
         <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />
-        <div className="character-stats-container">
+        {/* <div className="character-stats-container">
           <div className="character-stats">
             <h2 className="character-stats-title">
               Popularity
@@ -119,7 +119,7 @@ function CharacterPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {characterBuilds[tabs[activeTabIdx]].builds &&
           <>
             {/* <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky> */}
