@@ -39,7 +39,7 @@ export interface IArtifactSetData {
 }
 
 export interface IArtifactSetBuildData {
-  artifactSetBuildId: string,
+  _id: string,
   sets: IArtifactSet[]
 }
 

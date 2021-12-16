@@ -33,7 +33,6 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
   let data: number[] = [];
   let colors: string[] = [];
   let countSum = 0; 
-  console.log("BUILDS", filteredBuilds)
 
   forEach(filteredBuilds, ({ artifactSetBuildId, count }) => {
     const label = getArtifactSetNames(artifactSetBuildDb[artifactSetBuildId].sets, artifactSetDb)
@@ -80,7 +79,7 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
               id={filteredBuilds[activeBuildIdx].artifactSetBuildId}
             />
             <div className="artifact-set-builds-donut-container">
-              <div className="artifact-set-builds-donut-chart">
+            <div className="artifact-set-builds-donut-chart">
                 <Chart.Donut
                   id="artifact-set-builds-donut"
                   labels={labels}
