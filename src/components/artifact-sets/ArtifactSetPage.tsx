@@ -14,7 +14,7 @@ import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 
 function ArtifactSetPage() { 
-  const { shortName } = useParams<{ shortName: string }>();
+  const { shortName } = useParams();
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const allWeaponStats = useApi(`/weapons/weapon-stats.json`)

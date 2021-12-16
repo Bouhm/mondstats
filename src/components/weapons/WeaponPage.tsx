@@ -17,14 +17,14 @@ function WeaponPage() {
   const { shortName } = useParams();
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const allWeaponStats = useApi(`/weapons/weapon-stats.json`)
-  const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const weapon = find(weaponDb, weapon => getShortName(weapon) === shortName)
-  const max = 10;
 
   if (!weapon) return null;
- 
-  const weaponStats = find(allWeaponStats, { _id: weapon!._id });
+
+  const weaponStats = useApi(`/weapons/${weapon._id}.json`)
+  const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
+  const max = 10;
+
 
   if (!weaponStats || isEmpty(weaponDb) || isEmpty(weaponStats)) return <Loader />
 
