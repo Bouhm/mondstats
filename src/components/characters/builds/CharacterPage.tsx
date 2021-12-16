@@ -37,7 +37,6 @@ function CharacterPage() {
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const maxBuilds = 10;
   const [elementColor, setElementColor] = useState("");
   const dispatch = useAppDispatch()
 
@@ -125,7 +124,7 @@ function CharacterPage() {
           <>
             {/* <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky> */}
             <BuildSelector
-              builds={take(characterBuilds[tabs[activeTabIdx]].builds, maxBuilds)}
+              builds={characterBuilds[tabs[activeTabIdx]].builds}
               total={characterBuilds[tabs[activeTabIdx]].total}
               color={elementColor}
               filters={filters}

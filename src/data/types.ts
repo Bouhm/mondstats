@@ -39,7 +39,7 @@ export interface IArtifactSetData {
 }
 
 export interface IArtifactSetBuildData {
-  _id: string,
+  artifactSetBuildId: string,
   sets: IArtifactSet[]
 }
 
@@ -78,7 +78,7 @@ export interface ICharacterBuild {
 }
 
 export interface IWeaponBuild {
-  _id: string,
+  weaponId: string,
   count: number
 }
 
@@ -90,6 +90,15 @@ export interface IArtifactSet {
 export interface IBuild {
   artifactSetBuildId: string,
   weapons: IWeaponBuild[],
+  count: number
+}
+
+export interface IAbyssBuild {
+  artifactSetBuildId: string,
+  weapons: IWeaponBuild[],
+  battleCount: number,
+  avgStar: number,
+  winCount: number
 }
 
 export interface IAbyssData {
@@ -125,7 +134,7 @@ export interface IFlexChar {
 }
 
 export interface IArtifactSetStats {
-  _id: string
+  artifactSetId: string
   weapons: {
     artifacts: IArtifactSet[]
   },

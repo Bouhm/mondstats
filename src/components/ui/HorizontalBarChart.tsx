@@ -10,7 +10,7 @@ import LLImage from './LLImage';
 import Tooltip from './Tooltip';
 
 export interface IBarChartData {
-  _id: string,
+  weaponId: string,
   count: number,
   avgStar?: number,
   winCount?: number,
@@ -26,17 +26,19 @@ type HorizontalBarChart = {
 }
 
 function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart) {
+  
+
   return <div className="horizontal-barchart-container">
-    {map(data, ({ _id, count, avgStar, winCount, battleCount }, i) => {
+    {map(data, ({ weaponId, count, avgStar, winCount, battleCount }, i) => {
       const popularity = getPercentage(count, total);
-      const { name, rarity } = db[_id];
+      const { name, rarity } = db[weaponId];
 
       return (
-        <div key={`${_id}-${count}-${i}`} className="horizontal-barchart">
+        <div key={`${weaponId}-${count}-${i}`} className="horizontal-barchart">
           <div className={`bar-card`}>
             <Tooltip content={`${name}: ${count}`}>
               <div className='bar-card-title'>
-                <LLImage className={`rarity-${rarity}`} src={`/assets/${path}/${_id}.webp`} alt={name} />
+                <LLImage className={`rarity-${rarity}`} src={`/assets/${path}/${weaponId}.webp`} alt={name} />
                 <div className="bar-card-detail">
                   <div className="bar-card-name">
                     {name}

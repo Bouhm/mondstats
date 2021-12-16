@@ -1,10 +1,10 @@
-.artifact-set-build-card-container {
+.artifact-set-build-card {
   height: 100%;
   display: flex;
   justify-content: center;
   transition: transform 0.2s;
 
-  .artifact-thumb {
+  .artifact-set-thumb {
     position: relative;
     height: 100%;
     border-radius: 8px;
@@ -49,8 +49,8 @@
 }
 
 @media (max-width: 826px) {
-  .artifact-set-build-container {
-    .artifact-thumb {
+  .artifact-set-build {
+    .artifact-set-thumb {
       .artifact-set-activation {
         font-size: 1rem;
         right: -2px;
@@ -71,8 +71,8 @@
 }
 
 @media (max-width: 544px) {
-  .artifact-set-build-container {
-    .artifact-thumb {
+  .artifact-set-build {
+    .artifact-set-thumb {
       .artifact-set-activation {
         font-size: 0.8rem;
         right: -1px;

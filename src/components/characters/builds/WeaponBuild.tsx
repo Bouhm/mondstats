@@ -11,38 +11,36 @@ import HorizontalBarChart, { IBarChartData } from '../../ui/HorizontalBarChart';
 import { ChevronDown, ChevronUp } from '../../ui/Icons';
 
 type WeaponBuild = {
-  weaponBuilds: IWeaponBuild[]
+  weapons: IWeaponBuild[]
   total: number,
   color: string
 }
 
 const BP_WEAPONS = [11409, 12409, 14405, 15409, 13405]
 
-function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { filters : FiltersType}) {
+function WeaponBuild({ weapons, total, filters, color }: WeaponBuild & { filters : FiltersType}) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const max = 10;
   const [filteredWeapons, setFilteredWeapons] = useState<IWeaponBuild[] | []>([]) 
   
   useEffect(() => {
-    let orderedWeapons = orderBy(weaponBuilds, 'count', 'desc');
-
-    let weapons: IWeaponBuild[] = []
     let count5 = 0;
+    let filteredWeapons = [];
 
-    for (let i = 0; i < orderedWeapons.length; i++) {
-      if (weaponDb[orderedWeapons[i]._id]) {
-        if (weaponDb[orderedWeapons[i]._id].rarity > 4) {
+    for (let i = 0; i < weapons.length; i++) {
+      if (weaponDb[weapons[i].weaponId]) {
+        if (weaponDb[weapons[i].weaponId].rarity > 4) {
           count5++;      
           
           if (count5 > filters.max5!.value) continue;
         }
   
-        if (includes(BP_WEAPONS, weaponDb[orderedWeapons[i]._id].oid)) continue;
+        if (includes(BP_WEAPONS, weaponDb[weapons[i].weaponId].oid)) continue;
   
-        weapons.push(orderedWeapons[i]);
+        filteredWeapons.push(weapons[i]);
         
-        if (weapons.length >= max) {
+        if (filteredWeapons.length >= max) {
           break;
         }
       }
@@ -50,7 +48,7 @@ function WeaponBuild({ weaponBuilds, total, filters, color }: WeaponBuild & { fi
 
     setFilteredWeapons(weapons);
 
-  }, [setFilteredWeapons, weaponBuilds, filters])
+  }, [setFilteredWeapons, weapons, filters])
 
   return (
     <div className="weapons-list-container">
