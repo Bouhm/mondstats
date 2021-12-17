@@ -89,7 +89,6 @@ function AbyssPage() {
     })
 
     setAbyssFloorTeams(combinedStageTeams)
-    console.log("WHY KEEP LOADING")
   }
 
   useEffect(() => {
@@ -187,7 +186,7 @@ function AbyssPage() {
 
     return map(range(1, 4), stage => <AbyssStage 
       key={`floor-${tabs[activeTabIdx]}-${stage}-teams`}
-      stageData={filteredAbyssFloor[stage]} 
+      stageData={filteredAbyssFloor[stage-1]} 
       floor={tabs[activeTabIdx]}
       stage={stage}
       stageLimitToggle={stageLimitToggle} 
