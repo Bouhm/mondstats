@@ -78,7 +78,7 @@ function CharacterPage() {
     return <Loader />
   }
   
-  if (!character || isEmpty(characterBuilds) || characterBuilds[tabs[activeTabIdx]]) {
+  if (!character || isEmpty(characterBuilds)) {
     return <Empty />
   }
 

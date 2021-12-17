@@ -1,4 +1,4 @@
-import './ArtifactSetBuild.scss';
+import './ArtifactSets.scss';
 
 import { map } from 'lodash';
 import React from 'react';
@@ -14,12 +14,12 @@ type ArtifactSetBuildProps = {
   selector?: boolean
 }
 
-function ArtifactSetBuild({ artifacts, color='', selected=false, selector=false }: ArtifactSetBuildProps) {
+function ArtifactSets({ artifacts, color='', selected=false, selector=false }: ArtifactSetBuildProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
 
   return (
-    <div className={`artifact-set-build-container ${selector ? 'asSelector' : ''} ${selected ? "asSelected" : ""}`} style={selected ? {backgroundColor: color }:{}}>
+    <div className={`artifact-sets-container ${selector ? 'asSelector' : ''} ${selected ? "asSelected" : ""}`} style={selected ? {backgroundColor: color }:{}}>
       {map(artifacts, ({ _id, activation_number }, i) => {
         return (
           <div key={`thumb-${_id}-i`} className={"artifact-thumb"}>
@@ -32,4 +32,4 @@ function ArtifactSetBuild({ artifacts, color='', selected=false, selector=false 
   )
 }
 
-export default ArtifactSetBuild
+export default ArtifactSets

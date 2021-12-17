@@ -12,7 +12,7 @@
   padding-right: 1rem;
 }
 
-.artifact-set-build-container {
+.artifact-set-build-stats-container {
   display: flex;
   flex: 2;
 
@@ -67,7 +67,7 @@
     display: flex;
     overflow-y: hidden;
 
-    .artifact-set-build-container {
+    .artifact-set-build-card {
       width: 160px;
       height: 80px;
     }
@@ -105,7 +105,7 @@
       div {
         height: 100%;
 
-        .artifact-set-build-container {
+        .artifact-set-build-card {
           height: inherit;
           width: 140px;
         }
@@ -124,7 +124,7 @@
       height: 60px;
 
       div {
-        .artifact-set-build-container {
+        .artifact-set-build-card {
           height: inherit;
           width: 120px;
         }
@@ -132,7 +132,7 @@
     }
   }
 
-  .artifact-set-build-container {
+  .artifact-set-build-stats-container {
     .artifact-set-build-stats {
       .artifact-set-detail {
         min-height: 0;
@@ -148,7 +148,7 @@
       height: 60px;
 
       div {
-        .artifact-set-build-container {
+        .artifact-set-build-card {
           height: inherit;
           width: 100px;
         }
@@ -172,7 +172,7 @@
     font-size: 2rem;
   }
 
-  .artifact-set-build-container {
+  .artifact-set-build-stats-container {
     height: 100%;
     max-height: 100%;
     flex-wrap: wrap-reverse;
@@ -193,7 +193,7 @@
       height: 50px;
 
       div {
-        .artifact-set-build-container {
+        .artifact-set-build-card {
           height: inherit;
           width: 90px;
         }

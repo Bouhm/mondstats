@@ -36,6 +36,7 @@ ReactDOM.render(
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<App/>}>
+            <Route index element={<Home />} />
             <Route path="about" element={<About/>} />
             <Route path="changelog" element={<Changelog/>} />
             <Route path="abyss" element={<AbyssPage/>} />

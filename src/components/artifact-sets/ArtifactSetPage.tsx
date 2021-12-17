@@ -2,26 +2,25 @@ import './ArtifactSetPage.css';
 
 import { find, forEach, isEmpty, map, orderBy, reduce, take } from 'lodash';
 import React, { useState } from 'react';
+import ScrollContainer from 'react-indiana-drag-scroll';
 import { useParams } from 'react-router-dom';
+import { colors } from 'react-select/src/theme';
 
 import { getArtifactSetNames, getPercentage, getShortName } from '../../scripts/util';
+import ArtifactSetBuildDetail from '../characters/builds/ArtifactSetBuildDetail';
+import WeaponBuild from '../characters/builds/WeaponBuild';
 import Button from '../controls/Button';
 import useApi from '../hooks/useApi';
 import useExpand from '../hooks/useExpand';
 import { useAppSelector } from '../hooks/useRedux';
+import Chart from '../ui/Chart';
 import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
-import ScrollContainer from 'react-indiana-drag-scroll';
-import { colors } from 'react-select/src/theme';
-import ArtifactSetBuildDetail from '../characters/builds/ArtifactSetBuildDetail';
-import WeaponBuild from '../characters/builds/WeaponBuild';
 import ArtifactSetBuildCard from './ArtifactSetBuildCard';
-import Chart from '../ui/Chart';
 
 function ArtifactSetPage() { 
   const { shortName } = useParams();
-  console.log(shortName)
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
   const characterDb = useAppSelector((state) => state.data.characterDb)
@@ -62,7 +61,7 @@ function ArtifactSetPage() {
     <div className="artifact-set-page">
         <div className="artifact-set-builds-selector">
         <ScrollContainer vertical={false} hideScrollbars={true} className="artifact-set-builds-menu">
-          {map(artifactSetStats.artifactSetBuilds, (build, i) => {
+          {map(artifactSetStats.artifactSetBuilds, (build, i: number) => {
               return (
                 <div key={`artifacts-thumb-${i}`} onClick={() => handleSelectSet(i)}>
                   <ArtifactSetBuildCard id={build.artifactSetBuildId}selected={i === activeBuildIdx} selector={true} />
@@ -83,7 +82,7 @@ function ArtifactSetPage() {
         )}
       </div>
       <div className="build-details">
-        <div className="artifact-set-build-container">
+        <div className="artifact-set-build-stats-container">
           <div className="artifact-set-build-stats">
             <ArtifactSetBuildDetail
               id={artifactSetStats.artifactSetBuilds[activeBuildIdx].artifactSetBuildId}

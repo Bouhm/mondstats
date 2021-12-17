@@ -66,7 +66,7 @@ function Donut({ id = "", className = "", max, labels=[], colors = [], data = []
         chartOptions.cutout = 120;
       }
       
-      chart = new Chart(ref.current.getContext("2d"), {
+      chart = new Chart(ref.current.getContext("2d")! as ChartItem, {
         type: "doughnut",
         data: {
           labels,
@@ -136,7 +136,7 @@ function Odometer({ id = "", className = "", max, labels=[], colors = [], data =
       }
       }
       
-      chart = new Chart(ref.current.getContext("2d")! as unknown as ChartItem, {
+      chart = new Chart(ref.current.getContext("2d")! as ChartItem, {
         type: "doughnut",
         data: {
           labels,

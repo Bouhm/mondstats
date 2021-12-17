@@ -56,8 +56,8 @@ function Team({ team, winCount, battleCount, avgStar, total, flex = [] }: TeamPr
                         <CharacterCount key={`${flex.charId}-${i}`} character={characterDb[flex.charId]} battleCount={flex.battleCount} />
                         <div className="team-flex-stats">
                           <UsagePct count={flex.battleCount} total={battleCount} size={'small'} />
-                          <AbyssStat label="Avg Star" value={`★${avgStar.toFixed(2)}`} />
-                          <AbyssStat label="Win Rate" value={`${getPercentage(flex.winCount, flex.battleCount)}%`} />
+                          {/* <AbyssStat label="Avg Star" value={`★${avgStar.toFixed(2)}`} />
+                          <AbyssStat label="Win Rate" value={`${getPercentage(flex.winCount, flex.battleCount)}%`} /> */}
                         </div>
                       </div>
                     )}

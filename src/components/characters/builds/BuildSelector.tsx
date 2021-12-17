@@ -73,7 +73,7 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
           color={color}
           filters={filters}
         />
-        <div className="artifact-set-build-container">
+        <div className="artifact-set-build-stats-container">
           <div className="artifact-set-build-stats">
             <ArtifactSetBuildDetail
               id={filteredBuilds[activeBuildIdx].artifactSetBuildId}

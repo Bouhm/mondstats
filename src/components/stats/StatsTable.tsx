@@ -11,7 +11,7 @@ import {
   getCharacterLabel,
   getPercentage,
 } from '../../scripts/util';
-import ArtifactSetBuild from '../artifact-sets/ArtifactSetBuild';
+import ArtifactSets from '../artifact-sets/ArtifactSets';
 import CharacterCount from '../characters/CharacterCount';
 import Pagination from '../controls/Pagination';
 import useApi from '../hooks/useApi';
@@ -98,7 +98,7 @@ function ArtifactSets({data}: any) {
   const renderCard = (itemStat: any) => (
     <Tooltip content={getArtifactSetNames(itemStat.artifacts, db)}>
       <div className="row-card col">
-        <ArtifactSetBuild artifacts={itemStat.artifacts} />
+        <ArtifactSets artifacts={itemStat.artifacts} />
       </div>
     </Tooltip>
   )

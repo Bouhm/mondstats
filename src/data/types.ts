@@ -101,15 +101,7 @@ export interface IAbyssBuild {
   winCount: number
 }
 
-export interface IAbyssData {
-  teams: IAbyssParty[],
-  battles: IAbyssBattle[]
-}
-
-export interface IAbyssBattle {
-  floor_level: string,
-  battle_parties: IAbyssParty[][]
-}
+export type IAbyssFloor = { [battleIndex: string]: IAbyssParty[] }[]
 
 export interface IAbyssParty {
   coreParty: string[],

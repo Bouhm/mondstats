@@ -7,7 +7,7 @@ import LLImage from './LLImage';
 
 type CardProps = { 
   onClick?: (_id: string)=>void,
-  faded?: boolean 
+  faded?: boolean,
 } & SearchItem & {path: string}
 
 function Card({ _id, rarity, name, element, path, onClick, faded=false }: CardProps) {
