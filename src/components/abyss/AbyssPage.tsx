@@ -152,18 +152,18 @@ function AbyssPage() {
 
   const renderTopTeams = () => {
     const filteredTopTeams = filter(_filterTopTeams(), ({ flex }) => flex[0] && flex[0].length) as IAbyssParty[];
-    const total = reduce(abyssTopTeams, (sum,curr) => sum + curr.battleCount, 0)
+    const total = reduce(abyssTopTeams, (sum,curr) => sum + curr.count, 0)
 
     return (
       <>
         <h2 className="stage-label">Top Teams</h2>
         <div className="stage-half">
           <h2>{total} Teams</h2>
-          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({coreParty, flex, battleCount, winCount, avgStar}, i) => {
+          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({coreParty, flex, count, winCount, avgStar}, i) => {
             const party = [...coreParty, flex[0][0].charId]
             return <React.Fragment key={`parties-ALL-${i}`}>
               <div className="battle-container">
-                <Team team={party} battleCount={battleCount} winCount={winCount} avgStar={avgStar} flex={flex} total={total} />
+                <Team team={party} count={count} winCount={winCount} avgStar={avgStar} flex={flex} total={total} />
               </div>
             </React.Fragment>
           })}

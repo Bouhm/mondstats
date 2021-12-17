@@ -34,19 +34,19 @@ const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }
       <h2 className="stage-label">Floor {floor}-{stage}</h2>
       <Tabs tabs={['1st Half', '2nd Half']} activeTabIdx={activeTabIdx} onChange={onTabChange} />
       <div className="stage-half">
-        <h2>{reduce(stageData[activeTabIdx+1], (sum,curr) => sum + curr.battleCount, 0)} Teams</h2>
+        <h2>{reduce(stageData[activeTabIdx+1], (sum,curr) => sum + curr.count, 0)} Teams</h2>
         <div key={`battle-${floor}-${stage}-${activeTabIdx+1}`} className="battle-container">
           {stageData[activeTabIdx+1].length > 0 ? 
             <>
-              {map(take(stageData[activeTabIdx+1], stageLimitToggle[`${floor}-${stage}`] ? maxParties : pageSize), ({coreParty, flex, battleCount, winCount, avgStar}, k) => {
+              {map(take(stageData[activeTabIdx+1], stageLimitToggle[`${floor}-${stage}`] ? maxParties : pageSize), ({coreParty, flex, count, winCount, avgStar}, k) => {
                   const party = [...coreParty, flex[0][0].charId]
                   return (
                     <Team 
                       key={`team-${floor}-${stage}-${k}`} 
                       team={party} flex={flex} 
-                      total={reduce(stageData[activeTabIdx+1], (sum, curr) => sum + curr.battleCount, 0)} 
+                      total={reduce(stageData[activeTabIdx+1], (sum, curr) => sum + curr.count, 0)} 
                       winCount={winCount} 
-                      battleCount={battleCount} 
+                      count={count} 
                       avgStar={avgStar} 
                     />
                   )

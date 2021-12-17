@@ -79,7 +79,7 @@ export interface ICharacterBuild {
 
 export interface IWeaponBuild {
   weaponId: string,
-  count: number
+  count: number,
 }
 
 export interface IArtifactSet {
@@ -96,7 +96,7 @@ export interface IBuild {
 export interface IAbyssBuild {
   artifactSetBuildId: string,
   weapons: IWeaponBuild[],
-  battleCount: number,
+  count: number,
   avgStar: number,
   winCount: number
 }
@@ -106,21 +106,21 @@ export type IAbyssFloor = { [battleIndex: string]: IAbyssParty[] }[]
 export interface IAbyssParty {
   coreParty: string[],
   flex: IFlexChar[][]
-  battleCount: number,
+  count: number,
   avgStar: number,
   winCount: number
 }
 
 export interface IParty {
   party: string[],
-  battleCount: number,
+  count: number,
   avgStar: number,
   winCount: number
 }
 
 export interface IFlexChar {
   charId: string,
-  battleCount: number,
+  count: number,
   avgStar: number,
   winCount: number
 }

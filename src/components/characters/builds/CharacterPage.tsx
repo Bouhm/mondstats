@@ -24,11 +24,6 @@ import data from './albedo.json';
 import BuildSelector from './BuildSelector';
 import Constellations from './Constellations';
 
-interface ITotals { 
-  total: number,
-  battleCount: number
-}
-
 function CharacterPage() {  
   const { shortName } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -85,7 +80,7 @@ function CharacterPage() {
   return (
     <>
       <div className="character-page-stats-count" style={{ backgroundColor: elementColor }}>
-        <span>{characterBuilds[tabs[activeTabIdx]].total} {character.name} Builds</span>
+        <span>{characterBuilds[tabs[activeTabIdx]].count} {character.name} Builds</span>
       </div>
       <div className="character-page">
         <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} /> 
@@ -105,8 +100,8 @@ function CharacterPage() {
                 Pick Rate
               </h2>
               <div className="character-stats-content character-stats-pct">
-                {getPercentage(characterBuilds[tabs[activeTabIdx]].battleCount, characterBuilds[tabs[activeTabIdx]].total) }%
-                <Delta current={getPercentage(characterBuilds[tabs[activeTabIdx]].battleCount, characterBuilds[tabs[activeTabIdx]].total)} last={22.34} />
+                {getPercentage(characterBuilds[tabs[activeTabIdx]].count, characterBuilds[tabs[activeTabIdx]].total) }%
+                <Delta current={getPercentage(characterBuilds[tabs[activeTabIdx]].count, characterBuilds[tabs[activeTabIdx]].total)} last={22.34} />
               </div>
             </div>
             <div className="character-stats">
@@ -114,8 +109,8 @@ function CharacterPage() {
                 Win Rate
               </h2>
               <div className="character-stats-content character-stats-pct">
-                {getPercentage(characterBuilds[tabs[activeTabIdx]].winCount, characterBuilds[tabs[activeTabIdx]].battleCount)}%
-                <Delta current={getPercentage(characterBuilds[tabs[activeTabIdx]].battleCount, characterBuilds[tabs[activeTabIdx]].total)} last={85.35} />
+                {getPercentage(characterBuilds[tabs[activeTabIdx]].winCount, characterBuilds[tabs[activeTabIdx]].count)}%
+                <Delta current={getPercentage(characterBuilds[tabs[activeTabIdx]].count, characterBuilds[tabs[activeTabIdx]].total)} last={85.35} />
               </div>
             </div>
           </div>
@@ -125,12 +120,12 @@ function CharacterPage() {
             {/* <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky> */}
             <BuildSelector
               builds={characterBuilds[tabs[activeTabIdx]].builds}
-              total={characterBuilds[tabs[activeTabIdx]].total}
+              total={characterBuilds[tabs[activeTabIdx]].count}
               color={elementColor}
               filters={filters}
             /> 
             {character.rarity < 100 &&
-              <Constellations constellations={characterBuilds[tabs[activeTabIdx]].constellations} color={elementColor} total={reduce(characterBuilds[tabs[activeTabIdx]].constellations, (sum, curr) => sum += curr, 0)} />
+              <Constellations constellations={characterBuilds[tabs[activeTabIdx]].constellations} color={elementColor} total={reduce(characterBuilds[tabs[activeTabIdx]].constellations, (sum, curr) => sum + curr, 0)} />
             }
           </>
         }

@@ -7,14 +7,14 @@ import Tooltip from '../ui/Tooltip';
 
 type CharacterCountProps = {
   character: ICharacterData,
-  battleCount: number
+  count: number
 }
 
-const CharacterCount = ({character, battleCount}: CharacterCountProps) => {
+const CharacterCount = ({character, count}: CharacterCountProps) => {
   if (!character) return null;
 
   return (
-    <Tooltip content={`${character.name}: ${battleCount}`}>
+    <Tooltip content={`${character.name}: ${count}`}>
       <LLImage className={`character-stats rarity-${character.rarity}`} src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={character.name} />
     </Tooltip>
   )

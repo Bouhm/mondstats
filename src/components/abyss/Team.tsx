@@ -20,12 +20,12 @@ type TeamProps = {
   team: string[],
   total: number,
   winCount: number,
-  battleCount: number,
+  count: number,
   avgStar: number,
   flex?: IFlexChar[][]
 }
 
-function Team({ team, winCount, battleCount, avgStar, total, flex = [] }: TeamProps) {
+function Team({ team, winCount, count, avgStar, total, flex = [] }: TeamProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const { expanded, handleExpand } = useExpand();
 
@@ -36,9 +36,9 @@ function Team({ team, winCount, battleCount, avgStar, total, flex = [] }: TeamPr
           <CharacterTile key={`team-${char}-${i}`} id={char+''} labeled={false} clickable={false} />
         ))}
         <div className="team-stats">
-          <UsagePct count={battleCount} total={total} />
+          <UsagePct count={count} total={total} />
           <div className="team-abyss-stats-container">
-            <AbyssStat label="Win Rate" value={`${getPercentage(winCount, battleCount)}%`} />
+            <AbyssStat label="Win Rate" value={`${getPercentage(winCount, count)}%`} />
             <AbyssStat label="Avg Star" value={`★${avgStar.toFixed(2)}`} />
           </div>
         </div>
@@ -48,16 +48,16 @@ function Team({ team, winCount, battleCount, avgStar, total, flex = [] }: TeamPr
             {expanded && <>
               {map(filter(flex, party => party.length > 1), (party, i) => (
                 <div className="team-flex" key={`${team[0]}-${flex[0][0].charId}-${i}`}>
-                  <CharacterCount character={characterDb[party[0].charId]} battleCount={party[0].battleCount} />
+                  <CharacterCount character={characterDb[party[0].charId]} count={party[0].count} />
                   <Exchange size={22} />
                   <div className="team-flex-options">
                     {map(party.slice(1), (flex, i) => 
                       <div className="team-flex-stats-container">
-                        <CharacterCount key={`${flex.charId}-${i}`} character={characterDb[flex.charId]} battleCount={flex.battleCount} />
+                        <CharacterCount key={`${flex.charId}-${i}`} character={characterDb[flex.charId]} count={flex.count} />
                         <div className="team-flex-stats">
-                          <UsagePct count={flex.battleCount} total={battleCount} size={'small'} />
+                          <UsagePct count={flex.count} total={count} size={'small'} />
                           {/* <AbyssStat label="Avg Star" value={`★${avgStar.toFixed(2)}`} />
-                          <AbyssStat label="Win Rate" value={`${getPercentage(flex.winCount, flex.battleCount)}%`} /> */}
+                          <AbyssStat label="Win Rate" value={`${getPercentage(flex.winCount, flex.count)}%`} /> */}
                         </div>
                       </div>
                     )}
