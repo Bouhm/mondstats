@@ -55,7 +55,7 @@ const _compareFloor = (f1: Option, f2: Option) => {
 }
 
 function AbyssPage() {
-  const floors = range(9, 5);
+  const floors = range(9, 13);
   const tabs = ['ALL', ...floors]
 
   const characterDb = useAppSelector((state) => state.data.characterDb)
@@ -88,14 +88,15 @@ function AbyssPage() {
       })
     })
 
-    setAbyssFloorTeams(abyssFloorTeams)
+    setAbyssFloorTeams(combinedStageTeams)
+    console.log("WHY KEEP LOADING")
   }
 
   useEffect(() => {
     if (activeTabIdx !== 0) {
       fetchAbyssData();
     }
-  }, [setAbyssFloorTeams, activeTabIdx])
+  }, [activeTabIdx])
 
   function _filterParties(parties: IAbyssParty[]) {
     return filter(parties, ({ coreParty, flex}) => {

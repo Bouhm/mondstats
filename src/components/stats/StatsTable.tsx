@@ -4,14 +4,13 @@ import { capitalize, isEmpty, map, reduce } from 'lodash';
 import React, { useEffect } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
-import { ICharacterData } from '../../data/types';
 import {
   getArtifactSetNames,
   getCharacterFileName,
   getCharacterLabel,
   getPercentage,
 } from '../../scripts/util';
-import ArtifactSets from '../artifact-sets/ArtifactSets';
+import _ArtifactSets from '../artifact-sets/ArtifactSets';
 import CharacterCount from '../characters/CharacterCount';
 import Pagination from '../controls/Pagination';
 import useApi from '../hooks/useApi';
@@ -98,7 +97,7 @@ function ArtifactSets({data}: any) {
   const renderCard = (itemStat: any) => (
     <Tooltip content={getArtifactSetNames(itemStat.artifacts, db)}>
       <div className="row-card col">
-        <ArtifactSets artifacts={itemStat.artifacts} />
+        <_ArtifactSets artifacts={itemStat.artifacts} />
       </div>
     </Tooltip>
   )

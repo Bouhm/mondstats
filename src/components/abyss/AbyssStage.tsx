@@ -34,21 +34,21 @@ const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }
       }
       <div className="stage-half">
         {isLoading && <Loader />}
-        {map(stageData, (battleData, i) => { 
+        {map(stageData, (battleData, i) => {
           return (
-            <React.Fragment key={`floor-${floor}-${stage}-${i}-${activeTabIdx}`}>
-              <React.Fragment key={`parties-${floor}-${stage}-${i}-${activeTabIdx}`}>
-                <h2>{reduce(battleData[activeTabIdx], (sum,curr) => sum + curr.count, 0)} Teams</h2>
-                <div key={`battle-${floor}-${stage}-${i}-${activeTabIdx}`} className="battle-container">
-                  {battleData[activeTabIdx].length > 0 ? 
+            <React.Fragment key={`floor-${floor}-${stage}-${i}-${activeTabIdx+1}`}>
+              <React.Fragment key={`parties-${floor}-${stage}-${i}-${activeTabIdx+1}`}>
+                <h2>{reduce(battleData, (sum,curr) => sum + curr.battleCount, 0)} Teams</h2>
+                <div key={`battle-${floor}-${stage}-${i}-${activeTabIdx+1}`} className="battle-container">
+                  {battleData.length > 0 ? 
                     <>
-                      {map(take(orderBy(battleData[activeTabIdx], 'count', 'desc'), stageLimitToggle[`${floor}-${stage}`] ? maxParties : pageSize), ({coreParty, flex, battleCount, winCount, avgStar}, k) => {
+                      {map(take(orderBy(battleData, 'count', 'desc'), stageLimitToggle[`${floor}-${stage}`] ? maxParties : pageSize), ({coreParty, flex, battleCount, winCount, avgStar}, k) => {
                           const party = [...coreParty, flex[0][0].charId]
                           return (
                             <Team 
                               key={`team-${floor}-${stage}-${k}`} 
                               team={party} flex={flex} 
-                              total={reduce(battleData[activeTabIdx], (sum, curr) => sum + curr.count, 0)} 
+                              total={reduce(battleData, (sum, curr) => sum + curr.battleCount, 0)} 
                               winCount={winCount} 
                               battleCount={battleCount} 
                               avgStar={avgStar} 
@@ -58,7 +58,7 @@ const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }
                       }
                     </>
                     :
-                    <LLImage src={AmberSad} alt="empty" />
+                    <img src={AmberSad} alt="empty" />
                   }
                 </div>
               </React.Fragment>
