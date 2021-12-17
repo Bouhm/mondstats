@@ -120,6 +120,22 @@ function AbyssPage() {
     })
   }
 
+  function _filterTopTeams() {
+    return _filterParties(abyssTopTeams);
+  }
+
+  function _filterFloor() {
+    let filteredAbyssFloors: any = cloneDeep(abyssFloorTeams)!
+
+    forEach(filteredAbyssFloors, (stage, stageNum) => {
+      forEach(stage, (battle, battleIndex) => {
+        filteredAbyssFloors[stageNum][battleIndex] = _filterParties(battle);
+      })
+    })
+  
+    return filteredAbyssFloors;
+  }
+
   const handleToggleLimit = (selectedStage: string) => {
     let newMap: { [stage: string]: boolean } = clone(stageLimitToggle)
     newMap[selectedStage] = newMap[selectedStage] ? !newMap[selectedStage] : true;
@@ -136,6 +152,7 @@ function AbyssPage() {
   }
 
   const renderTopTeams = () => {
+    const filteredTopTeams = _filterTopTeams();
     const total = reduce(abyssTopTeams, (sum,curr) => sum + curr.battleCount, 0)
 
     return (
@@ -143,7 +160,7 @@ function AbyssPage() {
         <h2 className="stage-label">Top Teams</h2>
         <div className="stage-half">
           <h2>{total} Teams</h2>
-          {map(take(filter(abyssTopTeams, ({ flex }) => flex[0] && flex[0].length), stageLimitToggle["ALL"] ? 20 : 10), ({coreParty, flex, battleCount, winCount, avgStar}, i) => {
+          {map(take(filter(filteredTopTeams, ({ flex }) => flex[0] && flex[0].length), stageLimitToggle["ALL"] ? 20 : 10), ({coreParty, flex, battleCount, winCount, avgStar}, i) => {
             const party = [...coreParty, flex[0][0].charId]
             return <React.Fragment key={`parties-ALL-${i}`}>
               <div className="battle-container">
@@ -151,7 +168,7 @@ function AbyssPage() {
               </div>
             </React.Fragment>
           })}
-          {(abyssTopTeams.length > 10) && (!stageLimitToggle["ALL"] ?
+          {(filteredTopTeams.length > 10) && (!stageLimitToggle["ALL"] ?
             <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show more <ChevronDown size={20} /></Button>
             :
             <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show less <ChevronUp size={20} /></Button>
@@ -166,9 +183,11 @@ function AbyssPage() {
       return <Loader />
     }
 
+    const filteredAbyssFloor = filter(_filterFloor());
+
     return map(range(1, 4), stage => <AbyssStage 
       key={`floor-${tabs[activeTabIdx]}-${stage}-teams`}
-      stageData={abyssFloorTeams[stage]} 
+      stageData={filteredAbyssFloor[stage]} 
       floor={tabs[activeTabIdx]}
       stage={stage}
       stageLimitToggle={stageLimitToggle} 
