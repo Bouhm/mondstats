@@ -42,15 +42,10 @@ ReactDOM.render(
             <Route path="abyss" element={<AbyssPage/>} />
             <Route path="characters/:shortName" element={<CharacterPage/>} />
             <Route path="characters" element={<CharacterIndex/>} />
-            {/* <Route path="artifacts/:shortName" element={<ArtifactSetPage/>} />
+            <Route path="artifacts/:shortName" element={<ArtifactSetPage/>} />
             <Route path="artifacts" element={<ArtifactSetIndex/>} />
             <Route path="weapons/:shortName" element={<WeaponPage/>} />
-            <Route path="weapons" element={<WeaponIndex/>} /> */}
-            <Route path="artifacts/:shortName" element={<WIP />} />
-            <Route path="artifacts" element={<WIP />} />
-            <Route path="weapons/:shortName" element={<WIP />} />
-            <Route path="weapons" element={<WIP />} />
-            <Route path="charts" element={<WIP />} />
+            <Route path="weapons" element={<WeaponIndex/>} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -24,8 +24,7 @@ function WeaponPage() {
   const weaponStats = useApi(`/weapons/${weapon._id}.json`)
   const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const max = 10;
-
-
+  
   if (!weaponStats || isEmpty(weaponDb) || isEmpty(weaponStats)) return <Loader />
 
   const charsTotal = reduce(weaponStats.characters, (sum, curr) => sum + curr.count, 0)

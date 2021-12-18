@@ -159,11 +159,11 @@ function AbyssPage() {
         <h2 className="stage-label">Top Teams</h2>
         <div className="stage-half">
           <h2>{total} Teams</h2>
-          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({coreParty, flex, count, winCount, avgStar}, i) => {
+          {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({coreParty, flex, count }, i) => {
             const party = [...coreParty, flex[0][0].charId]
             return <React.Fragment key={`parties-ALL-${i}`}>
               <div className="battle-container">
-                <Team team={party} count={count} winCount={winCount} avgStar={avgStar} flex={flex} total={total} />
+                <Team team={party} count={count} flex={flex} total={total} />
               </div>
             </React.Fragment>
           })}

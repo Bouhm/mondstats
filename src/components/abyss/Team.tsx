@@ -19,13 +19,11 @@ import Tooltip from '../ui/Tooltip';
 type TeamProps = {
   team: string[],
   total: number,
-  winCount: number,
   count: number,
-  avgStar: number,
   flex?: IFlexChar[][]
 }
 
-function Team({ team, winCount, count, avgStar, total, flex = [] }: TeamProps) {
+function Team({ team, count, total, flex = [] }: TeamProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const { expanded, handleExpand } = useExpand();
 
@@ -37,10 +35,10 @@ function Team({ team, winCount, count, avgStar, total, flex = [] }: TeamProps) {
         ))}
         <div className="team-stats">
           <UsagePct count={count} total={total} />
-          <div className="team-abyss-stats-container">
+          {/* <div className="team-abyss-stats-container">
             <AbyssStat label="Win Rate" value={`${getPercentage(winCount, count)}%`} />
             <AbyssStat label="Avg Star" value={`★${avgStar.toFixed(2)}`} />
-          </div>
+          </div> */}
         </div>
       </div>
       {flex[0] && flex[0].length > 1 && 

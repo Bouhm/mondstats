@@ -12,10 +12,10 @@ import LLImage from './LLImage';
 import Tooltip from './Tooltip';
 
 export interface IBarChartData {
-  weaponId: string,
+  _id: string,
   count: number,
-  avgStar?: number,
-  winCount?: number
+  // avgStar?: number,
+  // winCount?: number
 }
 
 type HorizontalBarChart = {
@@ -27,18 +27,17 @@ type HorizontalBarChart = {
 }
 
 function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart) {
-  
-
+  console.log(data)
   return <div className="horizontal-barchart-container">
-    {map(data, ({ weaponId, avgStar, winCount, count }, i) => {
+    {map(data, ({ _id, count }, i) => {
       const popularity = getPercentage(count, total);
-      const { name, rarity } = db[weaponId];
+      const { name, rarity } = db[_id];
 
       return (
-        <div key={`${weaponId}-${count}-${i}`} className="horizontal-barchart">
+        <div key={`${_id}-${count}-${i}`} className="horizontal-barchart">
           <div className={`bar-card`}>
             <div className='bar-card-title'>
-              <LLImage className={`rarity-${rarity}`} src={`/assets/${path}/${weaponId}.webp`} alt={name} />
+              <LLImage className={`rarity-${rarity}`} src={`/assets/${path}/${_id}.webp`} alt={name} />
               <div className="bar-card-detail">
                 <div className="bar-card-name">
                   {name}
@@ -46,13 +45,13 @@ function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart
                 <UsagePct count={count || count} total={total} />
               </div>
             </div>
-            {winCount && avgStar &&
+            {/* {winCount && avgStar &&
               <>
                 <Divider />
                 <AbyssStat label="Win Rate" value={`${getPercentage(winCount, count)}%`} />
                 <AbyssStat label="Avg Star" value={`★${avgStar.toFixed(2)}`} />
               </>
-            }
+            } */}
             </div>
           <div className="horizontal-barchart-bar">
             <div  

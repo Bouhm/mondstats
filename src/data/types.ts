@@ -49,36 +49,27 @@ export interface IAffix {
 }
 
 export interface ICharacterDb{
-  [id: string]: ICharacterData
+  [_id: string]: ICharacterData
 }
 
 export interface IWeaponDb {
-  [id: string]: IWeaponData
+  [_id: string]: IWeaponData
 }
 
 export interface IArtifactDb {
-  [id: string]: IArtifactData
+  [_id: string]: IArtifactData
 }
 
 export interface IArtifactSetDb {
-  [id: string]: IArtifactSetData
+  [_id: string]: IArtifactSetData
 }
 
 export interface IArtifactSetBuildDb {
-  [id: string]: IArtifactSetBuildData
-}
-
-export interface ICharacterBuild {
-  avg_level: number,
-  constellations: number[],
-  char_id: string,
-  builds: IBuild[],
-  teams: IParty[],
-  total: number
+  [_id: string]: IArtifactSetBuildData
 }
 
 export interface IWeaponBuild {
-  weaponId: string,
+  _id: string,
   count: number,
 }
 
@@ -88,17 +79,17 @@ export interface IArtifactSet {
 }
 
 export interface IBuild {
-  artifactSetBuildId: string,
+  _id: string,
   weapons: IWeaponBuild[],
   count: number
 }
 
 export interface IAbyssBuild {
-  artifactSetBuildId: string,
+  _id: string,
   weapons: IWeaponBuild[],
   count: number,
-  avgStar: number,
-  winCount: number
+  // avgStar: number,
+  // winCount: number
 }
 
 export type IAbyssFloor = { [battleIndex: string]: IAbyssParty[] }[]
@@ -107,26 +98,26 @@ export interface IAbyssParty {
   coreParty: string[],
   flex: IFlexChar[][]
   count: number,
-  avgStar: number,
-  winCount: number
+  // avgStar: number,
+  // winCount: number
 }
 
 export interface IParty {
   party: string[],
   count: number,
-  avgStar: number,
-  winCount: number
+  // avgStar: number,
+  // winCount: number
 }
 
 export interface IFlexChar {
-  charId: string,
+  _id: string,
   count: number,
-  avgStar: number,
-  winCount: number
+  // avgStar: number,
+  // winCount: number
 }
 
 export interface IArtifactSetStats {
-  artifactSetId: string
+  _id: string
   weapons: {
     artifacts: IArtifactSet[]
   },

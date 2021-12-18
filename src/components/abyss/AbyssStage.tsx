@@ -38,16 +38,14 @@ const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }
         <div key={`battle-${floor}-${stage}-${activeTabIdx+1}`} className="battle-container">
           {stageData[activeTabIdx+1].length > 0 ? 
             <>
-              {map(take(stageData[activeTabIdx+1], stageLimitToggle[`${floor}-${stage}`] ? maxParties : pageSize), ({coreParty, flex, count, winCount, avgStar}, k) => {
+              {map(take(stageData[activeTabIdx+1], stageLimitToggle[`${floor}-${stage}`] ? maxParties : pageSize), ({coreParty, flex, count }, k) => {
                   const party = [...coreParty, flex[0][0].charId]
                   return (
                     <Team 
                       key={`team-${floor}-${stage}-${k}`} 
                       team={party} flex={flex} 
                       total={reduce(stageData[activeTabIdx+1], (sum, curr) => sum + curr.count, 0)} 
-                      winCount={winCount} 
                       count={count} 
-                      avgStar={avgStar} 
                     />
                   )
                 })

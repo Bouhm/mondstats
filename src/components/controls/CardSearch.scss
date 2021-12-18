@@ -80,7 +80,6 @@
   .cards {
     grid-template-columns: repeat(auto-fill, 100px);
     grid-template-rows: repeat(auto-fill, 130px);
-    height: 43vh;
   }
 }
 
@@ -88,7 +87,6 @@
   .cards {
     grid-template-columns: repeat(5, 60px);
     grid-template-rows: repeat(auto-fill, 80px);
-    height: 29vh;
   }
 }
 

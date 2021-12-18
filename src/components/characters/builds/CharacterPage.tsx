@@ -43,8 +43,9 @@ function CharacterPage() {
 
   const charId = characterIdMap[shortName as string]
   const _characterBuilds = useApi(`/characters/${charId}.json`);
-  // const _characterMainBuilds = useApi(`/characters/mains/${charId}.json`);
-  const [characterBuilds, setCharacterBuilds] = useState(_characterBuilds)
+  const _characterAbyssBuilds = useApi(`/characters/abyss/${charId}.json`);
+  const [selectedCharacterBuilds, setCharacterBuilds] = useState(_characterBuilds);
+
   useEffect(() => {
     if (!isEmpty(characterDb)) {
       const char = characterDb[charId];
@@ -56,31 +57,40 @@ function CharacterPage() {
   }, [setCharacter, dispatch, charId, characterDb])
 
   useEffect(() => {
-    // if (filters.a6.value) {
-    //   setCharacterBuilds(_characterMainBuilds)
-    // } else {
-      setCharacterBuilds(_characterBuilds)
-    // }
-  }, [_characterBuilds, setCharacterBuilds, filters])
+    if (_characterBuilds && _characterAbyssBuilds) {
+      switch (tabs[activeTabIdx]) {
+        case 'all':
+          setCharacterBuilds(_characterBuilds.data)
+          return;
+        case 'abyss':
+          setCharacterBuilds(_characterAbyssBuilds.data)
+          return;
+        default:
+          setCharacterBuilds(_characterBuilds.data)
+          return;
+      } 
+    }
+  }, [_characterBuilds, _characterAbyssBuilds, setCharacterBuilds, filters])
 
   useEffect(() => {
-    if (characterBuilds) {
+    console.log(selectedCharacterBuilds)
+    if (selectedCharacterBuilds) {
       setIsLoading(false)
     }
-  }, [characterBuilds, setIsLoading])
+  }, [selectedCharacterBuilds, setIsLoading])
 
   if (isLoading) {
     return <Loader />
   }
   
-  if (!character || isEmpty(characterBuilds)) {
+  if (!character || isEmpty(selectedCharacterBuilds)) {
     return <Empty />
   }
 
   return (
     <>
       <div className="character-page-stats-count" style={{ backgroundColor: elementColor }}>
-        <span>{characterBuilds[tabs[activeTabIdx]].count} {character.name} Builds</span>
+        <span>{selectedCharacterBuilds.count} {character.name} Builds</span>
       </div>
       <div className="character-page">
         <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} /> 
@@ -100,8 +110,8 @@ function CharacterPage() {
                 Pick Rate
               </h2>
               <div className="character-stats-content character-stats-pct">
-                {getPercentage(characterBuilds[tabs[activeTabIdx]].count, characterBuilds[tabs[activeTabIdx]].total) }%
-                <Delta current={getPercentage(characterBuilds[tabs[activeTabIdx]].count, characterBuilds[tabs[activeTabIdx]].total)} last={22.34} />
+                {getPercentage(selectedCharacterBuilds.count, selectedCharacterBuilds.total) }%
+                <Delta current={getPercentage(selectedCharacterBuilds.count, selectedCharacterBuilds.total)} last={22.34} />
               </div>
             </div>
             <div className="character-stats">
@@ -109,23 +119,23 @@ function CharacterPage() {
                 Win Rate
               </h2>
               <div className="character-stats-content character-stats-pct">
-                {getPercentage(characterBuilds[tabs[activeTabIdx]].winCount, characterBuilds[tabs[activeTabIdx]].count)}%
-                <Delta current={getPercentage(characterBuilds[tabs[activeTabIdx]].count, characterBuilds[tabs[activeTabIdx]].total)} last={85.35} />
+                {getPercentage(selectedCharacterBuilds.winCount, selectedCharacterBuilds.count)}%
+                <Delta current={getPercentage(selectedCharacterBuilds.count, selectedCharacterBuilds.total)} last={85.35} />
               </div>
             </div>
           </div>
         </div> */}
-        {characterBuilds[tabs[activeTabIdx]].builds &&
+        {selectedCharacterBuilds.builds &&
           <>
             {/* <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky> */}
             <BuildSelector
-              builds={characterBuilds[tabs[activeTabIdx]].builds}
-              total={characterBuilds[tabs[activeTabIdx]].count}
+              builds={selectedCharacterBuilds.builds}
+              total={selectedCharacterBuilds.count}
               color={elementColor}
               filters={filters}
             /> 
             {character.rarity < 100 &&
-              <Constellations constellations={characterBuilds[tabs[activeTabIdx]].constellations} color={elementColor} total={reduce(characterBuilds[tabs[activeTabIdx]].constellations, (sum, curr) => sum + curr, 0)} />
+              <Constellations constellations={selectedCharacterBuilds.constellations} color={elementColor} total={reduce(selectedCharacterBuilds.constellations, (sum, curr) => sum + curr, 0)} />
             }
           </>
         }
