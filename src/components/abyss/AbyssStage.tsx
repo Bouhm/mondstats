@@ -39,7 +39,7 @@ const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }
           {stageData[activeTabIdx+1].length > 0 ? 
             <>
               {map(take(stageData[activeTabIdx+1], stageLimitToggle[`${floor}-${stage}`] ? maxParties : pageSize), ({coreParty, flex, count }, k) => {
-                  const party = [...coreParty, flex[0][0].charId]
+                  const party = [...coreParty, flex[0][0]._id]
                   return (
                     <Team 
                       key={`team-${floor}-${stage}-${k}`} 

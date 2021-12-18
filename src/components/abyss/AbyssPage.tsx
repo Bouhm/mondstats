@@ -105,7 +105,7 @@ function AbyssPage() {
       forEach(flex, _flex => {
         if (!_flex[0]) return false;
 
-        const party = [...coreParty, _flex[0].charId]
+        const party = [...coreParty, _flex[0]._id]
   
         charFilter = (filter(party, char => {
           if (typeof char !== "string") return false;
@@ -160,7 +160,7 @@ function AbyssPage() {
         <div className="stage-half">
           <h2>{total} Teams</h2>
           {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({coreParty, flex, count }, i) => {
-            const party = [...coreParty, flex[0][0].charId]
+            const party = [...coreParty, flex[0][0]._id]
             return <React.Fragment key={`parties-ALL-${i}`}>
               <div className="battle-container">
                 <Team team={party} count={count} flex={flex} total={total} />

@@ -29,14 +29,14 @@ function WeaponBuild({ weapons, total, filters, color }: WeaponBuild & { filters
     let filteredWeapons = [];
 
     for (let i = 0; i < weapons.length; i++) {
-      if (weaponDb[weapons[i].weaponId]) {
-        if (weaponDb[weapons[i].weaponId].rarity > 4) {
+      if (weaponDb[weapons[i]._id]) {
+        if (weaponDb[weapons[i]._id].rarity > 4) {
           count5++;      
           
           if (count5 > filters.max5!.value) continue;
         }
   
-        if (includes(BP_WEAPONS, weaponDb[weapons[i].weaponId].oid)) continue;
+        if (includes(BP_WEAPONS, weaponDb[weapons[i]._id].oid)) continue;
   
         filteredWeapons.push(weapons[i]);
         

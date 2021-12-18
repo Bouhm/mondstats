@@ -15,8 +15,8 @@ import { ChevronDown, ChevronUp } from '../ui/Icons';
 interface ITeam {
   party: string[],
   count: number,
-  winCount: number,
-  avgStar: number
+  // winCount: number,
+  // avgStar: number
 }
 
 function CharacterTeams({ teams, filters }: { teams: IParty[], filters: FiltersType }) {
@@ -27,7 +27,7 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: FiltersT
 
   const [ filteredTeams, setFilteredTeams ] = useState<ITeam[]>([])
 
-  const filterTeams = (teams: IParty[], charId: string) => {
+  const filterTeams = (teams: IParty[], _id: string) => {
     let filtered = teams;
     let max5WithChar = filters.max5!.value;
 
@@ -40,11 +40,11 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: FiltersT
     filtered = filter(teams, ({ party }) => {
       if (party.length !== 4) return false;
 
-      return (includes(party, charId) && filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length <= max5WithChar)
+      return (includes(party, _id) && filter(party, char => characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler").length <= max5WithChar)
     })
 
     // Bring selected character to the front
-    filtered.forEach(({party}, i) => filtered[i].party = sortBy(party, (char: string) => char === charId ? 0 : 1))
+    filtered.forEach(({party}, i) => filtered[i].party = sortBy(party, (char: string) => char === _id ? 0 : 1))
 
     return take(filtered, max);
   }
@@ -57,8 +57,8 @@ function CharacterTeams({ teams, filters }: { teams: IParty[], filters: FiltersT
   const renderParties = () => (
     <div className="parties-container">
        <h2>{reduce(filteredTeams, (sum, curr) => sum + curr.count, 0)} Teams</h2>
-      {map(take(filteredTeams, expanded ? max : 5), ({party, count, winCount, avgStar}, i) => (
-        <Team key={`team-${i}`} team={party} total={reduce(filteredTeams, (sum,curr) => sum + curr.count, 0)} count={count} winCount={winCount} avgStar={avgStar}  />
+      {map(take(filteredTeams, expanded ? max : 5), ({party, count }, i) => (
+        <Team key={`team-${i}`} team={party} total={reduce(filteredTeams, (sum,curr) => sum + curr.count, 0)} count={count} />
       ))}
       {filteredTeams.length > 5 && (
         !expanded 

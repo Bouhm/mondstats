@@ -34,8 +34,8 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
   let colors: string[] = [];
   let countSum = 0; 
 
-  forEach(filteredBuilds, ({ artifactSetBuildId, count }) => {
-    const label = getArtifactSetNames(artifactSetBuildDb[artifactSetBuildId].sets, artifactSetDb)
+  forEach(filteredBuilds, ({ _id, count }) => {
+    const label = getArtifactSetNames(artifactSetBuildDb[_id].sets, artifactSetDb)
     if (!label) {
       return;
     }
@@ -59,7 +59,7 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
           {map(filteredBuilds, (build, i) => {
               return (
                 <div key={`artifacts-thumb-${i}`} onClick={() => handleSelectSet(i)}>
-                  <ArtifactSetBuildCard id={build.artifactSetBuildId} color={color} selected={i === activeBuildIdx} selector={true} />
+                  <ArtifactSetBuildCard id={build._id} color={color} selected={i === activeBuildIdx} selector={true} />
                 </div>
               )
             })
@@ -76,7 +76,7 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
         <div className="artifact-set-build-stats-container">
           <div className="artifact-set-build-stats">
             <ArtifactSetBuildDetail
-              id={filteredBuilds[activeBuildIdx].artifactSetBuildId}
+              id={filteredBuilds[activeBuildIdx]._id}
             />
             <div className="artifact-set-builds-donut-container">
             <div className="artifact-set-builds-donut-chart">

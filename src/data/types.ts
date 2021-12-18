@@ -122,7 +122,7 @@ export interface IArtifactSetStats {
     artifacts: IArtifactSet[]
   },
   characters: {
-    [charId: string]: number
+    [_id: string]: number
   },
   count: number
 }
@@ -130,7 +130,7 @@ export interface IArtifactSetStats {
 export interface IWeaponStats {
   _id: string
   characters: {
-    [charId: string]: number
+    [_id: string]: number
   },
   type_name: string,
   rarity: number,
