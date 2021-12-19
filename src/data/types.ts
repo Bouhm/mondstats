@@ -16,6 +16,7 @@ export interface IWeaponData {
   _id: string,
   oid: number,
   name: string,
+  type_name: string,
   rarity: number,
   baseAtk: string,
   subStat: string, 

@@ -1,10 +1,12 @@
+@use '../../variables.module' as var;
+
 #navbar {
   position: fixed;
   display: flex;
   top: 0;
   width: 100%;
   height: 4rem;
-  background: #2a2c3a;
+  background: var.$theme-color-4;
   border-bottom: 2px solid rgba(255, 255, 255, 0.4);
   z-index: 8;
 

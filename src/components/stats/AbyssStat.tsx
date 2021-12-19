@@ -4,10 +4,11 @@ import React from 'react';
 
 type AbyssStatProps = {
   label: string,
-  value: string
+  value: string,
+  color?: string
 }
 
-function AbyssStat({ label, value }: AbyssStatProps) {
+function AbyssStat({ label, value, color }: AbyssStatProps) {
   return (
     <div className="abyss-stat">
       <div className='abyss-stat-label'>{label}</div>

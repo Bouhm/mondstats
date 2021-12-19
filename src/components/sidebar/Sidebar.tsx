@@ -1,4 +1,4 @@
-import './Sidebar.css';
+import './Sidebar.scss';
 
 import _ from 'lodash';
 import React, { useContext, useState } from 'react';

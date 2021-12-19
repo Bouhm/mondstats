@@ -4,8 +4,8 @@ import { find, forEach, isEmpty, map, orderBy, reduce, take } from 'lodash';
 import React, { useState } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useParams } from 'react-router-dom';
-import { colors } from 'react-select/src/theme';
 
+import * as colorVars from '../../_variables.module.scss';
 import { getArtifactSetNames, getPercentage, getShortName } from '../../scripts/util';
 import ArtifactSetBuildDetail from '../characters/builds/ArtifactSetBuildDetail';
 import WeaponBuild from '../characters/builds/WeaponBuild';
@@ -24,6 +24,7 @@ function ArtifactSetPage() {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
   const characterDb = useAppSelector((state) => state.data.characterDb)
+  const colorClass = useAppSelector((state) => state.data.colorClass)
   const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const artifactSet = find(artifactSetDb, artifactSet => getShortName(artifactSet) === shortName)
 
@@ -45,8 +46,11 @@ function ArtifactSetPage() {
     const label = getArtifactSetNames(artifactSetBuildDb[artifactSetBuildId].sets, artifactSetDb)
     if (!label) {
       return;
-    }
+  }
     
+    colors = Array(10).fill(colorVars.none)
+    colors[activeBuildIdx] = colorVars[colorClass.toLowerCase()];
+
     labels.push(label);
     data.push(total);
     countSum += total;
@@ -73,7 +77,7 @@ function ArtifactSetPage() {
       </div>
       <div className="artifact-set-characters">
         <h1>Characters</h1>
-        <HorizontalBarChart data={take(orderBy(artifactSetStats.characters, 'count', 'desc'), expanded ? max : 5) as unknown as IBarChartData[]} db={characterDb} path='characters' total={charsTotal} color={''} />
+        <HorizontalBarChart data={take(orderBy(artifactSetStats.characters, 'count', 'desc'), expanded ? max : 5) as unknown as IBarChartData[]} db={characterDb} path='characters' total={charsTotal} />
         <br />
         {artifactSetStats.length > 5 && (
           <Button className="characters-show-more" onClick={handleExpand}>

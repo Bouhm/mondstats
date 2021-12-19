@@ -5,7 +5,7 @@ import _, { every, filter, forEach, map, orderBy, reduce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 
-import { ElementColors } from '../../../data/constants';
+import * as colorVars from '../../../_variables.module.scss';
 import { IBuild } from '../../../data/types';
 import { getArtifactSetNames, getPercentage } from '../../../scripts/util';
 import ArtifactSetBuildCard from '../../artifact-sets/ArtifactSetBuildCard';
@@ -20,12 +20,12 @@ type BuildSelectorProps = {
   builds: IBuild[],
   total: number,
   filters: FiltersType,
-  color: string
 }
 
-function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) { 
+function BuildSelector({ builds, total, filters }: BuildSelectorProps) { 
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
+  const colorClass = useAppSelector((state) => state.data.colorClass)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
 
   const filteredBuilds = builds;
@@ -40,13 +40,13 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
       return;
     }
     
+    colors = Array(10).fill(colorVars.none)
+    colors[activeBuildIdx] = colorVars[colorClass.toLowerCase()];
+
     labels.push(label);
     data.push(count);
     countSum += count;
   })
-
-  colors = Array(labels.length).fill(ElementColors.none)
-  colors[activeBuildIdx] = color;
 
   const handleSelectSet = (i: number) => {
     setActiveBuildIdx(i);
@@ -59,7 +59,7 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
           {map(filteredBuilds, (build, i) => {
               return (
                 <div key={`artifacts-thumb-${i}`} onClick={() => handleSelectSet(i)}>
-                  <ArtifactSetBuildCard id={build._id} color={color} selected={i === activeBuildIdx} selector={true} />
+                  <ArtifactSetBuildCard id={build._id} selected={i === activeBuildIdx} selector={true} />
                 </div>
               )
             })
@@ -70,7 +70,6 @@ function BuildSelector({ builds, color, total, filters }: BuildSelectorProps) {
         <WeaponBuild
           weapons={filteredBuilds[activeBuildIdx].weapons}
           total={reduce(filteredBuilds[activeBuildIdx].weapons, (sum, curr) => sum + curr.count, 0)}
-          color={color}
           filters={filters}
         />
         <div className="artifact-set-build-stats-container">

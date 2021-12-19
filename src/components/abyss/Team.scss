@@ -1,14 +1,16 @@
+@use '../../variables.module' as var;
+
 .team-container {
   margin: 0.6rem 0;
   max-width: 40rem;
-  border: solid 5px #20222D;
+  background-color: var.$theme-color-4;
+  border: solid 5px rgba(0,0,0,0.3);
   border-radius: 6px;
 }
 
 .team-stats-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1.4fr;
-  background-color: #20222D;
 
   .character-tile-container {
     overflow: hidden;
@@ -42,7 +44,7 @@
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  background-color: #20222D;
+  background-color: rgba(0,0,0,0.3);
 
   .team-flex {
     margin-top: 0.3rem;
@@ -86,8 +88,6 @@
     display: flex;
     justify-content: center;
     padding-bottom: 0.3rem;
-    background-color: #20222D;
-
     &:hover {
       cursor: pointer;
     }

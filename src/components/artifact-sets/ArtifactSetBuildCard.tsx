@@ -12,15 +12,15 @@ import LLImage from '../ui/LLImage';
 type ArtifactSetBuildCardProps = {
   id: string,
   selected?: boolean,
-  color?: string,
   selector?: boolean
 }
 
-function ArtifactSetBuildCard({ id, color='', selected=false, selector=false }: ArtifactSetBuildCardProps) {
+function ArtifactSetBuildCard({ id, selected=false, selector=false }: ArtifactSetBuildCardProps) {
   const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
-
+  const colorClass = useAppSelector((state) => state.data.colorClass)
+  
   return (
-    <div className={`artifact-set-build-card ${selector ? 'asSelector' : ''} ${selected ? "asSelected" : ""}`} style={selected ? {backgroundColor: color }:{}}>
+    <div className={`artifact-set-build-card ${selector ? 'asSelector' : ''} ${selected ? `asSelected ${colorClass}` : ""}`}>
       {map(artifactSetBuildDb[id].sets, ({ _id, activation_number }, i) => {
         return (
           <div key={`thumb-${_id}-i`} className={"artifact-set-thumb"}>

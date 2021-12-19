@@ -1,14 +1,15 @@
 import './WeaponPage.css';
 
 import { find, isEmpty, orderBy, reduce, take } from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getShortName } from '../../scripts/util';
+import { setColorClass } from '../../Store';
 import Button from '../controls/Button';
 import useApi from '../hooks/useApi';
 import useExpand from '../hooks/useExpand';
-import { useAppSelector } from '../hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
@@ -18,7 +19,14 @@ function WeaponPage() {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const weapon = find(weaponDb, weapon => getShortName(weapon) === shortName)
+  const dispatch = useAppDispatch()
 
+  useEffect(() => {
+    if (weapon) {
+      dispatch(setColorClass(weapon.type_name))
+    }
+  }, [weapon])
+  
   if (!weapon) return null;
 
   const weaponStats = useApi(`/weapons/${weapon._id}.json`)
@@ -28,12 +36,12 @@ function WeaponPage() {
   if (!weaponStats || isEmpty(weaponDb) || isEmpty(weaponStats)) return <Loader />
 
   const charsTotal = reduce(weaponStats.characters, (sum, curr) => sum + curr.count, 0)
-  
+
   return (
     <div className="weapon-page">
       <div className="weapon-characters">
         <h1>Characters</h1>
-        <HorizontalBarChart data={take(orderBy(weaponStats.characters, 'count', 'desc'), expanded ? max : 5) as unknown as IBarChartData[]} db={characterDb} path='characters' total={charsTotal} color={''} />
+        <HorizontalBarChart data={take(orderBy(weaponStats.characters, 'count', 'desc'), expanded ? max : 5) as unknown as IBarChartData[]} db={characterDb} path='characters' total={charsTotal} />
         <br />
         {weaponStats.characters > 5 && (
           <Button className="weapons-show-more" onClick={handleExpand}>

@@ -1,6 +1,8 @@
-@use 'variables' as var;
+@use 'variables.module' as var;
 
 .App {
+  background-color: var.$theme-color-base;
+
   .App-content {
     display: flex;
     min-height: calc(100vh - 4rem);
@@ -49,7 +51,7 @@ footer {
 .links {
   display: flex;
   justify-content: center;
-  color: #e9e5dc;
+  color: var.$card-color;
   margin: 1rem;
   font-size: 1.1rem;
 
@@ -104,6 +106,24 @@ footer {
 .Geo {
   background-color: var.$element-geo !important;
 }
+.None {
+  background-color: var.$none;
+}
+.Sword {
+  background-color: var.$weapon-sword;
+}
+.Claymore {
+  background-color: var.$weapon-claymore;
+}
+.Catalyst {
+  background-color: var.$weapon-catalyst;
+}
+.Bow {
+  background-color: var.$weapon-bow;
+}
+.Polearm {
+  background-color: var.$weapon-polearm;
+}
 .rarity-3 {
   background: var.$rarity-3;
 }
@@ -115,18 +135,6 @@ footer {
 }
 .rarity-105 {
   background: var.$rarity-105;
-}
-
-.Characters {
-  background-color: rgb(31, 120, 150) !important;
-}
-
-.Weapons {
-  background-color: rgb(172, 34, 18) !important;
-}
-
-.Artifacts {
-  background-color: rgb(48, 150, 113) !important;
 }
 
 @media (max-width: 1036px) {

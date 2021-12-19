@@ -1,3 +1,5 @@
+@use '../../variables.module' as var;
+
 .searchbar {
   position: relative;
   width: 40em;
@@ -15,7 +17,7 @@
     border-radius: 5px;
     padding-left: 2.5rem;
     color: #e9e5dc;
-    background-color: #2a2c3a;
+    background-color: var.$theme-color-4;
     border: 1.5px solid rgba(0, 0, 0, 0.4);
     font-size: 1.1rem;
     border-radius: 5px;

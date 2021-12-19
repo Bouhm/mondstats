@@ -13,12 +13,11 @@ import { ChevronDown, ChevronUp } from '../../ui/Icons';
 type WeaponBuild = {
   weapons: IWeaponBuild[]
   total: number,
-  color: string
 }
 
 const BP_WEAPONS = [11409, 12409, 14405, 15409, 13405]
 
-function WeaponBuild({ weapons, total, filters, color }: WeaponBuild & { filters : FiltersType}) {
+function WeaponBuild({ weapons, total, filters }: WeaponBuild & { filters : FiltersType}) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const max = 10;
@@ -53,7 +52,7 @@ function WeaponBuild({ weapons, total, filters, color }: WeaponBuild & { filters
   return (
     <div className="weapons-list-container">
       <h1>Weapons</h1>
-      <HorizontalBarChart data={take(filteredWeapons, expanded ? max : 5) as unknown as IBarChartData[]} path='weapons' db={weaponDb} total={total} color={color}/>
+      <HorizontalBarChart data={take(filteredWeapons, expanded ? max : 5) as unknown as IBarChartData[]} path='weapons' db={weaponDb} total={total} />
       <br />
       {filteredWeapons.length > 5 && (
         <Button className="weapons-show-more" onClick={handleExpand}>

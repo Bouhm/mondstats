@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IArtifactDb, IArtifactSetBuildDb, IArtifactSetDb, ICharacterDb, IWeaponDb } from './data/types';
@@ -11,7 +9,8 @@ interface IState {
   artifactSetDb: IArtifactSetDb,
   artifactSetBuildDb: IArtifactSetBuildDb,
   characterDb: ICharacterDb,
-  weaponDb: IWeaponDb
+  weaponDb: IWeaponDb,
+  colorClass: string
 }
 
 const initialState: IState = {
@@ -21,7 +20,8 @@ const initialState: IState = {
   artifactSetBuildDb: {},
   artifactDb: {},
   weaponDb: {},
-  characterDb: {}
+  characterDb: {},
+  colorClass: ''
 }
 
 const dataSlice = createSlice({
@@ -48,7 +48,10 @@ const dataSlice = createSlice({
     },
     setCharacterDb: (state, action: PayloadAction<ICharacterDb>) => {
       state.characterDb = action.payload
-    }
+    },
+    setColorClass: (state, action: PayloadAction<string>) => {
+      state.colorClass = action.payload
+    },
   }
 })
 
@@ -59,7 +62,8 @@ export const {
   setArtifactSetDb,
   setArtifactSetBuildDb,
   setWeaponDb,
-  setCharacterDb
+  setCharacterDb,
+  setColorClass
 } = dataSlice.actions;
 
 const store = configureStore({ reducer: { data: dataSlice.reducer } })

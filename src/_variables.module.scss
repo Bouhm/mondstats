@@ -1,0 +1,41 @@
+$element-pyro: #ee7033;
+$element-anemo: #58dbab;
+$element-cryo: #a1f9ff;
+$element-hydro: #35cbfc;
+$element-electro: #d795ff;
+$element-dendro: #a5d533;
+$element-geo: #f0b738;
+// $element-none: #4b0082;
+$none: #a4a4a4;
+$rarity-3: linear-gradient(#5d6887, #608eab, #5484a7);
+$rarity-4: linear-gradient(#605a86, #9476ac, #a67ab9);
+$rarity-5: linear-gradient(#8d5e2e, #b1792c, #b8742b);
+$rarity-105: linear-gradient(#A25056, #C75056, #E04A53);
+
+$card-color: #e9e5dc;
+
+$theme-color-base: #343748;
+$theme-color-3: #2E3142;
+$theme-color-4: #2A2C3A;
+
+$weapon-sword: #5144D3;
+$weapon-claymore: #6F38B1;
+$weapon-catalyst: #DA3490;
+$weapon-bow: #9089FA;
+$weapon-polearm: #2780EB;
+
+:export {
+  pyro: $element-pyro;
+  anemo: $element-anemo;
+  cryo: $element-cryo;
+  hydro: $element-hydro;
+  electro: $element-electro;
+  dendro: $element-dendro;
+  none: #a4a4a4;
+  geo: $element-geo;
+  sword: $weapon-sword;
+  claymore: $weapon-claymore;
+  catalyst: $weapon-catalyst;
+  bow: $weapon-bow;
+  polearm: $weapon-polearm;
+}

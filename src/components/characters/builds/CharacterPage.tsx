@@ -5,10 +5,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Sticky from 'react-stickynode';
 
-import { ElementColors } from '../../../data/constants';
 import { ICharacterData } from '../../../data/types';
 import { getCharacterFileName, getPercentage } from '../../../scripts/util';
-import { selectCharacter } from '../../../Store';
+import { selectCharacter, setColorClass } from '../../../Store';
 import Filters from '../../filters/Filters';
 import useApi from '../../hooks/useApi';
 import useFilters from '../../hooks/useFilters';
@@ -32,7 +31,6 @@ function CharacterPage() {
 
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const [elementColor, setElementColor] = useState("");
   const dispatch = useAppDispatch()
 
   const [character, setCharacter] = useState<ICharacterData | undefined>(undefined)
@@ -50,8 +48,8 @@ function CharacterPage() {
     if (!isEmpty(characterDb)) {
       const char = characterDb[charId];
       setCharacter(char)
-      setElementColor(ElementColors[char.element.toLowerCase()]);
       
+      dispatch(setColorClass(char.element))
       dispatch(selectCharacter(charId))
     }
   }, [setCharacter, dispatch, charId, characterDb])
@@ -89,7 +87,7 @@ function CharacterPage() {
 
   return (
     <>
-      <div className="character-page-stats-count" style={{ backgroundColor: elementColor }}>
+      <div className={`character-page-stats-count ${character.element}`} >
         <span>{selectedCharacterBuilds.count} {character.name} Builds</span>
       </div>
       <div className="character-page">
@@ -131,11 +129,10 @@ function CharacterPage() {
             <BuildSelector
               builds={selectedCharacterBuilds.builds}
               total={selectedCharacterBuilds.count}
-              color={elementColor}
               filters={filters}
             /> 
             {character.rarity < 100 &&
-              <Constellations constellations={selectedCharacterBuilds.constellations} color={elementColor} total={reduce(selectedCharacterBuilds.constellations, (sum, curr) => sum + curr, 0)} />
+              <Constellations constellations={selectedCharacterBuilds.constellations} total={reduce(selectedCharacterBuilds.constellations, (sum, curr) => sum + curr, 0)} />
             }
           </>
         }

@@ -1,3 +1,5 @@
+@use '../../variables.module' as var;
+
 .horizontal-barchart {
   display: flex;
 
@@ -26,7 +28,7 @@
 
   .bar-card {
     overflow: hidden;
-    background-color: #e9e5dc;
+    background-color: var.$card-color;
     display: flex;
     border: 2px solid white;
     border-right: 0;
@@ -48,6 +50,7 @@
         width: 100%;
         flex-flow: column;
         text-align: center;
+        color: rgba(73, 83, 102, 0.9);
 
         .bar-card-name {
           padding: 0 0.1rem;
@@ -71,7 +74,6 @@
           }
 
           .bar-card-popularity-count {
-            color: rgba(73, 83, 102, 0.9);
             font-size: 1.1rem;
           }
         }

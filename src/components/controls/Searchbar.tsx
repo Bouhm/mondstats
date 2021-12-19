@@ -1,4 +1,4 @@
-import './Searchbar.css';
+import './Searchbar.scss';
 
 import Fuse from 'fuse.js';
 import { debounce, filter, includes, map } from 'lodash';

@@ -5,6 +5,7 @@ import { map } from 'lodash';
 import React from 'react';
 
 import { getPercentage } from '../../scripts/util';
+import { useAppSelector } from '../hooks/useRedux';
 import AbyssStat from '../stats/AbyssStat';
 import UsagePct from '../stats/UsagePct';
 import Divider from './Divider';
@@ -19,15 +20,15 @@ export interface IBarChartData {
 }
 
 type HorizontalBarChart = {
-  color: string, 
   total: number,
   db: any,
   data: IBarChartData[],
   path: string
 }
 
-function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart) {
-  console.log(data)
+function HorizontalBarChart({ data, db, total, path }: HorizontalBarChart) {
+  const colorClass = useAppSelector((state) => state.data.colorClass)
+  
   return <div className="horizontal-barchart-container">
     {map(data, ({ _id, count }, i) => {
       const popularity = getPercentage(count, total);
@@ -55,8 +56,8 @@ function HorizontalBarChart({ data, db, total, color, path }: HorizontalBarChart
             </div>
           <div className="horizontal-barchart-bar">
             <div  
-              className={`barchart-bar`} 
-              style={{ width: `${popularity}%`, backgroundColor: color }} 
+              className={`barchart-bar ${colorClass}`} 
+              style={{ width: `${popularity}%` }} 
             />
           </div>
         </div>
