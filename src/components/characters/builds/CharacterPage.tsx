@@ -93,36 +93,6 @@ function CharacterPage() {
       <div className="character-page">
         <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} /> 
         <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />
-        {/* <div className="character-stats-container">
-          <div className="character-stats">
-            <h2 className="character-stats-title">
-              Popularity
-            </h2>
-            <div className="character-stats-content character-stats-popularity">
-              14 <Delta current={14} last={13} />
-            </div>
-          </div>
-          <div className="character-stats-abyss">
-            <div className="character-stats">
-              <h2 className="character-stats-title">
-                Pick Rate
-              </h2>
-              <div className="character-stats-content character-stats-pct">
-                {getPercentage(selectedCharacterBuilds.count, selectedCharacterBuilds.total) }%
-                <Delta current={getPercentage(selectedCharacterBuilds.count, selectedCharacterBuilds.total)} last={22.34} />
-              </div>
-            </div>
-            <div className="character-stats">
-              <h2 className="character-stats-title">
-                Win Rate
-              </h2>
-              <div className="character-stats-content character-stats-pct">
-                {getPercentage(selectedCharacterBuilds.winCount, selectedCharacterBuilds.count)}%
-                <Delta current={getPercentage(selectedCharacterBuilds.count, selectedCharacterBuilds.total)} last={85.35} />
-              </div>
-            </div>
-          </div>
-        </div> */}
         {selectedCharacterBuilds.builds &&
           <>
             {/* <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky> */}
