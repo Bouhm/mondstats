@@ -21,6 +21,12 @@ function Home() {
       <div className="home-logo">
         <LLImage src={Logo} alt="logo" />
       </div>
+      <div style={{color: 'white', textAlign: 'center'}}>
+        HEAVILY WIP BUILD WITH VERY ROUGH EDGES <br />
+        NOT REPRESENTATIVE OF THE FINAL PRODUCT <br />
+        PLEASE EXCUSE THE JANK <br />
+        THANK
+      </div>
     </div>
   )
 }
