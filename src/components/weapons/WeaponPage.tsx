@@ -1,4 +1,4 @@
-import './WeaponPage.css';
+import './WeaponPage.scss';
 
 import { find, isEmpty, orderBy, reduce, take } from 'lodash';
 import React, { useEffect, useState } from 'react';
@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
+import UsageStats from '../stats/UsageStats';
 
 function WeaponPage() { 
   const { shortName } = useParams();
@@ -39,29 +40,32 @@ function WeaponPage() {
 
   return (
     <div className="weapon-page">
-      <div className="weapon-characters">
-        <h1>Characters</h1>
-        <HorizontalBarChart data={take(orderBy(weaponStats.characters, 'count', 'desc'), expanded ? max : 5) as unknown as IBarChartData[]} db={characterDb} path='characters' total={charsTotal} />
-        <br />
-        {weaponStats.characters > 5 && (
-          <Button className="weapons-show-more" onClick={handleExpand}>
-            {!expanded ? <>Show more <ChevronDown size={20}/></> : <>Show less <ChevronUp size={20} /></>}
-          </Button>
-        )}
-      </div>
-      <div className="weapon-detail">
-        <h1>Weapon</h1>
-        <div className="weapon-info-container">
-          <div className="weapon-info">
-            <img src={`/assets/weapons/${weapon._id}.webp`} />
-            <div className="weapon-info-stats">
-              <div className="weapon-info-stat-title">Base Atk:</div>
-              <div className="weapon-info-stat-value">{weapon.baseAtk}</div>
-              <div className="weapon-info-stat-title">{weapon.subStat}:</div>
-              <div className="weapon-info-stat-value">{weapon.subValue}</div>
+      <UsageStats count={weaponStats.count} total={weaponStats.typeTotal} abyssCount={weaponStats.abyssCount} abyssTotal={weaponStats.abyssTypeTotal} />
+      <div className="weapon-charts">
+        <div className="weapon-characters">
+          <h1>Characters</h1>
+          <HorizontalBarChart data={take(orderBy(weaponStats.characters, 'count', 'desc'), expanded ? max : 5) as unknown as IBarChartData[]} db={characterDb} path='characters' total={charsTotal} />
+          <br />
+          {weaponStats.characters > 5 && (
+            <Button className="weapons-show-more" onClick={handleExpand}>
+              {!expanded ? <>Show more <ChevronDown size={20}/></> : <>Show less <ChevronUp size={20} /></>}
+            </Button>
+          )}
+        </div>
+        <div className="weapon-detail">
+          <h1>Weapon</h1>
+          <div className="weapon-info-container">
+            <div className="weapon-info">
+              <img src={`/assets/weapons/${weapon._id}.webp`} />
+              <div className="weapon-info-stats">
+                <div className="weapon-info-stat-title">Base Atk:</div>
+                <div className="weapon-info-stat-value">{weapon.baseAtk}</div>
+                <div className="weapon-info-stat-title">{weapon.subStat}:</div>
+                <div className="weapon-info-stat-value">{weapon.subValue}</div>
+              </div>
             </div>
+            <div className="weapon-info-effect">{weapon.effect}</div>
           </div>
-          <div className="weapon-info-effect">{weapon.effect}</div>
         </div>
       </div>
     </div>
