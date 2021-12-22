@@ -1,41 +1,56 @@
-import './ChartsPage.css';
+import './ChartsPage.scss';
 
 import { filter, includes, intersection, isEmpty, map } from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import useApi from '../hooks/useApi';
 import useCharacterSearch from '../hooks/useCharacterSearch';
 import { useAppSelector } from '../hooks/useRedux';
+import { useTabs } from '../hooks/useTabs';
 import Loader from '../ui/Loader';
+import Tabs from '../ui/Tabs';
 import StatsTable from './StatsTable';
 
 function ChartsPage() { 
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const characterStats = useApi(`/characters/top-characters.json`)
-  const [selectedCharacters, setSelectedCharacters] = useState<string[]>([])
+  const topCharacters = useApi(`/characters/stats/top-characters.json`)
 
-  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
-  const artifactSetStats = useApi(`/artifacts/top-artifactsets.json`)
-  const [selectedSets, setSelectedSets] = useState<string[]>([])
-
-  if (isEmpty(artifactSetDb) || isEmpty(artifactSetStats)) return <Loader />
-
-  if (isEmpty(characterDb) || isEmpty(characterStats)) return <Loader />
-
+  const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
+  const topArtifactSetBuilds = useApi(`/artifactSets/stats/top-artifact-set-builds.json`)
 
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
-  const weaponStats = useApi(`/weapons/top-weapons.json`)
-  const [selectedWeapons, setSelectedWeapons] = useState<string[]>([])
+  const topWeapons = useApi(`/weapons/stats/top-weapons.json`)
 
-  if (isEmpty(weaponDb) || isEmpty(weaponStats)) return <Loader />
+  const tabs = ['characters', 'artifact sets', 'weapons']
+  const { activeTabIdx, onTabChange } = useTabs();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (topCharacters && topArtifactSetBuilds && topWeapons) {
+      setIsLoading(false)
+    }
+  }, [topCharacters, topArtifactSetBuilds, topWeapons])
+
+  if (isLoading) return <Loader />
     
+  const renderChart = () => {
+    switch (activeTabIdx) {
+      case 0:
+        return <StatsTable.Characters data={topCharacters} />
+      case 1:
+        return <StatsTable.ArtifactSetBuilds data={topArtifactSetBuilds} />
+      case 2:
+        return <StatsTable.Weapons data={topWeapons} />
+      default:
+        return;
+    }
+  }
+
   return (
     <div className="charts-page-container">
-      <div className="charts-tabs"></div>
-      <div className="charters-container">
-        <StatsTable.Characters data={isEmpty(selectedCharacters) ? characterStats.characters : filter(characterStats.characters, character => includes(selectedCharacters, character._id))} /> 
-        <StatsTable.ArtifactSets data={isEmpty(selectedSets) ? artifactSetStats.artifactSets : filter(artifactSetStats.artifactSets, set => intersection(selectedSets, map(set.artifacts, artifact => artifact._id)).length > 0)} />
-        <StatsTable.Weapons data={isEmpty(selectedWeapons) ? weaponStats.weapons : filter(weaponStats.weapons, weapon => includes(selectedWeapons, weapon._id))} />
+      <Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={tabs} />
+      <div className="charts-container">
+        {renderChart()}
       </div>
     </div>
   )

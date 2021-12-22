@@ -21,160 +21,95 @@ import Loader from '../ui/Loader';
 import Tooltip from '../ui/Tooltip';
 
 function Characters({data}: any) {
-  const db = useAppSelector((state) => state.data.characterDb)
-  const featured = useApi(`/featured.json`);
-  const pageSize = 20;
-  const { currentPage, onPageChange, handleReset, filterPageContent } = usePaginate(pageSize);
-
-  useEffect(() => {
-    handleReset()
-  }, [data])
-
+  const db = useAppSelector((state) => state.data.artifactSetDb)
   const title = 'characters'
-  const renderCard = (itemStat: any) => {
-    const name = getCharacterLabel(db[itemStat._id]);
-    return <Tooltip content={name}>
-      <div className="row-card col">
-        {/* <LLImage className="row-card-element" src={`/assets/elements/${db[itemStat._id].element}.webp`} /> */}
-        <LLImage src={`/assets/${title}/${getCharacterFileName(db[itemStat._id])}.webp`} />
-      </div>
-    </Tooltip>
-  }
 
-  if (!featured) return <Loader />
-
-  return (
-    <div className='stats-table-container'>
-      <div className={`stats-table ${title}-stats`}>
-        <div className="stats-table-row">
-            <div className="row-card">
-              <span className="col-header">{capitalize(title)}</span>
-            </div>
-            <div className="row-stats">
-            <span className="col-header" title="*Players who own and have fully built the character">Usage %</span>
-            </div>
-            <div className="row-stats">
-            <span className="col-header" title="*Pick rates in the Spiral Abyss">Pick Rate %</span>
-            </div>
-        </div>
-        {map(filterPageContent(data), (itemStat: any, i) => {
-          const ownedPercentage = getPercentage(itemStat.total, featured.player_total);
-          const pickedPercentage = getPercentage(itemStat.abyssCount, featured.abyss_total);
-
-          return (
-            <div key={`row-${i}`} className="stats-table-row">
-              {renderCard(itemStat)}
-              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.total}`}>
-                <>
-                  <div
-                    className={`row-stats-bar`} 
-                    style={{ width: `${ownedPercentage}%`}} 
-                  />    
-                  <div className="row-stats-pct">{ `${ownedPercentage}%`}</div>
-                </>
-              </Tooltip>
-              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.abyssCount || 0}`}>
-                <>
-                  <div
-                    className={`row-stats-bar`} 
-                    style={{ width: `${pickedPercentage}%`}} 
-                  />    
-                  <div className="row-stats-pct">{ `${pickedPercentage}%`}</div>
-                </>
-              </Tooltip>
-            </div>
-          )
-        })}
-      </div>
-      {data.length > pageSize && <Pagination current={currentPage} pageSize={pageSize} onChange={onPageChange} total={data.length} />}
-    </div>
+  const getTotal = () => (
+    data.totals.total
   )
+  
+  const getAbyssTotal = () => (
+    data.totals.abyssTotal
+  )
+
+  const renderImage = (item: any) => (
+    <LLImage src={`/assets/${title}/${item._id}.webp`} />
+  )
+
+  return <StatsTable data={data} title={title} getTotal={getTotal} getAbyssTotal={getAbyssTotal} renderImage={renderImage} />
 }
 
-function ArtifactSets({data}: any) {
-  const db = useAppSelector((state) => state.data.artifactSetDb)
-  const title = 'artifacts'
-  const renderCard = (itemStat: any) => (
-    <Tooltip content={getArtifactSetNames(itemStat.artifacts, db)}>
-      <div className="row-card col">
-        <_ArtifactSets artifacts={itemStat.artifacts} />
-      </div>
-    </Tooltip>
+function ArtifactSetBuilds({data}: any) {
+  const db = useAppSelector((state) => state.data.artifactSetBuildDb)
+  const title = 'artifactsets'
+
+  const getTotal = () => (
+    data.totals.total
+  )
+  
+  const getAbyssTotal = () => (
+    data.totals.abyssTotal
   )
 
-  return <ItemStatsTable data={data} title={title} renderCard={renderCard} />
+  const renderImage = (item: any) => (
+    <_ArtifactSets artifacts={item.sets} />
+  )
+
+  return <StatsTable data={data} title={title} getTotal={getTotal} getAbyssTotal={getAbyssTotal} renderImage={renderImage} />
 }
 
 function Weapons({data}: any) {
   const db = useAppSelector((state) => state.data.weaponDb)
   const title = 'weapons'
-  const renderCard = (itemStat: any) => (
-    <Tooltip content={`${db[itemStat._id].name}`}>
-      <div className="row-card col">
-        <LLImage src={`/assets/${title}/${itemStat._id}.webp`} />
-      </div>
-    </Tooltip>
+
+  const getTotal = (item: any) => (
+    data.totals[db[item._id].type_name].total
+  )
+  
+  const getAbyssTotal = (item: any) => (
+    data.totals[db[item._id].type_name].abyssTotal
   )
 
-  return <ItemStatsTable data={data} title={title} renderCard={renderCard} />
+  const renderImage = (item: any) => (
+    <LLImage src={`/assets/${title}/${item._id}.webp`} />
+  )
+
+  return <StatsTable data={data} title={title} getTotal={getTotal} getAbyssTotal={getAbyssTotal} renderImage={renderImage} />
 }
 
 type StatsTableProps = {
   data: any,
   title: string,
-  renderCard: (itemStat: any) => JSX.Element
+  getTotal: (item?: any) => number,
+  getAbyssTotal: (item?: any) => number,
+  renderImage: (item: any) => JSX.Element
 } 
 
-function ItemStatsTable({ data, title, renderCard }: StatsTableProps) {
-  const characterDb = useAppSelector((state) => state.data.characterDb)
-  const total = reduce(data, (sum: number, curr: any) => sum + curr.count, 0)
-  const pageSize = 20;
-  const { currentPage, onPageChange, handleReset, filterPageContent } = usePaginate(pageSize);
-
-  useEffect(() => {
-    handleReset()
-  }, [data])
+function StatsTable({ data, title, getTotal, getAbyssTotal, renderImage }: StatsTableProps) {
+  console.log(data[title].length)
 
   return (
-    <div className='stats-table-container'>
-      <div className={`stats-table ${title}-stats`}>
-        <div className="stats-table-row asItems">
-            <div className="row-card">
-              <span className="col-header">{capitalize(title)}</span>
-            </div>
-            <div className="row-stats">
-            <span className="col-header">Usage %</span>
-            </div>
-            <div className="row-related">
-            <span className="col-header">Used by</span>
-            </div>
-        </div>
-        {map(filterPageContent(data), (itemStat: any, i) => {
-          const percentage = getPercentage(itemStat.count, total);
-
-          return (
-            <div key={`row-${i}`} className="stats-table-row asItems">
-              {renderCard(itemStat)}
-              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.count}`}>
-                <>
-                  <div
-                    className={`row-stats-bar`} 
-                    style={{ width: `${percentage}%`, backgroundColor: ''}} 
-                  />    
-                  <div className="row-stats-pct">{ `${percentage}%`}</div>
-                </>
-              </Tooltip>
-              <ScrollContainer vertical={false} className="row-related col">
-                {map(itemStat.characters, (charStat, j) => <CharacterCount character={characterDb[charStat._id]} count={charStat.count} key={`${charStat._id}-${i}-${j}`}/>)}
-              </ScrollContainer>
-            </div>
-          )
-        })}
-      </div>
-      {data.length > pageSize && <Pagination current={currentPage} pageSize={pageSize} onChange={onPageChange} total={data.length} />}
-    </div>
+    <table className='stats-table'>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>{title.slice(0, title.length-1)}</th>
+        <th>Overall Usage</th>
+        <th>Abyss Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      {map(data[title], (stats, i) => (
+        <tr key={`${title}-${i}`}>
+          <td>{i + 1}</td>
+          <td>{renderImage(stats)}</td>
+          <td className='stats-row-percentage'>{getPercentage(stats.count, getTotal(stats))}%</td>
+          <td className='stats-row-percentage'>{getPercentage(stats.abyssCount, getAbyssTotal(stats))}%</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
   )
 }
 
-
-export default { ArtifactSets, Weapons, Characters }
+export default { ArtifactSetBuilds, Weapons, Characters }

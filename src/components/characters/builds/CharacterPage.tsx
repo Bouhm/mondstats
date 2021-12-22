@@ -91,7 +91,7 @@ function CharacterPage() {
         <span>{selectedCharacterBuilds.count} {character.name} Builds</span>
       </div>
       <div className="character-page">
-        <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${getCharacterFileName(character)}_bg.webp")` }} /> 
+        <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${character._id}_bg.webp")` }} /> 
         <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />
         {selectedCharacterBuilds.builds &&
           <>

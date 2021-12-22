@@ -46,7 +46,7 @@ function Characters(props: CardSearchProps) {
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
           <img className="item-option-element" src={`/assets/elements/${character.element}.webp`} />
-          <img className="item-option-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-portrait" src={`/assets/characters/${character._id}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>
@@ -72,7 +72,7 @@ function ArtifactSets(props: CardSearchProps) {
     ) as ReactNode;
   }
 
-  return <CardSearch options={options} OptionLabel={OptionLabel} path={"artifacts"} placeholder={"Search artifact sets"} {...props} />
+  return <CardSearch options={options} OptionLabel={OptionLabel} path={"artifactsets"} placeholder={"Search artifact sets"} {...props} />
 }
 
 function Weapons(props: CardSearchProps) { 

@@ -18,6 +18,7 @@ import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';
 import WIP from './components/pages/WIP';
 import ScrollToTop from './components/ScrollToTop';
+import ChartsPage from './components/stats/ChartsPage';
 import WeaponIndex from './components/weapons/WeaponIndex';
 import WeaponPage from './components/weapons/WeaponPage';
 import store from './Store';
@@ -46,6 +47,7 @@ ReactDOM.render(
             <Route path="artifacts" element={<ArtifactSetIndex/>} />
             <Route path="weapons/:shortName" element={<WeaponPage/>} />
             <Route path="weapons" element={<WeaponIndex/>} />
+            <Route path="charts" element={<ChartsPage/>} />
           </Route>
         </Routes>
       </BrowserRouter>

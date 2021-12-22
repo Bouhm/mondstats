@@ -1,182 +1,71 @@
 .stats-table {
-  color: white;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
   width: 100%;
-  padding: 0 0.5rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  table-layout: fixed;
 
-  &.characters-stats {
-    .row-stats {
-      .row-stats-bar {
-        background-color: rgb(31, 120, 150);
-      }
-    }
+  tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
   }
-
-  &.artifacts-stats {
-    .row-stats {
-      .row-stats-bar {
-        background-color: rgb(48, 150, 113);
-      }
-    }
+  
+  th, td {
+    padding: .625em;
+    text-align: center;
   }
-
-  &.weapons-stats {
-    .row-stats {
-      .row-stats-bar {
-        background-color: rgb(172, 34, 18);
-      }
-    }
-  }
-
-  .stats-table-row {
-    display: grid;
-    grid-template-columns: 150px 1fr 1fr;
-    width: 100%;
-
-    &.asItems {
-      grid-template-columns: 150px 200px 1fr;
-    }
-
-    &:nth-child(even) {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-    .col {
-      &:not(:first-child) {
-        border-left: 1px solid rgba(255, 255, 255, 0.5);
-      }
-    }
-
-    .col-header {
-      font-size: 1.2rem;
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      width: 100%;
-    }
-  }
-
-  .row-card {
-    width: auto;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    margin-right: 1rem;
-    position: relative;
-
-    img {
-      height: inherit;
-    }
-  }
-
-  .row-stats {
-    flex: 1;
-    display: flex;
-    align-items: center;
-
-    .row-stats-bar {
-      height: 3rem;
-      display: inline-block;
-      animation-name: horibar;
-      animation-duration: 1s;
-      animation-direction: forwards;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      background-color: rgba(255, 255, 255, 0.6);
-      margin-right: 0.5rem;
-    }
-
-    @keyframes horibar {
-      0% {
-        max-width: 0;
-      }
-      100% {
-        max-width: 100%;
-      }
-    }
-  }
-
-  .row-related {
-    display: flex;
-    align-items: center;
-    padding: 0.2rem;
-
-    .character-stats {
-      width: 60px;
-      height: 60px;
-      margin-right: 0.2rem;
-      border-radius: 6px;
-      -webkit-user-drag: none;
-
-      &::selection {
-        color: none;
-        background: none;
-      }
-    }
+  
+  th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
   }
 }
 
-@media (max-width: 1036px) {
+
+@media screen and (max-width: 600px) {
   .stats-table {
-    .row-stats {
-      .row-stats-bar {
-        height: 1.5rem;
-      }
+    border: 0;
+
+    thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
     }
 
-    .stats-table-row {
-      grid-template-columns: 120px 1fr 1fr;
-
-      &.asItems {
-        grid-template-columns: 120px 150px 1fr;
-      }
-
-      .row-card {
-        width: auto;
-        height: 70px;
-        margin-right: 0.6rem;
-      }
-
-      .character-stats {
-        width: 50px;
-        height: 50px;
-        margin-right: 0.2rem;
-      }
+    tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
     }
-  }
-}
-
-@media (max-width: 676px) {
-  .stats-table {
-    .stats-table-row {
-      grid-template-columns: 65px 1fr 1fr;
-
-      &.asItems {
-        grid-template-columns: 65px 90px 1fr;
-      }
-
-      .col-header {
-        font-size: 0.8rem;
-        justify-content: center;
-      }
-
-      .row-card {
-        width: auto;
-        height: 40px;
-        margin-right: 0.2rem;
-      }
-
-      .character-stats {
-        width: 35px;
-        height: 35px;
-        margin-right: 0.1rem;
-        border-radius: 5px;
-      }
-
-      .stats-table-headers {
-        font-size: 0.8rem;
-        text-align: center;
-        justify-content: center;
-      }
+    
+    td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    td::before {
+      /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    td:last-child {
+      border-bottom: 0;
     }
   }
 }

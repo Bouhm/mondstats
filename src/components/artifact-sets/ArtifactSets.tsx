@@ -1,5 +1,3 @@
-import './ArtifactSets.scss';
-
 import { map } from 'lodash';
 import React from 'react';
 
