@@ -23,7 +23,7 @@ function ArtifactSetIndex() {
     
   return (
     <div className="artifact-set-stats-container">
-      <CardSearch.ArtifactSets items={filter(searchArtifactSets as SearchItem[], set => !includes(selectedSets, set!._id))} onSelect={handleSelect} />
+      <CardSearch.ArtifactSets items={searchArtifactSets as SearchItem[]} onSelect={handleSelect} />
     </div>
   )
 }
