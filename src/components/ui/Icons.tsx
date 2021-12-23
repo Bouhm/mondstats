@@ -194,3 +194,37 @@ export const CaretDown = ({size = 25, color = "#e9e5dc", className=""}: IconProp
     </svg>
   )
 }
+
+export const ArrowUp = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+  return (
+    <svg 
+      aria-hidden="true" 
+      focusable="false" 
+      className={"icon " + className}
+      role="img" 
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 512 512"
+    >
+        <path fill={color} d="M8 256C8 119 119 8 256 8s248 111 248 248-111 248-248 248S8 393 8 256zm292 116V256h70.9c10.7 0 16.1-13 8.5-20.5L264.5 121.2c-4.7-4.7-12.2-4.7-16.9 0l-115 114.3c-7.6 7.6-2.2 20.5 8.5 20.5H212v116c0 6.6 5.4 12 12 12h64c6.6 0 12-5.4 12-12z"></path>
+      </svg>
+  )
+}
+
+export const ChevronRight = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+  return (
+    <svg 
+      aria-hidden="true" 
+      focusable="false" 
+      className={"icon " + className}
+      role="img" 
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 320 512"
+    >
+      <path fill={color} d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
+    </svg>
+  )
+}

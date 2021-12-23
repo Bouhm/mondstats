@@ -1,4 +1,4 @@
-import './CharacterPage.css';
+import './CharacterPage.scss';
 
 import { cloneDeep, find, forEach, isEmpty, map, random, reduce, take } from 'lodash';
 import React, { useEffect, useState } from 'react';

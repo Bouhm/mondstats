@@ -205,7 +205,7 @@ function AbyssPage() {
 
   if (!characterDb || !abyssTopTeams) {
     return <Loader />
-  }
+}
 
   return (
     <div className="abyss-container">
@@ -213,8 +213,7 @@ function AbyssPage() {
       </div>
       <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handlePartyChange} showCards={false}/>
       <br />
-      <h1>Abyss Teams</h1>
-      <Sticky top='#navbar'><Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={tabs} /></Sticky>
+      <Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={tabs} />
       {!isEmpty(characterDb) && renderTeams()}
     </div>
   )

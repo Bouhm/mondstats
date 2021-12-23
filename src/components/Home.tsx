@@ -37,8 +37,8 @@ function Home() {
       <div className="home-logo">
         <LLImage src={Logo} alt="logo" />
       </div>
-      <div style={{color: 'white', textAlign: 'center'}}>
-        MONDSTATS IS UPDATED AFTER A HUGE DATA REWORK <br />
+      <div style={{color: 'white', textAlign: 'center', fontSize: '0.8rem'}}>
+        MONDSTATS HAS BEEN UPDATED AFTER A HUGE DATA REWORK <br />
         THIS IS STILL HEAVILY WIP -- EXPECT MISSING DATA <br />
       </div>
       <div className="home-top-charts">

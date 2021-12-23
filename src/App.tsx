@@ -12,6 +12,7 @@ import { useAppDispatch } from './components/hooks/useRedux';
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
 import Dialogue from './components/ui/Dialogue';
+import { ArrowUp } from './components/ui/Icons';
 import Loader from './components/ui/Loader';
 import {
   IArtifactData,
@@ -97,6 +98,9 @@ function App() {
           <main>
             {hasLoadedDb ? <Outlet /> : <Loader />}
           </main>
+          <div className="scroll-to-top-button" onClick={() => window.scrollTo(0, 0)}>
+            <ArrowUp />
+          </div>
           <section className="footer">
             <div className="links">
               <Link to="/about">About</Link>

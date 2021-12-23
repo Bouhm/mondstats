@@ -12,6 +12,7 @@ import ArtifactSetBuildCard from '../../artifact-sets/ArtifactSetBuildCard';
 import { FiltersType } from '../../hooks/useFilters';
 import { useAppSelector } from '../../hooks/useRedux';
 import Chart from '../../ui/Chart';
+import { ChevronDown, ChevronRight } from '../../ui/Icons';
 import LLImage from '../../ui/LLImage';
 import ArtifactSetBuildDetail from './ArtifactSetBuildDetail';
 import WeaponBuild from './WeaponBuild';
@@ -65,6 +66,9 @@ function BuildSelector({ builds, total, filters }: BuildSelectorProps) {
             })
           }
         </ScrollContainer>
+        <div className="artifact-set-builds-indicator">
+          <ChevronRight />
+        </div>
       </div>
       <div className="build-details">
         <WeaponBuild

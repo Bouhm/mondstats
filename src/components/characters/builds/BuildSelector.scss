@@ -5,6 +5,7 @@
   margin: 0 0 2rem 0;
   background-color: rgba(0, 0, 0, 0.15);
   border-radius: 10px;
+  position: relative;
 }
 
 .weapons-list-container {
@@ -53,11 +54,19 @@
 }
 
 .artifact-set-builds-selector {
+  position: relative;
   display: flex;
   justify-content: center;
   padding: 1rem 1rem 0 1rem;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 6px;
+
+  .artifact-set-builds-indicator {
+    position: absolute;
+    opacity: 0.6;
+    right: 0;
+    top: 50%;
+  }
 
   .artifact-set-thumb {
     overflow: hidden;

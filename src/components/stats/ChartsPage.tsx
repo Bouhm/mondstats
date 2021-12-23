@@ -46,9 +46,7 @@ function ChartsPage() {
 
   return (
     <div className="charts-page-container">
-      <Sticky top='#navbar'>
-        <Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={tabs} />
-      </Sticky>
+      <Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={tabs} />
       <div className="charts-container">
         {renderChart()}
       </div>

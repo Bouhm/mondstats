@@ -1,11 +1,8 @@
 @use 'variables.module' as var;
 
 .App {
-  background-color: var.$theme-color-base;
-
   .App-content {
     display: flex;
-    height: calc(100vh - 4rem);
 
     .section-view {
       display: flex;
@@ -14,10 +11,24 @@
       margin: 0 auto;
       max-width: 90rem;
       flex: 1;
+
+      min-height: 102vh;
     }
 
-    main {
-      flex: 1;
+    .scroll-to-top-button {
+      position: fixed;
+      right: 0.2rem;
+      bottom: 1rem;
+      z-index: 99;
+
+      :hover {
+        cursor: pointer;
+      }
+
+      svg {
+        width: 35px;
+        height: 35px;
+      }
     }
   }
 }

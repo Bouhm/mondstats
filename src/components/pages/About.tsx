@@ -19,7 +19,7 @@ function About() {
       </div>
       <div className="about-section">
         <h2>How reliable is the information on site?</h2>
-        <p>I encourage players to be critical about interpreting the data presented on this site. Behavioral data does not translate into an objective conclusion on what is the 'best' due to many factors including player investment, playstyle, etc. To objectively evaluate an optimal build or team, a theorycrafting resource such as https://keqingmains.com will be better suited for your needs.</p>
+        <p>I encourage players to be critical about interpreting the data presented on this site. Behavioral data does not translate into an objective conclusion on what is the 'best' due to many factors including player investment, playstyle, etc. To evaluate an optimal build or team as objectively as possible, a theorycrafting resource may be better suited for your needs.</p>
       </div>
       <div className="about-section">
         <h2>How can I contribute?</h2>

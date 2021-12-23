@@ -4,6 +4,7 @@ import Fuse from 'fuse.js';
 import { debounce, difference, filter, find, includes, map, orderBy, times, uniq } from 'lodash';
 import React, { ReactNode, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Sticky from 'react-stickynode';
 
 import { getCharacterFileName, getShortName } from '../../scripts/util';
 import Dropdown, { Option } from '../controls/Dropdown';
@@ -143,16 +144,18 @@ function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, 
     <div className='card-search-container'>
       <div className="cards-container">
         <div className="card-searchbar">
-          <Dropdown.SearchSelect
-            onChange={handleChange}
-            onInput={handleInput}
-            options={options}
-            optionLabel={OptionLabel}
-            showDropdown={!showCards}
-            isMulti={true}
-            value={selectedItems}
-            placeholder={placeholder}
-          />
+          <Sticky top={6} innerZ={9}>
+            <Dropdown.SearchSelect
+              onChange={handleChange}
+              onInput={handleInput}
+              options={options}
+              optionLabel={OptionLabel}
+              showDropdown={!showCards}
+              isMulti={true}
+              value={selectedItems}
+              placeholder={placeholder}
+            />
+          </Sticky>
         </div>
         {showCards && 
           <div className={`cards ${showAll ? 'asFull' : ''}`}>

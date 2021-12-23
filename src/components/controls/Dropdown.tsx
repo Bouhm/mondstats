@@ -18,27 +18,26 @@ type SelectProps = {
 
 function MultiSelect({ options, onChange, isMulti=false, placeholder="", defaultValue=options.slice(0,1) }: SelectProps) {
   return (
-    <Sticky top={6}>
-      <div className="multi-select">
-        <Select 
-          options={options} 
-          onChange={onChange} 
-          defaultValue={defaultValue} 
-          isMulti={isMulti} 
-          isSearchable={false}
-          placeholder={<>{placeholder}&hellip;</>}
-          styles={{ 
-            container: base => ({ ...base }),
-            singleValue: base => ({ ...base, color: "white" }),
-            valueContainer: base => ({ ...base, backgroundColor: "#232530",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
-            control: base =>  ({ ...base, borderColor: "none" }),
-            indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
-            menu: base => ({ ...base, backgroundColor: "#21232D", color: "white",  }),
-            option: base => ({ ...base, backgroundColor: "#21232D !important", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.6) !important" }}),
-          }}
-        />
-      </div>
-    </Sticky>
+    <div className="multi-select">
+      <Select 
+        options={options} 
+        onChange={onChange} 
+        defaultValue={defaultValue} 
+        isMulti={isMulti} 
+        isSearchable={false}
+        placeholder={<>{placeholder}&hellip;</>}
+        styles={{ 
+          container: base => ({ ...base }),
+          singleValue: base => ({ ...base, color: "white" }),
+          valueContainer: base => ({ ...base, backgroundColor: "#232530",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
+          control: base =>  ({ ...base, borderColor: "none" }),
+          indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
+          menu: base => ({ ...base, backgroundColor: "#21232D", color: "white" }),
+          menuPortal: base => ({ ...base, zIndex: 11 }),
+          option: base => ({ ...base, backgroundColor: "#21232D !important", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.6) !important" }}),
+        }}
+      />
+    </div>
   )
 }
 
@@ -58,42 +57,40 @@ function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="S
   const [shouldStick, setShouldStick] = useState(false);
   
   return (
-    <Sticky top={6}>
-      <div className="search-select">
-        <Select 
-          options={options} 
-          onChange={onChange} 
-          onInputChange={onInput}
-          defaultValue={defaultValue} 
-          isMulti={isMulti}
-          isSearchable={true}
-          formatOptionLabel={optionLabel}
-          value={value}
-          placeholder={
-            <div className="search-placeholder">
-              <Search className="search-icon" size={20} />
-              {placeholder}&hellip;
-            </div>
-          }
-          components={{
-            Menu: (showDropdown || shouldStick) ?  (props) => <components.Menu {...props} /> : () => null,
-            DropdownIndicator: showDropdown ?  (props) => <components.DropdownIndicator {...props} /> : () => null
-          }}
-          styles={{ 
-            container: base => ({ ...base }),
-            singleValue: base => ({ ...base, color: "white" }),
-            input: base => ({ ...base, color: "white" }),
-            valueContainer: base => ({ ...base, backgroundColor: "#232530",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
-            placeholder: base => ({ ...base, width: '100%' }),
-            control: base =>  ({ ...base, borderColor: "none" }),
-            indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
-            indicatorSeparator: base => ({ ...base, display: 'none '}),
-            menu: base => ({ ...base, backgroundColor: "#21232D", color: "white" }),
-            option: base => ({ ...base, backgroundColor: "#21232D !important", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.6) !important" }}),
-          }}
-        />
-      </div>
-    </Sticky>
+    <div className="search-select">
+      <Select 
+        options={options} 
+        onChange={onChange} 
+        onInputChange={onInput}
+        defaultValue={defaultValue} 
+        isMulti={isMulti}
+        isSearchable={true}
+        formatOptionLabel={optionLabel}
+        value={value}
+        placeholder={
+          <div className="search-placeholder">
+            <Search className="search-icon" size={20} />
+            {placeholder}&hellip;
+          </div>
+        }
+        components={{
+          Menu: (showDropdown || shouldStick) ?  (props) => <components.Menu {...props} /> : () => null,
+          DropdownIndicator: showDropdown ?  (props) => <components.DropdownIndicator {...props} /> : () => null
+        }}
+        styles={{ 
+          container: base => ({ ...base }),
+          singleValue: base => ({ ...base, color: "white" }),
+          input: base => ({ ...base, color: "white" }),
+          valueContainer: base => ({ ...base, backgroundColor: "#232530",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
+          placeholder: base => ({ ...base, width: '100%' }),
+          control: base =>  ({ ...base, borderColor: "none" }),
+          indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
+          indicatorSeparator: base => ({ ...base, display: 'none '}),
+          menu: base => ({ ...base, backgroundColor: "#21232D", color: "white" }),
+          option: base => ({ ...base, backgroundColor: "#21232D !important", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.6) !important" }}),
+        }}
+      />
+    </div>
   )
 }
 

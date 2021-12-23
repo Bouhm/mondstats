@@ -1,5 +1,8 @@
 @use '../../variables.module' as var;
 
+.horizontal-barchart-container {
+}
+
 .horizontal-barchart {
   display: flex;
   margin-right: 1rem;
@@ -119,6 +122,10 @@
   }
 
   .horizontal-barchart-container {
+    .horizontal-barchart {
+      margin-right: 0;
+    }
+
     .horizontal-barchart-bar {
       background-color: rgba(164, 164, 164, 0.2);
     }
