@@ -4,10 +4,7 @@
   position: relative;
   display: flex;
   flex-flow: column;
-  background: var.$theme-color-3;
-  -webkit-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
+
   z-index: 7;
   width: 12rem;
 
@@ -15,8 +12,12 @@
     position: fixed;
     display: flex;
     flex-flow: column;
+    -webkit-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
+    background: var.$theme-color-3;
     color: rgba(255, 255, 255, 0.6);
-    width: inherit;
+    height: 100%;
 
     .sidebar-tab {
       display: flex;

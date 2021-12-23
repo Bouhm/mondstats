@@ -3,6 +3,7 @@ import './StatsTable.scss';
 import { capitalize, isEmpty, map, reduce } from 'lodash';
 import React, { useEffect } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import Sticky from 'react-stickynode';
 
 import {
   getArtifactSetNames,
@@ -90,23 +91,44 @@ function StatsTable({ data, title, getTotal, getAbyssTotal, renderImage }: Stats
 
   return (
     <table className='stats-table'>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>{title.slice(0, title.length-1)}</th>
-        <th>Overall Usage</th>
-        <th>Abyss Usage</th>
-      </tr>
-    </thead>
-    <tbody>
-      {map(data[title], (stats, i) => (
-        <tr key={`${title}-${i}`}>
-          <td>{i + 1}</td>
-          <td>{renderImage(stats)}</td>
-          <td className='stats-row-percentage'>{getPercentage(stats.count, getTotal(stats))}%</td>
-          <td className='stats-row-percentage'>{getPercentage(stats.abyssCount, getAbyssTotal(stats))}%</td>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{title.slice(0, title.length-1)}</th>
+          <th scope="col">Overall Usage</th>
+          <th scope="col">Abyss Usage</th>
         </tr>
-      ))}
+      </thead>
+    <tbody>
+      {map(data[title], (stats, i) => {
+        const total = getPercentage(stats.count, getTotal(stats));
+        const abyssTotal = getPercentage(stats.abyssCount, getAbyssTotal(stats));
+
+        return (
+          <tr key={`${title}-${i}`}>
+            <td>{i + 1}</td>
+            <td className='stats-image'>{renderImage(stats)}</td>
+            <td>
+              <div className='stats-row-percentage'>
+                <div
+                  className={`stats-row-bar`} 
+                  style={{ width: `${total}%`}} 
+                />    
+                <div className="stats-row-value">{ `${total}%`}</div>
+              </div>
+            </td>
+            <td>
+              <div className='stats-row-percentage'>
+                <div
+                    className={`stats-row-bar`} 
+                    style={{ width: `${abyssTotal}%`}} 
+                />    
+                <div className="stats-row-value">{ `${abyssTotal}%`}</div>
+              </div>
+            </td>
+          </tr>
+        )
+      })}
     </tbody>
   </table>
   )

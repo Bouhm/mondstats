@@ -10,10 +10,10 @@ import Button from '../controls/Button';
 import useApi from '../hooks/useApi';
 import useExpand from '../hooks/useExpand';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
+import UsageStats from '../stats/UsageStats';
 import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
-import UsageStats from '../stats/UsageStats';
 
 function WeaponPage() { 
   const { shortName } = useParams();

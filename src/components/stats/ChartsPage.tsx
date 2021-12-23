@@ -2,6 +2,7 @@ import './ChartsPage.scss';
 
 import { filter, includes, intersection, isEmpty, map } from 'lodash';
 import React, { useEffect, useState } from 'react';
+import Sticky from 'react-stickynode';
 
 import useApi from '../hooks/useApi';
 import useCharacterSearch from '../hooks/useCharacterSearch';
@@ -34,7 +35,7 @@ function ChartsPage() {
   if (isLoading) return <Loader />
     
   const renderChart = () => {
-    switch (activeTabIdx) {
+  switch (activeTabIdx) {
       case 0:
         return <StatsTable.Characters data={topCharacters} />
       case 1:
@@ -48,7 +49,9 @@ function ChartsPage() {
 
   return (
     <div className="charts-page-container">
-      <Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={tabs} />
+      <Sticky top='#navbar'>
+        <Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={tabs} />
+      </Sticky>
       <div className="charts-container">
         {renderChart()}
       </div>

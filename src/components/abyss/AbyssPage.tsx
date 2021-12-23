@@ -19,6 +19,7 @@ import {
 } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import Sticky from 'react-stickynode';
 
 import { IAbyssFloor, IAbyssParty } from '../../data/types';
 import { getPercentage } from '../../scripts/util';
@@ -213,7 +214,7 @@ function AbyssPage() {
       <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handlePartyChange} showCards={false}/>
       <br />
       <h1>Abyss Teams</h1>
-      <Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={map(tabs, (floor => typeof floor === 'number' ? `FLOOR ${floor}` : floor.toString()))} />
+      <Sticky top='#navbar'><Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={map(tabs, (floor => typeof floor === 'number' ? `FLOOR ${floor}` : floor.toString()))} /></Sticky>
       {!isEmpty(characterDb) && renderTeams()}
     </div>
   )
