@@ -12,7 +12,7 @@ import Card from '../ui/Card';
 
 type CardSearchProps = {
   items: SearchItem[]
-  onSelect: (selectedIds: string[]) => void
+  onSelect?: (selectedId: string) => void
   showCards?: boolean,
   placeholder?: string
   showAll?: boolean
@@ -31,7 +31,6 @@ type DDProps = {
   OptionLabel: (o: Option)=>ReactNode 
   placeholder: string
 }
-
 
 function Characters(props: CardSearchProps) { 
   const characterDb = useAppSelector((state) => state.data.characterDb)
@@ -127,7 +126,6 @@ function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, 
 
   const handleChange = (selected: Option[]) => {
     setSelectedItems(selected);
-    onSelect(map(selected, item => item.value ))
   }
 
   const handleSelect = (_id: string) => {
@@ -135,7 +133,6 @@ function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, 
     if (selectedItem) {
       const newSelected = [...selectedItems, { label: selectedItem.name, rarity: selectedItem.rarity, value: selectedItem._id }];
       setSelectedItems(newSelected)
-      onSelect(map(newSelected, item => item.value ))
     }
   }
 
@@ -156,9 +153,10 @@ function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, 
         </div>
         {showCards && 
           <div className={`cards ${showAll ? 'asFull' : ''}`}>
-            {map(orderBy(searchedItems.length ? searchedItems : items, 'name', 'asc'), (item, i) => (
-              <Link key={`${item._id}-${i}`} to={`${getShortName(item)}`}><Card onClick={handleSelect} path={path} {...item} /></Link>
-            ))}
+            {map(orderBy(searchedItems.length ? searchedItems : items, 'name', 'asc'), (item, i) => {
+              console.log(item)
+              return <Link key={`${item._id}-${i}`} to={`${getShortName(item)}`}><Card onClick={handleSelect} path={path} {...item} /></Link>
+        })}
           </div>
         }
       </div>

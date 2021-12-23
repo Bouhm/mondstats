@@ -1,6 +1,7 @@
 import AmberSad from '/assets/amberSad.webp';
 import { isEmpty, map, orderBy, reduce, some, take, values } from 'lodash';
 import React from 'react';
+import Sticky from 'react-stickynode';
 
 import { getPercentage } from '../../scripts/util';
 import Button from '../controls/Button';

@@ -3,6 +3,7 @@
   width: 100%;
   table-layout: auto;
   color: white;
+  margin-top: 1rem;
 
   tr {
     padding: .35em;
@@ -29,12 +30,20 @@
     z-index: 9;
   }
 
-  .stats-image {
+  .stats-image, .stats-image > div{
     width: auto;
     height: 70px;
+    position: relative;
 
     img {
       height: inherit;
+    }
+
+    .stats-character-element {
+      height: 20%;
+      position: absolute;
+      top: 0;
+      right: 0;
     }
   }
   

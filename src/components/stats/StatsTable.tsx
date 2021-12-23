@@ -22,7 +22,7 @@ import Loader from '../ui/Loader';
 import Tooltip from '../ui/Tooltip';
 
 function Characters({data}: any) {
-  const db = useAppSelector((state) => state.data.artifactSetDb)
+  const db = useAppSelector((state) => state.data.characterDb)
   const title = 'characters'
 
   const getTotal = () => (
@@ -34,7 +34,10 @@ function Characters({data}: any) {
   )
 
   const renderImage = (item: any) => (
-    <LLImage src={`/assets/${title}/${item._id}.webp`} />
+    <div className='stats-character-portrait'>
+      <LLImage src={`/assets/${title}/${item._id}.webp`} />
+      <LLImage className='stats-character-element' src={`/assets/elements/${db[item._id].element}.webp`} />
+    </div>
   )
 
   return <StatsTable data={data} title={title} getTotal={getTotal} getAbyssTotal={getAbyssTotal} renderImage={renderImage} />
