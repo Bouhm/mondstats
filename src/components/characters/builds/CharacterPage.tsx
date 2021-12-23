@@ -19,7 +19,6 @@ import Empty from '../../ui/Empty';
 import { CaretUp } from '../../ui/Icons';
 import Loader from '../../ui/Loader';
 import Tabs from '../../ui/Tabs';
-import data from './albedo.json';
 import BuildSelector from './BuildSelector';
 import Constellations from './Constellations';
 
