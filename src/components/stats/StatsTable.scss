@@ -1,87 +1,79 @@
+.stats-table-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  position: relative;
+}
+
 .stats-table {
+  border-collapse: collapse;
+  width: 70%;
+  table-layout: auto;
   color: white;
-  width: 100%;
-  padding: 0 0.5rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  position: relative;
 
-  &.characters-stats {
-    .row-stats {
-      .row-stats-bar {
-        background-color: rgb(31, 120, 150);
-      }
-    }
-  }
-
-  &.artifacts-stats {
-    .row-stats {
-      .row-stats-bar {
-        background-color: rgb(48, 150, 113);
-      }
-    }
-  }
-
-  &.weapons-stats {
-    .row-stats {
-      .row-stats-bar {
-        background-color: rgb(172, 34, 18);
-      }
-    }
-  }
-
-  .stats-table-row {
-    display: grid;
-    grid-template-columns: 150px 1fr 1fr;
-    width: 100%;
-
-    &.asItems {
-      grid-template-columns: 150px 200px 1fr;
-    }
-
+  tr {
+    padding: 0.35em;
     &:nth-child(even) {
       background-color: rgba(0, 0, 0, 0.1);
     }
-    .col {
-      &:not(:first-child) {
-        border-left: 1px solid rgba(255, 255, 255, 0.5);
-      }
-    }
+  }
 
-    .col-header {
-      font-size: 1.2rem;
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      width: 100%;
+  th,
+  td {
+    text-align: center;
+    line-height: 3rem;
+
+    &:not(:first-child) {
+      border-left: 1px solid rgba(255, 255, 255, 0.5);
     }
   }
 
-  .row-card {
+  th {
+    background-color: rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    top: 7rem;
+    position: sticky;
+    padding: 0.5rem;
+    z-index: 9;
+    white-space: nowrap;
+  }
+
+  .stats-image {
     width: auto;
-    height: 80px;
+    height: 70px;
     display: flex;
     justify-content: center;
-    margin-right: 1rem;
-    position: relative;
 
+    .stats-character-portrait,
     img {
       height: inherit;
+      position: relative;
+    }
+
+    .stats-character-element {
+      position: absolute;
+      width: 20px;
+      height: auto;
+      left: 0;
+      top: 0;
     }
   }
 
-  .row-stats {
-    flex: 1;
+  .stats-row-percentage {
     display: flex;
-    align-items: center;
 
-    .row-stats-bar {
+    .stats-row-bar {
+      background: black;
       height: 3rem;
       display: inline-block;
       animation-name: horibar;
       animation-duration: 1s;
       animation-direction: forwards;
       border: 1px solid rgba(255, 255, 255, 0.7);
-      background-color: rgba(255, 255, 255, 0.6);
+      border-left: none;
       margin-right: 0.5rem;
     }
 
@@ -94,89 +86,12 @@
       }
     }
   }
-
-  .row-related {
-    display: flex;
-    align-items: center;
-    padding: 0.2rem;
-
-    .character-stats {
-      width: 60px;
-      height: 60px;
-      margin-right: 0.2rem;
-      border-radius: 6px;
-      -webkit-user-drag: none;
-
-      &::selection {
-        color: none;
-        background: none;
-      }
-    }
-  }
 }
 
-@media (max-width: 1036px) {
+@media (max-width: 747px) {
   .stats-table {
-    .row-stats {
-      .row-stats-bar {
-        height: 1.5rem;
-      }
-    }
-
-    .stats-table-row {
-      grid-template-columns: 120px 1fr 1fr;
-
-      &.asItems {
-        grid-template-columns: 120px 150px 1fr;
-      }
-
-      .row-card {
-        width: auto;
-        height: 70px;
-        margin-right: 0.6rem;
-      }
-
-      .character-stats {
-        width: 50px;
-        height: 50px;
-        margin-right: 0.2rem;
-      }
-    }
-  }
-}
-
-@media (max-width: 676px) {
-  .stats-table {
-    .stats-table-row {
-      grid-template-columns: 65px 1fr 1fr;
-
-      &.asItems {
-        grid-template-columns: 65px 90px 1fr;
-      }
-
-      .col-header {
-        font-size: 0.8rem;
-        justify-content: center;
-      }
-
-      .row-card {
-        width: auto;
-        height: 40px;
-        margin-right: 0.2rem;
-      }
-
-      .character-stats {
-        width: 35px;
-        height: 35px;
-        margin-right: 0.1rem;
-        border-radius: 5px;
-      }
-
-      .stats-table-headers {
-        font-size: 0.8rem;
-        text-align: center;
-        justify-content: center;
-      }
+    th {
+      font-size: 0.8rem;
     }
   }
 }

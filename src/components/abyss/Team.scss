@@ -1,0 +1,139 @@
+@use '../../variables.module' as var;
+
+.team-container {
+  margin: 0.6rem 0;
+  max-width: 40rem;
+  background-color: var.$theme-color-4;
+  border: solid 5px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+}
+
+.team-stats-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+  .character-tile-container {
+    overflow: hidden;
+
+    &:first-of-type {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+  }
+
+  &.asExpandable {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.team-characters {
+  .character-tile-container {
+    height: auto;
+    margin: 0;
+
+    .character-tile {
+      margin: 0;
+    }
+  }
+}
+
+.team-flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  background-color: rgba(0, 0, 0, 0.3);
+
+  .team-flex {
+    margin-top: 0.3rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.5rem;
+    display: flex;
+
+    div > div > img,
+    svg {
+      height: 50px;
+    }
+
+    svg {
+      margin: 0 0.5rem;
+    }
+
+    .team-flex-options {
+      display: flex;
+      flex-flow: column;
+
+      .team-flex-stats-container {
+        display: flex;
+
+        .team-flex-stats {
+          margin-left: 0.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+
+          > div {
+            margin: 0 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  .team-expand {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.3rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.team-stats {
+  position: relative;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+
+  .team-abyss-stats-container {
+    display: flex;
+    color: white;
+    justify-content: space-evenly;
+  }
+}
+
+@media (max-width: 544px) {
+  .team-container {
+    margin: 0.2rem 0;
+  }
+
+  .team-flex-container {
+    .team-flex {
+      padding-top: 0.2rem;
+
+      div > div > img,
+      svg {
+        height: 30px;
+      }
+
+      svg {
+        margin: 0 0.2rem;
+      }
+    }
+
+    .team-expand {
+      height: 8px;
+      > svg {
+        height: 7px;
+      }
+    }
+  }
+}

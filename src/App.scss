@@ -1,11 +1,11 @@
-@use 'variables' as var;
+@use 'variables.module' as var;
 
 .App {
+  background-color: var.$theme-color-base;
+
   .App-content {
     display: flex;
-    min-height: calc(100vh - 4rem);
-    height: 100%;
-    margin-top: 4rem;
+    height: calc(100vh - 4rem);
 
     .section-view {
       display: flex;
@@ -14,8 +14,6 @@
       margin: 0 auto;
       max-width: 90rem;
       flex: 1;
-      overflow-y: auto;
-      overflow-x: hidden;
     }
 
     main {
@@ -29,14 +27,9 @@ a {
   color: inherit;
 }
 
-h1 {
-  color: white;
-}
-
 footer {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   width: 100%;
   text-align: center;
   color: rgba(255, 255, 255, 0.5);
@@ -53,7 +46,7 @@ footer {
 .links {
   display: flex;
   justify-content: center;
-  color: #e9e5dc;
+  color: var.$card-color;
   margin: 1rem;
   font-size: 1.1rem;
 
@@ -108,6 +101,33 @@ footer {
 .Geo {
   background-color: var.$element-geo !important;
 }
+.None {
+  background-color: var.$none;
+}
+.Red {
+  background-color: var.$red !important;
+}
+.Green {
+  background-color: var.$green !important;
+}
+.Blue {
+  background-color: var.$blue !important;
+}
+.Sword {
+  background-color: var.$weapon-sword !important;
+}
+.Claymore {
+  background-color: var.$weapon-claymore !important;
+}
+.Catalyst {
+  background-color: var.$weapon-catalyst !important;
+}
+.Bow {
+  background-color: var.$weapon-bow !important;
+}
+.Polearm {
+  background-color: var.$weapon-polearm !important;
+}
 .rarity-3 {
   background: var.$rarity-3;
 }
@@ -119,18 +139,6 @@ footer {
 }
 .rarity-105 {
   background: var.$rarity-105;
-}
-
-.Characters {
-  background-color: rgb(31, 120, 150) !important;
-}
-
-.Weapons {
-  background-color: rgb(172, 34, 18) !important;
-}
-
-.Artifacts {
-  background-color: rgb(48, 150, 113) !important;
 }
 
 @media (max-width: 1036px) {
@@ -159,7 +167,12 @@ footer {
   }
 
   h1 {
-    font-size: 1.5rem !important;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2rem;
+    width: 300px;
+    color: white;
+    border-bottom: solid 1px grey;
   }
 
   .links {

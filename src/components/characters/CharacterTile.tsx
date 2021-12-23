@@ -32,7 +32,7 @@ function CharacterTile({ id, labeled = true, onClick, clickable = true }: Charac
     <div className={`character-tile-container ${clickable ? 'asClickable' : ''}`} onClick={() => handleClick(getShortName(character))}>
       <div className={classes}>
         <div className="character-image">
-          <LLImage className="character-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${character.name}-portrait`} />
+          <LLImage className="character-portrait" src={`/assets/characters/${character._id}.webp`} alt={`${character.name}-portrait`} />
           <LLImage className="element-icon" src={`/assets/elements/${character.element}.webp`} alt={character.element} />
         </div>
         {labeled && <div className="character-tile-name">

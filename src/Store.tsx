@@ -1,25 +1,27 @@
-import React from 'react';
-
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IArtifactDb, IArtifactSetDb, ICharacterDb, IWeaponDb } from './data/types';
+import { IArtifactDb, IArtifactSetBuildDb, IArtifactSetDb, ICharacterDb, IWeaponDb } from './data/types';
 
 interface IState {
   characterIdMap: {[shortname: string]: string},
   selectedCharacter: string,
   artifactDb: IArtifactDb,
   artifactSetDb: IArtifactSetDb,
+  artifactSetBuildDb: IArtifactSetBuildDb,
   characterDb: ICharacterDb,
-  weaponDb: IWeaponDb
+  weaponDb: IWeaponDb,
+  colorClass: string
 }
 
 const initialState: IState = {
   characterIdMap: {},
   selectedCharacter: '',
   artifactSetDb: {},
+  artifactSetBuildDb: {},
   artifactDb: {},
   weaponDb: {},
-  characterDb: {}
+  characterDb: {},
+  colorClass: ''
 }
 
 const dataSlice = createSlice({
@@ -38,12 +40,18 @@ const dataSlice = createSlice({
     setArtifactSetDb: (state, action: PayloadAction<IArtifactSetDb>) => {
       state.artifactSetDb = action.payload
     },
+    setArtifactSetBuildDb: (state, action: PayloadAction<IArtifactSetBuildDb>) => {
+      state.artifactSetBuildDb = action.payload
+    },
     setWeaponDb: (state, action: PayloadAction<IWeaponDb>) => {
       state.weaponDb = action.payload
     },
     setCharacterDb: (state, action: PayloadAction<ICharacterDb>) => {
       state.characterDb = action.payload
-    }
+    },
+    setColorClass: (state, action: PayloadAction<string>) => {
+      state.colorClass = action.payload
+    },
   }
 })
 
@@ -52,8 +60,10 @@ export const {
   selectCharacter,
   setArtifactDb,
   setArtifactSetDb,
+  setArtifactSetBuildDb,
   setWeaponDb,
-  setCharacterDb
+  setCharacterDb,
+  setColorClass
 } = dataSlice.actions;
 
 const store = configureStore({ reducer: { data: dataSlice.reducer } })

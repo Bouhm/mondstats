@@ -8,7 +8,7 @@ type BarChartProps = {
     tooltip?: string,
     content?: ReactNode,
     value: number,
-    color?: string,
+    classes: string
   }[]
 }
 
@@ -32,9 +32,9 @@ function BarChart({data}: BarChartProps) {
         className="barchart-container"
         style={barChartStyle}
       >
-        {_.map(data, ({ content, color, value }, i) => {
+        {_.map(data, ({ content, classes, value }, i) => {
           return (
-            <div key ={`${value}-${i}`} className={`barchart-bar`} style={{ ...barStyle(value), backgroundColor: color}} />
+            <div key ={`${value}-${i}`} className={`barchart-bar ${classes}`} style={{ ...barStyle(value)}} />
           )
         })}
       </div>

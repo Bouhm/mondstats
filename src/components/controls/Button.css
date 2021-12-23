@@ -1,34 +1,30 @@
 .button {
   text-transform: uppercase;
-  color: black;
+  color: #e9e5dc;
   text-align: center;
   font-size: 1rem;
   margin: 1rem auto;
-  background-color: #e9e5dc;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 5px;
-  width: 11rem;
+  width: 9rem;
   white-space: nowrap;
-
-  color: rgba(0,0,0,0.7);
-  border: none;
-  border-radius: 45px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.1s ease 0s;
   cursor: pointer;
-  outline: none;
+  border: solid 2px rgba(233, 229, 220, 0.7);
 
   svg {
     margin: 0 0.2rem;
     width: 0.8rem;
   }
 
-  &:hover,
-  &:active {
+  &:hover {
     cursor: pointer;
-    color: #000;
-    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
-    transform: translateY(-2px);
+    border: solid 2px #e9e5dc;
+  }
+
+  &.asActive {
+    background-color: #e9e5dc;
+    color: #495366;
+    border: solid 2px #495366;
   }
 }
 

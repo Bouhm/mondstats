@@ -1,6 +1,6 @@
 .divider {
-  border-left: 1px solid rgba(255,255,255,0.2); 
-  border-right: 1px solid rgba(0,0,0,0.5);
-  border-radius: 3px; 
-  margin: 0 0.5rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  border-right: 2px solid rgba(0, 0, 0, 0.2);
+  margin: 0 0.4rem;
+  height: 100%;
 }

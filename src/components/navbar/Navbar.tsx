@@ -1,4 +1,4 @@
-import './Navbar.css';
+import './Navbar.scss';
 
 import Logo from '/assets/logo_sm.webp';
 import _ from 'lodash';

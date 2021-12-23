@@ -3,16 +3,16 @@ import './CardSearch.scss';
 import Fuse from 'fuse.js';
 import { debounce, difference, filter, find, includes, map, orderBy, times, uniq } from 'lodash';
 import React, { ReactNode, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { getCharacterFileName, shortenId } from '../../scripts/util';
+import { getCharacterFileName, getShortName } from '../../scripts/util';
 import Dropdown, { Option } from '../controls/Dropdown';
 import { useAppSelector } from '../hooks/useRedux';
 import Card from '../ui/Card';
-import LLImage from '../ui/LLImage';
 
 type CardSearchProps = {
   items: SearchItem[]
-  onSelect: (selectedIds: string[]) => void
+  onSelect?: (selectedIds: string[]) => void
   showCards?: boolean,
   placeholder?: string
   showAll?: boolean
@@ -46,14 +46,14 @@ function Characters(props: CardSearchProps) {
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
           <img className="item-option-element" src={`/assets/elements/${character.element}.webp`} />
-          <img className="item-option-portrait" src={`/assets/characters/${getCharacterFileName(character)}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-portrait" src={`/assets/characters/${character._id}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>
     ) as ReactNode;
   }
 
-  return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"characters"} placeholder={"Search characters"} {...props} />
+  return <CardSearch options={options} OptionLabel={OptionLabel} path={"characters"} placeholder={"Search characters"} {...props} />
 }
 
 function ArtifactSets(props: CardSearchProps) { 
@@ -65,14 +65,14 @@ function ArtifactSets(props: CardSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
-          <img className="item-option-portrait" src={`/assets/artifacts/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-portrait" src={`/assets/artifacts/${value}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>
     ) as ReactNode;
   }
 
-  return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"artifacts"} placeholder={"Search artifact sets"} {...props} />
+  return <CardSearch options={options} OptionLabel={OptionLabel} path={"artifacts"} placeholder={"Search artifact sets"} {...props} />
 }
 
 function Weapons(props: CardSearchProps) { 
@@ -84,17 +84,17 @@ function Weapons(props: CardSearchProps) {
     return (
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
-          <img className="item-option-portrait" src={`/assets/weapons/${shortenId(value)}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-portrait" src={`/assets/weapons/${value}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>
     ) as ReactNode;
   }
 
-  return <CardSearch options={options} OptionLabel={OptionLabel} imgPath={"weapons"} placeholder={"Search weapons"} {...props} />
+  return <CardSearch options={options} OptionLabel={OptionLabel} path={"weapons"} placeholder={"Search weapons"} {...props} />
 }
 
-function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholder, showCards = true, showAll = false }: CardSearchProps & DDProps & { imgPath: string }) { 
+function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, showCards = true, showAll = false }: CardSearchProps & DDProps & { path: string }) { 
   const [searchedItems, setSearchedItems] = useState<SearchItem[]>([]);
   const [selectedItems, setSelectedItems] = useState<Option[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -127,7 +127,7 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholde
 
   const handleChange = (selected: Option[]) => {
     setSelectedItems(selected);
-    onSelect(map(selected, item => item.value ))
+    onSelect && onSelect(map(selected, item => item.value ))
   }
 
   const handleSelect = (_id: string) => {
@@ -135,7 +135,7 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholde
     if (selectedItem) {
       const newSelected = [...selectedItems, { label: selectedItem.name, rarity: selectedItem.rarity, value: selectedItem._id }];
       setSelectedItems(newSelected)
-      onSelect(map(newSelected, item => item.value ))
+      onSelect && onSelect(map(newSelected, item => item.value ))
     }
   }
 
@@ -156,9 +156,9 @@ function CardSearch({ items, imgPath, options, onSelect, OptionLabel, placeholde
         </div>
         {showCards && 
           <div className={`cards ${showAll ? 'asFull' : ''}`}>
-            {map(orderBy(searchedItems.length ? searchedItems : items, 'name', 'asc'), (item, i) => (
-              <Card onClick={handleSelect} key={`${item._id}-${i}`} imgPath={imgPath} {...item} />
-            ))}
+            {map(orderBy(searchedItems.length ? searchedItems : items, 'name', 'asc'), (item, i) => {
+              return <Link key={`${item._id}-${i}`} to={`${getShortName(item)}`}><Card onClick={handleSelect} path={path} {...item} /></Link>
+            })}
           </div>
         }
       </div>

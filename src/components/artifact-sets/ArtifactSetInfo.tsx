@@ -4,14 +4,13 @@ import _ from 'lodash';
 import React, { useContext } from 'react';
 
 import { IArtifactSetData } from '../../data/types';
-import { shortenId } from '../../scripts/util';
 import LLImage from '../ui/LLImage';
 
 function ArtifactSetInfo({ _id, name, affixes, activation }: IArtifactSetData & { activation: number }) {
   return (
     <div className={`artifact-set-info`}>
       <div className="artifact-set-header">
-        <LLImage src={`/assets/artifacts/${shortenId(_id)}.webp`} alt={name} />
+        <LLImage src={`/assets/artifacts/${_id}.webp`} alt={name} />
         <div className="artifact-set-detail">
           <div className="artifact-set-name">
             {activation}x {name}

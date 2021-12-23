@@ -1,0 +1,164 @@
+@use '../../variables.module' as var;
+
+.horizontal-barchart {
+  display: flex;
+  margin-right: 1rem;
+
+  .horizontal-barchart-bar {
+    flex: 1;
+    margin: 0.1rem 0;
+
+    .barchart-bar {
+      height: 100%;
+      display: inline-block;
+      animation-name: horibar;
+      animation-duration: 1s;
+      animation-direction: forwards;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+    }
+
+    @keyframes horibar {
+      0% {
+        max-width: 0;
+      }
+      100% {
+        max-width: 100%;
+      }
+    }
+  }
+
+  .bar-card {
+    overflow: hidden;
+    background-color: var.$card-color;
+    display: flex;
+    border: 2px solid white;
+    border-right: 0;
+    margin: 0.1rem 0 0.1rem 0;
+    padding: 0.3rem;
+
+    .bar-card-title {
+      display: flex;
+      width: 225px;
+
+      img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .bar-card-detail {
+        display: flex;
+        margin-left: 0.3rem;
+        width: 100%;
+        flex-flow: column;
+        text-align: center;
+        color: rgba(73, 83, 102, 0.9);
+
+        .bar-card-name {
+          padding: 0 0.1rem;
+          margin-bottom: 0.3rem;
+          color: rgb(73, 83, 102);
+          font-size: 1rem;
+          text-decoration: none;
+        }
+
+        .bar-card-popularity {
+          height: 100%;
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+
+          .bar-card-popularity-pct {
+            color: white;
+            font-size: 1.7rem;
+            text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+          }
+
+          .bar-card-popularity-count {
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+
+    .bar-abyss-stats-container {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+
+      .bar-abyss-stats {
+        width: 55px;
+        margin-top: 0.3rem;
+        text-align: center;
+        color: rgb(73, 83, 102);
+
+        &:first-child {
+          margin-right: 0.8rem;
+        }
+      }
+
+      .bar-abyss-stat-title {
+        text-transform: uppercase;
+        font-size: 0.6rem;
+        color: rgb(73, 83, 102);
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 676px) {
+  .character-page {
+    .build-details,
+    .constellations-container {
+      h1 {
+        width: 200px;
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .horizontal-barchart-container {
+    .horizontal-barchart-bar {
+      background-color: rgba(164, 164, 164, 0.2);
+    }
+
+    .bar-card {
+      padding: 1px;
+
+      .bar-card-title {
+        width: 110px;
+        display: flex;
+
+        img {
+          display: flex;
+          height: 40px;
+          width: 40px;
+        }
+
+        .bar-card-detail {
+          .bar-card-name {
+            font-size: 0.5rem;
+          }
+
+          .bar-card-popularity {
+            .bar-card-popularity-pct {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+
+      .bar-abyss-stats-container {
+        .bar-abyss-stats {
+          width: 60px;
+          font-size: 0.9rem;
+
+          &:first-child {
+            margin-right: 0.6rem;
+          }
+        }
+      }
+    }
+  }
+}

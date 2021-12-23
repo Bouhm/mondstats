@@ -1,182 +1,139 @@
 import './StatsTable.scss';
 
-import { capitalize, isEmpty, map, reduce } from 'lodash';
+import { capitalize, filter, isEmpty, map, reduce } from 'lodash';
 import React, { useEffect } from 'react';
-import ScrollContainer from 'react-indiana-drag-scroll';
 
-import { ICharacterData } from '../../data/types';
-import {
-  getArtifactSetNames,
-  getCharacterFileName,
-  getCharacterLabel,
-  getPercentage,
-  shortenId,
-} from '../../scripts/util';
-import ArtifactSetBuild from '../artifact-sets/ArtifactSetBuild';
-import CharacterCount from '../characters/CharacterCount';
-import Pagination from '../controls/Pagination';
-import useApi from '../hooks/useApi';
-import usePaginate from '../hooks/usePaginate';
+import { getPercentage } from '../../scripts/util';
+import ArtifactSetBuildCard from '../artifact-sets/ArtifactSetBuildCard';
 import { useAppSelector } from '../hooks/useRedux';
+import { useTabs } from '../hooks/useTabs';
 import LLImage from '../ui/LLImage';
-import Loader from '../ui/Loader';
-import Tooltip from '../ui/Tooltip';
+import Tabs from '../ui/Tabs';
 
 function Characters({data}: any) {
   const db = useAppSelector((state) => state.data.characterDb)
-  const featured = useApi(`/featured.json`);
-  const pageSize = 20;
-  const { currentPage, onPageChange, handleReset, filterPageContent } = usePaginate(pageSize);
-
-  useEffect(() => {
-    handleReset()
-  }, [data])
-
   const title = 'characters'
-  const renderCard = (itemStat: any) => {
-    const name = getCharacterLabel(db[itemStat._id]);
-    return <Tooltip content={name}>
-      <div className="row-card col">
-        {/* <LLImage className="row-card-element" src={`/assets/elements/${db[itemStat._id].element}.webp`} /> */}
-        <LLImage src={`/assets/${title}/${getCharacterFileName(db[itemStat._id])}.webp`} />
-      </div>
-    </Tooltip>
-  }
 
-  if (!featured) return <Loader />
+  const getTotal = () => data.totals.total
+  
+  const getAbyssTotal = () => data.totals.abyssTotal
+  
+  // const getColorClass = (item: any) => db[item._id].element
+  const getColorClass = (item: any) => 'Green'
 
-  return (
-    <div className='stats-table-container'>
-      <div className={`stats-table ${title}-stats`}>
-        <div className="stats-table-row">
-            <div className="row-card">
-              <span className="col-header">{capitalize(title)}</span>
-            </div>
-            <div className="row-stats">
-            <span className="col-header" title="*Players who own and have fully built the character">Usage %</span>
-            </div>
-            <div className="row-stats">
-            <span className="col-header" title="*Pick rates in the Spiral Abyss">Pick Rate %</span>
-            </div>
-        </div>
-        {map(filterPageContent(data), (itemStat: any, i) => {
-          const ownedPercentage = getPercentage(itemStat.total, featured.player_total);
-          const pickedPercentage = getPercentage(itemStat.abyssCount, featured.abyss_total);
-
-          return (
-            <div key={`row-${i}`} className="stats-table-row">
-              {renderCard(itemStat)}
-              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.total}`}>
-                <>
-                  <div
-                    className={`row-stats-bar`} 
-                    style={{ width: `${ownedPercentage}%`}} 
-                  />    
-                  <div className="row-stats-pct">{ `${ownedPercentage}%`}</div>
-                </>
-              </Tooltip>
-              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.abyssCount || 0}`}>
-                <>
-                  <div
-                    className={`row-stats-bar`} 
-                    style={{ width: `${pickedPercentage}%`}} 
-                  />    
-                  <div className="row-stats-pct">{ `${pickedPercentage}%`}</div>
-                </>
-              </Tooltip>
-            </div>
-          )
-        })}
-      </div>
-      {data.length > pageSize && <Pagination current={currentPage} pageSize={pageSize} onChange={onPageChange} total={data.length} />}
+  const renderImage = (item: any) => (
+    <div className='stats-character-portrait'>
+      <LLImage src={`/assets/${title}/${item._id}.webp`} />
+      <LLImage className='stats-character-element' src={`/assets/elements/${db[item._id].element}.webp`} />
     </div>
   )
+
+  return <StatsTable data={data} title={title} getTotal={getTotal} getAbyssTotal={getAbyssTotal} getColorClass={getColorClass} renderImage={renderImage} />
 }
 
-function ArtifactSets({data}: any) {
-  const db = useAppSelector((state) => state.data.artifactSetDb)
-  const title = 'artifacts'
-  const renderCard = (itemStat: any) => (
-    <Tooltip content={getArtifactSetNames(itemStat.artifacts, db)}>
-      <div className="row-card col">
-        <ArtifactSetBuild artifacts={itemStat.artifacts} />
-      </div>
-    </Tooltip>
-  )
+function ArtifactSetBuilds({data}: any) {
+  const db = useAppSelector((state) => state.data.artifactSetBuildDb)
+  const title = 'artifact sets'
 
-  return <ItemStatsTable data={data} title={title} renderCard={renderCard} />
+  const getTotal = () => data.totals.total
+  
+  const getAbyssTotal = () => data.totals.abyssTotal
+
+  const renderImage = (item: any) => <ArtifactSetBuildCard id={item._id} />
+
+  const getColorClass = (item: any) => 'Red'
+
+  return <StatsTable data={data} title={title} field='artifactSetBuilds' getTotal={getTotal} getAbyssTotal={getAbyssTotal} getColorClass={getColorClass} renderImage={renderImage} />
 }
 
 function Weapons({data}: any) {
   const db = useAppSelector((state) => state.data.weaponDb)
   const title = 'weapons'
-  const renderCard = (itemStat: any) => (
-    <Tooltip content={`${db[itemStat._id].name}`}>
-      <div className="row-card col">
-        <LLImage src={`/assets/${title}/${shortenId(itemStat._id)}.webp`} />
-      </div>
-    </Tooltip>
-  )
 
-  return <ItemStatsTable data={data} title={title} renderCard={renderCard} />
+  const getTotal = (item: any) => data.totals[db[item._id].type_name].typeTotal
+  
+  const getAbyssTotal = (item: any) => data.totals[db[item._id].type_name].abyssTypeTotal
+
+  const getColorClass = (item: any) => db[item._id].type_name
+
+  const renderImage = (item: any) => <LLImage src={`/assets/${title}/${item._id}.webp`} />
+
+  const dataFilter = (data: any, match: string) => filter(data, item => db[item._id].type_name === match)
+
+  return <StatsTable 
+    data={data} 
+    dataFilter={dataFilter}
+    title={title} 
+    getTotal={getTotal} 
+    getAbyssTotal={getAbyssTotal} 
+    getColorClass={getColorClass} 
+    tabs={['Sword', 'Claymore', 'Catalyst', 'Bow', 'Polearm']} 
+    renderImage={renderImage} 
+  />
 }
 
 type StatsTableProps = {
   data: any,
   title: string,
-  renderCard: (itemStat: any) => JSX.Element
+  field?: string,
+  tabs?: string[],
+  getTotal: (item?: any) => number,
+  getAbyssTotal: (item?: any) => number,
+  getColorClass?: (item?: any) => string,
+  dataFilter?: (data: any, match: string) => any,
+  renderImage: (item: any) => JSX.Element
 } 
 
-function ItemStatsTable({ data, title, renderCard }: StatsTableProps) {
-  const characterDb = useAppSelector((state) => state.data.characterDb)
-  const total = reduce(data, (sum: number, curr: any) => sum + curr.count, 0)
-  const pageSize = 20;
-  const { currentPage, onPageChange, handleReset, filterPageContent } = usePaginate(pageSize);
-
-  useEffect(() => {
-    handleReset()
-  }, [data])
+function StatsTable({ data, title, field = title, tabs = [], getTotal, getAbyssTotal, getColorClass, dataFilter, renderImage }: StatsTableProps) {
+  const { activeTabIdx, onTabChange } = useTabs();
+  const filteredData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
 
   return (
     <div className='stats-table-container'>
-      <div className={`stats-table ${title}-stats`}>
-        <div className="stats-table-row asItems">
-            <div className="row-card">
-              <span className="col-header">{capitalize(title)}</span>
-            </div>
-            <div className="row-stats">
-            <span className="col-header">Usage %</span>
-            </div>
-            <div className="row-related">
-            <span className="col-header">Used by</span>
-            </div>
-        </div>
-        {map(filterPageContent(data), (itemStat: any, i) => {
-          const percentage = getPercentage(itemStat.count, total);
+      {!!tabs.length && <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />}
+      <table className='stats-table'>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">{title.slice(0, title.length-1)}</th>
+            <th scope="col">Overall Usage</th>
+            <th scope="col">Abyss Usage</th>
+          </tr>
+        </thead>
+      <tbody>
+        {map(filteredData, (item, i) => {
+          const total = getPercentage(item.count, getTotal(item));
+          const abyssTotal = getPercentage(item.abyssCount, getAbyssTotal(item));
 
           return (
-            <div key={`row-${i}`} className="stats-table-row asItems">
-              {renderCard(itemStat)}
-              <Tooltip className={'row-stats col'} content={`Count: ${itemStat.count}`}>
-                <>
+            <tr key={`${title}-${i}`}>
+              <td>{i + 1}</td>
+              <td className='stats-image'>{renderImage(item)}</td>
+              <td>
+                <div className='stats-row-percentage'>
                   <div
-                    className={`row-stats-bar`} 
-                    style={{ width: `${percentage}%`, backgroundColor: ''}} 
+                    className={`stats-row-bar ${getColorClass && getColorClass(item)}`} 
+                    style={{ width: `${total}%`}} 
                   />    
-                  <div className="row-stats-pct">{ `${percentage}%`}</div>
-                </>
-              </Tooltip>
-              <ScrollContainer vertical={false} className="row-related col">
-                {map(itemStat.characters, (charStat, j) => <CharacterCount character={characterDb[charStat._id]} count={charStat.count} key={`${charStat._id}-${i}-${j}`}/>)}
-              </ScrollContainer>
-            </div>
+                  <div className="stats-row-value">{ `${total}%`}</div>
+                </div>
+              </td>
+              <td>
+                <div className='stats-row-percentage'>
+                  <div
+                      className={`stats-row-bar ${getColorClass && getColorClass(item)}`} 
+                      style={{ width: `${abyssTotal}%`}} 
+                  />    
+                  <div className="stats-row-value">{ `${abyssTotal}%`}</div>
+                </div>
+              </td>
+            </tr>
           )
         })}
-      </div>
-      {data.length > pageSize && <Pagination current={currentPage} pageSize={pageSize} onChange={onPageChange} total={data.length} />}
-    </div>
+      </tbody>
+    </table>
+  </div>
   )
 }
 
-
-export default { ArtifactSets, Weapons, Characters }
+export default { ArtifactSetBuilds, Weapons, Characters }

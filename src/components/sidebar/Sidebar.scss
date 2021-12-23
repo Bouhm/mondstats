@@ -1,0 +1,118 @@
+@use '../../variables.module' as var;
+
+.sidebar {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+
+  z-index: 7;
+  width: 12rem;
+
+  .sidebar-menu {
+    position: fixed;
+    display: flex;
+    flex-flow: column;
+    -webkit-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
+    background: var.$theme-color-3;
+    color: rgba(255, 255, 255, 0.6);
+    height: 100%;
+
+    .sidebar-tab {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      height: 4rem;
+      padding: 0.5rem;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      &.asActive {
+        font-weight: 700;
+        border-right: 2px solid rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .tab-name {
+        margin: 0 0.5rem;
+        white-space: no-wrap;
+      }
+
+      img {
+        width: 40px;
+      }
+    }
+  }
+}
+
+.sidebar-collapsible {
+  display: none;
+  z-index: 11;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .sidebar-menu {
+    background: #2a2c3a;
+    position: fixed;
+    display: flex;
+    flex-flow: column;
+    color: rgba(255, 255, 255, 0.6);
+    left: 0;
+    right: 0;
+    top: 4rem;
+
+    .sidebar-tab {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      height: 4rem;
+      padding: 0.5rem;
+
+      &.asActive {
+        border-right: 2px solid rgba(255, 255, 255, 0.5);
+        font-weight: 700;
+      }
+
+      .tab-name {
+        margin-left: 0.5rem;
+        white-space: no-wrap;
+      }
+
+      img {
+        width: 40px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 3.5rem;
+
+    .sidebar-menu {
+      width: inherit;
+    }
+
+    .tab-name {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 516px) {
+  .sidebar {
+    display: none;
+  }
+
+  .sidebar-collapsible {
+    display: block;
+  }
+}

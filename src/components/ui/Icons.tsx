@@ -1,5 +1,7 @@
 import React from 'react';
 
+// https://fontawesome.com/
+
 type IconProps = {
   size?: number,
   color?: string,
@@ -155,6 +157,40 @@ export const Exchange = ({size = 25, color = "#e9e5dc", className=""}: IconProps
       viewBox="0 0 512 512"
     >
       <path fill={color} d="M0 168v-16c0-13.255 10.745-24 24-24h360V80c0-21.367 25.899-32.042 40.971-16.971l80 80c9.372 9.373 9.372 24.569 0 33.941l-80 80C409.956 271.982 384 261.456 384 240v-48H24c-13.255 0-24-10.745-24-24zm488 152H128v-48c0-21.314-25.862-32.08-40.971-16.971l-80 80c-9.372 9.373-9.372 24.569 0 33.941l80 80C102.057 463.997 128 453.437 128 432v-48h360c13.255 0 24-10.745 24-24v-16c0-13.255-10.745-24-24-24z"></path>
+    </svg>
+  )
+}
+
+export const CaretUp = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+  return (
+    <svg 
+      aria-hidden="true" 
+      focusable="false" 
+      className={"icon " + className} 
+      role="img" 
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 320 416"
+    >
+      <path fill={color} d="M288.662 352H31.338c-17.818 0-26.741-21.543-14.142-34.142l128.662-128.662c7.81-7.81 20.474-7.81 28.284 0l128.662 128.662c12.6 12.599 3.676 34.142-14.142 34.142z"></path>
+    </svg>
+  )
+}
+
+export const CaretDown = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+  return (
+    <svg 
+      aria-hidden="true" 
+      focusable="false" 
+      className={"icon " + className}
+      role="img" 
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 320 416"
+    >
+      <path fill={color} d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path>
     </svg>
   )
 }

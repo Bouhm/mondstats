@@ -1,0 +1,15 @@
+.abyss-stat {
+  color: inherit;
+  font-size: 1.8vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.3rem;
+  flex-flow: column;
+}
+
+@media (min-width: 700px) {
+  .abyss-stat {
+    font-size: 0.8rem;
+  }
+}

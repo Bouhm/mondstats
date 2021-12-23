@@ -1,16 +1,20 @@
+@use '../../variables.module' as var;
+
 .tabs-container {
   width: 100%;
+  line-height: 3rem;
   display: flex;
+  height: 3rem;
   justify-content: center;
   color: #e9e5dc;
   font-size: 1.2rem;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var.$theme-color-4;
   border-radius: 6px;
 
   .tab {
-    width: 7rem;
+    text-transform: uppercase;
     text-align: center;
-    margin: 1rem;
+    margin: 0 1rem;
 
     &:hover {
       cursor: pointer;
@@ -18,7 +22,7 @@
 
     &.asActive {
       font-weight: 700;
-      border-bottom: 2px solid white;
+      text-decoration: underline;
     }
   }
 }

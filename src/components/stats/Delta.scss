@@ -1,0 +1,22 @@
+.delta-container {
+  margin: 0.3rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  
+  .delta-value {
+    font-size: inherit;
+    text-shadow: none;
+
+    &.asPos {
+      color: #32CD32;
+      font-size: 25%;
+    }
+
+    &.asNeg {
+      color: #DC143C;
+      font-size: 25%;
+    }
+  }
+}

@@ -1,14 +1,2 @@
-export const ElementColors: { [key: string]: string } = {
-  pyro: "#EE7033",
-  anemo: "#58DBAB",
-  cryo: "#A1F9FF",
-  hydro: "#35CBFC",
-  electro: "#D795FF",
-  dendro: "#A5D533",
-  geo: "#F0B738",
-  adaptive: "#4B0082",
-  none: "#a4a4a4"
-}
-
 export const CharacterElements = ["Anemo", "Cryo", "Electro", "Geo", "Hydro", "Pyro"]
 export const WeaponTypes = ["Bow", "Catalyst", "Claymore", "Polearm", "Sword"]

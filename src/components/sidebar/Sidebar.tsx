@@ -1,8 +1,9 @@
-import './Sidebar.css';
+import './Sidebar.scss';
 
 import _ from 'lodash';
 import React, { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+
 import { Hamburger } from '../ui/Icons';
 
 interface ITab {
@@ -12,11 +13,12 @@ interface ITab {
 }
 
 const tabs: ITab[] = [
-  { name: "Builds", linkto: "/builds", icon: "builds.webp" },
+  // { name: "Builds", linkto: "/builds", icon: "builds.webp" },
   { name: "Spiral Abyss", linkto: "/abyss", icon: "spiralAbyss.webp" },
   { name: "Characters", linkto: "/characters", icon: "characters.webp" },
   { name: "Artifacts", linkto: "/artifacts", icon: "artifacts.webp" },
-  { name: "Weapons", linkto: "/weapons", icon: "weapons.webp" }
+  { name: "Weapons", linkto: "/weapons", icon: "weapons.webp" },
+  { name: "Charts", linkto: "/charts", icon: "charts.webp"}
 ]
 
 function Sidebar() {

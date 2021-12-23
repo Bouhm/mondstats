@@ -3,17 +3,15 @@ import './Constellations.scss';
 import _, { map } from 'lodash';
 import React, { ReactNode } from 'react';
 
-import { ElementColors } from '../../../data/constants';
-import { getPercentage, shortenId } from '../../../scripts/util';
+import { getPercentage } from '../../../scripts/util';
 import { useAppSelector } from '../../hooks/useRedux';
 import BarChart from '../../ui/BarChart';
+import LLImage from '../../ui/LLImage';
 import Tooltip from '../../ui/Tooltip';
-import LLImage from '../../ui/LLImage'
 
 type ConstellationsProps = {
   constellations: number[],
   total: number,
-  color: string
 }
 
 type ConstellationCardProps = {
@@ -40,9 +38,10 @@ function ConstellationCard({ oid, i, name, count, children }: ConstellationCardP
   )
 }
 
-function Constellations({ constellations, total, color }: ConstellationsProps ) {
+function Constellations({ constellations, total }: ConstellationsProps ) {
   const selectedCharacter = useAppSelector((state) => state.data.selectedCharacter)
   const characterDb = useAppSelector((state) => state.data.characterDb)
+  const colorClass = useAppSelector((state) => state.data.colorClass)
 
   const generateChartData = () => {
     return map(constellations, (count, i) => {
@@ -51,7 +50,7 @@ function Constellations({ constellations, total, color }: ConstellationsProps ) 
       return { 
         tooltip: `C${i}`, 
         value: 1 + Math.round((count / total * 1000)/10), 
-        color: i === 0 ? ElementColors.none : color,
+        classes: i === 0 ? 'None' : colorClass,
         content: (
           <>
           {i === 0 ?

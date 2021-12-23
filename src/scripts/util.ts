@@ -2,41 +2,46 @@ import { forEach, reverse } from 'lodash';
 
 import { IArtifactSet, IArtifactSetDb } from '../data/types';
 
-export function getShortName(char: { name: string, element: string }) {
-  const charName = char.name === "Traveler" ? `${char.name}-${char.element}`.split(" ").join("").toLowerCase() : char.name.split(" ").join("").toLowerCase();
-  return charName;
+export function getShortName(item: { name: string, element?: string }) {
+  const shortName = item.name === "Traveler" ? `${item.name}-${item.element}`.split(" ").join("").toLowerCase() : item.name.split(" ").join("").toLowerCase();
+  return shortName.replace(/[^\w\s]/gi, '');
 }
 
 export function getArtifactSetNames(artifacts: IArtifactSet[], db: IArtifactSetDb) {
   let label = "";
 
   forEach(artifacts, (set, i) => {
-    let name = db[set._id].name;
-    if (name.includes(" ")) {
-      if (name.split(" ")[0] === "The") {
-        name = name.split(" ")[1]
-      } else {
-        name = name.split(" ")[0]
-      }
-    }
+    let dbSet = db[set._id]
 
-    label += set.activation_number + "-" + name
-    if (i !== artifacts.length - 1) label += " "
+    if (dbSet) {
+      let name = dbSet.name;
+      
+      if (name.includes(" ")) {
+        if (name.split(" ")[0] === "The") {
+          name = name.split(" ")[1]
+        } else {
+          name = name.split(" ")[0]
+        }
+      }
+  
+      label += set.activation_number + "-" + name
+      if (i !== artifacts.length - 1) label += " "
+    }
   })
 
   return label;
 }
 
-export function shortenId(_id: string) {
-  return reverse(_id.split('')).splice(0, _id.length/2).join('');
-}
+// export function shortenId(_id: string) {
+//   return reverse(_id.split('')).splice(0, _id.length/2).join('');
+// }
 
 export function getCharacterLabel(char: { name: string, element: string }) {
   return char.name === "Traveler" ? `Traveler (${char.element})` : char.name;
 }
 
 export function getCharacterFileName(char: { name: string, _id: string }) {
-  return char.name === "Traveler" ? "traveler" : shortenId(char._id);
+  return char.name === "Traveler" ? "traveler" : char._id;
 }
 
 export function numberWithCommas(n: number) {

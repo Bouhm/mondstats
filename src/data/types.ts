@@ -16,8 +16,12 @@ export interface IWeaponData {
   _id: string,
   oid: number,
   name: string,
+  type_name: string,
   rarity: number,
-  effect: string
+  baseAtk: string,
+  subStat: string, 
+  subValue: string,
+  effect: string,
 }
 
 export interface IArtifactData {
@@ -35,77 +39,82 @@ export interface IArtifactSetData {
   affixes: IAffix[]
 }
 
+export interface IArtifactSetBuildData {
+  _id: string,
+  sets: IArtifactSet[]
+}
+
 export interface IAffix { 
   activation_number: number,
   effect: string
 }
 
 export interface ICharacterDb{
-  [id: string]: ICharacterData
+  [_id: string]: ICharacterData
 }
 
 export interface IWeaponDb {
-  [id: string]: IWeaponData
+  [_id: string]: IWeaponData
 }
 
 export interface IArtifactDb {
-  [id: string]: IArtifactData
+  [_id: string]: IArtifactData
 }
 
 export interface IArtifactSetDb {
-  [id: string]: IArtifactSetData
+  [_id: string]: IArtifactSetData
 }
 
-export interface ICharacterBuild {
-  avg_level: number,
-  constellations: number[],
-  char_id: string,
-  builds: IBuild[],
-  teams: IParty[],
-  total: number
+export interface IArtifactSetBuildDb {
+  [_id: string]: IArtifactSetBuildData
 }
 
 export interface IWeaponBuild {
   _id: string,
-  count: number
+  count: number,
 }
 
 export interface IArtifactSet {
   _id: string,
   activation_number: number,
-  rarity?: number
 }
 
 export interface IBuild {
+  _id: string,
   weapons: IWeaponBuild[],
-  artifacts: IArtifactSet[]
   count: number
 }
 
-export interface IAbyssData {
-  teams: IAbyssParty[],
-  batttles: IAbyssBattle[]
+export interface IAbyssBuild {
+  _id: string,
+  weapons: IWeaponBuild[],
+  count: number,
+  // avgStar: number,
+  // winCount: number
 }
 
-export interface IAbyssBattle {
-  floor_level: string,
-  battle_parties: IAbyssParty[][]
-}
+export type IAbyssFloor = { [battleIndex: string]: IAbyssParty[] }[]
 
 export interface IAbyssParty {
-  core_party: string[],
+  coreParty: string[],
   flex: IFlexChar[][]
-  count: number
+  count: number,
+  // avgStar: number,
+  // winCount: number
 }
 
 export interface IParty {
   party: string[],
-  count: number
+  count: number,
+  // avgStar: number,
+  // winCount: number
 }
 
 export interface IFlexChar {
-  charId: string,
-  count: number
+  _id: string,
+  count: number,
+  // avgStar: number,
+  // winCount: number
 }
 
 export interface IArtifactSetStats {
@@ -114,7 +123,7 @@ export interface IArtifactSetStats {
     artifacts: IArtifactSet[]
   },
   characters: {
-    [charId: string]: number
+    [_id: string]: number
   },
   count: number
 }
@@ -122,7 +131,7 @@ export interface IArtifactSetStats {
 export interface IWeaponStats {
   _id: string
   characters: {
-    [charId: string]: number
+    [_id: string]: number
   },
   type_name: string,
   rarity: number,

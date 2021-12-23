@@ -33,16 +33,16 @@ const Filters = ({ filters, onFilterChange, color='' }: FiltersProps) => {
   return (
     <div className="filters-container">
       {/* <div className="filters-label">Filters</div> */}
-      <div className="filter-options">
-        {map(Object.entries(omit(filters, 'max5')), ([key, filter])=> <div key={`${key}`} onClick={() => handleFilterChange(key, !filter.value)}><FilterButton color={color} label={filter.label} isActive={filter.value} /></div>)}
-      </div>
       {
         includes(keys(filters), 'max5') && 
         <>
-          <Divider />
           <FiveStarFilter onChange={handleFilterChange} max5={filters.max5!.value} />
+          <Divider />
         </>
       }
+      <div className="filter-options">
+        {map(Object.entries(omit(filters, 'max5')), ([key, filter])=> <div key={`${key}`} onClick={() => handleFilterChange(key, !filter.value)}><FilterButton color={color} label={filter.label} isActive={filter.value} /></div>)}
+      </div>
     </div>
   )
 }

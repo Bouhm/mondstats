@@ -1,0 +1,58 @@
+.usage-pct {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+  .usage-pct-value {
+    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+    font-size: 4.8vw;
+  }
+
+  .usage-pct-count {
+    opacity: 0.8;
+    mix-blend-mode: difference;
+    font-size: 1.6vw;
+  }
+
+  &.small {
+    .usage-pct-value {
+      font-size: 2.8vw;
+    }
+  
+    .usage-pct-count {
+      font-size: 1.6vw;
+    }
+  }
+}
+
+@media (max-width: 544px) {
+  .usage-pct {
+    .usage-pct-value {
+      text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  .usage-pct {
+    .usage-pct-count {
+      font-size: 0.8rem;
+    }
+
+    .usage-pct-value {
+      font-size: 1.8rem;
+    }
+
+    &.small {
+      .usage-pct-value {
+        font-size: 1.2rem;
+      }
+    
+      .usage-pct-count {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
