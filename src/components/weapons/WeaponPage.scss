@@ -3,6 +3,7 @@
 
 .weapon-charts {
   display: flex;
+  flex-wrap: wrap-reverse;
 
   h1 {
     text-transform: uppercase;
@@ -16,43 +17,73 @@
   .weapon-characters {
     flex: 3;
   }
+}
 
-  .weapon-detail {
-    flex: 2;
+.weapon-detail {
+  flex: 2;
 
-    .weapon-info-container {
-      border-radius: 8px;
-      margin: 0.1rem 0 1rem 0;
-      overflow: hidden;
-      background-color: rgba(39, 42, 56, 0.7);
-      padding: 1rem;
+  .weapon-info-container {
+    border-radius: 8px;
+    margin: 0.1rem 0 1rem 0;
+    overflow: hidden;
+    background-color: rgba(39, 42, 56, 0.7);
+    padding: 1rem;
+    display: flex;
+    flex-flow: column;
+    color: #e9e5dc;
+
+    .weapon-info {
       display: flex;
-      flex-flow: column;
-      color: #e9e5dc;
 
-      .weapon-info {
+      img {
+        height: 200px;
+        width: auto;
+      }
+
+      .weapon-info-stats {
         display: flex;
+        flex-flow: column;
+        font-size: 1rem;
+
+        .weapon-info-stat-title {
+          color: white;
+        }
+
+        .weapon-info-stat-value {
+          color: #e9e5dc;
+          margin-bottom: 1rem;
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    .weapon-info-effect {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .weapon-detail {
+    .weapon-info-container {
+      .weapon-info {
+        img {
+          height: 150px;
+          width: auto;
+        }
 
         .weapon-info-stats {
-          display: flex;
-          flex-flow: column;
-          font-size: 1.2rem;
-
-          .weapon-info-stat-title {
-            color: white;
-          }
+          font-size: 0.7rem;
 
           .weapon-info-stat-value {
-            color: #e9e5dc;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+            font-size: 1rem;
           }
         }
       }
 
       .weapon-info-effect {
-        font-size: 1.3rem;
-        margin-top: 0.5rem;
+        font-size: 0.9rem;
       }
     }
   }

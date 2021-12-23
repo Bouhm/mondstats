@@ -1,10 +1,17 @@
+## dev build 12.22.21
+
+- Migrated to a new database schema and reworked all of the data aggregation
+- Improved abyss team flex UI
+- Added abyss statistics to builds, weaapons, and artifact sets
+- Added individual pages for every weapon and artifact set
+
 ## dev build 10.10.21
 
 - Spending a lot of time on the backend for the following changes:
   - Revamping weapons/artifact set data to show more statistics -- new data aggregation
   - Working on optimizing and performing data aggregation on the cloud instead of the client
 
-*I'm currently reworking my whole database. During this period changes to the live site will be halted. Thank you for your patience.
+\*I'm currently reworking my whole database. During this period changes to the live site will be halted. Thank you for your patience.
 
 ## dev build 9.29.21
 

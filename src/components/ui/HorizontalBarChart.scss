@@ -2,6 +2,7 @@
 
 .horizontal-barchart {
   display: flex;
+  margin-right: 1rem;
 
   .horizontal-barchart-bar {
     flex: 1;
@@ -13,7 +14,7 @@
       animation-name: horibar;
       animation-duration: 1s;
       animation-direction: forwards;
-      border: 2px solid rgba(255,255,255,0.8);
+      border: 2px solid rgba(255, 255, 255, 0.8);
     }
 
     @keyframes horibar {
@@ -69,8 +70,7 @@
           .bar-card-popularity-pct {
             color: white;
             font-size: 1.7rem;
-            text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black,
-              0 0 1px black;
+            text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
           }
 
           .bar-card-popularity-count {
@@ -109,7 +109,8 @@
 
 @media (max-width: 676px) {
   .character-page {
-    .build-details, .constellations-container {
+    .build-details,
+    .constellations-container {
       h1 {
         width: 200px;
         font-size: 1.5rem;
@@ -118,7 +119,6 @@
   }
 
   .horizontal-barchart-container {
-
     .horizontal-barchart-bar {
       background-color: rgba(164, 164, 164, 0.2);
     }

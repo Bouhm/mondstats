@@ -1,5 +1,7 @@
+import './UsageStats.scss';
+
 import React from 'react';
-import './UsageStats.scss'
+
 import { getPercentage } from '../../scripts/util';
 
 type UsageStatsProps = {
@@ -28,6 +30,9 @@ function UsageStats({ count, total, abyssCount, abyssTotal, rank }: UsageStatsPr
         <div className="usage-stats-content usage-stats-pct">
           {getPercentage(count, total)}%
         </div>
+        <div className="usage-stats-value">
+          {count}
+        </div>
       </div>
       <div className="usage-stats-abyss">
         <div className="usage-stats">
@@ -36,6 +41,9 @@ function UsageStats({ count, total, abyssCount, abyssTotal, rank }: UsageStatsPr
           </h2>
           <div className="usage-stats-content usage-stats-abyss-pct">
             {getPercentage(abyssCount, abyssTotal) }%
+          </div>
+          <div className="usage-stats-value">
+            {abyssCount}
           </div>
         </div>
       </div>

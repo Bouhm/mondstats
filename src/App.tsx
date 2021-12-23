@@ -92,11 +92,6 @@ function App() {
   return (
     <div className="App">
       <main className="App-content">
-        {showNotice && 
-          <Dialogue onClose={() => setShowNotice(false)}>
-            {notice}
-          </Dialogue>
-        }
         <Sidebar />
         <div className="section-view" style={showNotice ? {filter: 'blur(3px)'} : {}}  >
           <main>
@@ -106,14 +101,14 @@ function App() {
             <div className="links">
               <Link to="/about">About</Link>
               <Link to="/changelog">Changelog</Link>
-              <div className="notice" onClick={() => setShowNotice(true)}>⚠️</div>
+              {/* <div className="notice" onClick={() => setShowNotice(true)}>⚠️</div> */}
             </div>
             <footer>Genshin Impact is a registered trademark of miHoYo Co., Ltd. Mondstats is not affiliated or in any way officially connected with miHoYo.</footer>
           </section>
         </div>
       </main>
       <Navbar />
-      <span className="build-ver">dev build 12.16.21</span>
+      <span className="build-ver">dev build 12.22.21</span>
     </div>
   )
 }

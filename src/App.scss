@@ -5,6 +5,7 @@
 
   .App-content {
     display: flex;
+    min-height: calc(100vh - 4rem);
 
     .section-view {
       display: flex;
@@ -13,6 +14,7 @@
       margin: 0 auto;
       max-width: 90rem;
       flex: 1;
+      overflow-x: hidden;
     }
 
     main {
@@ -27,9 +29,8 @@ a {
 }
 
 footer {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   width: 100%;
   text-align: center;
   color: rgba(255, 255, 255, 0.5);
@@ -104,20 +105,29 @@ footer {
 .None {
   background-color: var.$none;
 }
+.Red {
+  background-color: var.$red !important;
+}
+.Green {
+  background-color: var.$green !important;
+}
+.Blue {
+  background-color: var.$blue !important;
+}
 .Sword {
-  background-color: var.$weapon-sword;
+  background-color: var.$weapon-sword !important;
 }
 .Claymore {
-  background-color: var.$weapon-claymore;
+  background-color: var.$weapon-claymore !important;
 }
 .Catalyst {
-  background-color: var.$weapon-catalyst;
+  background-color: var.$weapon-catalyst !important;
 }
 .Bow {
-  background-color: var.$weapon-bow;
+  background-color: var.$weapon-bow !important;
 }
 .Polearm {
-  background-color: var.$weapon-polearm;
+  background-color: var.$weapon-polearm !important;
 }
 .rarity-3 {
   background: var.$rarity-3;

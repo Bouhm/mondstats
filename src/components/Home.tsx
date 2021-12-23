@@ -22,10 +22,8 @@ function Home() {
         <LLImage src={Logo} alt="logo" />
       </div>
       <div style={{color: 'white', textAlign: 'center'}}>
-        HEAVILY WIP BUILD WITH VERY ROUGH EDGES <br />
-        NOT REPRESENTATIVE OF THE FINAL PRODUCT <br />
-        PLEASE EXCUSE THE JANK <br />
-        THANK
+        MONDSTATS IS BACK AFTER A HUGE DATA REWORK <br />
+        THIS IS STILL HEAVILY WIP -- EXPECT MISSING DATA <br />
       </div>
     </div>
   )

@@ -15,7 +15,6 @@ function ArtifactSetIndex() {
   if (isEmpty(artifactSetDb)) return <Loader />
 
   const { searchArtifactSets } = useArtifactSetSearch(artifactSetDb);
-  console.log(searchArtifactSets);
 
   const handleSelect = (selectedIds: string[]) => {
     setSelectedSets(selectedIds)

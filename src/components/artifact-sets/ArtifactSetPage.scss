@@ -3,6 +3,7 @@
 
 .artifact-set-charts {
   display: flex;
+  flex-wrap: wrap-reverse;
 
   h1 {
     text-transform: uppercase;

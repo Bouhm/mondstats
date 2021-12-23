@@ -14,7 +14,7 @@ const CharacterCount = ({character, count}: CharacterCountProps) => {
 
   return (
     <Tooltip content={`${character.name}: ${count}`}>
-      <LLImage className={`character-stats rarity-${character.rarity}`} src={`/assets/characters/${character._id}}.webp`} alt={character.name} />
+      <LLImage className={`character-stats rarity-${character.rarity}`} src={`/assets/characters/${character._id}.webp`} alt={character.name} />
     </Tooltip>
   )
 }

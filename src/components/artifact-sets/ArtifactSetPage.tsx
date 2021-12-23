@@ -1,18 +1,20 @@
 import './ArtifactSetPage.scss';
 
 import { find, forEach, isEmpty, map, orderBy, reduce, take } from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { useParams } from 'react-router-dom';
 
 import * as colorVars from '../../_variables.module.scss';
 import { getArtifactSetNames, getPercentage, getShortName } from '../../scripts/util';
+import { setColorClass } from '../../Store';
 import ArtifactSetBuildDetail from '../characters/builds/ArtifactSetBuildDetail';
 import WeaponBuild from '../characters/builds/WeaponBuild';
 import Button from '../controls/Button';
 import useApi from '../hooks/useApi';
 import useExpand from '../hooks/useExpand';
-import { useAppSelector } from '../hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
+import UsageStats from '../stats/UsageStats';
 import Chart from '../ui/Chart';
 import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
@@ -27,13 +29,28 @@ function ArtifactSetPage() {
   const colorClass = useAppSelector((state) => state.data.colorClass)
   const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const artifactSet = find(artifactSetDb, artifactSet => getShortName(artifactSet) === shortName)
-
+  const [isLoading, setIsLoading] = useState(true)
+  const dispatch = useAppDispatch()
+  
   if (!artifactSet) return null;
  
+  useEffect(() => {
+    if (artifactSet) {
+      dispatch(setColorClass('Red'))
+    }
+  }, [artifactSet])
+
   const [activeBuildIdx, setActiveBuildIdx] = useState(0);
   const artifactSetStats = useApi(`/artifactSets/${artifactSet._id}.json`)
-  if (!artifactSetStats || isEmpty(artifactSetDb) || isEmpty(artifactSetStats)) return <Loader />
+  const artifactSetTotals = useApi(`/artifactSets/stats/top-artifact-set-builds.json`)
 
+  useEffect(() => {
+    if (artifactSetStats && artifactSetTotals) {
+      setIsLoading(false)
+    }
+  }, [artifactSetStats, artifactSetTotals])
+  
+  if (isLoading) return <Loader />
 
   const charsTotal = reduce(artifactSetStats.artifactSetBuilds[activeBuildIdx].characters, (sum, curr) => sum + curr.count, 0)
   const max = 10;
@@ -44,7 +61,6 @@ function ArtifactSetPage() {
 
   forEach(artifactSetStats.artifactSetBuilds, ({ _id, count }) => {
     const label = getArtifactSetNames(artifactSetBuildDb[_id].sets, artifactSetDb)
-    console.log(label, count)
     if (!label) {
       return;
     }
@@ -64,6 +80,7 @@ function ArtifactSetPage() {
 
   return (
   <div className="artifact-set-page">
+    <UsageStats count={artifactSetStats.artifactSetBuilds[activeBuildIdx].count} total={artifactSetTotals.totals.total} abyssCount={artifactSetStats.artifactSetBuilds[activeBuildIdx].abyssCount} abyssTotal={artifactSetTotals.totals.abyssTotal} />
     <div className="artifact-set-builds-selector">
         <ScrollContainer vertical={false} hideScrollbars={true} className="artifact-set-builds-menu">
           {map(artifactSetStats.artifactSetBuilds, (build, i: number) => {
@@ -79,7 +96,7 @@ function ArtifactSetPage() {
       <div className="artifact-set-charts">
       <div className="artifact-set-characters">
         <h1>Characters</h1>
-        <HorizontalBarChart data={take(orderBy(artifactSetStats.artifactSetBuilds[activeBuildIdx].characters, 'count', 'desc'), expanded ? max : 5) as unknown as IBarChartData[]} db={characterDb} path='characters' total={charsTotal} />
+          <HorizontalBarChart data={take(orderBy(artifactSetStats.artifactSetBuilds[activeBuildIdx].characters, 'count', 'desc'), expanded ? max : 5) as unknown as IBarChartData[]} db={characterDb} path='characters' total={charsTotal} />
         <br />
         {artifactSetStats.length > 5 && (
           <Button className="characters-show-more" onClick={handleExpand}>

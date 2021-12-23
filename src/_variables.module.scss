@@ -10,19 +10,23 @@ $none: #a4a4a4;
 $rarity-3: linear-gradient(#5d6887, #608eab, #5484a7);
 $rarity-4: linear-gradient(#605a86, #9476ac, #a67ab9);
 $rarity-5: linear-gradient(#8d5e2e, #b1792c, #b8742b);
-$rarity-105: linear-gradient(#A25056, #C75056, #E04A53);
+$rarity-105: linear-gradient(#a25056, #c75056, #e04a53);
 
 $card-color: #e9e5dc;
 
 $theme-color-base: #343748;
-$theme-color-3: #2E3142;
-$theme-color-4: #2A2C3A;
+$theme-color-3: #2e3142;
+$theme-color-4: #2a2c3a;
 
-$weapon-sword: #5144D3;
-$weapon-claymore: #6F38B1;
-$weapon-catalyst: #DA3490;
-$weapon-bow: #9089FA;
-$weapon-polearm: #2780EB;
+$weapon-sword: #5144d3;
+$weapon-claymore: #6f38b1;
+$weapon-catalyst: #da3490;
+$weapon-bow: #9089fa;
+$weapon-polearm: #2780eb;
+
+$red: #e9422e;
+$green: #3cbc8d;
+$blue: #2796bc;
 
 :export {
   pyro: $element-pyro;
@@ -38,4 +42,7 @@ $weapon-polearm: #2780EB;
   catalyst: $weapon-catalyst;
   bow: $weapon-bow;
   polearm: $weapon-polearm;
+  red: $red;
+  green: $green;
+  blue: $blue;
 }

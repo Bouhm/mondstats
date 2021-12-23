@@ -12,7 +12,7 @@ import Card from '../ui/Card';
 
 type CardSearchProps = {
   items: SearchItem[]
-  onSelect?: (selectedId: string) => void
+  onSelect?: (selectedIds: string[]) => void
   showCards?: boolean,
   placeholder?: string
   showAll?: boolean
@@ -31,6 +31,7 @@ type DDProps = {
   OptionLabel: (o: Option)=>ReactNode 
   placeholder: string
 }
+
 
 function Characters(props: CardSearchProps) { 
   const characterDb = useAppSelector((state) => state.data.characterDb)
@@ -71,7 +72,7 @@ function ArtifactSets(props: CardSearchProps) {
     ) as ReactNode;
   }
 
-  return <CardSearch options={options} OptionLabel={OptionLabel} path={"artifactsets"} placeholder={"Search artifact sets"} {...props} />
+  return <CardSearch options={options} OptionLabel={OptionLabel} path={"artifacts"} placeholder={"Search artifact sets"} {...props} />
 }
 
 function Weapons(props: CardSearchProps) { 
@@ -126,6 +127,7 @@ function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, 
 
   const handleChange = (selected: Option[]) => {
     setSelectedItems(selected);
+    onSelect && onSelect(map(selected, item => item.value ))
   }
 
   const handleSelect = (_id: string) => {
@@ -133,6 +135,7 @@ function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, 
     if (selectedItem) {
       const newSelected = [...selectedItems, { label: selectedItem.name, rarity: selectedItem.rarity, value: selectedItem._id }];
       setSelectedItems(newSelected)
+      onSelect && onSelect(map(newSelected, item => item.value ))
     }
   }
 
@@ -154,9 +157,8 @@ function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, 
         {showCards && 
           <div className={`cards ${showAll ? 'asFull' : ''}`}>
             {map(orderBy(searchedItems.length ? searchedItems : items, 'name', 'asc'), (item, i) => {
-              console.log(item)
               return <Link key={`${item._id}-${i}`} to={`${getShortName(item)}`}><Card onClick={handleSelect} path={path} {...item} /></Link>
-        })}
+            })}
           </div>
         }
       </div>

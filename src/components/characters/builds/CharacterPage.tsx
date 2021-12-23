@@ -68,10 +68,9 @@ function CharacterPage() {
           return;
       } 
     }
-  }, [_characterBuilds, _characterAbyssBuilds, setCharacterBuilds, filters])
+  }, [activeTabIdx, _characterBuilds, _characterAbyssBuilds, setCharacterBuilds, filters])
 
   useEffect(() => {
-    console.log(selectedCharacterBuilds)
     if (selectedCharacterBuilds) {
       setIsLoading(false)
     }
@@ -93,6 +92,7 @@ function CharacterPage() {
       <div className="character-page">
         <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${character._id}_bg.webp")` }} /> 
         <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />
+        {/* <UsageStats count={character.count} total={character.total} abyssCount={character.abyssCount} abyssTotal={character.abyssTotal} /> */}
         {selectedCharacterBuilds.builds &&
           <>
             {/* <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky> */}

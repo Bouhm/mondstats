@@ -56,7 +56,7 @@ const _compareFloor = (f1: Option, f2: Option) => {
 }
 
 function AbyssPage() {
-  const floors = range(9, 13);
+  const floors = map(range(9, 13), num => num.toString());
   const tabs = ['ALL', ...floors]
 
   const characterDb = useAppSelector((state) => state.data.characterDb)
@@ -214,7 +214,7 @@ function AbyssPage() {
       <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handlePartyChange} showCards={false}/>
       <br />
       <h1>Abyss Teams</h1>
-      <Sticky top='#navbar'><Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={map(tabs, (floor => typeof floor === 'number' ? `FLOOR ${floor}` : floor.toString()))} /></Sticky>
+      <Sticky top='#navbar'><Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={tabs} /></Sticky>
       {!isEmpty(characterDb) && renderTeams()}
     </div>
   )

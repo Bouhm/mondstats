@@ -1,19 +1,27 @@
+.stats-table-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
 .stats-table {
   border-collapse: collapse;
-  width: 100%;
+  width: 70%;
   table-layout: auto;
   color: white;
   margin-top: 1rem;
 
   tr {
-    padding: .35em;
+    padding: 0.35em;
     &:nth-child(even) {
       background-color: rgba(0, 0, 0, 0.1);
     }
   }
-  
-  th, td {
+
+  th,
+  td {
     text-align: center;
+    line-height: 3rem;
 
     &:not(:first-child) {
       border-left: 1px solid rgba(255, 255, 255, 0.5);
@@ -24,29 +32,33 @@
     background-color: rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    top: 7rem;
+    top: 4rem;
     position: sticky;
     padding: 0.5rem;
     z-index: 9;
   }
 
-  .stats-image, .stats-image > div{
+  .stats-image {
     width: auto;
     height: 70px;
-    position: relative;
+    display: flex;
+    justify-content: center;
 
+    .stats-character-portrait,
     img {
       height: inherit;
+      position: relative;
     }
 
     .stats-character-element {
-      height: 20%;
       position: absolute;
+      width: 20px;
+      height: auto;
+      left: 0;
       top: 0;
-      right: 0;
     }
   }
-  
+
   .stats-row-percentage {
     display: flex;
 
@@ -58,6 +70,7 @@
       animation-duration: 1s;
       animation-direction: forwards;
       border: 1px solid rgba(255, 255, 255, 0.7);
+      border-left: none;
       margin-right: 0.5rem;
     }
 
