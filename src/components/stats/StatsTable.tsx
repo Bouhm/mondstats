@@ -1,6 +1,6 @@
 import './StatsTable.scss';
 
-import { capitalize, filter, isEmpty, map, reduce } from 'lodash';
+import { capitalize, filter, isEmpty, map, orderBy, reduce, sortBy } from 'lodash';
 import React, { useEffect } from 'react';
 
 import { getPercentage } from '../../scripts/util';
@@ -91,7 +91,8 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
   const { activeTabIdx, onTabChange } = useTabs();
   let filteredData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
 
-  if (isPreview) filteredData = data[field].slice(0, 5);
+  console.log(data[field])
+  if (isPreview) filteredData = orderBy(data[field], 'abyssCount', 'desc').slice(0, 5);
 
   return (
     <div className='stats-table-container'>
@@ -116,6 +117,7 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
             <tr key={`${title}-${i}`}>
               <td>{i + 1}</td>
               <td className='stats-image'>{renderImage(item)}</td>
+              {!isPreview && 
               <td>
                 <div className='stats-row-percentage'>
                   <div
@@ -125,7 +127,7 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
                   <div className="stats-row-value">{ `${total}%`}</div>
                 </div>
               </td>
-              {!isPreview && 
+              }
               <td>
                 <div className='stats-row-percentage'>
                   <div
@@ -135,7 +137,6 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
                   <div className="stats-row-value">{ `${abyssTotal}%`}</div>
                 </div>
               </td>
-              }
             </tr>
           )
         })}
