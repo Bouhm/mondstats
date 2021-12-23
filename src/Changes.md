@@ -2,7 +2,7 @@
 
 - Migrated to a new database schema and reworked all of the data aggregation
 - Improved abyss team flex UI
-- Added abyss statistics to builds, weaapons, and artifact sets
+- Added abyss statistics to builds, weapons, and artifact sets
 - Added individual pages for every weapon and artifact set
 
 ## dev build 10.10.21
