@@ -10,7 +10,7 @@ import { useTabs } from '../hooks/useTabs';
 import LLImage from '../ui/LLImage';
 import Tabs from '../ui/Tabs';
 
-function Characters({data}: any) {
+function Characters({data, isPreview }: any) {
   const db = useAppSelector((state) => state.data.characterDb)
   const title = 'characters'
 
@@ -28,10 +28,10 @@ function Characters({data}: any) {
     </div>
   )
 
-  return <StatsTable data={data} title={title} getTotal={getTotal} getAbyssTotal={getAbyssTotal} getColorClass={getColorClass} renderImage={renderImage} />
+  return <StatsTable data={data} title={title} getTotal={getTotal} getAbyssTotal={getAbyssTotal} getColorClass={getColorClass} renderImage={renderImage} isPreview={isPreview} />
 }
 
-function ArtifactSetBuilds({data}: any) {
+function ArtifactSetBuilds({data, isPreview }: any) {
   const db = useAppSelector((state) => state.data.artifactSetBuildDb)
   const title = 'artifact sets'
 
@@ -43,12 +43,13 @@ function ArtifactSetBuilds({data}: any) {
 
   const getColorClass = (item: any) => 'Red'
 
-  return <StatsTable data={data} title={title} field='artifactSetBuilds' getTotal={getTotal} getAbyssTotal={getAbyssTotal} getColorClass={getColorClass} renderImage={renderImage} />
+  return <StatsTable data={data} title={title} field='artifactSetBuilds' getTotal={getTotal} getAbyssTotal={getAbyssTotal} getColorClass={getColorClass} renderImage={renderImage} isPreview={isPreview} />
 }
 
-function Weapons({data}: any) {
+function Weapons({data, isPreview }: any) {
   const db = useAppSelector((state) => state.data.weaponDb)
   const title = 'weapons'
+  const tabs = isPreview ? [] : ['Sword', 'Claymore', 'Catalyst', 'Bow', 'Polearm'];
 
   const getTotal = (item: any) => data.totals[db[item._id].type_name].typeTotal
   
@@ -58,7 +59,7 @@ function Weapons({data}: any) {
 
   const renderImage = (item: any) => <LLImage src={`/assets/${title}/${item._id}.webp`} />
 
-  const dataFilter = (data: any, match: string) => filter(data, item => db[item._id].type_name === match)
+  const dataFilter = (data: any, match: string) => filter(data, item => db[item._id].type_name === match);
 
   return <StatsTable 
     data={data} 
@@ -67,12 +68,14 @@ function Weapons({data}: any) {
     getTotal={getTotal} 
     getAbyssTotal={getAbyssTotal} 
     getColorClass={getColorClass} 
-    tabs={['Sword', 'Claymore', 'Catalyst', 'Bow', 'Polearm']} 
+    tabs={tabs} 
     renderImage={renderImage} 
+    isPreview={isPreview}
   />
 }
 
 type StatsTableProps = {
+  isPreview?: boolean,
   data: any,
   title: string,
   field?: string,
@@ -84,14 +87,17 @@ type StatsTableProps = {
   renderImage: (item: any) => JSX.Element
 } 
 
-function StatsTable({ data, title, field = title, tabs = [], getTotal, getAbyssTotal, getColorClass, dataFilter, renderImage }: StatsTableProps) {
+function StatsTable({ data, isPreview = false, title, field = title, tabs = [], getTotal, getAbyssTotal, getColorClass, dataFilter, renderImage }: StatsTableProps) {
   const { activeTabIdx, onTabChange } = useTabs();
-  const filteredData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
+  let filteredData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
+
+  if (isPreview) filteredData = data[field].slice(0, 5);
 
   return (
     <div className='stats-table-container'>
       {!!tabs.length && <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />}
       <table className='stats-table'>
+        {!isPreview && 
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -100,6 +106,7 @@ function StatsTable({ data, title, field = title, tabs = [], getTotal, getAbyssT
             <th scope="col">Abyss Usage</th>
           </tr>
         </thead>
+        }
       <tbody>
         {map(filteredData, (item, i) => {
           const total = getPercentage(item.count, getTotal(item));
@@ -118,6 +125,7 @@ function StatsTable({ data, title, field = title, tabs = [], getTotal, getAbyssT
                   <div className="stats-row-value">{ `${total}%`}</div>
                 </div>
               </td>
+              {!isPreview && 
               <td>
                 <div className='stats-row-percentage'>
                   <div
@@ -127,6 +135,7 @@ function StatsTable({ data, title, field = title, tabs = [], getTotal, getAbyssT
                   <div className="stats-row-value">{ `${abyssTotal}%`}</div>
                 </div>
               </td>
+              }
             </tr>
           )
         })}

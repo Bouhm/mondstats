@@ -13,13 +13,10 @@ import Tabs from '../ui/Tabs';
 import StatsTable from './StatsTable';
 
 function ChartsPage() { 
-  const characterDb = useAppSelector((state) => state.data.characterDb)
   const topCharacters = useApi(`/characters/stats/top-characters.json`)
 
-  const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
   const topArtifactSetBuilds = useApi(`/artifactSets/stats/top-artifact-set-builds.json`)
 
-  const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const topWeapons = useApi(`/weapons/stats/top-weapons.json`)
 
   const tabs = ['characters', 'artifact sets', 'weapons']

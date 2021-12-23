@@ -12,6 +12,7 @@
   color: white;
   margin-top: 1rem;
   position: relative;
+  min-width: 15rem;
 
   tr {
     padding: 0.35em;
@@ -31,10 +32,11 @@
   }
 
   th {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #242632;
     text-transform: uppercase;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     top: 7rem;
+    font-size: 0.8rem;
     position: sticky;
     padding: 0.5rem;
     z-index: 9;
