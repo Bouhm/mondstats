@@ -15,6 +15,7 @@
   img {
     width: 100px;
     height: 100px;
+    border-radius: 6px;
   }
 
   .artifact-set-detail {
@@ -33,7 +34,7 @@
   }
 
   .artifact-set-effects {
-    font-size: 1.2rem;
+    font-size: 1rem;
     border-spacing: 0.5rem;
     display: inline-block;
 
@@ -50,7 +51,7 @@
 @media (max-width: 1036px) {
   .artifact-set-info {
     .artifact-set-effects {
-      font-size: 1rem;
+      font-size: 0.8rem;
     }
   }
 }
@@ -64,7 +65,7 @@
     }
 
     .artifact-set-effects {
-      font-size: 1rem;
+      font-size: 0.6rem;
     }
 
     table,

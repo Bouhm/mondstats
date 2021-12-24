@@ -4,7 +4,7 @@ import { capitalize, filter, isEmpty, map, orderBy, reduce, sortBy } from 'lodas
 import React, { useEffect } from 'react';
 
 import { getPercentage } from '../../scripts/util';
-import ArtifactSetBuildCard from '../artifact-sets/ArtifactSetBuildCard';
+import ArtifactSetBuildCard from '../artifactSets/ArtifactSetBuildCard';
 import { useAppSelector } from '../hooks/useRedux';
 import { useTabs } from '../hooks/useTabs';
 import LLImage from '../ui/LLImage';

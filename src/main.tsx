@@ -9,10 +9,10 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 import App from './App';
 import AbyssPage from './components/abyss/AbyssPage';
-import ArtifactSetIndex from './components/artifact-sets/ArtifactSetIndex';
-import ArtifactSetPage from './components/artifact-sets/ArtifactSetPage';
-import CharacterPage from './components/characters/builds/CharacterPage';
+import ArtifactSetIndex from './components/artifactSets/ArtifactSetIndex';
+import ArtifactSetPage from './components/artifactSets/ArtifactSetPage';
 import CharacterIndex from './components/characters/CharacterIndex';
+import CharacterPage from './components/characters/CharacterPage';
 import Home from './components/Home';
 import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';

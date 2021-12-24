@@ -1,23 +1,23 @@
 import { includes, map, orderBy, take } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
-import { IWeaponBuild } from '../../../data/types';
-import { getPercentage } from '../../../scripts/util';
-import Button from '../../controls/Button';
-import useExpand from '../../hooks/useExpand';
-import { FiltersType } from '../../hooks/useFilters';
-import { useAppSelector } from '../../hooks/useRedux';
-import HorizontalBarChart, { IBarChartData } from '../../ui/HorizontalBarChart';
-import { ChevronDown, ChevronUp } from '../../ui/Icons';
+import { IWeaponBuild } from '../../data/types';
+import { getPercentage } from '../../scripts/util';
+import Button from '../controls/Button';
+import useExpand from '../hooks/useExpand';
+import { FiltersType } from '../hooks/useFilters';
+import { useAppSelector } from '../hooks/useRedux';
+import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
+import { ChevronDown, ChevronUp } from '../ui/Icons';
 
-type WeaponBuild = {
+type WeaponChartProps = {
   weapons: IWeaponBuild[]
   total: number,
 }
 
 const BP_WEAPONS = [11409, 12409, 14405, 15409, 13405]
 
-function WeaponBuild({ weapons, total, filters }: WeaponBuild & { filters : FiltersType}) {
+function WeaponChart({ weapons, total, filters }: WeaponChartProps & { filters : FiltersType}) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const max = 10;
@@ -63,4 +63,4 @@ function WeaponBuild({ weapons, total, filters }: WeaponBuild & { filters : Filt
   )
 }
 
-export default WeaponBuild
+export default WeaponChart

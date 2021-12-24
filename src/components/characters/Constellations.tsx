@@ -3,11 +3,11 @@ import './Constellations.scss';
 import _, { map } from 'lodash';
 import React, { ReactNode } from 'react';
 
-import { getPercentage } from '../../../scripts/util';
-import { useAppSelector } from '../../hooks/useRedux';
-import BarChart from '../../ui/BarChart';
-import LLImage from '../../ui/LLImage';
-import Tooltip from '../../ui/Tooltip';
+import { getPercentage } from '../../scripts/util';
+import { useAppSelector } from '../hooks/useRedux';
+import BarChart from '../ui/BarChart';
+import LLImage from '../ui/LLImage';
+import Tooltip from '../ui/Tooltip';
 
 type ConstellationsProps = {
   constellations: number[],

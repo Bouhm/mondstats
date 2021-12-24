@@ -5,21 +5,21 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Sticky from 'react-stickynode';
 
-import { ICharacterData } from '../../../data/types';
-import { getCharacterFileName, getPercentage } from '../../../scripts/util';
-import { selectCharacter, setColorClass } from '../../../Store';
-import Filters from '../../filters/Filters';
-import useApi from '../../hooks/useApi';
-import useFilters from '../../hooks/useFilters';
-import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { useTabs } from '../../hooks/useTabs';
-import Delta from '../../stats/Delta';
-import Chart from '../../ui/Chart';
-import Empty from '../../ui/Empty';
-import { CaretUp } from '../../ui/Icons';
-import Loader from '../../ui/Loader';
-import Tabs from '../../ui/Tabs';
-import BuildSelector from './BuildSelector';
+import { ICharacterData } from '../../data/types';
+import { getCharacterFileName, getPercentage } from '../../scripts/util';
+import { selectCharacter, setColorClass } from '../../Store';
+import Filters from '../filters/Filters';
+import useApi from '../hooks/useApi';
+import useFilters from '../hooks/useFilters';
+import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
+import { useTabs } from '../hooks/useTabs';
+import BuildCharts from '../stats/BuildCharts';
+import Delta from '../stats/Delta';
+import Chart from '../ui/Chart';
+import Empty from '../ui/Empty';
+import { CaretUp } from '../ui/Icons';
+import Loader from '../ui/Loader';
+import Tabs from '../ui/Tabs';
 import Constellations from './Constellations';
 
 function CharacterPage() {  
@@ -84,29 +84,23 @@ function CharacterPage() {
   }
 
   return (
-    <>
+    <div className="character-page">
       <div className={`character-page-stats-count ${character.element}`} >
         <span>{selectedCharacterBuilds.count} {character.name} Builds</span>
       </div>
-      <div className="character-page">
-        <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${character._id}_bg.webp")` }} /> 
-        <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />
-        {/* <UsageStats count={character.count} total={character.total} abyssCount={character.abyssCount} abyssTotal={character.abyssTotal} /> */}
-        {selectedCharacterBuilds.builds &&
-          <>
-            {/* <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky> */}
-            <BuildSelector
-              builds={selectedCharacterBuilds.builds}
-              total={selectedCharacterBuilds.count}
-              filters={filters}
-            /> 
-            {character.rarity < 100 &&
-              <Constellations constellations={selectedCharacterBuilds.constellations} total={reduce(selectedCharacterBuilds.constellations, (sum, curr) => sum + curr, 0)} />
-            }
-          </>
-        }
-      </div>
-    </>
+      <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${character._id}_bg.webp")` }} /> 
+      <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />
+      {/* <UsageStats count={character.count} total={character.total} abyssCount={character.abyssCount} abyssTotal={character.abyssTotal} /> */}
+      {selectedCharacterBuilds.builds &&
+        <>
+          {/* <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky> */}
+          <BuildCharts.CharacterBuilds builds={selectedCharacterBuilds.builds} />
+          {character.rarity < 100 &&
+            <Constellations constellations={selectedCharacterBuilds.constellations} total={reduce(selectedCharacterBuilds.constellations, (sum, curr) => sum + curr, 0)} />
+          }
+        </>
+      }
+    </div>
   )
 }
 

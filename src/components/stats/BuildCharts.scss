@@ -1,27 +1,38 @@
-.build-details {
+.build-charts {
   display: flex;
   flex-flow: row;
   padding: 1rem;
   margin: 0 0 2rem 0;
   background-color: rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  position: relative;
+
+  h1 {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2rem;
+    width: 300px;
+    color: white;
+    border-bottom: solid 1px grey;
+  }
 }
 
-.weapons-list-container {
+.build-weapons,
+.build-characters {
   flex: 3;
   padding-right: 1rem;
 }
 
+.build-weapon,
+.artifact-set-build-stats-container {
+  flex: 2;
+}
+
 .artifact-set-build-stats-container {
   display: flex;
-  flex: 2;
 
   .artifact-set-build-stats {
-    display: flex;
     flex-flow: column;
     margin-right: 1rem;
-    width: 100%;
 
     .artifact-set-build-detail {
       min-height: 480px;
@@ -54,11 +65,9 @@
 }
 
 .artifact-set-builds-selector {
-  position: relative;
-  display: flex;
   justify-content: center;
   padding: 1rem 1rem 0 1rem;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 6px;
 
   .artifact-set-builds-indicator {
@@ -73,9 +82,6 @@
   }
 
   .artifact-set-builds-menu {
-    display: flex;
-    overflow-y: hidden;
-
     .artifact-set-build-card {
       width: 160px;
       height: 80px;
@@ -124,7 +130,7 @@
 }
 
 @media (max-width: 1036px) {
-  .build-details {
+  .build-charts {
     flex-flow: column-reverse;
   }
 
@@ -143,9 +149,8 @@
 
   .artifact-set-build-stats-container {
     .artifact-set-build-stats {
-      .artifact-set-detail {
+      .artifact-set-build-detail {
         min-height: 0;
-        height: 100%;
       }
     }
   }
@@ -167,16 +172,16 @@
 }
 
 @media (max-width: 676px) {
-  .weapons-list-container {
+  .build-charts {
+    flex-flow: column-reverse;
+  }
+
+  .build-weapons {
     padding-right: 0;
   }
 }
 
 @media (max-width: 617px) {
-  .build-details {
-    flex-flow: column-reverse;
-  }
-
   .artifact-popularity {
     font-size: 2rem;
   }
@@ -184,7 +189,6 @@
   .artifact-set-build-stats-container {
     height: 100%;
     max-height: 100%;
-    flex-wrap: wrap-reverse;
 
     .artifact-set-builds-menu-controls {
       display: block;

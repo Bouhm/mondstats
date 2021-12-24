@@ -1,0 +1,70 @@
+.weapon-detail-container {
+  border-radius: 8px;
+  margin: 0.1rem 0 1rem 0;
+  overflow: hidden;
+  background-color: rgba(39, 42, 56, 0.7);
+  padding: 1rem;
+  display: flex;
+  flex-flow: column;
+  color: #e9e5dc;
+
+  .weapon-detail {
+    display: flex;
+
+    img {
+      height: 160px;
+      width: auto;
+      border-radius: 4px;
+      margin-right: 1rem;
+    }
+
+    .weapon-detail-name {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .weapon-detail-stats {
+      display: flex;
+      flex-flow: column;
+      font-size: 1rem;
+
+      .weapon-detail-stat-title {
+        color: white;
+      }
+
+      .weapon-detail-stat-value {
+        color: #e9e5dc;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .weapon-detail-effect {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .weapon-detail-container {
+    .weapon-detail {
+      img {
+        height: 150px;
+        width: auto;
+      }
+
+      .weapon-detail-stats {
+        font-size: 0.7rem;
+
+        .weapon-detail-stat-value {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .weapon-detail-effect {
+      font-size: 0.9rem;
+    }
+  }
+}

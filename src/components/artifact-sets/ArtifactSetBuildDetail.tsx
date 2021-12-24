@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { useContext } from 'react';
 
-import { IArtifactSet } from '../../../data/types';
-import ArtifactSetInfo from '../../artifact-sets/ArtifactSetInfo';
-import { useAppSelector } from '../../hooks/useRedux';
+import { IArtifactSet } from '../../data/types';
+import ArtifactSetInfo from '../artifactSets/ArtifactSetInfo';
+import { useAppSelector } from '../hooks/useRedux';
 
 type ArtifactSetBuildDetail = {
   id: string;
