@@ -1,3 +1,10 @@
+## dev build 12.24.21
+
+- Component refactoring for consistency across character/artifact/weapon pages
+- Artifact set selector UI changed to vertical for better mobile/desktop experience
+- Fixed issues with character page responsiveness
+- Removed stacking of sticky tabs/headers/searchbar, added jump-to-top button on the bottom right
+
 ## dev build 12.22.21
 
 - Migrated to a new database schema and reworked all of the data aggregation
