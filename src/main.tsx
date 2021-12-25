@@ -5,8 +5,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-
 import App from './App';
 import AbyssPage from './components/abyss/AbyssPage';
 import ArtifactSetIndex from './components/artifactSets/ArtifactSetIndex';

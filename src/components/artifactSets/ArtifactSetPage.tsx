@@ -2,7 +2,6 @@ import './ArtifactSetPage.scss';
 
 import { filter, find, forEach, isEmpty, map, orderBy, reduce, take } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import ScrollContainer from 'react-indiana-drag-scroll';
 import { useParams } from 'react-router-dom';
 
 import * as colorVars from '../../_variables.module.scss';

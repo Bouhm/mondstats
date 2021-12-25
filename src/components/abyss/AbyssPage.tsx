@@ -18,7 +18,6 @@ import {
   take,
 } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import Sticky from 'react-stickynode';
 
 import { IAbyssFloor, IAbyssParty } from '../../data/types';
@@ -36,6 +35,7 @@ import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 import Tabs from '../ui/Tabs';
 import AbyssStage from './AbyssStage';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 // import abyssFloors from './abyssFloors.json';
 // import abyssTopTeams from './top-teams.json';
@@ -66,19 +66,21 @@ function AbyssPage() {
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
   const [ selectedCharacters, setSelectedCharacters] = useState<string[]>([])
   
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [isLoading, setIsLoading] = useState(true);
   const { filters, handleFilterChange } = useFilters(['f2p', 'max5']);
   const abyssTopTeams = useApi('abyss/stats/top-abyss-teams.json');
-  const { activeTabIdx, onTabChange } = useTabs();
+  const floorParam = searchParams.get('floor');
+  const { activeTabIdx, onTabChange } = useTabs(floorParam ? tabs.indexOf(floorParam) : 0);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  
   async function fetchAbyssData() {
-    await Promise.all(map(range(1,4), async (stageNum) => {
-      return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${tabs[activeTabIdx]}-${stageNum}.json`, {
-      // return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floor.value}.json`, {
+    setIsLoading(true);
+    await Promise.all(map(range(1,4), async (stageNum) => { 
+      // return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${tabs[activeTabIdx]}-${stageNum}.json`, {
+      return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${tabs[activeTabIdx]}-${stageNum}.json`, {
         headers: { 'accept': 'application/vnd.github.v3.raw+json' },
       }).then(res => ({ [stageNum]: res.data }))
-    })).then(data => loadAbyssFloorTeams(data))
+    })).then(data => { loadAbyssFloorTeams(data); setIsLoading(false) })
   }
 
   function loadAbyssFloorTeams(data: any) {
@@ -179,7 +181,7 @@ function AbyssPage() {
   }
 
   const renderFloorTeams = () => {
-    if (!abyssFloorTeams) {
+    if (!abyssFloorTeams || isLoading) {
       return <Loader />
     }
 
@@ -195,6 +197,11 @@ function AbyssPage() {
     />)
   }
   
+  const handleTabChange = (idx: number) => {
+    const tabFloor = tabs[idx] === 'ALL' ? undefined : tabs[idx];
+    onTabChange(idx);
+  }
+
   const renderTeams = () => (
     <div className="floor-container">
       <div key={tabs[activeTabIdx]} className="stage-container">
@@ -213,7 +220,7 @@ function AbyssPage() {
       </div>
       <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handlePartyChange} showCards={false}/>
       <br />
-      <Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={tabs} />
+      <Tabs activeTabIdx={activeTabIdx} onChange={handleTabChange} tabs={tabs} />
       {!isEmpty(characterDb) && renderTeams()}
     </div>
   )

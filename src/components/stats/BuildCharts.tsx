@@ -3,7 +3,6 @@ import './BuildCharts.scss';
 import AmberSad from '/assets/amberSad.webp';
 import _, { every, filter, forEach, map, orderBy, reduce } from 'lodash';
 import React, { ReactNode, useEffect, useState } from 'react';
-import ScrollContainer from 'react-indiana-drag-scroll';
 
 import * as colorVars from '../../_variables.module.scss';
 import { IBuild } from '../../data/types';
