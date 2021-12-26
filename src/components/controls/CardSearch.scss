@@ -47,12 +47,18 @@
   .cards {
     grid-template-columns: repeat(5, 60px);
     grid-template-rows: repeat(auto-fill, 80px);
-    gap: 0.3rem;
+    gap: 0.8rem;
   }
 }
 
 @media (max-width: 516px) {
   .card-searchbar {
     padding: 0 2.4rem;
+  }
+}
+
+@media (max-width: 414px) {
+  .cards {
+    gap: 0.3rem;
   }
 }
