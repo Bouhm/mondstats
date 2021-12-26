@@ -23,46 +23,6 @@
   }
 }
 
-.card-searchbar {
-  margin-top: 1rem;
-
-  .item-option {
-    display: flex;
-    align-items: center;
-    position: relative;
-
-    .item-option-element {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 12px;
-    }
-
-    .item-option-image {
-      border-radius: 3px 0 0 3px;
-      padding: 0.2rem 0.2rem 0rem 0.2rem;
-
-      .item-option-portrait {
-        width: 35px;
-      }
-    }
-
-    .item-option-label {
-      margin-left: 0.5rem;
-    }
-  }
-
-  input {
-    max-width: 35rem;
-  }
-}
-
-.search-select > div > div > div > div > div > .item-option {
-  .item-option-label {
-    display: none;
-  }
-}
-
 @media (max-width: 826px) {
   .card-search {
     width: 100%;
@@ -93,6 +53,6 @@
 
 @media (max-width: 516px) {
   .card-searchbar {
-    padding: 0 2rem;
+    padding: 0 2.4rem;
   }
 }

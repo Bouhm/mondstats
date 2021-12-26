@@ -5,6 +5,7 @@ import Select, { components } from 'react-select';
 import Sticky from 'react-stickynode';
 
 import { Search } from '../ui/Icons';
+import { ClearIndicator } from 'react-select/src/components/indicators';
 
 export type Option = { value: string, rarity?: number, label: string }
 
@@ -31,7 +32,9 @@ function MultiSelect({ options, onChange, isMulti=false, placeholder="", default
           singleValue: base => ({ ...base, color: "white" }),
           valueContainer: base => ({ ...base, backgroundColor: "#232530",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
           control: base =>  ({ ...base, borderColor: "none" }),
-          indicatorsContainer: base => ({ ...base, width: '1.3rem', padding: 0, backgroundColor: "rgba(0,0,0,0.9)" }),
+          indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
+          clearIndicator: base => ({ ...base, padding: 0 }),
+          dropdownIndicator: base => ({ ...base, padding: 0 }),
           menu: base => ({ ...base, backgroundColor: "#21232D", color: "white" }),
           menuPortal: base => ({ ...base, zIndex: 11 }),
           option: base => ({ ...base, backgroundColor: "#21232D !important", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.6) !important" }}),
@@ -75,7 +78,7 @@ function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="S
         }
         components={{
           Menu: (showDropdown || shouldStick) ?  (props) => <components.Menu {...props} /> : () => null,
-          DropdownIndicator: showDropdown ?  (props) => <components.DropdownIndicator {...props} /> : () => null
+          DropdownIndicator: showDropdown ?  (props) => <components.DropdownIndicator {...props} /> : () => null,
         }}
         styles={{ 
           container: base => ({ ...base }),
@@ -84,7 +87,9 @@ function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="S
           valueContainer: base => ({ ...base, backgroundColor: "#232530",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
           placeholder: base => ({ ...base, width: '100%' }),
           control: base =>  ({ ...base, borderColor: "none" }),
-          indicatorsContainer: base => ({ ...base, width: '1.3rem', padding: 0, backgroundColor: "rgba(0,0,0,0.9)" }),
+          indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
+          clearIndicator: base => ({ ...base, padding: 0 }),
+          dropdownIndicator: base => ({ ...base, padding: '0.1rem' }),
           indicatorSeparator: base => ({ ...base, display: 'none '}),
           menu: base => ({ ...base, backgroundColor: "#21232D", color: "white" }),
           option: base => ({ ...base, backgroundColor: "#21232D !important", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.6) !important" }}),
