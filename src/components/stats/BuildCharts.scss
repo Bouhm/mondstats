@@ -41,43 +41,40 @@
     padding-right: 1rem;
   }
 
-  .build-weapon,
-  .artifact-set-build-stats-container {
+  .build-weapon-detail,
+  .build-artifact-sets {
     flex: 2;
   }
+}
 
-  .artifact-set-build-stats-container {
-    .artifact-set-build-stats {
-      flex-flow: column;
-      margin-right: 1rem;
+.artifact-set-build-charts {
+  .artifact-set-build-detail-container {
+    height: 300px;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
 
-      .artifact-set-build-detail {
-        min-height: 480px;
-      }
+  .artifact-set-builds-donut-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: center;
 
-      .artifact-set-builds-donut-container {
-        position: relative;
-        display: flex;
-        width: 100%;
-        justify-content: center;
+    .artifact-set-builds-donut-chart {
+      z-index: 1;
+      max-width: 380px;
+      width: 90%;
+    }
 
-        .artifact-set-builds-donut-chart {
-          z-index: 1;
-          max-width: 380px;
-          width: 90%;
-        }
-      }
-
-      .artifact-popularity {
-        position: absolute;
-        text-align: center;
-        z-index: 0;
-        top: calc(50% - 1.5rem);
-        width: 100%;
-        color: white;
-        font-size: 2.5rem;
-        text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-      }
+    .artifact-popularity {
+      position: absolute;
+      text-align: center;
+      z-index: 0;
+      bottom: calc(50% - 1.5rem);
+      width: 100%;
+      color: white;
+      font-size: 2.5rem;
+      text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
     }
   }
 }

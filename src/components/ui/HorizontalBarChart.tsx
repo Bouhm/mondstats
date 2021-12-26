@@ -1,7 +1,7 @@
 
 import './HorizontalBarChart.scss';
 
-import { map } from 'lodash';
+import { map, take } from 'lodash';
 import React from 'react';
 
 import { getPercentage } from '../../scripts/util';
@@ -11,6 +11,9 @@ import UsagePct from '../stats/UsagePct';
 import Divider from './Divider';
 import LLImage from './LLImage';
 import Tooltip from './Tooltip';
+import useExpand from '../hooks/useExpand';
+import Button from '../controls/Button';
+import { ChevronDown, ChevronUp } from './Icons';
 
 export interface IBarChartData {
   _id: string,
@@ -27,10 +30,12 @@ type HorizontalBarChart = {
 }
 
 function HorizontalBarChart({ data, db, total, path }: HorizontalBarChart) {
+  const { expanded, handleExpand } = useExpand();
   const colorClass = useAppSelector((state) => state.data.colorClass)
+  const max = 6;
   
   return <div className="horizontal-barchart-container">
-    {map(data, ({ _id, count }, i) => {
+    {map(take(data, expanded ? 20 : max), ({ _id, count }, i) => {
       const popularity = getPercentage(count, total);
       const { name, rarity } = db[_id];
 
@@ -63,6 +68,12 @@ function HorizontalBarChart({ data, db, total, path }: HorizontalBarChart) {
         </div>
       )
     })}
+    <br />
+      {data.length > max && (
+        <Button className="weapons-show-more" onClick={handleExpand}>
+          {!expanded ? <>Show more <ChevronDown size={20} /></> : <>Show less <ChevronUp size={20} /></>}
+        </Button>
+      )}
   </div>
 }
 
