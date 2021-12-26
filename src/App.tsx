@@ -110,7 +110,7 @@ function App() {
         </main>
       </div>
       <Navbar />
-      <span className="build-ver">dev build 12.24.21</span>
+      <span className="build-ver">dev build 12.26.21</span>
     </div>
   )
 }

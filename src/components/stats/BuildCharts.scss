@@ -170,15 +170,17 @@
 }
 
 @media (max-width: 544px) {
-  .artifact-set-builds-selector {
-    .artifact-set-builds-menu {
-      height: 50px;
+  .artifact-set-build-charts .artifact-set-builds-donut-container .artifact-set-builds-donut-chart {
+    width: 75%;
+  }
 
-      div {
-        .artifact-set-build-card {
-          height: inherit;
-          width: 90px;
-        }
+  .artifact-set-builds-selector {
+    height: 60px;
+
+    div {
+      .artifact-set-build-card {
+        width: 90px;
+        height: 50px;
       }
     }
   }

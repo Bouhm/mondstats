@@ -48,8 +48,35 @@
     .search-placeholder {
       font-size: 1rem;
 
-      .search-icon svg {
+      .search-icon {
         width: 15px;
+      }
+    }
+  }
+
+  .character-option {
+    display: flex;
+    white-space: nowrap;
+    line-height: 30px;
+
+    .character-option-image {
+      width: 30px;
+      height: 30px;
+
+      margin-right: 1rem;
+      position: relative;
+
+      .character-option-element {
+        position: absolute;
+        left: -0.2rem;
+        top: -0.2rem;
+        width: 14px;
+        height: 14px;
+      }
+
+      .character-option-portrait {
+        width: 30px;
+        height: 30px;
       }
     }
   }

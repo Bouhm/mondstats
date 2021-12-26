@@ -1,7 +1,6 @@
 import './BuildCharts.scss';
 
-import AmberSad from '/assets/amberSad.webp';
-import _, { every, filter, forEach, map, orderBy, reduce } from 'lodash';
+import { every, filter, forEach, map, orderBy, reduce } from 'lodash';
 import React, { ReactNode, useEffect, useState } from 'react';
 
 import * as colorVars from '../../_variables.module.scss';
@@ -13,8 +12,6 @@ import { FiltersType } from '../hooks/useFilters';
 import { useAppSelector } from '../hooks/useRedux';
 import Chart from '../ui/Chart';
 import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
-import { ChevronDown, ChevronRight } from '../ui/Icons';
-import LLImage from '../ui/LLImage';
 import WeaponDetail from '../weapons/WeaponDetail';
 
 type ArtifactSetBuildChartProps = {

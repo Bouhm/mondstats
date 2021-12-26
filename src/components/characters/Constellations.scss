@@ -25,7 +25,7 @@
       width: 60px;
 
       &[alt] {
-        font-size: 1rem ;
+        font-size: 1rem;
       }
     }
   }
@@ -43,19 +43,19 @@
 @media (max-width: 887px) {
   .constellation-card {
     .constellation-popularity {
-      font-size: 1.2rem ;
+      font-size: 1.2rem;
     }
-  
+
     p {
-      font-size: 0.8rem ;
+      font-size: 0.8rem;
       text-align: center;
     }
-  
+
     .constellation-card-icon {
-      height: 30px ;
-  
+      height: 30px;
+
       img {
-        width: 30px ;
+        width: 30px;
       }
     }
   }
@@ -64,21 +64,21 @@
 @media (max-width: 1167px) {
   .constellation-card {
     .constellation-popularity {
-      font-size: 1.2rem ;
+      font-size: 1.2rem;
     }
-  
+
     p {
-      font-size: 0.8rem ;
+      font-size: 0.8rem;
       text-align: center;
     }
-  
+
     .constellation-card-icon {
-      height: 35px ;
-      line-height: 35px ;
-      font-size: 0.9rem ;
-  
+      height: 35px;
+      line-height: 35px;
+      font-size: 0.9rem;
+
       img {
-        width: 35px ;
+        width: 35px;
       }
     }
   }
@@ -87,20 +87,20 @@
 @media (max-width: 1013px) {
   .constellation-card {
     .constellation-popularity {
-      font-size: 1rem ;
+      font-size: 1rem;
       padding: 0.2rem 0;
     }
-  
+
     p {
       display: none;
     }
-  
+
     .constellation-card-icon {
-      height: 30px ;
-      line-height: 30px ;
-  
+      height: 30px;
+      line-height: 30px;
+
       img {
-        width: 30px ;
+        width: 30px;
       }
     }
   }
@@ -111,19 +111,24 @@
     .barchart-container {
       height: 30vh;
     }
+
+    .barchart-container,
+    .content-container {
+      padding: 0 1rem;
+    }
   }
-  
+
   .constellation-card {
     .constellation-card-icon {
-      line-height: 1.8rem ;
+      line-height: 1.8rem;
     }
-  
+
     .constellation-popularity {
-      display: none ;
+      display: none;
     }
-  
+
     p {
-      display: none ;
+      display: none;
     }
   }
 }
@@ -137,11 +142,11 @@
 
   .constellation-card {
     .constellation-card-icon {
-      height: 20px ;
-      line-height: 20px ;
-  
+      height: 20px;
+      line-height: 20px;
+
       img {
-        width: 20px ;
+        width: 20px;
       }
     }
   }

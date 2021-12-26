@@ -1,5 +1,10 @@
 ## dev build 12.24.21
 
+- More UI changes for better scaling for mobile
+- Abyss battles are now split up by stages, battles displayed together
+
+## dev build 12.24.21
+
 - Component refactoring for consistency across character/artifact/weapon pages
 - Artifact set selector UI changed to vertical for better mobile/desktop experience
 - Fixed issues with character page responsiveness
