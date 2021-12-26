@@ -7,23 +7,13 @@
 
   .usage-pct-value {
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-    font-size: 3.2vw;
+    font-size: 4vw;
   }
 
   .usage-pct-count {
     opacity: 0.8;
     mix-blend-mode: difference;
-    font-size: 1.6vw;
-  }
-
-  &.small {
-    .usage-pct-value {
-      font-size: 2.8vw;
-    }
-
-    .usage-pct-count {
-      font-size: 1.6vw;
-    }
+    font-size: 1.8vw;
   }
 }
 
@@ -38,21 +28,11 @@
 @media (min-width: 700px) {
   .usage-pct {
     .usage-pct-count {
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
 
     .usage-pct-value {
-      font-size: 1.8rem;
-    }
-
-    &.small {
-      .usage-pct-value {
-        font-size: 1.2rem;
-      }
-
-      .usage-pct-count {
-        font-size: 0.8rem;
-      }
+      font-size: 2rem;
     }
   }
 }

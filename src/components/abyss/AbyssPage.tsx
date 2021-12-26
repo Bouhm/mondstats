@@ -56,8 +56,8 @@ const _compareFloor = (f1: Option, f2: Option) => {
 }
 
 function AbyssPage() {
-  const floors = map(range(9, 13), num => num.toString());
-  const tabs = ['ALL', ...floors]
+  const floors = ['ALL', ...map(range(9, 13), num => num.toString())];
+  const stages = [1, 2, 3];
 
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const { searchCharacters } = useCharacterSearch(characterDb);
@@ -69,15 +69,16 @@ function AbyssPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const { filters, handleFilterChange } = useFilters(['f2p', 'max5']);
-  const abyssTopTeams = useApi('abyss/stats/top-abyss-teams.json');
+  const abyssTopTeams = useApi('/abyss/stats/top-abyss-teams.json');
   const floorParam = searchParams.get('floor');
-  const { activeTabIdx, onTabChange } = useTabs(floorParam ? tabs.indexOf(floorParam) : 0);
+  const floorTabs = useTabs(floorParam ? floors.indexOf(floorParam) : 0);
+  const stageTabs = useTabs();
 
   async function fetchAbyssData() {
     setIsLoading(true);
     await Promise.all(map(range(1,4), async (stageNum) => { 
-      // return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${tabs[activeTabIdx]}-${stageNum}.json`, {
-      return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${tabs[activeTabIdx]}-${stageNum}.json`, {
+      // return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
+      return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
         headers: { 'accept': 'application/vnd.github.v3.raw+json' },
       }).then(res => ({ [stageNum]: res.data }))
     })).then(data => { loadAbyssFloorTeams(data); setIsLoading(false) })
@@ -95,10 +96,10 @@ function AbyssPage() {
   }
 
   useEffect(() => {
-    if (activeTabIdx !== 0) {
+    if (floorTabs.activeTabIdx !== 0) {
       fetchAbyssData();
     }
-  }, [activeTabIdx])
+  }, [floorTabs.activeTabIdx])
 
   function _filterParties(parties: IAbyssParty[]) {
     return filter(parties, ({ coreParty, flex}) => {
@@ -187,25 +188,29 @@ function AbyssPage() {
 
     const filteredAbyssFloor = filter(_filterFloor());
 
-    return map(range(1, 4), stage => <AbyssStage 
-      key={`floor-${tabs[activeTabIdx]}-${stage}-teams`}
-      stageData={filteredAbyssFloor[stage-1]} 
-      floor={tabs[activeTabIdx]}
-      stage={stage}
+    return <AbyssStage 
+      key={`floor-${floors[floorTabs.activeTabIdx]}-${stageTabs.activeTabIdx}-teams`}
+      stageData={filteredAbyssFloor[stageTabs.activeTabIdx]} 
+      floor={floors[floorTabs.activeTabIdx]}
+      stage={stages[stageTabs.activeTabIdx]}
       stageLimitToggle={stageLimitToggle} 
       onToggleLimit={handleToggleLimit}
-    />)
+    />
   }
   
-  const handleTabChange = (idx: number) => {
-    const tabFloor = tabs[idx] === 'ALL' ? undefined : tabs[idx];
-    onTabChange(idx);
+  const handleFloorChange = (idx: number) => {
+    const tabFloor = floors[idx] === 'ALL' ? undefined : floors[idx];
+    floorTabs.onTabChange(idx);
+  }
+
+  const handleStageChange = (idx: number) => {
+    stageTabs.onTabChange(idx);
   }
 
   const renderTeams = () => (
     <div className="floor-container">
-      <div key={tabs[activeTabIdx]} className="stage-container">
-        {tabs[activeTabIdx] === "ALL" ? renderTopTeams() : renderFloorTeams()}
+      <div key={floors[floorTabs.activeTabIdx]} className="stage-container">
+        {floors[floorTabs.activeTabIdx] === "ALL" ? renderTopTeams() : renderFloorTeams()}
       </div>
     </div>
   )
@@ -220,7 +225,8 @@ function AbyssPage() {
       </div>
       <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handlePartyChange} showCards={false}/>
       <br />
-      <Tabs activeTabIdx={activeTabIdx} onChange={handleTabChange} tabs={tabs} />
+      <Tabs activeTabIdx={floorTabs.activeTabIdx} onChange={handleFloorChange} tabs={map(floors, (floor, i) => i === 0 ? floor : 'Floor ' + floor)} />
+      {floorTabs.activeTabIdx !== 0 && <Tabs activeTabIdx={stageTabs.activeTabIdx} onChange={handleStageChange} tabs={map(stages, stage => 'Stage ' + stage)} />}
       {!isEmpty(characterDb) && renderTeams()}
     </div>
   )

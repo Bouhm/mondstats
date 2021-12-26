@@ -40,6 +40,12 @@
       margin-bottom: 1rem;
     }
 
+    .stage-teams {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
     .stage-half {
       display: flex;
       flex-flow: column;

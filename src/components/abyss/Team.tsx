@@ -41,33 +41,38 @@ function Team({ team, count, total, flex = [] }: TeamProps) {
           </div> */}
         </div>
       </div>
-      {flex[0] && flex[0].length > 1 && 
         <div className="team-flex-container">
-            {expanded && <>
-              {map(filter(flex, party => party.length > 1), (party, i) => (
-                <div className="team-flex" key={`${team[0]}-${flex[0][0]._id}-${i}`}>
-                  <CharacterCount character={characterDb[party[0]._id]} count={party[0].count} />
-                  <Exchange size={22} />
-                  <div className="team-flex-options">
-                    {map(party.slice(1), (flex, i) => 
-                      <div className="team-flex-stats-container">
-                        <CharacterCount key={`${flex._id}-${i}`} character={characterDb[flex._id]} count={flex.count} />
-                        <div className="team-flex-stats">
-                          <UsagePct count={flex.count} total={count} size={'small'} />
-                          {/* <AbyssStat label="Avg Star" value={`★${avgStar.toFixed(2)}`} />
-                          <AbyssStat label="Win Rate" value={`${getPercentage(flex.winCount, flex.count)}%`} /> */}
-                        </div>
+          {expanded && <>
+            {map(filter(flex, party => party.length > 1), (party, i) => (
+              <div className="team-flex" key={`${team[0]}-${flex[0][0]._id}-${i}`}>
+                <CharacterCount character={characterDb[party[0]._id]} count={party[0].count} />
+                <Exchange size={22} />
+                <div className="team-flex-options">
+                  {map(party.slice(1), (flex, i) => 
+                    <div className="team-flex-stats-container">
+                      <CharacterCount key={`${flex._id}-${i}`} character={characterDb[flex._id]} count={flex.count} />
+                      <div className="team-flex-stats">
+                        <UsagePct count={flex.count} total={count} />
+                        {/* <AbyssStat label="Avg Star" value={`★${avgStar.toFixed(2)}`} />
+                        <AbyssStat label="Win Rate" value={`${getPercentage(flex.winCount, flex.count)}%`} /> */}
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
-              ))}
-            </>}
-          <div className="team-expand" onClick={handleExpand}>
-            {expanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
-          </div>
+              </div>
+            ))}
+          </>
+          }
+         {(flex[0] && flex[0].length > 1) ? 
+            <div className="team-expand" onClick={handleExpand}>
+              {expanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+            </div>
+            :
+            <div className="team-expand" style={{ visibility: 'hidden'}}>
+               <ChevronDown size={13} />
+            </div>
+          }
         </div>
-      }
     </div>
   )
 }

@@ -2,14 +2,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-const useApi = (apiUrl: string) => {
-  const apiBase = 'https://bouhm.github.io/mondstats-data/'
-  // const apiBase = 'https://raw.githubusercontent.com/bouhm/mondstats-data/develop/'
+const useApi = (path: string) => {
+  const apiBase = 'https://bouhm.github.io/mondstats-data'
+  // const apiBase = 'https://raw.githubusercontent.com/bouhm/mondstats-data/develop'
   const [data, setData] = useState<any>(undefined)
 
   useEffect(() => {
     const fetchApi = async () => {
-      axios.get(apiBase + apiUrl, { 
+      axios.get(apiBase + path, { 
         headers: { 
           'accept': 'application/vnd.github.v3.raw+json',
         }
@@ -18,7 +18,7 @@ const useApi = (apiUrl: string) => {
     }
 
     fetchApi()
-  }, [apiUrl, setData])
+  }, [path, setData])
 
   return data
 }

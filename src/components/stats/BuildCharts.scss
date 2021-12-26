@@ -124,6 +124,12 @@
 }
 
 @media (max-width: 826px) {
+  .build-charts-container {
+    h1 {
+      font-size: 1.6rem;
+    }
+  }
+
   .artifact-set-builds-selector {
     .artifact-set-builds-menu {
       height: 60px;

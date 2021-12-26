@@ -17,7 +17,6 @@ import Chart from '../ui/Chart';
 import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
-import WeaponBuild from '../weapons/WeaponChart';
 import ArtifactSetBuildCard from './ArtifactSetBuildCard';
 
 function ArtifactSetPage() { 

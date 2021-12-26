@@ -22,9 +22,8 @@ type AbyssFloorProps = {
 }
 
 const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }: AbyssFloorProps) => {
-  const pageSize = 6;
+  const pageSize = 8;
   const maxParties = pageSize * 2;
-  const { activeTabIdx, onTabChange } = useTabs();
 
   if (!stageData) {
     return <Loader />
@@ -33,34 +32,39 @@ const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }
   return (
     <>
       <h2 className="stage-label">Floor {floor}-{stage}</h2>
-      <Tabs tabs={['1st Half', '2nd Half']} activeTabIdx={activeTabIdx} onChange={onTabChange} />
-      <div className="stage-half">
-        <h2>{reduce(stageData[activeTabIdx+1], (sum,curr) => sum + curr.count, 0)} Teams</h2>
-        <div key={`battle-${floor}-${stage}-${activeTabIdx+1}`} className="battle-container">
-          {stageData[activeTabIdx+1].length > 0 ? 
+      <div className="stage-teams">
+        {map([stageData['1'], stageData['2']], (battle, battleIndex) => {
+          return (
             <>
-              {map(take(stageData[activeTabIdx+1], stageLimitToggle[`${floor}-${stage}`] ? maxParties : pageSize), ({coreParty, flex, count }, k) => {
-                  const party = [...coreParty, flex[0][0]._id]
-                  return (
-                    <Team 
-                      key={`team-${floor}-${stage}-${k}`} 
-                      team={party} flex={flex} 
-                      total={reduce(stageData[activeTabIdx+1], (sum, curr) => sum + curr.count, 0)} 
-                      count={count} 
-                    />
-                  )
-                })
-              }
-            </>
-            :
-            <img src={AmberSad} alt="empty" />
-          }
-        </div>
-        {some(stageData[activeTabIdx+1], parties => parties.length > pageSize) && (!stageLimitToggle[`${floor}-${stage}`] ?
-          <Button className="stage-teams-show-more" onClick={() => onToggleLimit(`${floor}-${stage}`)}>Show more <ChevronDown size={20} /></Button>
-          :
-          <Button className="stage-teams-show-more" onClick={() => onToggleLimit(`${floor}-${stage}`)}>Show less <ChevronUp size={20} /></Button>
-        )}
+              <div className="stage-half" key={`battle-${floor}-${stage}-${battleIndex}`}>
+                <h1>{`${battleIndex+1}${battleIndex === 0 ? 'st' : 'nd'}`} Half</h1>
+                <h2>{reduce(battle, (sum, curr) => sum + curr.count, 0)} Teams</h2>
+                <div className="battle-container">
+                {battle.length > 0 ?
+                  <>
+                    {map(take(battle, stageLimitToggle[`${floor}-${stage}`] ? maxParties : pageSize), ({ coreParty, flex, count }, k) => {
+                      const party = [...coreParty, flex[0][0]._id];
+                      return (
+                        <Team
+                          key={`team-${floor}-${stage}-${k}`}
+                          team={party} flex={flex}
+                          total={reduce(battle, (sum, curr) => sum + curr.count, 0)}
+                          count={count} />
+                      );
+                    })}
+                  </>
+                  :
+                  <img src={AmberSad} alt="empty" />
+                }
+              </div>
+            </div>
+            {some(battle, parties => parties.length > pageSize) && (!stageLimitToggle[`${floor}-${stage}`] ?
+              <Button className="stage-teams-show-more" onClick={() => onToggleLimit(`${floor}-${stage}`)}>Show more <ChevronDown size={20} /></Button>
+              :
+              <Button className="stage-teams-show-more" onClick={() => onToggleLimit(`${floor}-${stage}`)}>Show less <ChevronUp size={20} /></Button>
+            )}
+          </>)
+        })}
       </div>
     </>
   )

@@ -1,8 +1,8 @@
 @use '../../variables.module' as var;
 
 .team-container {
-  margin: 0.6rem 0;
-  max-width: 40rem;
+  margin: 0.6rem;
+  max-width: 35rem;
   background-color: var.$theme-color-4;
   border: solid 5px rgba(0, 0, 0, 0.15);
   border-radius: 6px;
@@ -55,7 +55,7 @@
 
     div > div > img,
     svg {
-      height: 50px;
+      height: 70px;
     }
 
     svg {
@@ -121,7 +121,7 @@
 
       div > div > img,
       svg {
-        height: 30px;
+        height: 50px;
       }
 
       svg {

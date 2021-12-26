@@ -7,12 +7,11 @@ import { getPercentage } from '../../scripts/util';
 type UsagePctProps = {
   total: number,
   count: number,
-  size?: string
 }
 
-function UsagePct({ total, count, size='' }: UsagePctProps) {
+function UsagePct({ total, count }: UsagePctProps) {
   return (
-    <div className={`usage-pct ${size}`}>
+    <div className={`usage-pct`}>
       <div className='usage-pct-value'>{`${getPercentage(count, total)}%`}</div>
       <div className='usage-pct-count'>{count}</div>
     </div>
