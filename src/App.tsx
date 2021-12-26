@@ -92,16 +92,14 @@ function App() {
 
   return (
     <div className="App">
-      <main className="App-content">
+      <div className="App-content">
         <Sidebar />
-        <div className="section-view" style={showNotice ? {filter: 'blur(3px)'} : {}}  >
-          <main>
-            {hasLoadedDb ? <Outlet /> : <Loader />}
-          </main>
-          <div className="scroll-to-top-button" onClick={() => window.scrollTo(0, 0)}>
-            <ArrowUp />
-          </div>
+        <main className="section-view" style={showNotice ? {filter: 'blur(3px)'} : {}}>
+          {hasLoadedDb ? <Outlet /> : <Loader />}
           <section className="footer">
+            <div className="scroll-to-top-button" onClick={() => window.scrollTo(0, 0)}>
+              <ArrowUp />
+            </div>
             <div className="links">
               <Link to="/about">About</Link>
               <Link to="/changelog">Changelog</Link>
@@ -109,8 +107,8 @@ function App() {
             </div>
             <footer>Genshin Impact is a registered trademark of miHoYo Co., Ltd. Mondstats is not affiliated or in any way officially connected with miHoYo.</footer>
           </section>
-        </div>
-      </main>
+        </main>
+      </div>
       <Navbar />
       <span className="build-ver">dev build 12.24.21</span>
     </div>

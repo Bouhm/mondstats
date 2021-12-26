@@ -34,7 +34,7 @@ function Weapons({ stats, filters }: BuildChartsProps) {
   const weapon = weaponDb[stats._id]
 
   return (
-    <div className='build-charts'>
+    <div className='build-charts-container'>
       <div className="build-characters">
         <h1>Characters</h1>
           <HorizontalBarChart data={orderBy(stats.characters, 'count', 'desc') as unknown as IBarChartData[]} db={characterDb} path='characters' total={charsTotal} />
@@ -85,46 +85,46 @@ function CharacterBuilds({ builds, filters }: BuildChartsProps) {
   console.log(filteredBuilds[activeBuildIdx])
 
   return (
-    <div className='build-charts'>
-      <div className="build-characters">
-        <h1>Weapons</h1>
-          <HorizontalBarChart data={orderBy(filteredBuilds[activeBuildIdx].weapons, 'count', 'desc') as unknown as IBarChartData[]} db={weaponDb} path='weapons' total={weaponsTotal} />
-        <br />
-      </div>
-      <div className="artifact-set-build-stats-container">
-        <div className="artifact-set-build-stats">
-          <div className="artifact-set-build-detail">
-            <h1>Artifacts</h1>
-            {map(artifactSetBuildDb[filteredBuilds[activeBuildIdx]._id].sets, ({ _id, activation_number }, i) => {
-              const set = artifactSetDb[_id]
-              if (!set) return null;
-
-              return <ArtifactSetInfo key={`${_id}-${i}`} {...set} activation={activation_number} />
-            })}
-          </div>
-          <div className="artifact-set-builds-donut-container">
-            <div className="artifact-set-builds-donut-chart">
-              <Chart.Donut
-                id="artifact-set-builds-donut"
-                labels={labels}
-                data={data}
-                colors={colors}
-                max={countSum}
-                showScale={false}
-              />
+    <div className='build-charts-container'>
+      <div className="artifact-set-builds-selector">
+        {map(builds, (build, i: number) => {
+          return (
+            <div key={`artifacts-thumb-${i}`} onClick={() => handleSelectSet(i)}>
+              <ArtifactSetBuildCard id={build._id} selected={i === activeBuildIdx} selector={true} />
             </div>
-            <div className="artifact-popularity">{getPercentage(builds[activeBuildIdx].count, countSum)}%</div>
-          </div>
+          )})
+        }
+      </div>
+      <div className="build-charts">
+        <div className="build-characters">
+          <h1>Weapons</h1>
+            <HorizontalBarChart data={orderBy(filteredBuilds[activeBuildIdx].weapons, 'count', 'desc') as unknown as IBarChartData[]} db={weaponDb} path='weapons' total={weaponsTotal} />
+          <br />
         </div>
-        <div className="artifact-set-builds-selector">
-          <div className="artifact-set-builds-menu">
-            {map(builds, (build, i: number) => {
-              return (
-                <div key={`artifacts-thumb-${i}`} onClick={() => handleSelectSet(i)}>
-                  <ArtifactSetBuildCard id={build._id} selected={i === activeBuildIdx} selector={true} />
-                </div>
-              )})
-            }
+        <div className="artifact-set-build-stats-container">
+          <div className="artifact-set-build-stats">
+            <div className="artifact-set-build-detail">
+              <h1>Artifacts</h1>
+              {map(artifactSetBuildDb[filteredBuilds[activeBuildIdx]._id].sets, ({ _id, activation_number }, i) => {
+                const set = artifactSetDb[_id]
+                if (!set) return null;
+
+                return <ArtifactSetInfo key={`${_id}-${i}`} {...set} activation={activation_number} />
+              })}
+            </div>
+            <div className="artifact-set-builds-donut-container">
+              <div className="artifact-set-builds-donut-chart">
+                <Chart.Donut
+                  id="artifact-set-builds-donut"
+                  labels={labels}
+                  data={data}
+                  colors={colors}
+                  max={countSum}
+                  showScale={false}
+                />
+              </div>
+              <div className="artifact-popularity">{getPercentage(builds[activeBuildIdx].count, countSum)}%</div>
+            </div>
           </div>
         </div>
       </div>
@@ -164,7 +164,7 @@ function ArtifactSetBuilds({ builds, filters }: BuildChartsProps) {
   }
 
   return (
-    <div className='build-charts'>
+    <div className='build-charts-container'>
       <div className="build-characters">
         <h1>Characters</h1>
           <HorizontalBarChart data={orderBy(builds[activeBuildIdx].characters, 'count', 'desc') as unknown as IBarChartData[]} db={characterDb} path='characters' total={charsTotal} />

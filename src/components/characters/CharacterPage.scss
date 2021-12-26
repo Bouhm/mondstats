@@ -1,4 +1,6 @@
 .character-page {
+  position: relative;
+
   .character-page-background {
     position: fixed;
     top: 0;
@@ -24,9 +26,7 @@
 }
 
 .character-page-stats-count {
-  position: absolute;
-  left: 12rem;
-  right: 0;
+  height: 100%;
   text-align: center;
   padding: 0.5rem;
   height: 3.1rem;
