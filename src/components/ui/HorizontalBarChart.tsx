@@ -32,7 +32,7 @@ type HorizontalBarChart = {
 function HorizontalBarChart({ data, db, total, path }: HorizontalBarChart) {
   const { expanded, handleExpand } = useExpand();
   const colorClass = useAppSelector((state) => state.data.colorClass)
-  const max = 6;
+  const max = 7;
   
   return <div className="horizontal-barchart-container">
     {map(take(data, expanded ? 20 : max), ({ _id, count }, i) => {

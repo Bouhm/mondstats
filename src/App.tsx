@@ -84,19 +84,20 @@ function App() {
     }
   }, [db, setHasLoadedDb])
 
-  const navRef = useRef<HTMLDivElement>(null);
+  const scrollBtnRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.addEventListener('scroll', () => {
-      if (navRef.current) {
+      if (scrollBtnRef.current) {
         if (window.scrollY > 0) {
-          navRef.current!.classList.remove("invis")
+          scrollBtnRef.current!.classList.remove("invis")
         } else {
-          navRef.current!.classList.add("invis")
+          scrollBtnRef.current!.classList.add("invis")
         }
       }
     })
-  }, [navRef])
+  }, [scrollBtnRef])
+
   return (
     <div className="App">
       <Navbar />
@@ -105,7 +106,7 @@ function App() {
         <main>
           {hasLoadedDb ? <Outlet /> : <Loader />}
           <div className="footer">
-            <div className="scroll-to-top-button" ref={navRef} onClick={() => window.scrollTo(0, 0)}>
+            <div className="scroll-to-top-button" ref={scrollBtnRef} onClick={() => window.scrollTo(0, 0)}>
               <ArrowUp />
             </div>
             <div className="links">

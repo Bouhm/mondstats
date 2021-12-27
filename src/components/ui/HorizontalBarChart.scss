@@ -37,11 +37,11 @@
     border: 2px solid white;
     border-right: 0;
     margin: 0.1rem 0 0.1rem 0;
-    padding: 0.3rem;
+    padding: 0.15rem;
 
     .bar-card-title {
       display: flex;
-      width: 225px;
+      width: 235px;
 
       img {
         width: 80px;
@@ -58,9 +58,8 @@
 
         .bar-card-name {
           padding: 0 0.1rem;
-          margin-bottom: 0.3rem;
           color: rgb(73, 83, 102);
-          font-size: 1rem;
+          font-size: 0.9rem;
           text-decoration: none;
         }
 

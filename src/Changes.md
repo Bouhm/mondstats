@@ -1,3 +1,8 @@
+## dev build 12.26.21
+
+- Adjusted character overall usage stastics to be relative to total players instead of characters
+- Fixed UI scaling issues
+
 ## dev build 12.24.21
 
 - More UI changes for better scaling for mobile

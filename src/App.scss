@@ -8,9 +8,11 @@
   }
 
   main {
-    min-height: 100vh;
-    width: 100%;
+    max-width: 90rem;
+    min-height: calc(100vh - 4rem);
     height: 100%;
+    margin: 2rem auto 0 auto;
+    flex: 1;
   }
 }
 
@@ -154,7 +156,7 @@ footer {
   }
 }
 
-@media (max-width: 516px) {
+@media (max-width: 544px) {
   .App {
     .App-content {
       .section-view {

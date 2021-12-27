@@ -1,6 +1,6 @@
 import './BuildCharts.scss';
 
-import { every, filter, forEach, map, orderBy, reduce } from 'lodash';
+import { every, filter, forEach, map, orderBy, reduce, take } from 'lodash';
 import React, { ReactNode, useEffect, useState } from 'react';
 
 import * as colorVars from '../../_variables.module.scss';

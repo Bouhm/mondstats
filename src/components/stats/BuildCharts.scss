@@ -18,9 +18,10 @@
 
 .artifact-set-builds-selector {
   display: flex;
-  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+  padding-bottom: 0.7rem;
+  max-width: calc(100vw - 15rem);
 
   .artifact-set-thumb {
     overflow: hidden;
@@ -102,6 +103,8 @@
   }
 
   .artifact-set-builds-selector {
+    max-width: calc(100vw - 6.5rem);
+
     .artifact-set-builds-menu {
       height: 60px;
 
@@ -175,6 +178,7 @@
   }
 
   .artifact-set-builds-selector {
+    max-width: calc(100vw - 3rem);
     height: 60px;
 
     div {

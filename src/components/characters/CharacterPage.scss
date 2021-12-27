@@ -52,19 +52,15 @@
   opacity: 0.5;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1036px) {
   .character-page {
     h1 {
       width: 100%;
     }
   }
-
-  .character-page-stats-count {
-    left: 3.5rem;
-  }
 }
 
-@media (max-width: 516px) {
+@media (max-width: 544px) {
   .character-page {
     h1 {
       width: 100%;
@@ -73,8 +69,6 @@
   }
 
   .character-page-stats-count {
-    left: 0;
-
     span {
       font-size: 1.2rem;
       line-height: 1.8rem;

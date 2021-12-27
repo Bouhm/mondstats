@@ -3,8 +3,10 @@
 .sidebar {
   z-index: 7;
   width: 12rem;
+  flex-shrink: 0;
 
   .sidebar-menu {
+    position: fixed;
     height: 100%;
     display: flex;
     flex-flow: column;
@@ -88,7 +90,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1036px) {
   .sidebar {
     width: 3.5rem;
 
@@ -102,7 +104,7 @@
   }
 }
 
-@media (max-width: 516px) {
+@media (max-width: 544px) {
   .sidebar {
     display: none;
   }
