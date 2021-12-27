@@ -19,7 +19,7 @@ function ChartsPage() {
 
   const topWeapons = useApi(`/weapons/stats/top-weapons.json`)
 
-  const tabs = ['characters', 'artifact sets', 'weapons']
+  const tabs = ['characters', 'artifacts', 'weapons']
   const { activeTabIdx, onTabChange } = useTabs();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -46,7 +46,7 @@ function ChartsPage() {
 
   return (
     <div className="charts-page-container">
-      <Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={tabs} />
+      <Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={map(tabs, tab => <img src={`/assets/icons/${tab}.webp`} />)} />
       <div className="charts-container">
         {renderChart()}
       </div>

@@ -6,13 +6,13 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Hamburger } from '../ui/Icons';
 
-interface ITab {
+interface IMenuItem {
   name: string
   linkto: string
   icon: string
 }
 
-const tabs: ITab[] = [
+const menuItems: IMenuItem[] = [
   // { name: "Builds", linkto: "/builds", icon: "builds.webp" },
   { name: "Spiral Abyss", linkto: "/abyss", icon: "spiralAbyss.webp" },
   { name: "Characters", linkto: "/characters", icon: "characters.webp" },
@@ -32,11 +32,11 @@ function Sidebar() {
   const renderMenu = () => {
     return (
       <div className="sidebar-menu">
-        {_.map(tabs, tab => {
-          return <Link key={tab.name} to={tab.linkto}>
-            <div className={`sidebar-tab ${location.pathname.startsWith(tab.linkto) ? 'asActive' : ''}`} onClick={() => setIsOpen(false)}>
-              <img src={`/assets/icons/${tab.icon}`} />
-              <span className="tab-name">{tab.name}</span>
+        {_.map(menuItems, menuItem => {
+          return <Link key={menuItem.name} to={menuItem.linkto}>
+            <div className={`sidebar-menuItem ${location.pathname.startsWith(menuItem.linkto) ? 'asActive' : ''}`} onClick={() => setIsOpen(false)}>
+              <img src={`/assets/icons/${menuItem.icon}`} />
+              <span className="menuItem-name">{menuItem.name}</span>
             </div>
           </Link>
         })}

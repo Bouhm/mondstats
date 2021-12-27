@@ -1,6 +1,6 @@
 import AmberSad from '/assets/amberSad.webp';
 import { isEmpty, map, orderBy, reduce, some, take, values } from 'lodash';
-import React from 'react';
+import React, { Fragment } from 'react';
 import Sticky from 'react-stickynode';
 
 import { getPercentage } from '../../scripts/util';
@@ -35,8 +35,8 @@ const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }
       <div className="stage-teams">
         {map([stageData['1'], stageData['2']], (battle, battleIndex) => {
           return (
-            <>
-              <div className="stage-half" key={`battle-${floor}-${stage}-${battleIndex}`}>
+            <Fragment key={`battle-${floor}-${stage}-${battleIndex}`}>
+              <div className="stage-half" >
                 <h1>{`${battleIndex+1}${battleIndex === 0 ? 'st' : 'nd'}`} Half</h1>
                 <h2>{reduce(battle, (sum, curr) => sum + curr.count, 0)} Teams</h2>
                 <div className="battle-container">
@@ -63,7 +63,7 @@ const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }
               :
               <Button className="stage-teams-show-more" onClick={() => onToggleLimit(`${floor}-${stage}`)}>Show less <ChevronUp size={20} /></Button>
             )}
-          </>)
+          </Fragment>)
         })}
       </div>
     </>

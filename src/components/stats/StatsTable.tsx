@@ -95,7 +95,7 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
 
   return (
     <div className='stats-table-container'>
-      {!!tabs.length && <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />}
+      {!!tabs.length && <Tabs tabs={map(tabs, tab => <img src={`/assets/icons/${tab}.webp`} />)} activeTabIdx={activeTabIdx} onChange={onTabChange} />}
       <table className='stats-table'>
         {!isPreview && 
         <thead>
