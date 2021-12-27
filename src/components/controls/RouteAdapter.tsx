@@ -28,3 +28,5 @@ const RouteAdapter: React.FunctionComponent<{
   }
   return children({ history: adaptedHistory, location: routerLocation });
 };
+
+export default RouteAdapter;

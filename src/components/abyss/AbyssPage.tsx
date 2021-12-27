@@ -35,7 +35,7 @@ import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 import Tabs from '../ui/Tabs';
 import AbyssStage from './AbyssStage';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { NumberParam, StringParam, useQueryParam } from 'use-query-params';
 
 // import abyssFloors from './abyssFloors.json';
 // import abyssTopTeams from './top-teams.json';
@@ -66,13 +66,15 @@ function AbyssPage() {
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
   const [ selectedCharacters, setSelectedCharacters] = useState<string[]>([])
   
-  const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const { filters, handleFilterChange } = useFilters(['f2p', 'max5']);
   const abyssTopTeams = useApi('/abyss/stats/top-abyss-teams.json');
-  const floorParam = searchParams.get('floor');
+
+  const [floorParam, setFloorParam] = useQueryParam('floor', StringParam);
+  const [stageParam, setStageParam] = useQueryParam('stage', NumberParam);
   const floorTabs = useTabs(floorParam ? floors.indexOf(floorParam) : 0);
-  const stageTabs = useTabs();
+  const stageTabs = useTabs(stageParam ? stages.indexOf(stageParam) : 0);
+  
 
   async function fetchAbyssData() {
     setIsLoading(true);
@@ -154,6 +156,17 @@ function AbyssPage() {
     }
   }
 
+  const handleFloorChange = (idx: number) => {
+    const tabFloor = floors[idx] === 'ALL' ? undefined : floors[idx];
+    setFloorParam(tabFloor);
+    floorTabs.onTabChange(idx);
+  }
+
+  const handleStageChange = (idx: number) => {
+    setStageParam(stages[idx]);
+    stageTabs.onTabChange(idx);
+  }
+
   const renderTopTeams = () => {
     const filteredTopTeams = filter(_filterTopTeams(), ({ flex }) => flex[0] && flex[0].length) as IAbyssParty[];
     const total = reduce(abyssTopTeams, (sum,curr) => sum + curr.count, 0)
@@ -198,15 +211,6 @@ function AbyssPage() {
     />
   }
   
-  const handleFloorChange = (idx: number) => {
-    const tabFloor = floors[idx] === 'ALL' ? undefined : floors[idx];
-    floorTabs.onTabChange(idx);
-  }
-
-  const handleStageChange = (idx: number) => {
-    stageTabs.onTabChange(idx);
-  }
-
   const renderTeams = () => (
     <div className="floor-container">
       <div key={floors[floorTabs.activeTabIdx]} className="stage-container">
