@@ -93,7 +93,6 @@ function CharacterPage() {
       {/* <UsageStats count={character.count} total={character.total} abyssCount={character.abyssCount} abyssTotal={character.abyssTotal} /> */}
       {selectedCharacterBuilds.builds &&
         <>
-          {/* <Sticky top={56}><Filters filters={filters} color={elementColor} onFilterChange={handleFilterChange} /></Sticky> */}
           <BuildCharts.CharacterBuilds builds={selectedCharacterBuilds.builds} />
           {character.rarity < 100 &&
             <Constellations constellations={selectedCharacterBuilds.constellations} total={reduce(selectedCharacterBuilds.constellations, (sum, curr) => sum + curr, 0)} />

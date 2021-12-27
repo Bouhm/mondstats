@@ -144,7 +144,7 @@ function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, 
     <div className='card-search-container'>
       <div className="cards-container">
         <div className="card-searchbar">
-          <Sticky top={3} innerZ={9}>
+          <Sticky top={5} innerZ={9}>
             <Dropdown.SearchSelect
               onChange={handleChange}
               onInput={handleInput}

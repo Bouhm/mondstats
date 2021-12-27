@@ -7,7 +7,7 @@
 
 .stats-table {
   border-collapse: collapse;
-  width: 70%;
+  width: 60%;
   table-layout: auto;
   color: white;
   margin-top: 1rem;
@@ -24,7 +24,7 @@
   th,
   td {
     text-align: center;
-    line-height: 3rem;
+    line-height: 2.5rem;
 
     &:not(:first-child) {
       border-left: 1px solid rgba(255, 255, 255, 0.5);
@@ -32,14 +32,14 @@
   }
 
   th {
-    background-color: rgba(29, 29, 41, 0.788);
+    background-color: rgba(29, 29, 41, 0.9);
     text-transform: uppercase;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     top: 4rem;
     font-size: 0.8rem;
     position: sticky;
+    z-index: 8;
     padding: 0.5rem;
-    z-index: 9;
     white-space: nowrap;
   }
 
@@ -57,7 +57,7 @@
 
     .stats-character-element {
       position: absolute;
-      width: 20px;
+      width: 18px;
       height: auto;
       left: 0;
       top: 0;
@@ -69,7 +69,7 @@
 
     .stats-row-bar {
       background: black;
-      height: 3rem;
+      height: 2.5rem;
       display: inline-block;
       animation-name: horibar;
       animation-duration: 1s;
@@ -87,6 +87,11 @@
         max-width: 100%;
       }
     }
+  }
+
+  thead tr th {
+    height: 1rem;
+    line-height: 1rem;
   }
 }
 

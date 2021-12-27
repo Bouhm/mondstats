@@ -14,7 +14,7 @@ function Characters({data, isPreview }: any) {
   const db = useAppSelector((state) => state.data.characterDb)
   const title = 'characters'
 
-  const getTotal = () => data.totals.total
+  const getTotal = () => 57824
   
   const getAbyssTotal = () => data.totals.abyssTotal
   
@@ -91,7 +91,6 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
   const { activeTabIdx, onTabChange } = useTabs();
   let filteredData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
 
-  console.log(data[field])
   if (isPreview) filteredData = orderBy(data[field], 'abyssCount', 'desc').slice(0, 5);
 
   return (

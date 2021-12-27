@@ -37,7 +37,7 @@ function WeaponPage() {
 
   return (
     <div className="weapon-page">
-      <UsageStats count={weaponStats.count} total={weaponStats.typeTotal} abyssCount={weaponStats.abyssCount} abyssTotal={weaponStats.abyssTypeTotal} />
+      <UsageStats count={weaponStats.count} total={weaponStats.typeTotal} abyssCount={weaponStats.abyssCount} abyssTotal={weaponStats.abyssTypeTota} />
       <BuildCharts.Weapons stats={weaponStats} />
     </div>
   )

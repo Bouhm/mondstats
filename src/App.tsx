@@ -3,7 +3,7 @@ import 'react-popper-tooltip/dist/styles.css';
 import 'rc-pagination/assets/index.css';
 
 import { forEach } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
 // import { gql, useQuery } from '@apollo/client';
@@ -42,12 +42,6 @@ function App() {
   const [hasLoadedDb, setHasLoadedDb] = useState(false)
   // const { loading, error, data } = useQuery(Query);
   const db = useApi(`/db.json`);
-  const notice = <p>
-    This site shows the most <i>used</i> builds and teams which don't necessarily mean the <i>best</i>.
-    <br/><br />
-    Please also be mindful of other players' spending in the game 
-    which may not reflect the objective value of a character or item.
-  </p>
 
   useEffect(() => {
     if (db) {
@@ -90,14 +84,28 @@ function App() {
     }
   }, [db, setHasLoadedDb])
 
+  const navRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.addEventListener('scroll', () => {
+      if (navRef.current) {
+        if (window.scrollY > 0) {
+          navRef.current!.classList.remove("invis")
+        } else {
+          navRef.current!.classList.add("invis")
+        }
+      }
+    })
+  }, [navRef])
   return (
     <div className="App">
+      <Navbar />
       <div className="App-content">
         <Sidebar />
-        <main className="section-view" style={showNotice ? {filter: 'blur(3px)'} : {}}>
+        <main>
           {hasLoadedDb ? <Outlet /> : <Loader />}
-          <section className="footer">
-            <div className="scroll-to-top-button" onClick={() => window.scrollTo(0, 0)}>
+          <div className="footer">
+            <div className="scroll-to-top-button" ref={navRef} onClick={() => window.scrollTo(0, 0)}>
               <ArrowUp />
             </div>
             <div className="links">
@@ -106,11 +114,10 @@ function App() {
               {/* <div className="notice" onClick={() => setShowNotice(true)}>⚠️</div> */}
             </div>
             <footer>Genshin Impact is a registered trademark of miHoYo Co., Ltd. Mondstats is not affiliated or in any way officially connected with miHoYo.</footer>
-          </section>
+            <span className="build-ver">dev build 12.26.21</span>
+          </div>
         </main>
       </div>
-      <Navbar />
-      <span className="build-ver">dev build 12.26.21</span>
     </div>
   )
 }

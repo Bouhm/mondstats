@@ -7,17 +7,12 @@ import { useParams } from 'react-router-dom';
 import * as colorVars from '../../_variables.module.scss';
 import { getArtifactSetNames, getPercentage, getShortName } from '../../scripts/util';
 import { setColorClass } from '../../Store';
-import Button from '../controls/Button';
 import useApi from '../hooks/useApi';
 import useExpand from '../hooks/useExpand';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import BuildCharts from '../stats/BuildCharts';
 import UsageStats from '../stats/UsageStats';
-import Chart from '../ui/Chart';
-import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
-import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
-import ArtifactSetBuildCard from './ArtifactSetBuildCard';
 
 function ArtifactSetPage() { 
   const { shortName } = useParams();
@@ -84,4 +79,4 @@ function ArtifactSetPage() {
   )
 }
 
-export default ArtifactSetPage
+export default ArtifactSetPage  

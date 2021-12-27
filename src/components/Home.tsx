@@ -43,7 +43,7 @@ function Home() {
       </div>
       <div className="home-top-charts">
         <div className="home-top-chart">
-          <StatsTable.Characters data={topCharacters} isPreview={true} />
+          <StatsTable.Characters data={topCharacters} isPreview={true} /> 
         </div>
         <div className="home-top-chart">
           <StatsTable.ArtifactSetBuilds data={topArtifactSetBuilds} isPreview={true} />
