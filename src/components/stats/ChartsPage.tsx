@@ -1,6 +1,8 @@
 import { filter, includes, intersection, isEmpty, map } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Sticky from 'react-stickynode';
+import { StringParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
 
 import useApi from '../hooks/useApi';
 import useCharacterSearch from '../hooks/useCharacterSearch';
@@ -12,22 +14,29 @@ import StatsTable from './StatsTable';
 
 function ChartsPage() { 
   const topCharacters = useApi(`/characters/stats/top-characters.json`)
-
   const topArtifactSetBuilds = useApi(`/artifactSets/stats/top-artifact-set-builds.json`)
-
   const topWeapons = useApi(`/weapons/stats/top-weapons.json`)
 
   const tabs = ['characters', 'artifacts', 'weapons']
-  const { activeTabIdx, onTabChange } = useTabs();
+  const [query, setQuery] = useQueryParams({
+    chart: withDefault(StringParam, tabs[0]),
+  });
+  const { activeTabIdx, onTabChange } = useTabs(query.chart ? (tabs.indexOf(query.chart) || 0) : 0);
   const [isLoading, setIsLoading] = useState(true);
+  console.log(activeTabIdx)
 
   useEffect(() => {
     if (topCharacters && topArtifactSetBuilds && topWeapons) {
       setIsLoading(false)
     }
-  }, [topCharacters, topArtifactSetBuilds, topWeapons])
+  }, [topCharacters, topArtifactSetBuilds, topWeapons]) 
 
   if (isLoading) return <Loader />
+  
+  const handleTabChange = (i: number) => {
+    setQuery({ chart: tabs[i] }, 'replace');
+    onTabChange(i)
+  } 
     
   const renderChart = () => {
   switch (activeTabIdx) {
@@ -44,7 +53,7 @@ function ChartsPage() {
 
   return (
     <div className="charts-page-container">
-      <Tabs activeTabIdx={activeTabIdx} onChange={onTabChange} tabs={map(tabs, tab => <img src={`/assets/icons/${tab}.webp`} />)} />
+      <Tabs activeTabIdx={activeTabIdx} onChange={handleTabChange} tabs={map(tabs, tab => <img src={`/assets/icons/${tab}.webp`} />)} />
       <div className="charts-container">
         {renderChart()}
       </div>

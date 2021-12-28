@@ -1,6 +1,10 @@
+## dev build 12.27.21
+
+- Added URL query params for persistent state management
+
 ## dev build 12.26.21
 
-- Adjusted character overall usage stastics to be relative to total players instead of characters
+- Adjusted character overall usage statistics to be relative to total players instead of characters
 - Fixed UI scaling issues
 
 ## dev build 12.24.21

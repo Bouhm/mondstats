@@ -9,6 +9,7 @@ import { useAppSelector } from '../hooks/useRedux';
 import { useTabs } from '../hooks/useTabs';
 import LLImage from '../ui/LLImage';
 import Tabs from '../ui/Tabs';
+import { StringParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
 
 function Characters({data, isPreview }: any) {
   const db = useAppSelector((state) => state.data.characterDb)
@@ -88,14 +89,24 @@ type StatsTableProps = {
 } 
 
 function StatsTable({ data, isPreview = false, title, field = title, tabs = [], getTotal, getAbyssTotal, getColorClass, dataFilter, renderImage }: StatsTableProps) {
-  const { activeTabIdx, onTabChange } = useTabs();
-  let filteredData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
+  const [query, setQuery] = useQueryParams({
+    type: withDefault(StringParam, tabs[0] || '')
+  });
+  const { activeTabIdx, onTabChange } = useTabs(query ? (tabs.indexOf(capitalize(query.type)) | 0) : 0);
 
+  let filteredData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
   if (isPreview) filteredData = orderBy(data[field], 'abyssCount', 'desc').slice(0, 5);
+
+  const handleTabChange = (i: number) => {
+    if (!!tabs.length) {
+      setQuery({ type: tabs[i].toLowerCase() })
+      onTabChange(i);
+    }
+  }
 
   return (
     <div className='stats-table-container'>
-      {!!tabs.length && <Tabs tabs={map(tabs, tab => <img src={`/assets/icons/${tab}.webp`} />)} activeTabIdx={activeTabIdx} onChange={onTabChange} />}
+      {!!tabs.length && <Tabs tabs={map(tabs, tab => <img src={`/assets/icons/${tab}.webp`} />)} activeTabIdx={activeTabIdx} onChange={handleTabChange} />}
       <table className='stats-table'>
         {!isPreview && 
         <thead>

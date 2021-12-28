@@ -7,7 +7,7 @@
   max-width: 80rem;
 
   .barchart-bar {
-    transition: all .6s ease;
+    transition: all 0.3 s ease;
     border: 2px solid white;
     border-bottom: none;
   }
@@ -35,7 +35,6 @@
     max-height: 100%;
   }
 }
-
 
 @keyframes horibar {
   0% {
