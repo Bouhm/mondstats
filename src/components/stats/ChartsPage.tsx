@@ -1,5 +1,3 @@
-import './ChartsPage.scss';
-
 import { filter, includes, intersection, isEmpty, map } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import Sticky from 'react-stickynode';

@@ -17,6 +17,7 @@ type CardSearchProps = {
   showCards?: boolean,
   placeholder?: string
   showAll?: boolean
+  defaultItems?: Option[]
 }
 
 export type SearchItem = {
@@ -33,12 +34,15 @@ type DDProps = {
   placeholder: string
 }
 
+export function generateOptions(items: any) {
+  return orderBy(map(items, (item) => {
+    return ({ label: item.name, rarity: item.rarity, value: item._id }) as Option
+  }),'label', 'asc')
+}
 
 function Characters(props: CardSearchProps) { 
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const options: Option[] = orderBy(map(props.items, (item) => {
-    return ({ label: item.name, rarity: item.rarity, value: item._id }) as Option
-  }),'label', 'asc')
+  const options: Option[] = generateOptions(props.items);
 
   const OptionLabel = ({ value, rarity, label }: Option) => {
     const character = characterDb[value];
@@ -95,9 +99,9 @@ function Weapons(props: CardSearchProps) {
   return <CardSearch options={options} OptionLabel={OptionLabel} path={"weapons"} placeholder={"Search weapons"} {...props} />
 }
 
-function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, showCards = true, showAll = false }: CardSearchProps & DDProps & { path: string }) { 
+function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, showCards = true, showAll = false, defaultItems = []}: CardSearchProps & DDProps & { path: string }) { 
   const [searchedItems, setSearchedItems] = useState<SearchItem[]>([]);
-  const [selectedItems, setSelectedItems] = useState<Option[]>([]);
+  const [selectedItems, setSelectedItems] = useState<Option[]>(defaultItems);
   const searchRef = useRef<HTMLInputElement>(null);
   const maxResults = 10;
   const fuse = new Fuse(items, { threshold: 0.3, keys: [{name: 'name', weight: 1}, {name: 'keys', weight: 0.5}] });

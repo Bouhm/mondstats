@@ -21,10 +21,10 @@ import React, { useEffect, useState } from 'react';
 import Sticky from 'react-stickynode';
 
 import { IAbyssFloor, IAbyssParty } from '../../data/types';
-import { getPercentage } from '../../scripts/util';
+import { getPercentage, getShortName } from '../../scripts/util';
 import Team from '../abyss/Team';
 import Button from '../controls/Button';
-import CardSearch from '../controls/CardSearch';
+import CardSearch, { generateOptions } from '../controls/CardSearch';
 import { Option } from '../controls/Dropdown';
 import useApi from '../hooks/useApi';
 import useCharacterSearch from '../hooks/useCharacterSearch';
@@ -35,7 +35,8 @@ import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 import Tabs from '../ui/Tabs';
 import AbyssStage from './AbyssStage';
-import { NumberParam, StringParam, useQueryParam } from 'use-query-params';
+import { ArrayParam, NumberParam, StringParam, useQueryParam } from 'use-query-params';
+import { Stats } from 'fs';
 
 // import abyssFloors from './abyssFloors.json';
 // import abyssTopTeams from './top-teams.json';
@@ -56,25 +57,25 @@ const _compareFloor = (f1: Option, f2: Option) => {
 }
 
 function AbyssPage() {
+  const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
+  const characterDb = useAppSelector((state) => state.data.characterDb)
   const floors = ['ALL', ...map(range(9, 13), num => num.toString())];
   const stages = [1, 2, 3];
-
-  const characterDb = useAppSelector((state) => state.data.characterDb)
   const { searchCharacters } = useCharacterSearch(characterDb);
 
   const [ abyssFloorTeams, setAbyssFloorTeams ] = useState<{[stage: number]: IAbyssFloor}>();
   const [ stageLimitToggle, setStageLimitToggle ] = useState<{ [stage: string]: boolean }>({})
-  const [ selectedCharacters, setSelectedCharacters] = useState<string[]>([])
   
   const [isLoading, setIsLoading] = useState(true);
   const { filters, handleFilterChange } = useFilters(['f2p', 'max5']);
   const abyssTopTeams = useApi('/abyss/stats/top-abyss-teams.json');
 
+  const [charactersParam, setCharactersParam] = useQueryParam('characters', ArrayParam);
   const [floorParam, setFloorParam] = useQueryParam('floor', StringParam);
   const [stageParam, setStageParam] = useQueryParam('stage', NumberParam);
   const floorTabs = useTabs(floorParam ? floors.indexOf(floorParam) : 0);
   const stageTabs = useTabs(stageParam ? stages.indexOf(stageParam) : 0);
-  
+  const [ selectedCharacters, setSelectedCharacters] = useState<string[]>(charactersParam ? map(charactersParam, char => characterIdMap[char!]) : [])
 
   async function fetchAbyssData() {
     setIsLoading(true);
@@ -116,7 +117,7 @@ function AbyssPage() {
         charFilter = (filter(party, char => {
           if (typeof char !== "string") return false;
           return characterDb[char].rarity > 4 && characterDb[char].name !== "Traveler"
-        }).length <= filters.max5!.value)
+        }).length <= filters.max5!.value) 
         
         if (!cond) cond = (charFilter && difference(selectedCharacters, party).length === 0);
       })
@@ -148,7 +149,11 @@ function AbyssPage() {
   }
 
   const handlePartyChange = (party: string[]) => {
-    setSelectedCharacters(party)
+    setSelectedCharacters(party);
+
+    const characters = map(party, char => getShortName(characterDb[char]));
+    console.log(characters);
+    setCharactersParam(map(party, char => getShortName(characterDb[char])));
     const count5 = countBy(party, char => characterDb[char].rarity);
 
     if (count5['5'] > filters.max5!.value) {
@@ -178,11 +183,13 @@ function AbyssPage() {
           <h2>{total} Teams</h2>
           {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({coreParty, flex, count }, i) => {
             const party = [...coreParty, flex[0][0]._id]
-            return <React.Fragment key={`parties-ALL-${i}`}>
-              <div className="battle-container">
-                <Team team={party} count={count} flex={flex} total={total} />
-              </div>
-            </React.Fragment>
+            return (
+              <React.Fragment key={`parties-ALL-${i}`}>
+                <div className="battle-container">
+                  <Team team={party} count={count} flex={flex} total={total} />
+                </div>
+              </React.Fragment>
+            )
           })}
           {(filteredTopTeams.length > 10) && (!stageLimitToggle["ALL"] ?
             <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show more <ChevronDown size={20} /></Button>
@@ -227,7 +234,12 @@ function AbyssPage() {
     <div className="abyss-container">
       <div className="abyss-controls">
       </div>
-      <CardSearch.Characters items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} onSelect={handlePartyChange} showCards={false}/>
+      <CardSearch.Characters 
+        items={filter(searchCharacters, character => !includes(selectedCharacters, character._id))} 
+        defaultItems={generateOptions(map(selectedCharacters, char => characterDb[char]))}
+        onSelect={handlePartyChange} 
+        showCards={false}
+      />
       <br />
       <Tabs activeTabIdx={floorTabs.activeTabIdx} onChange={handleFloorChange} tabs={map(floors, (floor, i) => i === 0 ? floor : 'Floor ' + floor)} />
       {floorTabs.activeTabIdx !== 0 && <Tabs activeTabIdx={stageTabs.activeTabIdx} onChange={handleStageChange} tabs={map(stages, stage => 'Stage ' + stage)} />}
