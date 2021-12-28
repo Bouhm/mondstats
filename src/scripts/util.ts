@@ -32,6 +32,32 @@ export function getArtifactSetNames(artifacts: IArtifactSet[], db: IArtifactSetD
   return label;
 }
 
+export function getArtifactSetBuildAbbreviation(artifacts: IArtifactSet[], db: IArtifactSetDb) {
+  let label = "";
+
+  forEach(artifacts, (set, i) => {
+    let dbSet = db[set._id]
+
+    if (dbSet) {
+      let name = dbSet.name;
+      let parts = name.split(' ')
+
+      forEach(parts, part => {
+        if (part === 'The') return;
+        if (part === 'of') {
+          label += part[0].toLocaleLowerCase();
+        } else {
+          label += part[0].toUpperCase();
+        }
+      })
+  
+      label = set.activation_number + label
+    }
+  })
+
+  return label;
+}
+
 // export function shortenId(_id: string) {
 //   return reverse(_id.split('')).splice(0, _id.length/2).join('');
 // }

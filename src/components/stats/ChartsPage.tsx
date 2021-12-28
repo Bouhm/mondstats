@@ -23,7 +23,6 @@ function ChartsPage() {
   });
   const { activeTabIdx, onTabChange } = useTabs(query.chart ? (tabs.indexOf(query.chart) || 0) : 0);
   const [isLoading, setIsLoading] = useState(true);
-  console.log(activeTabIdx)
 
   useEffect(() => {
     if (topCharacters && topArtifactSetBuilds && topWeapons) {

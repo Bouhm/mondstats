@@ -70,14 +70,14 @@ function AbyssPage() {
   const { filters, handleFilterChange } = useFilters(['f2p', 'max5']);
   const abyssTopTeams = useApi('/abyss/stats/top-abyss-teams.json');
 
-  const [charactersParam, setCharactersParam] = useQueryParam('characters', ArrayParam);
   const [query, setQuery] = useQueryParams({
-    floor: withDefault(StringParam, undefined),
-    stage: withDefault(NumberParam, stages[0])
+    floor: StringParam,
+    stage: withDefault(NumberParam, stages[0]),
+    characters: ArrayParam
   })
   const floorTabs = useTabs(query.floor ? floors.indexOf(query.floor) : 0);
   const stageTabs = useTabs(query.stage ? stages.indexOf(query.stage) : 0);
-  const [ selectedCharacters, setSelectedCharacters] = useState<string[]>(charactersParam ? map(charactersParam, char => characterIdMap[char!]) : [])
+  const [ selectedCharacters, setSelectedCharacters] = useState<string[]>(query.characters ? map(query.characters, char => characterIdMap[char!]) : [])
 
   async function fetchAbyssData() {
     setIsLoading(true);
@@ -153,8 +153,7 @@ function AbyssPage() {
   const handlePartyChange = (party: string[]) => {
     setSelectedCharacters(party);
 
-    const characters = map(party, char => getShortName(characterDb[char]));
-    setCharactersParam(map(party, char => getShortName(characterDb[char])));
+    setQuery({ characters: map(party, char => getShortName(characterDb[char])) }, 'pushIn');
     const count5 = countBy(party, char => characterDb[char].rarity);
 
     if (count5['5'] > filters.max5!.value) {
@@ -164,7 +163,7 @@ function AbyssPage() {
 
   const handleFloorChange = (idx: number) => {
     const tabFloor = floors[idx] === 'ALL' ? undefined : floors[idx];
-    setQuery({ floor: tabFloor }, 'replace');
+    setQuery({ floor: tabFloor, stage: undefined });
     floorTabs.onTabChange(idx);
     stageTabs.onTabChange(0)
   }

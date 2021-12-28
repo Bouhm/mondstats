@@ -17,7 +17,7 @@ function ArtifactSetBuildDetail(props: any) {
         if (!set) return null;
 
         return (
-          <div className="artifact-set-info">
+          <div className="artifact-set-info" key={_id}>
             <div className="artifact-set-header">
               <LLImage className={`rarity-${set.rarity}`} src={`/assets/artifacts/${set._id}.webp`} alt={set.name} />
               <div className="artifact-set-detail">

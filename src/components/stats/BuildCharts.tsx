@@ -5,7 +5,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 
 import * as colorVars from '../../_variables.module.scss';
 import { IBuild } from '../../data/types';
-import { getArtifactSetNames, getPercentage } from '../../scripts/util';
+import { getArtifactSetBuildAbbreviation, getArtifactSetNames, getPercentage } from '../../scripts/util';
 import ArtifactSetBuildCard from '../artifactSets/ArtifactSetBuildCard';
 import ArtifactSetBuildDetail from '../artifactSets/ArtifactSetBuildDetail';
 import { FiltersType } from '../hooks/useFilters';
@@ -13,6 +13,7 @@ import { useAppSelector } from '../hooks/useRedux';
 import Chart from '../ui/Chart';
 import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
 import WeaponDetail from '../weapons/WeaponDetail';
+import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 
 type ArtifactSetBuildChartProps = {
   builds: any,
@@ -103,12 +104,18 @@ function Weapons({ stats, filters }: BuildChartsProps) {
 function CharacterBuilds({ builds, filters }: BuildChartsProps) {
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
+  const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const filteredBuilds = filter(builds, ({ _id })=> !!artifactSetBuildDb[_id])
 
-  const [activeBuildIdx, setActiveBuildIdx] = useState(0)
+  const [query, setQuery] = useQueryParams({
+    buildIndex: withDefault(NumberParam, 0),
+  })
+  
+  const [activeBuildIdx, setActiveBuildIdx] = useState(query.buildIndex ? query.buildIndex : 0)
   const weaponsTotal = reduce(filteredBuilds[activeBuildIdx].weapons, (sum, curr) => sum + curr.count, 0);
 
   const handleSelectSet = (i: number) => {
+    setQuery({ buildIndex: i });
     setActiveBuildIdx(i);
   }
 

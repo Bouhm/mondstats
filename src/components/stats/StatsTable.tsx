@@ -1,7 +1,7 @@
 import './StatsTable.scss';
 
-import { capitalize, filter, isEmpty, map, orderBy, reduce, sortBy } from 'lodash';
-import React, { useEffect } from 'react';
+import { capitalize, filter, map, orderBy } from 'lodash';
+import React from 'react';
 
 import { getPercentage } from '../../scripts/util';
 import ArtifactSetBuildCard from '../artifactSets/ArtifactSetBuildCard';
@@ -9,7 +9,7 @@ import { useAppSelector } from '../hooks/useRedux';
 import { useTabs } from '../hooks/useTabs';
 import LLImage from '../ui/LLImage';
 import Tabs from '../ui/Tabs';
-import { StringParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
+import { StringParam, useQueryParams, withDefault } from 'use-query-params';
 
 function Characters({data, isPreview }: any) {
   const db = useAppSelector((state) => state.data.characterDb)
