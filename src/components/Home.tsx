@@ -38,8 +38,10 @@ function Home() {
         <LLImage src={Logo} alt="logo" />
       </div>
       <div style={{color: 'white', textAlign: 'center', fontSize: '0.8rem'}}>
-        MONDSTATS HAS BEEN UPDATED AFTER A HUGE DATA REWORK <br />
-        THIS IS STILL HEAVILY WIP -- EXPECT MISSING DATA <br />
+        <br />
+        HOYOLAB NO LONGER PROVIDES DATA FOR TEAMS AND ALL CHARACTERS 🪦<br />
+        DATA LAST UPDATED 11/25/21 UNTIL MIHOYO REVERTS THIS CHANGE<br />
+        
       </div>
       <div className="home-top-charts">
         <div className="home-top-chart">
