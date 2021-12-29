@@ -2,8 +2,8 @@ import './StatsTable.scss';
 
 import { capitalize, filter, map, orderBy } from 'lodash';
 import React from 'react';
-import { StringParam, useQueryParams, withDefault } from 'use-query-params';
 
+// import { StringParam, useQueryParams, withDefault } from 'use-query-params';
 import { getPercentage } from '../../scripts/util';
 import ArtifactSetBuildCard from '../artifactSets/ArtifactSetBuildCard';
 import { useAppSelector } from '../hooks/useRedux';
@@ -90,17 +90,18 @@ type StatsTableProps = {
 } 
 
 function StatsTable({ data, isPreview = false, title, field = title, tabs = [], getTotal, getAbyssTotal, getColorClass, dataFilter, renderImage }: StatsTableProps) {
-  const [query, setQuery] = useQueryParams({
-    type: withDefault(StringParam, tabs[0] || '')
-  });
-  const { activeTabIdx, onTabChange } = useTabs(query ? (tabs.indexOf(capitalize(query.type)) | 0) : 0);
+  // const [query, setQuery] = useQueryParams({
+  //   type: withDefault(StringParam, tabs[0] || '')
+  // });
+  // const { activeTabIdx, onTabChange } = useTabs(query ? (tabs.indexOf(capitalize(query.type)) | 0) : 0);
+  const { activeTabIdx, onTabChange } = useTabs(0);
 
   let filteredData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
   if (isPreview) filteredData = orderBy(data[field], 'abyssCount', 'desc').slice(0, 5);
 
   const handleTabChange = (i: number) => {
     if (!!tabs.length) {
-      setQuery({ type: tabs[i].toLowerCase() })
+      // setQuery({ type: tabs[i].toLowerCase() })
       onTabChange(i);
     }
   }

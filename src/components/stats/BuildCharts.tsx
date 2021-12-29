@@ -2,8 +2,8 @@ import './BuildCharts.scss';
 
 import { filter, forEach, map, orderBy, reduce } from 'lodash';
 import React, { useState } from 'react';
-import { StringParam, useQueryParams } from 'use-query-params';
 
+// import { StringParam, useQueryParams } from 'use-query-params';
 import * as colorVars from '../../_variables.module.scss';
 import { getArtifactSetNames, getPercentage } from '../../scripts/util';
 import ArtifactSetBuildCard from '../artifactSets/ArtifactSetBuildCard';
@@ -107,15 +107,16 @@ function CharacterBuilds({ builds, filters }: BuildChartsProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const filteredBuilds = filter(builds, ({ _id })=> !!artifactSetBuildDb[_id])
 
-  const [query, setQuery] = useQueryParams({
-    buildIndex: StringParam
-  })
+  // const [query, setQuery] = useQueryParams({
+  //   buildIndex: StringParam
+  // })
   
-  const [activeBuildIdx, setActiveBuildIdx] = useState(query.buildIndex ? parseInt(query.buildIndex) : 0)
+  // const [activeBuildIdx, setActiveBuildIdx] = useState(query.buildIndex ? parseInt(query.buildIndex) : 0)
+  const [activeBuildIdx, setActiveBuildIdx] = useState(0)
   const weaponsTotal = reduce(filteredBuilds[activeBuildIdx].weapons, (sum, curr) => sum + curr.count, 0);
 
   const handleSelectSet = (i: number) => {
-    setQuery({ buildIndex: i+'' });
+    // setQuery({ buildIndex: i+'' });
     setActiveBuildIdx(i);
   }
 
