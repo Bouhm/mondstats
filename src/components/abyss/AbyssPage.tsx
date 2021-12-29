@@ -16,8 +16,8 @@ import {
   take,
 } from 'lodash';
 import React, { useEffect, useState } from 'react';
+import { ArrayParam, StringParam, useQueryParams } from 'use-query-params';
 
-// import { ArrayParam, StringParam, useQueryParams } from 'use-query-params';
 import { IAbyssFloor, IAbyssParty } from '../../data/types';
 import { getShortName } from '../../scripts/util';
 import Team from '../abyss/Team';
@@ -50,17 +50,14 @@ function AbyssPage() {
   const { filters, handleFilterChange } = useFilters(['f2p', 'max5']);
   const abyssTopTeams = useApi('/abyss/stats/top-abyss-teams.json');
 
-  // const [query, setQuery] = useQueryParams({
-  //   floor: StringParam,
-  //   stage: StringParam,
-  //   characters: ArrayParam
-  // })
-  // const floorTabs = useTabs(query.floor ? floors.indexOf(query.floor) : 0);
-  // const stageTabs = useTabs(query.stage ? stages.indexOf(query.stage) : 0);
-  // const [ selectedCharacters, setSelectedCharacters] = useState<string[]>(query.characters ? map(query.characters, char => characterIdMap[char!]) : [])
-  const floorTabs = useTabs(0);
-  const stageTabs = useTabs(0);
-  const [ selectedCharacters, setSelectedCharacters] = useState<string[]>([])
+  const [query, setQuery] = useQueryParams({
+    floor: StringParam,
+    stage: StringParam,
+    characters: ArrayParam
+  })
+  const floorTabs = useTabs(query.floor ? floors.indexOf(query.floor) : 0);
+  const stageTabs = useTabs(query.stage ? stages.indexOf(query.stage) : 0);
+  const [ selectedCharacters, setSelectedCharacters] = useState<string[]>(query.characters ? map(query.characters, char => characterIdMap[char!]) : [])
 
   async function fetchAbyssData() {
     setIsLoading(true);
@@ -136,7 +133,7 @@ function AbyssPage() {
   const handlePartyChange = (party: string[]) => {
     setSelectedCharacters(party);
 
-    // setQuery({ characters: map(party, char => getShortName(characterDb[char])) }, 'pushIn');
+    setQuery({ characters: map(party, char => getShortName(characterDb[char])) }, 'pushIn');
     const count5 = countBy(party, char => characterDb[char].rarity);
 
     if (count5['5'] > filters.max5!.value) {
@@ -146,13 +143,13 @@ function AbyssPage() {
 
   const handleFloorChange = (idx: number) => {
     const tabFloor = floors[idx] === 'ALL' ? undefined : floors[idx];
-    // setQuery({ floor: tabFloor, stage: undefined });
+    setQuery({ floor: tabFloor, stage: undefined });
     floorTabs.onTabChange(idx);
     stageTabs.onTabChange(0)
   }
 
   const handleStageChange = (idx: number) => {
-    // setQuery({ stage: stages[idx] }, 'pushIn');
+    setQuery({ stage: stages[idx] }, 'pushIn');
     stageTabs.onTabChange(idx);
   }
 
