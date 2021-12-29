@@ -1,9 +1,9 @@
 import './Navbar.scss';
 
 import Logo from '/assets/logo_sm.webp';
-import _ from 'lodash';
+import { map } from 'lodash';
 import React, { useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import LLImage from '../ui/LLImage';
 
@@ -33,7 +33,7 @@ function Navbar() {
           <Link to="/"><LLImage src={Logo} alt="logo" /></Link>
         </div>
         <div className="nav-menu">
-          {_.map(Navtabs, tab => {
+          {map(Navtabs, tab => {
             return <Link key={tab.name} to={tab.linkto}><div className="nav-tab">{tab.name}</div></Link>
           })}
         </div>

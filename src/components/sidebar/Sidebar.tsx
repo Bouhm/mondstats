@@ -1,7 +1,7 @@
 import './Sidebar.scss';
 
-import _ from 'lodash';
-import React, { useContext, useState } from 'react';
+import { map } from 'lodash';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Hamburger } from '../ui/Icons';
@@ -32,7 +32,7 @@ function Sidebar() {
   const renderMenu = () => {
     return (
       <div className="sidebar-menu">
-        {_.map(menuItems, menuItem => {
+        {map(menuItems, menuItem => {
           return <Link key={menuItem.name} to={menuItem.linkto}>
             <div className={`sidebar-menuItem ${location.pathname.startsWith(menuItem.linkto) ? 'asActive' : ''}`} onClick={() => setIsOpen(false)}>
               <img src={`/assets/icons/${menuItem.icon}`} />

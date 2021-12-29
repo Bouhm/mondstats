@@ -1,7 +1,7 @@
 import './BarChart.scss';
 
-import _ from 'lodash';
-import React, { ReactNode, useEffect } from 'react';
+import { map } from 'lodash';
+import React, { ReactNode } from 'react';
 
 type BarChartProps = {
   data: {
@@ -32,7 +32,7 @@ function BarChart({data}: BarChartProps) {
         className="barchart-container"
         style={barChartStyle}
       >
-        {_.map(data, ({ content, classes, value }, i) => {
+        {map(data, ({ content, classes, value }, i) => {
           return (
             <div key ={`${value}-${i}`} className={`barchart-bar ${classes}`} style={{ ...barStyle(value)}} />
           )
@@ -42,7 +42,7 @@ function BarChart({data}: BarChartProps) {
         className="content-container"
         style={barChartStyle}
       >
-        {_.map(data, ({ content }, i) => <div key={i}  className={"bar-content"}>{content}</div>)}
+        {map(data, ({ content }, i) => <div key={i}  className={"bar-content"}>{content}</div>)}
       </div>
     </>
   )
