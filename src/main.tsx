@@ -4,8 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { QueryParamProvider } from 'use-query-params';
 
+// import { QueryParamProvider } from 'use-query-params';
 import App from './App';
 import AbyssPage from './components/abyss/AbyssPage';
 import ArtifactSetIndex from './components/artifactSets/ArtifactSetIndex';
@@ -34,7 +34,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <QueryParamProvider ReactRouterRoute={RouteAdapter as unknown as React.FunctionComponent}>
+        {/* <QueryParamProvider ReactRouterRoute={RouteAdapter as unknown as React.FunctionComponent}> */}
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<App/>}>
@@ -51,7 +51,7 @@ ReactDOM.render(
               <Route path="charts" element={<ChartsPage/>} />
             </Route>
           </Routes>
-        </QueryParamProvider>
+        {/* </QueryParamProvider> */}
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
