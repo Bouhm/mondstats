@@ -82,6 +82,7 @@ function Weapons({ stats, filters }: BuildChartsProps) {
   const charsTotal = reduce(stats.characters, (sum, curr) => sum + curr.count, 0)
 
   const weapon = weaponDb[stats._id]
+  
   return (
     <div className='build-charts-container'>
       <div className="build-charts">
@@ -105,15 +106,16 @@ function CharacterBuilds({ builds, filters }: BuildChartsProps) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const filteredBuilds = filter(builds, ({ _id })=> !!artifactSetBuildDb[_id])
 
-  const [query, setQuery] = useQueryParams({
-    buildIndex: StringParam
-  })
+  // const [query, setQuery] = useQueryParams({
+  //   buildIndex: StringParam
+  // })
   
-  const [activeBuildIdx, setActiveBuildIdx] = useState(query.buildIndex ? parseInt(query.buildIndex) : 0)
+  // const [activeBuildIdx, setActiveBuildIdx] = useState(query.buildIndex ? parseInt(query.buildIndex) : 0)
+  const [activeBuildIdx, setActiveBuildIdx] = useState(0)
   const weaponsTotal = reduce(filteredBuilds[activeBuildIdx].weapons, (sum, curr) => sum + curr.count, 0);
 
   const handleSelectSet = (i: number) => {
-    setQuery({ buildIndex: i+'' });
+    // setQuery({ buildIndex: i+'' });
     setActiveBuildIdx(i);
   }
 

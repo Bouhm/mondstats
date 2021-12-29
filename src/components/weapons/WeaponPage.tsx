@@ -13,7 +13,7 @@ import Empty from '../ui/Empty';
 import Loader from '../ui/Loader';
 
 function WeaponPage() { 
-  const { shortName } = useParams<any>();
+  const { shortName } = useParams();
   const weaponDb = useAppSelector((state) => state.data.weaponDb)
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const weapon = find(weaponDb, weapon => getShortName(weapon) === shortName)

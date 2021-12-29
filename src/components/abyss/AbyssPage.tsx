@@ -52,11 +52,12 @@ function AbyssPage() {
 
   const [query, setQuery] = useQueryParams({
     floor: StringParam,
-    stage: StringParam,
+    // stage: StringParam,
     characters: ArrayParam
   })
   const floorTabs = useTabs(query.floor ? floors.indexOf(query.floor) : 0);
-  const stageTabs = useTabs(query.stage ? stages.indexOf(query.stage) : 0);
+  // const stageTabs = useTabs(query.stage ? stages.indexOf(query.stage) : 0);
+  const stageTabs = useTabs(0);
   const [ selectedCharacters, setSelectedCharacters] = useState<string[]>(query.characters ? map(query.characters, char => characterIdMap[char!]) : [])
 
   async function fetchAbyssData() {
@@ -143,14 +144,15 @@ function AbyssPage() {
 
   const handleFloorChange = (idx: number) => {
     const tabFloor = floors[idx] === 'ALL' ? undefined : floors[idx];
-    setQuery({ floor: tabFloor, stage: undefined });
+    // setQuery({ floor: tabFloor, stage: undefined });
+    setQuery({ floor: tabFloor });
     floorTabs.onTabChange(idx);
-    stageTabs.onTabChange(0)
+    // stageTabs.onTabChange(0)
   }
 
   const handleStageChange = (idx: number) => {
-    setQuery({ stage: stages[idx] }, 'pushIn');
-    stageTabs.onTabChange(idx);
+    // setQuery({ stage: stages[idx] }, 'pushIn');
+    // stageTabs.onTabChange(idx);
   }
 
   const renderTopTeams = () => {

@@ -17,7 +17,7 @@ import Tabs from '../ui/Tabs';
 import Constellations from './Constellations';
 
 function CharacterPage() {  
-  const { shortName } = useParams<any>();
+  const { shortName } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const { activeTabIdx, onTabChange } = useTabs();
   const tabs = ['all', 'abyss'];
