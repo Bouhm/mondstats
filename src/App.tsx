@@ -4,15 +4,26 @@ import 'rc-pagination/assets/index.css';
 
 import { forEach } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 
+import AbyssPage from './components/abyss/AbyssPage';
+import ArtifactSetIndex from './components/artifactSets/ArtifactSetIndex';
+import ArtifactSetPage from './components/artifactSets/ArtifactSetPage';
+import CharacterIndex from './components/characters/CharacterIndex';
+import CharacterPage from './components/characters/CharacterPage';
+import Home from './components/Home';
 // import { gql, useQuery } from '@apollo/client';
 import useApi from './components/hooks/useApi';
 import { useAppDispatch } from './components/hooks/useRedux';
 import Navbar from './components/navbar/Navbar';
+import About from './components/pages/About';
+import Changelog from './components/pages/Changelog';
 import Sidebar from './components/sidebar/Sidebar';
+import ChartsPage from './components/stats/ChartsPage';
 import { ArrowUp } from './components/ui/Icons';
 import Loader from './components/ui/Loader';
+import WeaponIndex from './components/weapons/WeaponIndex';
+import WeaponPage from './components/weapons/WeaponPage';
 import {
   IArtifactData,
   IArtifactDb,
@@ -105,7 +116,19 @@ function App() {
       <div className="App-content">
         <Sidebar />
         <main>
-          {hasLoadedDb ? <Outlet /> : <Loader />}
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/changelog" component={Changelog} />
+            <Route path="/abyss" component={AbyssPage} />
+            <Route path="/characters/:shortName" component={CharacterPage} />
+            <Route path="/characters" component={CharacterIndex} />
+            <Route path="/artifacts/:shortName" component={ArtifactSetPage} />
+            <Route path="/artifacts" component={ArtifactSetIndex} />
+            <Route path="/weapons/:shortName" component={WeaponPage} />
+            <Route path="/weapons" component={WeaponIndex} />
+            <Route path="/charts" component={ChartsPage} />
+          </Switch>
           <div className="footer">
             <div className="scroll-to-top-button" ref={scrollBtnRef} onClick={() => window.scrollTo(0, 0)}>
               <ArrowUp />

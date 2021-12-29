@@ -2,7 +2,7 @@ import './Home.scss';
 
 import Logo from '/assets/logo_m.webp';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Button from './controls/Button';
 import useApi from './hooks/useApi';
@@ -20,7 +20,7 @@ function Home() {
   const topArtifactSetBuilds = useApi(`/artifactSets/stats/top-artifact-set-builds.json`)
   const topWeapons = useApi(`/weapons/stats/top-weapons.json`)
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+  const navigate = useHistory();
 
   useEffect(() => {
     if (topCharacters && topArtifactSetBuilds && topWeapons) {
@@ -54,7 +54,7 @@ function Home() {
         </div>
       </div>
       <div>
-        <Button onClick={() => navigate('/charts')}><>Show All</></Button>
+        <Button onClick={() => navigate.push('/charts')}><>Show All</></Button>
       </div>
     </div>
   )

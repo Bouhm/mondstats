@@ -16,7 +16,7 @@ import Empty from '../ui/Empty';
 import Loader from '../ui/Loader';
 
 function ArtifactSetPage() { 
-  const { shortName } = useParams();
+  const { shortName } = useParams<any>();
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)
   const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
   const characterDb = useAppSelector((state) => state.data.characterDb)

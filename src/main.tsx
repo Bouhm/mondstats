@@ -3,7 +3,7 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { QueryParamProvider } from 'use-query-params';
 
 import App from './App';
@@ -33,23 +33,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-          <QueryParamProvider ReactRouterRoute={RouteAdapter as unknown as React.FC}>
+        <QueryParamProvider ReactRouterRoute={Route}>
           <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<App/>}>
-              <Route index element={<Home />} />
-              <Route path="about" element={<About/>} />
-              <Route path="changelog" element={<Changelog/>} />
-              <Route path="abyss" element={<AbyssPage/>} />
-              <Route path="characters/:shortName" element={<CharacterPage/>} />
-              <Route path="characters" element={<CharacterIndex/>} />
-              <Route path="artifacts/:shortName" element={<ArtifactSetPage/>} />
-              <Route path="artifacts" element={<ArtifactSetIndex/>} />
-              <Route path="weapons/:shortName" element={<WeaponPage/>} />
-              <Route path="weapons" element={<WeaponIndex/>} />
-              <Route path="charts" element={<ChartsPage/>} />
-            </Route>
-          </Routes>
+          <App />
         </QueryParamProvider>
       </BrowserRouter>
     </Provider>
