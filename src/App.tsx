@@ -116,6 +116,7 @@ function App() {
       <div className="App-content">
         <Sidebar />
         <main>
+          {hasLoadedDb ? 
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
@@ -129,6 +130,7 @@ function App() {
             <Route path="/weapons" component={WeaponIndex} />
             <Route path="/charts" component={ChartsPage} />
           </Switch>
+          : <Loader />}
           <div className="footer">
             <div className="scroll-to-top-button" ref={scrollBtnRef} onClick={() => window.scrollTo(0, 0)}>
               <ArrowUp />

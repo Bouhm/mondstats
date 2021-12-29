@@ -82,8 +82,6 @@ function Weapons({ stats, filters }: BuildChartsProps) {
   const charsTotal = reduce(stats.characters, (sum, curr) => sum + curr.count, 0)
 
   const weapon = weaponDb[stats._id]
-  console.log(stats.characters);
-
   return (
     <div className='build-charts-container'>
       <div className="build-charts">

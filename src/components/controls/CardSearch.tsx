@@ -165,7 +165,7 @@ function CardSearch({ items, path, options, onSelect, OptionLabel, placeholder, 
         {showCards && 
           <div className={`cards ${showAll ? 'asFull' : ''}`}>
             {map(orderBy(searchedItems.length ? searchedItems : items, 'name', 'asc'), (item, i) => {
-              return <Link key={`${item._id}-${i}`} to={`${getShortName(item)}`}><Card onClick={handleSelect} path={path} {...item} /></Link>
+              return <Link key={`${item._id}-${i}`} to={`${path}/${getShortName(item)}`}><Card onClick={handleSelect} path={path} {...item} /></Link>
             })}
           </div>
         }
