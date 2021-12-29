@@ -27,7 +27,7 @@ function WeaponPage() {
       dispatch(setColorClass(weapon.type_name))
     }
   }, [weapon])
-  
+
   if (!weapon) return null;
 
   const weaponStats = useApi(`/weapons/${weapon._id}.json`)
@@ -46,7 +46,7 @@ function WeaponPage() {
 
   return (
     <div className="weapon-page">
-      <UsageStats count={weaponStats.count} total={weaponStats.typeTotal} abyssCount={weaponStats.abyssCount} abyssTotal={weaponStats.abyssTypeTota} />
+      <UsageStats count={weaponStats.count} total={weaponStats.typeTotal} abyssCount={weaponStats.abyssCount} abyssTotal={weaponStats.abyssTypeTotal} />
       <BuildCharts.Weapons stats={weaponStats} />
     </div>
   )
