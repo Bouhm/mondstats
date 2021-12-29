@@ -1,5 +1,3 @@
-import './ArtifactSetIndex.css';
-
 import { filter, includes, isEmpty } from 'lodash';
 import React, { useState } from 'react';
 

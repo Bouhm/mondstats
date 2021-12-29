@@ -83,12 +83,14 @@ function CharacterPage() {
     return <Empty />
   }
 
+  const imgFile = character.name.startsWith('Traveler') ? 'traveler' : character._id;
+
   return (
     <div className="character-page">
       <div className={`character-page-stats-count ${character.element}`} >
         <span>{selectedCharacterBuilds.count} {character.name} Builds</span>
       </div>
-      <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${character._id}_bg.webp")` }} /> 
+      <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${imgFile}_bg.webp")` }} /> 
       <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />
       {/* <UsageStats count={character.count} total={character.total} abyssCount={character.abyssCount} abyssTotal={character.abyssTotal} /> */}
       {selectedCharacterBuilds.builds &&

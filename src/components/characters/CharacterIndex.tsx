@@ -1,5 +1,3 @@
-import './CharacterIndex.css';
-
 import { filter, includes, isEmpty, map } from 'lodash';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

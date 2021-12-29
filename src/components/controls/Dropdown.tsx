@@ -2,10 +2,10 @@ import './Dropdown.scss';
 
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import Select, { components } from 'react-select';
+import { ClearIndicator } from 'react-select/src/components/indicators';
 import Sticky from 'react-stickynode';
 
 import { Search } from '../ui/Icons';
-import { ClearIndicator } from 'react-select/src/components/indicators';
 
 export type Option = { value: string, rarity?: number, label: string }
 

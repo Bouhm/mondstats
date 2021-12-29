@@ -33,6 +33,7 @@ import {
   setArtifactSetDb,
   setCharacterDb,
   setCharacterIdMap,
+  setTopBuilds,
   setWeaponDb,
 } from './Store';
 
@@ -42,6 +43,7 @@ function App() {
   const [hasLoadedDb, setHasLoadedDb] = useState(false)
   // const { loading, error, data } = useQuery(Query);
   const db = useApi(`/db.json`);
+  // const topBuilds = useApi('/abyss/stats/top-abyss-builds.json');
 
   useEffect(() => {
     if (db) {
@@ -80,6 +82,7 @@ function App() {
       dispatch(setCharacterDb(characterDb))
       dispatch(setCharacterIdMap(charIdMap))
       dispatch(setWeaponDb(weaponDb))
+      // dispatch(setTopBuilds(topBuilds))
       setHasLoadedDb(true)
     }
   }, [db, setHasLoadedDb])

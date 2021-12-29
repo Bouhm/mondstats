@@ -17,6 +17,16 @@
   }
 }
 
+.team-flex-container {
+  .usage-pct-value {
+    font-size: 3.6vw;
+  }
+
+  .usage-pct-count {
+    font-size: 1.2vw;
+  }
+}
+
 @media (max-width: 544px) {
   .usage-pct {
     .usage-pct-value {
@@ -33,6 +43,16 @@
 
     .usage-pct-value {
       font-size: 2rem;
+    }
+  }
+
+  .team-flex-container {
+    .usage-pct-count {
+      font-size: 0.7rem;
+    }
+
+    .usage-pct-value {
+      font-size: 1.6rem;
     }
   }
 }

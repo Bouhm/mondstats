@@ -62,6 +62,14 @@
       margin: 0 0.5rem;
     }
 
+    .team-exchange-stats {
+      display: flex;
+
+      img {
+        margin-left: 1rem;
+      }
+    }
+
     .team-flex-options {
       display: flex;
       flex-flow: column;

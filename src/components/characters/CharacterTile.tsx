@@ -1,6 +1,6 @@
-import './CharacterTile.css';
+import './CharacterTile.scss';
 
-import _ from 'lodash';
+import _, { map } from 'lodash';
 import React, { ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -12,11 +12,13 @@ export type CharacterTileProps = {
   id: string,
   labeled?: boolean,
   clickable?: boolean,
-  onClick?: (char: string) => void
+  onClick?: (char: string) => void,
+  build?: any
 }
 
-function CharacterTile({ id, labeled = true, onClick, clickable = true }: CharacterTileProps) {
+function CharacterTile({ id, labeled = true, onClick, clickable = true, build }: CharacterTileProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
+  const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
   const character = characterDb[id]
 
   if (!character) return null;
@@ -29,7 +31,7 @@ function CharacterTile({ id, labeled = true, onClick, clickable = true }: Charac
   }
 
   return (
-    <div className={`character-tile-container ${clickable ? 'asClickable' : ''}`} onClick={() => handleClick(getShortName(character))}>
+    <div className={`character-tile ${clickable ? 'asClickable' : ''}`} onClick={() => handleClick(getShortName(character))}>
       <div className={classes}>
         <div className="character-image">
           <LLImage className="character-portrait" src={`/assets/characters/${character._id}.webp`} alt={`${character.name}-portrait`} />
@@ -39,6 +41,14 @@ function CharacterTile({ id, labeled = true, onClick, clickable = true }: Charac
           {character.name}
         </div>}
       </div>
+      {/* {build &&
+        <div className="character-tile-build">
+          {map(artifactSetBuildDb[build.artifactSetBuildId].sets, ({ _id }) => (
+            <LLImage key={_id} src={`/assets/artifacts/${_id}.webp`} />
+          ))}
+          <LLImage src={`/assets/weapons/${build.weaponId}.webp`} />
+        </div>
+      } */}
     </div>
   )
 }

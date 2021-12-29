@@ -1,5 +1,4 @@
-.character-tile-container {
-}
+@use '../../variables.module' as var;
 
 .character-tile {
   position: relative;
@@ -9,6 +8,19 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+
+  .character-tile-build {
+    bottom: 0;
+    right: 0;
+    background: #242531;
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
 
   .element-icon {
     position: absolute;
@@ -25,7 +37,7 @@
       -moz-box-shadow: inset 0 0 5px #f2eee6;
       -webkit-box-shadow: inset 0 0 5px #f2eee6;
     }
-  
+
     a {
       &:hover,
       &:active {
@@ -59,7 +71,20 @@
 }
 
 @media (max-width: 676px) {
-  .character-tile-container {
+  .character-tile-name {
+    font-size: 0.9rem;
+    line-height: 0.8rem;
+    height: 2rem;
+  }
+}
+
+@media (max-width: 747px) {
+  .character-tile {
+    .element-icon {
+      width: 30px;
+      height: auto;
+    }
+
     .character-tile-name {
       font-size: 0.9rem;
       line-height: 0.8rem;
@@ -68,36 +93,17 @@
   }
 }
 
-@media (max-width: 747px) {
-  .character-tile-container {
-    .character-tile {
-      .element-icon {
-        width: 30px;
-        height: auto;
-      }
-
-      .character-tile-name {
-        font-size: 0.9rem;
-        line-height: 0.8rem;
-        height: 2rem;
-      }
-    }
-  }
-}
-
 @media (max-width: 544px) {
-  .character-tile-container {
-    .character-tile {
-      .element-icon {
-        width: 20px;
-        height: auto;
-      }
+  .character-tile {
+    .element-icon {
+      width: 20px;
+      height: auto;
+    }
 
-      .character-tile-name {
-        font-size: 0.8rem;
-        line-height: 0.7rem;
-        height: 2rem;
-      }
+    .character-tile-name {
+      font-size: 0.8rem;
+      line-height: 0.7rem;
+      height: 2rem;
     }
   }
 }

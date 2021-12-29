@@ -46,12 +46,13 @@ function Characters(props: CardSearchProps) {
 
   const OptionLabel = ({ value, rarity, label }: Option) => {
     const character = characterDb[value];
+    const imgFile = character.name.startsWith('Traveler') ? 'traveler' : character._id;
 
     return (
       <div className="item-option" key={label}>
         <div className={`item-option-image rarity-${rarity}`}>
           <img className="item-option-element" src={`/assets/elements/${character.element}.webp`} />
-          <img className="item-option-portrait" src={`/assets/characters/${character._id}.webp`} alt={`${label}-portrait`} />
+          <img className="item-option-portrait" src={`/assets/characters/${imgFile}.webp`} alt={`${label}-portrait`} />
         </div>
         <div className="item-option-label">{label}</div>
       </div>
