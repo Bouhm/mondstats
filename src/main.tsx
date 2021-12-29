@@ -12,11 +12,9 @@ import ArtifactSetIndex from './components/artifactSets/ArtifactSetIndex';
 import ArtifactSetPage from './components/artifactSets/ArtifactSetPage';
 import CharacterIndex from './components/characters/CharacterIndex';
 import CharacterPage from './components/characters/CharacterPage';
-import RouteAdapter from './components/controls/RouteAdapter';
 import Home from './components/Home';
 import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';
-import WIP from './components/pages/WIP';
 import ScrollToTop from './components/ScrollToTop';
 import ChartsPage from './components/stats/ChartsPage';
 import WeaponIndex from './components/weapons/WeaponIndex';
@@ -34,7 +32,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <QueryParamProvider ReactRouterRoute={RouteAdapter as unknown as React.FunctionComponent}>
+          <QueryParamProvider ReactRouterRoute={Route}>
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<App/>}>
