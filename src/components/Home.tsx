@@ -39,8 +39,9 @@ function Home() {
       </div>
       <div style={{color: 'white', textAlign: 'center', fontSize: '0.8rem'}}>
         <br />
-        HOYOLAB NO LONGER PROVIDES DATA FOR TEAMS AND ALL CHARACTERS 🪦<br />
-        DATA LAST UPDATED 11/25/21 UNTIL MIHOYO REVERTS THIS CHANGE<br />
+        HoYoLAB no longer includies data for Abyss team or all characters owned.<br />
+        Data cannot be updated until this changed is reverted.<br />
+        Last updated 11/25/21
         
       </div>
       <div className="home-top-charts">
