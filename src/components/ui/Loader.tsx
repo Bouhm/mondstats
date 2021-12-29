@@ -1,14 +1,16 @@
 import './Loader.scss';
 
-import loader from '/assets/loader.webp';
+import loaderB from '/assets/loaderBase.webp';
+import loaderF from '/assets/loaderFore.webp';
 import React from 'react';
-
-import LLImage from './LLImage';
 
 const Loader = () => {
   return (
     <div className="loader">
-      <LLImage className="logo" src={loader} alt="logo" />
+      <div className="logo">
+        <img className="logo" src={loaderB} alt="logo" />
+        <img className="logo asAnimated" src={loaderF} alt="logo" />
+      </div>
       Loading&hellip;
     </div>
   )

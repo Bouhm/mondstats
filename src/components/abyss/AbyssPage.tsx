@@ -1,15 +1,12 @@
 import './AbyssPage.scss';
 
 import axios from 'axios';
-import { Stats } from 'fs';
 import {
   clone,
   cloneDeep,
   countBy,
   difference,
   filter,
-  findIndex,
-  flatten,
   forEach,
   includes,
   isEmpty,
@@ -19,18 +16,10 @@ import {
   take,
 } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import Sticky from 'react-stickynode';
-import {
-  ArrayParam,
-  NumberParam,
-  StringParam,
-  useQueryParam,
-  useQueryParams,
-  withDefault,
-} from 'use-query-params';
+import { ArrayParam, NumberParam, StringParam, useQueryParams } from 'use-query-params';
 
 import { IAbyssFloor, IAbyssParty } from '../../data/types';
-import { fadeIn, getPercentage, getShortName } from '../../scripts/util';
+import { getShortName } from '../../scripts/util';
 import Team from '../abyss/Team';
 import Button from '../controls/Button';
 import CardSearch, { generateOptions } from '../controls/CardSearch';
@@ -79,7 +68,7 @@ function AbyssPage() {
 
   const [query, setQuery] = useQueryParams({
     floor: StringParam,
-    stage: withDefault(NumberParam, stages[0]),
+    stage: NumberParam,
     characters: ArrayParam
   })
   const floorTabs = useTabs(query.floor ? floors.indexOf(query.floor) : 0);

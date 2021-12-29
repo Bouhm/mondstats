@@ -1,12 +1,11 @@
 import './BuildCharts.scss';
 
-import { every, filter, forEach, map, orderBy, reduce, take } from 'lodash';
-import React, { ReactNode, useEffect, useState } from 'react';
-import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
+import { filter, forEach, map, orderBy, reduce } from 'lodash';
+import React, { useState } from 'react';
+import { NumberParam, useQueryParams } from 'use-query-params';
 
 import * as colorVars from '../../_variables.module.scss';
-import { IBuild } from '../../data/types';
-import { getArtifactSetBuildAbbreviation, getArtifactSetNames, getPercentage } from '../../scripts/util';
+import { getArtifactSetNames, getPercentage } from '../../scripts/util';
 import ArtifactSetBuildCard from '../artifactSets/ArtifactSetBuildCard';
 import ArtifactSetBuildDetail from '../artifactSets/ArtifactSetBuildDetail';
 import { FiltersType } from '../hooks/useFilters';
@@ -109,7 +108,7 @@ function CharacterBuilds({ builds, filters }: BuildChartsProps) {
   const filteredBuilds = filter(builds, ({ _id })=> !!artifactSetBuildDb[_id])
 
   const [query, setQuery] = useQueryParams({
-    buildIndex: withDefault(NumberParam, 0),
+    buildIndex: NumberParam
   })
   
   const [activeBuildIdx, setActiveBuildIdx] = useState(query.buildIndex ? query.buildIndex : 0)
