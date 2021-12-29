@@ -152,7 +152,7 @@ function AbyssPage() {
 
   const handleStageChange = (idx: number) => {
     // setQuery({ stage: stages[idx] }, 'pushIn');
-    // stageTabs.onTabChange(idx);
+    stageTabs.onTabChange(idx);
   }
 
   const renderTopTeams = () => {
