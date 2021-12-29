@@ -56,7 +56,7 @@ function AbyssPage() {
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const floors = ['ALL', ...map(range(9, 13), num => num.toString())];
-  const stages = [1, 2, 3];
+  const stages = ['1', '2', '3'];
   const { searchCharacters } = useCharacterSearch(characterDb);
 
   const [ abyssFloorTeams, setAbyssFloorTeams ] = useState<{[stage: number]: IAbyssFloor}>();
@@ -68,7 +68,7 @@ function AbyssPage() {
 
   const [query, setQuery] = useQueryParams({
     floor: StringParam,
-    stage: NumberParam,
+    stage: StringParam,
     characters: ArrayParam
   })
   const floorTabs = useTabs(query.floor ? floors.indexOf(query.floor) : 0);

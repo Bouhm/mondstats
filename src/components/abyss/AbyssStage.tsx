@@ -15,8 +15,8 @@ import Team from './Team';
 
 type AbyssFloorProps = {
   stageData: any,
-  floor: string | number,
-  stage: number,
+  floor: string,
+  stage: string,
   stageLimitToggle: { [floor: string]: boolean }
   onToggleLimit: (stage: string) => void;
 }
