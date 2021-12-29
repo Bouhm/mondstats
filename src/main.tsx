@@ -12,6 +12,7 @@ import ArtifactSetIndex from './components/artifactSets/ArtifactSetIndex';
 import ArtifactSetPage from './components/artifactSets/ArtifactSetPage';
 import CharacterIndex from './components/characters/CharacterIndex';
 import CharacterPage from './components/characters/CharacterPage';
+import RouteAdapter from './components/controls/RouteAdapter';
 import Home from './components/Home';
 import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';
@@ -32,7 +33,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-          <QueryParamProvider ReactRouterRoute={Route}>
+          <QueryParamProvider ReactRouterRoute={RouteAdapter as unknown as React.FC}>
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<App/>}>
