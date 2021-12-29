@@ -105,25 +105,7 @@ function App() {
       <div className="App-content">
         <Sidebar />
         <main>
-<<<<<<< HEAD
-          {hasLoadedDb ? 
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/changelog" component={Changelog} />
-            <Route path="/abyss" component={AbyssPage} />
-            <Route path="/characters/:shortName" component={CharacterPage} />
-            <Route path="/characters" component={CharacterIndex} />
-            <Route path="/artifacts/:shortName" component={ArtifactSetPage} />
-            <Route path="/artifacts" component={ArtifactSetIndex} />
-            <Route path="/weapons/:shortName" component={WeaponPage} />
-            <Route path="/weapons" component={WeaponIndex} />
-            <Route path="/charts" component={ChartsPage} />
-          </Switch>
-          : <Loader />}
-=======
           {hasLoadedDb ? <Outlet /> : <Loader />}
->>>>>>> parent of fedd9b9... downgrade react router
           <div className="footer">
             <div className="scroll-to-top-button" ref={scrollBtnRef} onClick={() => window.scrollTo(0, 0)}>
               <ArrowUp />
