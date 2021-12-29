@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { QueryParamProvider } from 'use-query-params';
 
 import App from './App';
 import AbyssPage from './components/abyss/AbyssPage';
@@ -11,6 +12,7 @@ import ArtifactSetIndex from './components/artifactSets/ArtifactSetIndex';
 import ArtifactSetPage from './components/artifactSets/ArtifactSetPage';
 import CharacterIndex from './components/characters/CharacterIndex';
 import CharacterPage from './components/characters/CharacterPage';
+import RouteAdapter from './components/controls/RouteAdapter';
 import Home from './components/Home';
 import About from './components/pages/About';
 import Changelog from './components/pages/Changelog';
@@ -20,8 +22,6 @@ import ChartsPage from './components/stats/ChartsPage';
 import WeaponIndex from './components/weapons/WeaponIndex';
 import WeaponPage from './components/weapons/WeaponPage';
 import store from './Store';
-import { QueryParamProvider } from 'use-query-params';
-import RouteAdapter from './components/controls/RouteAdapter';
 
 // const client = new ApolloClient({
 //   uri: 'https://mondstats-server.herokuapp.com/graphql',
@@ -34,8 +34,8 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <ScrollToTop />
         <QueryParamProvider ReactRouterRoute={RouteAdapter as unknown as React.FunctionComponent}>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<App/>}>
               <Route index element={<Home />} />
