@@ -34,7 +34,15 @@ function WeaponPage() {
   const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const max = 10;
   
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    if (weaponStats) {
+      setIsLoading(false)
+    }
+  }, [weaponStats])
+
   if (!weaponStats) return <Empty />
+  if (isLoading) return <Loader />
 
   return (
     <div className="weapon-page">

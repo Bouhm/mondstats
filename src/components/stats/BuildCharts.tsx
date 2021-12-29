@@ -2,6 +2,7 @@ import './BuildCharts.scss';
 
 import { every, filter, forEach, map, orderBy, reduce, take } from 'lodash';
 import React, { ReactNode, useEffect, useState } from 'react';
+import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 
 import * as colorVars from '../../_variables.module.scss';
 import { IBuild } from '../../data/types';
@@ -13,7 +14,6 @@ import { useAppSelector } from '../hooks/useRedux';
 import Chart from '../ui/Chart';
 import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
 import WeaponDetail from '../weapons/WeaponDetail';
-import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 
 type ArtifactSetBuildChartProps = {
   builds: any,
@@ -83,6 +83,7 @@ function Weapons({ stats, filters }: BuildChartsProps) {
   const charsTotal = reduce(stats.characters, (sum, curr) => sum + curr.count, 0)
 
   const weapon = weaponDb[stats._id]
+  console.log(stats.characters);
 
   return (
     <div className='build-charts-container'>
