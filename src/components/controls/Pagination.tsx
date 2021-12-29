@@ -1,6 +1,7 @@
-import React from "react";
-import _Pagination from 'rc-pagination';
 import './Pagination.scss';
+
+import _Pagination from 'rc-pagination';
+import React from 'react';
 
 type PaginationProps = {
   total: number,

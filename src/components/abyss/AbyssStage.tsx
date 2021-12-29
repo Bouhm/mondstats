@@ -1,16 +1,10 @@
 import AmberSad from '/assets/amberSad.webp';
-import { isEmpty, map, orderBy, reduce, some, take, values } from 'lodash';
+import { map, reduce, some, take } from 'lodash';
 import React, { Fragment } from 'react';
-import Sticky from 'react-stickynode';
 
-import { getPercentage } from '../../scripts/util';
 import Button from '../controls/Button';
-import { Option } from '../controls/Dropdown';
-import { useTabs } from '../hooks/useTabs';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
-import LLImage from '../ui/LLImage';
 import Loader from '../ui/Loader';
-import Tabs from '../ui/Tabs';
 import Team from './Team';
 
 type AbyssFloorProps = {

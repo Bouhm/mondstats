@@ -1,9 +1,7 @@
-import { filter, includes, isEmpty, map } from 'lodash';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { isEmpty } from 'lodash';
+import React from 'react';
 
 import CardSearch from '../controls/CardSearch';
-import useApi from '../hooks/useApi';
 import useCharacterSearch from '../hooks/useCharacterSearch';
 import { useAppSelector } from '../hooks/useRedux';
 import Loader from '../ui/Loader';

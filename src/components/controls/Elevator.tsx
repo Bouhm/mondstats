@@ -1,7 +1,6 @@
 import './Elevator.scss';
 
-import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 

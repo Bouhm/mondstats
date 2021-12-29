@@ -1,12 +1,8 @@
-import { filter, includes, intersection, isEmpty, map } from 'lodash';
-import React, { memo, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Sticky from 'react-stickynode';
-import { StringParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
+import { map } from 'lodash';
+import React, { useEffect, useState } from 'react';
+import { StringParam, useQueryParams, withDefault } from 'use-query-params';
 
 import useApi from '../hooks/useApi';
-import useCharacterSearch from '../hooks/useCharacterSearch';
-import { useAppSelector } from '../hooks/useRedux';
 import { useTabs } from '../hooks/useTabs';
 import Loader from '../ui/Loader';
 import Tabs from '../ui/Tabs';

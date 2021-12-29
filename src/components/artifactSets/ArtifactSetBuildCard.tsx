@@ -1,11 +1,8 @@
 import './ArtifactSetBuildCard.scss';
 
-import { isEmpty, map } from 'lodash';
-import React, { useEffect } from 'react';
+import { map } from 'lodash';
+import React from 'react';
 
-import { clippingParents } from '@popperjs/core';
-
-import { IArtifactSet } from '../../data/types';
 import { useAppSelector } from '../hooks/useRedux';
 import LLImage from '../ui/LLImage';
 

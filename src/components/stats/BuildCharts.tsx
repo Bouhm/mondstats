@@ -2,7 +2,7 @@ import './BuildCharts.scss';
 
 import { filter, forEach, map, orderBy, reduce } from 'lodash';
 import React, { useState } from 'react';
-import { NumberParam, StringParam, useQueryParams } from 'use-query-params';
+import { StringParam, useQueryParams } from 'use-query-params';
 
 import * as colorVars from '../../_variables.module.scss';
 import { getArtifactSetNames, getPercentage } from '../../scripts/util';

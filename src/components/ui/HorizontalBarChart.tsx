@@ -8,12 +8,9 @@ import { getPercentage } from '../../scripts/util';
 import Button from '../controls/Button';
 import useExpand from '../hooks/useExpand';
 import { useAppSelector } from '../hooks/useRedux';
-import AbyssStat from '../stats/AbyssStat';
 import UsagePct from '../stats/UsagePct';
-import Divider from './Divider';
 import { ChevronDown, ChevronUp } from './Icons';
 import LLImage from './LLImage';
-import Tooltip from './Tooltip';
 
 export interface IBarChartData {
   _id: string,

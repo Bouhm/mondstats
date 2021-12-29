@@ -1,11 +1,11 @@
 import './ArtifactSetPage.scss';
 
-import { filter, find, forEach, isEmpty, map, orderBy, reduce, take } from 'lodash';
+import { filter, find, forEach, orderBy, reduce, take } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import * as colorVars from '../../_variables.module.scss';
-import { getArtifactSetNames, getPercentage, getShortName } from '../../scripts/util';
+import { getArtifactSetNames, getShortName } from '../../scripts/util';
 import { setColorClass } from '../../Store';
 import useApi from '../hooks/useApi';
 import useExpand from '../hooks/useExpand';

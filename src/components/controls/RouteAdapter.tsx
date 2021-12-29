@@ -1,6 +1,6 @@
 import { Location } from 'history';
 import { useMemo } from 'react';
-import { BrowserRouter, useLocation, useNavigate, Location as RouterLocation } from 'react-router-dom';
+import { Location as RouterLocation, useLocation, useNavigate } from 'react-router-dom';
 
 const RouteAdapter: React.FunctionComponent<{
   children: React.FunctionComponent<{

@@ -1,23 +1,17 @@
 import './CharacterPage.scss';
 
-import { cloneDeep, find, forEach, isEmpty, map, random, reduce, take } from 'lodash';
+import { isEmpty, reduce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Sticky from 'react-stickynode';
 
 import { ICharacterData } from '../../data/types';
-import { getCharacterFileName, getPercentage } from '../../scripts/util';
 import { selectCharacter, setColorClass } from '../../Store';
-import Filters from '../filters/Filters';
 import useApi from '../hooks/useApi';
 import useFilters from '../hooks/useFilters';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { useTabs } from '../hooks/useTabs';
 import BuildCharts from '../stats/BuildCharts';
-import Delta from '../stats/Delta';
-import Chart from '../ui/Chart';
 import Empty from '../ui/Empty';
-import { CaretUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 import Tabs from '../ui/Tabs';
 import Constellations from './Constellations';

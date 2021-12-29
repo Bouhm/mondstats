@@ -1,18 +1,15 @@
-import { find, isEmpty, orderBy, reduce, take } from 'lodash';
+import { find } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getShortName } from '../../scripts/util';
 import { setColorClass } from '../../Store';
-import Button from '../controls/Button';
 import useApi from '../hooks/useApi';
 import useExpand from '../hooks/useExpand';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import BuildCharts from '../stats/BuildCharts';
 import UsageStats from '../stats/UsageStats';
 import Empty from '../ui/Empty';
-import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
-import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 
 function WeaponPage() { 

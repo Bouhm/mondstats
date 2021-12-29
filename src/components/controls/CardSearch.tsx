@@ -1,12 +1,12 @@
 import './CardSearch.scss';
 
 import Fuse from 'fuse.js';
-import { debounce, difference, filter, find, includes, map, orderBy, times, uniq } from 'lodash';
+import { debounce, filter, find, includes, map, orderBy } from 'lodash';
 import React, { ReactNode, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Sticky from 'react-stickynode';
 
-import { getCharacterFileName, getShortName } from '../../scripts/util';
+import { getShortName } from '../../scripts/util';
 import Dropdown, { Option } from '../controls/Dropdown';
 import { useAppSelector } from '../hooks/useRedux';
 import Card from '../ui/Card';

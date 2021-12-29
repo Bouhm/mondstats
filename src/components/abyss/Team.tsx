@@ -1,20 +1,15 @@
 import './Team.scss';
 
-import { filter, isEmpty, map, take } from 'lodash';
+import { filter, map } from 'lodash';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import { IFlexChar, IParty } from '../../data/types';
-import { getPercentage, getShortName } from '../../scripts/util';
+import { IFlexChar } from '../../data/types';
 import CharacterCount from '../characters/CharacterCount';
 import CharacterTile from '../characters/CharacterTile';
 import useExpand from '../hooks/useExpand';
 import { useAppSelector } from '../hooks/useRedux';
-import AbyssStat from '../stats/AbyssStat';
 import UsagePct from '../stats/UsagePct';
-import Divider from '../ui/Divider';
 import { ChevronDown, ChevronUp, Exchange } from '../ui/Icons';
-import Tooltip from '../ui/Tooltip';
 
 type TeamProps = {
   team: string[],

@@ -1,4 +1,4 @@
-import { filter, flatten, includes, map, reduce, uniq } from 'lodash';
+import { filter, flatten, includes, map, uniq } from 'lodash';
 
 import { KEYWORDS } from '../controls/Searchbar';
 

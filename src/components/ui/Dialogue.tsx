@@ -1,8 +1,8 @@
 import './Dialogue.scss';
 
-import _ from 'lodash';
 import React, { ReactNode } from 'react';
-import LLImage from './LLImage'
+
+import LLImage from './LLImage';
 
 type DialogueProps = {
   children: ReactNode

@@ -16,9 +16,8 @@ export type CharacterTileProps = {
   build?: any
 }
 
-function CharacterTile({ id, labeled = true, onClick, clickable = true, build }: CharacterTileProps) {
+function CharacterTile({ id, labeled = true, onClick, clickable = true }: CharacterTileProps) {
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const artifactSetBuildDb = useAppSelector((state) => state.data.artifactSetBuildDb)
   const character = characterDb[id]
 
   if (!character) return null;

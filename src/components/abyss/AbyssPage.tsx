@@ -16,14 +16,13 @@ import {
   take,
 } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { ArrayParam, NumberParam, StringParam, useQueryParams } from 'use-query-params';
+import { ArrayParam, StringParam, useQueryParams } from 'use-query-params';
 
 import { IAbyssFloor, IAbyssParty } from '../../data/types';
 import { getShortName } from '../../scripts/util';
 import Team from '../abyss/Team';
 import Button from '../controls/Button';
 import CardSearch, { generateOptions } from '../controls/CardSearch';
-import { Option } from '../controls/Dropdown';
 import useApi from '../hooks/useApi';
 import useCharacterSearch from '../hooks/useCharacterSearch';
 import useFilters from '../hooks/useFilters';
@@ -36,21 +35,6 @@ import AbyssStage from './AbyssStage';
 
 // import abyssFloors from './abyssFloors.json';
 // import abyssTopTeams from './top-teams.json';
-
-const _compareFloor = (f1: Option, f2: Option) => {
-  if (f1.value.startsWith('_') || f2.value.startsWith('_')) {
-    return f1.value.startsWith('_') ? 0 : 1;
-  }
-
-  const f1Strs = f1.value.split("-")
-  const f2Strs = f2.value.split("-")
-
-  if (parseInt(f1Strs[0]) === parseInt(f2Strs[0])) {
-    return parseInt(f1Strs[1]) - parseInt(f2Strs[1])
-  } else {
-    return parseInt(f1Strs[0]) - parseInt(f2Strs[0])
-  }
-}
 
 function AbyssPage() {
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)

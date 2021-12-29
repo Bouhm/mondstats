@@ -1,6 +1,5 @@
 import './Toggle.scss';
 
-import _ from 'lodash';
 import React, { ReactNode, useState } from 'react';
 
 type ToggleProps = {

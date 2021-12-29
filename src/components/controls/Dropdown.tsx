@@ -1,9 +1,7 @@
 import './Dropdown.scss';
 
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Select, { components } from 'react-select';
-import { ClearIndicator } from 'react-select/src/components/indicators';
-import Sticky from 'react-stickynode';
 
 import { Search } from '../ui/Icons';
 

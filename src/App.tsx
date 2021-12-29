@@ -11,7 +11,6 @@ import useApi from './components/hooks/useApi';
 import { useAppDispatch } from './components/hooks/useRedux';
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
-import Dialogue from './components/ui/Dialogue';
 import { ArrowUp } from './components/ui/Icons';
 import Loader from './components/ui/Loader';
 import {
@@ -33,7 +32,6 @@ import {
   setArtifactSetDb,
   setCharacterDb,
   setCharacterIdMap,
-  setTopBuilds,
   setWeaponDb,
 } from './Store';
 

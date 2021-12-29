@@ -1,6 +1,6 @@
 import './Constellations.scss';
 
-import _, { map } from 'lodash';
+import { map } from 'lodash';
 import React, { ReactNode } from 'react';
 
 import { getPercentage } from '../../scripts/util';

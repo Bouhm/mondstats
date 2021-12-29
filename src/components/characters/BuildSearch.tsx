@@ -1,12 +1,11 @@
 import './CharacterTable.css';
 
-import { filter, includes, isEmpty, map } from 'lodash';
-import React, { useState } from 'react';
+import { isEmpty } from 'lodash';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { getShortName } from '../../scripts/util';
 import CardSearch from '../controls/CardSearch';
-import useApi from '../hooks/useApi';
 import useCharacterSearch from '../hooks/useCharacterSearch';
 import { useAppSelector } from '../hooks/useRedux';
 import Loader from '../ui/Loader';

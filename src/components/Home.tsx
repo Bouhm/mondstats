@@ -1,11 +1,9 @@
 import './Home.scss';
 
 import Logo from '/assets/logo_m.webp';
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { numberWithCommas } from '../scripts/util';
 import Button from './controls/Button';
 import useApi from './hooks/useApi';
 import StatsTable from './stats/StatsTable';

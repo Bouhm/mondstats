@@ -2,7 +2,6 @@ import { filter, includes, isEmpty } from 'lodash';
 import React, { useState } from 'react';
 
 import CardSearch from '../controls/CardSearch';
-import useApi from '../hooks/useApi';
 import { useAppSelector } from '../hooks/useRedux';
 import useWeaponSearch from '../hooks/useWeaponSearch';
 import Loader from '../ui/Loader';

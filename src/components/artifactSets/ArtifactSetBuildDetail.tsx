@@ -1,11 +1,10 @@
 import './ArtifactSetBuildDetail.css';
 
 import { map } from 'lodash';
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { IArtifactSetData } from '../../data/types';
-import LLImage from '../ui/LLImage';
 import { useAppSelector } from '../hooks/useRedux';
+import LLImage from '../ui/LLImage';
 
 function ArtifactSetBuildDetail(props: any) {
   const artifactSetDb = useAppSelector((state) => state.data.artifactSetDb)

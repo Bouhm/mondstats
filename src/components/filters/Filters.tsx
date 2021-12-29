@@ -1,7 +1,7 @@
 import './Filters.scss';
 
 import { includes, keys, map, omit } from 'lodash';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { FiltersType } from '../hooks/useFilters';
 import Divider from '../ui/Divider';
