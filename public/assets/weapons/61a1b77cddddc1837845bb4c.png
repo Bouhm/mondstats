@@ -2,7 +2,7 @@
 <Error>
   <Code>NoSuchKey</Code>
   <Message>The specified key does not exist.</Message>
-  <RequestId>61B53B50D0409B31310D66BB</RequestId>
+  <RequestId>61CBCAF223C0543337DAAED5</RequestId>
   <HostId>plat-bbs-upload-sea.oss-cn-hongkong.aliyuncs.com</HostId>
   <Key>game_record/genshin/equip/UI_EquipIcon_Sword_Opus.png</Key>
 </Error>

@@ -1,6 +1,7 @@
 import './AbyssPage.scss';
 
 import axios from 'axios';
+import { Stats } from 'fs';
 import {
   clone,
   cloneDeep,
@@ -19,6 +20,14 @@ import {
 } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import Sticky from 'react-stickynode';
+import {
+  ArrayParam,
+  NumberParam,
+  StringParam,
+  useQueryParam,
+  useQueryParams,
+  withDefault,
+} from 'use-query-params';
 
 import { IAbyssFloor, IAbyssParty } from '../../data/types';
 import { getPercentage, getShortName } from '../../scripts/util';
@@ -35,8 +44,6 @@ import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
 import Tabs from '../ui/Tabs';
 import AbyssStage from './AbyssStage';
-import { ArrayParam, NumberParam, StringParam, useQueryParam, useQueryParams, withDefault } from 'use-query-params';
-import { Stats } from 'fs';
 
 // import abyssFloors from './abyssFloors.json';
 // import abyssTopTeams from './top-teams.json';
@@ -82,8 +89,8 @@ function AbyssPage() {
   async function fetchAbyssData() {
     setIsLoading(true);
     await Promise.all(map(range(1,4), async (stageNum) => { 
-      // return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
-      return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
+      return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
+      // return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
         headers: { 'accept': 'application/vnd.github.v3.raw+json' },
       }).then(res => ({ [stageNum]: res.data }))
     })).then(data => { loadAbyssFloorTeams(data); setIsLoading(false) })
