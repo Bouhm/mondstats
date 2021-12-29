@@ -78,3 +78,5 @@ export function getPercentage(count: number, total: number) {
   if (!count || !total) return 0;
   return Math.round((count / total) * 100 * 10) / 10;
 }
+
+export const fadeIn = (i: number, duration: number, delay: number) => `fadeIn ${duration}ms ease-out ${delay * (i + 1)}ms forwards`;

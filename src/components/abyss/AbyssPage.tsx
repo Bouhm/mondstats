@@ -30,7 +30,7 @@ import {
 } from 'use-query-params';
 
 import { IAbyssFloor, IAbyssParty } from '../../data/types';
-import { getPercentage, getShortName } from '../../scripts/util';
+import { fadeIn, getPercentage, getShortName } from '../../scripts/util';
 import Team from '../abyss/Team';
 import Button from '../controls/Button';
 import CardSearch, { generateOptions } from '../controls/CardSearch';

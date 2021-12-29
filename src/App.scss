@@ -145,6 +145,16 @@ footer {
   background: var.$rarity-105;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 @media (max-width: 1036px) {
   .App {
     .App-content {
