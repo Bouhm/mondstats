@@ -12,6 +12,7 @@ import useExpand from '../hooks/useExpand';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import BuildCharts from '../stats/BuildCharts';
 import UsageStats from '../stats/UsageStats';
+import Empty from '../ui/Empty';
 import Loader from '../ui/Loader';
 
 function ArtifactSetPage() { 
@@ -43,6 +44,7 @@ function ArtifactSetPage() {
     }
   }, [artifactSetStats, artifactSetTotals])
   
+  if (!artifactSetStats || !artifactSetStats.artifactSetBuilds[activeBuildIdx]) return <Empty />
   if (isLoading) return <Loader />
 
   const charsTotal = reduce(artifactSetStats.artifactSetBuilds[activeBuildIdx].characters, (sum, curr) => sum + curr.count, 0)
@@ -65,7 +67,6 @@ function ArtifactSetPage() {
     data.push(count);
     countSum += count;
   })
-
 
   const handleSelectSet = (i: number) => {
     setActiveBuildIdx(i);

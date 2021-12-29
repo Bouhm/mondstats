@@ -10,6 +10,7 @@ import useExpand from '../hooks/useExpand';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import BuildCharts from '../stats/BuildCharts';
 import UsageStats from '../stats/UsageStats';
+import Empty from '../ui/Empty';
 import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
 import { ChevronDown, ChevronUp } from '../ui/Icons';
 import Loader from '../ui/Loader';
@@ -33,7 +34,7 @@ function WeaponPage() {
   const { expanded, handleExpand } = useExpand(window.innerWidth > 1036);
   const max = 10;
   
-  if (!weaponStats || isEmpty(weaponDb) || isEmpty(weaponStats)) return <Loader />
+  if (!weaponStats) return <Empty />
 
   return (
     <div className="weapon-page">
