@@ -39,7 +39,7 @@ function Home() {
       </div>
       <div style={{color: 'white', textAlign: 'center', fontSize: '0.8rem'}}>
         <br />
-        HoYoLAB no longer includes data for Abyss team or all characters owned.<br />
+        HoYoLAB no longer includes data for Abyss team or characters owned.<br />
         Data cannot be updated until this changed is reverted.<br />
         Last updated 11/25/21
         
