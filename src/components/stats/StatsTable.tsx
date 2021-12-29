@@ -2,6 +2,7 @@ import './StatsTable.scss';
 
 import { capitalize, filter, map, orderBy } from 'lodash';
 import React from 'react';
+import { StringParam, useQueryParams, withDefault } from 'use-query-params';
 
 import { getPercentage } from '../../scripts/util';
 import ArtifactSetBuildCard from '../artifactSets/ArtifactSetBuildCard';
@@ -9,12 +10,12 @@ import { useAppSelector } from '../hooks/useRedux';
 import { useTabs } from '../hooks/useTabs';
 import LLImage from '../ui/LLImage';
 import Tabs from '../ui/Tabs';
-import { StringParam, useQueryParams, withDefault } from 'use-query-params';
 
 function Characters({data, isPreview }: any) {
   const db = useAppSelector((state) => state.data.characterDb)
   const title = 'characters'
 
+  // Total number of players before the whole hoyolab API changing and making everything obsolete
   const getTotal = () => 57824
   
   const getAbyssTotal = () => data.totals.abyssTotal
