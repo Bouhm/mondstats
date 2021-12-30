@@ -34,6 +34,8 @@ function HorizontalBarChart({ data, db, total, path }: HorizontalBarChart) {
   return <div className="horizontal-barchart-container">
     {map(take(data, expanded ? 20 : max), ({ _id, count }, i) => {
       const popularity = getPercentage(count, total);
+
+      if (!db[_id]) return null;
       const { name, rarity } = db[_id];
 
       return (
