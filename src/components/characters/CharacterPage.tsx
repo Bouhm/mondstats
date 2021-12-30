@@ -2,7 +2,7 @@ import './CharacterPage.scss';
 
 import { isEmpty, reduce } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 import { ICharacterData } from '../../data/types';
 import { selectCharacter, setColorClass } from '../../Store';
@@ -15,6 +15,7 @@ import Empty from '../ui/Empty';
 import Loader from '../ui/Loader';
 import Tabs from '../ui/Tabs';
 import Constellations from './Constellations';
+import Button from '../controls/Button';
 
 function CharacterPage() {  
   const { shortName } = useParams();
@@ -36,6 +37,7 @@ function CharacterPage() {
   const _characterBuilds = useApi(`/characters/${charId}.json`);
   const _characterAbyssBuilds = useApi(`/characters/abyss/${charId}.json`);
   const [selectedCharacterBuilds, setCharacterBuilds] = useState(_characterBuilds);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isEmpty(characterDb)) {
@@ -94,6 +96,11 @@ function CharacterPage() {
             <Constellations constellations={selectedCharacterBuilds.constellations} total={reduce(selectedCharacterBuilds.constellations, (sum, curr) => sum + curr, 0)} />
           }
         </>
+      }
+      {
+        <div className="character-page-goto-teams">
+          <Button onClick={() => navigate(`/abyss?characters=${shortName}`)}>Go to Teams</Button>
+        </div>
       }
     </div>
   )
