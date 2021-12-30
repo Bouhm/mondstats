@@ -11,6 +11,7 @@ import ArtifactSetBuildDetail from '../artifactSets/ArtifactSetBuildDetail';
 import { FiltersType } from '../hooks/useFilters';
 import { useAppSelector } from '../hooks/useRedux';
 import Chart from '../ui/Chart';
+import Empty from '../ui/Empty';
 import HorizontalBarChart, { IBarChartData } from '../ui/HorizontalBarChart';
 import WeaponDetail from '../weapons/WeaponDetail';
 
@@ -82,7 +83,7 @@ function Weapons({ stats, filters }: BuildChartsProps) {
   const charsTotal = reduce(stats.characters, (sum, curr) => sum + curr.count, 0)
 
   const weapon = weaponDb[stats._id]
-  
+
   return (
     <div className='build-charts-container'>
       <div className="build-charts">
@@ -140,9 +141,11 @@ function CharacterBuilds({ builds, filters }: BuildChartsProps) {
   )
 }
 
-function ArtifactSetBuilds({ builds, filters }: BuildChartsProps) {
+function ArtifactSetBuilds({ builds, filters }: BuildChartsProps) {  
   const characterDb = useAppSelector((state) => state.data.characterDb)
   const [activeBuildIdx, setActiveBuildIdx] = useState(0)
+    
+  if (!builds[activeBuildIdx]) return <Empty />
   const charsTotal = reduce(builds[activeBuildIdx].characters, (sum, curr) => sum + curr.count, 0)
 
   const handleSelectSet = (i: number) => {

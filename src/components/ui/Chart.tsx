@@ -1,3 +1,4 @@
+import { Chart, ChartItem, ChartOptions, registerables } from 'chart.js';
 import _ from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -25,16 +26,8 @@ type ChartProps = {
   semi?: boolean
 }
 
-declare global {
-  interface Window {
-    Chart: any;
-  }
-}
-const Chart = window.Chart;
-console.log(Chart)
-
 function Donut({ id = "", className = "", max, labels=[], colors = [], data = [], datasets = [], showScale = true, semi=false}: ChartProps) {
-  // Chart.register(...registerables)
+  Chart.register(...registerables)
   Chart.defaults.plugins.tooltip.displayColors = false;
   Chart.defaults.plugins.legend.display = false;
   Chart.defaults.plugins.tooltip.animation.duration = 0;
@@ -44,7 +37,7 @@ function Donut({ id = "", className = "", max, labels=[], colors = [], data = []
   const ref = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    let chart: typeof Chart;
+    let chart: Chart;
     let _datasets = datasets.length ? datasets :
       [
         {
@@ -54,7 +47,7 @@ function Donut({ id = "", className = "", max, labels=[], colors = [], data = []
       ]
 
     if (ref && ref.current) {
-      const chartOptions: any = {
+      const chartOptions: ChartOptions<any> = {
         borderColor: "rgba(255,255,255,0.7)",
         animation: {
           duration: hasMounted ? 0 : 600,
@@ -73,7 +66,7 @@ function Donut({ id = "", className = "", max, labels=[], colors = [], data = []
         chartOptions.cutout = 120;
       }
       
-      chart = new Chart(ref.current.getContext("2d"), {
+      chart = new Chart(ref.current.getContext("2d")! as ChartItem, {
         type: "doughnut",
         data: {
           labels,
@@ -94,7 +87,7 @@ function Donut({ id = "", className = "", max, labels=[], colors = [], data = []
 
 
 function Odometer({ id = "", className = "", max, labels=[], colors = [], data = [], datasets = [], showScale = true, semi=false}: ChartProps) {
-  // Chart.register(...registerables)
+  Chart.register(...registerables)
   Chart.defaults.plugins.tooltip.displayColors = false;
   Chart.defaults.plugins.legend.display = false;
   Chart.defaults.plugins.tooltip.animation.duration = 0;
@@ -104,7 +97,7 @@ function Odometer({ id = "", className = "", max, labels=[], colors = [], data =
   const ref = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    let chart:  typeof Chart;
+    let chart: Chart;
     let _datasets = datasets.length ? datasets :
       [
         {
@@ -114,7 +107,7 @@ function Odometer({ id = "", className = "", max, labels=[], colors = [], data =
       ]
 
     if (ref && ref.current) {
-      const chartOptions = {
+      const chartOptions: ChartOptions<any> = {
         borderColor: "rgba(255,255,255,0.7)",
         animation: {
           duration: hasMounted ? 0 : 600,
@@ -143,7 +136,7 @@ function Odometer({ id = "", className = "", max, labels=[], colors = [], data =
       }
       }
       
-      chart = new Chart(ref.current.getContext("2d"), {
+      chart = new Chart(ref.current.getContext("2d")! as ChartItem, {
         type: "doughnut",
         data: {
           labels,

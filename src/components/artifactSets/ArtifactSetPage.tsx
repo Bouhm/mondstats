@@ -44,7 +44,7 @@ function ArtifactSetPage() {
     }
   }, [artifactSetStats, artifactSetTotals])
   
-  if (!artifactSetStats || !artifactSetStats.artifactSetBuilds[activeBuildIdx]) return <Empty />
+  if (!artifactSetStats || !artifactSetTotals || !artifactSetStats.artifactSetBuilds[activeBuildIdx]) return <Empty />
   if (isLoading) return <Loader />
 
   const charsTotal = reduce(artifactSetStats.artifactSetBuilds[activeBuildIdx].characters, (sum, curr) => sum + curr.count, 0)
