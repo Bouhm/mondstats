@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const useApi = (path: string) => {
-  // const apiBase = 'https://bouhm.github.io/mondstats-data'
-  const apiBase = 'https://raw.githubusercontent.com/bouhm/mondstats-data/develop'
+  const apiBase = 'https://bouhm.github.io/mondstats-data'
+  // const apiBase = 'https://raw.githubusercontent.com/bouhm/mondstats-data/develop'
   const [data, setData] = useState<any>(undefined)
 
   useEffect(() => {
