@@ -16,7 +16,7 @@ import {
   take,
 } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { ArrayParam, StringParam, useQueryParams } from 'use-query-params';
+import { ArrayParam, NumberParam, StringParam, useQueryParams } from 'use-query-params';
 
 import { IAbyssFloor, IAbyssParty } from '../../data/types';
 import { getShortName } from '../../scripts/util';
@@ -39,8 +39,8 @@ import AbyssStage from './AbyssStage';
 function AbyssPage() {
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const characterDb = useAppSelector((state) => state.data.characterDb)
-  const floors = ['ALL', ...map(range(9, 13), num => num.toString())];
-  const stages = ['1', '2', '3'];
+  const floors = [0, ...range(9, 13)];
+  const stages = [1, 2, 3];
   const { searchCharacters } = useCharacterSearch(characterDb);
 
   const [ abyssFloorTeams, setAbyssFloorTeams ] = useState<{[stage: number]: IAbyssFloor}>();
@@ -51,13 +51,12 @@ function AbyssPage() {
   const abyssTopTeams = useApi('/abyss/stats/top-abyss-teams.json');
 
   const [query, setQuery] = useQueryParams({
-    floor: StringParam,
-    // stage: StringParam,
+    floor: NumberParam,
+    stage: NumberParam,
     characters: ArrayParam
   })
   const floorTabs = useTabs(query.floor ? floors.indexOf(query.floor) : 0);
-  // const stageTabs = useTabs(query.stage ? stages.indexOf(query.stage) : 0);
-  const stageTabs = useTabs(0);
+  const stageTabs = useTabs(query.stage ? stages.indexOf(query.stage) : 0);
   const [ selectedCharacters, setSelectedCharacters] = useState<string[]>(query.characters ? map(query.characters, char => characterIdMap[char!]) : [])
 
   async function fetchAbyssData() {
@@ -143,15 +142,14 @@ function AbyssPage() {
   }
 
   const handleFloorChange = (idx: number) => {
-    const tabFloor = floors[idx] === 'ALL' ? undefined : floors[idx];
-    // setQuery({ floor: tabFloor, stage: undefined });
-    setQuery({ floor: tabFloor });
+    const tabFloor = idx === 0 ? undefined : floors[idx];
+    setQuery({ floor: tabFloor, stage: undefined });
     floorTabs.onTabChange(idx);
-    // stageTabs.onTabChange(0)
+    stageTabs.onTabChange(0)
   }
 
   const handleStageChange = (idx: number) => {
-    // setQuery({ stage: stages[idx] }, 'pushIn');
+    setQuery({ stage: stages[idx] }, 'pushIn');
     stageTabs.onTabChange(idx);
   }
 
@@ -204,7 +202,7 @@ function AbyssPage() {
   const renderTeams = () => (
     <div className="floor-container">
       <div key={floors[floorTabs.activeTabIdx]} className="stage-container">
-        {floors[floorTabs.activeTabIdx] === "ALL" ? renderTopTeams() : renderFloorTeams()}
+        {floorTabs.activeTabIdx === 0 ? renderTopTeams() : renderFloorTeams()}
       </div>
     </div>
   )
@@ -224,7 +222,7 @@ function AbyssPage() {
         showCards={false}
       />
       <br />
-      <Tabs activeTabIdx={floorTabs.activeTabIdx} onChange={handleFloorChange} tabs={map(floors, (floor, i) => i === 0 ? floor : 'Floor ' + floor)} />
+      <Tabs activeTabIdx={floorTabs.activeTabIdx} onChange={handleFloorChange} tabs={map(floors, (floor, i) => i === 0 ? 'ALL' : 'Floor ' + floor)} />
       {floorTabs.activeTabIdx !== 0 && <Tabs activeTabIdx={stageTabs.activeTabIdx} onChange={handleStageChange} tabs={map(stages, stage => 'Stage ' + stage)} />}
       {!isEmpty(characterDb) && renderTeams()}
     </div>
