@@ -4,7 +4,7 @@ import './HorizontalBarChart.scss';
 import { map, take } from 'lodash';
 import React from 'react';
 
-import { getPercentage } from '../../scripts/util';
+import { getCharacterLabel, getPercentage } from '../../scripts/util';
 import Button from '../controls/Button';
 import useExpand from '../hooks/useExpand';
 import { useAppSelector } from '../hooks/useRedux';
@@ -37,15 +37,16 @@ function HorizontalBarChart({ data, db, total, path }: HorizontalBarChart) {
 
       if (!db[_id]) return null;
       const { name, rarity } = db[_id];
+      const charFile = name === 'Traveler' ? 'traveler' : _id;
 
       return (
         <div key={`${_id}-${count}-${i}`} className="horizontal-barchart">
           <div className={`bar-card`}>
             <div className='bar-card-title'>
-              <LLImage className={`rarity-${rarity}`} src={`/assets/${path}/${_id}.webp`} alt={name} />
+              <LLImage className={`rarity-${rarity}`} src={`/assets/${path}/${charFile}.webp`} alt={name} />
               <div className="bar-card-detail">
                 <div className="bar-card-name">
-                  {name}
+                  {getCharacterLabel(db[_id])}
                 </div>
                 <UsagePct count={count || count} total={total} />
               </div>
