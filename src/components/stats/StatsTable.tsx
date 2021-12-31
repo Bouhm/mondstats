@@ -102,18 +102,17 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
   const { activeTabIdx, onTabChange } = useTabs(query ? (tabs.indexOf(capitalize(query.type)) | 0) : 0);
 
   let defaultData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
-  if (isPreview) defaultData = orderBy(data[field], 'abyssCount', 'desc').slice(0, 5);
+  if (isPreview) defaultData = orderBy(defaultData, 'abyssCount', 'desc').slice(0, 5);
 
-  const [filteredData, setFilteredData] = useState(defaultData);
+  const [orderedData, setOrderedData] = useState(defaultData);
   useEffect(() => {
-    console.log('col change')
+    let filteredData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
     if (query.columnOrder && query.columnOrder === columns[1]) {
-      setFilteredData(orderBy(data[field], 'abyssCount', 'desc'))
+      setOrderedData(orderBy(filteredData, 'abyssCount', 'desc'))
     } else {
-      setFilteredData(orderBy(data[field], 'count', 'desc'))
+      setOrderedData(orderBy(filteredData, 'count', 'desc'))
     }
-    console.log(filteredData)
-  }, [query.columnOrder])
+  }, [query.columnOrder, dataFilter, activeTabIdx])
 
   const handleTabChange = (i: number) => {
     if (!!tabs.length) {
@@ -153,7 +152,7 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
         </thead>
         }
       <tbody>
-        {map(filteredData, (item, i) => {
+        {map(orderedData, (item, i) => {
           const total = getPercentage(item.count, getTotal(item));
           const abyssTotal = getPercentage(item.abyssCount, getAbyssTotal(item));
 
