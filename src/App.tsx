@@ -116,7 +116,6 @@ function App() {
               {/* <div className="notice" onClick={() => setShowNotice(true)}>⚠️</div> */}
             </div>
             <footer>Genshin Impact is a registered trademark of miHoYo Co., Ltd. Mondstats is not affiliated or in any way officially connected with miHoYo.</footer>
-            <span className="build-ver">dev build 12.27.21</span>
           </div>
         </main>
       </div>

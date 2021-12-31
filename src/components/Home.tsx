@@ -22,8 +22,11 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     if (topCharacters && topArtifactSetBuilds && topWeapons) {
+  console.log(topWeapons)
+
       setIsLoading(false)
     }
   }, [topCharacters, topArtifactSetBuilds, topWeapons])

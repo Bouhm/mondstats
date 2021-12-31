@@ -1,13 +1,14 @@
 import './StatsTable.scss';
 
 import { capitalize, filter, map, orderBy } from 'lodash';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StringParam, useQueryParams, withDefault } from 'use-query-params';
 
 import { getPercentage } from '../../scripts/util';
 import ArtifactSetBuildCard from '../artifactSets/ArtifactSetBuildCard';
 import { useAppSelector } from '../hooks/useRedux';
 import { useTabs } from '../hooks/useTabs';
+import { CaretDown, CaretUp } from '../ui/Icons';
 import LLImage from '../ui/LLImage';
 import Tabs from '../ui/Tabs';
 
@@ -90,18 +91,50 @@ type StatsTableProps = {
 } 
 
 function StatsTable({ data, isPreview = false, title, field = title, tabs = [], getTotal, getAbyssTotal, getColorClass, dataFilter, renderImage }: StatsTableProps) {
+  
+  const columns = ['all', 'abyss']
+  const [orderDir, setOrderDir] = useState('desc');
+
   const [query, setQuery] = useQueryParams({
-    type: withDefault(StringParam, tabs[0] || '')
+    type: withDefault(StringParam, tabs[0] || ''),
+    columnOrder: withDefault(StringParam, columns[0])
   });
   const { activeTabIdx, onTabChange } = useTabs(query ? (tabs.indexOf(capitalize(query.type)) | 0) : 0);
 
-  let filteredData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
-  if (isPreview) filteredData = orderBy(data[field], 'abyssCount', 'desc').slice(0, 5);
+  let defaultData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
+  if (isPreview) defaultData = orderBy(data[field], 'abyssCount', 'desc').slice(0, 5);
+
+  const [filteredData, setFilteredData] = useState(defaultData);
+  useEffect(() => {
+    console.log('col change')
+    if (query.columnOrder && query.columnOrder === columns[1]) {
+      setFilteredData(orderBy(data[field], 'abyssCount', 'desc'))
+    } else {
+      setFilteredData(orderBy(data[field], 'count', 'desc'))
+    }
+    console.log(filteredData)
+  }, [query.columnOrder])
 
   const handleTabChange = (i: number) => {
     if (!!tabs.length) {
       setQuery({ type: tabs[i].toLowerCase() })
       onTabChange(i);
+    }
+  }
+
+  const handleColOrderChange = (col: string) => {
+    if (col === 'all') {
+      setQuery({ columnOrder: undefined }, 'pushIn');
+    } else {
+      setQuery({ columnOrder: col }, 'pushIn');
+    }
+  }
+
+  const renderCaret = (col: string) => {
+    if (orderDir === 'desc') {
+      return <span className={`orderToggle ${col === query.columnOrder ? 'asActive' : ''}`}><CaretDown /></span>
+    } else {
+      return <span className={`orderToggle ${col === query.columnOrder ? 'asActive' : ''}`}><CaretUp /></span>
     }
   }
 
@@ -114,8 +147,8 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
           <tr>
             <th scope="col">#</th>
             <th scope="col">{title.slice(0, title.length-1)}</th>
-            <th scope="col">Overall Usage</th>
-            <th scope="col">Abyss Usage</th>
+            <th scope="col" onClick={() => handleColOrderChange(columns[0])}>Overall Usage {renderCaret(columns[0])}</th>
+            <th scope="col" onClick={() => handleColOrderChange(columns[1])}>Abyss Usage {renderCaret(columns[1])}</th>
           </tr>
         </thead>
         }

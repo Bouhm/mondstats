@@ -1,3 +1,9 @@
+## 0.1.0-beta
+
+- Changed Spiral Abyss teams to show uncombined core team stats
+- Fixed weapon/artifact pages not showing overall usage
+- Added stats table ordering
+
 ## dev build 12.27.21
 
 - Added URL query params for persistent state management

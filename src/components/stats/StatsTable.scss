@@ -41,6 +41,24 @@
     z-index: 8;
     padding: 0.5rem;
     white-space: nowrap;
+
+    .orderToggle {
+      margin-left: 0.2rem;
+      opacity: 0.3;
+
+      &.asActive {
+        opacity: 1;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
   }
 
   .stats-image {

@@ -62,8 +62,8 @@ function AbyssPage() {
   async function fetchAbyssData() {
     setIsLoading(true);
     await Promise.all(map(range(1,4), async (stageNum) => { 
-      // return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
-      return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
+      return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
+      // return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
         headers: { 'accept': 'application/vnd.github.v3.raw+json' },
       }).then(res => ({ [stageNum]: res.data }))
     })).then(data => { loadAbyssFloorTeams(data); setIsLoading(false) })
