@@ -102,17 +102,21 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
   const { activeTabIdx, onTabChange } = useTabs(query ? (tabs.indexOf(capitalize(query.type)) | 0) : 0);
 
   let defaultData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
-  if (isPreview) defaultData = orderBy(defaultData, 'abyssCount', 'desc').slice(0, 5);
 
   const [orderedData, setOrderedData] = useState(defaultData);
   useEffect(() => {
     let filteredData = dataFilter ? dataFilter(data[field], tabs[activeTabIdx]) : data[field];
-    if (query.columnOrder && query.columnOrder === columns[1]) {
-      setOrderedData(orderBy(filteredData, 'abyssCount', 'desc'))
+
+    if (!isPreview) {
+      if (query.columnOrder && query.columnOrder === columns[1]) {
+        setOrderedData(orderBy(filteredData, 'abyssCount', 'desc'))
+      } else {
+        setOrderedData(orderBy(filteredData, 'count', 'desc'))
+      }
     } else {
-      setOrderedData(orderBy(filteredData, 'count', 'desc'))
+      setOrderedData(orderBy(data[field], 'abyssCount', 'desc').slice(0, 5))
     }
-  }, [query.columnOrder, dataFilter, activeTabIdx])
+  }, [query.columnOrder, dataFilter, activeTabIdx, isPreview])
 
   const handleTabChange = (i: number) => {
     if (!!tabs.length) {

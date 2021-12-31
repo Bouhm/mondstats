@@ -32,7 +32,7 @@ const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }
             <Fragment key={`battle-${floor}-${stage}-${battleIndex}`}>
               <div className="stage-half" >
                 <h1>{`${battleIndex+1}${battleIndex === 0 ? 'st' : 'nd'}`} Half</h1>
-                <h2>{reduce(battle, (sum, curr) => sum + curr.count, 0)} Teams</h2>
+                {/* <h2>{reduce(battle, (sum, curr) => sum + curr.count, 0)} Teams</h2> */}
                 <div className="battle-container">
                 {battle.length > 0 ?
                   <>
