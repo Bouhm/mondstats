@@ -161,7 +161,7 @@ function AbyssPage() {
       <>
         <h2 className="stage-label">Top Teams</h2>
         <div className="stage-half">
-          <h2>{total} Teams</h2>
+          {/* <h2>{total} Teams</h2> */}
           {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({coreParty, flex, count }, i) => {
             const party = [...coreParty, flex[0][0]._id]
             return (
