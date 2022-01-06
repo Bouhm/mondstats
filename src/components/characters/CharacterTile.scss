@@ -34,8 +34,9 @@
     &:hover,
     &:active {
       cursor: pointer;
-      -moz-box-shadow: inset 0 0 5px #f2eee6;
-      -webkit-box-shadow: inset 0 0 5px #f2eee6;
+      box-shadow: 0 0 0 5px #c3b0e4;
+      -moz-box-shadow: 0 0 0 5px #c3b0e4;
+      -webkit-box-shadow: 0 0 0 5px #c3b0e4;
     }
 
     a {
@@ -43,10 +44,10 @@
       &:active {
         -webkit-transform: scale(1.08, 1.08);
         transform: scale(1.08, 1.08);
-        -moz-box-shadow: inset 0 0 5px #f2eee6;
-        -webkit-box-shadow: inset 0 0 5px #f2eee6;
-        box-shadow: inset 0 0 5px #f2eee6;
-        border: 3px solid #f2eee6;
+        box-shadow: 0 0 0 5px #c3b0e4;
+        -moz-box-shadow: 0 0 0 5px #c3b0e4;
+        -webkit-box-shadow: 0 0 0 5px #c3b0e4;
+        border: 3px solid #c3b0e4;
       }
     }
   }

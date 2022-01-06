@@ -108,7 +108,7 @@ function App() {
           {hasLoadedDb ? <Outlet /> : <Loader />}
           <div className="footer">
             <div className="scroll-to-top-button" ref={scrollBtnRef} onClick={() => window.scrollTo(0, 0)}>
-              <ArrowUp />
+              <ArrowUp color={'#c3b0e4'} />
             </div>
             <div className="links">
               <Link to="/about">About</Link>

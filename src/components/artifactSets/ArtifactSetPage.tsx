@@ -30,7 +30,7 @@ function ArtifactSetPage() {
  
   useEffect(() => {
     if (artifactSet) {
-      dispatch(setColorClass('Red'))
+      dispatch(setColorClass('Artifacts'))
     }
   }, [artifactSet])
 

@@ -3,8 +3,8 @@
 .team-container {
   margin: 0.6rem;
   max-width: 35rem;
-  background-color: var.$theme-color-4;
-  border: solid 5px rgba(0, 0, 0, 0.15);
+  background-color: var.$theme-color-5;
+  border: solid 5px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
 }
 
@@ -44,11 +44,11 @@
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.1);
 
   .team-flex {
     margin-top: 0.3rem;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     padding: 0.5rem;
     display: flex;
@@ -105,7 +105,7 @@
 .team-stats {
   position: relative;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var.$theme-color-5;
   color: white;
   display: flex;
   flex-flow: column;

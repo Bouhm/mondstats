@@ -25,7 +25,7 @@ const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }
 
   return (
     <>
-      <h2 className="stage-label">Floor {floor}-{stage}</h2>
+      {/* <h2 className="stage-label">Floor {floor}-{stage}</h2> */}
       <div className="stage-teams">
         {map([stageData['1'], stageData['2']], (battle, battleIndex) => {
           return (
@@ -53,9 +53,9 @@ const AbyssStage = ({ stageData, stageLimitToggle, floor, stage, onToggleLimit }
               </div>
             </div>
             {some(battle, parties => parties.length > pageSize) && (!stageLimitToggle[`${floor}-${stage}`] ?
-              <Button className="stage-teams-show-more" onClick={() => onToggleLimit(`${floor}-${stage}`)}>Show more <ChevronDown size={20} /></Button>
+              <Button className="stage-teams-show-more" onClick={() => onToggleLimit(`${floor}-${stage}`)}>Show more <ChevronDown size={16} /></Button>
               :
-              <Button className="stage-teams-show-more" onClick={() => onToggleLimit(`${floor}-${stage}`)}>Show less <ChevronUp size={20} /></Button>
+              <Button className="stage-teams-show-more" onClick={() => onToggleLimit(`${floor}-${stage}`)}>Show less <ChevronUp size={16} /></Button>
             )}
           </Fragment>)
         })}

@@ -44,7 +44,7 @@ function ArtifactSetBuilds({data, isPreview }: any) {
 
   const renderImage = (item: any) => <ArtifactSetBuildCard id={item._id} />
 
-  const getColorClass = (item: any) => 'Red'
+  const getColorClass = (item: any) => 'Artifacts'
 
   return <StatsTable data={data} title={title} field='artifactSetBuilds' getTotal={getTotal} getAbyssTotal={getAbyssTotal} getColorClass={getColorClass} renderImage={renderImage} isPreview={isPreview} />
 }
@@ -144,52 +144,54 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
   return (
     <div className='stats-table-container'>
       {!!tabs.length && <Tabs tabs={map(tabs, tab => <img src={`/assets/icons/${tab}.webp`} />)} activeTabIdx={activeTabIdx} onChange={handleTabChange} />}
-      <table className='stats-table'>
-        {!isPreview && 
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">{title.slice(0, title.length-1)}</th>
-            <th scope="col" onClick={() => handleColOrderChange(columns[0])}>Overall Usage {renderCaret(columns[0])}</th>
-            <th scope="col" onClick={() => handleColOrderChange(columns[1])}>Abyss Usage {renderCaret(columns[1])}</th>
-          </tr>
-        </thead>
-        }
-      <tbody>
-        {map(orderedData, (item, i) => {
-          const total = getPercentage(item.count, getTotal(item));
-          const abyssTotal = getPercentage(item.abyssCount, getAbyssTotal(item));
+      <div className={`stats-table ${isPreview ? 'asPreview' : ''}`}>
+        <table>
+          {!isPreview && 
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">{title.slice(0, title.length-1)}</th>
+                <th scope="col" onClick={() => handleColOrderChange(columns[0])}>Overall Usage {renderCaret(columns[0])}</th>
+                <th scope="col" onClick={() => handleColOrderChange(columns[1])}>Abyss Usage {renderCaret(columns[1])}</th>
+              </tr>
+            </thead>
+          }
+          <tbody>
+            {map(orderedData, (item, i) => {
+              const total = getPercentage(item.count, getTotal(item));
+              const abyssTotal = getPercentage(item.abyssCount, getAbyssTotal(item));
 
-          return (
-            <tr key={`${title}-${i}`}>
-              <td>{i + 1}</td>
-              <td className='stats-image'>{renderImage(item)}</td>
-              {!isPreview && 
-              <td>
-                <div className='stats-row-percentage'>
-                  <div
-                    className={`stats-row-bar ${getColorClass && getColorClass(item)}`} 
-                    style={{ width: `${total}%`}} 
-                  />    
-                  <div className="stats-row-value">{ `${total}%`}</div>
-                </div>
-              </td>
-              }
-              <td>
-                <div className='stats-row-percentage'>
-                  <div
-                      className={`stats-row-bar ${getColorClass && getColorClass(item)}`} 
-                      style={{ width: `${abyssTotal}%`}} 
-                  />    
-                  <div className="stats-row-value">{ `${abyssTotal}%`}</div>
-                </div>
-              </td>
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
-  </div>
+              return (
+                <tr key={`${title}-${i}`}>
+                  <td>{i + 1}</td>
+                  <td className='stats-image'>{renderImage(item)}</td>
+                  {!isPreview && 
+                  <td>
+                    <div className='stats-row-percentage'>
+                      <div
+                        className={`stats-row-bar ${getColorClass && getColorClass(item)}`} 
+                        style={{ width: `${total}%`}} 
+                      />    
+                      <div className="stats-row-value">{ `${total}%`}</div>
+                    </div>
+                  </td>
+                  }
+                  <td>
+                    <div className='stats-row-percentage'>
+                      <div
+                          className={`stats-row-bar ${getColorClass && getColorClass(item)}`} 
+                          style={{ width: `${abyssTotal}%`}} 
+                      />    
+                      <div className="stats-row-value">{ `${abyssTotal}%`}</div>
+                    </div>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
   )
 }
 

@@ -28,14 +28,15 @@ function MultiSelect({ options, onChange, isMulti=false, placeholder="", default
         styles={{ 
           container: base => ({ ...base }),
           singleValue: base => ({ ...base, color: "white" }),
-          valueContainer: base => ({ ...base, backgroundColor: "#232530",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
+          placeholder: base => ({ ...base, color: "rgba(255,255,255,0.5)" }),
+          valueContainer: base => ({ ...base, backgroundColor: "#1c3b63", minHeight: "3rem", fontSize: "1.2rem"}),
           control: base =>  ({ ...base, borderColor: "none" }),
-          indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
+          indicatorsContainer: base => ({ ...base }),
           clearIndicator: base => ({ ...base, padding: 0 }),
-          dropdownIndicator: base => ({ ...base, padding: 0 }),
-          menu: base => ({ ...base, backgroundColor: "#21232D", color: "white" }),
+          dropdownIndicator: base => ({ ...base, padding: 0, backgroundColor: '#0c253d' }),
+          menu: base => ({ ...base, backgroundColor: "#1c3b63", color: "white" }),
           menuPortal: base => ({ ...base, zIndex: 11 }),
-          option: base => ({ ...base, backgroundColor: "#21232D !important", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.6) !important" }}),
+          option: base => ({ ...base, backgroundColor: "#1c3b63 !important", "&:hover": { backgroundColor: "#0c253d !important" }}),
         }}
       />
     </div>
@@ -79,18 +80,18 @@ function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="S
           DropdownIndicator: showDropdown ?  (props) => <components.DropdownIndicator {...props} /> : () => null,
         }}
         styles={{ 
-          container: base => ({ ...base }),
+          container: base => ({ ...base, outline: 'none' }),
           singleValue: base => ({ ...base, color: "white" }),
           input: base => ({ ...base, color: "white" }),
-          valueContainer: base => ({ ...base, backgroundColor: "#232530",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
-          placeholder: base => ({ ...base, width: '100%' }),
+          valueContainer: base => ({ ...base, backgroundColor: "#1c3b63",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
+          placeholder: base => ({ ...base, color: "rgba(255,255,255,0.5)", width: '100%' }),
           control: base =>  ({ ...base, borderColor: "none" }),
-          indicatorsContainer: base => ({ ...base, backgroundColor: "rgba(0,0,0,0.9)" }),
+          indicatorsContainer: base => ({ ...base, backgroundColor: "#0c253d" }),
           clearIndicator: base => ({ ...base, padding: 0 }),
           dropdownIndicator: base => ({ ...base, padding: '0.1rem' }),
           indicatorSeparator: base => ({ ...base, display: 'none '}),
-          menu: base => ({ ...base, backgroundColor: "#21232D", color: "white" }),
-          option: base => ({ ...base, backgroundColor: "#21232D !important", "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.6) !important" }}),
+          menu: base => ({ ...base, backgroundColor: "#1c3b63", color: "white" }),
+          option: base => ({ ...base, backgroundColor: "#1c3b63 !important", "&:hover": { backgroundColor: "#0c253d !important" }}),
         }}
       />
     </div>

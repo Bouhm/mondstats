@@ -1,10 +1,12 @@
+@use '../../variables.module' as var;
+
 .artifact-set-build-detail {
   display: flex;
   flex-flow: column;
   color: #e9e5dc;
   border-radius: 8px;
   overflow: hidden;
-  background-color: rgba(39, 42, 56, 0.7);
+  background-color: var.$theme-color-5;
   padding: 0.5rem 0.5rem 0 0.5rem;
   height: 100%;
   max-height: 100%;

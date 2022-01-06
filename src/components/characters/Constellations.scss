@@ -1,5 +1,7 @@
+@use '../../variables.module' as var;
+
 .constellations-container {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: var.$theme-color-2;
   border-radius: 10px;
   padding: 2rem 0 1rem 0;
 
@@ -13,7 +15,7 @@
   flex-flow: column;
   align-items: center;
   color: white;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var.$theme-color-5;
 
   .constellation-card-icon {
     height: 60px;

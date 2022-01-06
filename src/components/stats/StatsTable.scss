@@ -1,3 +1,5 @@
+@use '../../variables.module' as var;
+
 .stats-table-container {
   display: flex;
   flex-flow: column;
@@ -6,18 +8,27 @@
 }
 
 .stats-table {
-  border-collapse: collapse;
-  width: 60%;
-  table-layout: auto;
-  color: white;
   margin-top: 1rem;
-  position: relative;
-  min-width: 15rem;
+  width: 65%;
+  padding: 1rem 2rem;
+  background-color: var.$theme-color-2;
+
+  &.asPreview {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+    color: white;
+    min-width: 15rem;
+  }
 
   tr {
     padding: 0.35em;
     &:nth-child(even) {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.05);
     }
   }
 
@@ -32,7 +43,7 @@
   }
 
   th {
-    background-color: rgba(29, 29, 41, 0.9);
+    background-color: var.$theme-color-5;
     text-transform: uppercase;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     top: 4rem;
@@ -115,6 +126,8 @@
 
 @media (max-width: 747px) {
   .stats-table {
+    width: 90%;
+
     th {
       font-size: 0.8rem;
     }
@@ -123,6 +136,7 @@
 
 @media (max-width: 544px) {
   .stats-table {
-    width: 90%;
+    width: 100%;
+    padding: 0.5rem;
   }
 }

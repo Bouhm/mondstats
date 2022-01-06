@@ -1,9 +1,11 @@
+@use '../../variables.module' as var;
+
 .build-charts-container {
   display: flex;
   flex-flow: column;
   padding: 1rem;
   margin: 0 0 2rem 0;
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: var.$theme-color-2;
   border-radius: 10px;
 
   h1 {
@@ -100,6 +102,10 @@
 @media (max-width: 1036px) {
   .build-charts {
     flex-flow: column-reverse;
+
+    .build-weapons {
+      padding-right: 0;
+    }
   }
 
   .artifact-set-builds-selector {

@@ -2,6 +2,7 @@
 
 .App {
   margin-top: 4rem;
+  background-color: var.$theme-color-base;
 
   .App-content {
     display: flex;
@@ -40,7 +41,7 @@ footer {
 .links {
   display: flex;
   justify-content: center;
-  color: var.$card-color;
+  color: var.$card;
   margin: 1rem;
   font-size: 1.1rem;
 
@@ -57,11 +58,17 @@ footer {
 
 .scroll-to-top-button {
   position: fixed;
-  bottom: 1rem;
-  right: 0.5rem;
+  bottom: 0.5rem;
+  right: 0.7rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
 
   &.invis {
     display: none;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -84,6 +91,9 @@ footer {
   z-index: 9;
 }
 
+.Artifacts {
+  background-color: var.$element-none !important;
+}
 .Pyro {
   background-color: var.$element-pyro !important;
 }

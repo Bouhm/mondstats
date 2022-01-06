@@ -1,6 +1,6 @@
 import './Home.scss';
 
-import Logo from '/assets/logo_m.webp';
+import Logo from '/assets/logo_sm2.webp';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

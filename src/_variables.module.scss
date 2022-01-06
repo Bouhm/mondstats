@@ -5,18 +5,21 @@ $element-hydro: #35cbfc;
 $element-electro: #d795ff;
 $element-dendro: #a5d533;
 $element-geo: #f0b738;
-// $element-none: #4b0082;
+$element-none: #4b0082;
 $none: #a4a4a4;
 $rarity-3: linear-gradient(#5d6887, #608eab, #5484a7);
 $rarity-4: linear-gradient(#605a86, #9476ac, #a67ab9);
 $rarity-5: linear-gradient(#8d5e2e, #b1792c, #b8742b);
 $rarity-105: linear-gradient(#a25056, #c75056, #e04a53);
 
-$card-color: #e9e5dc;
+$card: #e9e5dc;
 
-$theme-color-base: #343748;
-$theme-color-3: #2e3142;
-$theme-color-4: #2a2c3a;
+$theme-color-base: #02213d;
+$theme-color-2: #152f4c;
+$theme-color-3: #0c253d;
+$theme-color-4: #011a30;
+$theme-color-5: #1c3b63;
+$theme-color-6: #c3b0e4;
 
 $weapon-sword: #5144d3;
 $weapon-claymore: #6f38b1;
@@ -45,4 +48,5 @@ $blue: #2796bc;
   red: $red;
   green: $green;
   blue: $blue;
+  artifacts: $element-none;
 }

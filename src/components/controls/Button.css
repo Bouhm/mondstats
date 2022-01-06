@@ -1,6 +1,6 @@
 .button {
   text-transform: uppercase;
-  color: #e9e5dc;
+  color: #c3b0e4;
   text-align: center;
   font-size: 1rem;
   margin: 1rem auto;
@@ -9,7 +9,7 @@
   width: 9rem;
   white-space: nowrap;
   cursor: pointer;
-  border: solid 2px rgba(233, 229, 220, 0.7);
+  border: solid 2px rgba(195, 176, 228, 0.7);
 
   svg {
     margin: 0 0.2rem;
@@ -18,11 +18,11 @@
 
   &:hover {
     cursor: pointer;
-    border: solid 2px #e9e5dc;
+    border: solid 2px #c3b0e4;
   }
 
   &.asActive {
-    background-color: #e9e5dc;
+    background-color: #c3b0e4;
     color: #495366;
     border: solid 2px #495366;
   }

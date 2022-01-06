@@ -48,7 +48,7 @@ function Sidebar() {
     <>
      <div className="sidebar-collapsible">
         <div className="sidebar-menu-burger" onClick={handleBurgerClick}>
-          <Hamburger size={30} />
+          <Hamburger color={'#c3b0e4'} size={30} />
         </div>
         {isOpen && renderMenu()}
       </div>

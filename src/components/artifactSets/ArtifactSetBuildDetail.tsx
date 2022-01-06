@@ -1,4 +1,4 @@
-import './ArtifactSetBuildDetail.css';
+import './ArtifactSetBuildDetail.scss';
 
 import { map } from 'lodash';
 import React from 'react';

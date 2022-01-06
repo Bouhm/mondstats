@@ -159,7 +159,7 @@ function AbyssPage() {
 
     return (
       <>
-        <h2 className="stage-label">Top Teams</h2>
+        {/* <h2 className="stage-label">Top Teams</h2> */}
         <div className="stage-half">
           {/* <h2>{total} Teams</h2> */}
           {map(take(filteredTopTeams, stageLimitToggle["ALL"] ? 20 : 10), ({coreParty, flex, count }, i) => {
@@ -173,9 +173,9 @@ function AbyssPage() {
             )
           })}
           {(filteredTopTeams.length > 10) && (!stageLimitToggle["ALL"] ?
-            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show more <ChevronDown size={20} /></Button>
+            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show more <ChevronDown size={16} /></Button>
             :
-            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show less <ChevronUp size={20} /></Button>
+            <Button className="stage-teams-show-more" onClick={() => handleToggleLimit("ALL")}>Show less <ChevronUp size={16} /></Button>
           )}
         </div>
     </>
