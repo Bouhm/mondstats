@@ -47,7 +47,7 @@
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var.$theme-color-1;
 
   .team-flex {
     border: 2px solid rgba(25, 231, 167, 0.7);
@@ -98,7 +98,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-bottom: 0.3rem;
+    padding: 0.15rem 0;
     &:hover {
       cursor: pointer;
     }
