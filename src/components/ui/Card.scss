@@ -22,7 +22,7 @@
       cursor: pointer;
       -webkit-transform: scale(1.05, 1.05);
       transform: scale(1.05, 1.05);
-      border: 2px solid #f2eee6;
+      border: 2px solid var.$theme-color-6;
     }
 
     .card-element {
