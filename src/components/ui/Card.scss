@@ -1,15 +1,16 @@
 @use '../../variables.module' as var;
 
 .card-container {
+  width: 110px;
+  height: 157px;
+
   .card {
     position: relative;
-    background-color: white;
     overflow: hidden;
     transition: transform 0.2s;
     box-sizing: border-box;
     padding: 0;
-    width: 110px;
-    height: 157px;
+
     border-radius: 8px;
 
     &.faded {
@@ -35,27 +36,26 @@
       vertical-align: middle;
       width: 110px;
     }
+  }
 
-    .card-name {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgb(73, 83, 102);
-      background-color: #e9e5dc;
-      font-size: 0.9rem;
-      height: 3rem;
-      text-align: center;
-      text-decoration: none;
-    }
+  .card-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var.$card;
+    font-size: 0.9rem;
+    height: 3rem;
+    text-align: center;
+    text-decoration: none;
   }
 }
 
 @media (max-width: 826px) {
   .card-container {
-    .card {
-      width: 90px;
-      height: 122px;
+    width: 90px;
+    height: 122px;
 
+    .card {
       .card-element {
         width: 30px;
       }
@@ -63,21 +63,22 @@
       .card-thumb {
         width: 90px;
       }
+    }
 
-      .card-name {
-        font-size: 0.8rem;
-        line-height: 0.8rem;
-        height: 2rem;
-      }
+    .card-name {
+      font-size: 0.8rem;
+      line-height: 0.8rem;
+      height: 2rem;
     }
   }
 }
 
 @media (max-width: 544px) {
   .card-container {
+    height: 84px;
+    width: 65px;
+
     .card {
-      height: 84px;
-      width: 65px;
       border-radius: 6px;
 
       .card-element {
@@ -87,21 +88,22 @@
       .card-thumb {
         width: 65px;
       }
+    }
 
-      .card-name {
-        font-size: 0.6rem;
-        line-height: 0.5rem;
-        height: 1.2rem;
-      }
+    .card-name {
+      font-size: 0.6rem;
+      line-height: 0.5rem;
+      height: 1.2rem;
     }
   }
 }
 
 @media (max-width: 414px) {
   .card-container {
+    height: 74px;
+    width: 55px;
+
     .card {
-      height: 74px;
-      width: 55px;
       border-radius: 5px;
 
       .card-element {
@@ -111,12 +113,12 @@
       .card-thumb {
         width: 55px;
       }
+    }
 
-      .card-name {
-        font-size: 0.5rem;
-        line-height: 0.5rem;
-        height: 1.2rem;
-      }
+    .card-name {
+      font-size: 0.5rem;
+      line-height: 0.5rem;
+      height: 1.2rem;
     }
   }
 }
