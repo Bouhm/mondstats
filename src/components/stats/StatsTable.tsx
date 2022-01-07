@@ -135,7 +135,7 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
 
   const renderCaret = (col: string) => {
     if (orderDir === 'desc') {
-      return <span className={`orderToggle ${col === query.columnOrder ? 'asActive' : ''}`}><CaretDown /></span>
+      return <span className={`orderToggle ${col === query.columnOrder ? 'asActive' : ''}`}><CaretDown color={'black'} /></span>
     } else {
       return <span className={`orderToggle ${col === query.columnOrder ? 'asActive' : ''}`}><CaretUp /></span>
     }

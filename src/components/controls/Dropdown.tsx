@@ -27,16 +27,16 @@ function MultiSelect({ options, onChange, isMulti=false, placeholder="", default
         placeholder={<>{placeholder}&hellip;</>}
         styles={{ 
           container: base => ({ ...base }),
-          singleValue: base => ({ ...base, color: "white" }),
-          placeholder: base => ({ ...base, color: "rgba(255,255,255,0.5)" }),
-          valueContainer: base => ({ ...base, backgroundColor: "#1c3b63", minHeight: "3rem", fontSize: "1.2rem"}),
-          control: base =>  ({ ...base, borderColor: "none" }),
+          singleValue: base => ({ ...base }),
+          placeholder: base => ({ ...base }),
+          valueContainer: base => ({ ...base, minHeight: "3rem", fontSize: "1.2rem"}),
+          control: base =>  ({ ...base, borderColor: "none", borderRadius: '8px', overflow: 'hidden' }),
           indicatorsContainer: base => ({ ...base }),
           clearIndicator: base => ({ ...base, padding: 0 }),
-          dropdownIndicator: base => ({ ...base, padding: 0, backgroundColor: '#0c253d' }),
-          menu: base => ({ ...base, backgroundColor: "#1c3b63", color: "white" }),
+          dropdownIndicator: base => ({ ...base, padding: 0 }),
+          menu: base => ({ ...base }),
           menuPortal: base => ({ ...base, zIndex: 11 }),
-          option: base => ({ ...base, backgroundColor: "#1c3b63 !important", "&:hover": { backgroundColor: "#0c253d !important" }}),
+          option: base => ({ ...base, backgroundColor: "#e9e5dc !important", "&:hover": { backgroundColor: "#CCC8C1 !important" }}),
         }}
       />
     </div>
@@ -71,7 +71,7 @@ function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="S
         value={value}
         placeholder={
           <div className="search-placeholder">
-            <Search className="search-icon" size={20} />
+            <Search className="search-icon" color="#15C48A" size={20} />
             {placeholder}&hellip;
           </div>
         }
@@ -81,17 +81,17 @@ function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="S
         }}
         styles={{ 
           container: base => ({ ...base, outline: 'none' }),
-          singleValue: base => ({ ...base, color: "white" }),
-          input: base => ({ ...base, color: "white" }),
-          valueContainer: base => ({ ...base, backgroundColor: "#1c3b63",  border: "2px solid rgba(0,0,0,0.1)", minHeight: "3rem", fontSize: "1.2rem"}),
-          placeholder: base => ({ ...base, color: "rgba(255,255,255,0.5)", width: '100%' }),
-          control: base =>  ({ ...base, borderColor: "none" }),
-          indicatorsContainer: base => ({ ...base, backgroundColor: "#0c253d" }),
+          singleValue: base => ({ ...base }),
+          input: base => ({ ...base }),
+          valueContainer: base => ({ ...base, backgroundColor: "#e9e5dc", minHeight: "3rem", fontSize: "1.2rem"}),
+          placeholder: base => ({ ...base, width: '100%' }),
+          control: base =>  ({ ...base, borderColor: "none", borderRadius: '8px', overflow: 'hidden' }),
+          indicatorsContainer: base => ({ ...base }),
           clearIndicator: base => ({ ...base, padding: 0 }),
           dropdownIndicator: base => ({ ...base, padding: '0.1rem' }),
-          indicatorSeparator: base => ({ ...base, display: 'none '}),
-          menu: base => ({ ...base, backgroundColor: "#1c3b63", color: "white" }),
-          option: base => ({ ...base, backgroundColor: "#1c3b63 !important", "&:hover": { backgroundColor: "#0c253d !important" }}),
+          indicatorSeparator: base => ({ ...base, display: 'none' }),
+          menu: base => ({ ...base }),
+          option: base => ({ ...base, backgroundColor: "#e9e5dc !important", "&:hover": { backgroundColor: "#CCC8C1 !important" } }),
         }}
       />
     </div>

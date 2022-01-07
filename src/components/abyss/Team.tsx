@@ -60,11 +60,11 @@ function Team({ team, count, total, flex = [] }: TeamProps) {
           }
          {(flex[0] && flex[0].length > 1) ? 
             <div className="team-expand" onClick={handleExpand}>
-              {expanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+              {expanded ? <ChevronUp color='white' size={13} /> : <ChevronDown color='white' size={13} />}
             </div>
             :
             <div className="team-expand" style={{ visibility: 'hidden'}}>
-               <ChevronDown size={13} />
+               <ChevronDown color='white' size={13} />
             </div>
           }
         </div>

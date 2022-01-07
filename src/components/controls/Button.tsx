@@ -1,4 +1,4 @@
-import './Button.css';
+import './Button.scss';
 
 import React, { ReactNode } from 'react';
 

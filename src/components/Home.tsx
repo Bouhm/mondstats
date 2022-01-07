@@ -25,8 +25,6 @@ function Home() {
 
   useEffect(() => {
     if (topCharacters && topArtifactSetBuilds && topWeapons) {
-  console.log(topWeapons)
-
       setIsLoading(false)
     }
   }, [topCharacters, topArtifactSetBuilds, topWeapons])

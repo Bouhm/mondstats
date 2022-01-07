@@ -13,12 +13,12 @@ interface IMenuItem {
 }
 
 const menuItems: IMenuItem[] = [
-  // { name: "Builds", linkto: "/builds", icon: "builds.webp" },
-  { name: "Spiral Abyss", linkto: "/abyss", icon: "spiralAbyss.webp" },
-  { name: "Characters", linkto: "/characters", icon: "characters.webp" },
-  { name: "Artifacts", linkto: "/artifacts", icon: "artifacts.webp" },
-  { name: "Weapons", linkto: "/weapons", icon: "weapons.webp" },
-  { name: "Charts", linkto: "/charts", icon: "charts.webp"}
+  // { name: "Builds", linkto: "/builds", icon: "builds_c.webp" },
+  { name: "Spiral Abyss", linkto: "/abyss", icon: "spiralAbyss_c.webp" },
+  { name: "Characters", linkto: "/characters", icon: "characters_c.webp" },
+  { name: "Artifacts", linkto: "/artifacts", icon: "artifacts_c.webp" },
+  { name: "Weapons", linkto: "/weapons", icon: "weapons_c.webp" },
+  { name: "Charts", linkto: "/charts", icon: "charts_c.webp"}
 ]
 
 function Sidebar() {
@@ -48,7 +48,7 @@ function Sidebar() {
     <>
      <div className="sidebar-collapsible">
         <div className="sidebar-menu-burger" onClick={handleBurgerClick}>
-          <Hamburger color={'#c3b0e4'} size={30} />
+          <Hamburger size={30} />
         </div>
         {isOpen && renderMenu()}
       </div>

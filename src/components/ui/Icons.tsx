@@ -8,7 +8,7 @@ type IconProps = {
   className?: string
 }
 
-export const Search = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const Search = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -26,7 +26,7 @@ export const Search = ({size = 25, color = "#e9e5dc", className=""}: IconProps) 
   )
 }
 
-export const Circle = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const Circle = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -42,7 +42,7 @@ export const Circle = ({size = 25, color = "#e9e5dc", className=""}: IconProps) 
   )
 }
 
-export const ChevronUp = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const ChevronUp = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -59,7 +59,7 @@ export const ChevronUp = ({size = 25, color = "#e9e5dc", className=""}: IconProp
   )
 }
 
-export const ChevronDown = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const ChevronDown = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -76,7 +76,7 @@ export const ChevronDown = ({size = 25, color = "#e9e5dc", className=""}: IconPr
   )
 }
 
-export const EllipsisV = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const EllipsisV = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -93,7 +93,7 @@ export const EllipsisV = ({size = 25, color = "#e9e5dc", className=""}: IconProp
   )
 }
 
-export const Close = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const Close = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -110,7 +110,7 @@ export const Close = ({size = 25, color = "#e9e5dc", className=""}: IconProps) =
   )
 }
 
-export const Plus = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const Plus = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -127,7 +127,7 @@ export const Plus = ({size = 25, color = "#e9e5dc", className=""}: IconProps) =>
   )
 }
 
-export const Hamburger = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const Hamburger = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -144,7 +144,7 @@ export const Hamburger = ({size = 25, color = "#e9e5dc", className=""}: IconProp
   )
 }
 
-export const Exchange = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const Exchange = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -161,7 +161,7 @@ export const Exchange = ({size = 25, color = "#e9e5dc", className=""}: IconProps
   )
 }
 
-export const CaretUp = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const CaretUp = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -178,7 +178,7 @@ export const CaretUp = ({size = 25, color = "#e9e5dc", className=""}: IconProps)
   )
 }
 
-export const CaretDown = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const CaretDown = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -195,7 +195,7 @@ export const CaretDown = ({size = 25, color = "#e9e5dc", className=""}: IconProp
   )
 }
 
-export const ArrowUp = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const ArrowUp = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 
@@ -212,7 +212,7 @@ export const ArrowUp = ({size = 25, color = "#e9e5dc", className=""}: IconProps)
   )
 }
 
-export const ChevronRight = ({size = 25, color = "#e9e5dc", className=""}: IconProps) => {
+export const ChevronRight = ({size = 25, color = "#0ee6b7", className=""}: IconProps) => {
   return (
     <svg 
       aria-hidden="true" 

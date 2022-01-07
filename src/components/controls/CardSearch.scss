@@ -1,6 +1,3 @@
-.cards-container {
-}
-
 .card-searchbar {
   width: 35rem;
   margin: 0 auto;
@@ -10,13 +7,14 @@
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, 120px);
-  grid-template-rows: repeat(auto-fill, 170px);
+  grid-template-rows: repeat(auto-fill, 160px);
   margin-top: 3rem;
   gap: 0.6rem;
   justify-content: center;
   flex-wrap: wrap;
   overflow-x: hidden;
   overflow-y: auto;
+  padding: 0.3rem;
 
   &.asFull {
     height: 100%;

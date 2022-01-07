@@ -3,14 +3,17 @@
 .team-container {
   margin: 0.6rem;
   max-width: 35rem;
-  background-color: var.$theme-color-5;
-  border: solid 5px rgba(0, 0, 0, 0.1);
+  background-color: var.$theme-color-1;
+  overflow: hidden;
   border-radius: 6px;
+  border: 5px solid var.$theme-color-1;
 }
 
 .team-stats-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  overflow: hidden;
+  border-radius: 6px;
 
   .character-tile-container {
     overflow: hidden;
@@ -47,8 +50,8 @@
   background-color: rgba(0, 0, 0, 0.1);
 
   .team-flex {
+    border: 2px solid rgba(25, 231, 167, 0.7);
     margin-top: 0.3rem;
-    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     padding: 0.5rem;
     display: flex;
@@ -105,7 +108,7 @@
 .team-stats {
   position: relative;
   text-align: center;
-  background-color: var.$theme-color-5;
+  background-color: var.$card;
   color: white;
   display: flex;
   flex-flow: column;
