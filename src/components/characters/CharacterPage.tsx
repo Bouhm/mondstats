@@ -6,6 +6,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 import { ICharacterData } from '../../data/types';
 import { selectCharacter, setColorClass } from '../../Store';
+import Button from '../controls/Button';
 import useApi from '../hooks/useApi';
 import useFilters from '../hooks/useFilters';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
@@ -15,7 +16,6 @@ import Empty from '../ui/Empty';
 import Loader from '../ui/Loader';
 import Tabs from '../ui/Tabs';
 import Constellations from './Constellations';
-import Button from '../controls/Button';
 
 function CharacterPage() {  
   const { shortName } = useParams();
@@ -82,26 +82,28 @@ function CharacterPage() {
   const imgFile = character.name.startsWith('Traveler') ? 'traveler' : character._id;
 
   return (
-    <div className="character-page">
-      <div className={`character-page-stats-count ${character.element}`} >
-        <span>{selectedCharacterBuilds.count} {character.name} Builds</span>
-      </div>
+    <div className="character-page-container">
       <div className="character-page-background" style={{ backgroundImage: `url("/assets/characters/${imgFile}_bg.webp")` }} /> 
-      <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />
-      {/* <UsageStats count={character.count} total={character.total} abyssCount={character.abyssCount} abyssTotal={character.abyssTotal} /> */}
-      {selectedCharacterBuilds.builds &&
-        <>
-          <BuildCharts.CharacterBuilds builds={selectedCharacterBuilds.builds} />
-          {character.rarity < 100 &&
-            <Constellations constellations={selectedCharacterBuilds.constellations} total={reduce(selectedCharacterBuilds.constellations, (sum, curr) => sum + curr, 0)} />
-          }
-        </>
-      }
-      {
-        <div className="character-page-goto-teams">
-          <Button onClick={() => navigate(`/abyss?characters=${shortName}`)}>Go to Teams</Button>
+      <div className="character-page">
+        <div className={`character-page-stats-count ${character.element}`} >
+          <span>{selectedCharacterBuilds.count} {character.name} Builds</span>
         </div>
-      }
+        <Tabs tabs={tabs} activeTabIdx={activeTabIdx} onChange={onTabChange} />
+        {/* <UsageStats count={character.count} total={character.total} abyssCount={character.abyssCount} abyssTotal={character.abyssTotal} /> */}
+        {selectedCharacterBuilds.builds &&
+          <>
+            <BuildCharts.CharacterBuilds builds={selectedCharacterBuilds.builds} />
+            {character.rarity < 100 &&
+              <Constellations constellations={selectedCharacterBuilds.constellations} total={reduce(selectedCharacterBuilds.constellations, (sum, curr) => sum + curr, 0)} />
+            }
+          </>
+        }
+        {
+          <div className="character-page-goto-teams">
+            <Button onClick={() => navigate(`/abyss?characters=${shortName}`)}>Go to Teams</Button>
+          </div>
+        }
+      </div>
     </div>
   )
 }

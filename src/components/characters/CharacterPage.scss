@@ -1,4 +1,4 @@
-.character-page {
+.character-page-container {
   position: relative;
   margin-top: -2rem;
 
@@ -12,9 +12,14 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    z-index: -1;
+    z-index: 0;
     opacity: 0.5;
   }
+}
+
+.character-page {
+  position: relative;
+  z-index: 1;
 
   h1 {
     text-transform: uppercase;
