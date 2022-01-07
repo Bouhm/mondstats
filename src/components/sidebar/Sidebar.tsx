@@ -13,12 +13,11 @@ interface IMenuItem {
 }
 
 const menuItems: IMenuItem[] = [
-  // { name: "Builds", linkto: "/builds", icon: "builds_c.webp" },
-  { name: "Spiral Abyss", linkto: "/abyss", icon: "spiralAbyss_c.webp" },
-  { name: "Characters", linkto: "/characters", icon: "characters_c.webp" },
-  { name: "Artifacts", linkto: "/artifacts", icon: "artifacts_c.webp" },
-  { name: "Weapons", linkto: "/weapons", icon: "weapons_c.webp" },
-  { name: "Charts", linkto: "/charts", icon: "charts_c.webp"}
+  { name: "Spiral Abyss", linkto: "/abyss", icon: "abyss.svg" },
+  { name: "Characters", linkto: "/characters", icon: "characters.svg" },
+  { name: "Artifacts", linkto: "/artifacts", icon: "artifacts.svg" },
+  { name: "Weapons", linkto: "/weapons", icon: "weapons.svg" },
+  { name: "Charts", linkto: "/charts", icon: "charts.svg"}
 ]
 
 function Sidebar() {

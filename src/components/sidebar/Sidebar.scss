@@ -28,7 +28,7 @@
 
       &.asActive {
         font-weight: 700;
-        border-right: 2px solid rgba(255, 255, 255, 0.5);
+        border-right: 2px solid var.$theme-color-6;
         background-color: rgba(255, 255, 255, 0.05);
       }
 
@@ -38,7 +38,8 @@
       }
 
       img {
-        width: 40px;
+        width: 30px;
+        margin-right: 0.3rem;
       }
     }
   }
@@ -73,7 +74,7 @@
       padding: 0.5rem;
 
       &.asActive {
-        border-right: 2px solid rgba(255, 255, 255, 0.5);
+        border-right: var.$theme-color-6;
         font-weight: 700;
       }
 
@@ -83,7 +84,8 @@
       }
 
       img {
-        width: 40px;
+        width: 30px;
+        margin: 0;
       }
     }
   }

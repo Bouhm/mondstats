@@ -29,7 +29,7 @@ function Home() {
     }
   }, [topCharacters, topArtifactSetBuilds, topWeapons])
 
-  if (isLoading) return <Loader />
+  if (isLoading) return null
     
   return (
     <div className="home">

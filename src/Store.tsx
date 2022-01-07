@@ -1,3 +1,5 @@
+import mondstadt from '/assets/mondstadt.webp';
+
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IArtifactDb, IArtifactSetBuildDb, IArtifactSetDb, ICharacterDb, IWeaponDb } from './data/types';
@@ -10,7 +12,8 @@ interface IState {
   artifactSetBuildDb: IArtifactSetBuildDb,
   characterDb: ICharacterDb,
   weaponDb: IWeaponDb,
-  colorClass: string
+  colorClass: string,
+  background: string,
 }
 
 const initialState: IState = {
@@ -21,7 +24,8 @@ const initialState: IState = {
   artifactDb: {},
   weaponDb: {},
   characterDb: {},
-  colorClass: ''
+  colorClass: '',
+  background: '',
 }
 
 const dataSlice = createSlice({
@@ -51,7 +55,10 @@ const dataSlice = createSlice({
     },
     setColorClass: (state, action: PayloadAction<string>) => {
       state.colorClass = action.payload
-    }
+    },
+    setBackground: (state, action: PayloadAction<string>) => {
+      state.colorClass = action.payload
+    },
   }
 })
 
@@ -63,7 +70,8 @@ export const {
   setArtifactSetBuildDb,
   setWeaponDb,
   setCharacterDb,
-  setColorClass
+  setColorClass,
+  setBackground
 } = dataSlice.actions;
 
 const store = configureStore({ reducer: { data: dataSlice.reducer } })
