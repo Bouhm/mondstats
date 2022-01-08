@@ -14,7 +14,7 @@
       animation-name: horibar;
       animation-duration: 1s;
       animation-direction: forwards;
-      border: 2px solid rgba(255, 255, 255, 0.8);
+      border: 2px solid rgba(255, 255, 255, 0.6);
     }
 
     @keyframes horibar {
@@ -29,9 +29,9 @@
 
   .bar-card {
     overflow: hidden;
-    background-color: var.$card;
+    background-color: var.$theme-color-1;
     display: flex;
-    border: 2px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.6);
     border-right: 0;
     margin: 0.1rem 0 0.1rem 0;
     padding: 0.15rem;
@@ -54,7 +54,7 @@
 
         .bar-card-name {
           padding: 0 0.1rem;
-          color: rgb(73, 83, 102);
+          color: var.$card;
           font-size: 0.9rem;
           text-decoration: none;
           overflow: hidden;
@@ -126,7 +126,7 @@
     }
 
     .horizontal-barchart-bar {
-      background-color: rgba(164, 164, 164, 0.2);
+      background-color: rgba(164, 164, 164, 0.1);
     }
 
     .bar-card {

@@ -8,7 +8,7 @@
 
   .barchart-bar {
     transition: all 0.3 s ease;
-    border: 2px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.6);
     border-bottom: none;
   }
 }
@@ -22,7 +22,7 @@
   max-width: 80rem;
 
   .bar-content {
-    border: 2px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.6);
     border-top: none;
   }
 }

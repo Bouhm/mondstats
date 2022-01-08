@@ -28,15 +28,17 @@ function MultiSelect({ options, onChange, isMulti=false, placeholder="", default
         styles={{ 
           container: base => ({ ...base }),
           singleValue: base => ({ ...base }),
-          placeholder: base => ({ ...base, color: 'rgba(0,0,0,0.3)' }),
-          valueContainer: base => ({ ...base, minHeight: "3rem", fontSize: "1.2rem"}),
-          control: base =>  ({ ...base, borderColor: "none", border: 'none', backgroundColor: '#13222E', borderRadius: '12px', overflow: 'hidden' }),
-          indicatorsContainer: base => ({ ...base, backgroundColor: '#13222E' }),
+          multiValue: base => ({ ...base, backgroundColor: 'rgba(0,0,0,0.3)' }),
+          input: base => ({ ...base, color: '#e9e5dc' }),
+          placeholder: base => ({ ...base, color: '#e9e5dc' }),
+          valueContainer: base => ({ ...base, color: '#e9e5dc', minHeight: "3rem", fontSize: "1.2rem"}),
+          control: base =>  ({ ...base, borderColor: "none", border: 'none', backgroundColor: '#1D262E', borderRadius: '12px', overflow: 'hidden' }),
+          indicatorsContainer: base => ({ ...base, backgroundColor: '#1D262E' }),
           clearIndicator: base => ({ ...base, padding: 0 }),
           dropdownIndicator: base => ({ ...base, padding: 0 }),
-          menu: base => ({ ...base }),
+          menu: base => ({ ...base, backgroundColor: '#1D262E', color: '#e9e5dc' }),
           menuPortal: base => ({ ...base, zIndex: 11 }),
-          option: base => ({ ...base, backgroundColor: "#e9e5dc !important", "&:hover": { backgroundColor: "#CCC8C1 !important" }}),
+          option: base => ({ ...base, backgroundColor: "#1D262E !important", "&:hover": { backgroundColor: "#186359 !important" }}),
         }}
       />
     </div>
@@ -71,7 +73,7 @@ function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="S
         value={value}
         placeholder={
           <div className="search-placeholder">
-            <Search className="search-icon" color="#15C48A" size={20} />
+            <Search className="search-icon" color="#0ee6b7" size={20} />
             {placeholder}&hellip;
           </div>
         }
@@ -82,16 +84,17 @@ function SearchSelect({ onChange, onInput, options, defaultValue, placeholder="S
         styles={{ 
           container: base => ({ ...base }),
           singleValue: base => ({ ...base }),
-          input: base => ({ ...base }),
-          valueContainer: base => ({ ...base, backgroundColor: "#e9e5dc", minHeight: "3rem", fontSize: "1.2rem"}),
-          placeholder: base => ({ ...base, color: 'rgba(0,0,0,0.3)', width: '100%' }),
-          control: base =>  ({ ...base, borderColor: "none", border: 'none', backgroundColor: '#13222E', borderRadius: '12px', overflow: 'hidden' }),
-          indicatorsContainer: base => ({ ...base, backgroundColor: '#13222E' }),
+          multiValue: base => ({ ...base, backgroundColor: 'rgba(0,0,0,0.3)' }),
+          input: base => ({ ...base, color: '#e9e5dc' }),
+          valueContainer: base => ({ ...base, backgroundColor: "#1D262E", color: '#e9e5dc', minHeight: "3rem", fontSize: "1.2rem"}),
+          placeholder: base => ({ ...base, color: '#e9e5dc', width: '100%' }),
+          control: base =>  ({ ...base, borderColor: "none", border: 'none', backgroundColor: '#1D262E', borderRadius: '12px', overflow: 'hidden' }),
+          indicatorsContainer: base => ({ ...base,  backgroundColor: 'rgba(0,0,0,0.3)' }),
           clearIndicator: base => ({ ...base, padding: 0 }),
           dropdownIndicator: base => ({ ...base, padding: '0.1rem' }),
           indicatorSeparator: base => ({ ...base, display: 'none' }),
-          menu: base => ({ ...base }),
-          option: base => ({ ...base, backgroundColor: "#e9e5dc !important", "&:hover": { backgroundColor: "#CCC8C1 !important" } }),
+          menu: base => ({ ...base, backgroundColor: '#1D262E', color: '#e9e5dc' }),
+          option: base => ({ ...base, backgroundColor: "#1D262E !important", "&:hover": { backgroundColor: "#186359 !important" } }),
         }}
       />
     </div>
