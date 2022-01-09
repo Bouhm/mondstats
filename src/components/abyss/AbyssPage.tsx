@@ -1,6 +1,7 @@
 import './AbyssPage.scss';
 
 import axios from 'axios';
+import { setupCache } from 'axios-cache-adapter';
 import {
   clone,
   cloneDeep,
@@ -36,6 +37,16 @@ import AbyssStage from './AbyssStage';
 // import abyssFloors from './abyssFloors.json';
 // import abyssTopTeams from './top-teams.json';
 
+// Create `axios-cache-adapter` instance
+const cache = setupCache({
+  maxAge: 24 * 60 * 60 * 1000
+})
+
+// Create `axios` instance passing the newly created `cache.adapter`
+const api = axios.create({
+  adapter: cache.adapter
+})
+
 function AbyssPage() {
   const characterIdMap = useAppSelector((state) => state.data.characterIdMap)
   const characterDb = useAppSelector((state) => state.data.characterDb)
@@ -62,9 +73,14 @@ function AbyssPage() {
   async function fetchAbyssData() {
     setIsLoading(true);
     await Promise.all(map(range(1,4), async (stageNum) => { 
-      // return axios.get(`https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
-      return axios.get(`https://bouhm.github.io/mondstats-data/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`, {
-        headers: { 'accept': 'application/vnd.github.v3.raw+json' },
+      // const url = `https://raw.githubusercontent.com/bouhm/mondstats-data/develop/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`;
+      const url =`https://bouhm.github.io/mondstats-data/abyss/${floors[floorTabs.activeTabIdx]}-${stageNum}.json`;
+      return api({
+        url,
+        method: 'get', 
+        headers: { 
+          'accept': 'application/vnd.github.v3.raw+json',
+        }
       }).then(res => ({ [stageNum]: res.data }))
     })).then(data => { loadAbyssFloorTeams(data); setIsLoading(false) })
   }

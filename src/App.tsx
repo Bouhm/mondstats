@@ -1,6 +1,4 @@
 import './App.scss';
-import 'react-popper-tooltip/dist/styles.css';
-import 'rc-pagination/assets/index.css';
 
 import { forEach } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
