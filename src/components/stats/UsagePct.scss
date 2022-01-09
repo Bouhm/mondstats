@@ -7,42 +7,34 @@
 
   .usage-pct-value {
     text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-    font-size: 4vw;
+    font-size: 1.6rem;
   }
 
   .usage-pct-count {
     opacity: 0.8;
     mix-blend-mode: difference;
-    font-size: 1.8vw;
+    font-size: 0.9rem;
   }
 }
 
 .team-flex-container {
-  .usage-pct-value {
-    font-size: 3.6vw;
+  .usage-pct-count {
+    font-size: 0.7rem;
   }
 
-  .usage-pct-count {
-    font-size: 1.2vw;
+  .usage-pct-value {
+    font-size: 1.6rem;
   }
 }
 
 @media (max-width: 544px) {
   .usage-pct {
     .usage-pct-value {
-      text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+      font-size: 1.3rem;
     }
-  }
-}
 
-@media (min-width: 700px) {
-  .usage-pct {
     .usage-pct-count {
-      font-size: 1rem;
-    }
-
-    .usage-pct-value {
-      font-size: 1.7rem;
+      font-size: 0.7rem;
     }
   }
 
@@ -52,7 +44,7 @@
     }
 
     .usage-pct-value {
-      font-size: 1.6rem;
+      font-size: 1.2rem;
     }
   }
 }

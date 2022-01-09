@@ -9,6 +9,7 @@ import useApi from './hooks/useApi';
 import StatsTable from './stats/StatsTable';
 import LLImage from './ui/LLImage';
 import Loader from './ui/Loader';
+import Notice from './ui/Notice';
 
 interface IFeatured {
   player_total: number,
@@ -36,13 +37,11 @@ function Home() {
       <div className="home-logo">
         <LLImage src={Logo} alt="logo" />
       </div>
-      <div style={{color: 'white', textAlign: 'center', fontSize: '0.8rem'}}>
-        <br />
+      <Notice>
         HoYoLAB no longer includes data for Abyss team or characters owned.<br />
         Data cannot be updated until this issue is resolved by Mihoyo.<br />
         Last updated 11/25/21
-        
-      </div>
+      </Notice>
       <div className="home-top-charts">
         <div className="home-top-chart">
           <StatsTable.Characters data={topCharacters} isPreview={true} /> 
