@@ -38,7 +38,6 @@ function Home() {
       <Notice>
         HoYoLAB no longer includes data for Abyss team or characters owned.<br />
         Data cannot be updated until this issue is resolved by Mihoyo.<br />
-        Last updated 11/25/21
       </Notice>
       <div className="home-top-charts">
         {isLoading ? <Loader /> : 
