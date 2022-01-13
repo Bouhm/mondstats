@@ -30,8 +30,6 @@ function Home() {
     }
   }, [topCharacters, topArtifactSetBuilds, topWeapons])
 
-  if (isLoading) return null
-    
   return (
     <div className="home">
       <div className="home-logo">
@@ -43,15 +41,19 @@ function Home() {
         Last updated 11/25/21
       </Notice>
       <div className="home-top-charts">
-        <div className="home-top-chart">
-          <StatsTable.Characters data={topCharacters} isPreview={true} /> 
-        </div>
-        <div className="home-top-chart">
-          <StatsTable.ArtifactSetBuilds data={topArtifactSetBuilds} isPreview={true} />
-        </div>
-        <div className="home-top-chart">
-          <StatsTable.Weapons data={topWeapons} isPreview={true} />
-        </div>
+        {isLoading ? <Loader /> : 
+          <>
+            <div className="home-top-chart">
+              <StatsTable.Characters data={topCharacters} isPreview={true} /> 
+            </div>
+            <div className="home-top-chart">
+              <StatsTable.ArtifactSetBuilds data={topArtifactSetBuilds} isPreview={true} />
+            </div>
+            <div className="home-top-chart">
+              <StatsTable.Weapons data={topWeapons} isPreview={true} />
+            </div>
+          </>
+        }
       </div>
       <div>
         <Button onClick={() => navigate('/charts')}><>Show All</></Button>

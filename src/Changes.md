@@ -1,9 +1,13 @@
+## 0.1.1-beta
+
+- Improved loading / rendering cycle
+- Changed website theme
+
 ## 0.1.0-beta
 
 - Changed Spiral Abyss teams to show uncombined core team stats
 - Fixed weapon/artifact pages not showing overall usage
 - Added stats table ordering
-- Changed website theme
 
 ## dev build 12.27.21
 

@@ -9,12 +9,15 @@ const useApi = (path: string) => {
 
   // Create `axios-cache-adapter` instance
   const cache = setupCache({
-    maxAge: 24 * 60 * 60 * 1000
+    maxAge: 24 * 60 * 60 * 1000,
+    exclude: {
+      query: false,
+    }
   })
 
   // Create `axios` instance passing the newly created `cache.adapter`
   const api = axios.create({
-    adapter: cache.adapter
+    adapter: cache.adapter,
   })
 
   useEffect(() => {

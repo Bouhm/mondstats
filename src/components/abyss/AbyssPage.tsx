@@ -82,7 +82,7 @@ function AbyssPage() {
           'accept': 'application/vnd.github.v3.raw+json',
         }
       }).then(res => ({ [stageNum]: res.data }))
-    })).then(data => { loadAbyssFloorTeams(data); setIsLoading(false) })
+    })).then(data => loadAbyssFloorTeams(data))
   }
 
   function loadAbyssFloorTeams(data: any) {
@@ -100,6 +100,8 @@ function AbyssPage() {
     if (floorTabs.activeTabIdx !== 0) {
       fetchAbyssData();
     }
+    
+    setIsLoading(false)
   }, [floorTabs.activeTabIdx])
 
   function _filterParties(parties: IAbyssParty[]) {
@@ -170,6 +172,10 @@ function AbyssPage() {
   }
 
   const renderTopTeams = () => {
+    if (!abyssTopTeams || isLoading) {
+      return <Loader />
+    }
+
     const filteredTopTeams = filter(_filterTopTeams(), ({ flex }) => flex[0] && flex[0].length) as IAbyssParty[];
     const total = reduce(abyssTopTeams, (sum,curr) => sum + curr.count, 0)
 
@@ -222,10 +228,6 @@ function AbyssPage() {
       </div>
     </div>
   )
-
-  if (!characterDb || !abyssTopTeams) {
-    return <Loader />
-}
 
   return (
     <div className="abyss-container">
