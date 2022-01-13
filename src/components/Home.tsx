@@ -36,8 +36,8 @@ function Home() {
         <LLImage src={Logo} alt="logo" />
       </div>
       <Notice>
-        HoYoLAB no longer includes data for Abyss team or characters owned.<br />
-        Data cannot be updated until this issue is resolved by Mihoyo.<br />
+        HoYoLAB no longer includes data for Abyss teams or owned characters.<br />
+        Data cannot be updated until this issue is resolved by miHoYo.<br />
       </Notice>
       <div className="home-top-charts">
         {isLoading ? <Loader /> : 
