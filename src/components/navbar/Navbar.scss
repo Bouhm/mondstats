@@ -8,9 +8,7 @@
   height: 4rem;
   background: var.$theme-color-5;
   z-index: 8;
-  -webkit-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid rgba(25, 231, 167, 0.2);
 
   &.invis {
     background: none;
@@ -42,7 +40,6 @@
 
     .nav-tab {
       text-align: center;
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
       width: auto;
       padding: 0 1rem;
     }

@@ -10,9 +10,7 @@
     height: 100%;
     display: flex;
     flex-flow: column;
-    -webkit-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.5);
+    border-right: 2px solid rgba(25, 231, 167, 0.2);
     background: var.$theme-color-4;
     color: rgba(255, 255, 255, 0.9);
 
