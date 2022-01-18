@@ -64,9 +64,7 @@
     color: #fafbfc;
     background-color: #d73a49;
   }
-  .markdown-body .pl-c2::before {
-    content: '^M';
-  }
+
   .markdown-body .pl-sr .pl-cce {
     font-weight: 700;
     color: #22863a;

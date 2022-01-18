@@ -4,13 +4,14 @@ import { capitalize, filter, map, orderBy } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { StringParam, useQueryParams, withDefault } from 'use-query-params';
 
-import { getPercentage } from '../../scripts/util';
+import { getArtifactSetBuildAbbreviation, getArtifactSetNames, getPercentage } from '../../scripts/util';
 import ArtifactSetBuildCard from '../artifactSets/ArtifactSetBuildCard';
 import { useAppSelector } from '../hooks/useRedux';
 import { useTabs } from '../hooks/useTabs';
 import { CaretDown, CaretUp } from '../ui/Icons';
 import LLImage from '../ui/LLImage';
 import Tabs from '../ui/Tabs';
+import Tooltip from '../ui/Tooltip';
 
 function Characters({data, isPreview }: any) {
   const db = useAppSelector((state) => state.data.characterDb)
@@ -25,10 +26,12 @@ function Characters({data, isPreview }: any) {
   const getColorClass = (item: any) => 'Green'
 
   const renderImage = (item: any) => (
-    <div className='stats-character-portrait'>
-      <LLImage src={`/assets/${title}/${item._id}.webp`} />
-      <LLImage className='stats-character-element' src={`/assets/elements/${db[item._id].element}.webp`} />
-    </div>
+    <Tooltip className='stats-character-portrait' content={db[item._id].name}>
+      <>
+        <LLImage src={`/assets/${title}/${item._id}.webp`} />
+        <LLImage className='stats-character-element' src={`/assets/elements/${db[item._id].element}.webp`} />
+      </>
+    </Tooltip>
   )
 
   return <StatsTable data={data} title={title} getTotal={getTotal} getAbyssTotal={getAbyssTotal} getColorClass={getColorClass} renderImage={renderImage} isPreview={isPreview} />
@@ -36,13 +39,16 @@ function Characters({data, isPreview }: any) {
 
 function ArtifactSetBuilds({data, isPreview }: any) {
   const db = useAppSelector((state) => state.data.artifactSetBuildDb)
+  const setDb = useAppSelector((state) => state.data.artifactSetDb)
   const title = 'artifact sets'
 
   const getTotal = () => data.totals.total
   
   const getAbyssTotal = () => data.totals.abyssTotal
 
-  const renderImage = (item: any) => <ArtifactSetBuildCard id={item._id} />
+  const renderImage = (item: any) => {
+    return <Tooltip content={getArtifactSetNames(db[item._id].sets, setDb)}><ArtifactSetBuildCard id={item._id} /></Tooltip>
+  }
 
   const getColorClass = (item: any) => 'Artifacts'
 
@@ -60,7 +66,7 @@ function Weapons({data, isPreview }: any) {
 
   const getColorClass = (item: any) => db[item._id].type_name
 
-  const renderImage = (item: any) => <LLImage src={`/assets/${title}/${item._id}.webp`} />
+  const renderImage = (item: any) => <Tooltip content={db[item._id].name}><LLImage src={`/assets/${title}/${item._id}.webp`} /></Tooltip>
 
   const dataFilter = (data: any, match: string) => filter(data, item => db[item._id].type_name === match);
 

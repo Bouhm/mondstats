@@ -80,6 +80,10 @@
     display: flex;
     justify-content: center;
 
+    > div {
+      height: inherit;
+    }
+
     .stats-character-portrait,
     img {
       height: inherit;
