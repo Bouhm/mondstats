@@ -173,23 +173,27 @@ function StatsTable({ data, isPreview = false, title, field = title, tabs = [], 
                   <td className='stats-image'>{renderImage(item)}</td>
                   {!isPreview && 
                   <td>
-                    <div className='stats-row-percentage'>
-                      <div
-                        className={`stats-row-bar ${getColorClass && getColorClass(item)}`} 
-                        style={{ width: `${total}%`}} 
-                      />    
-                      <div className="stats-row-value">{ `${total}%`}</div>
-                    </div>
+                    <Tooltip className='stats-row-percentage' content={`Count: ${item.count}`}>
+                      <>
+                        <div
+                          className={`stats-row-bar ${getColorClass && getColorClass(item)}`} 
+                          style={{ width: `${total}%`}} 
+                        />    
+                        <div className="stats-row-value">{ `${total}%`}</div>
+                      </>
+                    </Tooltip>
                   </td>
                   }
                   <td>
-                    <div className='stats-row-percentage'>
-                      <div
-                          className={`stats-row-bar ${getColorClass && getColorClass(item)}`} 
-                          style={{ width: `${abyssTotal}%`}} 
-                      />    
-                      <div className="stats-row-value">{ `${abyssTotal}%`}</div>
-                    </div>
+                    <Tooltip className='stats-row-percentage' content={`Abyss Count: ${item.abyssCount}`}>
+                      <>
+                        <div
+                            className={`stats-row-bar ${getColorClass && getColorClass(item)}`} 
+                            style={{ width: `${abyssTotal}%`}} 
+                        />    
+                        <div className="stats-row-value">{ `${abyssTotal}%`}</div>
+                      </>
+                    </Tooltip>
                   </td>
                 </tr>
               )
