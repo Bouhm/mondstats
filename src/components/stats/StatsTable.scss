@@ -144,5 +144,9 @@
   .stats-table {
     width: 100%;
     padding: 0.5rem;
+
+    th {
+      font-size: 0.7rem;
+    }
   }
 }

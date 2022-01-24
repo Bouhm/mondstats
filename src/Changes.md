@@ -1,3 +1,8 @@
+## 0.1.3-beta
+
+- Consolidate all UI theme colors
+- Fix UI scaling and spacing for mobile
+
 ## 0.1.2-beta
 
 - UI tweaks/fixes

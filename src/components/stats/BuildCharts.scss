@@ -136,6 +136,7 @@
   .build-charts-container {
     h1 {
       font-size: 1.6rem;
+      margin: 1rem auto;
     }
   }
 
@@ -179,6 +180,16 @@
 }
 
 @media (max-width: 544px) {
+  .build-charts-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .build-charts {
+    .build-characters {
+      padding-right: 0;
+    }
+  }
+
   .artifact-set-build-charts .artifact-set-builds-donut-container .artifact-set-builds-donut-chart {
     width: 75%;
   }
