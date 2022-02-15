@@ -1,3 +1,10 @@
+## 0.1.4-beta
+
+- Optimize assets and caching
+- Add animations
+- Regarding data updates for new content:
+  - I am still searching for a solution that is not intrusive. At this time it is still not possible to gather enough data for new content with the 8 character restriction and loss of Spiral Abyss team data.
+
 ## 0.1.3-beta
 
 - Consolidate all UI theme colors
