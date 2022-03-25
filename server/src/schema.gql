@@ -1,0 +1,172 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AbyssBattle {
+  _id: String!
+  battle_index: Float!
+  floor_level: String!
+  party: [String!]!
+  player: String!
+}
+
+type Affix {
+  activation_number: Float!
+  effect: String!
+}
+
+type Artifact {
+  _id: String!
+  icon: String!
+  name: String!
+  oid: Float!
+  pos: Float!
+  pos_name: String!
+  set: String!
+}
+
+type ArtifactSet {
+  _id: String!
+  affixes: [Affix!]!
+  name: String!
+  oid: Float!
+  rarity: Float!
+}
+
+type BuildSet {
+  _id: String!
+  activation_number: Float!
+}
+
+type BuildStats {
+  artifacts: [BuildSet!]!
+  count: Float!
+  weapons: [BuildWeapon!]!
+}
+
+type BuildWeapon {
+  _id: String!
+  count: Float!
+}
+
+type Character {
+  _id: String!
+  constellations: [Constellation!]!
+  element: String!
+  icon: String!
+  image: String!
+  name: String!
+  oid: Float!
+  rarity: Float!
+  weapon_type: Float!
+}
+
+type CharacterBuildStats {
+  builds: [BuildStats!]!
+  char_id: String!
+  constellations: [Float!]!
+  teams: [TeamStats!]!
+  total: Float!
+}
+
+type Constellation {
+  effect: String!
+  icon: String!
+  name: String!
+  oid: Float!
+  pos: Float!
+}
+
+input ListAbyssBattleInput {
+  battle_index: [Float!]
+  charIds: [String!]
+  f2p: Boolean
+  floorLevels: [String!]
+  players: [String!]
+  totalStars: Float
+}
+
+input ListArtifactInput {
+  ids: [String!]
+}
+
+input ListArtifactSetInput {
+  ids: [String!]
+}
+
+input ListCharacterInput {
+  ids: [String!]
+}
+
+input ListPlayerCharacterInput {
+  charIds: [String!]
+  f2p: Boolean
+  setIds: [String!]
+  totalStars: Float
+  uids: [Float!]
+  weaponIds: [String!]
+}
+
+input ListPlayerInput {
+  uids: [Float!]
+}
+
+input ListWeaponInput {
+  oids: [Float!]
+}
+
+type PartyStats {
+  count: Float!
+  party: [String!]!
+}
+
+type Player {
+  _id: String!
+  schedule_id: Float!
+  total_battles: Float!
+  total_star: Float!
+  total_wins: Float!
+  uid: Float!
+}
+
+type PlayerCharacter {
+  _id: String!
+  artifacts: [String!]!
+  character: String!
+  constellation: Float!
+  fetter: Float!
+  level: Float!
+  player: String!
+  strongest_strike: Float!
+  weapon: String!
+}
+
+type Query {
+  abyssBattles(filter: ListAbyssBattleInput): [AbyssBattle!]!
+  artifactSets(filter: ListArtifactSetInput): [ArtifactSet!]!
+  artifacts(filter: ListArtifactInput): [Artifact!]!
+  character(id: String): Character!
+  characterBuilds(filter: ListPlayerCharacterInput): [CharacterBuildStats!]!
+  characters(filter: ListCharacterInput): [Character!]!
+  playerCharacters(filter: ListPlayerCharacterInput): [PlayerCharacter!]!
+  players(filter: ListPlayerInput): [Player!]!
+  weapons(filter: ListWeaponInput): [Weapon!]!
+}
+
+type TeamStats {
+  count: Float!
+  party: [PlayerCharacter!]!
+}
+
+type Weapon {
+  _id: String!
+  affix_level: Float!
+  desc: String!
+  icon: String!
+  level: Float!
+  name: String!
+  oid: Float!
+  rarity: Float!
+  type: Float!
+  type_name: String!
+}
